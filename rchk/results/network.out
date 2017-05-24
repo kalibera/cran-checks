@@ -1,0 +1,33 @@
+Package network version 1.13.0
+Package built using 72723/R 3.5.0; x86_64-pc-linux-gnu; 2017-05-23 13:54:52 UTC; unix   
+Checked with rchk version ac99217b516322c231620a9f69e542843ba9eb72
+
+Suspicious call (two or more unprotected arguments) to vecUnion at getEdges network/src/access.c:210
+Suspicious call (two or more unprotected arguments) to vecAppend at getEdges network/src/access.c:227
+
+Function copyEdges_R
+  [UP] unprotected variable y while calling allocating function getListElement network/src/constructors.c:43
+  [UP] unprotected variable y while calling allocating function Rf_duplicate network/src/constructors.c:44
+  [UP] unprotected variable y while calling allocating function getListElement network/src/constructors.c:46
+  [UP] unprotected variable y while calling allocating function Rf_duplicate network/src/constructors.c:47
+
+Function deleteListElement
+  [UP] unprotectERROR: too many states (abstraction error?) in function getEdgeIDs
+ed variable names while calling allocating function Rf_allocVector network/src/utils.c:42
+  [UP] unprotected variable names while calling allocating function Rf_allocVector network/src/utils.c:43
+  [UP] unprotected variable names while calling allocating function Rf_mkChar network/src/utils.c:50
+  [UP] unprotected variable names while calling allocating function Rf_mkChar network/src/utils.c:57
+
+Function deleteVertices_R
+  [UP] unprotected variable x while calling allocating function Rf_allocVector network/src/access.c:1282
+  [UP] allocating function networkSize may destroy its unprotected argument (x <arg 1>), which is later used. network/src/access.c:1283
+  [UP] allocating function getListElement may destroy its unprotected argument (x <arg 1>), which is later used. network/src/access.c:1288
+  [UP] unprotected variable x while calling allocating function contractList network/src/access.c:1288
+  [UP] allocating function getListElement may destroy its unprotected argument (x <arg 1>), which is later used. network/src/access.c:1289
+  [UP] unprotected variable x while calling allocating function contractList network/src/access.c:1289
+  [UP] allocating function getListElement may destroy its unprotected argument (x <arg 1>), which is later used. network/src/access.c:1290
+  [UP] unprotected variable x while calling allocating function contractList network/src/access.c:1290
+
+Function permuteVertexIDs
+  [UP] allocating function getListElement may destroy its unprotected argument (edge <arg 1>), which is later used. network/src/access.c:803
+  [UP] unprotected variable edge while calling allocating function Rf_coerceVector network/src/access.c:804

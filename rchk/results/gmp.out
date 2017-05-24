@@ -1,0 +1,17 @@
+Package gmp version 0.5-13.1
+Package built using 72723/R 3.5.0; x86_64-pc-linux-gnu; 2017-05-23 13:53:44 UTC; unix   
+Checked with rchk version ac99217b516322c231620a9f69e542843ba9eb72
+
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at bigintegerR::create_SEXP(bigvec const&) gmp/src/bigintegerR.cc:199
+
+Function bigint_transposeR
+  [UP] unprotected variable dimAttr while calling allocating function bigintegerR::create_bignum(SEXPREC* const&) gmp/src/matrix.cc:118
+
+Function bigq_transposeR
+  [UP] unprotected variable dimAttr while calling allocating function bigrationalR::create_bignum(SEXPREC*) gmp/src/matrixq.cc:108
+
+Function bigrationalR::create_bignum(SEXPREC*)
+  [UP] unprotected variable denAttr while calling allocating function Rf_getAttrib(?,V) gmp/src/bigrationalR.cc:111
+  [UP] unprotected variable denAttr while calling allocating function Rf_mkString gmp/src/bigrationalR.cc:111
+  [UP] unprotected variable denAttr while calling allocating function Rf_getAttrib(?,V) gmp/src/bigrationalR.cc:116
+  [UP] unprotected variable denAttr while calling allocating function Rf_mkString gmp/src/bigrationalR.cc:116

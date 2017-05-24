@@ -1,0 +1,24 @@
+Package lazyeval version 0.2.0
+Package built using 72723/R 3.5.0; x86_64-pc-linux-gnu; 2017-05-23 13:54:11 UTC; unix   
+Checked with rchk version ac99217b516322c231620a9f69e542843ba9eb72
+
+Suspicious call (two or more unprotected arguments) to Rf_eval at lhs_name lazyeval/src/name.c:44
+
+Function base_promise
+  [UP] allocating function is_lazy_load may destroy its unprotected argument (obj <arg 1>), which is later used. lazyeval/src/expr.c:25
+
+Function base_promise_env
+  [UP] allocating function is_lazy_load may destroy its unprotected argument (obj <arg 1>), which is later used. lazyeval/src/expr.c:58
+
+Function lhs_name
+  [UP] unprotected variable names while calling allocating function Rf_eval lazyeval/src/name.c:44
+  [UP] unprotected variable names while calling allocating function env lazyeval/src/name.c:44
+  [UP] unprotected variable names while calling allocating function env lazyeval/src/name.c:50
+  [UP] unprotected variable names while calling allocating function make_formula1 lazyeval/src/name.c:50
+
+Function make_lazy_dots
+  [UP] unprotected variable dots while calling allocating function Rf_allocVector lazyeval/src/lazy.c:83
+  [UP] unprotected variable dots while calling allocating function Rf_allocVector lazyeval/src/lazy.c:84
+
+Function promise_as_lazy
+  [UP] allocating function is_lazy_load may destroy its unprotected argument (obj <arg 1>), which is later used. lazyeval/src/lazy.c:24
