@@ -1,0 +1,19 @@
+Package adespatial version 0.0-8
+Package built using 72723/R 3.5.0; x86_64-pc-linux-gnu; 2017-05-23 14:32:15 UTC; unix   
+Checked with rchk version ac99217b516322c231620a9f69e542843ba9eb72
+
+Suspicious call (two or more unprotected arguments) to RestrictedPerm at s_loop adespatial/src/stipermute.c:338
+Suspicious call (two or more unprotected arguments) to RestrictedPerm at sti_loop adespatial/src/stipermute.c:249
+Suspicious call (two or more unprotected arguments) to RestrictedPerm at t_loop adespatial/src/stipermute.c:437
+
+Function s_loop
+  [UP] allocating function produit_dgemm(?,V) may destroy its unprotected argument (Yperm <arg 2>), which is later used. adespatial/src/stipermute.c:340
+  [UP] unprotected variable Yperm while calling allocating function SS(V) adespatial/src/stipermute.c:341
+
+Function sti_loop
+  [UP] allocating function produit_dgemm(?,V) may destroy its unprotected argument (Yperm <arg 2>), which is later used. adespatial/src/stipermute.c:252
+  [UP] unprotected variable Yperm while calling allocating function SS(V) adespatial/src/stipermute.c:253
+
+Function t_loop
+  [UP] allocating function produit_dgemm(?,V) may destroy its unprotected argument (Yperm <arg 2>), which is later used. adespatial/src/stipermute.c:439
+  [UP] unprotected variable Yperm while calling allocating function SS(V) adespatial/src/stipermute.c:440

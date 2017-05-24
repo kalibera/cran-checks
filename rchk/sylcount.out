@@ -1,0 +1,14 @@
+Package sylcount version 0.1-0
+Package built using 72723/R 3.5.0; x86_64-pc-linux-gnu; 2017-05-23 13:56:39 UTC; unix   
+Checked with rchk version ac99217b516322c231620a9f69e542843ba9eb72
+
+Function __Rvecalloc
+  [PB] has possible protection stack imbalance sylcount/src/./include/RNACI.h:201
+
+Function make_dataframe
+  [UP] allocating function set_list_as_df(V) may destroy its unprotected argument (R_df <arg 1>), which is later used. sylcount/src/./include/RNACI.h:415
+  [UP] unprotected variable R_df while calling allocating function make_dataframe_default_rownames sylcount/src/./include/RNACI.h:423
+  [UP] unprotected variable R_df while calling allocating function make_dataframe_default_rownames sylcount/src/./include/RNACI.h:432
+
+Function make_list_names
+  [UP] unprotected variable R_list_names while calling allocating function Rf_mkChar sylcount/src/./include/RNACI.h:463
