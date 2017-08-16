@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2017-08-14 r73093) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-08-15 r73096) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -3190,7 +3190,7 @@ Residual Deviance: 9863 	AIC: 28250
 > val <- sim(val,R=40,b0=1,mc.cores=1) ## append results
   |                                                |                                        |   0%  |                                                |==                                      |   5%  |                                                |====                                    |  10%  |                                                |======                                  |  15%  |                                                |========                                |  20%  |                                                |==========                              |  25%  |                                                |============                            |  30%  |                                                |==============                          |  35%  |                                                |================                        |  40%  |                                                |==================                      |  45%  |                                                |====================                    |  50%  |                                                |======================                  |  55%  |                                                |========================                |  60%  |                                                |==========================              |  65%  |                                                |============================            |  70%  |                                                |==============================          |  75%  |                                                |================================        |  80%  |                                                |==================================      |  85%  |                                                |====================================    |  90%  |                                                |======================================  |  95%  |                                                |========================================| 100%
 > summary(val,estimate=c(1,1),confint=c(3,4,6,7),true=c(1,1))
-50 replications					Time: 3.185s
+50 replications					Time: 3.184s
 
           Estimate Estimate.1
 Mean     1.0023683  1.0023683
@@ -3212,7 +3212,7 @@ Coverage 0.7800000  0.9200000
 
 > 
 > summary(val,estimate=c(1,1),se=c(2,5),names=c("Model","Sandwich"))
-50 replications					Time: 3.185s
+50 replications					Time: 3.184s
 
            Model Sandwich
 Mean    1.002368 1.002368
@@ -3229,7 +3229,7 @@ Max     1.048389 1.048389
 Missing 0.000000 0.000000
 
 > summary(val,estimate=c(1,1),se=c(2,5),true=c(1,1),names=c("Model","Sandwich"),confint=TRUE)
-50 replications					Time: 3.185s
+50 replications					Time: 3.184s
 
              Model  Sandwich
 Mean     1.0023683 1.0023683
@@ -3426,7 +3426,7 @@ Exogenous variables:
 > 
 > toformula(c("age","gender"), "weight")
 c(age, gender) ~ weight
-<environment: 0x55b383e44b18>
+<environment: 0x55b9fb69ea08>
 > 
 > 
 > 
@@ -3661,7 +3661,7 @@ attr(,"b")
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  86.608 0.612 95.878 0 0.076 
+Time elapsed:  88.992 1.324 90.568 0.004 0.092 
 > grDevices::dev.off()
 null device 
           1 

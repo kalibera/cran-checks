@@ -11,7 +11,7 @@ The following object is masked from ‘package:base’:
 
 
 > print(sessionInfo(), l = F)
-R Under development (unstable) (2017-08-14 r73093)
+R Under development (unstable) (2017-08-15 r73096)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 17.04
 
@@ -27,7 +27,7 @@ other attached packages:
 
 loaded via a namespace (and not attached):
  [1] cmprsk_2.2-7      zoo_1.8-0         MASS_7.3-47       compiler_3.5.0   
- [5] Matrix_1.2-10     plyr_1.8.4        parallel_3.5.0    tools_3.5.0      
+ [5] Matrix_1.2-11     plyr_1.8.4        parallel_3.5.0    tools_3.5.0      
  [9] survival_2.41-3   etm_0.6-2         Rcpp_0.12.12      splines_3.5.0    
 [13] grid_3.5.0        numDeriv_2016.8-1 lattice_0.20-35  
 
@@ -214,7 +214,7 @@ function (obj, newdata, Exp = NULL, alpha = 0.05)
             return(zz)
     }
 }
-<bytecode: 0x562a52dcaa28>
+<bytecode: 0x56269994dde0>
 <environment: namespace:Epi>
 
 > nd <- data.frame(DMdur = as.numeric(dimnames(pr.rates)[[1]]), 
@@ -326,7 +326,7 @@ Classes ‘Lexis’ and 'data.frame':	0 obs. of  9 variables:
 > system.time(simL <- simLexis(Tr, ini, t.range = 12, 
 +     N = Nsim))
    user  system elapsed 
- 10.708   0.072  10.805 
+ 13.064   0.108  13.187 
 
 > summary(simL, by = "sex")
 $M
@@ -354,7 +354,7 @@ From   DM Ins Dead Dead(Ins)  Records:  Events: Risk time:  Persons:
 > system.time(simP <- simLexis(Tr.p, ini, t.range = 12, 
 +     N = Nsim))
    user  system elapsed 
- 11.872   0.084  11.960 
+ 11.720   0.100  11.855 
 
 > summary(simP, by = "sex")
 $M
@@ -415,7 +415,7 @@ sexF                          0.665  0.614  0.720
 > system.time(simC <- simLexis(Tr.c, ini, t.range = 12, 
 +     N = Nsim))
    user  system elapsed 
- 14.912   0.060  15.004 
+ 15.404   0.032  15.506 
 
 > summary(simC, by = "sex")
 $M
@@ -440,7 +440,7 @@ From   DM Ins Dead Dead(Ins)  Records:  Events: Risk time:  Persons:
 > system.time(nSt <- nState(subset(simL, sex == "M"), 
 +     at = seq(0, 11, 0.2), from = 1995, time.scale = "Per"))
    user  system elapsed 
-  0.248   0.000   0.246 
+  0.268   0.000   0.270 
 
 > nSt[1:10, ]
         State
