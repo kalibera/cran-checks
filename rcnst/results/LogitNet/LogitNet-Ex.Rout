@@ -1,0 +1,65 @@
+
+R Under development (unstable) (2017-08-14 r73093) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "LogitNet"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('LogitNet')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("LogitNet.CV")
+> ### * LogitNet.CV
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: LogitNet.CV
+> ### Title: Fit LogitNet models with cross validation.
+> ### Aliases: LogitNet.CV
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> 
+> ######################## get data example
+> 
+> data(LogitNet.data)
+> data.m=LogitNet.data$data.m
+> chromosome=LogitNet.data$chromosome
+> p=ncol(data.m)
+> 
+> ######################## specify the penalty parameter
+> lambda.n=5
+> lambda.v=exp(seq(log(13), log(30), length=lambda.n))
+> 
+> ######################## calculate the weight matrix
+> w.m=LogitNet.weight(data.m, chr=chromosome) 
+> 
+> ######################## perform cross validation to select lambda
+> if(0) ### this part will take 10 minutes.
++ {
++ try.CV=LogitNet.CV(data.m, w.m, lambda.v, fold=5) 
++ temp=apply(try.CV[[3]], 2, sum) 
++ index=which.max(temp) 
++ }
+> index=2
+> ######################## estimate the model at selected lambda
+> 
+> result=LogitNet(data.m, w.m, lambda.v[index]) ###20-30 seconds
+Terminated

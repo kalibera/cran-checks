@@ -1,0 +1,140 @@
+* using log directory ‘/home/tomas/cran/rcnst/check/CARrampsOcl.Rcheck’
+* using R Under development (unstable) (2017-08-14 r73093)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* checking for file ‘CARrampsOcl/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘CARrampsOcl’ version ‘0.1.4’
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘CARrampsOcl’ can be installed ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... NOTE
+CARrampsOcl.fit: no visible global function definition for
+  ‘coefficients’
+CARrampsOcl.fit: no visible global function definition for ‘lm’
+CARrampsOcl.fit: no visible global function definition for ‘runif’
+CARrampsOcl.fit: no visible global function definition for
+  ‘write.table’
+CARrampsOcl.fit: no visible global function definition for ‘rgamma’
+CARrampsOcl.fit: no visible global function definition for ‘rnorm’
+multivspost2blogandtausqtot : genst: no visible global function
+  definition for ‘rgamma’
+optimizelogpost: no visible global function definition for ‘optim’
+optimizelogpost: no visible global function definition for ‘optimize’
+plot2Q: no visible global function definition for ‘terrain.colors’
+plot2Q: no visible global function definition for ‘par’
+plot3Q: no visible global function definition for ‘terrain.colors’
+plot3Q: no visible global function definition for ‘par’
+plot3Q: no visible global function definition for ‘dev.flush’
+plotCAR1: no visible global function definition for ‘terrain.colors’
+plotCAR1: no visible global function definition for ‘par’
+plotCAR1plus1Q: no visible global function definition for
+  ‘terrain.colors’
+plotCAR1plus1Q: no visible global function definition for ‘par’
+plotCAR1plus1Q: no visible global function definition for ‘dev.flush’
+rdirichlet: no visible global function definition for ‘rgamma’
+Undefined global functions or variables:
+  coefficients dev.flush lm optim optimize par rgamma rnorm runif
+  terrain.colors write.table
+Consider adding
+  importFrom("grDevices", "dev.flush", "terrain.colors")
+  importFrom("graphics", "par")
+  importFrom("stats", "coefficients", "lm", "optim", "optimize",
+             "rgamma", "rnorm", "runif")
+  importFrom("utils", "write.table")
+to your NAMESPACE file.
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking compiled code ... NOTE
+Note: information on .o files is not available
+* checking examples ... ERROR
+Running examples in ‘CARrampsOcl-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: CARrampsOcl-package
+> ### Title: Draws independent samples from joint posterior in Bayesian CAR
+> ###   models
+> ### Aliases: CARrampsOcl-package CARrampsOcl
+> ### Keywords: Spatial SpatioTemporal Bayesian HighPerformanceComputing
+> 
+> ### ** Examples
+> 
+> 
+> # load data
+>   data(iowaSW06)
+> 
+> # construct structure matrices
+>   Q1<- makeRW2Q(33)       # RW2 within rows (east-west)
+>   Q2<- makeRW2Q(24)       # RW2 within columns (north-south)
+> 
+>   iowaQ <- list( list( type="Gen", content=Q1 ), list( type="Gen", content=Q2))
+> # dimenstions of Q1, Q2,  in that order
+>   na<- nrow(Q1)
+>   nb<- nrow(Q2)
+> 
+> 
+> # construct the design matrix with with as many columns as there are
+> # in null space of kronecker prod of Q's
+> 
+>   X2 <- cbind( rep(1,nb), 1:nb)
+>   X1 <- cbind( rep(1,na), 1:na)
+>   X <-  kronecker( X2, X1)
+> 
+> # parameters of gamma prior densities on tausqy, tausqphi[1], tausqphi[2]
+>   alpha2 = beta2 <- c(.1, .1, .1)
+> 
+> # number of samples
+>   nsamp = 100
+> 
+> #random seed
+>   myseed = 314
+> 
+>   output <- CARrampsOcl.fit(alpha=alpha2, beta=beta2, 
++             Q=iowaQ, y=iowaSW06,  nsamp=nsamp,
++             seed=myseed,
++             fixed = FALSE, randeffs=TRUE, coefs=TRUE,designMat=X,
++             mult= 50) 
+Error in oclPlatforms() : clGetPlatformIDs failed
+Calls: CARrampsOcl.fit -> oclPlatforms
+Execution halted
+* checking PDF version of manual ... OK
+* DONE
+Status: 1 ERROR, 2 NOTEs

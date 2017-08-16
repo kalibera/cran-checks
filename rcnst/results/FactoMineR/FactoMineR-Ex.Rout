@@ -1,0 +1,196 @@
+
+R Under development (unstable) (2017-08-14 r73093) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "FactoMineR"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('FactoMineR')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("AovSum")
+> ### * AovSum
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: AovSum
+> ### Title: Analysis of variance with the contrasts sum (the sum of the
+> ###   coefficients is 0)
+> ### Aliases: AovSum
+> ### Keywords: models
+> 
+> ### ** Examples
+> 
+> ## Example two-way anova
+> data(senso)
+> res <- AovSum(Score~ Product + Day , data=senso)
+> res
+Ftest
+               SS df      MS F value   Pr(>F)    
+Product    2.0278  2  1.0139  3.4428  0.04148 *  
+Day       25.4725  1 25.4725 86.4959 1.18e-11 ***
+Residuals 12.0742 41  0.2945                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Ttest
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  4.590736   0.081464 56.3528  < 2e-16 ***
+Product - 1  0.237057   0.120675  1.9644  0.05628 .  
+Product - 2 -0.284745   0.114663 -2.4833  0.01720 *  
+Product - 3  0.047688   0.118456  0.4026  0.68935    
+Day - 1      0.803378   0.086382  9.3003  < 2e-16 ***
+Day - 2     -0.803378   0.086382 -9.3003  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+> 
+> ## Example two-way anova with interaction
+> data(senso)
+> res2 <- AovSum(Score~ Product + Day + Product : Day, data=senso)
+> res2
+Ftest
+                 SS df      MS F value    Pr(>F)    
+Product      1.7773  2  0.8886  2.9876   0.06206 .  
+Day         25.8418  1 25.8418 86.8787 1.804e-11 ***
+Product:Day  0.4738  2  0.2369  0.7964   0.45813    
+Residuals   11.6004 39  0.2974                      
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Ttest
+                        Estimate Std. Error t value Pr(>|t|)    
+(Intercept)            4.5842929  0.0871239 52.6181  < 2e-16 ***
+Product - 1            0.2557071  0.1225836  2.0860  0.04357 *  
+Product - 2           -0.2509596  0.1203159 -2.0858  0.04358 *  
+Product - 3           -0.0047475  0.1266521 -0.0375  0.97029    
+Day - 1                0.8120707  0.0871239  9.3209  < 2e-16 ***
+Day - 2               -0.8120707  0.0871239 -9.3209  < 2e-16 ***
+Product - 1 : Day - 1  0.0279293  0.1225836  0.2278  0.82096    
+Product - 2 : Day - 1 -0.1454040  0.1203159 -1.2085  0.23412    
+Product - 3 : Day - 1  0.1174747  0.1266521  0.9275  0.35935    
+Product - 1 : Day - 2 -0.0279293  0.1225836 -0.2278  0.82096    
+Product - 2 : Day - 2  0.1454040  0.1203159  1.2085  0.23412    
+Product - 3 : Day - 2 -0.1174747  0.1266521 -0.9275  0.35935    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+> 
+> ## Example ancova
+> data(footsize)
+> res3 <- AovSum(footsize ~ size + sex + size : sex, data=footsize)
+> res3
+Ftest
+              SS df     MS F value    Pr(>F)    
+size      72.322  1 72.322 70.4901 1.353e-12 ***
+sex        3.114  1  3.114  3.0353   0.08531 .  
+size:sex   3.789  1  3.789  3.6930   0.05820 .  
+Residuals 82.079 80  1.026                      
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Ttest
+                Estimate Std. Error t value Pr(>|t|)    
+(Intercept)     4.973278   4.214939  1.1799  0.24153    
+size            0.204172   0.024318  8.3958  < 2e-16 ***
+sex - F         7.343305   4.214939  1.7422  0.08531 .  
+sex - M        -7.343305   4.214939 -1.7422  0.08531 .  
+sex - F : size -0.046733   0.024318 -1.9217  0.05820 .  
+sex - M : size  0.046733   0.024318  1.9217  0.05820 .  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+> 
+> 
+> 
+> cleanEx()
+> nameEx("CA")
+> ### * CA
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: CA
+> ### Title: Correspondence Analysis (CA)
+> ### Aliases: CA
+> ### Keywords: multivariate
+> 
+> ### ** Examples
+> 
+> data(children)
+> res.ca <- CA (children, row.sup = 15:18, col.sup = 6:8)
+> summary(res.ca)
+
+Call:
+CA(X = children, row.sup = 15:18, col.sup = 6:8) 
+
+The chi square of independence between the two variables is equal to 98.80159 (p-value =  9.748064e-05 ).
+
+Eigenvalues
+                       Dim.1   Dim.2   Dim.3   Dim.4
+Variance               0.035   0.013   0.007   0.006
+% of var.             57.043  21.132  11.764  10.061
+Cumulative % of var.  57.043  78.175  89.939 100.000
+
+Rows (the 10 first)
+                      Iner*1000    Dim.1    ctr   cos2    Dim.2    ctr   cos2  
+money               |     3.759 | -0.115  4.550  0.428 |  0.020  0.371  0.013 |
+future              |     8.690 |  0.176 17.567  0.716 | -0.098 14.587  0.220 |
+unemployment        |     9.151 | -0.212 22.616  0.875 | -0.071  6.779  0.097 |
+circumstances       |     3.804 |  0.401  6.274  0.584 |  0.331 11.544  0.398 |
+hard                |     1.199 | -0.250  2.994  0.884 |  0.068  0.592  0.065 |
+economic            |     8.787 |  0.354 12.005  0.484 |  0.321 26.604  0.397 |
+egoism              |     3.287 |  0.060  0.681  0.073 | -0.026  0.338  0.013 |
+employment          |     5.648 | -0.137  2.621  0.164 |  0.215 17.555  0.408 |
+finances            |     3.576 | -0.237  2.790  0.276 | -0.206  5.690  0.209 |
+war                 |     1.025 |  0.217  2.169  0.749 | -0.075  0.694  0.089 |
+                     Dim.3    ctr   cos2  
+money                0.101 16.884  0.328 |
+future              -0.053  7.568  0.064 |
+unemployment        -0.004  0.046  0.000 |
+circumstances       -0.016  0.046  0.001 |
+hard                 0.060  0.845  0.051 |
+economic             0.084  3.280  0.027 |
+egoism               0.179 29.496  0.655 |
+employment          -0.213 30.815  0.398 |
+finances            -0.044  0.469  0.010 |
+war                 -0.098  2.139  0.152 |
+
+Columns
+                      Iner*1000    Dim.1    ctr   cos2    Dim.2    ctr   cos2  
+unqualified         |    13.146 | -0.209 25.110  0.676 | -0.081 10.082  0.101 |
+cep                 |    10.044 | -0.139 18.297  0.645 |  0.056  8.079  0.105 |
+bepc                |     7.670 |  0.109  6.758  0.312 | -0.028  1.251  0.021 |
+high_school_diploma |    17.732 |  0.274 37.976  0.758 | -0.121 20.099  0.149 |
+university          |    13.468 |  0.231 11.859  0.312 |  0.318 60.488  0.589 |
+                     Dim.3    ctr   cos2  
+unqualified          0.073 14.659  0.081 |
+cep                 -0.018  1.520  0.011 |
+bepc                -0.147 59.874  0.570 |
+high_school_diploma  0.077 14.407  0.059 |
+university           0.094  9.540  0.052 |
+
+Supplementary rows
+                      Dim.1  cos2   Dim.2  cos2   Dim.3  cos2  
+comfort             | 0.210 0.069 | 0.703 0.775 | 0.071 0.008 |
+disagreement        | 0.146 0.131 | 0.119 0.087 | 0.171 0.180 |
+world               | 0.523 0.876 | 0.143 0.065 | 0.084 0.023 |
+to_live             | 0.308 0.139 | 0.502 0.369 | 0.521 0.397 |
+
+Supplementary columns
+Error in `colnames<-`(`*tmp*`, value = `*vtmp*`) : 
+  attempt to set 'colnames' on an object with less than two dimensions
+Calls: summary -> summary.CA -> print3 -> colnames<-
+Execution halted

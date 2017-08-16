@@ -1,0 +1,108 @@
+
+R Under development (unstable) (2017-08-14 r73093) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(intamap)
+Loading required package: sp
+> 
+> # observations = Something from Java...
+> # Until then we use the Meuse data:
+> data(meuse)
+> observations = data.frame(x = meuse$x,y = meuse$y,value = log(meuse$zinc))
+> # If you send a field just with 3 columns (x,y & z), we can let R figure
+> # out itself which names they have, for creation of a spatial object:
+> obsNames = names(observations)
+> coordinates(observations) = as.formula(paste("~",obsNames[1], "+", obsNames[2]))
+> set.seed(13531)
+> predictionLocations = spsample(observations, 10, "regular")
+> gridded(predictionLocations) = TRUE
+> cellsize = predictionLocations@grid@cellsize
+> cs = predictionLocations@grid@cellsize[1]/2
+> 
+> # We dont know the projection of the data at this stage, assume it is
+> # somehow metric
+> 
+> Srl = list()
+> for (i in 1:dim(coordinates(predictionLocations))[1]) {
++   pt1 = coordinates(predictionLocations)[i,]
++   x1 = pt1[1]-cs
++   x2 = pt1[1]+cs
++   y1 = pt1[2]-cs
++   y2 = pt1[2]+cs
++ 
++   boun = data.frame(x=c(x1,x2,x2,x1,x1),y=c(y1,y1,y2,y2,y1))
++   coordinates(boun) = ~x+y
++   boun = Polygon(boun)
++   Srl[[i]] = Polygons(list(boun),ID = as.character(i))
++ }
+> predictionLocations = SpatialPolygons(Srl)
+> 
+> 
+> krigingObject = createIntamapObject(
++ 	observations = observations,
++ 	predictionLocations = predictionLocations,
++ #	targetCRS = "+init=epsg:3035",
++ #	boundCRS = "+proj=laea +lat_0=48 +lon_0=9 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m",
++ #	boundCRS = boundCRS,
++ #	boundaries = boundaries,
++   formulaString = as.formula(paste(obsNames[3],"~1")),
++ 	params =  list(thresh = quantile(observations$value,0.9),block=cellsize),
++     outputWhat = list(mean=TRUE, variance=TRUE, excprob = 5.9, cumdistr = 5.9, 
++ 		quantile = .1),
++     blockWhat = list(fat=7,fatVar=7,blockMax=TRUE,blockMaxVar = TRUE,blockMin=TRUE),
++ 	class="automap"
++ )
+> 
+> checkSetup(krigingObject)
+Checking object ... OK
+> krigingObject = preProcess(krigingObject)
+> krigingObject = estimateParameters(krigingObject)
+> krigingObject = blockPredict(krigingObject)
+[using ordinary kriging]
+[1] "performed ordinary block kriging"
+Warning message:
+In if (blockWhat == "none") blockWhat = list(mean = TRUE) else blockWhat$mean = TRUE :
+  the condition has length > 1 and only the first element will be used
+> krigingObject = postProcess(krigingObject)
+> predictions = krigingObject$predictions
+> 
+> # Send predictions back to Java. Not sure how to deal with this spatial object though...?
+> summary(krigingObject$outputTable, digits = 4)
+       x                y               mean          variance      
+ Min.   :179530   Min.   :330383   Min.   :5.121   Min.   :0.00926  
+ 1st Qu.:179530   1st Qu.:331165   1st Qu.:5.847   1st Qu.:0.01225  
+ Median :180051   Median :331946   Median :6.031   Median :0.06452  
+ Mean   :180051   Mean   :331946   Mean   :6.048   Mean   :0.10364  
+ 3rd Qu.:180572   3rd Qu.:332728   3rd Qu.:6.374   3rd Qu.:0.16456  
+ Max.   :180572   Max.   :333509   Max.   :6.785   Max.   :0.33726  
+   excprob5.9        cumdistr5.9       quantile0.1         fat7         
+ Min.   :0.000287   Min.   :0.01470   Min.   :4.783   Min.   :0.009495  
+ 1st Qu.:0.427082   1st Qu.:0.03642   1st Qu.:5.525   1st Qu.:0.075707  
+ Median :0.698870   Median :0.30113   Median :5.716   Median :0.164949  
+ Mean   :0.611131   Mean   :0.38887   Mean   :5.693   Mean   :0.172652  
+ 3rd Qu.:0.963581   3rd Qu.:0.57292   3rd Qu.:6.005   3rd Qu.:0.252298  
+ Max.   :0.985297   Max.   :0.99971   Max.   :6.264   Max.   :0.380101  
+    fatVar7             blockMax      blockMaxVar         blockMin    
+ Min.   :0.0003123   Min.   :6.755   Min.   :0.08544   Min.   :3.979  
+ 1st Qu.:0.0030803   1st Qu.:7.466   1st Qu.:0.12191   1st Qu.:4.371  
+ Median :0.0044864   Median :7.820   Median :0.17630   Median :4.454  
+ Mean   :0.0143819   Mean   :7.713   Mean   :0.19836   Mean   :4.507  
+ 3rd Qu.:0.0299516   3rd Qu.:8.151   3rd Qu.:0.24059   3rd Qu.:4.702  
+ Max.   :0.0411645   Max.   :8.326   Max.   :0.41360   Max.   :4.954  
+> 
+> proc.time()
+   user  system elapsed 
+  9.608   1.900   9.521 

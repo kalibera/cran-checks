@@ -1,0 +1,84 @@
+* using log directory ‘/home/tomas/cran/rcnst/check/data.table.Rcheck’
+* using R Under development (unstable) (2017-08-14 r73093)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* checking for file ‘data.table/DESCRIPTION’ ... OK
+* this is package ‘data.table’ version ‘1.10.4’
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘data.table’ can be installed ... OK
+* checking package directory ... OK
+* checking ‘build’ directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking compiled code ... NOTE
+Note: information on .o files is not available
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... ERROR
+  Running ‘autoprint.R’
+  Comparing ‘autoprint.Rout’ to ‘autoprint.Rout.save’ ... OK
+  Running ‘knitr.R’
+  Comparing ‘knitr.Rout’ to ‘knitr.Rout.save’ ... OK
+  Running ‘main.R’
+Running the tests in ‘tests/main.R’ failed.
+Last 13 lines of output:
+  
+  Running test id 1696     Test 1751 ran without errors but failed check that x equals y:
+  > x = capture.output(fwrite(DT, verbose = FALSE))[-1] 
+  First 6 of 12 :[1] "4.6623917247682e-210"  "4.74137339850716e-210" "4.74137339850783e-210"
+  [4] "1.11255199825605e-308" "0"                     ""                     
+  > y = tt 
+  First 6 of 12 :[1] "2016-09-28T15:30:00.000000070Z" "2016-09-29T23:59:00.000000001Z"
+  [3] "2016-09-29T23:59:00.000000999Z" "1970-01-01T00:01:01.000001000Z"
+  [5] "1970-01-01T00:00:00.000000000Z" "1969-12-31T23:59:59.999999999Z"
+  12 string mismatches
+  
+  Error in eval(exprs[i], envir) : 
+    2 errors out of 5938 (lastID=1751, endian==little, sizeof(long double)==16, sizeof(pointer)==8) in inst/tests/tests.Rraw on Tue Aug 15 04:07:27 2017. Search tests.Rraw for test numbers: 1675.1, 1751.
+  Calls: test.data.table -> sys.source -> eval -> eval
+  Execution halted
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+* checking re-building of vignette outputs ... OK
+* checking PDF version of manual ... OK
+* DONE
+Status: 1 ERROR, 1 NOTE

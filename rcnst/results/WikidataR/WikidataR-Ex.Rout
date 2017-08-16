@@ -1,0 +1,107 @@
+
+R Under development (unstable) (2017-08-14 r73093) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "WikidataR"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('WikidataR')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("extract_claims")
+> ### * extract_claims
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: extract_claims
+> ### Title: Extract Claims from Returned Item Data
+> ### Aliases: extract_claims
+> 
+> ### ** Examples
+> 
+> # Get item data
+> adams_data <- get_item("42")
+> 
+> # Get claim data
+> claims <- extract_claims(adams_data, "P31")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("find_item")
+> ### * find_item
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: find_item
+> ### Title: Search for Wikidata items or properties that match a search term
+> ### Aliases: find_item find_property find_property
+> 
+> ### ** Examples
+> 
+> 
+> #Check for entries relating to Douglas Adams in some way
+> adams_items <- find_item("Douglas Adams")
+> 
+> #Check for properties involving the peerage
+> peerage_props <- find_property("peerage")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_geo_box")
+> ### * get_geo_box
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_geo_box
+> ### Title: Get geographic entities based on a bounding box
+> ### Aliases: get_geo_box
+> 
+> ### ** Examples
+> 
+> # Simple bounding box
+> bruges_box <- WikidataR:::get_geo_box("Q12988", "NorthEast", "Q184287", "SouthWest")
+> 
+> # Custom language
+> bruges_box_fr <- WikidataR:::get_geo_box("Q12988", "NorthEast", "Q184287", "SouthWest",
++                                         language = "fr")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_geo_entity")
+> ### * get_geo_entity
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_geo_entity
+> ### Title: Retrieve geographic information from Wikidata
+> ### Aliases: get_geo_entity
+> 
+> ### ** Examples
+> 
+> # All entities
+> sf_locations <- get_geo_entity("Q62")
+Error in sparql_query(query) : Internal Server Error (HTTP 500).
+Calls: get_geo_entity ... clean_geo -> do.call -> lapply -> sparql_query -> <Anonymous>
+Execution halted

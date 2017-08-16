@@ -1,0 +1,83 @@
+* using log directory ‘/home/tomas/cran/rcnst/check/texmexseq.Rcheck’
+* using R Under development (unstable) (2017-08-14 r73093)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* checking for file ‘texmexseq/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘texmexseq’ version ‘0.3’
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘texmexseq’ can be installed ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking compiled code ... NOTE
+Note: information on .o files is not available
+* checking examples ... ERROR
+Running examples in ‘texmexseq-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: quad.table
+> ### Title: Create and plot "quads" of samples
+> ### Aliases: quad.table quad.plot
+> ### Keywords: hplot manip design
+> 
+> ### ** Examples
+> 
+> # make up some data
+> sim.data <- function() rpoilog(1000, 1.0, 1.0, condS=TRUE)
+> otu <- data.frame(sample0=sim.data())
+> for (i in 1:10) otu[[paste('sample', i, sep='')]] <- sim.data()
+> otu.ids <- paste('otu', seq(1:1000), sep='')
+> rownames(otu) <- otu.ids
+> z.table <- z.transform.table(otu)
+Warning in value[[3L]](cond) : fit 1 failed
+Warning in value[[3L]](cond) : fit 1 failed
+Warning in value[[3L]](cond) : fit 2 failed
+> 
+> # pull out a quad, imagining that samples 1 and 2 were the control samples
+> # and 3 and 4 were the treatment
+> q <- quad.table(z.table, 'sample1', 'sample2', 'sample3', 'sample4')
+> 
+> # plot it
+> p <- quad.plot(q)
+Error in get("d.control") : object 'd.control' not found
+Calls: quad.plot ... map_if -> map -> lapply -> FUN -> overscope_eval_next -> get
+Execution halted
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking PDF version of manual ... OK
+* DONE
+Status: 1 ERROR, 1 NOTE

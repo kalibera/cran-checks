@@ -1,0 +1,2440 @@
+
+R Under development (unstable) (2017-08-14 r73093) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "Runuran"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('Runuran')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("Runuran.distributions")
+> ### * Runuran.distributions
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Runuran.distributions
+> ### Title: UNU.RAN distribution objects
+> ### Aliases: Runuran.distributions
+> ### Keywords: distribution datagen
+> 
+> ### ** Examples
+> 
+> ## Create an object for a gamma distribution with shape parameter 5.
+> distr <- udgamma(shape=5)
+> ## Create the UNU.RAN generator object. use method PINV (inversion).
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen, 100)
+> ## Compute some quantiles for Monte Carlo methods
+> x <- uq(gen, (1:9)/10)
+> 
+> ## Analogous for half normal distribution
+> distr <- udnorm(lb=0, ub=Inf)
+> gen <- pinvd.new(distr)
+> x <- ur(gen, 100)
+> x <- uq(gen, (1:9)/10)
+> 
+> ## Analogous for a generalized hyperbolic distribution
+> distr <- udghyp(lambda=-1.0024, alpha=39.6, beta=4.14, delta=0.0118, mu=-0.000158)
+> gen <- pinvd.new(distr)
+> x <- ur(gen, 100)
+> x <- uq(gen, (1:9)/10)
+> 
+> ## It is also possible to compute density or distribution functions.
+> ## However, this might not work for all generator objects.
+> ##    Density
+> x <- ud(gen, 1.2)
+> ##    Cumulative distribution function
+> x <- up(gen, 1.2)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Runuran.special.generators")
+> ### * Runuran.special.generators
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Runuran.special.generators
+> ### Title: Generators for distributions based on methods from the UNU.RAN
+> ###   library
+> ### Aliases: Runuran.special.generators SpecialGenerator
+> ### Keywords: distribution datagen
+> 
+> ### ** Examples
+> 
+> ## draw a sample of size 100 from a
+> ## gamma distribution with shape parameter 5
+> x <- urgamma(n=100, shape=5)
+> 
+> ## draw a sample of size 100 from a
+> ## half normal distribution
+> x <- urnorm(n=100, lb=0, ub=Inf)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ars.new")
+> ### * ars.new
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ars.new
+> ### Title: UNU.RAN generator based on Adaptive Rejection Sampling (ARS)
+> ### Aliases: ars.new arsd.new
+> ### Keywords: datagen distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 100 for a 
+> ## Gaussian distribution (use logPDF)
+> lpdf <- function (x) { -0.5*x^2 }
+> gen <- ars.new(logpdf=lpdf, lb=-Inf, ub=Inf)
+> x <- ur(gen,100)
+> 
+> ## Same example but additionally provide derivative of log-density
+> ## to prevent possible round-off errors
+> lpdf <- function (x) { -0.5*x^2 }
+> dlpdf <- function (x) { -x }
+> gen <- ars.new(logpdf=lpdf, dlogpdf=dlpdf, lb=-Inf, ub=Inf)
+> x <- ur(gen,100)
+> 
+> ## Draw a sample from a truncated Gaussian distribution
+> ## on domain [100,Inf)
+> lpdf <- function (x) { -0.5*x^2 }
+> gen <- ars.new(logpdf=lpdf, lb=50, ub=Inf)
+> x <- ur(gen,100)
+> 
+> ## Alternative approach
+> distr <- udnorm()
+> gen <- arsd.new(distr)
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("dari.new")
+> ### * dari.new
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dari.new
+> ### Title: UNU.RAN generator based on Discrete Automatic Rejection
+> ###   Inversion (DARI)
+> ### Aliases: dari.new darid.new
+> ### Keywords: datagen distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 100 for a Binomial distribution
+> ## with 1000 number if observations and probability 0.2
+> gen <- dari.new(pmf=dbinom, lb=0, ub=1000, size=1000, prob=0.2)
+> x <- ur(gen,100)
+> 
+> ## Create a sample from a distribution with PMF
+> ##  p(x) = 1/x^3, x >= 1  (Zipf distribution)
+> zipf <- function (x) { 1/x^3 }
+> gen <- dari.new(pmf=zipf, lb=1, ub=Inf)
+> x <- ur(gen,100)
+> 
+> ## Alternative approach
+> distr <- udbinom(size=100,prob=0.3)
+> gen <- darid.new(distr)
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("dau.new")
+> ### * dau.new
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dau.new
+> ### Title: UNU.RAN generator based on the Alias method (DAU)
+> ### Aliases: dau.new daud.new
+> ### Keywords: datagen distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 100 for a 
+> ## binomial distribution with size=115, prob=0.5
+> gen <- dau.new(pv=dbinom(0:115,115,0.5), from=0)
+> x <- ur(gen,100)
+> 
+> ## Alternative approach
+> distr <- udbinom(size=100,prob=0.3)
+> gen <- daud.new(distr)
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("dgt.new")
+> ### * dgt.new
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dgt.new
+> ### Title: UNU.RAN generator based on table guided discrete inversion (DGT)
+> ### Aliases: dgt.new dgtd.new
+> ### Keywords: datagen distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 100 for a 
+> ## binomial distribution with size=115, prob=0.5
+> gen <- dgt.new(pv=dbinom(0:115,115,0.5),from=0)
+> x <- ur(gen,100)
+> 
+> ## Alternative approach
+> distr <- udbinom(size=100,prob=0.3)
+> gen <- dgtd.new(distr)
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("hitro.new")
+> ### * hitro.new
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: hitro.new
+> ### Title: UNU.RAN generator based on Hit-and-Run sampler (HITRO)
+> ### Aliases: hitro.new
+> ### Keywords: datagen distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 100 for a 
+> ## Gaussian distribution
+> mvpdf <- function (x) { exp(-sum(x^2)) }
+> gen <- hitro.new(dim=2, pdf=mvpdf)
+> x <- ur(gen,100)
+> 
+> ## Use mode of Gaussian distribution.
+> ## Reduce auto-correlation by thinning and burn-in.
+> ##  mode at (0,0)
+> ##  thinning factor 3
+> ##    (only every 3rd vector in the sequence is returned)
+> ##  burn-in of length 1000
+> ##    (the first 100 vectors in the sequence are discarded)
+> mvpdf <- function (x) { exp(-sum(x^2)) }
+> gen <- hitro.new(dim=2, pdf=mvpdf, mode=c(0,0), thinning=3, burnin=1000)
+> x <- ur(gen,100)
+> 
+> ## Gaussian distribution restricted to the rectangle [1,2]x[1,2]
+> ##  (don't forget to provide a starting point using 'center')
+> mvpdf <- function (x) { exp(-sum(x^2)) }
+> gen <- hitro.new(dim=2, pdf=mvpdf, center=c(1.1,1.1), ll=c(1,1), ur=c(2,2))
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("itdr.new")
+> ### * itdr.new
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: itdr.new
+> ### Title: UNU.RAN generator based on Inverse Transformed Density Rejection
+> ###   (ITDR)
+> ### Aliases: itdr.new itdrd.new
+> ### Keywords: datagen distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 100 for a Gamma(0.5) distribution
+> pdf <- function (x) { x^(-0.5)*exp(-x) }
+> dpdf <- function (x) { (-x^(-0.5) - 0.5*x^(-1.5))*exp(-x) }
+> gen <- itdr.new(pdf=pdf, dpdf=dpdf, lb=0, ub=Inf, pole=0)
+> x <- ur(gen,100)
+> 
+> ## Alternative approach
+> distr <- udgamma(shape=0.5)
+> gen <- itdrd.new(distr)
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("mixt.new")
+> ### * mixt.new
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: mixt.new
+> ### Title: UNU.RAN generator for finite mixture of distributions
+> ### Aliases: mixt.new
+> ### Keywords: datagen distribution
+> 
+> ### ** Examples
+> 
+> ## Create a mixture of an Exponential and a Half-normal distribution
+> unr1 <- unuran.new(udnorm(lb=-Inf, ub=0))
+> unr2 <- unuran.new(udexp())
+> mix <- mixt.new( c(1,1), c(unr1, unr2) )
+> x <- ur(mix,100)
+> 
+> ## Now use inversion method:
+> ## It is important that
+> ##  1. we use a inversion for each component
+> ##  2. the domains to not overlap
+> ##  3. the components are ordered with respect to their domains
+> unr1 <- pinvd.new(udnorm(lb=-Inf, ub=0))
+> unr2 <- pinvd.new(udexp())
+> mix <- mixt.new( c(1,1), c(unr1, unr2), inversion=TRUE )
+> x <- ur(mix,100)
+> 
+> ## We also can compute the inverse distribution function
+> ##x <- uq(mix,0.90)
+> 
+> ## Create a mixture of Exponential and Geometric distrbutions
+> unr1 <- unuran.new(udexp())
+> unr2 <- unuran.new(udgeom(0.7))
+> mix <- mixt.new( c(0.6,0.4), c(unr1, unr2) )
+> x <- ur(mix,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("pinv.new")
+> ### * pinv.new
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: pinv.new
+> ### Title: UNU.RAN generator based on Polynomial interpolation of INVerse
+> ###   CDF (PINV)
+> ### Aliases: pinv.new pinvd.new
+> ### Keywords: datagen distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 100 for a Gaussian distribution
+> pdf <- function (x) { exp(-0.5*x^2) }
+> gen <- pinv.new(pdf=pdf, lb=-Inf, ub=Inf)
+> x <- ur(gen,100)
+> 
+> ## Create a sample of size 100 for a 
+> ## Gaussian distribution (use logPDF)
+> logpdf <- function (x) { -0.5*x^2 }
+> gen <- pinv.new(pdf=logpdf, islog=TRUE, lb=-Inf, ub=Inf)
+> x <- ur(gen,100)
+> 
+> ## Draw sample from Gaussian distribution with mean 1 and
+> ## standard deviation 2. Use 'dnorm'.
+> gen <- pinv.new(pdf=dnorm, lb=-Inf, ub=Inf, mean=1, sd=2)
+> x <- ur(gen,100)
+> 
+> ## Draw a sample from a truncated Gaussian distribution
+> ## on domain [2,Inf)
+> gen <- pinv.new(pdf=dnorm, lb=2, ub=Inf)
+[UNU.RAN - warning] : center moved into domain of distribution
+> x <- ur(gen,100)
+> 
+> ## Improve the accuracy of the approximation
+> gen <- pinv.new(pdf=dnorm, lb=-Inf, ub=Inf, uresolution=1e-15)
+> x <- ur(gen,100)
+> 
+> ## We have to provide a 'center' when PDF (almost) vanishes at 0.
+> gen <- pinv.new(pdf=dgamma, lb=0, ub=Inf, center=4, shape=5)
+> x <- ur(gen,100)
+> 
+> ## We also can force a smoother approximation
+> gen <- pinv.new(pdf=dnorm, lb=-Inf, ub=Inf, smooth=TRUE)
+> x <- ur(gen,100)
+> 
+> ## Alternative approach
+> distr <- udnorm()
+> gen <- pinvd.new(distr)
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("srou.new")
+> ### * srou.new
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: srou.new
+> ### Title: UNU.RAN generator based on Simple Ratio-Of-Uniforms Method
+> ###   (SROU)
+> ### Aliases: srou.new sroud.new
+> ### Keywords: datagen distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 100 for a Gaussian distribution.
+> pdf <- function (x) { exp(-0.5*x^2) }
+> gen <- srou.new(pdf=pdf, lb=-Inf, ub=Inf, mode=0, area=2.506628275)
+> x <- ur(gen,100)
+> 
+> ## Create a sample of size 100 for a Gaussian distribution.
+> ## Use 'dnorm'.
+> gen <- srou.new(pdf=dnorm, lb=-Inf, ub=Inf, mode=0, area=1)
+> x <- ur(gen,100)
+> 
+> ## Alternative approach
+> distr <- udnorm()
+> gen <- sroud.new(distr)
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("tdr.new")
+> ### * tdr.new
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: tdr.new
+> ### Title: UNU.RAN generator based on Transformed Density Rejection (TDR)
+> ### Aliases: tdr.new tdrd.new
+> ### Keywords: datagen distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 100 for a Gaussian distribution
+> pdf <- function (x) { exp(-0.5*x^2) }
+> gen <- tdr.new(pdf=pdf, lb=-Inf, ub=Inf)
+> x <- ur(gen,100)
+> 
+> ## Create a sample of size 100 for a 
+> ## Gaussian distribution (use logPDF)
+> logpdf <- function (x) { -0.5*x^2 }
+> gen <- tdr.new(pdf=logpdf, islog=TRUE, lb=-Inf, ub=Inf)
+> x <- ur(gen,100)
+> 
+> ## Same example but additionally provide derivative of log-density
+> ## to prevent possible round-off errors
+> logpdf <- function (x) { -0.5*x^2 }
+> dlogpdf <- function (x) { -x }
+> gen <- tdr.new(pdf=logpdf, dpdf=dlogpdf, islog=TRUE, lb=-Inf, ub=Inf)
+> x <- ur(gen,100)
+> 
+> ## Draw sample from Gaussian distribution with mean 1 and
+> ## standard deviation 2. Use 'dnorm'.
+> gen <- tdr.new(pdf=dnorm, lb=-Inf, ub=Inf, mean=1, sd=2)
+> x <- ur(gen,100)
+> 
+> ## Draw a sample from a truncated Gaussian distribution
+> ## on domain [5,Inf)
+> logpdf <- function (x) { -0.5*x^2 }
+> gen <- tdr.new(pdf=logpdf, lb=5, ub=Inf, islog=TRUE)
+> x <- ur(gen,100)
+> 
+> ## Alternative approach
+> distr <- udnorm()
+> gen <- tdrd.new(distr)
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ud")
+> ### * ud
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ud
+> ### Title: Density function for "unuran" object
+> ### Aliases: ud
+> 
+> ### ** Examples
+> 
+> ## Create an UNU.RAN distribution object (for standard Gaussian)
+> ## and evaluate density for some points
+> distr <- udnorm()
+> ud(distr, 1.5)
+[1] 0.1295176
+> ud(distr, -3:3)
+[1] 0.004431848 0.053990967 0.241970725 0.398942280 0.241970725 0.053990967
+[7] 0.004431848
+> 
+> ## Create an UNU.RAN generator object (for standard Gaussian)
+> ## and evaluate density of underyling distribution
+> gen <- tdrd.new(udnorm())
+> ud(gen, 1.5)
+[1] 0.1295176
+> ud(gen, -3:3)
+[1] 0.004431848 0.053990967 0.241970725 0.398942280 0.241970725 0.053990967
+[7] 0.004431848
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udbeta")
+> ### * udbeta
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udbeta
+> ### Title: UNU.RAN object for Beta distribution
+> ### Aliases: udbeta
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for beta distribution
+> distr <- udbeta(shape1=3,shape2=7)
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udbinom")
+> ### * udbinom
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udbinom
+> ### Title: UNU.RAN object for Binomial distribution
+> ### Aliases: udbinom
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for Binomial distribution
+> dist <- udbinom(size=100, prob=0.33)
+> ## Generate generator object; use method DGT (inversion)
+> gen <- dgtd.new(dist)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udcauchy")
+> ### * udcauchy
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udcauchy
+> ### Title: UNU.RAN object for Cauchy distribution
+> ### Aliases: udcauchy
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for Cauchy distribution
+> distr <- udcauchy()
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udchi")
+> ### * udchi
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udchi
+> ### Title: UNU.RAN object for Chi distribution
+> ### Aliases: udchi
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for chi-squared distribution
+> distr <- udchi(df=5)
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udchisq")
+> ### * udchisq
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udchisq
+> ### Title: UNU.RAN object for Chi-Squared distribution
+> ### Aliases: udchisq
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for chi-squared distribution
+> distr <- udchisq(df=5)
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udexp")
+> ### * udexp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udexp
+> ### Title: UNU.RAN object for Exponential distribution
+> ### Aliases: udexp
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for standard exponential distribution
+> distr <- udexp()
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udf")
+> ### * udf
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udf
+> ### Title: UNU.RAN object for F distribution
+> ### Aliases: udf
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for F distribution
+> distr <- udf(df1=3,df2=6)
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udfrechet")
+> ### * udfrechet
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udfrechet
+> ### Title: UNU.RAN object for Frechet distribution
+> ### Aliases: udfrechet
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for Frechet distribution
+> distr <- udfrechet(shape=2)
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udgamma")
+> ### * udgamma
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udgamma
+> ### Title: UNU.RAN object for Gamma distribution
+> ### Aliases: udgamma
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for gamma distribution
+> distr <- udgamma(shape=4)
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udgeom")
+> ### * udgeom
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udgeom
+> ### Title: UNU.RAN object for Geometric distribution
+> ### Aliases: udgeom
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for Geometric distribution
+> dist <- udgeom(prob=0.33)
+> ## Generate generator object; use method DARI
+> gen <- darid.new(dist)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udghyp")
+> ### * udghyp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udghyp
+> ### Title: UNU.RAN object for Generalized Hyperbolic distribution
+> ### Aliases: udghyp
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for generalized hyperbolic distribution
+> distr <- udghyp(lambda=-1.0024, alpha=39.6, beta=4.14, delta=0.0118, mu=-0.000158)
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udgig")
+> ### * udgig
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udgig
+> ### Title: UNU.RAN object for Generalized Inverse Gaussian distribution
+> ### Aliases: udgig udgiga
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for GIG distribution
+> distr <- udgig(theta=3, psi=1, chi=1)
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udgumbel")
+> ### * udgumbel
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udgumbel
+> ### Title: UNU.RAN object for Gumbel distribution
+> ### Aliases: udgumbel
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for Gumbel distribution
+> distr <- udgumbel()
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udhyper")
+> ### * udhyper
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udhyper
+> ### Title: UNU.RAN object for Hypergeometric distribution
+> ### Aliases: udhyper
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for Hypergeometric distribution
+> dist <- udhyper(m=15,n=5,k=7)
+> ## Generate generator object; use method DGT (inversion)
+> gen <- dgtd.new(dist)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udhyperbolic")
+> ### * udhyperbolic
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udhyperbolic
+> ### Title: UNU.RAN object for Hyperbolic distribution
+> ### Aliases: udhyperbolic
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for hyperbolic distribution
+> distr <- udhyperbolic(alpha=3,beta=2,delta=1,mu=0)
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udig")
+> ### * udig
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udig
+> ### Title: UNU.RAN object for Inverse Gaussian distribution
+> ### Aliases: udig
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for inverse Gaussian distribution
+> distr <- udig(mu=3, lambda=2)
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udlaplace")
+> ### * udlaplace
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udlaplace
+> ### Title: UNU.RAN object for Laplace distribution
+> ### Aliases: udlaplace
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for standard Laplace distribution
+> distr <- udlaplace()
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udlnorm")
+> ### * udlnorm
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udlnorm
+> ### Title: UNU.RAN object for Log Normal distribution
+> ### Aliases: udlnorm
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for log normal distribution
+> distr <- udlnorm()
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udlogarithmic")
+> ### * udlogarithmic
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udlogarithmic
+> ### Title: UNU.RAN object for Logarithmic distribution
+> ### Aliases: udlogarithmic
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for Logarithmic distribution
+> dist <- udlogarithmic(shape=0.3)
+> ## Generate generator object; use method DARI
+> gen <- darid.new(dist)
+[UNU.RAN - error] (distribution) data are missing (cannot execute): Cannot compute sum
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udlogis")
+> ### * udlogis
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udlogis
+> ### Title: UNU.RAN object for Logistic distribution
+> ### Aliases: udlogis
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for standard logistic distribution
+> distr <- udlogis()
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udlomax")
+> ### * udlomax
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udlomax
+> ### Title: UNU.RAN object for Lomax distribution
+> ### Aliases: udlomax
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for Lomax distribution
+> distr <- udlomax(shape=2)
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udmeixner")
+> ### * udmeixner
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udmeixner
+> ### Title: UNU.RAN object for Meixner distribution
+> ### Aliases: udmeixner
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for meixner distribution
+> distr <- udmeixner(alpha=0.0298, beta=0.1271, delta=0.5729, mu=-0.0011)
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udnbinom")
+> ### * udnbinom
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udnbinom
+> ### Title: UNU.RAN object for Negative Binomial distribution
+> ### Aliases: udnbinom
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for Negative Binomial distribution
+> dist <- udnbinom(size=100, prob=0.33)
+> ## Generate generator object; use method DARI
+> gen <- darid.new(dist)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udnorm")
+> ### * udnorm
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udnorm
+> ### Title: UNU.RAN object for Normal distribution
+> ### Aliases: udnorm
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for standard normal distribution
+> distr <- udnorm()
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> ## Create distribution object for positive normal distribution
+> distr <- udnorm(lb=0, ub=Inf)
+> ## ... and draw a sample
+> gen <- pinvd.new(distr)
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udpareto")
+> ### * udpareto
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udpareto
+> ### Title: UNU.RAN object for Pareto distribution
+> ### Aliases: udpareto
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for Pareto distribution
+> distr <- udpareto(k=3,a=2)
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udpois")
+> ### * udpois
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udpois
+> ### Title: UNU.RAN object for Poisson distribution
+> ### Aliases: udpois
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for Poisson distribution
+> dist <- udpois(lambda=2.3)
+> ## Generate generator object; use method DARI
+> gen <- darid.new(dist)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udpowerexp")
+> ### * udpowerexp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udpowerexp
+> ### Title: UNU.RAN object for Powerexponential distribution
+> ### Aliases: udpowerexp
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for powerexponential distribution
+> distr <- udpowerexp(shape=4)
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udrayleigh")
+> ### * udrayleigh
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udrayleigh
+> ### Title: UNU.RAN object for Rayleigh distribution
+> ### Aliases: udrayleigh
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for standard Rayleigh distribution
+> distr <- udrayleigh()
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udslash")
+> ### * udslash
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udslash
+> ### Title: UNU.RAN object for Slash distribution
+> ### Aliases: udslash
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for a slash distribution
+> distr <- udslash()
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udt")
+> ### * udt
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udt
+> ### Title: UNU.RAN object for Student t distribution
+> ### Aliases: udt
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for t distribution
+> distr <- udt(df=4)
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udvg")
+> ### * udvg
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udvg
+> ### Title: UNU.RAN object for Variance Gamma distribution
+> ### Aliases: udvg
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for variance gamma distribution
+> distr <- udvg(lambda=2.25, alpha=210.5, beta=-5.14, mu=0.00094)
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("udweibull")
+> ### * udweibull
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: udweibull
+> ### Title: UNU.RAN object for Weibull distribution
+> ### Aliases: udweibull
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create distribution object for Weibull distribution
+> distr <- udweibull(shape=3)
+> ## Generate generator object; use method PINV (inversion)
+> gen <- pinvd.new(distr)
+> ## Draw a sample of size 100
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("unuran.cmv-class")
+> ### * unuran.cmv-class
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: unuran.cmv-class
+> ### Title: Class "unuran.cmv" for Continuous Multivariate Distribution
+> ### Aliases: unuran.cmv-class print,unuran.cmv-method
+> ###   show,unuran.cmv-method initialize,unuran.cmv-method
+> ### Keywords: classes distribution datagen
+> 
+> ### ** Examples
+> 
+> ## Create distribution with given PDF
+> mvpdf <- function (x) { exp(-sum(x^2)) }
+> mvdist <- new("unuran.cmv", dim=2, pdf=mvpdf)
+> 
+> ## Restrict domain to rectangle [0,1]x[0,1] and set
+> ## mode to (0,0)
+> mvpdf <- function (x) { exp(-sum(x^2)) }
+> mvdist <- new("unuran.cmv", dim=2, pdf=mvpdf, ll=c(0,0), ur=c(1,1), mode=c(0,0))
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("unuran.cmv.new")
+> ### * unuran.cmv.new
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: unuran.cmv.new
+> ### Title: Create a UNU.RAN continuous multivariate distribution object
+> ### Aliases: unuran.cmv.new
+> ### Keywords: distribution datagen
+> 
+> ### ** Examples
+> 
+> ## Get a distribution object with given pdf and mode
+> mvpdf <- function (x) { exp(-sum(x^2)) }
+> mvd <- unuran.cmv.new(dim=2, pdf=mvpdf, mode=c(0,0))
+> 
+> ## Restrict domain to rectangle [0,1]x[0,1] and set
+> ## mode to (0,0)
+> mvpdf <- function (x) { exp(-sum(x^2)) }
+> mvd <- unuran.cmv.new(dim=2, pdf=mvpdf, ll=c(0,0), ur=c(1,1), mode=c(0,0))
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("unuran.cont-class")
+> ### * unuran.cont-class
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: unuran.cont-class
+> ### Title: Class "unuran.cont" for Continuous Distribution
+> ### Aliases: unuran.cont-class print,unuran.cont-method
+> ###   show,unuran.cont-method initialize,unuran.cont-method
+> ### Keywords: classes distribution datagen
+> 
+> ### ** Examples
+> 
+> ## Create continuous distribution with given logPDF and its derivative
+> pdf <- function (x) { -0.5*x^2 }
+> dpdf <- function (x) { -x }
+> distr <- new("unuran.cont", pdf=pdf, dpdf=dpdf, islog=TRUE, lb=-Inf, ub=Inf)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("unuran.cont.new")
+> ### * unuran.cont.new
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: unuran.cont.new
+> ### Title: Create a UNU.RAN continuous univariate distribution object
+> ### Aliases: unuran.cont.new
+> ### Keywords: distribution datagen
+> 
+> ### ** Examples
+> 
+> ## Get a distribution object with given pdf, domain and mode
+> mypdf <- function (x) { exp(-x) }
+> distr <- unuran.cont.new(pdf=mypdf, islog=FALSE, lb=0, ub=Inf, mode=0)
+> 
+> ## This object can now be used to create an generator object.
+> ## 1. select a method using a Runuran function:
+> gen <- pinvd.new(distr, uresolution=1e-12)
+> 
+> ## 2. directly use the UNU.RAN string API
+> gen <- unuran.new(distr, method="pinv; u_resolution=1e-12")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("unuran.details")
+> ### * unuran.details
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: unuran.details
+> ### Title: Information on a given "unuran" generator object
+> ### Aliases: unuran.details
+> ### Keywords: distribution datagen
+> 
+> ### ** Examples
+> 
+> ## Create a generator object
+> distr <- udnorm()
+> gen <- tdrd.new(distr)
+> 
+> ## print data about object on console
+> unuran.details(gen)
+
+Object is UNU.RAN object:
+	method:    tdr 
+	distr:     [S4 class] 
+	inversion: FALSE 
+
+generator ID: TDR.093
+
+distribution:
+   name      = normal (0,1)  [UNU.RAN standard distribution]
+   type      = continuous univariate distribution
+   functions = PDF dPDF
+   domain    = (-inf, inf)
+   center    = 0  [= mode]
+
+method: TDR (Transformed Density Rejection)
+   variant   = PS (proportional squeeze)
+   T_c(x)    = -1/sqrt(x)  ... c = -1/2
+
+performance characteristics:
+   area(hat) = 1.00143
+   rejection constant = 1.00143
+   area ratio squeeze/hat = 0.994723
+   # intervals = 51
+
+parameters:
+   variant_ps = on  [default]
+   c = -0.5  [default]
+   max_sqhratio = 0.99  [default]
+   max_intervals = 100  [default]
+
+[ Hint: You may use "variant_ia" for faster generation times. ]
+[ Hint: You can set "max_sqhratio" closer to 1 to decrease rejection constant. ]
+
+> 
+> ## get list with some of these data
+> data <- unuran.details(gen,return.list=TRUE)
+
+Object is UNU.RAN object:
+	method:    tdr 
+	distr:     [S4 class] 
+	inversion: FALSE 
+
+generator ID: TDR.093
+
+distribution:
+   name      = normal (0,1)  [UNU.RAN standard distribution]
+   type      = continuous univariate distribution
+   functions = PDF dPDF
+   domain    = (-inf, inf)
+   center    = 0  [= mode]
+
+method: TDR (Transformed Density Rejection)
+   variant   = PS (proportional squeeze)
+   T_c(x)    = -1/sqrt(x)  ... c = -1/2
+
+performance characteristics:
+   area(hat) = 1.00143
+   rejection constant = 1.00143
+   area ratio squeeze/hat = 0.994723
+   # intervals = 51
+
+parameters:
+   variant_ps = on  [default]
+   c = -0.5  [default]
+   max_sqhratio = 0.99  [default]
+   max_intervals = 100  [default]
+
+[ Hint: You may use "variant_ia" for faster generation times. ]
+[ Hint: You can set "max_sqhratio" closer to 1 to decrease rejection constant. ]
+
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("unuran.discr-class")
+> ### * unuran.discr-class
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: unuran.discr-class
+> ### Title: Class "unuran.discr" for Discrete Distribution
+> ### Aliases: unuran.discr-class print,unuran.discr-method
+> ###   show,unuran.discr-method initialize,unuran.discr-method
+> ### Keywords: classes distribution datagen
+> 
+> ### ** Examples
+> 
+> ## Create discrete distribution with given probability vector
+> ## (the PV need not be normalized)
+> pv <- c(1.,2.,1.5,0.,3.,1.2)     
+> dpv <- new("unuran.discr", pv=pv, lb=1)
+> 
+> ## Create discrete distribution with given PMF
+> pmf <- function(x) dbinom(x,100,0.3)
+> dpmf <- new("unuran.discr",pmf=pmf,lb=0,ub=100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("unuran.discr.new")
+> ### * unuran.discr.new
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: unuran.discr.new
+> ### Title: Create a UNU.RAN discrete univariate distribution object
+> ### Aliases: unuran.discr.new
+> ### Keywords: distribution datagen
+> 
+> ### ** Examples
+> 
+> ## Create a distribution object with given PV and mode
+> mypv <- dbinom(0:100,100,0.3)
+> distr <- new("unuran.discr", pv=mypv, lb=0, mode=30)
+> 
+> ## Create discrete distribution with given probability vector
+> ## (the PV need not be normalized)
+> pv <- c(1.,2.,1.5,0.,3.,1.2)     
+> dpv <- new("unuran.discr", pv=pv, lb=1)
+> 
+> ## Create discrete distribution with given PMF
+> pmf <- function(x) dbinom(x,100,0.3)
+> dpmf <- new("unuran.discr", pmf=pmf, lb=0, ub=100)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("unuran.is.inversion")
+> ### * unuran.is.inversion
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: unuran.is.inversion
+> ### Title: Test whether a "unuran" generator object implements an inversion
+> ###   method
+> ### Aliases: unuran.is.inversion
+> ### Keywords: datagen
+> 
+> ### ** Examples
+> 
+> ## PINV is an inversion method
+> unr <- pinvd.new(udnorm())
+> unuran.is.inversion(unr)
+[1] TRUE
+> 
+> ## TDR is a rejection method
+> unr <- tdrd.new(udnorm())
+> unuran.is.inversion(unr)
+[1] FALSE
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("unuran.new")
+> ### * unuran.new
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: unuran.new
+> ### Title: Create a UNU.RAN object
+> ### Aliases: unuran.new
+> ### Keywords: distribution datagen
+> 
+> ### ** Examples
+> 
+> ## Use method 'TDR' (Transformed Density Rejection) to 
+> ## draw a sample of size 10 from a hyperbolic distribution with PDF
+> ##   f(x) = const * exp(-sqrt(1+x^2)) 
+> ## restricted to domain [-1,2].
+> 
+> ## We first have to define functions that return the log-density and
+> ## its derivative, respectively. (We also could use the density itself.)
+> lf  <- function (x) { -sqrt(1+x^2) }
+> dlf <- function (x) { -x/sqrt(1+x^2) }
+> 
+> ## Next create the continuous distribution object.
+> d <- unuran.cont.new(pdf=lf,dpdf=dlf,islog=TRUE,lb=-1,ub=2)
+> 
+> ## Create 'unuran' object. We choose method 'TDR' with 
+> ## immediate acceptance (IA) and parameter c=0.
+> gen <- unuran.new(distr=d, method="tdr; variant_ia; c=0")
+> 
+> ## Now we can use this object to draw the sample.
+> ## (Of course we can repeat this step as often as required.)
+> ur(gen,10)
+ [1] -0.2902051 -0.0521077  0.3988726  1.4575782 -0.4398361  1.4119568
+ [7]  1.6438568  0.6172100  0.5360069 -0.8078932
+> 
+> ## Here is some information about our generator object.
+> unuran.details(gen)
+
+Object is UNU.RAN object:
+	method:    tdr; variant_ia; c=0 
+	distr:     [S4 class] 
+	inversion: FALSE 
+
+generator ID: TDR.096
+
+distribution:
+   name      = unknown
+   type      = continuous univariate distribution
+   functions = PDF dPDF
+   domain    = (-1, 2)
+   center    = 0  [default]
+
+[ Hint: You may provide a point near the mode as "center". ]
+
+method: TDR (Transformed Density Rejection)
+   variant   = IA (immediate acceptance)
+   T_c(x)    = log(x)  ... c = 0
+
+performance characteristics:
+   area(hat) = 0.808085
+   rejection constant <= 1.0006
+   area ratio squeeze/hat = 0.9994
+   # intervals = 32
+
+parameters:
+   variant_ia = on
+   c = 0  
+   max_sqhratio = 0.99  [default]
+   max_intervals = 100  [default]
+
+[ Hint: You can set "max_sqhratio" closer to 1 to decrease rejection constant. ]
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("unuran.packed-methods")
+> ### * unuran.packed-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: unuran.packed-method
+> ### Title: Pack "unuran" object
+> ### Aliases: unuran.packed unuran.packed-method unuran.packed,unuran-method
+> ###   unuran.packed<- unuran.packed<--method unuran.packed<-,unuran-method
+> ### Keywords: methods distribution datagen
+> 
+> ### ** Examples
+> 
+> ## create a unuran object for half-normal distribution using methed 'PINV'
+> gen <- pinv.new(dnorm,lb=0,ub=Inf)
+> 
+> ## status of object 
+> unuran.packed(gen)
+[1] FALSE
+> 
+> ## draw a random sample of size 10
+> x <- ur(gen,10)
+> 
+> ## pack unuran object
+> unuran.packed(gen) <- TRUE
+> unuran.packed(gen)
+[1] TRUE
+> 
+> ## draw a random sample of size 10
+> x <- ur(gen,10)
+> 
+> ## Not run: 
+> ##D ## unpacking is not supported
+> ##D unuran.packed(gen) <- FALSE    ## results in error 
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("unuran.verify.hat")
+> ### * unuran.verify.hat
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: unuran.verify.hat
+> ### Title: Verify hat and squeezes in a "unuran" generator object
+> ### Aliases: unuran.verify.hat
+> ### Keywords: distribution datagen
+> 
+> ### ** Examples
+> 
+> ## Create a generator object that implements a rejection method
+> unr <- tdrd.new(udnorm())
+> 
+> ## Verify hat and squeeze
+> unuran.verify.hat(unr)
+
+  Check inequality squeeze(x) <= density(x) <= hat(x) 
+  for automatic rejection method:
+
+	 0 out of 1e+05 (= 0%) points failed.
+
+	 No problems have been detected!
+
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("up")
+> ### * up
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: up
+> ### Title: Distribution function for "unuran" object
+> ### Aliases: up
+> 
+> ### ** Examples
+> 
+> ## Create an UNU.RAN distribution object (for standard Gaussian)
+> ## and evaluate distribution function for some points
+> distr <- udnorm()
+> up(distr, 1.5)
+[1] 0.9331928
+> up(distr, -3:3)
+[1] 0.001349898 0.022750132 0.158655254 0.500000000 0.841344746 0.977249868
+[7] 0.998650102
+> 
+> ## Create an UNU.RAN generator object (for standard Gaussian)
+> ## and evaluate distribution function of underyling distribution
+> unr <- tdrd.new(udnorm())
+> up(unr, 1.5)
+[1] 0.9331928
+> up(unr, -3:3)
+[1] 0.001349898 0.022750132 0.158655254 0.500000000 0.841344746 0.977249868
+[7] 0.998650102
+> 
+> ## Create an UNU.RAN generator object that does not contain
+> ## the CDF but implements method PINV.
+> unr <- pinv.new(pdf=function(x){exp(-x)}, lb=0,ub=Inf)
+> up(unr, 0:5)
+[1] 0.0000000 0.6321206 0.8646647 0.9502129 0.9816844 0.9932621
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("uq")
+> ### * uq
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: uq
+> ### Title: Quantile function for "unuran" object
+> ### Aliases: uq
+> ### Keywords: distribution datagen
+> 
+> ### ** Examples
+> 
+> ## Compute quantiles of normal distribution using method 'PINV'
+> gen <- pinv.new(pdf=dnorm, lb=-Inf, ub=Inf)
+> uq(gen,seq(0,1,0.05))
+ [1]          -Inf -1.644854e+00 -1.281552e+00 -1.036433e+00 -8.416212e-01
+ [6] -6.744898e-01 -5.244005e-01 -3.853205e-01 -2.533471e-01 -1.256613e-01
+[11] -3.069895e-11  1.256613e-01  2.533471e-01  3.853205e-01  5.244005e-01
+[16]  6.744898e-01  8.416212e-01  1.036433e+00  1.281552e+00  1.644854e+00
+[21]           Inf
+> 
+> ## Compute quantiles of user-defined distribution using method 'PINV'
+> pdf <- function (x) { exp(-x) }
+> gen <- pinv.new(pdf=pdf, lb=0, ub=Inf, uresolution=1.e-12)
+> uq(gen,seq(0,1,0.05))
+ [1] 0.00000000 0.05129329 0.10536052 0.16251893 0.22314355 0.28768207
+ [7] 0.35667494 0.43078292 0.51082562 0.59783700 0.69314718 0.79850770
+[13] 0.91629073 1.04982212 1.20397280 1.38629436 1.60943791 1.89711998
+[19] 2.30258509 2.99573227        Inf
+> 
+> ## Compute quantiles of binomial distribution using method 'DGT'
+> gen <- dgt.new(pv=dbinom(0:1000,1000,0.4), from=0)
+> uq(gen,seq(0,1,0.05))
+ [1]    0  375  380  384  387  390  392  394  396  398  400  402  404  406  408
+[16]  410  413  416  420  426 1000
+> 
+> 
+> ## Compute quantiles of normal distribution using method 'HINV'
+> ## (using 'advanced' interface)
+> gen <- unuran.new("normal()","hinv")
+> uq(gen,0.975)
+[1] 1.959964
+> uq(gen,c(0.025,0.975))
+[1] -1.959964  1.959964
+> 
+> ## Compute quantiles of user-defined distributio using method 'HINV'
+> ## (using 'advanced' interface)
+> cdf <- function (x) { 1.-exp(-x) }
+> pdf <- function (x) { exp(-x) }
+> dist <- new("unuran.cont", cdf=cdf, pdf=pdf, lb=0, ub=Inf)
+> gen <- unuran.new(dist, "hinv; u_resolution=1.e-12")
+> uq(gen,seq(0,1,0.05))
+ [1] 0.00000000 0.05129329 0.10536052 0.16251893 0.22314355 0.28768207
+ [7] 0.35667494 0.43078292 0.51082562 0.59783700 0.69314718 0.79850770
+[13] 0.91629073 1.04982212 1.20397280 1.38629436 1.60943791 1.89711998
+[19] 2.30258509 2.99573227        Inf
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ur")
+> ### * ur
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ur
+> ### Title: Sample from a distribution specified by a "unuran" object
+> ### Aliases: ur unuran.sample
+> ### Keywords: distribution datagen
+> 
+> ### ** Examples
+> 
+> ## Draw random sample of size 10 from normal distribution using
+> ## method 'TDR'
+> unr <- unuran.new("normal","tdr")
+> x <- ur(unr,n=10)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urbeta")
+> ### * urbeta
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urbeta
+> ### Title: UNU.RAN Beta random variate generator
+> ### Aliases: urbeta
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urbeta(n=1000,shape1=2,shape2=5)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urbinom")
+> ### * urbinom
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urbinom
+> ### Title: UNU.RAN Binomial random variate generator
+> ### Aliases: urbinom
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000 from the binomial distribution 
+> x <- urbinom(n=1000,size=10,prob=0.3)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urburr")
+> ### * urburr
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urburr
+> ### Title: UNU.RAN Burr random variate generator
+> ### Aliases: urburr
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urburr(n=1000,a=2,b=3)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urcauchy")
+> ### * urcauchy
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urcauchy
+> ### Title: UNU.RAN Cauchy random variate generator
+> ### Aliases: urcauchy
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urcauchy(n=1000)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urchi")
+> ### * urchi
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urchi
+> ### Title: UNU.RAN Chi random variate generator
+> ### Aliases: urchi
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urchi(n=1000,df=3)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urchisq")
+> ### * urchisq
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urchisq
+> ### Title: UNU.RAN Chi-Squared random variate generator
+> ### Aliases: urchisq
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urchisq(n=1000,df=3)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urexp")
+> ### * urexp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urexp
+> ### Title: UNU.RAN Exponential random variate generator
+> ### Aliases: urexp
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urexp(n=1000)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urextremeI")
+> ### * urextremeI
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urextremeI
+> ### Title: UNU.RAN Extreme value type I (Gumbel-type) random variate
+> ###   generator
+> ### Aliases: urextremeI
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urextremeI(n=1000)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urextremeII")
+> ### * urextremeII
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urextremeII
+> ### Title: UNU.RAN Extreme value type II (Frechet-type) random variate
+> ###   generator
+> ### Aliases: urextremeII
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urextremeII(n=1000,shape=2)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urf")
+> ### * urf
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urf
+> ### Title: UNU.RAN F random variate generator
+> ### Aliases: urf
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urf(n=1000,df1=3,df2=5)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urgamma")
+> ### * urgamma
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urgamma
+> ### Title: UNU.RAN Gamma random variate generator
+> ### Aliases: urgamma
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urgamma(n=1000,shape=2)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urgeom")
+> ### * urgeom
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urgeom
+> ### Title: UNU.RAN Geometric random variate generator
+> ### Aliases: urgeom
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urgeom(n=1000,prob=0.2)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urgig")
+> ### * urgig
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urgig
+> ### Title: UNU.RAN Generalized Inverse Gaussian Distribution variate
+> ###   generator
+> ### Aliases: urgig
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urgig(n=1000,lambda=2,omega=3)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urhyper")
+> ### * urhyper
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urhyper
+> ### Title: UNU.RAN Hypergeometric random variate generator
+> ### Aliases: urhyper
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urhyper(nn=20,m=15,n=5,k=7)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urhyperbolic")
+> ### * urhyperbolic
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urhyperbolic
+> ### Title: UNU.RAN Hyperbolic random variate generator
+> ### Aliases: urhyperbolic
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000 from Hyperbolic distribution with shape=3
+> x <- urhyperbolic(n=1000,shape=3)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urlaplace")
+> ### * urlaplace
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urlaplace
+> ### Title: UNU.RAN Laplace random variate generator
+> ### Aliases: urlaplace
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urlaplace(n=1000)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urlnorm")
+> ### * urlnorm
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urlnorm
+> ### Title: UNU.RAN Log-Normal random variate generator
+> ### Aliases: urlnorm
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urlnorm(n=1000)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urlogarithmic")
+> ### * urlogarithmic
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urlogarithmic
+> ### Title: UNU.RAN Logarithmic random variate generator
+> ### Aliases: urlogarithmic
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urlogarithmic(n=1000,shape=0.3)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urlogis")
+> ### * urlogis
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urlogis
+> ### Title: UNU.RAN Logistic random variate generator
+> ### Aliases: urlogis
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urlogis(n=1000)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urlomax")
+> ### * urlomax
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urlomax
+> ### Title: UNU.RAN Lomax random variate generator
+> ### Aliases: urlomax
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urlomax(n=1000,shape=2)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urnbinom")
+> ### * urnbinom
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urnbinom
+> ### Title: UNU.RAN Negative Binomial random variate generator
+> ### Aliases: urnbinom
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urnbinom(n=1000,size=10,prob=0.3)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urnorm")
+> ### * urnorm
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urnorm
+> ### Title: UNU.RAN Normal random variate generator
+> ### Aliases: urnorm
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urnorm(n=1000)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urpareto")
+> ### * urpareto
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urpareto
+> ### Title: UNU.RAN Pareto random variate generator
+> ### Aliases: urpareto
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urpareto(n=1000,k=2,a=3)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urplanck")
+> ### * urplanck
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urplanck
+> ### Title: UNU.RAN Planck random variate generator
+> ### Aliases: urplanck
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urplanck(n=1000,a=2)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urpois")
+> ### * urpois
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urpois
+> ### Title: UNU.RAN Poisson random variate generator
+> ### Aliases: urpois
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000 from Poisson distribution with lamda=2.3
+> x <- urpois(n=1000,lambda=2.3)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urpowerexp")
+> ### * urpowerexp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urpowerexp
+> ### Title: UNU.RAN Powerexponential random variate generator
+> ### Aliases: urpowerexp
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urpowerexp(n=1000, shape=4)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urrayleigh")
+> ### * urrayleigh
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urrayleigh
+> ### Title: UNU.RAN Rayleigh random variate generator
+> ### Aliases: urrayleigh
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000 from Rayleigh distribution with scale=1
+> x <- urrayleigh(n=1000,scale=1)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urt")
+> ### * urt
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urt
+> ### Title: UNU.RAN Student t random variate generator
+> ### Aliases: urt
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urt(n=1000,df=4)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urtriang")
+> ### * urtriang
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urtriang
+> ### Title: UNU.RAN Triangular random variate generator
+> ### Aliases: urtriang
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urtriang(n=1000,a=-1,m=0,b=2)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("urweibull")
+> ### * urweibull
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: urweibull
+> ### Title: UNU.RAN Weibull random variate generator
+> ### Aliases: urweibull
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 1000
+> x <- urweibull(n=1000,shape=3)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("use.aux.urng-method")
+> ### * use.aux.urng-method
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: use.aux.urng-method
+> ### Title: Use auxiliary random number generator for Runuran objects
+> ### Aliases: use.aux.urng use.aux.urng-method use.aux.urng,unuran-method
+> ###   use.aux.urng<- use.aux.urng<--method use.aux.urng<-,unuran-method
+> ###   set.aux.seed
+> ### Keywords: methods datagen
+> 
+> ### ** Examples
+> 
+> ## Create respective generators for normal and exponential distribution.
+> ## Use method TDR
+> gen1 <- tdrd.new(udnorm())
+> gen2 <- tdrd.new(udexp())
+> 
+> ## The two streams are independent even we use the same seed
+> set.seed(123); x1 <- ur(gen1,1e5)
+> set.seed(123); x2 <- ur(gen2,1e5)
+> cor(x1,x2)
+[1] 0.01546765
+> 
+> ## We can enable the auxiliary URNG and get correlated streams
+> use.aux.urng(gen1) <- TRUE
+> use.aux.urng(gen2) <- TRUE
+> set.seed(123); x1 <- ur(gen1,1e5)
+> set.seed(123); x2 <- ur(gen2,1e5)
+> cor(x1,x2)
+[1] 0.896655
+> 
+> ## This feature can be disabled again
+> use.aux.urng(gen1)
+[1] TRUE
+> use.aux.urng(gen1) <- FALSE
+> use.aux.urng(gen2) <- FALSE
+> 
+> ## Notice that TDR cannot simply mixed with an inversion method
+> ## as the number of URNG per random point differs
+> gen3 <- pinvd.new(udexp())
+> set.seed(123); x3 <- ur(gen3,1e5)
+> cor(x1,x3)
+[1] -0.001739966
+> 
+> ## But a trick would do this
+> set.seed(123); x3 <- ur(gen3,2*1e5)
+> x3 <- x3[seq(1,2*1e5,2)]
+> cor(x1,x3)
+[1] 0.9008
+> ## or ...
+> set.seed(123); u3 <- runif(2*1e5); u3 <- u3[seq(1,2*1e5,2)]
+> x3 <- uq(gen3,u3)
+> cor(x1,x3)
+[1] 0.9008
+> 
+> ## Maybe method AROU is more appropriate
+> gen4 <- unuran.new(udnorm(), "arou")
+> use.aux.urng(gen4) <- TRUE
+> set.seed(123); x3 <- ur(gen3,1e5)
+> set.seed(123); x4 <- ur(gen4,1e5)
+> cor(x3,x4)
+[1] 0.8982554
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("vnrou.new")
+> ### * vnrou.new
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: vnrou.new
+> ### Title: UNU.RAN generator based on Multivariate Naive Ratio-Of-Uniforms
+> ###   method (VNROU)
+> ### Aliases: vnrou.new
+> ### Keywords: datagen distribution
+> 
+> ### ** Examples
+> 
+> ## Create a sample of size 100 for a Gaussian distribution
+> mvpdf <- function (x) { exp(-sum(x^2)) }
+> gen <- vnrou.new(dim=2, pdf=mvpdf)
+> x <- ur(gen,100)
+> 
+> ## Use mode of Gaussian distribution to accelerate set-up.
+> mvpdf <- function (x) { exp(-sum(x^2)) }
+> gen <- vnrou.new(dim=2, pdf=mvpdf, mode=c(0,0))
+> x <- ur(gen,100)
+> 
+> ## Gaussian distribution restricted to the rectangle [1,2]x[1,2]
+> ##  (don't forget to provide a point inside domain using 'center')
+> mvpdf <- function (x) { exp(-sum(x^2)) }
+> gen <- vnrou.new(dim=2, pdf=mvpdf, ll=c(1,1), ur=c(2,2), center=c(1.5,1.5))
+> x <- ur(gen,100)
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  4.18 0.02 4.217 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

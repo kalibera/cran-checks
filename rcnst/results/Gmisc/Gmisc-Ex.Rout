@@ -1,0 +1,1861 @@
+
+R Under development (unstable) (2017-08-14 r73093) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "Gmisc"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('Gmisc')
+Loading required package: Rcpp
+Loading required package: htmlTable
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("Transition-class")
+> ### * Transition-class
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Transition-class
+> ### Title: A reference class for generating transition plots
+> ### Aliases: Transition Transition-class
+> 
+> ### ** Examples
+> 
+> # Transitions
+> set.seed(1)
+> n <- 10
+> my_data <-
++   data.frame(
++     Var_a = sample(c("Test 1",
++                      "Test 2",
++                      "Test 3"),
++                    size = n,
++                    replace = TRUE,
++                    prob = 3:1),
++     Var_b = sample(c("Test 1",
++                      "Test 2",
++                      "Test 3"),
++                    size = n,
++                    replace = TRUE,
++                    prob = 1:3))
+> mtrx <- with(my_data,
++              table(Var_a, Var_b))
+> 
+> # Initialize the transition plot
+> transitions <-
++   getRefClass("Transition")$new(mtrx, label=c("Before", "After"))
+> 
+> # Render the plot
+> transitions$render()
+> 
+> 
+> 
+> cleanEx()
+> nameEx("bezierArrowGradient")
+> ### * bezierArrowGradient
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bezierArrowGradient
+> ### Title: A bezier arrow with gradient
+> ### Aliases: bezierArrowGradient
+> 
+> ### ** Examples
+> 
+> library(grid)
+> grid.newpage()
+> arrowGrob <- bezierArrowGradient(x = c(.1,.3,.6,.9),
++                                      y = c(0.2, 0.2, 0.9, 0.9))
+> grid.draw(arrowGrob)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:grid’
+
+> nameEx("bezierArrowSmpl")
+> ### * bezierArrowSmpl
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bezierArrowSmpl
+> ### Title: A simple bezier arrow
+> ### Aliases: bezierArrowSmpl
+> 
+> ### ** Examples
+> 
+> library(grid)
+> grid.newpage()
+> arrowGrob <- bezierArrowSmpl(x = c(.1,.3,.6,.9),
++                              y = c(0.2, 0.2, 0.9, 0.9))
+> grid.draw(arrowGrob)
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:grid’
+
+> nameEx("box")
+> ### * box
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: boxGrob
+> ### Title: Create a box with text
+> ### Aliases: boxGrob heightDetails.box plot.box print.box widthDetails.box
+> 
+> ### ** Examples
+> 
+> library(grid)
+> grid.newpage()
+> boxGrob("My box")
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:grid’
+
+> nameEx("boxPropGrob")
+> ### * boxPropGrob
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: boxPropGrob
+> ### Title: Create a box with a color split
+> ### Aliases: boxPropGrob
+> 
+> ### ** Examples
+> 
+> library(grid)
+> grid.newpage()
+> boxPropGrob("Main label", "Left text", "Right text", prop = .3)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:grid’
+
+> nameEx("connect")
+> ### * connect
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: connectGrob
+> ### Title: Connect boxes with an arrow
+> ### Aliases: connectGrob plot.connect_boxes print.connect_boxes
+> 
+> ### ** Examples
+> 
+> library(grid)
+> grid.newpage()
+> 
+> # Initiate the boxes that we want to connect
+> start <- boxGrob("Top", x=.5, y=.8)
+> end <- boxGrob("Bottom", x=.5, y=.2)
+> side <- boxPropGrob("Side", "Left", "Right", prop=.3, x=.2, y=.8)
+> sub_side_left <- boxGrob("Left", x = attr(side, "coords")$left_x, y = .5)
+> sub_side_right <- boxGrob("Right", x = attr(side, "coords")$right_x, y = .5)
+> exclude <- boxGrob("Exclude:\n - Too sick\n - Prev. surgery", x=.8, y=.5,just="left")
+> 
+> # Connect the boxes and print/plot them
+> connectGrob(start, end, "vertical")
+> connectGrob(start, side, "horizontal")
+> connectGrob(side, sub_side_left, "v", "l")
+> connectGrob(side, sub_side_right, "v", "r")
+> connectGrob(start, exclude, "L")
+> 
+> # Print the grobs
+> start
+> end
+> side
+> exclude
+> sub_side_left
+> sub_side_right
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:grid’
+
+> nameEx("copyAllNewAttributes")
+> ### * copyAllNewAttributes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: copyAllNewAttributes
+> ### Title: A simple thing to keep the attributes
+> ### Aliases: copyAllNewAttributes
+> 
+> ### ** Examples
+> 
+> a <- "test"
+> attr(a, 'wow') <- 1000
+> b <- a
+> b <- copyAllNewAttributes(a, b)
+> print(attr(b, 'wow'))
+[1] 1000
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("describeFactors")
+> ### * describeFactors
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: describeFactors
+> ### Title: Describes factor variables
+> ### Aliases: describeFactors
+> 
+> ### ** Examples
+> 
+> set.seed(1)
+> describeFactors(sample(50, x=c("A","B", "C"), replace=TRUE))
+  [,1]        
+A "12 (24.0%)"
+B "19 (38.0%)"
+C "19 (38.0%)"
+> 
+> n <- 500
+> my_var <- factor(sample(size=n, x=c("A","B", "C", NA), replace=TRUE))
+> my_exp <- rbinom(n=n, size=1, prob=0.2)
+> total <- table(my_var, useNA="ifany")
+> by(my_var,
++    INDICES=my_exp,
++    FUN=describeFactors,
++    useNA="ifany",
++    horizontal_proportions = total)
+my_exp: 0
+        [,1]         
+A       "96 (80.0%)" 
+B       "124 (83.2%)"
+C       "79 (71.2%)" 
+Missing "97 (80.8%)" 
+------------------------------------------------------------ 
+my_exp: 1
+        [,1]        
+A       "24 (20.0%)"
+B       "25 (16.8%)"
+C       "32 (28.8%)"
+Missing "23 (19.2%)"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("describeMean")
+> ### * describeMean
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: describeMean
+> ### Title: Describe the mean
+> ### Aliases: describeMean
+> 
+> ### ** Examples
+> 
+> describeMean(1:10)
+          Mean (SD) 
+"5.5 (&plusmn;3.0)" 
+> describeMean(c(1:10, NA), useNA="always")
+          TRUE               
+Mean (SD) "5.5 (&plusmn;3.0)"
+Missing   "1 (9.1%)"         
+> describeMean(c(1:10, NA), useNA="no")
+          Mean (SD) 
+"5.5 (&plusmn;3.0)" 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("describeMedian")
+> ### * describeMedian
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: describeMedian
+> ### Title: A function that returns a description median that contains the
+> ###   interquartile range or the full range
+> ### Aliases: describeMedian
+> 
+> ### ** Examples
+> 
+> describeMedian(1:10)
+     Median (IQR) 
+"5.5 (3.2 - 7.8)" 
+> describeMedian(c(1:10, NA), useNA="ifany")
+             TRUE             
+Median (IQR) "5.5 (3.2 - 7.8)"
+Missing      "1 (9.1%)"       
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("describeProp")
+> ### * describeProp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: describeProp
+> ### Title: A function that returns a description proportion that contains
+> ###   the number and the percentage
+> ### Aliases: describeProp
+> 
+> ### ** Examples
+> 
+> describeProp(factor(sample(50, x=c("A","B", NA), replace=TRUE)))
+        [,1]        
+A       "12 (24.0%)"
+B       "19 (38.0%)"
+Missing "19 (38.0%)"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("docx_document")
+> ### * docx_document
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: docx_document
+> ### Title: Formatter wrapper for 'html_document', facilitates easier
+> ###   porting to docx
+> ### Aliases: docx_document
+> 
+> ### ** Examples
+> 
+> # Possible yaml configuration at the top of the Rmd doc
+> ## Not run: 
+> ##D ---
+> ##D title: "Test"
+> ##D author: "Max Gordon"
+> ##D output:
+> ##D   Gmisc::docx_document
+> ##D ---
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("fastDoCall")
+> ### * fastDoCall
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: fastDoCall
+> ### Title: An alternative to the internal 'do.call'
+> ### Aliases: fastDoCall
+> 
+> ### ** Examples
+> 
+> fastDoCall("complex", list(imaginary = 1:3))
+[1] 0+1i 0+2i 0+3i
+> 
+> ## if we already have a list (e.g. a data frame)
+> ## we need c() to add further arguments
+> tmp <- expand.grid(letters[1:2], 1:3, c("+", "-"))
+> fastDoCall("paste", c(tmp, sep = ""))
+ [1] "a1+" "b1+" "a2+" "b2+" "a3+" "b3+" "a1-" "b1-" "a2-" "b2-" "a3-" "b3-"
+> 
+> ## examples of where objects will be found.
+> A <- 2
+> f <- function(x) print(x^2)
+> env <- new.env()
+> assign("A", 10, envir = env)
+> assign("f", f, envir = env)
+> f <- function(x) print(x)
+> f(A)                                      # 2
+[1] 2
+> fastDoCall("f", list(A))                     # 2
+[1] 2
+> fastDoCall("f", list(A), envir = env)        # 4
+[1] 4
+> fastDoCall(f, list(A), envir = env)          # 2
+[1] 2
+> fastDoCall("f", list(quote(A)), envir = env) # 100
+[1] 100
+> fastDoCall(f, list(quote(A)), envir = env)   # 10
+[1] 10
+> fastDoCall("f", list(as.name("A")), envir = env) # 100
+[1] 100
+> 
+> eval(call("f", A))                      # 2
+[1] 2
+> eval(call("f", quote(A)))               # 2
+[1] 2
+> eval(call("f", A), envir = env)         # 4
+[1] 4
+> eval(call("f", quote(A)), envir = env)  # 100
+[1] 100
+> 
+> 
+> 
+> cleanEx()
+> nameEx("figCapNo")
+> ### * figCapNo
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: figCapNo
+> ### Title: Adds a figure caption number
+> ### Aliases: figCapNo
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D ```{r, fig.cap=figCapNo("My nice plot")}
+> ##D plot(1:10 + rnorm(10), 1:10)
+> ##D ```
+> ## End(Not run)
+> org_opts <- options(fig_caption_no = 2,
++                     fig_caption_no_sprintf = "Figure %s: %s")
+> figCapNo("A plot with caption number = 3")
+[1] "Figure 3: A plot with caption number = 3"
+> 
+> org_opts <- options(fig_caption_no = TRUE)
+> figCapNo("A plot with caption number =  1")
+[1] "Figure 1: A plot with caption number =  1"
+> 
+> # Use default setting
+> options(fig_caption_no_sprintf = NULL)
+> figCapNo("A plot with caption number =  2")
+[1] "Fig. 2: A plot with caption number =  2"
+> 
+> # Return the original settings
+> options(org_opts)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("figCapNoLast")
+> ### * figCapNoLast
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: figCapNoLast
+> ### Title: Gets the last figure caption number
+> ### Aliases: figCapNoLast
+> 
+> ### ** Examples
+> 
+> org_opts <- options(fig_caption_no=1)
+> figCapNoLast()
+[1] 1
+> options(org_opts)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("figCapNoNext")
+> ### * figCapNoNext
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: figCapNoNext
+> ### Title: Gets the next figure caption number
+> ### Aliases: figCapNoNext
+> 
+> ### ** Examples
+> 
+> org_opts <- options(fig_caption_no=1)
+> figCapNoNext()
+[1] 2
+> options(org_opts)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getDescriptionStatsBy")
+> ### * getDescriptionStatsBy
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getDescriptionStatsBy
+> ### Title: Creating of description statistics
+> ### Aliases: getDescriptionStatsBy
+> 
+> ### ** Examples
+> 
+> data(mtcars)
+> # For labelling we use the label()
+> # function from the Hmisc package
+> library(Hmisc)
+Loading required package: lattice
+Loading required package: survival
+Loading required package: Formula
+Loading required package: ggplot2
+
+Attaching package: ‘Hmisc’
+
+The following objects are masked from ‘package:base’:
+
+    format.pval, round.POSIXt, trunc.POSIXt, units
+
+> 
+> label(mtcars$mpg) <- "Gas"
+> units(mtcars$mpg) <- "Miles/(US) gallon"
+> 
+> label(mtcars$wt) <- "Weight"
+> units(mtcars$wt) <- "10<sup>3</sup> kg" # not sure the unit is correct
+> 
+> mtcars$am <- factor(mtcars$am, levels=0:1, labels=c("Automatic", "Manual"))
+> label(mtcars$am) <- "Transmission"
+> 
+> mtcars$gear <- factor(mtcars$gear)
+> label(mtcars$gear) <- "Gears"
+> 
+> # Make up some data for making it slightly more interesting
+> mtcars$col <- factor(sample(c("red", "black", "silver"),
++                      size=NROW(mtcars), replace=TRUE))
+> label(mtcars$col) <- "Car color"
+> 
+> mergeDesc(getDescriptionStatsBy(mtcars$mpg, mtcars$am,
++                                 header_count = TRUE,
++                                 use_units = TRUE),
++           getDescriptionStatsBy(mtcars$wt, mtcars$am,
++                                 header_count = TRUE,
++                                 use_units = TRUE),
++           htmlTable_args = list(caption  = "Basic continuous stats from the mtcars dataset"))
+<table class='gmisc_table' style='border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;' >
+<thead>
+<tr><td colspan='4' style='text-align: left;'>
+Basic continuous stats from the mtcars dataset</td></tr>
+<tr>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'> </th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Automatic<br />
+ No. 19</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Manual<br />
+ No. 13</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style='text-align: left;'>Gas</td>
+<td style='text-align: center;'>17.1 (&plusmn;3.8)</td>
+<td style='text-align: center;'>24.4 (&plusmn;6.2)</td>
+<td style='text-align: center;'>Miles/(US) gallon</td>
+</tr>
+<tr>
+<td style='border-bottom: 2px solid grey; text-align: left;'>Weight</td>
+<td style='border-bottom: 2px solid grey; text-align: center;'>3.8 (&plusmn;0.8)</td>
+<td style='border-bottom: 2px solid grey; text-align: center;'>2.4 (&plusmn;0.6)</td>
+<td style='border-bottom: 2px solid grey; text-align: center;'>10<sup>3</sup> kg</td>
+</tr>
+</tbody>
+</table>
+> 
+> tll <- list()
+> tll[["Gear (3 to 5)"]] <- getDescriptionStatsBy(mtcars$gear, mtcars$am)
+> tll <- c(tll,
++          list(getDescriptionStatsBy(mtcars$col, mtcars$am)))
+> 
+> mergeDesc(tll,
++           htmlTable_args = list(caption  = "Factored variables"))
+<table class='gmisc_table' style='border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;' >
+<thead>
+<tr><td colspan='3' style='text-align: left;'>
+Factored variables</td></tr>
+<tr>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'> </th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Automatic</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Manual</th>
+</tr>
+</thead>
+<tbody> 
+<tr><td colspan='3' style='font-weight: 900;'>Gear (3 to 5)</td></tr>
+<tr>
+<td style='text-align: left;'>&nbsp;&nbsp;3</td>
+<td style='text-align: center;'>15 (78.9%)</td>
+<td style='text-align: center;'>0 (0.0%)</td>
+</tr>
+<tr>
+<td style='text-align: left;'>&nbsp;&nbsp;4</td>
+<td style='text-align: center;'>4 (21.1%)</td>
+<td style='text-align: center;'>8 (61.5%)</td>
+</tr>
+<tr>
+<td style='text-align: left;'>&nbsp;&nbsp;5</td>
+<td style='text-align: center;'>0 (0.0%)</td>
+<td style='text-align: center;'>5 (38.5%)</td>
+</tr> 
+<tr><td colspan='3' style='font-weight: 900;'>Car color</td></tr>
+<tr>
+<td style='text-align: left;'>&nbsp;&nbsp;black</td>
+<td style='text-align: center;'>5 (26.3%)</td>
+<td style='text-align: center;'>8 (61.5%)</td>
+</tr>
+<tr>
+<td style='text-align: left;'>&nbsp;&nbsp;red</td>
+<td style='text-align: center;'>7 (36.8%)</td>
+<td style='text-align: center;'>2 (15.4%)</td>
+</tr>
+<tr>
+<td style='border-bottom: 2px solid grey; text-align: left;'>&nbsp;&nbsp;silver</td>
+<td style='border-bottom: 2px solid grey; text-align: center;'>7 (36.8%)</td>
+<td style='border-bottom: 2px solid grey; text-align: center;'>3 (23.1%)</td>
+</tr>
+</tbody>
+</table>
+> 
+> tl_no_units <- list()
+> tl_no_units[["Gas (mile/gallons)"]] <-
++   getDescriptionStatsBy(mtcars$mpg, mtcars$am,
++                         header_count = TRUE)
+> tl_no_units[["Weight (10<sup>3</sup> kg)"]] <-
++   getDescriptionStatsBy(mtcars$wt, mtcars$am,
++                         header_count = TRUE)
+> mergeDesc(tl_no_units, tll,
++           # Remove the formatting for the groups
++           htmlTable_args = list(css.rgroup = ""))
+<table class='gmisc_table' style='border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;' >
+<thead>
+<tr>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'> </th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Automatic<br />
+ No. 19</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Manual<br />
+ No. 13</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style='text-align: left;'>Gas (mile/gallons)</td>
+<td style='text-align: center;'>17.1 (&plusmn;3.8)</td>
+<td style='text-align: center;'>24.4 (&plusmn;6.2)</td>
+</tr>
+<tr>
+<td style='text-align: left;'>Weight (10<sup>3</sup> kg)</td>
+<td style='text-align: center;'>3.8 (&plusmn;0.8)</td>
+<td style='text-align: center;'>2.4 (&plusmn;0.6)</td>
+</tr> 
+<tr><td colspan='3' style=''>Gear (3 to 5)</td></tr>
+<tr>
+<td style='text-align: left;'>&nbsp;&nbsp;3</td>
+<td style='text-align: center;'>15 (78.9%)</td>
+<td style='text-align: center;'>0 (0.0%)</td>
+</tr>
+<tr>
+<td style='text-align: left;'>&nbsp;&nbsp;4</td>
+<td style='text-align: center;'>4 (21.1%)</td>
+<td style='text-align: center;'>8 (61.5%)</td>
+</tr>
+<tr>
+<td style='text-align: left;'>&nbsp;&nbsp;5</td>
+<td style='text-align: center;'>0 (0.0%)</td>
+<td style='text-align: center;'>5 (38.5%)</td>
+</tr> 
+<tr><td colspan='3' style=''>Car color</td></tr>
+<tr>
+<td style='text-align: left;'>&nbsp;&nbsp;black</td>
+<td style='text-align: center;'>5 (26.3%)</td>
+<td style='text-align: center;'>8 (61.5%)</td>
+</tr>
+<tr>
+<td style='text-align: left;'>&nbsp;&nbsp;red</td>
+<td style='text-align: center;'>7 (36.8%)</td>
+<td style='text-align: center;'>2 (15.4%)</td>
+</tr>
+<tr>
+<td style='border-bottom: 2px solid grey; text-align: left;'>&nbsp;&nbsp;silver</td>
+<td style='border-bottom: 2px solid grey; text-align: center;'>7 (36.8%)</td>
+<td style='border-bottom: 2px solid grey; text-align: center;'>3 (23.1%)</td>
+</tr>
+</tbody>
+</table>
+> 
+> 
+> # A little more advanced
+> mtcars$mpg[sample(1:NROW(mtcars), size=5)] <- NA
+> getDescriptionStatsBy(mtcars$mpg, mtcars$am, statistics=TRUE)
+Gas 
+          Automatic            Manual               P-value
+Mean (SD) "17.5 (&plusmn;3.9)" "23.6 (&plusmn;5.7)" "0.010"
+Missing   "4 (21.1%)"          "1 (7.7%)"           ""     
+> 
+> # Do the horizontal version
+> getDescriptionStatsBy(mtcars$col, mtcars$am,
++                       statistics=TRUE, hrzl_prop = TRUE)
+Car color 
+       Total        Automatic   Manual      P-value
+black  "13 (40.6%)" "5 (38.5%)" "8 (61.5%)" "0.16" 
+red    "9 (28.1%)"  "7 (77.8%)" "2 (22.2%)" ""     
+silver "10 (31.2%)" "7 (70.0%)" "3 (30.0%)" ""     
+> 
+> mtcars$wt_with_missing <- mtcars$wt
+> mtcars$wt_with_missing[sample(1:NROW(mtcars), size=8)] <- NA
+> getDescriptionStatsBy(mtcars$wt_with_missing, mtcars$am, statistics=TRUE,
++                       hrzl_prop = TRUE, total_col_show_perc = FALSE)
+Weight 
+          Total               Automatic           Manual              P-value 
+Mean (SD) "3.1 (&plusmn;1.0)" "3.7 (&plusmn;0.9)" "2.5 (&plusmn;0.6)" "0.0008"
+Missing   "8"                 "7 (36.8%)"         "1 (7.7%)"          ""      
+> 
+> 
+> mtcars$col_with_missing <- mtcars$col
+> mtcars$col_with_missing[sample(1:NROW(mtcars), size=5)] <- NA
+> getDescriptionStatsBy(mtcars$col_with_missing, mtcars$am, statistics=TRUE,
++                       hrzl_prop = TRUE, total_col_show_perc = FALSE)
+Car color 
+        Total Automatic   Manual      P-value
+black   "12"  "5 (41.7%)" "7 (58.3%)" "0.14" 
+red     "7"   "6 (85.7%)" "1 (14.3%)" ""     
+silver  "8"   "6 (75.0%)" "2 (25.0%)" ""     
+Missing "5"   "2 (40.0%)" "3 (60.0%)" ""     
+> 
+> 
+> ## Not run: 
+> ##D   ## There is also a LaTeX wrapper
+> ##D   tll <- list(
+> ##D     getDescriptionStatsBy(mtcars$gear, mtcars$am),
+> ##D     getDescriptionStatsBy(mtcars$col, mtcars$am))
+> ##D 
+> ##D   latex(mergeDesc(tll),
+> ##D         caption  = "Factored variables",
+> ##D         file="")
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
+  ‘package:survival’, ‘package:lattice’
+
+> nameEx("getPval")
+> ### * getPval
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getPvalWilcox
+> ### Title: P-value extractors for 'getDescriptionStatsBy'
+> ### Aliases: getPvalAnova getPvalChiSq getPvalFisher getPvalKruskal
+> ###   getPvalWilcox
+> 
+> ### ** Examples
+> 
+> set.seed(123)
+> getPvalFisher(sample(letters[1:3], size = 100, replace = TRUE),
++               sample(LETTERS[1:3], size = 100, replace = TRUE))
+[1] 0.3170214
+> getPvalWilcox(rnorm(100),
++               sample(LETTERS[1:2], size = 100, replace = TRUE))
+[1] 0.8491605
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getSvdMostInfluential")
+> ### * getSvdMostInfluential
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getSvdMostInfluential
+> ### Title: Gets the maximum contributor variables from svd()
+> ### Aliases: getSvdMostInfluential
+> 
+> ### ** Examples
+> 
+> org_par <- par(ask=TRUE)
+> set.seed(12345); 
+> 
+> # Simulate data with a pattern
+> dataMatrix <- matrix(rnorm(15*160),ncol=15)
+> colnames(dataMatrix) <- 
++   c(paste("Pos.3:", 1:3, sep=" #"), 
++     paste("Neg.Decr:", 4:6, sep=" #"), 
++     paste("No pattern:", 7:8, sep=" #"),
++     paste("Pos.Incr:", 9:11, sep=" #"),
++     paste("No pattern:", 12:15, sep=" #"))
+> for(i in 1:nrow(dataMatrix)){
++   # flip a coin
++   coinFlip1 <- rbinom(1,size=1,prob=0.5)
++   coinFlip2 <- rbinom(1,size=1,prob=0.5)
++   coinFlip3 <- rbinom(1,size=1,prob=0.5)
++   
++   # if coin is heads add a common pattern to that row
++   if(coinFlip1){
++     cols <- grep("Pos.3", colnames(dataMatrix))
++     dataMatrix[i, cols] <- dataMatrix[i, cols] + 3
++   }
++   
++   if(coinFlip2){
++     cols <- grep("Neg.Decr", colnames(dataMatrix))
++     dataMatrix[i, cols] <- dataMatrix[i, cols] - seq(from=5, to=15, length.out=length(cols))
++   }
++   
++   if(coinFlip3){
++     cols <- grep("Pos.Incr", colnames(dataMatrix))
++     dataMatrix[i,cols] <- dataMatrix[i,cols] + seq(from=3, to=15, length.out=length(cols))
++   }
++ }
+> 
+> # Illustrate data
+> heatmap(dataMatrix, Colv=NA, Rowv=NA, margins=c(7,2), labRow="")
+> 
+> svd_out <- svd(scale(dataMatrix))
+> 
+> library(lattice)
+> b_clr <- c("steelblue", "darkred")
+> key <- simpleKey(rectangles = TRUE, space = "top", points=FALSE,
++   text=c("Positive", "Negative"))
+> key$rectangles$col <- b_clr
+> 
+> b1 <- barchart(as.table(svd_out$v[,1]),
++   main="First column",
++   horizontal=FALSE, col=ifelse(svd_out$v[,1] > 0, 
++       b_clr[1], b_clr[2]),
++   ylab="Impact value", 
++   scales=list(x=list(rot=55, labels=colnames(dataMatrix), cex=1.1)),
++   key = key)
+> 
+> b2 <- barchart(as.table(svd_out$v[,2]),
++   main="Second column",
++   horizontal=FALSE, col=ifelse(svd_out$v[,2] > 0, 
++       b_clr[1], b_clr[2]),
++   ylab="Impact value", 
++   scales=list(x=list(rot=55, labels=colnames(dataMatrix), cex=1.1)),
++   key = key)
+> 
+> b3 <- barchart(as.table(svd_out$v[,3]),
++   main="Third column",
++   horizontal=FALSE, col=ifelse(svd_out$v[,3] > 0, 
++       b_clr[1], b_clr[2]),
++   ylab="Impact value", 
++   scales=list(x=list(rot=55, labels=colnames(dataMatrix), cex=1.1)),
++   key = key)
+> 
+> b4 <- barchart(as.table(svd_out$v[,4]),
++   main="Fourth column",
++   horizontal=FALSE, col=ifelse(svd_out$v[,4] > 0, 
++       b_clr[1], b_clr[2]),
++   ylab="Impact value", 
++   scales=list(x=list(rot=55, labels=colnames(dataMatrix), cex=1.1)),
++   key = key)
+> 
+> # Note that the fourth has the no pattern columns as the
+> # chosen pattern, probably partly because of the previous
+> # patterns already had been identified
+> print(b1, position=c(0,0.5,.5,1), more=TRUE)
+> print(b2, position=c(0.5,0.5,1,1), more=TRUE)
+> print(b3, position=c(0,0,.5,.5), more=TRUE)
+> print(b4, position=c(0.5,0,1,.5))
+> 
+> # Let's look at how well the SVD identifies
+> # the most influential columns
+> getSvdMostInfluential(dataMatrix, 
++                       quantile=.8, 
++                       similarity_threshold = .9,
++                       plot_threshold = .05,
++                       plot_selection = TRUE)
+$most_influential
+ [1]  5  6  4 11 10  3  2  1 13  7
+
+$svd
+$svd$d
+ [1] 22.079823 20.498937 19.366767 13.545960 13.383771 12.640558 12.547571
+ [8] 11.978977 11.108905  7.040429  6.801640  6.077939  3.632932  2.318208
+[15]  2.027925
+
+$svd$u
+                [,1]          [,2]          [,3]          [,4]          [,5]
+  [1,]  0.0185591095  0.0865237036 -0.0978873961 -0.0877612327 -1.553266e-01
+  [2,]  0.0413234145  0.0998799920  0.0703535643 -0.0726623258 -2.393896e-02
+  [3,] -0.0847821804  0.0225793272  0.0916144894 -0.0691913181 -3.289293e-02
+  [4,]  0.0481113252  0.1000001641  0.0349008819  0.0423924968 -4.791786e-02
+  [5,]  0.1265605759  0.0066973484  0.0092468074 -0.0466327532 -2.542510e-02
+  [6,] -0.0068809087 -0.1176230434  0.0635175079  0.1001700367  2.448187e-03
+  [7,] -0.0261529505 -0.1299547988 -0.0269082738 -0.0771328754  3.705327e-02
+  [8,]  0.1137222788 -0.0224392472  0.0299949002 -0.0252083241 -7.234376e-02
+  [9,]  0.0054164673 -0.1202558784  0.1007958827 -0.0909431761  5.290797e-02
+ [10,] -0.0300313180 -0.1246248106 -0.0576103749  0.0588243492  8.060576e-02
+ [11,] -0.0103096233 -0.0967497011 -0.0422553926  0.0500691972  6.522078e-02
+ [12,] -0.0734035903 -0.0012006571 -0.0135576737 -0.0454377108  1.592574e-01
+ [13,]  0.0274569325  0.1177403103  0.0555436133 -0.0364345189 -6.097163e-02
+ [14,]  0.0510149255  0.1366759163  0.0690366892 -0.0967781421  1.104872e-01
+ [15,] -0.0151940321 -0.0948171990  0.0542271923  0.0073018562 -7.482951e-02
+ [16,]  0.0113505115 -0.0999143290  0.1202266235 -0.1605769088 -7.737227e-02
+ [17,] -0.0967907269  0.0665149765  0.0684381303 -0.0859021934 -7.366230e-02
+ [18,] -0.0948238508  0.0550344930  0.0939546123  0.0525582015  9.257661e-02
+ [19,]  0.1325204032 -0.0045994478  0.0786711616  0.2215528676 -2.154901e-01
+ [20,] -0.1362590103  0.0290639965 -0.0898026304 -0.0928526051 -2.225302e-01
+ [21,] -0.0014719106 -0.0512911542  0.1139576639 -0.0513053970 -2.441542e-02
+ [22,] -0.0819087633  0.0262511677 -0.0560275269 -0.0845534353  6.871699e-02
+ [23,] -0.1149728676  0.0338159988 -0.0753855853 -0.0841443790 -1.770901e-01
+ [24,]  0.1120135441 -0.0257971459  0.0572188004 -0.0523081171  5.895669e-02
+ [25,] -0.1163893951 -0.0260075315 -0.0864789942  0.1654911474 -3.436741e-02
+ [26,]  0.0540540007  0.0658115795 -0.0714231955 -0.0509812969  2.837856e-02
+ [27,]  0.0043754196 -0.0987771039  0.0829280572  0.0306462798  8.807459e-03
+ [28,] -0.1041986752  0.0458225678  0.0925768613  0.0091229820  5.909117e-03
+ [29,]  0.0339279515 -0.1165137029  0.0468765420 -0.0445377751  1.007554e-01
+ [30,] -0.0791169021 -0.0140633269 -0.0697061361 -0.0530044526  9.472476e-02
+ [31,] -0.0771342356  0.0609208629  0.0863805818  0.0066493523  3.369679e-02
+ [32,]  0.0178752578  0.1582136164 -0.0992391492  0.0604593784  1.604396e-02
+ [33,] -0.0061834925 -0.0899184717  0.1092317073  0.1530145216  4.676473e-03
+ [34,] -0.0082101671 -0.0892975283  0.0973155188  0.0614270713  8.639697e-02
+ [35,] -0.0035892549 -0.1347184272 -0.0117617347 -0.1117948040  1.289803e-01
+ [36,]  0.0624570881  0.1142784855  0.0492638427  0.1215954046  5.478019e-02
+ [37,]  0.1125973595 -0.0322518192  0.0774061752  0.0407005591 -1.336245e-01
+ [38,]  0.1165015035 -0.0387309126 -0.1344977276 -0.1310503345 -3.424775e-03
+ [39,]  0.0557751335  0.1059151896  0.0733402012 -0.1555172280 -3.449775e-02
+ [40,] -0.0311620327 -0.0919126345 -0.0716965123 -0.0618729063  1.202276e-02
+ [41,] -0.0932954783  0.0297433822  0.0620342287 -0.0155431592 -9.385862e-02
+ [42,] -0.1072485400  0.0212852304 -0.0076944923 -0.0695182919 -1.117653e-02
+ [43,] -0.1110707770 -0.0162622650 -0.0889397275  0.1007970429  2.977428e-02
+ [44,]  0.0478849506  0.1198341223  0.0769242093 -0.2286760652  5.283307e-02
+ [45,] -0.0830452436  0.0044842577 -0.0512124731 -0.0340044597 -6.725929e-02
+ [46,]  0.0082265602 -0.1170032253  0.1231728759  0.0967148712  4.263529e-02
+ [47,] -0.0147251569 -0.1143613966 -0.1067488687 -0.0640493529  4.401976e-02
+ [48,]  0.1290130994 -0.0033674630  0.1000584426  0.0216294224  5.600087e-02
+ [49,] -0.0988304853  0.0198203700 -0.0540770474 -0.0766997353  4.348400e-02
+ [50,]  0.0570419586  0.1075177044  0.0059555687  0.0151043814  5.222797e-02
+ [51,] -0.0212750724 -0.1280331651 -0.0515798685  0.0274884868  7.721056e-02
+ [52,]  0.0460297015  0.1264767535  0.0803867574  0.1364797226 -3.528641e-02
+ [53,] -0.0829478170  0.0443121810  0.0691433499  0.0524271925  8.789585e-02
+ [54,]  0.0071536858 -0.1251847773 -0.0160831855  0.1170808975 -2.642263e-02
+ [55,] -0.1276277876 -0.0147083647 -0.0777054812  0.0553813363 -2.938549e-02
+ [56,] -0.1227368035  0.0371586641 -0.0720956922 -0.1197585148 -1.629777e-03
+ [57,] -0.0592593182  0.0199213612  0.1144281731 -0.0586781767 -4.903217e-02
+ [58,] -0.1075073662 -0.0162199144 -0.1263278390  0.1176761806  7.309234e-03
+ [59,] -0.1277780897  0.0391014184 -0.0709197941 -0.0267499287  1.638695e-02
+ [60,] -0.0903436930  0.0285758624  0.0735620273 -0.0175769836  1.192146e-02
+ [61,]  0.0113071965  0.0993445016  0.0505452290  0.0756883926 -1.044318e-01
+ [62,]  0.0178471843  0.0819133459 -0.1690941808 -0.0619401477  5.958644e-02
+ [63,] -0.0971209299  0.0242462035 -0.0698152693  0.0456972852  1.364732e-01
+ [64,]  0.0337977280  0.1097334887  0.0477186679  0.0530766557  6.409812e-02
+ [65,] -0.0246295167 -0.1218124882 -0.0395258571  0.1670613032 -8.520687e-02
+ [66,] -0.0383781576 -0.1031960672  0.0706485769 -0.0195906158  1.375336e-02
+ [67,] -0.1068113258  0.0802729456  0.0885779910  0.0681373127 -3.119438e-02
+ [68,]  0.0535661969  0.1154178305 -0.0585312801  0.0200573021  8.629492e-02
+ [69,]  0.0455603566  0.1369191062  0.0506078785 -0.1175837996 -2.420809e-02
+ [70,] -0.0806239869  0.0092687310  0.0488757645 -0.0039048924  8.406815e-02
+ [71,]  0.0062326768 -0.1057073316  0.1085035043 -0.0442878376 -6.188692e-02
+ [72,] -0.0958156672  0.0428481473  0.0464745937 -0.0347635383  6.764189e-02
+ [73,]  0.0896073352 -0.0229664620 -0.1045609317  0.0226491246 -9.267126e-02
+ [74,] -0.0962259123  0.0059777792 -0.0364103516 -0.1071143847  6.373369e-02
+ [75,] -0.0294165293 -0.1326346657 -0.0155405817 -0.0353867182 -1.500852e-02
+ [76,] -0.1350925345  0.0201818238 -0.0599109851 -0.0991253199 -6.620300e-02
+ [77,]  0.0307528674  0.1331465110 -0.0808044131  0.1042894841 -4.092015e-02
+ [78,] -0.1113969801  0.0210548335  0.0573458755  0.0247659303  3.370263e-02
+ [79,] -0.1179394419  0.0204791378 -0.0586459438 -0.0172936686  4.269946e-02
+ [80,]  0.0360164226  0.0838984304 -0.1132094517  0.0950060583 -3.890134e-02
+ [81,]  0.1125427684  0.0007365711  0.0659615736 -0.0245471717 -2.697200e-03
+ [82,] -0.0302778746 -0.0683685252  0.0857785480 -0.0661769100  5.755039e-02
+ [83,]  0.1291229149 -0.0030272616  0.0459151892  0.0166672817  5.595071e-02
+ [84,]  0.0378414567  0.0677912176 -0.1001976870 -0.0406638521 -7.166784e-02
+ [85,]  0.0140994584 -0.0925641254  0.0958256353 -0.2501034436  7.462084e-02
+ [86,]  0.0068134631 -0.0708068313  0.1320277054  0.0228459068  5.985457e-02
+ [87,] -0.0009426783 -0.0681643072  0.1299928124 -0.0523940533 -2.453086e-02
+ [88,]  0.0292194889  0.0822899207 -0.1122485678  0.0005271902 -2.885417e-02
+ [89,]  0.0405595307  0.0961940976 -0.1194803440  0.0926583730  1.479117e-01
+ [90,]  0.1349989851 -0.0272423942  0.0639113952  0.0507328128  5.674638e-02
+ [91,]  0.0837609087 -0.0276161176 -0.1391905284 -0.1002113276  7.196278e-02
+ [92,]  0.1184319194 -0.0446972923 -0.0954179614  0.0253290741  7.537286e-02
+ [93,]  0.1105278479 -0.0328750990 -0.0324132170  0.0032928534 -7.363124e-02
+ [94,]  0.1344275055 -0.0064239545  0.0188463638  0.0627973819 -3.204335e-02
+ [95,] -0.0034059342 -0.1146200033  0.0568366284  0.0535927974 -7.053724e-02
+ [96,]  0.0296002599  0.1331297206  0.0559768488 -0.0736955111 -7.305583e-03
+ [97,] -0.0024161422 -0.0949731563  0.0712579784  0.0427589809 -8.448364e-03
+ [98,]  0.0168936268  0.1167684184 -0.1037769689  0.1931135203  3.177472e-02
+ [99,]  0.1232327428  0.0005589188  0.0110726530 -0.1082773393 -2.414562e-02
+[100,] -0.0719421133 -0.0105213805  0.0595082473 -0.0202013933  5.945938e-02
+[101,]  0.0965795558 -0.0202822226 -0.0671331478 -0.0519246955 -7.198316e-02
+[102,]  0.0180703106 -0.0809257262  0.0843257192 -0.0650112019  3.130443e-02
+[103,]  0.1180635756 -0.0088260457  0.0524730112 -0.0494901617 -6.983760e-02
+[104,] -0.0968869101  0.0280917507  0.0450388251 -0.0902012717 -1.158504e-01
+[105,] -0.1080068245  0.0420865357 -0.0393090995  0.0868841074  1.270343e-01
+[106,] -0.0181433202 -0.1353284096 -0.0835978323 -0.0240687620  1.342734e-01
+[107,] -0.0255053682 -0.1099674373 -0.0476337635  0.0995916917 -8.049926e-03
+[108,]  0.0461018560  0.1101692478  0.0594707962  0.0609938249 -3.083882e-02
+[109,] -0.0153364303 -0.1521886394 -0.0627643764  0.0231458690 -7.254739e-02
+[110,]  0.0421309251  0.1144270778 -0.1086488298  0.0163056879  7.469290e-02
+[111,] -0.1137264487  0.0034096325 -0.1143314731  0.0467961180 -1.972728e-01
+[112,] -0.0807164384 -0.0141348727 -0.1054933310  0.0172017789  1.014120e-01
+[113,]  0.1073098004 -0.0271056944 -0.0674736737  0.0082133860  1.015543e-01
+[114,] -0.1078426367  0.0081995766 -0.1037258017 -0.0630359095 -1.017710e-01
+[115,] -0.1188067719  0.0512080199  0.0770500550 -0.0198994079  1.440884e-02
+[116,]  0.1075190188 -0.0088801436  0.0810025069 -0.0408410163  3.829902e-02
+[117,] -0.0829498493  0.0598376089  0.0944341333  0.1216930605 -9.207591e-02
+[118,] -0.0191357271 -0.1167469218 -0.0431601536  0.0591660130 -7.169334e-03
+[119,]  0.0952470188  0.0042041744  0.0846831717  0.0107315033  8.540319e-05
+[120,] -0.0758682979  0.0442119044  0.1056353634 -0.0231554966 -8.372672e-02
+[121,]  0.0028827063 -0.0943768898 -0.0623606113 -0.0591722420  6.967275e-02
+[122,] -0.0657088275  0.0499526073  0.1060545647  0.0154454567  8.571976e-02
+[123,]  0.1223876719 -0.0477736740 -0.0997311430 -0.0166847216  1.906489e-02
+[124,]  0.0500363047  0.1298195558  0.1089049607 -0.0110645080 -1.938040e-02
+[125,]  0.0119231442 -0.1139564261  0.1103285159 -0.0152299180 -5.905866e-02
+[126,]  0.1271235553 -0.0131456745  0.0483675365  0.0473033699  4.548310e-02
+[127,]  0.1150422021 -0.0306449407  0.0177044110  0.0044002197 -5.660742e-02
+[128,]  0.0443173209  0.1153271825  0.0006189243  0.0058449104  1.532595e-02
+[129,] -0.1161814629  0.0172778420  0.0742129790  0.0691951570 -1.285331e-01
+[130,]  0.0976190727 -0.0406035597 -0.1200410156  0.0711493665  1.590495e-02
+[131,]  0.0419571976  0.0827344771 -0.0727901095 -0.1255996861 -3.003606e-03
+[132,]  0.0502588492  0.1352305603  0.0503776134  0.1329880045  1.666140e-01
+[133,]  0.1322464293  0.0133239155  0.0383519438  0.0658839396  8.599526e-02
+[134,]  0.0856983351 -0.0329024585 -0.1142214402  0.0041029199 -1.221178e-01
+[135,]  0.0158017996  0.1144660633 -0.0651171731 -0.0663435886  8.693311e-03
+[136,] -0.1075585966  0.0406996796  0.0814240724  0.0163349474 -2.166208e-02
+[137,] -0.0922182384 -0.0147686743 -0.0968955938  0.0442937600  7.535232e-02
+[138,]  0.0734599378  0.0691106433  0.0416795947 -0.0310174291 -3.498005e-02
+[139,]  0.1110856278 -0.0492038907 -0.1207524846  0.0208167735 -4.263134e-02
+[140,] -0.0612147016  0.0066564694  0.0771929788  0.0895426447 -1.772709e-02
+[141,] -0.0323875230 -0.1359882395 -0.0821986174 -0.0472072797 -1.422056e-02
+[142,]  0.0037418528 -0.1164519855  0.0682299649 -0.0641211985 -1.838239e-02
+[143,]  0.1003967849 -0.0301824707 -0.1064837878  0.0151272297 -1.795334e-01
+[144,] -0.0048153714 -0.1423851523 -0.0789270215 -0.0229160631 -3.171613e-02
+[145,]  0.1021076027 -0.0358527361 -0.0912911026  0.0205922170 -1.100910e-01
+[146,] -0.1010653397  0.0440443488  0.0601932625  0.0545021167 -1.041623e-01
+[147,]  0.0235761716  0.0954917460 -0.1286830402 -0.0332378746  7.392062e-02
+[148,]  0.0153968944  0.1200395975 -0.1019770684 -0.1262447231 -6.018202e-02
+[149,] -0.0767221529  0.0221496089  0.0437923412  0.0737893561  2.030322e-01
+[150,]  0.0386889376  0.0861384460  0.0680024926 -0.0019681501  5.059081e-02
+[151,] -0.0706282720  0.0202848360  0.0428757213  0.1601670784 -7.470087e-02
+[152,]  0.0962498021 -0.0309587053 -0.0896154225 -0.0696755720  5.172475e-02
+[153,] -0.1125369784 -0.0137904317 -0.0906325443  0.0285075047  3.309983e-02
+[154,]  0.1000944064 -0.0442794018 -0.0597094829 -0.0557286471  1.816600e-02
+[155,]  0.1130179514 -0.0484935930 -0.0404763068  0.0515069205 -5.760382e-02
+[156,]  0.0968072838  0.0212535111  0.0327353478  0.0836720755 -1.288213e-01
+[157,] -0.0127660847 -0.1017131027 -0.0605014718  0.1656300260  5.839968e-02
+[158,] -0.0199947494 -0.0798230191  0.0424005486 -0.0165927909 -2.431838e-03
+[159,] -0.1010478381  0.0116578676 -0.0334624465 -0.0104084515 -1.907992e-01
+[160,]  0.0362004984  0.1228508740  0.0030820026  0.1029222781  1.699513e-01
+                [,6]          [,7]          [,8]          [,9]         [,10]
+  [1,] -0.0207624343  0.0326126321  0.0324628458  0.1137783686 -2.517493e-05
+  [2,] -0.1537264308 -0.0325486667 -0.1517866208  0.0411475368  1.399257e-02
+  [3,] -0.0245743102  0.0013237114  0.0382570085 -0.0967913353  3.310084e-02
+  [4,]  0.1270687252 -0.0588858061 -0.0246456496 -0.0932470571  1.610241e-02
+  [5,]  0.1001704479 -0.0694005886 -0.0348218442 -0.1369208034 -1.560912e-01
+  [6,]  0.1307000642 -0.1174247806  0.1509007314  0.0511459992  8.046203e-02
+  [7,] -0.1286161287 -0.0720506863  0.0019616190 -0.0221706220 -1.435567e-02
+  [8,] -0.0293097260 -0.1806613287 -0.0165182340  0.1337994321 -4.145657e-02
+  [9,]  0.0384639645 -0.0061820579  0.1053818822  0.0710458525  6.287674e-02
+ [10,] -0.0640457784 -0.1163412584 -0.0887425885 -0.1137206893  3.234729e-02
+ [11,]  0.1205146182  0.0298075874 -0.1880123139 -0.0336072937 -3.581897e-02
+ [12,]  0.0585074193  0.1494417541 -0.0411422112 -0.0141361606 -3.261888e-02
+ [13,] -0.0355488598  0.1704127612 -0.1740356338  0.0645435583  1.415352e-02
+ [14,]  0.0622724249  0.0088768366 -0.1581716574  0.0757075367  3.781769e-02
+ [15,]  0.0006724880 -0.0312272121 -0.0935122439 -0.0418206171 -7.450098e-02
+ [16,]  0.0755058690  0.0115413019  0.0284339735 -0.0474156335 -6.658251e-02
+ [17,]  0.0361543853  0.1023211842 -0.0476806977  0.0601795452  1.311213e-01
+ [18,]  0.0132669011 -0.0224911765  0.0790103710 -0.0763516195  7.819288e-02
+ [19,]  0.0564575929  0.0195279354  0.0216287238 -0.0089784387 -8.113657e-02
+ [20,] -0.0263654807 -0.0024812554  0.0494369708  0.0259030835 -7.749497e-02
+ [21,] -0.0135902520  0.2437960109  0.1526597877  0.0400984736 -2.257975e-02
+ [22,] -0.1428641130  0.0317862697 -0.0472332504 -0.0870142202 -5.476270e-02
+ [23,]  0.0840577328  0.1162318708  0.0667938912  0.0020249400  4.911115e-02
+ [24,]  0.0614239929 -0.1180715592 -0.0811133331  0.0078047293  1.190093e-01
+ [25,] -0.0064061352 -0.1267093451 -0.0779043742 -0.0731048634  9.517904e-02
+ [26,] -0.0886631465 -0.0894773776  0.1175856744 -0.1448016090 -4.499222e-02
+ [27,] -0.0311322237  0.0235391901  0.0114979246 -0.0550911063  4.143998e-02
+ [28,] -0.0370628169 -0.0352713454  0.0191157518  0.0150919232 -1.749383e-02
+ [29,]  0.0357946529 -0.0578623434 -0.0396281879  0.0159204159 -1.335193e-01
+ [30,] -0.0595552533 -0.0467097294  0.0532957887 -0.0384817902  4.427568e-02
+ [31,]  0.0697731367 -0.0057717455 -0.0664938013  0.1177582864 -3.094230e-02
+ [32,] -0.0017258232  0.0382070977  0.0341036086  0.0564557574 -1.047309e-01
+ [33,] -0.0463394021  0.1220854080 -0.0249799547 -0.0781203069 -1.440907e-01
+ [34,] -0.0642584977  0.0654696744 -0.0802900996 -0.0123763140 -1.431898e-01
+ [35,]  0.0009600674  0.0901131418 -0.0814422131  0.0319659596  5.020796e-02
+ [36,] -0.0085931867 -0.0190939060  0.0057312063 -0.0697194453  3.096946e-02
+ [37,]  0.0192106827 -0.1254999692 -0.0079634847 -0.1417645610  2.458040e-02
+ [38,]  0.0542861150 -0.0282822496  0.0876901063  0.2142674543  1.196778e-01
+ [39,] -0.0484976465 -0.0109712090  0.1371485652  0.0182971882 -4.406466e-02
+ [40,]  0.0465026552  0.1794271155  0.1788666964 -0.1159993536 -3.158857e-03
+ [41,]  0.0280126398 -0.1349577613 -0.0241550951 -0.1086206280 -1.823555e-01
+ [42,]  0.0372185152  0.0001538108 -0.0233127125  0.0757494556  9.029071e-02
+ [43,]  0.0157832692 -0.0365033859 -0.0623955762  0.1706716714  7.963859e-02
+ [44,] -0.1248255152  0.0006008500 -0.0637111840 -0.0704438545  4.457423e-02
+ [45,] -0.0645324338 -0.0812221027 -0.0434957800  0.0894429742 -1.010462e-02
+ [46,] -0.1388736382 -0.0980689397  0.1285801113 -0.0249493551 -7.058625e-02
+ [47,]  0.0404520955  0.0018043446  0.0517745349 -0.0983431393  3.710890e-03
+ [48,] -0.0457786084  0.0057310084  0.0783540899 -0.0500887665  4.410598e-02
+ [49,]  0.0586188235 -0.0998292456 -0.0904143523 -0.0544314180 -4.001702e-02
+ [50,]  0.0208718318 -0.1203783347 -0.0562631984  0.0354033375  9.809388e-02
+ [51,]  0.0058441923  0.0078270702 -0.0647651075 -0.0791382181  3.988452e-02
+ [52,] -0.1106851143 -0.0199702326  0.1038665830 -0.0161456345 -5.824040e-02
+ [53,] -0.0239468947 -0.0443814828 -0.0372902600 -0.0170527498 -4.234229e-03
+ [54,] -0.0865855015  0.1224182728 -0.0090902653  0.1220478047  7.817705e-02
+ [55,]  0.0792240091  0.1201937257  0.0467635029 -0.0436682830  1.893597e-02
+ [56,] -0.0995865587  0.0563471473 -0.0976228703 -0.1587008569 -7.880366e-03
+ [57,]  0.0111647533 -0.0519863254  0.0712035336 -0.0004792934  1.431906e-02
+ [58,] -0.1010686171 -0.0802567158  0.0904774623  0.0482127181 -1.320696e-01
+ [59,]  0.1284056460 -0.1517879959  0.0175882300  0.0110479951 -2.350612e-01
+ [60,]  0.1625150872 -0.0524985523  0.0274670084 -0.0529633939  1.718608e-01
+ [61,] -0.1052100028 -0.0027374969 -0.0995406157  0.0677398374  3.869424e-02
+ [62,] -0.0767039528  0.0047960771  0.1082894047  0.0586767940  8.530261e-02
+ [63,]  0.0099197636  0.0201953847  0.0526247442 -0.0032503886 -3.304714e-03
+ [64,]  0.0162673271  0.0496451271  0.0272304629  0.0529580257 -8.427682e-02
+ [65,]  0.0560188672 -0.1450899482 -0.0764573806  0.0475647340  4.565883e-02
+ [66,]  0.0351767801  0.0207577262 -0.0780140076 -0.0241201376  8.935957e-02
+ [67,]  0.0009802462  0.1338873139  0.0062220489  0.0439142530 -3.448160e-02
+ [68,]  0.1208451103 -0.0635035365 -0.0457207315  0.0992949596 -3.689559e-02
+ [69,]  0.0345126599 -0.0962324020 -0.0330409217 -0.0465996822  2.586360e-02
+ [70,] -0.1482069548  0.1414963061 -0.0537610653  0.0284317107  1.203229e-01
+ [71,] -0.1375283668  0.0776700662  0.0811169372 -0.0326196273  2.453821e-02
+ [72,]  0.0422972428 -0.0013967346  0.0290275013  0.0989212957  3.216131e-02
+ [73,]  0.1261772779 -0.0200784583  0.0429118607 -0.1029830501  4.638076e-02
+ [74,] -0.0831945545  0.0458836194  0.0513647708  0.0141198210 -9.744228e-02
+ [75,] -0.0678660137 -0.0553969304 -0.0235926575  0.0395511801 -7.630104e-02
+ [76,] -0.0387044436 -0.0494159998  0.0289494096 -0.0065663705 -6.093920e-02
+ [77,]  0.1115570200  0.1149468785 -0.0203488038 -0.0003156039  1.960477e-02
+ [78,] -0.0015229961 -0.0659275193 -0.0759963164 -0.0940674936  3.644915e-03
+ [79,]  0.0451994686  0.0001161504 -0.0247444010 -0.0135117975 -4.233055e-03
+ [80,] -0.1203046612 -0.0444709801  0.0048646442  0.0125380918 -2.803746e-02
+ [81,]  0.0343621704  0.0791168040 -0.1295856644 -0.0725850491 -8.511394e-02
+ [82,] -0.0265733346 -0.0772774827  0.0930921749  0.0749143182 -1.069504e-01
+ [83,]  0.1319297727  0.0967920473  0.0072586469  0.0041777055  1.163953e-02
+ [84,] -0.1638959208 -0.1448089060  0.0182965363  0.0555512943 -1.598590e-01
+ [85,]  0.0398212671  0.0383181130 -0.0233988960 -0.0512152046 -9.774746e-02
+ [86,] -0.0299251375 -0.0722582361  0.0967322141  0.0503470716 -8.707014e-02
+ [87,]  0.1342676816 -0.0443981639  0.0083282125  0.1361208707  1.440740e-02
+ [88,] -0.0177472967  0.0921194199  0.0995227857 -0.1419094280  8.069622e-02
+ [89,]  0.0755324339 -0.0330860473  0.0413722516 -0.0105681696  5.159310e-03
+ [90,] -0.1401472339  0.0974414188  0.0290208662  0.0078675517  6.681375e-03
+ [91,]  0.0444489697  0.0472150948  0.0202528444  0.0381584466  2.699742e-02
+ [92,]  0.0139482412  0.0125985198  0.0256211947  0.0212787802  1.113414e-01
+ [93,]  0.0042446274 -0.0829045578  0.0322736874 -0.0636447611 -8.081389e-02
+ [94,]  0.0425349558  0.1092160355  0.0009132249  0.0760799439 -2.257283e-02
+ [95,]  0.0216462347  0.1449738343 -0.0086593709 -0.0317645489  1.556285e-03
+ [96,]  0.0634497645  0.0557519378 -0.0655759726  0.1070548020  8.623808e-03
+ [97,]  0.0159672110  0.0813595302  0.0694335865  0.0802647262  2.408088e-03
+ [98,] -0.0679384009  0.0856563091  0.0169637892 -0.0333962139 -1.162201e-01
+ [99,] -0.0006984648  0.0303107897  0.0128851323  0.0211219908  2.219477e-03
+[100,] -0.1569057707 -0.0973669560 -0.0208240904  0.1362648217  4.725908e-02
+[101,] -0.1227834074  0.0886129712 -0.0362469202  0.0377787084  6.207915e-02
+[102,]  0.0922381891 -0.0464371188  0.1076340694  0.0636467836  1.123578e-01
+[103,]  0.0260419668 -0.0823769380 -0.0002513246 -0.1074636682 -6.288792e-02
+[104,]  0.0541307529 -0.0819233390 -0.1007140974  0.0745398501  3.158627e-02
+[105,]  0.1442433495  0.0201648238  0.0875854663 -0.0011584401  8.344489e-02
+[106,]  0.0978579599 -0.1126932896  0.0178996460  0.0693784323 -1.612534e-02
+[107,]  0.0614520615 -0.0861923200  0.1117712402  0.0142307083  2.989594e-02
+[108,] -0.0967053651 -0.0317249941  0.0217800284 -0.0345763262 -4.718482e-02
+[109,] -0.1588468705 -0.0710283291  0.0217388701  0.0475602769 -4.285572e-03
+[110,] -0.1284698980 -0.0520590375  0.0036254962 -0.0805819724  3.379474e-02
+[111,]  0.0165423946 -0.0092937064 -0.1232054752 -0.1009427736 -9.147679e-03
+[112,] -0.0852381127 -0.1034935203  0.1885879807 -0.1414094123  1.109526e-01
+[113,]  0.0766109976  0.0615102665  0.0480376474  0.1275857526 -2.567964e-02
+[114,] -0.0417695569  0.1299001520  0.0407804836 -0.0059095075 -1.596471e-01
+[115,]  0.0740155591  0.0044182698 -0.0578931446  0.0650469139  4.627914e-03
+[116,] -0.0474791183 -0.0007470062 -0.0424146569 -0.1653917018  8.982686e-02
+[117,]  0.1476756327 -0.0445960802  0.1546021884  0.0843528536  3.943043e-02
+[118,] -0.0754211177  0.0377792658  0.0126119443  0.0506789587 -4.218720e-02
+[119,]  0.0424798542  0.0259811919 -0.1558907600  0.0367190760 -2.003429e-01
+[120,] -0.0501762879  0.0395565847  0.0355143043  0.0936331207  7.957284e-02
+[121,]  0.0169954705  0.0394491670  0.0380267872  0.0355164560 -1.594457e-01
+[122,]  0.0732552705  0.1699710005  0.1318485860 -0.1141451420 -2.773138e-02
+[123,] -0.0263248046  0.0318893732  0.0240778361  0.0299883857 -2.282688e-02
+[124,]  0.0980319211  0.0202300740 -0.0238386148 -0.0881316478  4.909351e-03
+[125,] -0.0530392305 -0.0393639872 -0.0002511187  0.0982782494  5.688638e-02
+[126,] -0.0052460850 -0.0798335748 -0.0293316643 -0.0678010068  9.401845e-02
+[127,] -0.0443351946  0.0680452194 -0.0186305355 -0.0438614969  1.148971e-01
+[128,] -0.1369996002 -0.0618046659  0.1805700646  0.1582085951 -4.266255e-02
+[129,] -0.0403798140  0.1007545577 -0.0189151179 -0.1490289307  1.795034e-01
+[130,]  0.0031257269  0.0093948041 -0.0023115620  0.0214741026  9.013185e-02
+[131,] -0.0231441777 -0.0583454359  0.1209161489 -0.0080697159 -3.706605e-02
+[132,]  0.0037488851  0.0494532492  0.1006729713 -0.0695210004  1.830950e-03
+[133,]  0.0794191104 -0.0472603236  0.0665034133 -0.0250339043 -5.299875e-02
+[134,]  0.1451428816 -0.0557332896 -0.0489234901  0.0254249697  3.814027e-02
+[135,]  0.0318558193  0.0154856369 -0.1111199190  0.0121490281 -1.637865e-01
+[136,]  0.0331013208 -0.1005745738  0.0130455940 -0.1609429918  7.781468e-02
+[137,] -0.0428189219  0.0629202256 -0.2017740718 -0.0538538910  3.773203e-03
+[138,] -0.0569478769  0.0377298540  0.1043258025  0.0878017186  3.677778e-03
+[139,] -0.0126126584 -0.0115733940 -0.0433290485  0.0826681895 -4.896785e-02
+[140,] -0.0042195563 -0.1488649907  0.0326730603 -0.0375090729  4.528755e-02
+[141,]  0.0486655877  0.0434083417 -0.1437273528 -0.1181366800  4.299737e-03
+[142,]  0.0145384530 -0.0211159190 -0.0678621131 -0.0753807574  3.143524e-02
+[143,]  0.1119271393  0.0195099582  0.0082251081 -0.0409495360 -1.081618e-02
+[144,] -0.0352722215  0.0415828284 -0.0938545820  0.0931455523  1.003916e-01
+[145,]  0.0503694227  0.1073762659 -0.0846929690 -0.0822308728 -3.131754e-02
+[146,]  0.0576056594 -0.0503026984 -0.0593122193  0.0478700638 -9.068487e-02
+[147,]  0.0937755749  0.0238964305 -0.0097822122 -0.0626443344  1.734033e-01
+[148,]  0.1274622741  0.0244097493  0.1752092581 -0.1034838629 -7.854097e-03
+[149,] -0.1131792957  0.0794838485 -0.0269349741 -0.0539866795 -7.895374e-02
+[150,] -0.1251821798 -0.1024668607 -0.1393181845  0.0869330487  8.772772e-02
+[151,] -0.0317751078  0.0669976399  0.0021070987  0.1785028480  1.099622e-01
+[152,] -0.0029783853  0.0831282632 -0.0284047841  0.1500904825 -1.816104e-02
+[153,]  0.0502291066 -0.0084763832 -0.1302319337  0.1294180797 -2.597439e-02
+[154,] -0.0570840317 -0.0630829240 -0.0426375154 -0.1293680292  1.403924e-01
+[155,] -0.1915125671 -0.0332114881 -0.0384344621 -0.0373428864  1.352547e-01
+[156,] -0.0375958235  0.0927999167 -0.0710000602 -0.0428608820 -2.646489e-02
+[157,]  0.0118204989  0.1418692774  0.0143087466  0.0056795112 -1.537829e-01
+[158,]  0.1629436973 -0.0137215060  0.0701158045  0.0316610388 -9.927196e-02
+[159,] -0.0698925655  0.0351125693  0.0637567312  0.0207631015  1.175350e-01
+[160,]  0.0797414359 -0.0447792720 -0.1620289170  0.0643442006  1.509739e-02
+               [,11]         [,12]        [,13]         [,14]         [,15]
+  [1,] -0.0301569620  0.0195197384  0.015616229 -1.453446e-03  9.068622e-02
+  [2,] -0.0540179017  0.0094202726 -0.002720354  1.491970e-02  1.738685e-02
+  [3,]  0.0028089637  0.1376755056  0.044394872  1.651331e-02  2.991881e-02
+  [4,]  0.0641998986  0.1850734715 -0.062528487 -6.558390e-02 -6.425045e-02
+  [5,]  0.0672637957 -0.0500478603  0.094488212  1.547563e-02 -6.486966e-02
+  [6,] -0.0144078643  0.0739659975  0.009655770  7.934849e-02  3.077819e-02
+  [7,] -0.0514468963 -0.0806225854 -0.033893872 -3.885219e-03 -5.953079e-02
+  [8,] -0.1003532818  0.0103859847 -0.058338833 -2.211790e-02  1.055663e-01
+  [9,]  0.1369176654 -0.0575897752  0.039655322 -9.613206e-02  2.215045e-02
+ [10,] -0.1394485795 -0.0453679424 -0.002784973  1.309655e-01 -2.609754e-02
+ [11,] -0.1336540768 -0.0032899908  0.072918799 -7.799266e-02 -3.438839e-02
+ [12,]  0.1043861446  0.0615540073 -0.082739751 -9.935329e-02 -7.973493e-02
+ [13,] -0.0335588198  0.0501206538  0.052070724  7.776599e-02  1.154793e-01
+ [14,] -0.0403930151  0.0136620792  0.090331234  7.357043e-02 -1.084678e-01
+ [15,] -0.1140934025  0.0672004895  0.028177830  6.553462e-02  4.099984e-02
+ [16,]  0.0724902004  0.0739738474 -0.039217499 -1.005067e-01 -1.075030e-01
+ [17,]  0.1477208907 -0.1842948844  0.075722512  5.642620e-03 -1.063832e-01
+ [18,] -0.1313766230 -0.0733860421  0.085254667 -9.521922e-02  4.536244e-02
+ [19,]  0.0493873048  0.0553296546  0.011507060  9.169427e-02 -1.403807e-01
+ [20,] -0.1194299329 -0.0124901225  0.096485161  7.209669e-02  7.004247e-02
+ [21,] -0.2104329986 -0.0011569146  0.058224646 -3.802187e-02 -1.312715e-01
+ [22,]  0.0061829702  0.0126381274  0.234727935  8.531258e-03 -9.976210e-03
+ [23,] -0.0610957910  0.0090281608 -0.060588507 -6.202378e-02 -4.568267e-02
+ [24,] -0.0810373454 -0.0850800716  0.099623452 -1.191774e-01 -6.320743e-03
+ [25,]  0.0585486078 -0.0326741489 -0.246341199 -6.907452e-03 -8.172734e-02
+ [26,]  0.0741406354  0.0508141969  0.011452098 -7.028796e-02 -5.218197e-02
+ [27,]  0.1070086909 -0.0984275908  0.008677741 -7.782291e-02 -5.272559e-03
+ [28,] -0.0943385524 -0.1730037068 -0.067515320 -5.979609e-02  5.475739e-02
+ [29,]  0.1739500763  0.0016919661  0.208082990  1.670380e-02  2.464743e-02
+ [30,] -0.0099729003  0.1233301292 -0.004033324  1.007094e-02 -5.353569e-02
+ [31,]  0.0336383357  0.0049741712  0.146815814  9.822136e-02 -1.444920e-01
+ [32,] -0.0798597618 -0.1466770950  0.022057481  7.575014e-02 -1.071588e-01
+ [33,]  0.2061469345  0.0346115118  0.043123938  1.566775e-01  9.075634e-02
+ [34,]  0.0347100314 -0.0949536954  0.075648352 -2.302827e-02  1.123021e-02
+ [35,]  0.0440617554  0.1186766154 -0.036164865 -1.864419e-02 -6.262164e-02
+ [36,]  0.0948677381  0.0039074419 -0.137876773 -5.584110e-02 -2.004596e-02
+ [37,]  0.0343925311  0.0148314429 -0.014537755 -1.816263e-02  8.934415e-02
+ [38,] -0.0586151219 -0.0024949722  0.022348980 -1.688486e-02  6.044692e-02
+ [39,]  0.0409802937  0.1052305914 -0.033524052  7.240779e-03 -2.789186e-02
+ [40,]  0.0137714402 -0.0999374633  0.097502560  7.372739e-02 -4.060550e-02
+ [41,] -0.0175800563 -0.0111131572 -0.006715363 -1.497236e-01 -7.157692e-02
+ [42,]  0.0764821246 -0.0145146810 -0.018474891  5.205961e-02  9.642986e-02
+ [43,]  0.0294926736  0.0510289678  0.011520220 -2.522548e-02  7.407539e-02
+ [44,]  0.0351420048 -0.0245796531 -0.033307032  4.513937e-02 -1.242820e-01
+ [45,]  0.0906041068  0.0156376093 -0.020986734 -3.120200e-02 -2.047568e-02
+ [46,]  0.0191223710  0.0460308980  0.039389787  1.495143e-02  6.672915e-02
+ [47,] -0.1365532357  0.0067131492 -0.179182903  1.261448e-01 -3.405638e-02
+ [48,] -0.1467465315 -0.0728883903 -0.013674700 -1.431299e-02  4.070979e-02
+ [49,] -0.0168305660  0.0211692093  0.010505489  8.946241e-02 -1.251881e-02
+ [50,]  0.0143560246  0.0453538366  0.088655589  1.010872e-02 -1.110803e-01
+ [51,]  0.0399922802  0.0013410441  0.101322366  3.457742e-02  8.457364e-02
+ [52,] -0.0560865780  0.1163981227 -0.142481330 -3.733870e-02 -1.904334e-01
+ [53,] -0.0542408705 -0.0070886388  0.024538717 -3.968955e-04 -2.717931e-02
+ [54,]  0.0708250879 -0.0084692911  0.045357292  4.685415e-02 -1.327020e-01
+ [55,] -0.0840497136 -0.0263657635 -0.076569006 -1.350241e-01  1.398462e-02
+ [56,] -0.0161593174 -0.1260484441 -0.052166406 -4.025737e-02 -1.670301e-01
+ [57,]  0.0478793371  0.0870235308  0.001196049 -6.415075e-02 -1.938377e-02
+ [58,]  0.0969296006 -0.0002506892 -0.024252060 -2.370177e-02 -5.560965e-02
+ [59,] -0.0757077558  0.0497257305 -0.036278625 -8.846322e-05  6.739795e-02
+ [60,] -0.0838972132  0.1328134229 -0.019234359 -3.882684e-02 -2.378087e-03
+ [61,]  0.0527671524 -0.0601243097 -0.104255071 -4.999940e-02  1.782402e-01
+ [62,] -0.0979516699  0.0937995678 -0.023497324  6.518933e-02  1.632345e-01
+ [63,] -0.0098362666  0.0074400232 -0.020003029 -8.949856e-02  2.880758e-02
+ [64,]  0.0343353428 -0.0459663472 -0.177462350 -4.508645e-02  8.218557e-02
+ [65,]  0.0776072541 -0.0383085429 -0.119868244  5.063235e-02 -3.858490e-02
+ [66,]  0.0113504566 -0.0280239135 -0.137452961  7.226651e-02 -4.245596e-02
+ [67,] -0.1046438397 -0.0721753907  0.078193222  3.045653e-02  4.921304e-02
+ [68,] -0.1148242660  0.0611098247  0.088183114  8.050869e-03 -1.019216e-01
+ [69,]  0.1000903465 -0.1334385724  0.121511726  4.042779e-03  3.879588e-02
+ [70,]  0.0037461126  0.0211899994 -0.042634706 -7.159336e-02 -1.902660e-02
+ [71,] -0.0609396980  0.0172296932  0.065657334 -9.717760e-02 -1.667369e-02
+ [72,] -0.1018952182 -0.0411374105 -0.039354504 -1.681637e-01 -7.979319e-02
+ [73,] -0.0655741479 -0.0990246332 -0.032169097 -7.614717e-02 -4.796494e-02
+ [74,]  0.0786398824 -0.0165305920 -0.083543760  9.571502e-03  3.425640e-02
+ [75,]  0.0127935909 -0.0739189248 -0.060017441  7.976866e-02  6.793624e-05
+ [76,] -0.0256468585 -0.0465013213 -0.153465351  1.674087e-01  1.486294e-01
+ [77,]  0.0041882354 -0.0137569432  0.052248032  2.341433e-02 -1.345261e-01
+ [78,] -0.0665950683  0.0003860319 -0.044219688 -6.737629e-02  1.078031e-01
+ [79,]  0.0414233127 -0.0379444503 -0.006969549  6.970980e-02  7.780774e-02
+ [80,]  0.0833757679 -0.0682170179  0.098973578 -9.392036e-02 -9.975385e-02
+ [81,] -0.1096263338  0.0252480432 -0.034204898 -9.340205e-02 -3.522062e-02
+ [82,] -0.1314262831 -0.2041738144 -0.011122162  1.137816e-01  8.625254e-02
+ [83,] -0.0054551088  0.0845362183  0.009759222 -2.841723e-02 -5.574408e-02
+ [84,]  0.1006334180  0.0716815786 -0.050386013 -6.086482e-02 -1.450976e-01
+ [85,]  0.0668550824  0.0609595420  0.034314981 -8.118780e-03  1.623926e-02
+ [86,] -0.0601228706 -0.1401346859  0.009225129  4.517791e-03 -1.329059e-01
+ [87,]  0.1280281607 -0.1445687011 -0.032085041 -1.110805e-02 -1.590819e-01
+ [88,]  0.0734338849  0.0918993693  0.085264789 -5.032534e-02  1.416947e-01
+ [89,]  0.0878307913 -0.0724522231  0.086733881 -1.104414e-01 -5.038027e-02
+ [90,]  0.0968686803 -0.0210450947 -0.144884099  6.208770e-02  7.890885e-02
+ [91,] -0.0648390610 -0.0961755977 -0.114733884  8.714778e-02  1.599648e-02
+ [92,]  0.0184046599 -0.0324059638  0.011528713 -1.047359e-01 -4.202422e-02
+ [93,]  0.0027109637  0.0575567050 -0.042020426 -6.199802e-02  1.191431e-02
+ [94,] -0.0388382638  0.1347146972  0.074011543 -1.511384e-01  1.044616e-01
+ [95,]  0.0725420409  0.0621793652  0.014707796 -1.824424e-02  5.877685e-02
+ [96,]  0.0347357567 -0.0265355899 -0.093320721  2.656413e-03  5.912166e-02
+ [97,] -0.0504503932 -0.0241418516 -0.157149650 -6.219061e-02 -4.113899e-02
+ [98,]  0.0232447249 -0.0777229859 -0.014544986 -1.557134e-02 -2.664997e-02
+ [99,] -0.0136241755 -0.0249096264  0.072701657  1.881182e-01 -7.204564e-02
+[100,] -0.0765172100  0.1430414671 -0.023468469 -1.041171e-01 -2.112097e-02
+[101,] -0.0467622608 -0.0363934032 -0.099597059  1.033612e-01 -4.142332e-02
+[102,]  0.0179202769 -0.0665627362  0.036226068  7.058959e-02  6.572370e-02
+[103,]  0.0155477741 -0.0366887569 -0.051715453  1.708131e-01  3.521980e-03
+[104,] -0.0058004998  0.0668376422  0.026635974 -1.089719e-01 -1.205547e-01
+[105,] -0.0053074802 -0.0816129094 -0.090038533  9.784276e-03 -2.475684e-02
+[106,]  0.0563786251  0.0473789258  0.018827776 -1.339319e-01  1.011317e-01
+[107,] -0.0281650929  0.0837300365  0.220117048  1.787605e-01  9.866723e-02
+[108,]  0.0791594500 -0.0434912730  0.039506987 -5.611791e-02  1.911249e-01
+[109,] -0.1166392588  0.0896367995 -0.053771369 -1.113530e-01 -5.257351e-02
+[110,] -0.1518865083 -0.0486498599  0.142997726  2.197763e-02 -1.076573e-01
+[111,] -0.0113714854 -0.0330566179  0.140356581 -6.348996e-02 -1.835985e-02
+[112,] -0.0088092685  0.0531899979  0.126148215  7.058752e-04 -1.045318e-01
+[113,]  0.0586105251  0.0290852325 -0.091990475  3.231183e-02  7.265270e-02
+[114,]  0.0676526493  0.1026897274 -0.025023553  1.184263e-01 -9.705286e-02
+[115,] -0.0135789781 -0.0377929028 -0.059160456  1.745348e-02  3.023846e-02
+[116,] -0.0198008663 -0.0277739344 -0.173614328 -5.007795e-02  1.643861e-02
+[117,] -0.0719671845  0.0270121308 -0.049695311  1.043514e-01 -9.783520e-02
+[118,] -0.0739431059  0.0189089074  0.046449348 -5.231421e-03 -7.764682e-02
+[119,] -0.1096667306  0.0098707941 -0.078020687  6.677813e-02  1.502028e-01
+[120,] -0.1202497165 -0.0306874268 -0.027280893 -1.056105e-02 -1.637472e-02
+[121,] -0.1020502591  0.0199555690  0.079382620 -8.781966e-02 -7.666234e-05
+[122,]  0.0619893512  0.0889752219 -0.054960098  2.245523e-02 -3.722001e-02
+[123,] -0.0126396814  0.1080780832  0.005092637  8.060918e-02 -3.655253e-02
+[124,]  0.0828714104  0.0649348356  0.058930387  3.253918e-02 -2.955685e-03
+[125,]  0.0072612533  0.0997750618 -0.001384765  2.681787e-02 -3.079763e-03
+[126,] -0.0500351892  0.0219509016  0.091263363  9.419585e-02  7.834852e-03
+[127,]  0.0293757994  0.0177141556  0.021775745  6.942377e-02  4.412764e-02
+[128,]  0.1203975468 -0.0761849855  0.009502338  1.061500e-01  2.647005e-02
+[129,]  0.0122871393  0.0177337021  0.063871031  1.804938e-02  8.332347e-02
+[130,] -0.0005557895 -0.1409544382  0.033105723 -2.705794e-02  7.782777e-02
+[131,]  0.0121896946  0.1010350360  0.030853704 -1.535371e-01  1.712897e-01
+[132,] -0.0819310781  0.0355881191 -0.109595275  2.654912e-02  6.110452e-02
+[133,] -0.0176758686 -0.0839212645  0.057434555  3.732806e-02 -1.256389e-02
+[134,]  0.0243739432 -0.0505312665 -0.076937152 -2.155641e-02 -9.329635e-02
+[135,] -0.0523904041  0.0973029888 -0.031839107  7.355454e-02 -2.880540e-02
+[136,] -0.0701445551 -0.0103227884 -0.055834929  1.458502e-01  8.692086e-02
+[137,] -0.1241704406  0.2792572874  0.001485923  8.306990e-02  6.716582e-02
+[138,]  0.1069587116  0.1854596984 -0.018470144 -8.845772e-02  6.218932e-02
+[139,]  0.0747885714  0.0938577717 -0.051009889  9.658024e-02 -6.086373e-02
+[140,]  0.0827133948  0.0942346342  0.107242495 -2.449669e-02  1.128581e-02
+[141,]  0.0663825393 -0.0437213520 -0.053103835  2.436571e-02  9.325228e-02
+[142,]  0.0446902719  0.0819849906 -0.024848354  1.140139e-01 -6.493486e-02
+[143,] -0.0653070198 -0.0323294692  0.020567345 -1.870249e-01  9.141510e-02
+[144,]  0.0825389603 -0.0124306007  0.109366100 -1.383727e-01  5.049622e-02
+[145,] -0.0082962505  0.0260606891 -0.031227486 -1.866424e-01  7.155595e-02
+[146,]  0.0319874653 -0.1177018506  0.065635081 -9.122666e-03  7.832562e-02
+[147,]  0.1442615461  0.0265376807 -0.037552327  1.364932e-01 -6.763486e-02
+[148,]  0.0709361022 -0.1070410665 -0.004982650  3.619848e-02  1.543494e-01
+[149,]  0.0726521146 -0.0872848233  0.021226764 -8.941388e-02  1.288843e-01
+[150,]  0.0773972985 -0.0223430199 -0.064884110 -3.381513e-02  6.375835e-03
+[151,] -0.0667187755  0.1505052888  0.071172724  1.002143e-01  2.015649e-02
+[152,] -0.0766850041 -0.0760444064  0.011203003  3.319696e-02 -3.877181e-03
+[153,]  0.2171707435 -0.0880031284 -0.054249710 -6.697102e-02  4.960554e-02
+[154,]  0.0113820359 -0.0285100240 -0.149009729  6.887564e-02 -1.740655e-03
+[155,] -0.0374113177 -0.0955353442  0.067375460 -5.724144e-02 -3.631211e-02
+[156,] -0.1367993693 -0.1885790993  0.067759904 -2.921673e-02  2.890936e-02
+[157,]  0.0497564417  0.0186997794 -0.021933298  5.665800e-02 -6.307249e-02
+[158,] -0.0304914337 -0.0202562588 -0.021120393 -4.832816e-02  6.436191e-02
+[159,]  0.1304367045 -0.0629212232  0.087904660  1.050441e-01  7.331316e-03
+[160,] -0.0424752033  0.0576689108  0.082331877  8.542243e-02  8.283879e-02
+
+$svd$v
+              [,1]         [,2]         [,3]          [,4]         [,5]
+ [1,]  0.083501645  0.183740367  0.531022528 -0.0014738154  0.053780730
+ [2,]  0.075432416  0.050648362  0.575452308  0.0222960320  0.007374213
+ [3,]  0.024980987  0.084455483  0.577908678  0.0488553309 -0.029574816
+ [4,] -0.463146358 -0.313575706  0.091669320  0.0409128969 -0.007008314
+ [5,] -0.478878011 -0.295980753  0.110004612  0.0087867483  0.047461038
+ [6,] -0.468098627 -0.314540373  0.124304825 -0.0032583845  0.047303527
+ [7,] -0.066462341  0.103198588  0.022480321  0.0137162707 -0.548742307
+ [8,]  0.037119212 -0.026685494 -0.000334148 -0.1723603751  0.487242715
+ [9,]  0.339654606 -0.411843108  0.064767986 -0.0441050216 -0.015433428
+[10,]  0.315422462 -0.484867633  0.038969303  0.0066884491 -0.012439671
+[11,]  0.314006899 -0.485837674  0.053650474 -0.0004841371 -0.015073886
+[12,] -0.004794388 -0.108556718 -0.003293163  0.3478624268 -0.273061851
+[13,] -0.052864396  0.001937639 -0.015894022 -0.6464229571 -0.315089467
+[14,]  0.026886291 -0.087581464  0.075154879 -0.3726435396 -0.418142661
+[15,]  0.031238711 -0.010050447 -0.043888929  0.5345386887 -0.322192676
+              [,6]         [,7]         [,8]         [,9]       [,10]
+ [1,] -0.096144870  0.030353876  0.074521337  0.057738426 -0.79147730
+ [2,]  0.040458599 -0.017821597 -0.099324057  0.011941943  0.51045566
+ [3,]  0.077661095 -0.058664516  0.030154068  0.047146219  0.24771145
+ [4,] -0.004120678  0.033791440  0.010283179 -0.026359429 -0.05195335
+ [5,]  0.015006566  0.003806493  0.030095952  0.036089306 -0.01417537
+ [6,]  0.045204665  0.022004214  0.045465791 -0.018943073 -0.05108287
+ [7,]  0.623187252  0.067990397 -0.236086070 -0.463922619 -0.12703238
+ [8,]  0.272821855 -0.714553121  0.091155241 -0.364817353 -0.04165678
+ [9,]  0.062061498  0.059890520 -0.048304429  0.034945094  0.02596873
+[10,]  0.100240677  0.045702257  0.022923411  0.008367786 -0.11463984
+[11,]  0.086880577  0.062439668 -0.004454093 -0.013627407 -0.05375062
+[12,] -0.351133679 -0.525152742 -0.612772863  0.093879384 -0.08147221
+[13,]  0.201078795 -0.286309371 -0.003853505  0.594255516 -0.02441428
+[14,] -0.556896148 -0.118925352  0.329376662 -0.484327347  0.06301855
+[15,]  0.150663022 -0.311438812  0.655495552  0.213602622  0.01856773
+             [,11]        [,12]       [,13]         [,14]        [,15]
+ [1,]  0.157331700 -0.050514382  0.01832547  0.0276282816  0.022241964
+ [2,]  0.463331681 -0.409711369  0.05570530 -0.0426206192  0.007824957
+ [3,] -0.630911853  0.413412447 -0.10912816 -0.0020515016 -0.012834273
+ [4,]  0.123938627 -0.020817889 -0.79803231 -0.0805099083  0.115105812
+ [5,] -0.013541545  0.067257498  0.49148748  0.0488657763  0.646016166
+ [6,] -0.003277244 -0.001770630  0.30218259  0.0316242222 -0.751236799
+ [7,]  0.032108581  0.008503742  0.03491048  0.0005167206  0.026754521
+ [8,]  0.033034874  0.008555118 -0.03278869  0.0053940480  0.019325982
+ [9,]  0.474215407  0.686313665  0.02022575  0.0073401771 -0.024589694
+[10,] -0.245236865 -0.282117674  0.06528540 -0.7022127939  0.026884612
+[11,] -0.218344416 -0.316771309 -0.07132106  0.7026834728  0.029066613
+[12,] -0.028521206  0.004276993  0.03038640  0.0008464635 -0.028859309
+[13,]  0.008728232 -0.048107729 -0.03314387  0.0072725956 -0.010332680
+[14,] -0.006489652  0.003992028  0.02703435 -0.0084423065  0.009045607
+[15,]  0.105906319 -0.016123636  0.01085393  0.0217062166 -0.007303141
+
+
+> par(org_par)
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+
+detaching ‘package:lattice’
+
+> nameEx("gnrlBezierPoints")
+> ### * gnrlBezierPoints
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: gnrlBezierPoints
+> ### Title: Generates a generalized Bezier line
+> ### Aliases: gnrlBezierPoints
+> 
+> ### ** Examples
+> 
+> library(grid)
+> grid.newpage()
+> l <- gnrlBezierPoints(data.frame(x = c(.1, -.1, .7, 1, 1, 0.1),
++                                  y = c(.9, 0, 1, .8, .4, .1)),
++                       length_out = 100)
+> grid.lines(l[,1], l[,2], gp=gpar(col="#550000", lwd = 4))
+> 
+> out_sizes <- 4:20
+> clrs <- colorRampPalette(c("orange", "darkblue"))(length(out_sizes))
+> for (i in out_sizes){
++    l <- gnrlBezierPoints(data.frame(x = c(.1, -.1, .7, 1, 1, 0.1),
++                                     y = c(.9, 0, 1, .8, .4, .1)),
++                          length_out = i)
++    grid.lines(l[,1], l[,2],
++    gp=gpar(col=clrs[which(i == out_sizes)]))
++ }
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:grid’
+
+> nameEx("insertRowAndKeepAttr")
+> ### * insertRowAndKeepAttr
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: insertRowAndKeepAttr
+> ### Title: Insert a row into a matrix
+> ### Aliases: insertRowAndKeepAttr
+> 
+> ### ** Examples
+> 
+> test <- matrix(1:4, ncol=2)
+> attr(test, 'wow') <- 1000
+> test <- insertRowAndKeepAttr(test, 2)
+> print(attr(test, 'wow'))
+[1] 1000
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("mergeDesc")
+> ### * mergeDesc
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: mergeDesc
+> ### Title: Prepares a matrix for htmlTable from a list
+> ### Aliases: mergeDesc
+> 
+> ### ** Examples
+> 
+> data(mtcars)
+> # For labelling we use the label()
+> # function from the Hmisc package
+> library(Hmisc)
+Loading required package: lattice
+Loading required package: survival
+Loading required package: Formula
+Loading required package: ggplot2
+
+Attaching package: ‘Hmisc’
+
+The following objects are masked from ‘package:base’:
+
+    format.pval, round.POSIXt, trunc.POSIXt, units
+
+> 
+> label(mtcars$mpg) <- "Gas"
+> units(mtcars$mpg) <- "Miles/(US) gallon"
+> 
+> label(mtcars$wt) <- "Weight"
+> units(mtcars$wt) <- "10<sup>3</sup> kg" # not sure the unit is correct
+> 
+> mtcars$am <- factor(mtcars$am, levels=0:1, labels=c("Automatic", "Manual"))
+> label(mtcars$am) <- "Transmission"
+> 
+> mtcars$gear <- factor(mtcars$gear)
+> label(mtcars$gear) <- "Gears"
+> 
+> # Make up some data for making it slightly more interesting
+> mtcars$col <- factor(sample(c("red", "black", "silver"),
++                      size=NROW(mtcars), replace=TRUE))
+> label(mtcars$col) <- "Car color"
+> 
+> mergeDesc(getDescriptionStatsBy(mtcars$mpg, mtcars$am,
++                                 header_count = TRUE,
++                                 use_units = TRUE),
++           getDescriptionStatsBy(mtcars$wt, mtcars$am,
++                                 header_count = TRUE,
++                                 use_units = TRUE),
++           htmlTable_args = list(caption  = "Basic continuous stats from the mtcars dataset"))
+<table class='gmisc_table' style='border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;' >
+<thead>
+<tr><td colspan='4' style='text-align: left;'>
+Basic continuous stats from the mtcars dataset</td></tr>
+<tr>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'> </th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Automatic<br />
+ No. 19</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Manual<br />
+ No. 13</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style='text-align: left;'>Gas</td>
+<td style='text-align: center;'>17.1 (&plusmn;3.8)</td>
+<td style='text-align: center;'>24.4 (&plusmn;6.2)</td>
+<td style='text-align: center;'>Miles/(US) gallon</td>
+</tr>
+<tr>
+<td style='border-bottom: 2px solid grey; text-align: left;'>Weight</td>
+<td style='border-bottom: 2px solid grey; text-align: center;'>3.8 (&plusmn;0.8)</td>
+<td style='border-bottom: 2px solid grey; text-align: center;'>2.4 (&plusmn;0.6)</td>
+<td style='border-bottom: 2px solid grey; text-align: center;'>10<sup>3</sup> kg</td>
+</tr>
+</tbody>
+</table>
+> 
+> tll <- list()
+> tll[["Gear (3 to 5)"]] <- getDescriptionStatsBy(mtcars$gear, mtcars$am)
+> tll <- c(tll,
++          list(getDescriptionStatsBy(mtcars$col, mtcars$am)))
+> 
+> mergeDesc(tll,
++           htmlTable_args = list(caption  = "Factored variables"))
+<table class='gmisc_table' style='border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;' >
+<thead>
+<tr><td colspan='3' style='text-align: left;'>
+Factored variables</td></tr>
+<tr>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'> </th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Automatic</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Manual</th>
+</tr>
+</thead>
+<tbody> 
+<tr><td colspan='3' style='font-weight: 900;'>Gear (3 to 5)</td></tr>
+<tr>
+<td style='text-align: left;'>&nbsp;&nbsp;3</td>
+<td style='text-align: center;'>15 (78.9%)</td>
+<td style='text-align: center;'>0 (0.0%)</td>
+</tr>
+<tr>
+<td style='text-align: left;'>&nbsp;&nbsp;4</td>
+<td style='text-align: center;'>4 (21.1%)</td>
+<td style='text-align: center;'>8 (61.5%)</td>
+</tr>
+<tr>
+<td style='text-align: left;'>&nbsp;&nbsp;5</td>
+<td style='text-align: center;'>0 (0.0%)</td>
+<td style='text-align: center;'>5 (38.5%)</td>
+</tr> 
+<tr><td colspan='3' style='font-weight: 900;'>Car color</td></tr>
+<tr>
+<td style='text-align: left;'>&nbsp;&nbsp;black</td>
+<td style='text-align: center;'>5 (26.3%)</td>
+<td style='text-align: center;'>8 (61.5%)</td>
+</tr>
+<tr>
+<td style='text-align: left;'>&nbsp;&nbsp;red</td>
+<td style='text-align: center;'>7 (36.8%)</td>
+<td style='text-align: center;'>2 (15.4%)</td>
+</tr>
+<tr>
+<td style='border-bottom: 2px solid grey; text-align: left;'>&nbsp;&nbsp;silver</td>
+<td style='border-bottom: 2px solid grey; text-align: center;'>7 (36.8%)</td>
+<td style='border-bottom: 2px solid grey; text-align: center;'>3 (23.1%)</td>
+</tr>
+</tbody>
+</table>
+> 
+> tl_no_units <- list()
+> tl_no_units[["Gas (mile/gallons)"]] <-
++   getDescriptionStatsBy(mtcars$mpg, mtcars$am,
++                         header_count = TRUE)
+> tl_no_units[["Weight (10<sup>3</sup> kg)"]] <-
++   getDescriptionStatsBy(mtcars$wt, mtcars$am,
++                         header_count = TRUE)
+> mergeDesc(tl_no_units, tll,
++           # Remove the formatting for the groups
++           htmlTable_args = list(css.rgroup = ""))
+<table class='gmisc_table' style='border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;' >
+<thead>
+<tr>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'> </th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Automatic<br />
+ No. 19</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Manual<br />
+ No. 13</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style='text-align: left;'>Gas (mile/gallons)</td>
+<td style='text-align: center;'>17.1 (&plusmn;3.8)</td>
+<td style='text-align: center;'>24.4 (&plusmn;6.2)</td>
+</tr>
+<tr>
+<td style='text-align: left;'>Weight (10<sup>3</sup> kg)</td>
+<td style='text-align: center;'>3.8 (&plusmn;0.8)</td>
+<td style='text-align: center;'>2.4 (&plusmn;0.6)</td>
+</tr> 
+<tr><td colspan='3' style=''>Gear (3 to 5)</td></tr>
+<tr>
+<td style='text-align: left;'>&nbsp;&nbsp;3</td>
+<td style='text-align: center;'>15 (78.9%)</td>
+<td style='text-align: center;'>0 (0.0%)</td>
+</tr>
+<tr>
+<td style='text-align: left;'>&nbsp;&nbsp;4</td>
+<td style='text-align: center;'>4 (21.1%)</td>
+<td style='text-align: center;'>8 (61.5%)</td>
+</tr>
+<tr>
+<td style='text-align: left;'>&nbsp;&nbsp;5</td>
+<td style='text-align: center;'>0 (0.0%)</td>
+<td style='text-align: center;'>5 (38.5%)</td>
+</tr> 
+<tr><td colspan='3' style=''>Car color</td></tr>
+<tr>
+<td style='text-align: left;'>&nbsp;&nbsp;black</td>
+<td style='text-align: center;'>5 (26.3%)</td>
+<td style='text-align: center;'>8 (61.5%)</td>
+</tr>
+<tr>
+<td style='text-align: left;'>&nbsp;&nbsp;red</td>
+<td style='text-align: center;'>7 (36.8%)</td>
+<td style='text-align: center;'>2 (15.4%)</td>
+</tr>
+<tr>
+<td style='border-bottom: 2px solid grey; text-align: left;'>&nbsp;&nbsp;silver</td>
+<td style='border-bottom: 2px solid grey; text-align: center;'>7 (36.8%)</td>
+<td style='border-bottom: 2px solid grey; text-align: center;'>3 (23.1%)</td>
+</tr>
+</tbody>
+</table>
+> 
+> 
+> # A little more advanced
+> mtcars$mpg[sample(1:NROW(mtcars), size=5)] <- NA
+> getDescriptionStatsBy(mtcars$mpg, mtcars$am, statistics=TRUE)
+Gas 
+          Automatic            Manual               P-value
+Mean (SD) "17.5 (&plusmn;3.9)" "23.6 (&plusmn;5.7)" "0.010"
+Missing   "4 (21.1%)"          "1 (7.7%)"           ""     
+> 
+> # Do the horizontal version
+> getDescriptionStatsBy(mtcars$col, mtcars$am,
++                       statistics=TRUE, hrzl_prop = TRUE)
+Car color 
+       Total        Automatic   Manual      P-value
+black  "13 (40.6%)" "5 (38.5%)" "8 (61.5%)" "0.16" 
+red    "9 (28.1%)"  "7 (77.8%)" "2 (22.2%)" ""     
+silver "10 (31.2%)" "7 (70.0%)" "3 (30.0%)" ""     
+> 
+> mtcars$wt_with_missing <- mtcars$wt
+> mtcars$wt_with_missing[sample(1:NROW(mtcars), size=8)] <- NA
+> getDescriptionStatsBy(mtcars$wt_with_missing, mtcars$am, statistics=TRUE,
++                       hrzl_prop = TRUE, total_col_show_perc = FALSE)
+Weight 
+          Total               Automatic           Manual              P-value 
+Mean (SD) "3.1 (&plusmn;1.0)" "3.7 (&plusmn;0.9)" "2.5 (&plusmn;0.6)" "0.0008"
+Missing   "8"                 "7 (36.8%)"         "1 (7.7%)"          ""      
+> 
+> 
+> mtcars$col_with_missing <- mtcars$col
+> mtcars$col_with_missing[sample(1:NROW(mtcars), size=5)] <- NA
+> getDescriptionStatsBy(mtcars$col_with_missing, mtcars$am, statistics=TRUE,
++                       hrzl_prop = TRUE, total_col_show_perc = FALSE)
+Car color 
+        Total Automatic   Manual      P-value
+black   "12"  "5 (41.7%)" "7 (58.3%)" "0.14" 
+red     "7"   "6 (85.7%)" "1 (14.3%)" ""     
+silver  "8"   "6 (75.0%)" "2 (25.0%)" ""     
+Missing "5"   "2 (40.0%)" "3 (60.0%)" ""     
+> 
+> 
+> ## Not run: 
+> ##D   ## There is also a LaTeX wrapper
+> ##D   tll <- list(
+> ##D     getDescriptionStatsBy(mtcars$gear, mtcars$am),
+> ##D     getDescriptionStatsBy(mtcars$col, mtcars$am))
+> ##D 
+> ##D   latex(mergeDesc(tll),
+> ##D         caption  = "Factored variables",
+> ##D         file="")
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
+  ‘package:survival’, ‘package:lattice’
+
+> nameEx("mergeLists")
+> ### * mergeLists
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: mergeLists
+> ### Title: Merging of multiple lists
+> ### Aliases: mergeLists
+> 
+> ### ** Examples
+> 
+> v1 <- list("a"=c(1,2), b="test 1", sublist=list(one=20:21, two=21:22))
+> v2 <- list("a"=c(3,4), b="test 2", sublist=list(one=10:11, two=11:12, three=1:2))
+> mergeLists(v1, v2)
+$a
+     [,1] [,2]
+[1,]    1    2
+[2,]    3    4
+
+$b
+[1] "test 1" "test 2"
+
+$sublist
+$sublist$one
+     [,1] [,2]
+[1,]   20   21
+[2,]   10   11
+
+$sublist$two
+     [,1] [,2]
+[1,]   21   22
+[2,]   11   12
+
+$sublist$three
+     [,1] [,2]
+[1,]   NA   NA
+[2,]    1    2
+
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("transitionPlot")
+> ### * transitionPlot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: transitionPlot
+> ### Title: A transition plot
+> ### Aliases: transitionPlot
+> 
+> ### ** Examples
+> 
+> # This example does not run since it
+> # takes a little while to assemble the
+> # arrows and RMD Check complains that this
+> # is more than allowed for
+> library(grid)
+> par_org <- par(ask=TRUE)
+> # Settings
+> no_boxes <- 3
+> # Generate test setting
+> transition_matrix <- matrix(NA, nrow=no_boxes, ncol=no_boxes)
+> transition_matrix[1,] <- 200*c(.5, .25, .25)
+> transition_matrix[2,] <- 540*c(.75, .10, .15)
+> transition_matrix[3,] <- 340*c(0, .2, .80)
+> 
+> grid.newpage()
+> transitionPlot(transition_matrix,
++                box_txt = c("First", "Second", "Third"),
++                type_of_arrow = "simple",
++                min_lwd = unit(1, "mm"),
++                max_lwd = unit(6, "mm"),
++                overlap_add_width = unit(1, "mm"))
+The minimum width reached and the arrow at box no. '1' to no. '2' will not be shown. This is due to the fact that the lwd will generate a falsely strong arrow.
+The minimum width reached and the arrow at box no. '1' to no. '3' will not be shown. This is due to the fact that the lwd will generate a falsely strong arrow.
+The minimum width reached and the arrow at box no. '1' to no. '2' will not be shown. This is due to the fact that the lwd will generate a falsely strong arrow.
+The minimum width reached and the arrow at box no. '1' to no. '3' will not be shown. This is due to the fact that the lwd will generate a falsely strong arrow.
+The minimum width reached and the arrow at box no. '2' to no. '2' will not be shown. This is due to the fact that the lwd will generate a falsely strong arrow.
+The minimum width reached and the arrow at box no. '2' to no. '2' will not be shown. This is due to the fact that the lwd will generate a falsely strong arrow.
+> 
+> 
+> # Setup proportions
+> box_prop <- cbind(c(1,0,0.5), c(.52,.2,.8))
+> # From the Set2 Colorbrewer
+> start_box_clr <- c("#8DA0CB", "#FC8D62")
+> # Darken the colors slightly
+> end_box_clr <- c(colorRampPalette(c(start_box_clr[1], "#000000"))(10)[2],
++                  colorRampPalette(c(start_box_clr[2], "#000000"))(10)[2])
+> # Create a new grid
+> grid.newpage()
+> transitionPlot(transition_matrix, box_prop=box_prop,
++                fill_start_box=start_box_clr, fill_end_box=end_box_clr,
++                txt_start_clr = c("#FFFFFF", "#000000"), txt_end_clr = c("#FFFFFF", "#000000"),
++                box_txt = c("First", "Second", "Third"),
++                type_of_arrow = "gradient",
++                min_lwd = unit(1, "mm"),
++                max_lwd = unit(10, "mm"),
++                overlap_add_width = unit(1, "mm"))
+> par(par_org)
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> ### * <FOOTER>
+> ###
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  70.884 0.476 71.822 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

@@ -1,0 +1,86 @@
+
+R Under development (unstable) (2017-08-14 r73093) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "gputools"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('gputools')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("cpuMatMult")
+> ### * cpuMatMult
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: cpuMatMult
+> ### Title: Perform Matrix Multiplication
+> ### Aliases: cpuMatMult
+> ### Keywords: array algebra
+> 
+> ### ** Examples
+> 
+> matA <- matrix(runif(2*3), 2, 3)
+> matB <- matrix(runif(3*4), 3, 4)
+> cpuMatMult(matA, matB)
+          [,1]      [,2]      [,3]      [,4]
+[1,] 0.7562406 0.1700063 0.5577087 0.7432832
+[2,] 1.5168675 0.3686766 1.2961212 1.7280707
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getGpuId")
+> ### * getGpuId
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getGpuId
+> ### Title: Discover the Id of the current GPU device
+> ### Aliases: getGpuId
+> 
+> ### ** Examples
+> 
+> getGpuId()
+[1] 0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("gpuCor")
+> ### * gpuCor
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: gpuCor
+> ### Title: Calculate Various Correlation Coefficients With a GPU
+> ### Aliases: gpuCor
+> 
+> ### ** Examples
+> 
+> numAvars <- 5
+> numBvars <- 10
+> numSamples <- 30
+> A <- matrix(runif(numAvars*numSamples), numSamples, numAvars)
+> B <- matrix(runif(numBvars*numSamples), numSamples, numBvars)
+> gpuCor(A, B, method="pearson")
+Warning in gpuCor(A, B, method = "pearson") :
+  PMCC function : malloc and memcpy
+Error in gpuCor(A, B, method = "pearson") : unknown error
+Execution halted

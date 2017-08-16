@@ -1,0 +1,586 @@
+
+> options(width = 90, SweaveHooks = list(fig = function() par(mar = c(3, 
++     3, 1, 1), mgp = c(3, 1, 0)/1.6, las = 1, bty = "n")))
+
+> library(Epi)
+
+Attaching package: ‘Epi’
+
+The following object is masked from ‘package:base’:
+
+    merge.data.frame
+
+
+> TM <- matrix(NA, 4, 4)
+
+> rownames(TM) <- colnames(TM) <- c("Well", "DM", "Dead", 
++     "Dead(DM)")
+
+> TM[1, 2:3] <- TM[2, 4] <- 1
+
+> zz <- boxes(TM, boxpos = list(x = c(20, 80, 20, 80), 
++     y = c(80, 80, 20, 20)), wm = 1.5, hm = 4)
+
+> zz$Arrowtext <- c(expression(lambda), expression(mu[W]), 
++     expression(mu[D][M]))
+
+> boxes(zz)
+Warning in d * offset :
+  longer object length is not a multiple of shorter object length
+Warning in d * offset :
+  longer object length is not a multiple of shorter object length
+Warning in d * offset :
+  longer object length is not a multiple of shorter object length
+
+> data(DMepi)
+
+> str(DMepi)
+'data.frame':	4000 obs. of  8 variables:
+ $ sex : Factor w/ 2 levels "M","F": 1 2 1 2 1 2 1 2 1 2 ...
+ $ A   : num  0 0 1 1 2 2 3 3 4 4 ...
+ $ P   : num  1996 1996 1996 1996 1996 ...
+ $ X   : num  1 9 4 7 7 2 6 5 9 4 ...
+ $ D.nD: num  28 19 23 19 7 8 8 8 6 7 ...
+ $ Y.nD: num  35454 33095 36451 34790 35329 ...
+ $ D.DM: num  0 0 0 0 0 0 0 0 0 0 ...
+ $ Y.DM: num  0.476 3.877 4.92 7.248 12.474 ...
+
+> head(DMepi)
+  sex A    P X D.nD     Y.nD D.DM       Y.DM
+1   M 0 1996 1   28 35453.65    0  0.4757016
+2   F 0 1996 9   19 33094.86    0  3.8767967
+3   M 1 1996 4   23 36450.73    0  4.9199179
+4   F 1 1996 7   19 34789.99    0  7.2484600
+5   M 2 1996 7    7 35328.92    0 12.4743326
+6   F 2 1996 2    8 33673.43    0  8.0951403
+
+> DMepi <- transform(subset(DMepi, A > 30), D.T = D.nD + 
++     D.DM, Y.T = Y.nD + Y.DM)
+
+> head(DMepi)
+   sex  A    P  X D.nD     Y.nD D.DM     Y.DM D.T      Y.T
+63   M 31 1996 21   51 43909.32    0 291.4107  51 44200.73
+64   F 31 1996 33   16 41376.91    2 287.4969  18 41664.41
+65   M 32 1996 26   67 43159.94    0 299.6571  67 43459.59
+66   F 32 1996 20   23 40706.49    1 275.2615  24 40981.75
+67   M 33 1996 35   54 41251.06    4 321.0397  58 41572.10
+68   F 33 1996 32   23 39102.29    1 277.4463  24 39379.74
+
+> (a.kn <- seq(40, 95, , 6))
+[1] 40 51 62 73 84 95
+
+> (p.kn <- seq(1997, 2015, , 4))
+[1] 1997 2003 2009 2015
+
+> (c.kn <- seq(1910, 1976, , 6))
+[1] 1910.0 1923.2 1936.4 1949.6 1962.8 1976.0
+
+> ae <- xtabs(cbind(D.nD, D.DM, X) ~ cut(A, c(30, a.kn, 
++     Inf)) + sex, data = DMepi)
+
+> ftable(addmargins(ae, 1), col.vars = 3:2)
+                               D.nD          D.DM             X       
+                         sex      M      F      M      F      M      F
+cut(A, c(30, a.kn, Inf))                                              
+(30,40]                        8899   4525    564    269   9912   8622
+(40,51]                       24686  15296   2886   1399  31668  20769
+(51,62]                       57747  38968  10276   4916  53803  34495
+(62,73]                      102877  78771  24070  13008  51000  38731
+(73,84]                      154804 153842  31006  25414  25444  26804
+(84,95]                       97698 175484  13972  21231   4726   7852
+(95,Inf]                       5800  20563    545   1522     74    238
+Sum                          452511 487449  83319  67759 176627 137511
+
+> pe <- xtabs(cbind(D.nD, D.DM, X) ~ cut(P, c(1990, 
++     p.kn, Inf)) + sex, data = DMepi)
+
+> ftable(addmargins(pe, 1), col.vars = 3:2)
+                                 D.nD          D.DM             X       
+                           sex      M      F      M      F      M      F
+cut(P, c(1990, p.kn, Inf))                                              
+(1990,1997]                     51901  54162   6012   5378  12477  10030
+(1997,2003]                    145418 157768  21028  17976  43749  34255
+(2003,2009]                    133175 144717  25172  20595  56556  43891
+(2009,2015]                    122017 130802  31107  23810  63845  49335
+(2015,Inf]                          0      0      0      0      0      0
+Sum                            452511 487449  83319  67759 176627 137511
+
+> ce <- xtabs(cbind(D.nD, D.DM, X) ~ cut(P - A, c(-Inf, 
++     c.kn, Inf)) + sex, data = DMepi)
+
+> ftable(addmargins(ce, 1), col.vars = 3:2)
+                                     D.nD          D.DM             X       
+                               sex      M      F      M      F      M      F
+cut(P - A, c(-Inf, c.kn, Inf))                                              
+(-Inf,1.91e+03]                     19912  49797   1784   3731    536   1143
+(1.91e+03,1.92e+03]                130691 190012  18160  23709   9765  13519
+(1.92e+03,1.94e+03]                154227 146284  32435  24876  34897  32481
+(1.94e+03,1.95e+03]                 93397  67909  22921  11437  65012  44292
+(1.95e+03,1.96e+03]                 40948  26234   6724   3326  46155  29891
+(1.96e+03,1.98e+03]                 12534   6810   1245    654  19293  15311
+(1.98e+03, Inf]                       802    403     50     26    969    874
+Sum                                452511 487449  83319  67759 176627 137511
+
+> mW.m <- glm(D.nD ~ -1 + Ns(A, knots = a.kn, int = TRUE) + 
++     Ns(P, knots = p.kn, ref = 2005) + Ns(P - A, knots = c.kn, 
++     ref = 1950), offse .... [TRUNCATED] 
+
+> mD.m <- update(mW.m, D.DM ~ ., offset = log(Y.DM))
+
+> mT.m <- update(mW.m, D.T ~ ., offset = log(Y.T))
+
+> lW.m <- update(mW.m, X ~ .)
+
+> mW.f <- update(mW.m, data = subset(DMepi, sex == "F"))
+
+> mD.f <- update(mD.m, data = subset(DMepi, sex == "F"))
+
+> mT.f <- update(mT.m, data = subset(DMepi, sex == "F"))
+
+> lW.f <- update(lW.m, data = subset(DMepi, sex == "F"))
+
+> a.ref <- 30:90
+
+> p.ref <- 1996:2016
+
+> aYLL <- NArray(list(type = c("Imm", "Tot", "Sus"), 
++     sex = levels(DMepi$sex), age = a.ref, date = p.ref))
+
+> str(aYLL)
+ logi [1:3, 1:2, 1:61, 1:21] NA NA NA NA NA NA ...
+ - attr(*, "dimnames")=List of 4
+  ..$ type: chr [1:3] "Imm" "Tot" "Sus"
+  ..$ sex : chr [1:2] "M" "F"
+  ..$ age : chr [1:61] "30" "31" "32" "33" ...
+  ..$ date: chr [1:21] "1996" "1997" "1998" "1999" ...
+
+> system.time(for (ip in p.ref) {
++     nd <- data.frame(A = seq(30, 90, 0.2) + 0.1, P = ip, Y.nD = 1, 
++         Y.DM = 1, Y.T = 1)
++     muW.m <- ci .... [TRUNCATED] 
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+  prediction from a rank-deficient fit may be misleading
+   user  system elapsed 
+101.448   0.792 103.267 
+
+> round(ftable(aYLL[, , seq(1, 61, 10), ], col.vars = c(3, 
++     2)), 1)
+          age   30        40        50        60        70        80        90     
+          sex    M    F    M    F    M    F    M    F    M    F    M    F    M    F
+type date                                                                          
+Imm  1996     11.7 10.8  9.8  9.7  7.8  8.2  5.6  6.3  3.4  3.9  1.5  1.6  0.0  0.0
+     1997     11.5 10.6  9.7  9.4  7.7  7.9  5.6  6.1  3.4  3.9  1.4  1.6  0.0  0.0
+     1998     11.3 10.3  9.6  9.2  7.6  7.7  5.5  5.9  3.4  3.8  1.4  1.5  0.0  0.0
+     1999     11.1 10.0  9.4  9.0  7.5  7.5  5.4  5.7  3.3  3.7  1.4  1.5  0.0  0.0
+     2000     10.9  9.8  9.3  8.7  7.4  7.3  5.4  5.6  3.3  3.6  1.4  1.5  0.0  0.0
+     2001     10.7  9.5  9.1  8.5  7.3  7.1  5.3  5.4  3.3  3.4  1.4  1.4  0.0  0.0
+     2002     10.5  9.2  9.0  8.3  7.1  6.9  5.2  5.2  3.2  3.3  1.3  1.4  0.0  0.0
+     2003     10.3  9.0  8.8  8.1  7.0  6.7  5.1  5.1  3.1  3.2  1.3  1.3  0.0  0.0
+     2004     10.0  8.8  8.6  7.8  6.8  6.5  5.0  4.9  3.1  3.1  1.3  1.3  0.0  0.0
+     2005      9.7  8.5  8.4  7.6  6.6  6.3  4.8  4.8  3.0  3.0  1.2  1.3  0.0  0.0
+     2006      9.4  8.3  8.1  7.5  6.5  6.2  4.7  4.6  2.9  2.9  1.2  1.2  0.0  0.0
+     2007      9.1  8.1  7.9  7.3  6.3  6.0  4.6  4.5  2.8  2.8  1.1  1.2  0.0  0.0
+     2008      8.9  7.9  7.7  7.1  6.1  5.9  4.4  4.3  2.7  2.7  1.1  1.1  0.0  0.0
+     2009      8.6  7.7  7.5  6.9  6.0  5.7  4.3  4.2  2.7  2.6  1.1  1.1  0.0  0.0
+     2010      8.4  7.5  7.3  6.8  5.9  5.6  4.2  4.1  2.6  2.5  1.1  1.1  0.0  0.0
+     2011      8.3  7.3  7.2  6.7  5.8  5.5  4.2  4.0  2.6  2.5  1.0  1.0  0.0  0.0
+     2012      8.1  7.2  7.1  6.5  5.7  5.4  4.1  4.0  2.6  2.4  1.0  1.0  0.0  0.0
+     2013      8.0  7.1  7.0  6.4  5.6  5.3  4.1  3.9  2.5  2.4  1.0  1.0  0.0  0.0
+     2014      7.8  6.9  6.9  6.3  5.6  5.3  4.1  3.8  2.5  2.3  1.0  0.9  0.0  0.0
+     2015      7.7  6.8  6.8  6.2  5.5  5.2  4.0  3.8  2.5  2.2  1.0  0.9  0.0  0.0
+     2016      7.6  6.7  6.7  6.1  5.5  5.1  4.0  3.7  2.5  2.2  1.0  0.9  0.0  0.0
+Tot  1996     11.1 10.4  9.3  9.2  7.3  7.7  5.2  5.9  3.1  3.7  1.3  1.5  0.0  0.0
+     1997     10.9 10.1  9.1  9.0  7.2  7.5  5.1  5.7  3.1  3.6  1.3  1.5  0.0  0.0
+     1998     10.7  9.8  9.0  8.7  7.0  7.3  5.0  5.5  3.1  3.5  1.3  1.4  0.0  0.0
+     1999     10.5  9.6  8.8  8.5  6.9  7.1  5.0  5.4  3.0  3.4  1.3  1.4  0.0  0.0
+     2000     10.3  9.3  8.6  8.3  6.8  6.9  4.9  5.2  3.0  3.3  1.3  1.4  0.0  0.0
+     2001     10.0  9.0  8.5  8.0  6.6  6.6  4.8  5.0  2.9  3.2  1.2  1.3  0.0  0.0
+     2002      9.8  8.8  8.3  7.8  6.5  6.4  4.7  4.8  2.9  3.1  1.2  1.3  0.0  0.0
+     2003      9.5  8.5  8.1  7.6  6.3  6.2  4.5  4.7  2.8  2.9  1.2  1.2  0.0  0.0
+     2004      9.3  8.2  7.8  7.3  6.1  6.0  4.4  4.5  2.7  2.8  1.1  1.2  0.0  0.0
+     2005      9.0  8.0  7.6  7.1  5.9  5.9  4.3  4.3  2.6  2.7  1.1  1.1  0.0  0.0
+     2006      8.7  7.8  7.4  6.9  5.8  5.7  4.1  4.2  2.5  2.6  1.0  1.1  0.0  0.0
+     2007      8.4  7.5  7.1  6.7  5.6  5.5  4.0  4.1  2.4  2.5  1.0  1.1  0.0  0.0
+     2008      8.1  7.3  6.9  6.6  5.4  5.4  3.8  3.9  2.3  2.4  1.0  1.0  0.0  0.0
+     2009      7.8  7.1  6.7  6.4  5.2  5.2  3.7  3.8  2.3  2.3  0.9  1.0  0.0  0.0
+     2010      7.6  7.0  6.5  6.3  5.1  5.1  3.6  3.7  2.2  2.2  0.9  0.9  0.0  0.0
+     2011      7.4  6.8  6.4  6.1  5.0  5.0  3.5  3.6  2.2  2.2  0.9  0.9  0.0  0.0
+     2012      7.3  6.6  6.3  6.0  4.9  4.9  3.5  3.5  2.1  2.1  0.9  0.9  0.0  0.0
+     2013      7.1  6.5  6.1  5.9  4.8  4.8  3.4  3.4  2.1  2.0  0.9  0.8  0.0  0.0
+     2014      7.0  6.3  6.0  5.8  4.8  4.7  3.4  3.4  2.0  2.0  0.8  0.8  0.0  0.0
+     2015      6.8  6.2  5.9  5.6  4.7  4.6  3.3  3.3  2.0  1.9  0.8  0.8  0.0  0.0
+     2016      6.7  6.1  5.8  5.5  4.6  4.6  3.3  3.2  2.0  1.9  0.8  0.7  0.0  0.0
+Sus  1996     10.7 10.1  8.9  9.0  7.1  7.6  5.2  5.9  3.2  3.8  1.4  1.6  0.0  0.0
+     1997     10.5  9.8  8.8  8.8  7.0  7.4  5.1  5.7  3.2  3.7  1.4  1.5  0.0  0.0
+     1998     10.3  9.6  8.7  8.5  6.9  7.2  5.1  5.5  3.2  3.6  1.4  1.5  0.0  0.0
+     1999     10.2  9.3  8.5  8.3  6.8  7.0  5.0  5.4  3.1  3.5  1.4  1.5  0.0  0.0
+     2000     10.0  9.0  8.4  8.1  6.7  6.8  4.9  5.2  3.1  3.4  1.4  1.4  0.0  0.0
+     2001      9.7  8.8  8.2  7.8  6.5  6.6  4.8  5.0  3.1  3.3  1.3  1.4  0.0  0.0
+     2002      9.5  8.5  8.1  7.6  6.4  6.4  4.7  4.9  3.0  3.2  1.3  1.4  0.0  0.0
+     2003      9.2  8.3  7.8  7.4  6.2  6.2  4.6  4.7  2.9  3.1  1.3  1.3  0.0  0.0
+     2004      8.9  8.0  7.6  7.2  6.0  5.9  4.5  4.5  2.9  3.0  1.2  1.3  0.0  0.0
+     2005      8.6  7.7  7.3  6.9  5.8  5.8  4.3  4.4  2.8  2.8  1.2  1.2  0.0  0.0
+     2006      8.3  7.5  7.1  6.7  5.6  5.6  4.2  4.2  2.7  2.7  1.1  1.2  0.0  0.0
+     2007      8.0  7.2  6.8  6.5  5.4  5.4  4.0  4.1  2.6  2.6  1.1  1.1  0.0  0.0
+     2008      7.7  7.0  6.6  6.3  5.2  5.2  3.9  3.9  2.5  2.5  1.1  1.1  0.0  0.0
+     2009      7.4  6.8  6.4  6.2  5.1  5.1  3.8  3.8  2.4  2.4  1.0  1.1  0.0  0.0
+     2010      7.3  6.6  6.2  6.0  5.0  5.0  3.7  3.7  2.4  2.4  1.0  1.0  0.0  0.0
+     2011      7.1  6.5  6.2  5.9  4.9  4.9  3.7  3.7  2.4  2.3  1.0  1.0  0.0  0.0
+     2012      7.0  6.4  6.1  5.8  4.9  4.9  3.6  3.6  2.3  2.3  1.0  1.0  0.0  0.0
+     2013      7.0  6.3  6.0  5.8  4.9  4.8  3.6  3.6  2.3  2.2  1.0  0.9  0.0  0.0
+     2014      6.9  6.3  6.0  5.7  4.9  4.8  3.6  3.5  2.3  2.2  1.0  0.9  0.0  0.0
+     2015      6.8  6.2  6.0  5.7  4.9  4.8  3.6  3.5  2.3  2.1  1.0  0.9  0.0  0.0
+     2016      6.8  6.1  6.0  5.6  4.9  4.7  3.6  3.5  2.3  2.1  1.0  0.8  0.0  0.0
+
+> plyll <- function(wh) {
++     par(mfrow = c(1, 2), mar = c(3, 3, 1, 1), mgp = c(3, 1, 0)/1.6, 
++         bty = "n", las = 1)
++     matplot(a.ref, aY .... [TRUNCATED] 
+
+> plyll("Imm")
+
+> plyll("Tot")
+
+> plyll("Sus")
+
+> source("../R/erl.R", keep.source = TRUE)
+Warning in file(filename, "r", encoding = encoding) :
+  cannot open file '../R/erl.R': No such file or directory
+
+  When sourcing ‘yll.R’:
+Error: cannot open the connection
+Execution halted

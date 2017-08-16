@@ -1,0 +1,509 @@
+
+R Under development (unstable) (2017-08-14 r73093) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "vetr"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('vetr')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("abstract")
+> ### * abstract
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: abstract
+> ### Title: Turn S3 Objects Into Templates
+> ### Aliases: abstract abstract.data.frame abstract.default abstract.array
+> ###   abstract.matrix abstract.list abstract.lm abstract.environment
+> ###   abstract.ts
+> 
+> ### ** Examples
+> 
+> iris.tpl <- abstract(iris)
+> alike(iris.tpl, iris[1:10, ])
+[1] TRUE
+> alike(iris.tpl, transform(iris, Species=as.character(Species)))
+[1] "`transform(iris, Species = as.character(Species))$Species` should be class \"factor\" (is \"character\")"
+> 
+> abstract(1:10)
+integer(0)
+> abstract(matrix(1:9, nrow=3))
+<0 x 0 matrix>
+> abstract(list(1:9, runif(10)))
+[[1]]
+integer(0)
+
+[[2]]
+numeric(0)
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("alike")
+> ### * alike
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: alike
+> ### Title: Compare Object Structure
+> ### Aliases: alike
+> 
+> ### ** Examples
+> 
+> ## Type comparison
+> alike(1L, 1.0)         # TRUE, because 1.0 is integer-like
+[1] TRUE
+> alike(1L, 1.1)         # FALSE, 1.1 is not integer-like
+[1] "`1.1` should be type \"integer-like\" (is \"double\")"
+> alike(1.1, 1L)         # TRUE, by default, integers are always considered real
+[1] TRUE
+> 
+> alike(1:100, 1:100 + 0.0)  # TRUE
+[1] TRUE
+> 
+> ## We do not check numerics for integerness if longer than 100
+> alike(1:101, 1:101 + 0.0)
+[1] "`1:101 + 0` should be type \"integer\" (is \"double\")"
+> 
+> ## Scalarness can now be checked at same time as type
+> alike(integer(1L), 1)            # integer-like and length 1?
+[1] TRUE
+> alike(logical(1L), TRUE)         # logical and length 1?
+[1] TRUE
+> alike(integer(1L), 1:3)
+[1] "`1:3` should be length 1 (is 3)"
+> alike(logical(1L), c(TRUE, TRUE))
+[1] "`c(TRUE, TRUE)` should be length 1 (is 2)"
+> 
+> ## Zero length match any length of same type
+> alike(integer(), 1:10)
+[1] TRUE
+> alike(1:10, integer())   # but not the other way around
+[1] "`integer()` should be length 10 (is 0)"
+> 
+> ## Recursive objects compared recursively
+> alike(
++   list(integer(), list(character(), logical(1L))),
++   list(1:10, list(letters, TRUE))
++ )
+[1] TRUE
+> alike(
++   list(integer(), list(character(), logical(1L))),
++   list(1:10, list(letters, c(TRUE, FALSE)))
++ )
+[1] "`list(1:10, list(letters, c(TRUE, FALSE)))[[2]][[2]]` should be length 1 (is 2)"
+> 
+> ## `NULL` is a wild card when nested within recursive objects
+> alike(list(NULL, NULL), list(iris, mtcars))
+[1] TRUE
+> alike(NULL, mtcars)    # but not at top level
+[1] "`mtcars` should be \"NULL\" (is \"list\")"
+> 
+> ## Since `data.frame` are lists, we can compare them recursively:
+> iris.fake <- transform(iris, Species=as.character(Species))
+> alike(iris, iris.fake)
+[1] "`iris.fake$Species` should be class \"factor\" (is \"character\")"
+> 
+> ## we even check attributes (factor levels must match)!
+> iris.fake2 <- iris
+> levels(iris.fake2$Species) <- c("setosa", "versicolor", "africana")
+> alike(iris, iris.fake2)
+[1] "`levels(iris.fake2$Species)[3]` should be \"virginica\" (is \"africana\")"
+> 
+> ## We can use partially specified objects as templates
+> iris.tpl <- abstract(iris)
+> str(iris.tpl)
+'data.frame':	0 obs. of  5 variables:
+ $ Sepal.Length: num 
+ $ Sepal.Width : num 
+ $ Petal.Length: num 
+ $ Petal.Width : num 
+ $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 
+> alike(iris.tpl, iris)
+[1] TRUE
+> ## any row sample of iris matches our iris template
+> alike(iris.tpl, iris[sample(1:nrow(iris), 10), ])
+[1] TRUE
+> ## but column order matters
+> alike(iris.tpl, iris[c(2, 1, 3, 4, 5)])
+[1] "`names(iris[c(2, 1, 3, 4, 5)])[1]` should be \"Sepal.Length\" (is \"Sepal.Width\")"
+> 
+> ## 3 x 3 integer
+> alike(matrix(integer(), 3, 3), matrix(1:9, nrow=3))
+[1] TRUE
+> ## 3 x 3, but not integer!
+> alike(matrix(integer(), 3, 3), matrix(runif(9), nrow=3))
+[1] "`matrix(runif(9), nrow = 3)` should be type \"integer-like\" (is \"double\")"
+> ## partial spec, any 3 row integer matrix
+> alike(matrix(integer(), 3), matrix(1:12, nrow=3))
+[1] TRUE
+> alike(matrix(integer(), 3), matrix(1:12, nrow=4))
+[1] "`matrix(1:12, nrow = 4)` should have 3 rows (has 4)"
+> ## Any logical matrix (but not arrays)
+> alike(matrix(logical()), array(rep(TRUE, 8), rep(2, 3)))
+[1] "`array(rep(TRUE, 8), rep(2, 3))` should be \"matrix\" (is \"array\")"
+> 
+> ## In order for objects to be alike, they must share a family
+> ## tree, not just a common class
+> obj.tpl <- structure(TRUE, class=letters[1:3])
+> obj.cur.1 <-  structure(TRUE, class=c("x", letters[1:3]))
+> obj.cur.2 <-  structure(TRUE, class=c(letters[1:3], "x"))
+> 
+> alike(obj.tpl, obj.cur.1)
+[1] TRUE
+> alike(obj.tpl, obj.cur.2)
+[1] "`class(obj.cur.2)[2]` should be \"a\" (is \"b\")"
+> 
+> ## You can compare language objects; these are alike if they are self
+> ## consistent; we don't care what the symbols are, so long as they are used
+> ## consistently across target and current:
+> 
+> ## TRUE, symbols are consistent (adding two different symbols)
+> alike(quote(x + y), quote(a + b))
+[1] TRUE
+> ## FALSE, different function
+> alike(quote(x + y), quote(a - b))
+[1] "`quote(a - b)[[1]]` should be a call to `+` (is a call to `-`)"
+> ## FALSE, inconsistent symbols
+> alike(quote(x + y), quote(a + a))
+[1] "`quote(a + a)[[3]]` should not be `a`"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("nullify")
+> ### * nullify
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: nullify
+> ### Title: Set Element to NULL Without Removing It
+> ### Aliases: nullify nullify.default
+> 
+> ### ** Examples
+> 
+> nullify(list(1, 2, 3), 2)
+[[1]]
+[1] 1
+
+[[2]]
+NULL
+
+[[3]]
+[1] 3
+
+> nullify(call("fun", 1, 2, 3), 2)
+fun(NULL, 2, 3)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("type_of")
+> ### * type_of
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: type_of
+> ### Title: A Fuzzier Version 'typeof'
+> ### Aliases: type_of
+> 
+> ### ** Examples
+> 
+> 
+> type_of(1.0001)          # numeric
+[1] "double"
+> type_of(1.0)             # integer (`typeof` returns numeric)
+[1] "integer"
+> type_of(1)               # integer (`typeof` returns numeric)
+[1] "integer"
+> type_of(sum)             # closure (`typeof` returns builtin)
+[1] "closure"
+> type_of(`$`)             # closure (`typeof` returns special)
+[1] "closure"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("vet")
+> ### * vet
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: vet
+> ### Title: Verify Objects Meet Structural Requirements
+> ### Aliases: vet tev tev
+> 
+> ### ** Examples
+> 
+> ## template vetting
+> vet(numeric(2L), runif(2))
+[1] TRUE
+> vet(numeric(2L), runif(3))
+[1] "`runif(3)` should be length 2 (is 3)"
+> vet(numeric(2L), letters)
+[1] "`letters` should be type \"numeric\" (is \"character\")"
+> try(vet(numeric(2L), letters, stop=TRUE))
+Error in vet(numeric(2L), letters, stop = TRUE) : 
+  `letters` should be type "numeric" (is "character")
+> 
+> ## `tev` just reverses target and current for use with maggrittr
+> ## Not run: 
+> ##D if(require(magrittr)) {
+> ##D   runif(2) %>% tev(numeric(2L))
+> ##D   runif(3) %>% tev(numeric(2L))
+> ##D }
+> ## End(Not run)
+> ## Zero length templates are wild cards
+> vet(numeric(), runif(2))
+[1] TRUE
+> vet(numeric(), runif(100))
+[1] TRUE
+> vet(numeric(), letters)
+[1] "`letters` should be type \"numeric\" (is \"character\")"
+> 
+> ## This extends to data.frames
+> iris.tpl <- iris[0,]   # zero row matches any # of rows
+> iris.1 <- iris[1:10,]
+> iris.2 <- iris[1:10, c(1,2,3,5,4)]  # change col order
+> vet(iris.tpl, iris.1)
+[1] TRUE
+> vet(iris.tpl, iris.2)
+[1] "`names(iris.2)[4]` should be \"Petal.Width\" (is \"Species\")"
+> 
+> ## Short (<100 length) integer-like numerics will
+> ## pass for integer
+> vet(integer(), c(1, 2, 3))
+[1] TRUE
+> vet(integer(), c(1, 2, 3) + 0.1)
+[1] "`c(1, 2, 3) + 0.1` should be type \"integer-like\" (is \"double\")"
+> 
+> ## Nested templates; note, in packages you should consider
+> ## defining templates outside of `vet` or `vetr` so that
+> ## they are computed on load rather that at runtime
+> tpl <- list(numeric(1L), matrix(integer(), 3))
+> val.1 <- list(runif(1), rbind(1:10, 1:10, 1:10))
+> val.2 <- list(runif(1), cbind(1:10, 1:10, 1:10))
+> vet(tpl, val.1)
+[1] TRUE
+> vet(tpl, val.2)
+[1] "`val.2[[2]]` should have 3 rows (has 10)"
+> 
+> ## See `example(alike)` for more template examples
+> 
+> ## Custom tokens allow you to check values
+> vet(. > 0, runif(10))
+[1] TRUE
+> vet(. > 0, -runif(10))
+[1] "`-runif(10) > 0` is not all TRUE (contains non-TRUE values)"
+> 
+> ## You can combine templates and custom tokens with
+> ## `&&` and/or `||`
+> vet(numeric(2L) && . > 0, runif(2))
+[1] TRUE
+> vet(numeric(2L) && . > 0, runif(10))
+[1] "`runif(10)` should be length 2 (is 10)"
+> vet(numeric(2L) && . > 0, -runif(2))
+[1] "`-runif(2) > 0` is not all TRUE (contains non-TRUE values)"
+> 
+> ## Using pre-defined tokens (see `?vet_token`)
+> vet(INT.1, 1)
+[1] TRUE
+> vet(INT.1, 1:2)
+[1] "`1:2` should be length 1 (is 2)"
+> vet(INT.1 && . %in% 0:1 || LGL.1, TRUE)
+[1] TRUE
+> vet(INT.1 && . %in% 0:1 || LGL.1, 1)
+[1] TRUE
+> vet(INT.1 && . %in% 0:1 || LGL.1, NA)
+[1] "At least one of these should pass:"                       
+[2] "  - `NA` should be type \"integer-like\" (is \"logical\")"
+[3] "  - `NA` should not contain NAs, but does"                
+> 
+> ## Vetting expressions can be assembled from previously
+> ## defined tokens
+> 
+> scalar.num.pos <- quote(numeric(1L) && . > 0)
+> foo.or.bar <- quote(character(1L) && . %in% c('foo', 'bar'))
+> vet.exp <- quote(scalar.num.pos || foo.or.bar)
+> 
+> vet(vet.exp, 42)
+[1] TRUE
+> vet(scalar.num.pos || foo.or.bar, 42)  # equivalently
+[1] TRUE
+> vet(vet.exp, "foo")
+[1] TRUE
+> vet(vet.exp, "baz")
+[1] "At least one of these should pass:"                         
+[2] "  - `\"baz\"` should be type \"numeric\" (is \"character\")"
+[3] "  - `\"baz\" %in% c(\"foo\", \"bar\")` is not TRUE (FALSE)" 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("vet_token")
+> ### * vet_token
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: vet_token
+> ### Title: Vetting Tokens With Custom Error Messages
+> ### Aliases: vet_token NO.NA vet_token NO.INF vet_token GTE.0 vet_token
+> ###   LTE.0 vet_token GT.0 vet_token LT.0 vet_token INT.1 vet_token
+> ###   INT.1.POS vet_token INT.1.NEG vet_token INT.1.POS.STR vet_token
+> ###   INT.1.NEG.STR vet_token INT vet_token INT.POS vet_token INT.NEG
+> ###   vet_token INT.POS.STR vet_token INT.NEG.STR vet_token NUM.1 vet_token
+> ###   NUM.1.POS vet_token NUM.1.NEG vet_token NUM vet_token NUM.POS
+> ###   vet_token NUM.NEG vet_token CHR.1 vet_token CHR vet_token CPX
+> ###   vet_token CPX.1 vet_token LGL vet_token LGL.1
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> ## Predefined tokens:
+> vet(INT.1, 1:2)
+[1] "`1:2` should be length 1 (is 2)"
+> vet(INT.1 || LGL, 1:2)
+[1] "At least one of these should pass:"                   
+[2] "  - `1:2` should be length 1 (is 2)"                  
+[3] "  - `1:2` should be type \"logical\" (is \"integer\")"
+> vet(INT.1 || LGL, c(TRUE, FALSE))
+[1] TRUE
+> 
+> ## Check squareness
+> mx <- matrix(1:3)
+> SQR <- vet_token(nrow(.) == ncol(.), "%sshould be square")
+> vet(SQR, mx)
+[1] "`mx` should be square"
+> 
+> ## Let `vetr` make up error message; note `quote` vs `vet_token`
+> ## Often, `vetr` does fine without explictly specified err msg:
+> SQR.V2 <- quote(nrow(.) == ncol(.))
+> vet(SQR.V2, mx)
+[1] "`nrow(mx) == ncol(mx)` is not TRUE (FALSE)"
+> 
+> ## Combine some tokens, notice how we use `quote` at the combining
+> ## step:
+> NUM.MX <- vet_token(matrix(numeric(), 0, 0), "%sshould be numeric matrix")
+> SQR.NUM.MX <- quote(NUM.MX && SQR)
+> vet(SQR.NUM.MX, mx)
+[1] "`mx` should be square"
+> 
+> ## If instead we used `vet_token` the overall error message
+> ## is not used; instead it falls back to the error message of
+> ## the specific sub-token that fails:
+> NUM.MX <- vet_token(matrix(numeric(), 0, 0), "%sshould be numeric matrix")
+> SQR.NUM.MX.V2 <-
++   vet_token(NUM.MX && SQR, "%sshould be a square numeric matrix")
+> vet(SQR.NUM.MX.V2, mx)
+[1] "`mx` should be square"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("vetr")
+> ### * vetr
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: vetr
+> ### Title: Verify Function Arguments Meet Structural Requirements
+> ### Aliases: vetr
+> 
+> ### ** Examples
+> 
+> fun1 <- function(x, y) {
++   vetr(integer(), LGL.1)
++   TRUE   # do some work
++ }
+> fun1(1:10, TRUE)
+[1] TRUE
+> try(fun1(1:10, 1:10))
+Error in fun1(x = 1:10, y = 1:10) : 
+  For argument `y`, `1:10` should be type "logical" (is "integer")
+> 
+> ## only vet the second argument
+> fun2 <- function(x, y) {
++   vetr(y=LGL.1)
++   TRUE   # do some work
++ }
+> try(fun2(letters, 1:10))
+Error in fun2(x = letters, y = 1:10) : 
+  For argument `y`, `1:10` should be type "logical" (is "integer")
+> 
+> ## Nested templates; note, in packages you should consider
+> ## defining templates outside of `vet` or `vetr` so that
+> ## they are computed on load rather that at runtime
+> tpl <- list(numeric(1L), matrix(integer(), 3))
+> val.1 <- list(runif(1), rbind(1:10, 1:10, 1:10))
+> val.2 <- list(runif(1), cbind(1:10, 1:10, 1:10))
+> fun3 <- function(x, y) {
++   vetr(x=tpl, y=tpl && ncol(.[[2]]) == ncol(x[[2]]))
++   TRUE   # do some work
++ }
+> fun3(val.1, val.1)
+[1] TRUE
+> try(fun3(val.1, val.2))
+Error in fun3(x = val.1, y = val.2) : 
+  For argument `y`, `val.2[[2]]` should have 3 rows (has 10)
+> val.1.a <- val.1
+> val.1.a[[2]] <- val.1.a[[2]][, 1:8]
+> try(fun3(val.1, val.1.a))
+Error in fun3(x = val.1, y = val.1.a) : 
+  For argument `y`, `ncol(val.1.a[[2]]) == ncol(x[[2]])` is not TRUE (FALSE)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("vetr_settings")
+> ### * vetr_settings
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: vetr_settings
+> ### Title: Generate Control Settings For vetr and alike
+> ### Aliases: vetr_settings
+> 
+> ### ** Examples
+> 
+> type_alike(1L, 1.0, settings=vetr_settings(type.mode=2))
+[1] "`1` should be type \"integer\" (is \"double\")"
+> ## better if you are going to re-use settings to reduce overhead
+> set <- vetr_settings(type.mode=2)
+> type_alike(1L, 1.0, settings=set)
+[1] "`1` should be type \"integer\" (is \"double\")"
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.568 0.024 0.591 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

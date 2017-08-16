@@ -1,0 +1,74 @@
+
+R Under development (unstable) (2017-08-14 r73093) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "glcm"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('glcm')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("glcm")
+> ### * glcm
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: glcm
+> ### Title: Image texture measures from grey-level co-occurrence matrices
+> ###   (GLCM)
+> ### Aliases: glcm
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D require(raster)
+> ##D # Calculate GLCM textures using default 90 degree shift
+> ##D textures_shift1 <- glcm(raster(L5TSR_1986, layer=1))
+> ##D plot(textures_shift1)
+> ##D 
+> ##D # Calculate GLCM textures over all directions
+> ##D textures_all_dir <- glcm(raster(L5TSR_1986, layer=1),
+> ##D                          shift=list(c(0,1), c(1,1), c(1,0), c(1,-1)))
+> ##D plot(textures_all_dir)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("test_raster")
+> ### * test_raster
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: test_raster
+> ### Title: Randomly generated 100x100 test image
+> ### Aliases: test_raster
+> 
+> ### ** Examples
+> 
+> # The image was generated with the following code:
+> require(raster)
+Loading required package: raster
+Loading required package: sp
+> set.seed(0)
+> test_matrix <- matrix(runif(100)*32, nrow=10)
+> test_raster <- raster(test_matrix, crs='+init=EPSG:4326')
+Error in CRS(as.character(projection(crs))) : no system list, errno: 2
+Calls: raster ... raster -> .local -> raster -> raster -> .local -> CRS
+Execution halted

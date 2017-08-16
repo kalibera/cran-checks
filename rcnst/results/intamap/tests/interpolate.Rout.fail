@@ -1,0 +1,189 @@
+
+R Under development (unstable) (2017-08-14 r73093) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> options(error = recover)
+> set.seed(15331)
+> library(intamap)
+Loading required package: sp
+> library(automap)
+> library(gstat)
+> library(psgp)
+> #loadMeuse()
+> 
+> sessionInfo()
+R Under development (unstable) (2017-08-14 r73093)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 17.04
+
+Matrix products: default
+BLAS: /home/tomas/cran/rcnst/build/lib/libRblas.so
+LAPACK: /home/tomas/cran/rcnst/build/lib/libRlapack.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=C              
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] psgp_0.3-6     gstat_1.1-5    automap_1.0-14 intamap_1.4-1  sp_1.2-5      
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_0.12.12      codetools_0.2-15  lattice_0.20-35   intervals_0.15.1 
+ [5] mvtnorm_1.0-6     FNN_1.1           reshape_0.8.7     spacetime_1.2-0  
+ [9] zoo_1.8-0         foreach_1.4.3     MASS_7.3-47       grid_3.5.0       
+[13] plyr_1.8.4        doParallel_1.0.10 xts_0.10-0        rgdal_1.2-8      
+[17] iterators_1.0.8   parallel_3.5.0    compiler_3.5.0    evd_2.3-2        
+> 
+> crs = CRS("+init=epsg:28992 +proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.417,50.3319,465.552,-0.398957,0.343988,-1.8774,4.0725 +units=m +no_defs")
+> data("meuse")
+> coordinates(meuse) <- ~x+y
+> proj4string(meuse) <- crs
+> data("meuse.grid")
+> coordinates(meuse.grid) <- ~x+y
+> gridded(meuse.grid) <- TRUE
+> proj4string(meuse.grid) <- crs
+> 
+> meuse$value = log(meuse$zinc)
+> meuse.grid = meuse.grid[sample(1:dim(meuse.grid)[1], 100),]
+> output = interpolate(meuse, meuse.grid, list(mean=T, variance=T, nsim = 5),methodName = "automap")
+R 2017-08-15 14:01:08 interpolating 155 observations, 100 prediction locations
+Checking object ... OK
+Warning message:
+In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLocations))[1],  :
+  
+ using standard model for estimating time. For better 
+ platform spesific predictions, please run 
+ timeModels <- generateTimeModels()
+  and save the workspace
+> summary(t(output$outputTable), digits = 4)
+       x                y               mean          variance     
+ Min.   :178500   Min.   :329620   Min.   :4.804   Min.   :0.0778  
+ 1st Qu.:179290   1st Qu.:330220   1st Qu.:5.202   1st Qu.:0.1243  
+ Median :179820   Median :330780   Median :5.485   Median :0.1445  
+ Mean   :179850   Mean   :331028   Mean   :5.670   Mean   :0.1677  
+ 3rd Qu.:180280   3rd Qu.:331780   3rd Qu.:6.138   3rd Qu.:0.1917  
+ Max.   :181460   Max.   :333620   Max.   :7.321   Max.   :0.4220  
+      sim1            sim2            sim3            sim4      
+ Min.   :4.464   Min.   :4.149   Min.   :4.287   Min.   :4.008  
+ 1st Qu.:5.240   1st Qu.:5.115   1st Qu.:5.089   1st Qu.:5.320  
+ Median :5.639   Median :5.575   Median :5.663   Median :5.756  
+ Mean   :5.742   Mean   :5.645   Mean   :5.644   Mean   :5.771  
+ 3rd Qu.:6.257   3rd Qu.:6.099   3rd Qu.:6.162   3rd Qu.:6.124  
+ Max.   :7.462   Max.   :7.346   Max.   :7.753   Max.   :7.625  
+      sim5      
+ Min.   :3.866  
+ 1st Qu.:5.283  
+ Median :5.840  
+ Mean   :5.817  
+ 3rd Qu.:6.255  
+ Max.   :8.018  
+> 
+> output = interpolate(meuse, meuse.grid,
++     optList = list(idpRange = seq(0.1, 2.9, 0.5), nfold = 3), 
++     outputWhat = list(mean=TRUE),methodName = "idw")
+R 2017-08-15 14:01:09 interpolating 155 observations, 100 prediction locations
+Checking object ... OK
+[1] "best idp value found is 2.6 rmse 0.460976071935718"
+Warning message:
+In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLocations))[1],  :
+  
+ using standard model for estimating time. For better 
+ platform spesific predictions, please run 
+ timeModels <- generateTimeModels()
+  and save the workspace
+> summary(t(output$outputTable), digits = 4)
+       x                y               mean      
+ Min.   :178500   Min.   :329620   Min.   :4.863  
+ 1st Qu.:179290   1st Qu.:330220   1st Qu.:5.315  
+ Median :179820   Median :330780   Median :5.574  
+ Mean   :179850   Mean   :331028   Mean   :5.685  
+ 3rd Qu.:180280   3rd Qu.:331780   3rd Qu.:6.093  
+ Max.   :181460   Max.   :333620   Max.   :7.114  
+> 
+> 
+> output = interpolate(meuse, meuse.grid, list(mean=T, variance=T),methodName = "transGaussian")
+R 2017-08-15 14:01:10 interpolating 155 observations, 100 prediction locations
+Checking object ... OK
+Warning messages:
+1: In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLocations))[1],  :
+  
+ using standard model for estimating time. For better 
+ platform spesific predictions, please run 
+ timeModels <- generateTimeModels()
+  and save the workspace
+2: In predLoess(object$y, object$x, newx = if (is.null(newdata)) object$x else if (is.data.frame(newdata)) as.matrix(model.frame(delete.response(terms(object)),  :
+  pseudoinverse used at 155
+3: In predLoess(object$y, object$x, newx = if (is.null(newdata)) object$x else if (is.data.frame(newdata)) as.matrix(model.frame(delete.response(terms(object)),  :
+  neighborhood radius 1845
+4: In predLoess(object$y, object$x, newx = if (is.null(newdata)) object$x else if (is.data.frame(newdata)) as.matrix(model.frame(delete.response(terms(object)),  :
+  reciprocal condition number  0
+> summary(t(output$outputTable), digits = 4)
+       x                y               mean          variance      
+ Min.   :178500   Min.   :329620   Min.   :4.811   Min.   :0.06306  
+ 1st Qu.:179290   1st Qu.:330220   1st Qu.:5.217   1st Qu.:0.10706  
+ Median :179820   Median :330780   Median :5.493   Median :0.12807  
+ Mean   :179850   Mean   :331028   Mean   :5.660   Mean   :0.14978  
+ 3rd Qu.:180280   3rd Qu.:331780   3rd Qu.:6.113   3rd Qu.:0.17678  
+ Max.   :181460   Max.   :333620   Max.   :7.376   Max.   :0.34441  
+> 
+> 
+> data(meuse)
+> meuse = meuse[sample(dim(meuse)[1],30),]
+> meuse$value=meuse$zinc
+> coordinates(meuse) = ~x+y
+> mgrid = spsample(meuse,10,"regular")
+> gridded(mgrid) = TRUE
+> output1 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5),
++                      methodName = "copula")
+R 2017-08-15 14:01:11 interpolating 30 observations, 12 prediction locations
+Checking object ... OK
+There were 50 or more warnings (use warnings() to see the first 50)
+> 
+> output2 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5),
++                      methodName = "copula",optList = list(methodParameters = output1$methodParameters))
+R 2017-08-15 14:01:18 interpolating 30 observations, 12 prediction locations
+Checking object ... OK
+There were 50 or more warnings (use warnings() to see the first 50)
+> 
+> output3 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5),
++                      methodName = "automap",optList = list(model = c("Exp", "Sph")), cv = TRUE)
+R 2017-08-15 14:01:19 interpolating 30 observations, 12 prediction locations
+Checking object ... OK
+Warning message:
+In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLocations))[1],  :
+  
+ using standard model for estimating time. For better 
+ platform spesific predictions, please run 
+ timeModels <- generateTimeModels()
+  and save the workspace
+> output4 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5),
++                      methodName = "psgp", cv = TRUE)
+R 2017-08-15 14:01:20 interpolating 30 observations, 12 prediction locations
+Checking object ... OK
+Invalid parameters: either the range, sill or nugget
+is negative or zero. Reverting to defaults.
+
+error: Mat::init(): requested size is not compatible with column vector layout
+terminate called after throwing an instance of 'std::logic_error'
+  what():  Mat::init(): requested size is not compatible with column vector layout
+Aborted (core dumped)

@@ -1,0 +1,68 @@
+
+R Under development (unstable) (2017-08-14 r73093) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(intamap)
+Loading required package: sp
+> 
+> set.seed(13131)
+> 
+> # set up data:
+> data(meuse)
+> coordinates(meuse) = ~x+y
+> meuse$value = log(meuse$zinc)
+> data(meuse.grid)
+> gridded(meuse.grid) = ~x+y
+> proj4string(meuse) = CRS("+init=epsg:28992")
+> proj4string(meuse.grid) = CRS("+init=epsg:28992")
+> 
+> # set up intamap object:
+> idwObject = createIntamapObject(
++ 	observations = meuse,
++ 	formulaString=as.formula(zinc~1),
++   predictionLocations = meuse.grid,
++ 	targetCRS = "+init=epsg:3035",
++ 	constantBias = 0,
++ 	classes = "idw"
++ )
+> 
+> # run test:
+> checkSetup(idwObject)
+Checking object ... OK
+> 
+> # do interpolation steps:
+> idwObject = preProcess(idwObject)
+> idwObject = estimateParameters(idwObject, idpRange = seq(0.25,2.75,.5), nfold=3) # faster
+[1] "best idp value found is 2.25 rmse 277.246436580228"
+> idwObject = spatialPredict(idwObject)
+> idwObject = postProcess(idwObject)
+Warning message:
+In spTransform(object$predictions, CRS(object$targetCRS)) :
+  Grid warping not available, coercing to points
+> 
+> # generate some output:
+> summary(as.data.frame(idwObject$outputTable))
+       x                 y                mean       
+ Min.   :4020568   Min.   :3102569   Min.   : 116.6  
+ 1st Qu.:4021552   1st Qu.:3103401   1st Qu.: 253.4  
+ Median :4022145   Median :3104136   Median : 344.4  
+ Mean   :4022165   Mean   :3104246   Mean   : 411.2  
+ 3rd Qu.:4022771   3rd Qu.:3104998   3rd Qu.: 511.9  
+ Max.   :4023832   Max.   :3106558   Max.   :1827.1  
+> 
+> proc.time()
+   user  system elapsed 
+  6.940   1.652   6.901 

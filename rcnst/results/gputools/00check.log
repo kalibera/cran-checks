@@ -1,0 +1,83 @@
+* using log directory ‘/home/tomas/cran/rcnst/check/gputools.Rcheck’
+* using R Under development (unstable) (2017-08-14 r73093)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* checking for file ‘gputools/DESCRIPTION’ ... OK
+* this is package ‘gputools’ version ‘1.1’
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘gputools’ can be installed ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking line endings in shell scripts ... WARNING
+Found the following shell script(s) with CR or CRLF line endings:
+  configure
+Non-Windows OSes require LF line endings.
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking compiled code ... NOTE
+Note: information on .o files is not available
+File ‘/home/tomas/cran/rcnst/lib/gputools/libs/gputools.so’:
+  Found ‘exit’, possibly from ‘exit’ (C)
+
+Compiled code should not call entry points which might terminate R nor
+write to stdout/stderr instead of to the console, nor the system RNG.
+The detected symbols are linked into the code but might come from
+libraries and not actually be called.
+
+See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
+* checking examples ... ERROR
+Running examples in ‘gputools-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: gpuCor
+> ### Title: Calculate Various Correlation Coefficients With a GPU
+> ### Aliases: gpuCor
+> 
+> ### ** Examples
+> 
+> numAvars <- 5
+> numBvars <- 10
+> numSamples <- 30
+> A <- matrix(runif(numAvars*numSamples), numSamples, numAvars)
+> B <- matrix(runif(numBvars*numSamples), numSamples, numBvars)
+> gpuCor(A, B, method="pearson")
+Warning in gpuCor(A, B, method = "pearson") :
+  PMCC function : malloc and memcpy
+Error in gpuCor(A, B, method = "pearson") : unknown error
+Execution halted
+* checking PDF version of manual ... OK
+* DONE
+Status: 1 ERROR, 1 WARNING, 1 NOTE

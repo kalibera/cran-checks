@@ -1,0 +1,45 @@
+* installing *source* package ‘bayesCL’ ...
+** package ‘bayesCL’ successfully unpacked and MD5 sums checked
+OPENCL_FLAGS not set, using default -DCL_HPP_MINIMUM_OPENCL_VERSION=110 -DCL_USE_DEPRECATED_OPENCL_1_2_APIS  -DCL_HPP_TARGET_OPENCL_VERSION=120
+Linux OS
+found OpenCL library
+Checking OpenCL C++ API
+OPENCL_INC not set, using default include directory /usr/include
+cl2.hpp header exists
+
+*********** Generated Makevars file ***********
+CXX_STD=CXX11
+PKG_CPPFLAGS=-I../inst/include -DCL_HPP_MINIMUM_OPENCL_VERSION=110 -DCL_USE_DEPRECATED_OPENCL_1_2_APIS -DCL_HPP_TARGET_OPENCL_VERSION=120 -I'/usr/include/' -DHAVE_CL_CL2_HPP
+PKG_CXXFLAGS=-DUSE_R -DNDEBUG -DDISABLE_SINGLE -DNTHROW 
+PKG_LIBS=-lOpenCL
+BUILD_LIB=
+
+$(SHLIB): $(BUILD_LIB)
+
+../inst/include/loader/libOpenCL.a:
+	cd ../inst/include/loader/ && $(MAKE) libOpenCL.a \
+	CC="$(CC)" CFLAGS="$(ALL_CFLAGS)" AR="$(AR)" RM="$(RM)" \
+	ICD_OS=icd_linux
+***********************************************
+** libs
+make[1]: Entering directory '/tmp/RtmpoYGqkY/R.INSTALL8cb80e87ed/bayesCL/src'
+g++ -std=gnu++11 -I/home/tomas/cran/rcnst/build/include -DNDEBUG -I../inst/include -DCL_HPP_MINIMUM_OPENCL_VERSION=110 -DCL_USE_DEPRECATED_OPENCL_1_2_APIS -DCL_HPP_TARGET_OPENCL_VERSION=120 -I'/usr/include/' -DHAVE_CL_CL2_HPP  -I/usr/local/include  -DUSE_R -DNDEBUG -DDISABLE_SINGLE -DNTHROW  -fpic  -g -O2 -c Blasso.cpp -o Blasso.o
+g++ -std=gnu++11 -I/home/tomas/cran/rcnst/build/include -DNDEBUG -I../inst/include -DCL_HPP_MINIMUM_OPENCL_VERSION=110 -DCL_USE_DEPRECATED_OPENCL_1_2_APIS -DCL_HPP_TARGET_OPENCL_VERSION=120 -I'/usr/include/' -DHAVE_CL_CL2_HPP  -I/usr/local/include  -DUSE_R -DNDEBUG -DDISABLE_SINGLE -DNTHROW  -fpic  -g -O2 -c LogitWrapper.cpp -o LogitWrapper.o
+LogitWrapper.cpp: In function ‘int read_file(char**, size_t*, const char*)’:
+LogitWrapper.cpp:417:31: warning: ignoring return value of ‘size_t fread(void*, size_t, size_t, FILE*)’, declared with attribute warn_unused_result [-Wunused-result]
+   fread(*output, *size, 1, fp);
+                               ^
+g++ -std=gnu++11 -I/home/tomas/cran/rcnst/build/include -DNDEBUG -I../inst/include -DCL_HPP_MINIMUM_OPENCL_VERSION=110 -DCL_USE_DEPRECATED_OPENCL_1_2_APIS -DCL_HPP_TARGET_OPENCL_VERSION=120 -I'/usr/include/' -DHAVE_CL_CL2_HPP  -I/usr/local/include  -DUSE_R -DNDEBUG -DDISABLE_SINGLE -DNTHROW  -fpic  -g -O2 -c PolyaGamma.cpp -o PolyaGamma.o
+g++ -std=gnu++11 -I/home/tomas/cran/rcnst/build/include -DNDEBUG -I../inst/include -DCL_HPP_MINIMUM_OPENCL_VERSION=110 -DCL_USE_DEPRECATED_OPENCL_1_2_APIS -DCL_HPP_TARGET_OPENCL_VERSION=120 -I'/usr/include/' -DHAVE_CL_CL2_HPP  -I/usr/local/include  -DUSE_R -DNDEBUG -DDISABLE_SINGLE -DNTHROW  -fpic  -g -O2 -c PolyaGammaD.cpp -o PolyaGammaD.o
+gcc -I/home/tomas/cran/rcnst/build/include -DNDEBUG -I../inst/include -DCL_HPP_MINIMUM_OPENCL_VERSION=110 -DCL_USE_DEPRECATED_OPENCL_1_2_APIS -DCL_HPP_TARGET_OPENCL_VERSION=120 -I'/usr/include/' -DHAVE_CL_CL2_HPP  -I/usr/local/include   -fpic  -g -O2  -c bayesCL_init.c -o bayesCL_init.o
+g++ -std=gnu++11 -shared -L/usr/local/lib -o bayesCL.so Blasso.o LogitWrapper.o PolyaGamma.o PolyaGammaD.o bayesCL_init.o -lOpenCL
+make[1]: Leaving directory '/tmp/RtmpoYGqkY/R.INSTALL8cb80e87ed/bayesCL/src'
+installing to /home/tomas/cran/rcnst/lib/bayesCL/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded
+* DONE (bayesCL)
