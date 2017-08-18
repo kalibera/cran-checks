@@ -1,0 +1,83 @@
+* using log directory ‘/home/tomas/cran/rcnst/check/mosaicCore.Rcheck’
+* using R Under development (unstable) (2017-08-15 r73096)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* checking for file ‘mosaicCore/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘mosaicCore’ version ‘0.2.0’
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘mosaicCore’ can be installed ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking examples ... ERROR
+Running examples in ‘mosaicCore-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: df_stats
+> ### Title: Calculate statistics on a variable
+> ### Aliases: df_stats
+> 
+> ### ** Examples
+> 
+> df_stats( ~ hp, data = mtcars)
+  min   Q1 median  Q3 max     mean       sd  n missing
+1  52 96.5    123 180 335 146.6875 68.56287 32       0
+> # There are several ways to specify functions
+> df_stats( ~ hp, data = mtcars, mean, trimmed_mean = mean(trim = 0.1), "median",
++   range, Q = quantile(c(0.25, 0.75)))
+   mean_hp trimmed_mean median_hp range_hp_1 range_hp_2 Q_25% Q_75%
+1 146.6875     141.1923       123         52        335  96.5   180
+> # force names to by syntactically valid
+> df_stats( ~ hp, data = mtcars, Q = quantile(c(0.25, 0.75)), nice_names = TRUE)
+  Q_25. Q_75.
+1  96.5   180
+> # shorter names
+> df_stats( ~ hp, data = mtcars, mean, trimmed_mean = mean(trim = 0.1), "median", range,
++   long_names = FALSE)
+      mean trimmed_mean median range_1 range_2
+1 146.6875     141.1923    123      52     335
+> # wide vs long format
+> df_stats( hp ~ cyl, data = mtcars, mean, median, range)
+  cyl   mean_hp median_hp range_hp_1 range_hp_2
+1   4  82.63636      91.0         52        113
+2   6 122.28571     110.0        105        175
+3   8 209.21429     192.5        150        335
+> df_stats( hp ~ cyl, data = mtcars, mean, median, range, format = "long")
+Error in FUN(X[[i]], ...) : object 'd' not found
+Calls: df_stats ... unname -> <Anonymous> -> map_if -> map -> lapply -> FUN
+Execution halted
+* checking PDF version of manual ... OK
+* DONE
+Status: 1 ERROR

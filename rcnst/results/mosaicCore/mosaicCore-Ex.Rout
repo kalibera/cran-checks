@@ -1,0 +1,90 @@
+
+R Under development (unstable) (2017-08-15 r73096) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "mosaicCore"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('mosaicCore')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("coef")
+> ### * coef
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: coef.function
+> ### Title: Extract coefficients from a function
+> ### Aliases: coef.function coef
+> 
+> ### ** Examples
+> 
+> if (require(mosaicData)) {
++   model <- lm( width ~ length, data = KidsFeet)
++   f <- makeFun( model )
++   coef(f)
++ }
+Loading required package: mosaicData
+(Intercept)      length 
+  2.8622761   0.2479478 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:mosaicData’
+
+> nameEx("df_stats")
+> ### * df_stats
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: df_stats
+> ### Title: Calculate statistics on a variable
+> ### Aliases: df_stats
+> 
+> ### ** Examples
+> 
+> df_stats( ~ hp, data = mtcars)
+  min   Q1 median  Q3 max     mean       sd  n missing
+1  52 96.5    123 180 335 146.6875 68.56287 32       0
+> # There are several ways to specify functions
+> df_stats( ~ hp, data = mtcars, mean, trimmed_mean = mean(trim = 0.1), "median",
++   range, Q = quantile(c(0.25, 0.75)))
+   mean_hp trimmed_mean median_hp range_hp_1 range_hp_2 Q_25% Q_75%
+1 146.6875     141.1923       123         52        335  96.5   180
+> # force names to by syntactically valid
+> df_stats( ~ hp, data = mtcars, Q = quantile(c(0.25, 0.75)), nice_names = TRUE)
+  Q_25. Q_75.
+1  96.5   180
+> # shorter names
+> df_stats( ~ hp, data = mtcars, mean, trimmed_mean = mean(trim = 0.1), "median", range,
++   long_names = FALSE)
+      mean trimmed_mean median range_1 range_2
+1 146.6875     141.1923    123      52     335
+> # wide vs long format
+> df_stats( hp ~ cyl, data = mtcars, mean, median, range)
+  cyl   mean_hp median_hp range_hp_1 range_hp_2
+1   4  82.63636      91.0         52        113
+2   6 122.28571     110.0        105        175
+3   8 209.21429     192.5        150        335
+> df_stats( hp ~ cyl, data = mtcars, mean, median, range, format = "long")
+Error in FUN(X[[i]], ...) : object 'd' not found
+Calls: df_stats ... unname -> <Anonymous> -> map_if -> map -> lapply -> FUN
+Execution halted

@@ -1,0 +1,162 @@
+
+R Under development (unstable) (2017-08-15 r73096) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "KernSmoothIRT"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('KernSmoothIRT')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("ksIRT")
+> ### * ksIRT
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ksIRT
+> ### Title: ksIRT - kernel smoothing in Item Response Theory
+> ### Aliases: ksIRT print.ksIRT
+> 
+> ### ** Examples
+> 
+>  ## Psych101 data
+> data(Psych101)
+> Psych1 <- ksIRT(responses = Psychresponses[1:100,], key = Psychkey, format = 1)
+> Psych1
+    Item Correlation
+1      1  0.25649591
+2      2  0.02677782
+3      3  0.31383602
+4      4  0.48082331
+5      5  0.27337044
+6      6  0.30066495
+7      7  0.06094600
+8      8  0.26786289
+9      9  0.24416394
+10    10  0.29036694
+11    11 -0.09167675
+12    12  0.11672180
+13    13  0.35673809
+14    14  0.38508561
+15    15  0.21393572
+16    16  0.37488562
+17    17  0.31125237
+18    18  0.20866377
+19    19  0.10251262
+20    20  0.17690514
+21    21  0.36689552
+22    22  0.05837302
+23    23  0.40261936
+24    24  0.18861821
+25    25  0.42918758
+26    26  0.31302205
+27    27  0.29482179
+28    28  0.24620279
+29    29  0.40264614
+30    30  0.32054662
+31    31  0.35226408
+32    32  0.48324792
+33    33  0.36835729
+34    34  0.25032496
+35    35  0.22099327
+36    36  0.14968733
+37    37  0.33610537
+38    38  0.22060420
+39    39  0.13508245
+40    40  0.26383227
+41    41  0.25873834
+42    42  0.15871280
+43    43  0.41586999
+44    44  0.24892583
+45    45  0.29259704
+46    46  0.23420217
+47    47 -0.02784687
+48    48  0.04140554
+49    49  0.34749330
+50    50  0.26970521
+51    51 -0.01693182
+52    52  0.28134781
+53    53  0.25086885
+54    54  0.57840217
+55    55  0.17736880
+56    56  0.34690274
+57    57  0.06099389
+58    58 -0.02441550
+59    59  0.40810997
+60    60  0.01820892
+61    61  0.24745021
+62    62  0.13531784
+63    63  0.08247568
+64    64  0.16807939
+65    65  0.03894124
+66    66  0.39106036
+67    67  0.30230507
+68    68  0.19942670
+69    69  0.18529447
+70    70  0.17712152
+71    71  0.34539944
+72    72  0.52002207
+73    73  0.33429083
+74    74  0.26113763
+75    75  0.40930444
+76    76  0.21587087
+77    77  0.37827051
+78    78  0.24961369
+79    79  0.40543742
+80    80  0.03268210
+81    81  0.21256659
+82    82  0.14123338
+83    83  0.01494216
+84    84  0.33480104
+85    85  0.29491708
+86    86  0.16582713
+87    87  0.34420910
+88    88  0.32577955
+89    89  0.30076840
+90    90  0.24745021
+91    91  0.36872462
+92    92  0.25965929
+93    93  0.20863746
+94    94  0.23990613
+95    95  0.37610617
+96    96 -0.09620540
+97    97  0.37240652
+98    98  0.40023911
+99    99  0.07887368
+100  100  0.18727827
+>     
+> plot(Psych1,plottype="OCC", item=c(24,25,92,96))
+> plot(Psych1,plottype="EIS", item=c(24,25,92,96))
+> plot(Psych1, plottype="tetrahedron", items=c(24,92))
+Warning in rgl.open(useNULL) : RGL: no suitable visual available
+
+ *** caught segfault ***
+address (nil), cause 'memory not mapped'
+
+Traceback:
+ 1: rgl.open(useNULL)
+ 2: open3d()
+ 3: FUN(X[[i]], ...)
+ 4: lapply(X = X, FUN = FUN, ...)
+ 5: sapply(items, plotit, OBJ = OBJ, main, ...)
+ 6: Tetplot(x, items, main, ...)
+ 7: plot.ksIRT(Psych1, plottype = "tetrahedron", items = c(24, 92))
+ 8: plot(Psych1, plottype = "tetrahedron", items = c(24, 92))
+An irrecoverable exception occurred. R is aborting now ...
+Segmentation fault (core dumped)

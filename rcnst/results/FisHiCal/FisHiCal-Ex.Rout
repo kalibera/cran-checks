@@ -1,0 +1,144 @@
+
+R Under development (unstable) (2017-08-15 r73096) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "FisHiCal"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('FisHiCal')
+Loading required package: igraph
+
+Attaching package: ‘igraph’
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union
+
+Loading required package: RcppArmadillo
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("calibrate")
+> ### * calibrate
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: calibrate
+> ### Title: Hi-C calibration
+> ### Aliases: calibrate
+> 
+> ### ** Examples
+> 
+>  data(match) 
+>  data(hic)
+>  npoints = 10 # number of points to fit
+>  
+>  # prepareCalib computes threshold to fit 
+>  res = prepareCalib(match, npoints, useMax = FALSE)
+>  calib = res$calib
+>  calib$f # calibration function
+function (m, params) 
+{
+    a = params[[1]]
+    b = params[[2]]
+    threshold = params[[3]]
+    m = exp((log(m) - b)/a)
+    m[m == Inf] = 0
+    m[m > threshold] = 0
+    return(m)
+}
+<bytecode: 0x55b2ab279e38>
+<environment: 0x55b2ab2666e8>
+>  calib$params # the parametrs for f
+[[1]]
+[1] -2
+
+[[2]]
+[1] 10
+
+[[3]]
+[1] 22.79646
+
+>  # note that calib could be refined by the user
+>  
+>  # now calibrate the hic matrix
+>  calibHiC = calibrate(hic, calib)
+>  plot(match$distances, calibHiC[upper.tri(calibHiC)],
++  xlab = "distances", ylab = "calibrated distances")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("lsmacof")
+> ### * lsmacof
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: lsmacof
+> ### Title: 3D reconstruction from Hi-C distances
+> ### Aliases: lsmacof
+> 
+> ### ** Examples
+> 
+>  data(calibHiC)
+>  data(match)
+>  data(conf)
+>  predConf = lsmacof(calibHiC, max(match$distances))
+>  
+>  # superimpose
+>  partialPS<-function(m1, m2)
++  {
++     # translate to origin
++     tm1<-scale(m1, scale = FALSE)
++     tm2<-scale(m2, scale = FALSE)
++     A<-svd(t(tm2)%*%tm1)
++     v<-A$u
++     w<-A$v
++     # update v a det(R) is positive
++     k = ncol(m1)
++     d = sign(det(t(w)%*%t(v)))
++     v[,k] = v[,k]*-1*d
++     R<- w%*%t(v)
++     return(list(m1=tm1%*%R,m2=tm2))
++   }
+> 
+>   res = partialPS(predConf, conf) 
+>   if (require(rgl))
++   {
++     plot3d(res$m2, type = "l", axes = FALSE, box = FALSE, xlab = "", ylab = "", zlab = "")
++     lines3d(res$m1, col = "red")
++   }
+Loading required package: rgl
+Warning in rgl.open(useNULL) : RGL: no suitable visual available
+
+ *** caught segfault ***
+address (nil), cause 'memory not mapped'
+
+Traceback:
+ 1: rgl.open(useNULL)
+ 2: open3d()
+ 3: .check3d()
+ 4: next3d()
+ 5: plot3d.default(res$m2, type = "l", axes = FALSE, box = FALSE,     xlab = "", ylab = "", zlab = "")
+ 6: plot3d(res$m2, type = "l", axes = FALSE, box = FALSE, xlab = "",     ylab = "", zlab = "")
+An irrecoverable exception occurred. R is aborting now ...
+Segmentation fault (core dumped)

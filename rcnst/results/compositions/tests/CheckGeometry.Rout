@@ -1,0 +1,303 @@
+
+R Under development (unstable) (2017-08-15 r73096) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(compositions)
+Loading required package: tensorA
+
+Attaching package: 'tensorA'
+
+The following object is masked from 'package:base':
+
+    norm
+
+Loading required package: robustbase
+Loading required package: energy
+Loading required package: bayesm
+Welcome to compositions, a package for compositional data analysis.
+Find an intro with "? compositions"
+
+
+Attaching package: 'compositions'
+
+The following objects are masked from 'package:stats':
+
+    cor, cov, dist, var
+
+The following objects are masked from 'package:base':
+
+    %*%, scale, scale.default
+
+> #library(compositions,lib.loc="../../compositions.Rcheck")
+> par(pch=20)
+> data(SimulatedAmounts)
+> 
+> geomSetA <- acomp(rbind(c(1,2,3),c(1,1,1)))
+Warning message:
+In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> geomSetA
+     [,1]      [,2]      [,3]     
+[1,] 0.1666667 0.3333333 0.5000000
+[2,] 0.3333333 0.3333333 0.3333333
+attr(,"class")
+[1] acomp
+> plot(geomSetA)
+Warning messages:
+1: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+2: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+3: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+4: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+5: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+6: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> ellipses(acomp(geomSetA[1,]),ilrvar2clr(clrvar2ilr(diag(3))))
+There were 37 warnings (use warnings() to see them)
+> 
+> geomSetA <- acomp(rbind(c(a=1,b=2,c=3,d=4),c(1,1,1,1)))
+Warning message:
+In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> geomSetA
+     a    b    c    d   
+[1,] 0.10 0.20 0.30 0.40
+[2,] 0.25 0.25 0.25 0.25
+attr(,"class")
+[1] acomp
+> plot(geomSetA,col=1:2,axes=list(side=-1:-3,pos=0.5))
+There were 50 or more warnings (use warnings() to see the first 50)
+> 
+> 
+> ellipses(acomp(geomSetA[1,]),ilrvar2clr(clrvar2ilr(diag(4))))
+There were 50 or more warnings (use warnings() to see the first 50)
+> ellipses(acomp(geomSetA[1,]),ilrvar2clr(clrvar2ilr(diag(4))),thinRatio=1)
+There were 50 or more warnings (use warnings() to see the first 50)
+> ellipses(acomp(geomSetA[1,]),ilrvar2clr(clrvar2ilr(diag(4))),thinRatio=0)
+There were 50 or more warnings (use warnings() to see the first 50)
+> 
+> plot(geomSetA,col=1:2,margin="b")
+There were 37 warnings (use warnings() to see them)
+> ellipses(acomp(geomSetA[1,]),ilrvar2clr(clrvar2ilr(diag(4))))
+There were 50 or more warnings (use warnings() to see the first 50)
+> 
+> plot(rcomp(geomSetA),col=1:2,margin="b")
+There were 14 warnings (use warnings() to see them)
+> ellipses(rcomp(geomSetA[1,]),ilrvar2clr(clrvar2ilr(diag(4))))
+There were 50 or more warnings (use warnings() to see the first 50)
+> 
+> 
+> geomSetA <- acomp(rbind( c(2,1,1),c(1,2,1),c(1,1,2),c(1,1,1)))
+Warning message:
+In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> delta <- acomp(c(0.4,0.9,3))
+Warning message:
+In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> plot(geomSetA+delta)
+Warning messages:
+1: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+2: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+3: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+4: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+5: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+6: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+7: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> straight(acomp(c(2,1,1))+delta,acomp(c(1,2,1))-acomp(c(2,1,1)))
+There were 32 warnings (use warnings() to see them)
+> ellipses(acomp(c(1,1,2))+delta,var=diag(3),r=norm(acomp(c(1,1,2))-acomp(c(1,1,1))))
+There were 37 warnings (use warnings() to see them)
+> ellipses(mean(geomSetA+delta),var=var(geomSetA+delta),r=2)
+There were 41 warnings (use warnings() to see them)
+> 
+> 
+> plot(rcomp(geomSetA+delta))
+Warning messages:
+1: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+2: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+3: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+4: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> straight(rcomp(acomp(c(2,1,1))+delta),rcomp(acomp(c(1,2,1))+delta)-rcomp(acomp(c(2,1,1))+delta))
+There were 12 warnings (use warnings() to see them)
+> ellipses(rcomp(acomp(c(1,1,2)+delta)),var=diag(3)-1/3,r=norm(rcomp(acomp(c(1,1,2))+delta)-rcomp(acomp(c(2,1,1))+delta)))
+There were 26 warnings (use warnings() to see them)
+> ellipses(mean(rcomp(geomSetA+delta)),var=var(rcomp(geomSetA+delta)),r=2)
+There were 28 warnings (use warnings() to see them)
+> 
+> geomSetA <- acomp(rbind( c(2,1,1,1),c(1,2,1,1),c(1,1,2,1),c(1,1,1,2),c(1,1,1,1)))
+Warning message:
+In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> delta <- acomp(c(0.4,0.9,3,1.2))
+Warning message:
+In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> #delta <- acomp(c(1,1,1,1))
+> plot(geomSetA+delta,col=1:5,pch=1:5)
+There were 50 or more warnings (use warnings() to see the first 50)
+> straight(acomp(c(2,1,1,1))+delta,acomp(c(1,2,1,1))-acomp(c(2,1,1,1)),steps=100)
+There were 50 or more warnings (use warnings() to see the first 50)
+> #straight(acomp(c(2,1,1,1))+delta,acomp(c(1,2,1,1))-acomp(c(2,1,1,1)),steps=10)
+> #ellipses(acomp(c(1,1,2,1))+delta,var=diag(4)-1/4,r=norm(acomp(c(1,1,2,1))-acomp(c(1,1,1,1))))
+> replot(onlyPanel=c(3,1))
+There were 50 or more warnings (use warnings() to see the first 50)
+> segments.acomp(acomp(c(2,1,1,1))+delta,acomp(c(1,2,1,1))+delta,col="red")
+There were 50 or more warnings (use warnings() to see the first 50)
+> 
+> ellipses(acomp(c(1,1,1,1))+delta,var=diag(4)-1/4,r=norm(acomp(c(1,1,2,1))-acomp(c(1,1,1,1))),col="blue")
+There were 50 or more warnings (use warnings() to see the first 50)
+> ellipses(mean(geomSetA+delta),var=var(geomSetA+delta),r=2,col="red")
+There were 50 or more warnings (use warnings() to see the first 50)
+> 
+> ellipses(mean(geomSetA+delta),var=var(geomSetA+delta),r=2,col="red",thinRatio=0.1)
+There were 50 or more warnings (use warnings() to see the first 50)
+> 
+> plot(rcomp(geomSetA+delta),col=1:5,pch=1:5)
+There were 50 or more warnings (use warnings() to see the first 50)
+> straight(rcomp(acomp(c(2,1,1,1))+delta),rcomp(acomp(c(1,2,1,1))+delta)-rcomp(acomp(c(2,1,1,1))+delta))
+There were 50 or more warnings (use warnings() to see the first 50)
+> ellipses(rcomp(acomp(c(1,1,2,1)+delta)),var=diag(4)-1/4,r=norm(rcomp(acomp(c(1,1,2,1))+delta)-rcomp(acomp(c(2,1,1,1))+delta)))
+There were 50 or more warnings (use warnings() to see the first 50)
+> ellipses(mean(rcomp(geomSetA+delta)),var=var(rcomp(geomSetA+delta)),r=2)
+There were 50 or more warnings (use warnings() to see the first 50)
+> 
+> geomSetA <- aplus(rbind( c(2,1,1),c(1,2,1),c(1,1,2),c(1,1,1),c(1.5,1.5,1.5)))
+> delta <- aplus(c(0.4,0.9,3))
+> #delta <- aplus(c(1,1,1))
+> plot(geomSetA+delta,xlim=c(0.1,10),ylim=c(0.1,10),logscale=TRUE)
+> straight(aplus(c(2,1,1))+delta,aplus(c(1,2,1))-aplus(c(2,1,1)))
+There were 12 warnings (use warnings() to see them)
+> ellipses(aplus(c(1.5,1.5,1.5))+delta,var=diag(3),r=norm(aplus(c(1,1,2))-aplus(c(1,1,1))))
+There were 14 warnings (use warnings() to see them)
+> ellipses(aplus(c(1,1,1))+delta,var=diag(3),r=norm(aplus(c(1,1,2))-aplus(c(1,1,1))))
+There were 14 warnings (use warnings() to see them)
+> ellipses(mean(geomSetA+delta),var=var(geomSetA+delta),r=2)
+There were 12 warnings (use warnings() to see them)
+> lines(geomSetA+delta)
+There were 12 warnings (use warnings() to see them)
+> geomSetA <- rplus(rbind( c(2,1,1),c(1,2,1),c(1,1,2),c(1,1,1),c(1.5,1.5,1.5)))
+> delta <- rplus(c(0.4,0.9,3))
+> plot(geomSetA+delta,xlim=c(0.1,10),ylim=c(0.1,10))
+> #straight(aplus(c(2,1,1))+delta,aplus(c(1,2,1))-aplus(c(2,1,1)))
+> ellipses(rplus(c(1.5,1.5,1.5))+delta,var=diag(3),r=norm(rplus(c(1,1,2))-rplus(c(1,1,1))))
+Warning messages:
+1: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+2: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> ellipses(mean(geomSetA+delta),var=var(geomSetA+delta),r=2)
+> 
+> plot(rcomp(sa.lognormals))
+Warning messages:
+1: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+2: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+3: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> ternaryAxis(side=1:3,pos=0,col.axis="red",col.lab="green")
+Warning messages:
+1: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+2: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+3: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> ternaryAxis(side=1:3,at=1:9/10,labels=expression(9:1,4:1,7:3,3:2,1:1,2:3,3:7,1:4,1:9),pos=0,col.axis="red",col.lab="green")
+Warning messages:
+1: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+2: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+3: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> ternaryAxis(side=rep(-1:-3,3),labels=paste(seq(20,80,by=20),"%"),
++             pos=rep(c(0,0.5,1),each=3),col.axis=1:3,col.lab="green")
+Warning messages:
+1: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+2: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+3: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> ternaryAxis(side=rep(1:3,3),at=1:9/10,labels=expression(9:1,4:1,7:3,3:2,1:1,2:3,3:7,1:4,1:9),pos=rep(c(0,0.5,1),each=3))
+Warning messages:
+1: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+2: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+3: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> 
+> proc.time()
+   user  system elapsed 
+ 21.628   0.124  21.757 

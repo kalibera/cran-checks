@@ -1,0 +1,379 @@
+
+R Under development (unstable) (2017-08-15 r73096) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> 
+> require(compositions)
+Loading required package: compositions
+Loading required package: tensorA
+
+Attaching package: 'tensorA'
+
+The following object is masked from 'package:base':
+
+    norm
+
+Loading required package: robustbase
+Loading required package: energy
+Loading required package: bayesm
+Welcome to compositions, a package for compositional data analysis.
+Find an intro with "? compositions"
+
+
+Attaching package: 'compositions'
+
+The following objects are masked from 'package:stats':
+
+    cor, cov, dist, var
+
+The following objects are masked from 'package:base':
+
+    %*%, scale, scale.default
+
+> 
+> res <- rAitchison(100,theta=c(1,2,3),sigma=ilrvar2clr(diag(c(0.1,2))))
+There were 15 warnings (use warnings() to see them)
+> res2<- rnorm.acomp(100,acomp(c(1,2,3)),ilrvar2clr(diag(c(0.1,2))))
+There were 15 warnings (use warnings() to see them)
+> plot(res)
+Warning messages:
+1: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+2: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+3: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+4: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+5: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+6: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> plot(res2,add=TRUE,col="red")
+Warning messages:
+1: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+2: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+3: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+4: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+5: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> 
+> dr = dAitchison(res,theta=c(1,2,3),sigma=ilrvar2clr(diag(c(1,2))))
+There were 19 warnings (use warnings() to see them)
+> print(dr)
+  [1] 0.082961678 0.066899369 0.072351670 0.096944202 0.093282970 0.086438451
+  [7] 0.074838797 0.015108680 0.052502674 0.086253630 0.096342210 0.029745710
+ [13] 0.102821353 0.066022842 0.051543676 0.065172995 0.099424865 0.014186504
+ [19] 0.064796756 0.090666534 0.025135127 0.081229963 0.059095147 0.085040804
+ [25] 0.073923714 0.090746740 0.062129757 0.057145329 0.024368254 0.007051454
+ [31] 0.095467887 0.089170304 0.081815390 0.079201498 0.044429853 0.064992023
+ [37] 0.094614796 0.042327493 0.023247950 0.080433654 0.085767072 0.033951562
+ [43] 0.102411711 0.038220004 0.059112182 0.086008872 0.094488118 0.035454761
+ [49] 0.086043683 0.094372766 0.070474278 0.082230717 0.031512067 0.082496346
+ [55] 0.031397456 0.099344035 0.010436398 0.090865255 0.047437607 0.028519872
+ [61] 0.098349775 0.052447456 0.024926468 0.033594770 0.060245595 0.104019374
+ [67] 0.076057904 0.052800521 0.051546035 0.094786957 0.082936521 0.084577778
+ [73] 0.066924190 0.023654464 0.042162123 0.007105728 0.070692044 0.065548395
+ [79] 0.084616162 0.018643712 0.068149604 0.103571723 0.099795918 0.074913981
+ [85] 0.010678847 0.101335625 0.097286069 0.035071798 0.053418986 0.096199022
+ [91] 0.101974445 0.073893161 0.104267842 0.025094492 0.078184125 0.057476647
+ [97] 0.078921471 0.100976434 0.011184291 0.072582862
+> 
+> 
+> 
+> erg<-AitchisonDistributionIntegrals(c(-1,3,-2),ilrvar2clr(-diag(c(1,2))),grid=60)
+Warning messages:
+1: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+2: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+3: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+4: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+5: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+6: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+7: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+8: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> print(erg)
+$theta
+[1] -1  3 -2
+
+$beta
+           [,1]       [,2]       [,3]
+[1,] -0.8333333  0.1666667  0.6666667
+[2,]  0.1666667 -0.8333333  0.6666667
+[3,]  0.6666667  0.6666667 -1.3333333
+
+$alpha
+[1] 0
+
+$mu
+[1] 0.1033797 0.7638782 0.1327421
+attr(,"class")
+[1] acomp
+
+$sigma
+            [,1]        [,2]        [,3]
+[1,]  0.29166667 -0.20833333 -0.08333333
+[2,] -0.20833333  0.29166667 -0.08333333
+[3,] -0.08333333 -0.08333333  0.16666667
+
+$expKappa
+[1] 126.4483
+
+$loggxMean
+[1] -1.595297
+
+$clrMean
+[1] -0.7491284  1.2492295 -0.5001012
+
+$clrVar
+            [,1]        [,2]        [,3]
+[1,]  0.28804158 -0.20476955 -0.08327203
+[2,] -0.20476955  0.28841772 -0.08364817
+[3,] -0.08327203 -0.08364817  0.16692020
+
+> 
+> (myvar<-with(erg, -1/2*ilrvar2clr(solve(clrvar2ilr(beta)))))
+            1           2           3
+1  0.29166667 -0.20833333 -0.08333333
+2 -0.20833333  0.29166667 -0.08333333
+3 -0.08333333 -0.08333333  0.16666667
+Warning messages:
+1: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+2: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+3: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+4: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+5: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+6: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+7: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+8: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> (mymean<-with(erg,myvar%*%theta))
+   [,1]
+1 -0.75
+2  1.25
+3 -0.50
+Warning message:
+In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> 
+> with(erg,myvar-clrVar)
+              1             2             3
+1  3.625083e-03 -0.0035637819 -6.130155e-05
+2 -3.563782e-03  0.0032489448  3.148371e-04
+3 -6.130155e-05  0.0003148371 -2.535355e-04
+> with(erg,mymean-clrMean)
+           [,1]
+1 -0.0008716054
+2  0.0007704529
+3  0.0001011525
+> 
+> 
+> AitchisonDistributionIntegrals
+function (theta = alpha + sigma %*% clr(mu), beta = -1/2 * gsi.svdinverse(sigma), 
+    alpha = mean(theta), mu = clrInv(c(sigma %*% (theta - alpha))), 
+    sigma = -1/2 * gsi.svdinverse(beta), grid = 30, mode = 3) 
+{
+    if (!xor(missing(theta), (missing(mu) || missing(alpha)))) 
+        stop("Specify either theta or mu and alpha")
+    if (!xor(missing(beta), missing(sigma))) 
+        stop("Specify either beta or sigma")
+    D <- length(theta)
+    if (nrow(beta) == D - 1) 
+        beta <- ilrvar2clr(beta)
+    if (any(abs(beta - t(beta)) > 1e-10)) {
+        warning("AitchisonDistributionIntegrals: beta was not symmetric 1")
+        print(beta)
+    }
+    gsiInt(dim(beta), 2)
+    stopifnot(length(dim(beta)) == 2, ncol(beta) == D, nrow(beta) == 
+        D)
+    erg <- .C(gsiAitchisonDistributionIntegral, D = gsiInt(D, 
+        1), grid = gsiInt(grid, 1), mode = gsiInt(mode, 1), theta = gsiDouble(theta, 
+        D), beta = gsiDouble(beta, D * D), expKappa = numeric(1), 
+        loggxMean = numeric(1), clrMean = numeric(D), clrVar = numeric(D * 
+            D))
+    erg$beta <- matrix(erg$beta, nrow = D)
+    erg$SqIntegral <- matrix(erg$clrVar, nrow = D, ncol = D)
+    erg$alpha = alpha
+    erg$mu = mu
+    erg$sigma = sigma
+    erg$clrSqExpectation <- matrix(erg$clrVar, nrow = D, ncol = D)
+    dim(erg$clrVar) <- c(D, D)
+    return(erg[c("theta", "beta", "alpha", "mu", "sigma", if (mode >= 
+        0) c("expKappa", "loggxMean") else c(), if (mode >= 1) "clrMean" else c(), 
+        if (mode == 2) "clrSqExpectation" else if (mode >= 3) "clrVar" else c())])
+}
+<bytecode: 0x556d5fd80438>
+<environment: namespace:compositions>
+> 
+> 
+> res <- rAitchison(100,theta=c(0.5,1,3),sigma=ilrvar2clr(diag(c(0.1,2))))
+There were 15 warnings (use warnings() to see them)
+> plot(res)
+Warning messages:
+1: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+2: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+3: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+4: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+5: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+6: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> AitStats = AitchisonDistributionIntegrals(theta=c(0.5,1,3),sigma=ilrvar2clr(diag(c(0.1,2))))
+Warning messages:
+1: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+2: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+3: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+4: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+5: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+6: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+7: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+8: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+>   plot(clrInv(AitStats$clrMean), add=TRUE, col=2, pch=19)
+Warning messages:
+1: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+2: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+3: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+4: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+5: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+6: In structure(c(), class = c(class(x), class(y))) :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+> print(AitStats)
+$theta
+[1] 0.5 1.0 3.0
+
+$beta
+            [,1]        [,2]        [,3]
+[1,] -2.54166667  2.45833333  0.08333333
+[2,]  2.45833333 -2.54166667  0.08333333
+[3,]  0.08333333  0.08333333 -0.16666667
+
+$alpha
+[1] 1.5
+
+$mu
+[1] 0.01059915 0.01114258 0.97825827
+attr(,"class")
+[1] acomp
+
+$sigma
+           1          2          3
+1  0.3833333  0.2833333 -0.6666667
+2  0.2833333  0.3833333 -0.6666667
+3 -0.6666667 -0.6666667  1.3333333
+
+$expKappa
+[1] 0.08158924
+
+$loggxMean
+[1] -1.346044
+
+$clrMean
+[1] -0.3959256 -0.3503244  0.7462500
+
+$clrVar
+           [,1]       [,2]       [,3]
+[1,]  0.1345549  0.0430842 -0.1776391
+[2,]  0.0430842  0.1340438 -0.1771280
+[3,] -0.1776391 -0.1771280  0.3547671
+
+> 
+> proc.time()
+   user  system elapsed 
+  1.920   0.076   1.990 

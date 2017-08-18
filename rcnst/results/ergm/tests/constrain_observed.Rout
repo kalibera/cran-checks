@@ -1,0 +1,103 @@
+
+R Under development (unstable) (2017-08-15 r73096) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> #  File tests/constrain_observed.R in package ergm, part of the Statnet suite
+> #  of packages for network analysis, http://statnet.org .
+> #
+> #  This software is distributed under the GPL-3 license.  It is free,
+> #  open source, and has the attribution requirements (GPL Section 7) at
+> #  http://statnet.org/attribution
+> #
+> #  Copyright 2003-2017 Statnet Commons
+> #######################################################################
+> 
+> library(ergm)
+Loading required package: statnet.common
+
+Attaching package: 'statnet.common'
+
+The following object is masked from 'package:base':
+
+    order
+
+Loading required package: network
+network: Classes for Relational Data
+Version 1.13.0 created on 2015-08-31.
+copyright (c) 2005, Carter T. Butts, University of California-Irvine
+                    Mark S. Handcock, University of California -- Los Angeles
+                    David R. Hunter, Penn State University
+                    Martina Morris, University of Washington
+                    Skye Bender-deMoll, University of Washington
+ For citation information, type citation("network").
+ Type help("network-package") to get started.
+
+
+ergm: version 3.7.1, created on 2017-03-20
+Copyright (c) 2017, Mark S. Handcock, University of California -- Los Angeles
+                    David R. Hunter, Penn State University
+                    Carter T. Butts, University of California -- Irvine
+                    Steven M. Goodreau, University of Washington
+                    Pavel N. Krivitsky, University of Wollongong
+                    Martina Morris, University of Washington
+                    with contributions from
+                    Li Wang
+                    Kirk Li, University of Washington
+                    Skye Bender-deMoll, University of Washington
+Based on "statnet" project software (statnet.org).
+For license and citation information see statnet.org/attribution
+or type citation("ergm").
+
+NOTE: Versions before 3.6.1 had a bug in the implementation of the bd()
+constriant which distorted the sampled distribution somewhat. In
+addition, Sampson's Monks datasets had mislabeled verteces. See the
+NEWS and the documentation for more details.
+
+> data(florentine)
+> f.miss<-network.copy(flomarriage)
+> f.miss[2,1] <- NA
+> f.miss[3,1] <- NA
+> fit <- ergm(f.miss ~ edges)
+Evaluating log-likelihood at the estimate. 
+Warning messages:
+1: In 'ergm': Autodetection of acceptable control parameter generators and of the calling function name has been deprecated and will be removed in a future version. They must be set explicitly. 
+2: In 'control.san': Autodetection of acceptable control parameter generators and of the calling function name has been deprecated and will be removed in a future version. They must be set explicitly. 
+3: In 'control.logLik.ergm': Autodetection of acceptable control parameter generators and of the calling function name has been deprecated and will be removed in a future version. They must be set explicitly. 
+4: In 'control.ergm': Autodetection of acceptable control parameter generators and of the calling function name has been deprecated and will be removed in a future version. They must be set explicitly. 
+5: In 'logLikNull.ergm': Autodetection of acceptable control parameter generators and of the calling function name has been deprecated and will be removed in a future version. They must be set explicitly. 
+6: In 'logLik.ergm': Autodetection of acceptable control parameter generators and of the calling function name has been deprecated and will be removed in a future version. They must be set explicitly. 
+> OK.2.1<-OK.3.1<-FALSE
+> for(s in 1:1000){
++   sim <- simulate(fit, constraints=~observed)
++   d<-(sim[,] != flomarriage[,])
++   if(d[2,1]) OK.2.1<-TRUE
++   if(d[3,1]) OK.3.1<-TRUE
++ 
++   d[2,1]<-d[3,1]<-d[1,2]<-d[1,3]<-FALSE
++   if(any(d)) stop("Observed dyad toggled!")
++ 
++   if(OK.2.1 && OK.3.1) break
++ }
+Warning messages:
+1: In 'simulate.ergm': Autodetection of acceptable control parameter generators and of the calling function name has been deprecated and will be removed in a future version. They must be set explicitly. 
+2: In 'control.simulate.ergm': Autodetection of acceptable control parameter generators and of the calling function name has been deprecated and will be removed in a future version. They must be set explicitly. 
+3: In 'simulate.formula': Autodetection of acceptable control parameter generators and of the calling function name has been deprecated and will be removed in a future version. They must be set explicitly. 
+> 
+> if(!OK.2.1 || !OK.3.1) stop("No toggles of a missing dyad in 1000 trials.")
+> 
+> proc.time()
+   user  system elapsed 
+ 13.360   0.324  14.099 

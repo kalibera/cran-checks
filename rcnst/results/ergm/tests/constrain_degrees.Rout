@@ -1,0 +1,124 @@
+
+R Under development (unstable) (2017-08-15 r73096) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> #  File tests/constrain_degrees.R in package ergm, part of the Statnet suite
+> #  of packages for network analysis, http://statnet.org .
+> #
+> #  This software is distributed under the GPL-3 license.  It is free,
+> #  open source, and has the attribution requirements (GPL Section 7) at
+> #  http://statnet.org/attribution
+> #
+> #  Copyright 2003-2017 Statnet Commons
+> #######################################################################
+> library(ergm)
+Loading required package: statnet.common
+
+Attaching package: 'statnet.common'
+
+The following object is masked from 'package:base':
+
+    order
+
+Loading required package: network
+network: Classes for Relational Data
+Version 1.13.0 created on 2015-08-31.
+copyright (c) 2005, Carter T. Butts, University of California-Irvine
+                    Mark S. Handcock, University of California -- Los Angeles
+                    David R. Hunter, Penn State University
+                    Martina Morris, University of Washington
+                    Skye Bender-deMoll, University of Washington
+ For citation information, type citation("network").
+ Type help("network-package") to get started.
+
+
+ergm: version 3.7.1, created on 2017-03-20
+Copyright (c) 2017, Mark S. Handcock, University of California -- Los Angeles
+                    David R. Hunter, Penn State University
+                    Carter T. Butts, University of California -- Irvine
+                    Steven M. Goodreau, University of Washington
+                    Pavel N. Krivitsky, University of Wollongong
+                    Martina Morris, University of Washington
+                    with contributions from
+                    Li Wang
+                    Kirk Li, University of Washington
+                    Skye Bender-deMoll, University of Washington
+Based on "statnet" project software (statnet.org).
+For license and citation information see statnet.org/attribution
+or type citation("ergm").
+
+NOTE: Versions before 3.6.1 had a bug in the implementation of the bd()
+constriant which distorted the sampled distribution somewhat. In
+addition, Sampson's Monks datasets had mislabeled verteces. See the
+NEWS and the documentation for more details.
+
+> 
+> nsim <- 100
+> n <- 50
+> m <- 10
+> d <- 0.1
+> 
+> od <- function(nw) apply(as.matrix(nw, matrix.type="adjacency"), 1, sum)
+> id <- function(nw) apply(as.matrix(nw, matrix.type="adjacency"), 2, sum)
+> 
+> ###### Directed
+> y0 <- as.network(n, density=d, directed=TRUE)
+> 
+> ### Outdegrees
+> ys <- simulate(y0~sender(base=0)+receiver(base=0), constraints=~odegrees, coef=rep(0,n*2), nsim=nsim, statsonly=TRUE)
+Warning message:
+In 'simulate.formula': Autodetection of acceptable control parameter generators and of the calling function name has been deprecated and will be removed in a future version. They must be set explicitly. 
+> stopifnot(all(sweep(ys[,1:n], 2, od(y0))==0), any(sweep(ys[,-(1:n)], 2, id(y0))!=0)) # Outdegrees shouldn't vary but indegrees should.
+> 
+> ### Indegrees
+> ys <- simulate(y0~receiver(base=0)+sender(base=0), constraints=~idegrees, coef=rep(0,n*2), nsim=nsim, statsonly=TRUE)
+> stopifnot(all(sweep(ys[,1:n], 2, id(y0))==0), any(sweep(ys[,-(1:n)], 2, od(y0))!=0)) # Indegrees shouldn't vary but outdegrees should.
+> 
+> ### Both in- and outdegrees
+> ys <- simulate(y0~sender(base=0)+receiver(base=0), constraints=~degrees, coef=rep(0,n*2), nsim=nsim, statsonly=TRUE)
+> stopifnot(all(sweep(ys, 2, c(od(y0),id(y0)))==0))
+> 
+> ys <- simulate(y0~sender(base=0)+receiver(base=0), constraints=~odegrees+idegrees, coef=rep(0,n*2), nsim=nsim, statsonly=TRUE)
+> stopifnot(all(sweep(ys, 2, c(od(y0),id(y0)))==0))
+> 
+> ###### Undirected
+> y0 <- as.network(n, density=d, directed=FALSE)
+> 
+> ### Degrees
+> ys <- simulate(y0~sociality(base=0), constraints=~degrees, coef=rep(0,n), nsim=nsim, statsonly=TRUE)
+> stopifnot(all(sweep(ys, 2, od(y0))==0))
+> 
+> ###### Bipartite undirected
+> y0 <- as.network(n-m, density=d, directed=FALSE, bipartite=m)
+> 
+> ### B1degrees
+> ys <- simulate(y0~sociality(base=0), constraints=~b1degrees, coef=rep(0,n), nsim=nsim, statsonly=TRUE)
+> stopifnot(all(sweep(ys[,1:m], 2, od(y0))==0), any(sweep(ys[,-(1:m)], 2, id(y0))!=0))
+> 
+> ### B2degrees
+> ys <- simulate(y0~sociality(base=0), constraints=~b2degrees, coef=rep(0,n), nsim=nsim, statsonly=TRUE)
+> stopifnot(all(sweep(ys[,-(1:m)], 2, id(y0))==0), any(sweep(ys[,1:m], 2, od(y0))!=0))
+> 
+> ### Both B1 and B2 degrees
+> ys <- simulate(y0~sociality(base=0), constraints=~degrees, coef=rep(0,n), nsim=nsim, statsonly=TRUE)
+> stopifnot(all(sweep(ys, 2, c(od(y0),id(y0)))==0))
+> 
+> ys <- simulate(y0~sociality(base=0), constraints=~b1degrees+b2degrees, coef=rep(0,n), nsim=nsim, statsonly=TRUE)
+> stopifnot(all(sweep(ys, 2, c(od(y0),id(y0)))==0))
+> 
+> proc.time()
+   user  system elapsed 
+ 14.636   0.196  24.711 
