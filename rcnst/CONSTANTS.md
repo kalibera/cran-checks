@@ -12,7 +12,7 @@ copying is done automatically by the R runtime and the user does not have to
 worry and cannot prevent it from happening.  Environments are an exception,
 they are passed by reference, and hence any modification made inside a
 function to an environment passed in as argument will be visible
-immeditately outside such function.  The same applies to assignment, in `x
+immediately outside such function.  The same applies to assignment, in `x
 <- y`, the assignment is "by value", hence it is equivalent to a copy for
 most R objects (environments are an exception).
 
