@@ -1,2 +1,29 @@
 Package vetr version 0.1.0
-Package built using /R 3.5.0; x86_64-pc-linux-gnu; 2017-07-07 09:16:46 UTC; unix   
+Package built using /R 3.5.0; x86_64-pc-linux-gnu; 2017-07-07 09:16:46 UTC; unix
+Excerpts from error reports follow. Please refer to the included outputs for details.
+
+--------------------
+ERROR: modification of compiler constant of type language, length 5
+ERROR: modification of compiler constant of type language, length 5
+ERROR: the modified constant is function body:
+.Call(VALC_match_call, call, quote(match.call(function (yollo, 
+    zambia) 
+NULL, quote(var(y = 1:10, runif(10))))), env)
+ERROR: the body was originally:
+.Call(VALC_match_call, call, quote(match.call(NULL, quote(NULL))), 
+    env)
+Function match_call_alike in namespace vetr has this body.
+ERROR: modification of compiler constant of type language, length 2
+ERROR: modification of compiler constant of type language, length 2
+ERROR: the modified value of the constant is:
+quote(match.call(function (yollo, zambia) 
+NULL, quote(var(y = 1:10, runif(10)))))
+ERROR: the original value of the constant is:
+quote(match.call(NULL, quote(NULL)))
+ERROR: the modified constant is at index 3
+ERROR: the modified constant is in this function body:
+.Call(VALC_match_call, call, quote(match.call(function (yollo, 
+    zambia) 
+NULL, quote(var(y = 1:10, runif(10))))), env)
+Function match_call_alike in namespace vetr has this body.
+Fatal error: compiler constants were modified!
