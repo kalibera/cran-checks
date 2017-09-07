@@ -7,8 +7,6 @@ R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
 Type 'license()' or 'licence()' for distribution details.
 
-  Natural language support but running in an English locale
-
 R is a collaborative project with many contributors.
 Type 'contributors()' for more information and
 'citation()' on how to cite R or R packages in publications.
@@ -17,87 +15,18 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> pkgname <- "SpaDES.tools"
-> source(file.path(R.home("share"), "R", "examples-header.R"))
-> options(warn = 1)
-> library('SpaDES.tools')
-> 
-> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
-> cleanEx()
-> nameEx("adj")
-> ### * adj
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: adj.raw
-> ### Title: Fast 'adjacent' function, and Just In Time compiled version
-> ### Aliases: adj.raw adj
-> 
-> ### ** Examples
-> 
-> library(raster)
-Loading required package: sp
-> a <- raster(extent(0, 1000, 0, 1000), res = 1)
-> sam <- sample(1:length(a), 1e4)
-> numCol <- ncol(a)
-> numCell <- ncell(a)
-> adj.new <- adj(numCol = numCol, numCell = numCell, cells = sam, directions = 8)
-> adj.new <- adj(numCol = numCol, numCell = numCell, cells = sam, directions = 8,
-+                include = TRUE)
-> 
-> 
-> 
-> 
-> cleanEx()
+> library(testthat)
+> test_check("SpaDES.core")
+Loading required package: SpaDES.core
+Loading required package: quickPlot
+Loading required package: reproducible
 
-detaching ‘package:raster’, ‘package:sp’
+Attaching package: 'SpaDES.core'
 
-> nameEx("cir")
-> ### * cir
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: cir
-> ### Title: Identify pixels in a circle or ring (donut) around an object.
-> ### Aliases: cir cir,RasterLayer,SpatialPoints,missing-method
-> ###   cir,RasterLayer,missing,numeric-method
-> ###   cir,RasterLayer,missing,missing-method
-> ###   cir,RasterLayer,matrix,missing-method
-> 
-> ### ** Examples
-> 
-> library(data.table)
-> library(sp)
-> library(raster)
+The following objects are masked from 'package:stats':
 
-Attaching package: ‘raster’
+    end, start
 
-The following object is masked from ‘package:data.table’:
-
-    shift
-
-> library(quickPlot)
-> 
-> set.seed(1642)
-> 
-> # circle centred
-> ras <- raster(extent(0, 15, 0, 15), res = 1, val = 0)
-> middleCircle <- cir(ras)
-> ras[middleCircle[, "indices"]] <- 1
-> circlePoints <- SpatialPoints(middleCircle[, c("x", "y")])
-> if (interactive()) {
-+   clearPlot()
-+   Plot(ras)
-+   Plot(circlePoints, addTo = "ras")
-+ }
-> 
-> # circles non centred
-> ras <- randomPolygons(ras, numTypes = 4)
-> n <- 2
-> agent <- SpatialPoints(coords = cbind(x = stats::runif(n, xmin(ras), xmax(ras)),
-+                                       y = stats::runif(n, xmin(ras), xmax(ras))))
-> 
-> cirs <- cir(ras, agent, maxRadius = 15, simplify = TRUE)
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "includePixel" "excludePixel" "includeRing"  "excludeRing" 
