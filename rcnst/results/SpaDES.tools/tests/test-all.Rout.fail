@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2017-09-06 r73210) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-09-07 r73217) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -801,10 +801,15 @@ ERROR: the modified constant is in this function body:
     }
     return(landscape)
 }
+1. Error: mapReduce: file does not work correctly 1 (@test-mapReduce.R#15) -----
+promise already under evaluation: recursive default argument reference or earlier problems?
+1: data.table(mapcodeAll = uniqueComms, communities = sample(1:1000, length(uniqueComms)), 
+       biomass = rnbinom(length(uniqueComms), mu = 4000, 0.4)) at testthat/test-mapReduce.R:15
+
 [1] "Scales with number of starts, not maxSize of raster"
 testthat results ================================================================
-OK: 990 SKIPPED: 11 FAILED: 0
-> 
-> proc.time()
-   user  system elapsed 
-108.008   4.468 136.423 
+OK: 988 SKIPPED: 11 FAILED: 1
+1. Error: mapReduce: file does not work correctly 1 (@test-mapReduce.R#15) 
+
+Error: testthat unit tests failed
+Execution halted

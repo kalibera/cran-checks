@@ -1,5 +1,5 @@
 * using log directory ‘/home/tomas/cran/rcnst/check/SpaDES.tools.Rcheck’
-* using R Under development (unstable) (2017-09-06 r73210)
+* using R Under development (unstable) (2017-09-07 r73217)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘SpaDES.tools/DESCRIPTION’ ... OK
@@ -878,8 +878,25 @@ S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature R
 Fatal error: compiler constants were modified!
 
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... OK
+* checking tests ... ERROR
   Running ‘test-all.R’
+Running the tests in ‘tests/test-all.R’ failed.
+Last 13 lines of output:
+      }
+      return(landscape)
+  }
+  1. Error: mapReduce: file does not work correctly 1 (@test-mapReduce.R#15) -----
+  promise already under evaluation: recursive default argument reference or earlier problems?
+  1: data.table(mapcodeAll = uniqueComms, communities = sample(1:1000, length(uniqueComms)), 
+         biomass = rnbinom(length(uniqueComms), mu = 4000, 0.4)) at testthat/test-mapReduce.R:15
+  
+  [1] "Scales with number of starts, not maxSize of raster"
+  testthat results ================================================================
+  OK: 988 SKIPPED: 11 FAILED: 1
+  1. Error: mapReduce: file does not work correctly 1 (@test-mapReduce.R#15) 
+  
+  Error: testthat unit tests failed
+  Execution halted
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 ERROR, 2 NOTEs
+Status: 2 ERRORs, 2 NOTEs
