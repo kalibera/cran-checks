@@ -1,5 +1,5 @@
 Package bnlearn version 4.2
-Package built using 72890/R 3.5.0; x86_64-pc-linux-gnu; 2017-07-04 20:28:59 UTC; unix   
+Package built using 73252/R 3.5.0; x86_64-pc-linux-gnu; 2017-09-14 05:09:07 UTC; unix   
 Checked with rchk version b118bbcfd496724b04ea20eaa5e1eeeb8635c2dd
 
 Function PROTECT_DEBUG
@@ -21,9 +21,13 @@ Function alpha_star
   [UP] unprotected variable labels while calling allocating function getListElement bnlearn/src/alpha.star.c:94
   [UP] unprotected variable labels while calling allocating function c_dataframe_column bnlearn/src/alpha.star.c:111
   [UP] unprotected variable labels while calling allocating function c_configurations bnlearn/src/alpha.star.c:112
+  [UP] unprotected variable labels while calling allocating function Rf_getAttrib(V,S:levels) bnlearn/src/alpha.star.c:115
+  [UP] unprotected variable labels while calling allocating function Rf_getAttrib(V,S:levels) bnlearn/src/alpha.star.c:118
+  [UP] unprotected variable labels while calling allocating function Rf_getAttrib(V,S:levels) bnlearn/src/alpha.star.c:120
   [UP] unprotected variable labels while calling allocating function Rprintf bnlearn/src/alpha.star.c:131
 
 Function aracne
+  [UP] unprotected variable nodes while calling allocating function Rf_getAttrib(?,S:levels) bnlearn/src/mi.matrix.c:135
   [UP] unprotected variable nodes while calling allocating function Rprintf bnlearn/src/mi.matrix.c:143
   [UP] unprotected variable nodes while calling allocating function mi_matrix bnlearn/src/mi.matrix.c:145
   [UP] unprotected variable nodes while calling allocating function Rprintf bnlearn/src/mi.matrix.c:147
@@ -52,10 +56,12 @@ Function bn_recovery
 Function c_entropy_loss
   [UP] allocating function c_dataframe_column may destroy its unprotected argument (nodes <arg 2>), which is later used. bnlearn/src/loss.c:70
   [UP] allocating function Rf_match may destroy its unprotected argument (nodes <arg 1>), which is later used. bnlearn/src/loss.c:72
+  [UP] unprotected variable nodes while calling allocating function c_is bnlearn/src/loss.c:82
   [UP] unprotected variable nodes while calling allocating function Rprintf bnlearn/src/loss.c:99
-  [UP] unprotected variable nodes while calling aERROR: too many states (abstraction error?) in function c_rbn_master
-llocating function getListElement bnlearn/src/loss.c:110
+  [UP] unprotected variable nodes while calling allocating function getListElement bnlearn/src/loss.c:110
+  [UP] unprotected variable nodes while calling allocating function r_fitted_node_label bnlearn/src/loss.c:114
   [UP] unprotected variable nodes while calling allocating function getListElement bnlearn/src/loss.c:120
+  [UP] unprotected variable nodes while calling allocating function Rf_getAttrib(?,S:dim) bnlearn/src/loss.c:121
   [UP] allocating function c_dloss may destroy its unprotected argument (nodes <arg 6>), which is later used. bnlearn/src/loss.c:123
   [UP] unprotected variable nodes while calling allocating function getListElement bnlearn/src/loss.c:130
   [UP] unprotected variable nodes while calling allocating function getListElement bnlearn/src/loss.c:131
@@ -71,6 +77,14 @@ llocating function getListElement bnlearn/src/loss.c:110
 
 Function c_unique_arcs
   [PB] has possible protection stack imbalance bnlearn/src/filter.arcs.c:110
+
+Function castelo_prior
+  [UP] allocating function Rf_match may destroy its unprotected argument (nodes <arg 1>), which is later used. bnlearn/src/graph.priors.c:90
+  [UP] allocating function Rf_match may destroy its unprotected argument (nodes <arg 1>), which is later used. bnlearn/src/graph.priors.c:97
+  [UP] allocating function Rf_match may destroy its unprotected argument (nodes <arg 1>), which is later used. bnlearn/src/graph.priors.c:103
+  [UP] unprotected variable nodes while calling allocating function Rprintf bnlearn/src/graph.priors.c:148
+  [UP] unprotected variable nodes while calling allocating function Rprintf bnlearn/src/graph.priors.c:152
+  [UP] unprotected variable nodes while calling allocating function Rprintf bnlearn/src/graph.priors.c:156
 
 Function dag2ug
   [UP] unprotected variable nodes while calling allocating function getListElement bnlearn/src/pdag2dag.c:65
@@ -133,8 +147,14 @@ Function fitted_vs_data
   [UP] allocating function Rf_match may destroy its unprotected argument (nodes <arg 1>), which is later used. bnlearn/src/sanitization.c:89
   [UP] unprotected variable vars while calling allocating function Rf_match bnlearn/src/sanitization.c:89
   [UP] unprotected variable nodes while calling allocating function Rf_match bnlearn/src/sanitization.c:91
+  [UP] unprotected variable nodes while calling allocating function r_fitted_node_label bnlearn/src/sanitization.c:99
+  [UP] unprotected variable nodes while calling allocating function Rf_getAttrib(?,S:class) bnlearn/src/sanitization.c:116
   [UP] unprotected variable nodes while calling allocating function Rf_warning bnlearn/src/sanitization.c:119
   [UP] unprotected variable nodes while calling allocating function Rf_warning bnlearn/src/sanitization.c:122
+  [UP] unprotected variable nodes while calling allocating function Rf_getAttrib(?,S:levels) bnlearn/src/sanitization.c:126
+  [UP] unprotected variable cur_var_levels while calling allocating function Rf_getAttrib(?,S:dimnames) bnlearn/src/sanitization.c:127
+  [UP] unprotected variable cur_var_levels while calling allocating function getListElement bnlearn/src/sanitization.c:127
+  [UP] unprotected variable nodes while calling allocating function Rf_getAttrib(?,S:dimnames) bnlearn/src/sanitization.c:127
   [UP] unprotected variable nodes while calling allocating function getListElement bnlearn/src/sanitization.c:127
 
 Function ic_2nodes
@@ -159,12 +179,14 @@ Function nbr2arcs
   [UP] unprotected variable names while calling allocating function getListElement bnlearn/src/bayesian.network.c:53
 
 Function nparams_cgnet
+  [UP] unprotected variable nodes while calling allocating function Rf_getAttrib(?,S:levels) bnlearn/src/nparams.c:23
   [UP] unprotected variable nodes while calling allocating function getListElement bnlearn/src/nparams.c:30
   [UP] allocating function Rf_match may destroy its unprotected argument (nodes <arg 1>), which is later used. bnlearn/src/nparams.c:31
   [UP] unprotected variable nodes while calling allocating function Rprintf bnlearn/src/nparams.c:48
 
 Function nparams_fitted
   [UP] unprotected variable nodes while calling allocating function getListElement bnlearn/src/nparams.c:79
+  [UP] unprotected variable nodes while calling allocating function Rf_getAttrib(?,S:dim) bnlearn/src/nparams.c:84
   [UP] unprotected variable nodes while calling allocating function getListElement bnlearn/src/nparams.c:119
   [UP] unprotected variable nodes while calling allocating function Rprintf bnlearn/src/nparams.c:140
 

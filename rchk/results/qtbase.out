@@ -1,0 +1,43 @@
+Package qtbase version 1.0.12
+Package built using 73252/R 3.5.0; x86_64-pc-linux-gnu; 2017-09-14 05:11:48 UTC; unix   
+Checked with rchk version b118bbcfd496724b04ea20eaa5e1eeeb8635c2dd
+
+Suspicious call (two or more unprotected arguments) to Rf_lang4 at InstanceObjectTable::methodClosure(char const*) const qtbase/src/InstanceObjectTable.cpp:34
+Suspicious call (two or more unprotected arguments) to Rf_findVarInFrame at RClass::findMethod(MethodCall const&) const qtbase/src/RClass.cpp:62
+Suspicious call (two or more unprotected arguments) to Rf_findVarInFrame at RClass::hasMethod(char const*, QFlags<Method::Qualifier>) const qtbase/src/RClass.cpp:76
+Suspicious call (two or more unprotected arguments) to Rf_findVarInFrame at RClass::implementsMethod(char const*) const qtbase/src/RClass.cpp:122
+Suspicious call (two or more unprotected arguments) to Rf_findVarInFrame at RClass::property(char const*) const qtbase/src/RClass.cpp:107
+
+Function InstanceObjectTable::get(char const*, Rboolean*) const
+  [UP] unprotected variable ans while calling allocating function InstanceObjectTable::methodExists(char const*) const qtbase/src/InstanceObjectTable.cpp:121
+
+Function RClass::findMethod(MethodCall const&) const
+  [UP] unprotected variable fun while calling allocating function RMethod::qualifiers() const qtbase/src/RClass.cpp:66
+
+Function RClass::methods(QFlags<Method::Qualifier>) const
+  [UP] allocating function R_lsInternal may destroy its unprotected argument (_env <arg 1>), which is later used. qtbase/src/RClass.cpp:47
+  [UP] allocating function Rf_findVarInFrame may destroy its unprotected argument (_env <arg 1>), which is later used. qtbase/src/RClass.cpp:51
+  [UP] unprotected variable _env while calling allocating function Rf_install qtbase/src/RClass.cpp:51
+  [UP] unprotected variable _env while calling allocating function RMethod::qualifiers() const qtbase/src/RClass.cpp:52
+  [UP] unprotected variable fun while calling allocating function RMethod::qualifiers() const qtbase/src/RClass.cpp:52
+
+Function RClass::property(char const*) const
+  [UP] unprotected variable rprop while calling allocating function Rf_asChar qtbase/src/RClass.cpp:113
+
+Function SmokeObject::orphanSexp()
+  [UP] unprotected variable old_classes while calling allocating function Rf_allocVector qtbase/src/SmokeObject.cpp:427
+  [UP] unprotected variable old_classes while calling allocating function Rf_mkChar qtbase/src/SmokeObject.cpp:428
+
+Function qvariant_from_sexp(SEXPREC*, int)
+  [UP] unprotected variable rlist while calling allocating function Rf_getAttrib(?,S:names) qtbase/src/convert.cpp:339
+  [UP] unprotected variable rlist while calling allocating function Rf_getAttrib(V,S:names) qtbase/src/convert.cpp:339
+
+Function qvariant_into_vector(QVariant, SEXPREC*, int)
+  [UP] unprotected variable levels while calling allocating function int QVariant::value<int>() const qtbase/src/convert.cpp:295
+  [UP] unprotected variable levels while calling allocating function QString QVariant::value<QString>() const qtbase/src/convert.cpp:297
+
+Function to_sexp(QPolygon)
+  [UP] allocating function Rf_nrows may destroy its unprotected argument (rpolygon <arg 1>), which is later used. qtbase/src/convert.cpp:718
+
+Function to_sexp(QPolygonF)
+  [UP] allocating function Rf_nrows may destroy its unprotected argument (rpolygon <arg 1>), which is later used. qtbase/src/convert.cpp:708

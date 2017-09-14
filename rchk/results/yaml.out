@@ -1,13 +1,21 @@
 Package yaml version 2.1.14
-Package built using 72729/R 3.5.0; x86_64-pc-linux-gnu; 2017-05-24 16:09:25 UTC; unix   
+Package built using 73252/R 3.5.0; x86_64-pc-linux-gnu; 2017-09-14 05:13:33 UTC; unix   
 Checked with rchk version b118bbcfd496724b04ea20eaa5e1eeeb8635c2dd
+
+Function R_has_class
+  [UP] unprotected variable class while calling allocating function Rf_getAttrib(?,S:class) yaml/src/r-ext.c:363
 
 Function convert_object
   [PB] has negative depth yaml/src/r-ext.c:946
   [PB] has possible protection stack imbalance yaml/src/r-ext.c:952
 
+Function emit_factor
+  [UP] unprotected variable levels while calling allocating function Rf_mkChar yaml/src/r-ext.c:1687
+  [UP] unprotected variable levels while calling allocating function emit_char yaml/src/r-ext.c:1698
+
 Function emit_object
   [UP] unprotected variable obj while calling allocating function yaml_emitter_emit yaml/src/r-ext.c:1755
+  [UP] allocating function R_has_class(V,?) may destroy its unprotected argument (obj <arg 1>), which is later used. yaml/src/r-ext.c:1760
   [UP] allocating function emit_factor(?,?,V) may destroy its unprotected argument (obj <arg 3>), which is later used. yaml/src/r-ext.c:1761
   [UP] unprotected variable names while calling allocating function yaml_emitter_emit yaml/src/r-ext.c:1833
   [UP] unprotected variable names while calling allocating function yaml_emitter_emit yaml/src/r-ext.c:1840

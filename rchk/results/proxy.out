@@ -1,5 +1,5 @@
 Package proxy version 0.4-17
-Package built using 72729/R 3.5.0; x86_64-pc-linux-gnu; 2017-05-24 16:07:38 UTC; unix   
+Package built using 73252/R 3.5.0; x86_64-pc-linux-gnu; 2017-09-14 05:11:45 UTC; unix   
 Checked with rchk version b118bbcfd496724b04ea20eaa5e1eeeb8635c2dd
 
 Suspicious call (two or more unprotected arguments) to Rf_setAttrib at R_apply_dist_binary_matrix proxy/src/apply.c:287
@@ -18,6 +18,10 @@ Suspicious call (two or more unprotected arguments) to Rf_setAttrib at R_subset_
 Suspicious call (two or more unprotected arguments) to Rf_setAttrib at R_subset_dist proxy/src/util.c:82
 Suspicious call (two or more unprotected arguments) to Rf_setAttrib at dists proxy/src/distance.c:304
 
+Function R_apply_dist_binary_matrix
+  [UP] unprotected variable d while calling allocating function Rf_install proxy/src/apply.c:290
+  [UP] unprotected variable d1 while calling allocating function Rf_getAttrib(?,S:dimnames) proxy/src/apply.c:300
+
 Function R_apply_dist_list
   [UP] unprotected variable d while calling allocating function Rf_install proxy/src/apply.c:180
   [UP] unprotected variable d1 while calling allocating function Rf_getAttrib(?,S:names) proxy/src/apply.c:190
@@ -28,3 +32,7 @@ Function R_apply_dist_list
   [UP] unprotected variable ty while calling allocating function Rf_coerceVector proxy/src/apply.c:227
   [UP] unprotected variable tx while calling allocating function R_CheckUserInterrupt proxy/src/apply.c:231
   [UP] unprotected variable ty while calling allocating function R_CheckUserInterrupt proxy/src/apply.c:231
+
+Function R_bjaccard
+  [UP] unprotected variable d while calling allocating function Rf_install proxy/src/distance.c:430
+  [UP] unprotected variable d1 while calling allocating function Rf_getAttrib(?,S:dimnames) proxy/src/distance.c:440

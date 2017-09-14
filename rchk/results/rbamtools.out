@@ -1,5 +1,5 @@
 Package rbamtools version 2.16.6
-Package built using 72729/R 3.5.0; x86_64-pc-linux-gnu; 2017-05-24 16:45:06 UTC; unix   
+Package built using 73252/R 3.5.0; x86_64-pc-linux-gnu; 2017-09-14 05:54:29 UTC; unix   
 Checked with rchk version b118bbcfd496724b04ea20eaa5e1eeeb8635c2dd
 
 Suspicious call (two or more unprotected arguments) to R_do_slot_assign at bam_count_segment_aligns rbamtools/src/rbamtools.cpp:4625
@@ -10,6 +10,15 @@ Suspicious call (two or more unprotected arguments) to R_do_slot_assign at bam_c
 
 Function atmptr<int>::atmptr(unsigned int)
   [PB] has possible protection stack imbalance rbamtools/src/./extptr.h:133
+
+Function bam_count_segment_aligns
+  [UP] unprotected variable pSeqCount while calling allocating function R_alloc rbamtools/src/rbamtools.cpp:4623
+  [UP] unprotected variable pSeqCount while calling allocating function Rf_allocVector rbamtools/src/rbamtools.cpp:4628
+  [UP] unprotected variable pSeqCount while calling allocating function Rf_allocVector rbamtools/src/rbamtools.cpp:4634
+
+Function bam_count_segment_melt_down
+  [UP] unprotected variable pInPosition while calling allocating function R_do_slot(?,S:count) rbamtools/src/rbamtools.cpp:4656
+  [UP] unprotected variable pInPosition while calling allocating function Rf_install rbamtools/src/rbamtools.cpp:4656
 
 Function bam_range_get_align_depth
   [UP] unprotected variable alignDepth while calling allocating function Rf_mkString rbamtools/src/rbamtools.cpp:2884

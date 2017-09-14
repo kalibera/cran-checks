@@ -1,9 +1,17 @@
 Package AlgDesign version 1.1-7.3
-Package built using 72729/R 3.5.0; x86_64-pc-linux-gnu; 2017-05-24 16:04:50 UTC; unix   
+Package built using 73252/R 3.5.0; x86_64-pc-linux-gnu; 2017-09-14 05:08:53 UTC; unix   
 Checked with rchk version b118bbcfd496724b04ea20eaa5e1eeeb8635c2dd
 
 Function BlockOpt
   [UP] unprotected variable Xi while calling allocating function Rf_coerceVector AlgDesign/src/OptBlock.c:3495
+  [UP] allocating function Rf_getAttrib(?,S:dim) may destroy its unprotected argument (Xi <arg 1>), which is later used. AlgDesign/src/OptBlock.c:3503
 
 Function FederovOpt
   [UP] unprotected variable Xi while calling allocating function Rf_coerceVector AlgDesign/src/FederovOpt.c:1990
+  [UP] allocating function Rf_getAttrib(?,S:dim) may destroy its unprotected argument (Xi <arg 1>), which is later used. AlgDesign/src/FederovOpt.c:1994
+
+Function GetFactorial
+  [UP] allocating function Rf_getAttrib(?,S:dim) may destroy its unprotected argument (Xi <arg 1>), which is later used. AlgDesign/src/Utility.c:51
+
+Function GetMixture
+  [UP] allocating function Rf_getAttrib(?,S:dim) may destroy its unprotected argument (Xi <arg 1>), which is later used. AlgDesign/src/Utility.c:148

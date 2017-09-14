@@ -1,5 +1,5 @@
 Package adaptivetau version 2.2-1
-Package built using 72729/R 3.5.0; x86_64-pc-linux-gnu; 2017-05-24 16:04:50 UTC; unix   
+Package built using 73252/R 3.5.0; x86_64-pc-linux-gnu; 2017-09-14 05:08:52 UTC; unix   
 Checked with rchk version b118bbcfd496724b04ea20eaa5e1eeeb8635c2dd
 
 Function CRList::CRList(int, bool)
@@ -22,4 +22,10 @@ Function CStochasticEqns::CStochasticEqns(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*
   [PB] has possible protection stack imbalance adaptivetau/src/adaptivetau.cpp:238
 
 Function CStochasticEqns::SetTLParams(SEXPREC*)
+  [UP] unprotected variable names while calling allocating function Rf_isInteger adaptivetau/src/adaptivetau.cpp:290
   [UP] unprotected variable names while calling allocating function Rf_warning adaptivetau/src/adaptivetau.cpp:297
+
+Function CStochasticEqns::x_CalcJacobian()
+  [UP] allocating function Rf_isMatrix may destroy its unprotected argument (res <arg 1>), which is later used. adaptivetau/src/adaptivetau.cpp:490
+  [UP] allocating function Rf_getAttrib(?,S:dim) may destroy its unprotected argument (res <arg 1>), which is later used. adaptivetau/src/adaptivetau.cpp:494
+  [UP] allocating function Rf_getAttrib(?,S:dim) may destroy its unprotected argument (res <arg 1>), which is later used. adaptivetau/src/adaptivetau.cpp:495
