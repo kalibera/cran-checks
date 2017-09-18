@@ -1,23 +1,17 @@
-Package vetr version 0.1.0
-Package built using 73252/R 3.5.0; x86_64-pc-linux-gnu; 2017-09-14 05:13:28 UTC; unix   
+Package vetr version 0.2.0
+Package built using 73296/R 3.5.0; x86_64-pc-linux-gnu; 2017-09-18 01:41:40 UTC; unix   
 Checked with rchk version b118bbcfd496724b04ea20eaa5e1eeeb8635c2dd
 
-Suspicious call (two or more unprotected arguments) to Rf_lang3 at ALIKEC_compare_class vetr/src/attr.c:180
-Suspicious call (two or more unprotected arguments) to Rf_lang3 at ALIKEC_compare_dimnames vetr/src/attr.c:724
-Suspicious call (two or more unprotected arguments) to Rf_lang3 at ALIKEC_compare_dimnames_wrap vetr/src/attr.c:542
-Suspicious call (two or more unprotected arguments) to Rf_lang3 at ALIKEC_compare_ts vetr/src/attr.c:786
+Function ALIKEC_alike_obj
+  [UP] allocating function Rf_xlength may destroy its unprotected argument (klass <arg 1>), which is later used. vetr/src/alike.c:136
+  [UP] allocating function Rf_asChar may destroy its unprotected argument (klass <arg 1>), which is later used. vetr/src/alike.c:145
+  [UP] unprotected variable klass while calling allocating function Rf_allocList vetr/src/alike.c:154
+  [UP] allocating function Rf_xlength may destroy its unprotected argument (klass_attrib <arg 1>), which is later used. vetr/src/alike.c:167
+  [UP] allocating function Rf_xlength may destroy its unprotected argument (klass_cur <arg 1>), which is later used. vetr/src/alike.c:180
+  [UP] allocating function Rf_getAttrib(?,S:package) may destroy its unprotected argument (klass_cur <arg 1>), which is later used. vetr/src/alike.c:189
+  [UP] allocating function Rf_xlength may destroy its unprotected argument (klass_cur_attrib <arg 1>), which is later used. vetr/src/alike.c:191
+  [UP] unprotected variable klass_cur while calling allocating function Rf_xlength vetr/src/alike.c:191
+  [UP] unprotected variable klass_cur_attrib while calling allocating function Rf_asChar vetr/src/alike.c:200
 
-Function ALIKEC_alike_rec
-  [UP] unprotected variable var_cur_val while calling allocating function Rf_findVarInFrame vetr/src/alike.c:507
-
-Function ALIKEC_compare_dimnames
-  [UP] unprotected variable prim_names while calling allocating function Rf_getAttrib(?,S:names) vetr/src/attr.c:565
-  [UP] unprotected variable prim_names while calling allocating function ALIKEC_alike_internal vetr/src/attr.c:626
-  [UP] unprotected variable sec_names while calling allocating function ALIKEC_alike_internal vetr/src/attr.c:626
-
-Function VALC_evaluate_recurse
-  [UP] unprotected variable err_attrib while calling allocating function ALIKEC_pad_or_quote vetr/src/eval.c:209
-
-Function VALC_settings_vet
-  [UP] unprotected variable set_names while calling allocating function Rf_allocVector vetr/src/settings.c:110
-  [UP] unprotected variable set_names while calling allocating function Rf_mkChar vetr/src/settings.c:112
+Function VALC_error_standard
+  [UP] unprotected variable err_attrib while calling allocating function ALIKEC_pad_or_quote vetr/src/eval.c:218
