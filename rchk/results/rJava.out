@@ -1,6 +1,6 @@
-Package rJava version 0.9-8
-Package built using 73252/R 3.5.0; x86_64-pc-linux-gnu; 2017-09-14 05:12:19 UTC; unix   
-Checked with rchk version b118bbcfd496724b04ea20eaa5e1eeeb8635c2dd
+Package rJava version 0.9-9
+Package built using 73545/R 3.5.0; x86_64-pc-linux-gnu; 2017-10-12 20:14:06 UTC; unix   
+Checked with rchk version 97ceff3509ba01fd98333a063217cf304ce9009c
 
 Suspicious call (two or more unprotected arguments) to R_do_slot_assign at ckx rJava/src/rJava.c:169
 Suspicious call (two or more unprotected arguments) to R_do_slot_assign at new_jarrayRef rJava/src/Rglue.c:832
@@ -11,49 +11,71 @@ Suspicious call (two or more unprotected arguments) to R_do_slot_assign at new_j
 Suspicious call (two or more unprotected arguments) to R_do_slot_assign at new_jobjRef rJava/src/Rglue.c:781
 Suspicious call (two or more unprotected arguments) to Rf_lcons at throwR rJava/src/rJava.c:101
 
+Function RJava_checkJVM
+  [UP] allocating function LOGICAL(V) may destroy its unprotected argument (r <arg 1>), which is later used. rJava/src/tools.c:131
+  [UP] allocating function LOGICAL(V) may destroy its unprotected argument (r <arg 1>), which is later used. rJava/src/tools.c:133
+
+Function RJava_has_jri_cb
+  [UP] allocating function DATAPTR(V) may destroy its unprotected argument (r <arg 1>), which is later used. rJava/src/Rglue.c:26
+
+Function RJava_needs_init
+  [UP] allocating function LOGICAL(V) may destroy its unprotected argument (r <arg 1>), which is later used. rJava/src/tools.c:141
+
 Function RcallMethod
+  [UP] allocating function DATAPTR(V) may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:523
   [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:525
   [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:526
+  [UP] allocating function DATAPTR(V) may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:536
   [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:538
   [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:539
+  [UP] allocating function DATAPTR(V) may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:549
   [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:551
   [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:552
+  [UP] allocating function DATAPTR(V) may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:562
   [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:564
   [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:565
+  [UP] allocating function DATAPTR(V) may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:575
   [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:577
   [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:578
+  [UP] allocating function DATAPTR(V) may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:588
   [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:590
   [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:591
+  [UP] allocating function DATAPTR(V) may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:601
   [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:603
   [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:604
+  [UP] allocating function DATAPTR(V) may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:614
   [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:616
   [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:617
 
 Function RcallSyncMethod
   [UP] unprotected variable e while calling allocating function REprintf rJava/src/Rglue.c:674
 
-Function RcreateArray
-  [UP] allocating function deserializeSEXP may destroy its unprotected argument (sref <arg 1>), which is later used. rJava/src/Rglue.c:987
-
 Function RgetField
-  [UP] allocating function deserializeSEXP may destroy its unprotected argument (obj <arg 1>), which is later used. rJava/src/fields.c:87
+  [UP] allocating function INTEGER(V) may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/fields.c:160
   [UP] unprotected variable e while calling allocating function releaseObject rJava/src/fields.c:161
+  [UP] allocating function INTEGER(V) may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/fields.c:170
   [UP] unprotected variable e while calling allocating function releaseObject rJava/src/fields.c:171
+  [UP] allocating function INTEGER(V) may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/fields.c:180
   [UP] unprotected variable e while calling allocating function releaseObject rJava/src/fields.c:181
+  [UP] allocating function INTEGER(V) may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/fields.c:190
   [UP] unprotected variable e while calling allocating function releaseObject rJava/src/fields.c:191
+  [UP] allocating function REAL(V) may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/fields.c:200
   [UP] unprotected variable e while calling allocating function releaseObject rJava/src/fields.c:201
+  [UP] allocating function LOGICAL(V) may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/fields.c:210
   [UP] unprotected variable e while calling allocating function releaseObject rJava/src/fields.c:211
+  [UP] allocating function REAL(V) may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/fields.c:220
   [UP] unprotected variable e while calling allocating function releaseObject rJava/src/fields.c:221
+  [UP] allocating function REAL(V) may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/fields.c:230
   [UP] unprotected variable e while calling allocating function releaseObject rJava/src/fields.c:231
 
-Function Rpar2jvalue
-  [UP] allocating function deserializeSEXP may destroy its unprotected argument (sref <arg 1>), which is later used. rJava/src/Rglue.c:362
+Function RidenticalRef
+  [UP] allocating function LOGICAL(V) may destroy its unprotected argument (r <arg 1>), which is later used. rJava/src/tools.c:102
 
-Function RsetField
-  [UP] allocating function deserializeSEXP may destroy its unprotected argument (obj <arg 1>), which is later used. rJava/src/fields.c:285
+Function RisAssignableFrom
+  [UP] allocating function LOGICAL(V) may destroy its unprotected argument (r <arg 1>), which is later used. rJava/src/tools.c:123
 
 Function RthrowException
-  [UP] allocating function deserializeSEXP may destroy its unprotected argument (exr <arg 1>), which is later used. rJava/src/Rglue.c:1054
+  [UP] allocating function DATAPTR(V) may destroy its unprotected argument (res <arg 1>), which is later used. rJava/src/Rglue.c:1064
 
 Function RtoString
   [UP] unprotected variable r while calling allocating function releaseObject rJava/src/tools.c:91
