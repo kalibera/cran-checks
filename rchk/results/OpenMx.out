@@ -1,6 +1,6 @@
-Package OpenMx version 2.7.17
-Package built using 73252/R 3.5.0; x86_64-pc-linux-gnu; 2017-09-14 05:48:40 UTC; unix   
-Checked with rchk version b118bbcfd496724b04ea20eaa5e1eeeb8635c2dd
+Package OpenMx version 2.7.18
+Package built using 73552/R 3.5.0; x86_64-pc-linux-gnu; 2017-10-15 21:49:41 UTC; unix   
+Checked with rchk version 97ceff3509ba01fd98333a063217cf304ce9009c
 
 Suspicious call (two or more unprotected arguments) to Rf_setAttrib at MLFitState::populateAttr(SEXPREC*) OpenMx/src/omxMLFitFunction.cpp:290
 Suspicious call (two or more unprotected arguments) to Rf_setAttrib at MLFitState::populateAttr(SEXPREC*) OpenMx/src/omxMLFitFunction.cpp:291
@@ -9,8 +9,8 @@ Suspicious call (two or more unprotected arguments) to Rf_setAttrib at omxGREMLE
 Suspicious call (two or more unprotected arguments) to Rf_setAttrib at omxLISRELExpectation::populateAttr(SEXPREC*) OpenMx/src/omxLISRELExpectation.cpp:99
 Suspicious call (two or more unprotected arguments) to Rf_setAttrib at omxNormalExpectation::populateAttr(SEXPREC*) OpenMx/src/omxNormalExpectation.cpp:76
 Suspicious call (two or more unprotected arguments) to Rf_setAttrib at omxRAMExpectation::populateAttr(SEXPREC*) OpenMx/src/omxRAMExpectation.cpp:109
-Suspicious call (two or more unprotected arguments) to Rf_setAttrib at omxWLSFitFunction::populateAttr(SEXPREC*) OpenMx/src/omxWLSFitFunction.cpp:266
-Suspicious call (two or more unprotected arguments) to Rf_setAttrib at omxWLSFitFunction::populateAttr(SEXPREC*) OpenMx/src/omxWLSFitFunction.cpp:268
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at omxWLSFitFunction::populateAttr(SEXPREC*) OpenMx/src/omxWLSFitFunction.cpp:244
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at omxWLSFitFunction::populateAttr(SEXPREC*) OpenMx/src/omxWLSFitFunction.cpp:246
 
 Function AlgebraFitFunction::init()
   [PB] has possible protection stack imbalance OpenMx/src/omxAlgebraFitFunction.cpp:240
@@ -18,46 +18,55 @@ Function AlgebraFitFunction::init()
 Function BA81Expect::populateAttr(SEXPREC*)
   [PB] has possible protection stack imbalance OpenMx/src/omxExpectationBA81.cpp:348
 
+Function ComputeBenchmark::initFromFrontend(omxState*, SEXPREC*)
+  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:1983
+
 Function ComputeBootstrap::computeImpl(FitContext*)
-  [UP] unprotected variable colNames while calling allocating function Rf_mkChar OpenMx/src/Compute.cpp:3056
-  [UP] unprotected variable colNames while calling allocating function Rf_allocVector OpenMx/src/Compute.cpp:3057
-  [UP] unprotected variable colNames while calling allocating function Rf_mkChar OpenMx/src/Compute.cpp:3058
-  [UP] unprotected variable colNames while calling allocating function Rf_allocVector OpenMx/src/Compute.cpp:3059
-  [UP] unprotected variable colNames while calling allocating function Rf_mkChar OpenMx/src/Compute.cpp:3061
-  [UP] unprotected variable colNames while calling allocating function Rf_allocVector OpenMx/src/Compute.cpp:3062
-  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:3175
+  [UP] allocating function SET_STRING_ELT(V,?,?) may destroy its unprotected argument (colNames <arg 1>), which is later used. OpenMx/src/Compute.cpp:3152
+  [UP] unprotected variable colNames while calling allocating function Rf_mkChar OpenMx/src/Compute.cpp:3152
+  [UP] unprotected variable colNames while calling allocating function Rf_allocVector OpenMx/src/Compute.cpp:3153
+  [UP] unprotected variable colNames while calling allocating function SET_VECTOR_ELT(?,?,V) OpenMx/src/Compute.cpp:3153
+  [UP] allocating function SET_STRING_ELT(V,?,?) may destroy its unprotected argument (colNames <arg 1>), which is later used. OpenMx/src/Compute.cpp:3154
+  [UP] unprotected variable colNames while calling allocating function Rf_mkChar OpenMx/src/Compute.cpp:3154
+  [UP] unprotected variable colNames while calling allocating function Rf_allocVector OpenMx/src/Compute.cpp:3155
+  [UP] unprotected variable colNames while calling allocating function SET_VECTOR_ELT(?,?,V) OpenMx/src/Compute.cpp:3155
+  [UP] allocating function SET_STRING_ELT(V,?,?) may destroy its unprotected argument (colNames <arg 1>), which is later used. OpenMx/src/Compute.cpp:3157
+  [UP] unprotected variable colNames while calling allocating function Rf_mkChar OpenMx/src/Compute.cpp:3157
+  [UP] unprotected variable colNames while calling allocating function Rf_allocVector OpenMx/src/Compute.cpp:3158
+  [UP] unprotected variable colNames while calling allocating function SET_VECTOR_ELT(?,?,V) OpenMx/src/Compute.cpp:3158
+  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:3271
 
 Function ComputeBootstrap::initFromFrontend(omxState*, SEXPREC*)
-  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:3044
+  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:3140
 
 Function ComputeCI::computeImpl(FitContext*)
-  [PB] has possible protection stack imbalance OpenMx/src/ComputeGD.cpp:1658
+  [PB] has possible protection stack imbalance OpenMx/src/ComputeGD.cpp:1659
 
 Function ComputeCI::initFromFrontend(omxState*, SEXPREC*)
-  [PB] has possible protection stack imbalance OpenMx/src/ComputeGD.cpp:813
+  [PB] has possible protection stack imbalance OpenMx/src/ComputeGD.cpp:814
 
 Function ComputeCI::reportResults(FitContext*, MxRList*, MxRList*)
-  [PB] has possible protection stack imbalance OpenMx/src/ComputeGD.cpp:1709
+  [PB] has possible protection stack imbalance OpenMx/src/ComputeGD.cpp:1710
 
 Function ComputeEM::MengRubinFamily(FitContext*)
-  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:2582
+  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:2678
 
 Function ComputeEM::initFromFrontend(omxState*, SEXPREC*)
-  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:2095
+  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:2191
 
 Function ComputeEM::reportResults(FitContext*, MxRList*, MxRList*)
-  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:2637
+  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:2733
 
 Function ComputeNR::initFromFrontend(omxState*, SEXPREC*)
   [PB] has possible protection stack imbalance OpenMx/src/ComputeNR.cpp:78
 
 Function ComputeReportDeriv::reportResults(FitContext*, MxRList*, MxRList*)
-  [UP] allocating function MxRList::add(char const*, SEXPREC*)(?,?,V) may destroy its unprotected argument (Rgradient <arg 3>), which is later used. OpenMx/src/Compute.cpp:2936
-  [UP] allocating function MxRList::add(char const*, SEXPREC*) may destroy its unprotected argument (Rhessian <arg 3>), which is later used. OpenMx/src/Compute.cpp:2943
-  [UP] allocating function MxRList::add(char const*, SEXPREC*) may destroy its unprotected argument (Rihessian <arg 3>), which is later used. OpenMx/src/Compute.cpp:2949
+  [UP] allocating function MxRList::add(char const*, SEXPREC*)(?,?,V) may destroy its unprotected argument (Rgradient <arg 3>), which is later used. OpenMx/src/Compute.cpp:3032
+  [UP] allocating function MxRList::add(char const*, SEXPREC*) may destroy its unprotected argument (Rhessian <arg 3>), which is later used. OpenMx/src/Compute.cpp:3039
+  [UP] allocating function MxRList::add(char const*, SEXPREC*) may destroy its unprotected argument (Rihessian <arg 3>), which is later used. OpenMx/src/Compute.cpp:3045
 
 Function ComputeTryH::initFromFrontend(omxState*, SEXPREC*)
-  [PB] has possible protection stack imbalance OpenMx/src/ComputeGD.cpp:1772
+  [PB] has possible protection stack imbalance OpenMx/src/ComputeGD.cpp:1773
 
 Function FitMultigroup::init()
   [PB] has possible protection stack imbalance OpenMx/src/fitMultigroup.cpp:134
@@ -69,7 +78,7 @@ Function MxRList::add(char const*, SEXPREC*)
   [PB] has possible protection stack imbalance OpenMx/src/./omxDefines.h:350
 
 Function MxRList::asR()
-  [PB] has possible protection stack imbalance OpenMx/src/glue.cpp:299
+  [PB] has possible protection stack imbalance OpenMx/src/glue.cpp:315
 
 Function ProtectedSEXP::ProtectedSEXP(SEXPREC*)
   [PB] has possible protection stack imbalance OpenMx/src/./omxDefines.h:380
@@ -90,10 +99,10 @@ Function makeFactor(SEXPREC*, int, char const**)
   [PB] has possible protection stack imbalance OpenMx/src/glue.cpp:74
 
 Function omxComputeGD::reportResults(FitContext*, MxRList*, MxRList*)
-  [PB] has possible protection stack imbalance OpenMx/src/ComputeGD.cpp:718
+  [PB] has possible protection stack imbalance OpenMx/src/ComputeGD.cpp:719
 
 Function omxComputeIterate::initFromFrontend(omxState*, SEXPREC*)
-  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:1856
+  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:1889
 
 Function omxComputeNM::reportResults(FitContext*, MxRList*, MxRList*)
   [PB] has possible protection stack imbalance OpenMx/src/ComputeNM.cpp:516
@@ -108,7 +117,7 @@ Function omxComputeNumericDeriv::reportResults(FitContext*, MxRList*, MxRList*)
   [PB] has possible protection stack imbalance OpenMx/src/omxHessianCalculation.cpp:521
 
 Function omxComputeSequence::initFromFrontend(omxState*, SEXPREC*)
-  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:1798
+  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:1831
 
 Function omxData::connectDynamicData(omxState*)
   [PB] has possible protection stack imbalance OpenMx/src/omxData.cpp:129
@@ -129,16 +138,19 @@ Function omxState::omxExportResults(MxRList*, FitContext*)
   [PB] has possible protection stack imbalance OpenMx/src/omxExportBackendState.cpp:79
 
 Function omxState::omxProcessMxDataEntities(SEXPREC*, SEXPREC*)
+  [UP] unprotected variable listNames while calling allocating function Rf_length OpenMx/src/omxImportFrontendState.cpp:38
+  [UP] unprotected variable listNames while calling allocating function VECTOR_ELT OpenMx/src/omxImportFrontendState.cpp:39
+  [UP] allocating function STRING_ELT may destroy its unprotected argument (listNames <arg 1>), which is later used. OpenMx/src/omxImportFrontendState.cpp:40
   [UP] unprotected variable listNames while calling allocating function omxState::omxNewDataFromMxData(SEXPREC*, char const*) OpenMx/src/omxImportFrontendState.cpp:40
 
 Function omxStateSpaceExpectation::populateAttr(SEXPREC*)
   [PB] has possible protection stack imbalance OpenMx/src/omxStateSpaceExpectation.cpp:440
 
 Function omxWLSFitFunction::populateAttr(SEXPREC*)
-  [PB] has possible protection stack imbalance OpenMx/src/omxWLSFitFunction.cpp:269
+  [PB] has possible protection stack imbalance OpenMx/src/omxWLSFitFunction.cpp:247
 
 Function readOpts(SEXPREC*, int*, int*)
-  [PB] has possible protection stack imbalance OpenMx/src/glue.cpp:400
+  [PB] has possible protection stack imbalance OpenMx/src/glue.cpp:416
 
 Function sparseInvert_wrapper(SEXPREC*)
   [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:432
