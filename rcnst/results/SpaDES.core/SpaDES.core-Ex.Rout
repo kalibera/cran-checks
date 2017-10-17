@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2017-10-12 r73545) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-10-16 r73554) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -1718,14 +1718,14 @@ The following object is masked from ‘package:base’:
 > inputs(sim) <- data.frame(file = tmpFile) # using only required column, "file"
 > inputs(sim) # see that it is not yet loaded, but when it is scheduled to be loaded
                              file     fun package objectName loadTime loaded
-1 /tmp/Rtmpkm8KDj/inputs/test.rds readRDS    base       test        0     NA
+1 /tmp/RtmprF3OQA/inputs/test.rds readRDS    base       test        0     NA
   arguments intervals
 1        NA        NA
 > simOut <- spades(sim)
-test read from /tmp/Rtmpkm8KDj/inputs/test.rds using readRDS
+test read from /tmp/RtmprF3OQA/inputs/test.rds using readRDS
 > inputs(simOut) # confirm it was loaded
                              file     fun package objectName loadTime loaded
-1 /tmp/Rtmpkm8KDj/inputs/test.rds readRDS    base       test        0   TRUE
+1 /tmp/RtmprF3OQA/inputs/test.rds readRDS    base       test        0   TRUE
   arguments intervals
 1        NA        NA
 > simOut$test
@@ -1805,13 +1805,13 @@ Maps5 read from /home/tomas/cran/rcnst/lib/quickPlot/maps/percentPine.tif using 
 +                paths = list(outputPath = tmpdir))
 > outputs(sim) # To see what will be saved, when, what filename
   objectName                                         file     fun package
-1    tempObj /tmp/Rtmpkm8KDj/outputs/tempObj_second10.rds saveRDS    base
+1    tempObj /tmp/RtmprF3OQA/outputs/tempObj_second10.rds saveRDS    base
   saveTime saved arguments
 1       10    NA        NA
 > sim <- spades(sim)
 > outputs(sim) # To see that it was saved, when, what filename
   objectName                                         file     fun package
-1    tempObj /tmp/Rtmpkm8KDj/outputs/tempObj_second10.rds saveRDS    base
+1    tempObj /tmp/RtmprF3OQA/outputs/tempObj_second10.rds saveRDS    base
   saveTime saved arguments
 1       10  TRUE        NA
 > 
@@ -1821,16 +1821,16 @@ Maps5 read from /home/tomas/cran/rcnst/lib/quickPlot/maps/percentPine.tif using 
 > sim <- spades(sim)
 > outputs(sim) # To see that it was saved, when, what filename.
    objectName saveTime                                         file     fun
-1     tempObj        1 /tmp/Rtmpkm8KDj/outputs/tempObj_second01.rds saveRDS
-2     tempObj        2 /tmp/Rtmpkm8KDj/outputs/tempObj_second02.rds saveRDS
-3     tempObj        3 /tmp/Rtmpkm8KDj/outputs/tempObj_second03.rds saveRDS
-4     tempObj        4 /tmp/Rtmpkm8KDj/outputs/tempObj_second04.rds saveRDS
-5     tempObj        5 /tmp/Rtmpkm8KDj/outputs/tempObj_second05.rds saveRDS
-6     tempObj        6 /tmp/Rtmpkm8KDj/outputs/tempObj_second06.rds saveRDS
-7     tempObj        7 /tmp/Rtmpkm8KDj/outputs/tempObj_second07.rds saveRDS
-8     tempObj        8 /tmp/Rtmpkm8KDj/outputs/tempObj_second08.rds saveRDS
-9     tempObj        9 /tmp/Rtmpkm8KDj/outputs/tempObj_second09.rds saveRDS
-10    tempObj       10 /tmp/Rtmpkm8KDj/outputs/tempObj_second10.rds saveRDS
+1     tempObj        1 /tmp/RtmprF3OQA/outputs/tempObj_second01.rds saveRDS
+2     tempObj        2 /tmp/RtmprF3OQA/outputs/tempObj_second02.rds saveRDS
+3     tempObj        3 /tmp/RtmprF3OQA/outputs/tempObj_second03.rds saveRDS
+4     tempObj        4 /tmp/RtmprF3OQA/outputs/tempObj_second04.rds saveRDS
+5     tempObj        5 /tmp/RtmprF3OQA/outputs/tempObj_second05.rds saveRDS
+6     tempObj        6 /tmp/RtmprF3OQA/outputs/tempObj_second06.rds saveRDS
+7     tempObj        7 /tmp/RtmprF3OQA/outputs/tempObj_second07.rds saveRDS
+8     tempObj        8 /tmp/RtmprF3OQA/outputs/tempObj_second08.rds saveRDS
+9     tempObj        9 /tmp/RtmprF3OQA/outputs/tempObj_second09.rds saveRDS
+10    tempObj       10 /tmp/RtmprF3OQA/outputs/tempObj_second10.rds saveRDS
    package saved arguments
 1     base  TRUE        NA
 2     base  TRUE        NA
@@ -1867,12 +1867,12 @@ Maps5 read from /home/tomas/cran/rcnst/lib/quickPlot/maps/percentPine.tif using 
 5   tempObj2        7   saveRDS    base
 6        df1       10 write.csv   utils
                                            file saved arguments
-1  /tmp/Rtmpkm8KDj/outputs/tempObj_second01.rds  TRUE        NA
-2  /tmp/Rtmpkm8KDj/outputs/tempObj_second04.rds  TRUE        NA
-3 /tmp/Rtmpkm8KDj/outputs/tempObj2_second02.rds  TRUE        NA
-4 /tmp/Rtmpkm8KDj/outputs/tempObj2_second06.rds  TRUE        NA
-5 /tmp/Rtmpkm8KDj/outputs/tempObj2_second07.rds  TRUE        NA
-6      /tmp/Rtmpkm8KDj/outputs/df1_second10.csv  TRUE     FALSE
+1  /tmp/RtmprF3OQA/outputs/tempObj_second01.rds  TRUE        NA
+2  /tmp/RtmprF3OQA/outputs/tempObj_second04.rds  TRUE        NA
+3 /tmp/RtmprF3OQA/outputs/tempObj2_second02.rds  TRUE        NA
+4 /tmp/RtmprF3OQA/outputs/tempObj2_second06.rds  TRUE        NA
+5 /tmp/RtmprF3OQA/outputs/tempObj2_second07.rds  TRUE        NA
+6      /tmp/RtmprF3OQA/outputs/df1_second10.csv  TRUE     FALSE
 > 
 > # read one back in just to test it all worked as planned
 > newObj <- read.csv(dir(tmpdir, pattern = "second10.csv", full.name = TRUE))
@@ -2052,7 +2052,7 @@ list()
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  46.936 2.764 48.624 0 0 
+Time elapsed:  39.26 3.12 40.29 0 0 
 > grDevices::dev.off()
 null device 
           1 
