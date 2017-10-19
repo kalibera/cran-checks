@@ -1,74 +1,8 @@
-Package purrr version 0.2.3
-Package built using 73252/R 3.5.0; x86_64-pc-linux-gnu; 2017-09-14 05:38:44 UTC; unix   
-Checked with rchk version b118bbcfd496724b04ea20eaa5e1eeeb8635c2dd
+Package purrr version 0.2.4
+Package built using 73557/R 3.5.0; x86_64-pc-linux-gnu; 2017-10-19 01:12:52 UTC; unix   
+Checked with rchk version 97ceff3509ba01fd98333a063217cf304ce9009c
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
-Function call_loop
-  [UP] unprotected variable i_val while calling allocating function Rf_allocVector purrr/src/map.c:26
-  [UP] unprotected variable i_val while calling allocating function R_CheckUserInterrupt purrr/src/map.c:29
-  [UP] unprotected variable i_val while calling allocating function R_forceAndCall purrr/src/map.c:34
-  [UP] unprotected variable i_val while calling allocating function set_vector_value purrr/src/map.c:41
-
-Function find_offset
-  [UP] unprotected variable names while calling allocating function Rf_translateCharUTF8 purrr/src/extract.c:46
-  [UP] unprotected variable names while calling allocating function Rf_translateCharUTF8 purrr/src/extract.c:54
-
-Function flatten_impl
-  [UP] unprotected variable x_names while calling allocating function Rf_getAttrib(?,S:names) purrr/src/flatten.c:27
-  [UP] unprotected variable x_names while calling allocating function Rf_getAttrib(V,S:names) purrr/src/flatten.c:27
-  [UP] unprotected variable x_names while calling allocating function Rf_allocVector purrr/src/flatten.c:39
-  [UP] unprotected variable x_names while calling allocating function Rf_allocVector purrr/src/flatten.c:40
-  [UP] unprotected variable x_names while calling allocating function Rf_setAttrib(V,S:names,V) purrr/src/flatten.c:42
-  [UP] unprotected variable x_names while calling allocating function Rf_getAttrib(?,S:names) purrr/src/flatten.c:50
-  [UP] unprotected variable names_j while calling allocating function Rf_ScalarInteger purrr/src/flatten.c:56
-  [UP] unprotected variable x_names while calling allocating function Rf_ScalarInteger purrr/src/flatten.c:56
-  [UP] unprotected variable names_j while calling allocating function Rf_ScalarReal purrr/src/flatten.c:57
-  [UP] unprotected variable x_names while calling allocating function Rf_ScalarReal purrr/src/flatten.c:57
-  [UP] unprotected variable names_j while calling allocating function Rf_ScalarString purrr/src/flatten.c:58
-  [UP] unprotected variable x_names while calling allocating function Rf_ScalarString purrr/src/flatten.c:58
-  [UP] unprotected variable x_names while calling allocating function Rf_mkChar purrr/src/flatten.c:67
-  [UP] unprotected variable names_j while calling allocating function R_CheckUserInterrupt purrr/src/flatten.c:71
-  [UP] unprotected variable x_names while calling allocating function R_CheckUserInterrupt purrr/src/flatten.c:71
-
-Function map2_impl
-  [UP] unprotected variable x_val while calling allocating function Rf_eval purrr/src/map.c:92
-  [UP] unprotected variable x_val while calling allocating function Rf_ScalarInteger purrr/src/map.c:109
-  [UP] unprotected variable x_val while calling allocating function Rf_lang3(S:[[,?,?) purrr/src/map.c:110
-  [UP] unprotected variable x_val while calling allocating function Rf_lang3(S:[[,?,?) purrr/src/map.c:111
-  [UP] unprotected variable x_val while calling allocating function Rf_lang4(?,?,?,S:...) purrr/src/map.c:112
-  [UP] unprotected variable x_val while calling allocating function call_loop purrr/src/map.c:114
-
-Function pmap_impl
-  [UP] unprotected variable l_val while calling allocating function Rf_asChar purrr/src/map.c:125
-  [UP] allocating function Rf_getAttrib(V,S:names) may destroy its unprotected argument (l_val <arg 1>), which is later used. purrr/src/map.c:159
-  [UP] unprotected variable l_names while calling allocating function Rf_asChar purrr/src/map.c:162
-  [UP] unprotected variable l_val while calling allocating function Rf_asChar purrr/src/map.c:162
-  [UP] unprotected variable l_names while calling allocating function Rf_install purrr/src/map.c:163
-  [UP] unprotected variable l_val while calling allocating function Rf_install purrr/src/map.c:163
-  [UP] unprotected variable l_names while calling allocating function Rf_install purrr/src/map.c:164
-  [UP] unprotected variable l_val while calling allocating function Rf_install purrr/src/map.c:164
-  [UP] unprotected variable l_names while calling allocating function Rf_ScalarInteger purrr/src/map.c:165
-  [UP] unprotected variable l_val while calling allocating function Rf_ScalarInteger purrr/src/map.c:165
-  [UP] unprotected variable l_names while calling allocating function Rf_lang1(S:...) purrr/src/map.c:172
-  [UP] unprotected variable l_val while calling allocating function Rf_lang1(S:...) purrr/src/map.c:172
-  [UP] unprotected variable l_names while calling allocating function Rf_ScalarInteger purrr/src/map.c:180
-  [UP] unprotected variable l_val while calling allocating function Rf_ScalarInteger purrr/src/map.c:180
-  [UP] unprotected variable l_names while calling allocating function Rf_install purrr/src/map.c:181
-  [UP] unprotected variable l_names while calling allocating function Rf_lang3(S:c,V,?) purrr/src/map.c:181
-  [UP] unprotected variable l_val while calling allocating function Rf_install purrr/src/map.c:181
-  [UP] unprotected variable l_val while calling allocating function Rf_lang3(S:c,V,?) purrr/src/map.c:181
-  [UP] unprotected variable l_names while calling allocating function Rf_lang3(S:[[,?,?) purrr/src/map.c:182
-  [UP] unprotected variable l_val while calling allocating function Rf_lang3(S:[[,?,?) purrr/src/map.c:182
-  [UP] unprotected variable l_names while calling allocating function Rf_lcons purrr/src/map.c:184
-  [UP] unprotected variable l_val while calling allocating function Rf_lcons purrr/src/map.c:184
-  [UP] unprotected variable l_names while calling allocating function Rf_install purrr/src/map.c:186
-  [UP] unprotected variable l_val while calling allocating function Rf_install purrr/src/map.c:186
-  [UP] unprotected variable l_val while calling allocating function Rf_lcons purrr/src/map.c:191
-  [UP] unprotected variable l_val while calling allocating function call_loop purrr/src/map.c:193
-
-Function transpose_impl
-  [UP] unprotected variable names1 while calling allocating function Rf_allocVector purrr/src/transpose.c:26
-
-Function vflatten_impl
-  [UP] unprotected variable names_j while calling allocating function set_vector_value purrr/src/flatten.c:115
-  [UP] unprotected variable names_j while calling allocating function Rf_mkChar purrr/src/flatten.c:118
-  [UP] unprotected variable names_j while calling allocating function R_CheckUserInterrupt purrr/src/flatten.c:120
+Function extract_impl
+  [UP] unprotected variable x while calling allocating function VECTOR_ELT purrr/src/extract.c:144
+  [UP] allocating function Rf_length may destroy its unprotected argument (x <arg 1>), which is later used. purrr/src/extract.c:166
