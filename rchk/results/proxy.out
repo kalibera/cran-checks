@@ -1,38 +1,113 @@
-Package proxy version 0.4-17
-Package built using 73252/R 3.5.0; x86_64-pc-linux-gnu; 2017-09-14 05:11:45 UTC; unix   
-Checked with rchk version b118bbcfd496724b04ea20eaa5e1eeeb8635c2dd
-
-Suspicious call (two or more unprotected arguments) to Rf_setAttrib at R_apply_dist_binary_matrix proxy/src/apply.c:287
-Suspicious call (two or more unprotected arguments) to Rf_lcons at R_apply_dist_data_frame proxy/src/apply.c:440
-Suspicious call (two or more unprotected arguments) to Rf_setAttrib at R_apply_dist_data_frame proxy/src/apply.c:459
-Suspicious call (two or more unprotected arguments) to Rf_setAttrib at R_apply_dist_data_frame proxy/src/apply.c:460
-Suspicious call (two or more unprotected arguments) to Rf_setAttrib at R_apply_dist_data_frame proxy/src/apply.c:477
-Suspicious call (two or more unprotected arguments) to Rf_setAttrib at R_apply_dist_data_frame proxy/src/apply.c:482
-Suspicious call (two or more unprotected arguments) to Rf_setAttrib at R_apply_dist_list proxy/src/apply.c:177
-Suspicious call (two or more unprotected arguments) to Rf_setAttrib at R_apply_dist_matrix proxy/src/apply.c:69
-Suspicious call (two or more unprotected arguments) to Rf_setAttrib at R_bjaccard proxy/src/distance.c:427
-Suspicious call (two or more unprotected arguments) to Rf_setAttrib at R_cosine proxy/src/distance.c:868
-Suspicious call (two or more unprotected arguments) to Rf_setAttrib at R_edice proxy/src/distance.c:718
-Suspicious call (two or more unprotected arguments) to Rf_setAttrib at R_ejaccard proxy/src/distance.c:566
-Suspicious call (two or more unprotected arguments) to Rf_setAttrib at R_subset_dist proxy/src/util.c:78
-Suspicious call (two or more unprotected arguments) to Rf_setAttrib at R_subset_dist proxy/src/util.c:82
-Suspicious call (two or more unprotected arguments) to Rf_setAttrib at dists proxy/src/distance.c:304
+Package proxy version 0.4-19
+Package built using 73636/R 3.5.0; x86_64-pc-linux-gnu; 2017-10-29 17:54:10 UTC; unix   
+Checked with rchk version 97ceff3509ba01fd98333a063217cf304ce9009c
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
 Function R_apply_dist_binary_matrix
-  [UP] unprotected variable d while calling allocating function Rf_install proxy/src/apply.c:290
-  [UP] unprotected variable d1 while calling allocating function Rf_getAttrib(?,S:dimnames) proxy/src/apply.c:300
+  [UP] allocating function LENGTH may destroy its unprotected argument (s <arg 1>), which is later used. proxy/src/apply.c:358
+
+Function R_apply_dist_data_frame
+  [UP] unprotected variable rx while calling allocating function Rf_setAttrib(V,S:class,?) proxy/src/apply.c:485
+  [UP] unprotected variable rx while calling allocating function Rf_allocVector proxy/src/apply.c:487
+  [UP] unprotected variable rx while calling allocating function Rf_getAttrib(?,S:names) proxy/src/apply.c:488
+  [UP] unprotected variable rx while calling allocating function Rf_setAttrib(V,S:names,?) proxy/src/apply.c:488
+  [UP] unprotected variable rx while calling allocating function Rf_allocVector proxy/src/apply.c:489
+  [UP] unprotected variable rx while calling allocating function Rf_install proxy/src/apply.c:489
+  [UP] unprotected variable rx while calling allocating function Rf_setAttrib(V,S:row.names,V) proxy/src/apply.c:489
+  [UP] unprotected variable rx while calling allocating function Rf_setAttrib(V,S:class,?) proxy/src/apply.c:491
+  [UP] unprotected variable ry while calling allocating function Rf_setAttrib(V,S:class,?) proxy/src/apply.c:491
+  [UP] unprotected variable rx while calling allocating function VECTOR_ELT proxy/src/apply.c:496
+  [UP] unprotected variable ry while calling allocating function VECTOR_ELT proxy/src/apply.c:496
+  [UP] unprotected variable rx while calling allocating function Rf_allocVector proxy/src/apply.c:499
+  [UP] unprotected variable rx while calling allocating function SET_VECTOR_ELT(V,?,?) proxy/src/apply.c:499
+  [UP] unprotected variable ry while calling allocating function Rf_allocVector proxy/src/apply.c:499
+  [UP] unprotected variable ry while calling allocating function SET_VECTOR_ELT(V,?,?) proxy/src/apply.c:499
+  [UP] unprotected variable rx while calling allocating function Rf_allocVector proxy/src/apply.c:503
+  [UP] unprotected variable rx while calling allocating function SET_VECTOR_ELT(V,?,?) proxy/src/apply.c:503
+  [UP] unprotected variable ry while calling allocating function Rf_allocVector proxy/src/apply.c:503
+  [UP] unprotected variable ry while calling allocating function SET_VECTOR_ELT(V,?,?) proxy/src/apply.c:503
+  [UP] unprotected variable rx while calling allocating function Rf_cons(V,?) proxy/src/apply.c:508
+  [UP] unprotected variable rx while calling allocating function Rf_lcons proxy/src/apply.c:508
+  [UP] unprotected variable ry while calling allocating function Rf_cons(V,?) proxy/src/apply.c:508
+  [UP] unprotected variable ry while calling allocating function Rf_lcons proxy/src/apply.c:508
+  [UP] unprotected variable rx while calling allocating function VECTOR_ELT proxy/src/apply.c:513
+  [UP] unprotected variable rx while calling allocating function VECTOR_ELT(V,?) proxy/src/apply.c:513
+  [UP] unprotected variable rx while calling allocating function setElement proxy/src/apply.c:513
+  [UP] unprotected variable ry while calling allocating function VECTOR_ELT proxy/src/apply.c:513
+  [UP] unprotected variable ry while calling allocating function VECTOR_ELT(V,?) proxy/src/apply.c:513
+  [UP] unprotected variable ry while calling allocating function setElement proxy/src/apply.c:513
+  [UP] allocating function INTEGER(V) may destroy its unprotected argument (ry <arg 1>), which is later used. proxy/src/apply.c:514
+  [UP] unprotected variable rx while calling allocating function INTEGER(V) proxy/src/apply.c:514
+  [UP] unprotected variable rx while calling allocating function VECTOR_ELT proxy/src/apply.c:526
+  [UP] unprotected variable rx while calling allocating function VECTOR_ELT(V,?) proxy/src/apply.c:526
+  [UP] unprotected variable rx while calling allocating function setElement proxy/src/apply.c:526
+  [UP] unprotected variable ry while calling allocating function VECTOR_ELT proxy/src/apply.c:526
+  [UP] unprotected variable ry while calling allocating function VECTOR_ELT(V,?) proxy/src/apply.c:526
+  [UP] unprotected variable ry while calling allocating function setElement proxy/src/apply.c:526
+  [UP] allocating function INTEGER(V) may destroy its unprotected argument (rx <arg 1>), which is later used. proxy/src/apply.c:527
+  [UP] unprotected variable ry while calling allocating function INTEGER(V) proxy/src/apply.c:527
+  [UP] unprotected variable rx while calling allocating function Rf_eval proxy/src/apply.c:528
+  [UP] unprotected variable ry while calling allocating function Rf_eval proxy/src/apply.c:528
+  [UP] allocating function LENGTH may destroy its unprotected argument (s <arg 1>), which is later used. proxy/src/apply.c:529
+  [UP] unprotected variable rx while calling allocating function LENGTH proxy/src/apply.c:529
+  [UP] unprotected variable ry while calling allocating function LENGTH proxy/src/apply.c:529
+  [UP] unprotected variable rx while calling allocating function REAL proxy/src/apply.c:533
+  [UP] unprotected variable rx while calling allocating function REAL(V) proxy/src/apply.c:533
+  [UP] unprotected variable rx while calling allocating function Rf_coerceVector proxy/src/apply.c:533
+  [UP] unprotected variable ry while calling allocating function REAL proxy/src/apply.c:533
+  [UP] unprotected variable ry while calling allocating function REAL(V) proxy/src/apply.c:533
+  [UP] unprotected variable ry while calling allocating function Rf_coerceVector proxy/src/apply.c:533
+  [UP] unprotected variable rx while calling allocating function REAL proxy/src/apply.c:535
+  [UP] unprotected variable rx while calling allocating function REAL(V) proxy/src/apply.c:535
+  [UP] unprotected variable ry while calling allocating function REAL proxy/src/apply.c:535
+  [UP] unprotected variable ry while calling allocating function REAL(V) proxy/src/apply.c:535
+  [UP] unprotected variable rx while calling allocating function R_CheckUserInterrupt proxy/src/apply.c:537
+  [UP] unprotected variable ry while calling allocating function R_CheckUserInterrupt proxy/src/apply.c:537
 
 Function R_apply_dist_list
-  [UP] unprotected variable d while calling allocating function Rf_install proxy/src/apply.c:180
-  [UP] unprotected variable d1 while calling allocating function Rf_getAttrib(?,S:names) proxy/src/apply.c:190
-  [UP] unprotected variable ty while calling allocating function Rf_lcons proxy/src/apply.c:205
-  [UP] unprotected variable tx while calling allocating function Rf_eval proxy/src/apply.c:222
-  [UP] unprotected variable ty while calling allocating function Rf_eval proxy/src/apply.c:222
-  [UP] unprotected variable tx while calling allocating function Rf_coerceVector proxy/src/apply.c:227
-  [UP] unprotected variable ty while calling allocating function Rf_coerceVector proxy/src/apply.c:227
-  [UP] unprotected variable tx while calling allocating function R_CheckUserInterrupt proxy/src/apply.c:231
-  [UP] unprotected variable ty while calling allocating function R_CheckUserInterrupt proxy/src/apply.c:231
+  [UP] unprotected variable d while calling allocating function Rf_install proxy/src/apply.c:182
+  [UP] unprotected variable d1 while calling allocating function Rf_getAttrib(?,S:names) proxy/src/apply.c:192
+  [UP] unprotected variable ty while calling allocating function Rf_lcons proxy/src/apply.c:207
+  [UP] unprotected variable tx while calling allocating function VECTOR_ELT proxy/src/apply.c:212
+  [UP] unprotected variable ty while calling allocating function VECTOR_ELT proxy/src/apply.c:212
+  [UP] unprotected variable tx while calling allocating function VECTOR_ELT proxy/src/apply.c:223
+  [UP] unprotected variable ty while calling allocating function VECTOR_ELT proxy/src/apply.c:223
+  [UP] unprotected variable tx while calling allocating function Rf_eval proxy/src/apply.c:224
+  [UP] unprotected variable ty while calling allocating function Rf_eval proxy/src/apply.c:224
+  [UP] allocating function LENGTH may destroy its unprotected argument (s <arg 1>), which is later used. proxy/src/apply.c:225
+  [UP] unprotected variable tx while calling allocating function LENGTH proxy/src/apply.c:225
+  [UP] unprotected variable ty while calling allocating function LENGTH proxy/src/apply.c:225
+  [UP] unprotected variable tx while calling allocating function REAL proxy/src/apply.c:229
+  [UP] unprotected variable tx while calling allocating function REAL(V) proxy/src/apply.c:229
+  [UP] unprotected variable tx while calling allocating function Rf_coerceVector proxy/src/apply.c:229
+  [UP] unprotected variable ty while calling allocating function REAL proxy/src/apply.c:229
+  [UP] unprotected variable ty while calling allocating function REAL(V) proxy/src/apply.c:229
+  [UP] unprotected variable ty while calling allocating function Rf_coerceVector proxy/src/apply.c:229
+  [UP] unprotected variable tx while calling allocating function REAL proxy/src/apply.c:231
+  [UP] unprotected variable tx while calling allocating function REAL(V) proxy/src/apply.c:231
+  [UP] unprotected variable ty while calling allocating function REAL proxy/src/apply.c:231
+  [UP] unprotected variable ty while calling allocating function REAL(V) proxy/src/apply.c:231
+  [UP] unprotected variable tx while calling allocating function R_CheckUserInterrupt proxy/src/apply.c:233
+  [UP] unprotected variable ty while calling allocating function R_CheckUserInterrupt proxy/src/apply.c:233
 
 Function R_bjaccard
-  [UP] unprotected variable d while calling allocating function Rf_install proxy/src/distance.c:430
-  [UP] unprotected variable d1 while calling allocating function Rf_getAttrib(?,S:dimnames) proxy/src/distance.c:440
+  [UP] allocating function LENGTH(V) may destroy its unprotected argument (r <arg 1>), which is later used. proxy/src/distance.c:391
+  [UP] allocating function REAL(V) may destroy its unprotected argument (r <arg 1>), which is later used. proxy/src/distance.c:392
+  [UP] allocating function REAL(V) may destroy its unprotected argument (r <arg 1>), which is later used. proxy/src/distance.c:394
+
+Function logicalSubscript
+  [UP] unprotected variable indx while calling allocating function LOGICAL proxy/src/arrayIndex.c:43
+  [UP] unprotected variable indx while calling allocating function LOGICAL proxy/src/arrayIndex.c:44
+  [UP] allocating function INTEGER(V) may destroy its unprotected argument (indx <arg 1>), which is later used. proxy/src/arrayIndex.c:45
+  [UP] allocating function INTEGER(V) may destroy its unprotected argument (indx <arg 1>), which is later used. proxy/src/arrayIndex.c:47
+
+Function nullSubscript
+  [UP] allocating function INTEGER(V) may destroy its unprotected argument (indx <arg 1>), which is later used. proxy/src/arrayIndex.c:20
+
+Function positiveSubscript
+  [UP] unprotected variable indx while calling allocating function INTEGER proxy/src/arrayIndex.c:81
+  [UP] allocating function INTEGER(V) may destroy its unprotected argument (indx <arg 1>), which is later used. proxy/src/arrayIndex.c:82
+  [UP] unprotected variable indx while calling allocating function INTEGER proxy/src/arrayIndex.c:82
+
+Function stringSubscript
+  [UP] unprotected variable names_j while calling allocating function STRING_ELT proxy/src/arrayIndex.c:180
