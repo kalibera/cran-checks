@@ -1,8 +1,7 @@
-Package lazyeval version 0.2.0
-Package built using 73252/R 3.5.0; x86_64-pc-linux-gnu; 2017-09-14 05:10:42 UTC; unix   
-Checked with rchk version b118bbcfd496724b04ea20eaa5e1eeeb8635c2dd
-
-Suspicious call (two or more unprotected arguments) to Rf_eval at lhs_name lazyeval/src/name.c:44
+Package lazyeval version 0.2.1
+Package built using 73639/R 3.5.0; x86_64-pc-linux-gnu; 2017-10-30 11:05:18 UTC; unix   
+Checked with rchk version 97ceff3509ba01fd98333a063217cf304ce9009c
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
 Function base_promise
   [UP] allocating function is_lazy_load may destroy its unprotected argument (obj <arg 1>), which is later used. lazyeval/src/expr.c:25
@@ -10,18 +9,12 @@ Function base_promise
 Function base_promise_env
   [UP] allocating function is_lazy_load may destroy its unprotected argument (obj <arg 1>), which is later used. lazyeval/src/expr.c:58
 
-Function lhs_name
-  [UP] unprotected variable names while calling allocating function is_formula lazyeval/src/name.c:40
-  [UP] unprotected variable names while calling allocating function Rf_eval lazyeval/src/name.c:44
-  [UP] unprotected variable names while calling allocating function env lazyeval/src/name.c:44
-  [UP] unprotected variable names while calling allocating function lhs lazyeval/src/name.c:44
-  [UP] unprotected variable names while calling allocating function as_name lazyeval/src/name.c:46
-  [UP] unprotected variable names while calling allocating function env lazyeval/src/name.c:50
-  [UP] unprotected variable names while calling allocating function make_formula1 lazyeval/src/name.c:50
+Function make_lazy
+  [UP] unprotected variable promise while calling allocating function Rf_asLogical lazyeval/src/lazy.c:51
 
 Function make_lazy_dots
-  [UP] unprotected variable dots while calling allocating function Rf_allocVector lazyeval/src/lazy.c:83
-  [UP] unprotected variable dots while calling allocating function Rf_allocVector lazyeval/src/lazy.c:84
+  [UP] unprotected variable dots while calling allocating function Rf_asLogical lazyeval/src/lazy.c:62
+  [UP] unprotected variable dots while calling allocating function Rf_asLogical lazyeval/src/lazy.c:63
 
 Function promise_as_lazy
   [UP] allocating function is_lazy_load may destroy its unprotected argument (obj <arg 1>), which is later used. lazyeval/src/lazy.c:24
