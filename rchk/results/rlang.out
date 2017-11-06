@@ -1,26 +1,11 @@
-Package rlang version 0.1.2
-Package built using 73252/R 3.5.0; x86_64-pc-linux-gnu; 2017-09-14 05:12:06 UTC; unix   
-Checked with rchk version b118bbcfd496724b04ea20eaa5e1eeeb8635c2dd
+Package rlang version 0.1.4
+Package built using 73671/R 3.5.0; x86_64-pc-linux-gnu; 2017-11-06 03:12:17 UTC; unix   
+Checked with rchk version 97ceff3509ba01fd98333a063217cf304ce9009c
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
-Suspicious call (two or more unprotected arguments) to Rf_lang2 at rlang_namespace rlang/src/export.c:21
-Suspicious call (two or more unprotected arguments) to Rf_defineVar at rlang_register_pointer rlang/src/export.c:35
+Function replace_na_
+  [UP] unprotected variable new_value while calling allocating function STRING_ELT rlang/src/replace-na.c:105
+  [UP] allocating function SET_STRING_ELT may destroy its unprotected argument (new_value <arg 3>), which is later used. rlang/src/replace-na.c:106
 
-Function atom_squash
-  [UP] unprotected variable out_names while calling allocating function atom_squash rlang/src/splice.c:42
-  [UP] unprotected variable out_names while calling allocating function vec_copy_coerce_n rlang/src/splice.c:44
-  [UP] unprotected variable out_names while calling allocating function names rlang/src/splice.c:47
-  [UP] unprotected variable out_names while calling allocating function has_name_at rlang/src/splice.c:50
-  [UP] unprotected variable out_names while calling allocating function names rlang/src/splice.c:51
-
-Function list_squash
-  [UP] unprotected variable out_names while calling allocating function list_squash rlang/src/splice.c:78
-  [UP] unprotected variable out_names while calling allocating function names rlang/src/splice.c:82
-  [UP] unprotected variable out_names while calling allocating function names rlang/src/splice.c:83
-
-Function rlang_capturedots
-  [UP] unprotected variable dots while calling allocating function Rf_allocVector rlang/src/capture.c:82
-  [UP] unprotected variable dots while calling allocating function Rf_allocVector rlang/src/capture.c:83
-  [UP] unprotected variable dots while calling allocating function Rf_setAttrib(V,S:names,V) rlang/src/capture.c:84
-  [UP] unprotected variable dots while calling allocating function capture_promise rlang/src/capture.c:92
-  [UP] unprotected variable dots while calling allocating function capture_arg rlang/src/capture.c:98
-  [UP] unprotected variable dots while calling allocating function unescape_sexp rlang/src/capture.c:103
+Function unescape_character_in_copy
+  [UP] allocating function unescape_sexp may destroy its unprotected argument (old_elt <arg 1>), which is later used. rlang/src/symbol.c:59
