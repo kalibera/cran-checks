@@ -1,6 +1,7 @@
 Package dbarts version 0.8-7
-Package built using 73252/R 3.5.0; x86_64-pc-linux-gnu; 2017-09-14 05:09:51 UTC; unix   
-Checked with rchk version b118bbcfd496724b04ea20eaa5e1eeeb8635c2dd
+Package built using 73707/R 3.5.0; x86_64-pc-linux-gnu; 2017-11-10 16:14:09 UTC; unix   
+Checked with rchk version 63f79d910f5835174fcaa5a0a7d2409348f7d2ac
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
 Suspicious call (two or more unprotected arguments) to SET_VECTOR_ELT at dbarts_makeModelMatrixFromDataFrame dbarts/src/makeModelMatrixFromDataFrame.c:81
 
@@ -12,21 +13,13 @@ Function (anonymous namespace)::createCustomLoss(dbarts::xval::LossFunctorDefini
   [PB] has possible protection stack imbalance dbarts/src/R_interface_crossvalidate.cpp:287
 
 Function createMatrix
-  [UP] unprotected variable names while calling allocating function Rf_getAttrib(?,S:dimnames) dbarts/src/makeModelMatrixFromDataFrame.c:288
-  [UP] unprotected variable names while calling allocating function Rf_getAttrib(?,S:dim) dbarts/src/makeModelMatrixFromDataFrame.c:317
-  [UP] unprotected variable names while calling allocating function Rf_getAttrib(?,S:dimnames) dbarts/src/makeModelMatrixFromDataFrame.c:319
   [UP] unprotected variable names while calling allocating function Rf_mkChar dbarts/src/makeModelMatrixFromDataFrame.c:327
   [UP] unprotected variable names while calling allocating function Rf_mkChar dbarts/src/makeModelMatrixFromDataFrame.c:333
-  [UP] unprotected variable names while calling allocating function Rf_getAttrib(?,S:dim) dbarts/src/makeModelMatrixFromDataFrame.c:347
-  [UP] unprotected variable names while calling allocating function Rf_getAttrib(?,S:dimnames) dbarts/src/makeModelMatrixFromDataFrame.c:349
   [UP] unprotected variable names while calling allocating function Rf_mkChar dbarts/src/makeModelMatrixFromDataFrame.c:357
   [UP] unprotected variable names while calling allocating function Rf_mkChar dbarts/src/makeModelMatrixFromDataFrame.c:363
-  [UP] unprotected variable names while calling allocating function Rf_getAttrib(?,S:levels) dbarts/src/makeModelMatrixFromDataFrame.c:377
   [UP] allocating function setFactorColumnName may destroy its unprotected argument (names <arg 1>), which is later used. dbarts/src/makeModelMatrixFromDataFrame.c:387
-  [UP] allocating function setFactorColumnName may destroy its unprotected argument (levels <arg 3>), which is later used. dbarts/src/makeModelMatrixFromDataFrame.c:392
   [UP] allocating function setFactorColumnName may destroy its unprotected argument (names <arg 1>), which is later used. dbarts/src/makeModelMatrixFromDataFrame.c:392
   [UP] allocating function setFactorColumnName may destroy its unprotected argument (names <arg 1>), which is later used. dbarts/src/makeModelMatrixFromDataFrame.c:408
-  [UP] allocating function setFactorColumnName may destroy its unprotected argument (levels <arg 3>), which is later used. dbarts/src/makeModelMatrixFromDataFrame.c:414
   [UP] allocating function setFactorColumnName may destroy its unprotected argument (names <arg 1>), which is later used. dbarts/src/makeModelMatrixFromDataFrame.c:414
 
 Function dbarts::createStateExpressionFromFit(dbarts::BARTFit const&)
@@ -34,26 +27,12 @@ Function dbarts::createStateExpressionFromFit(dbarts::BARTFit const&)
   [UP] unprotected variable slotExpr while calling allocating function Rf_mkChar dbarts/src/R_interface_common.cpp:302
   [PB] has possible protection stack imbalance dbarts/src/R_interface_common.cpp:307
 
-Function dbarts::initializeDataFromExpression(dbarts::Data&, SEXPREC*)
-  [UP] allocating function rc_assertDimConstraints may destroy its unprotected argument (slotExpr <arg 1>), which is later used. dbarts/src/R_interface_common.cpp:196
-  [UP] allocating function Rf_getAttrib(?,S:dim) may destroy its unprotected argument (slotExpr <arg 1>), which is later used. dbarts/src/R_interface_common.cpp:197
-  [UP] allocating function rc_assertIntConstraints may destroy its unprotected argument (slotExpr <arg 1>), which is later used. dbarts/src/R_interface_common.cpp:206
-  [UP] allocating function rc_assertIntConstraints may destroy its unprotected argument (slotExpr <arg 1>), which is later used. dbarts/src/R_interface_common.cpp:257
-
-Function dbarts::initializeModelFromExpression(dbarts::Model&, SEXPREC*, dbarts::Control const&)
-  [UP] allocating function Rf_getAttrib(?,S:power) may destroy its unprotected argument (priorExpr <arg 1>), which is later used. dbarts/src/R_interface_common.cpp:142
-  [UP] unprotected variable priorExpr while calling allocating function Rf_install dbarts/src/R_interface_common.cpp:142
-  [UP] allocating function Rf_getAttrib(?,S:df) may destroy its unprotected argument (priorExpr <arg 1>), which is later used. dbarts/src/R_interface_common.cpp:163
-  [UP] unprotected variable priorExpr while calling allocating function Rf_install dbarts/src/R_interface_common.cpp:163
-
 Function dbarts::storeStateExpressionFromFit(dbarts::BARTFit const&, SEXPREC*)
-  [UP] allocating function Rf_getAttrib(?,S:dim) may destroy its unprotected argument (slotExpr <arg 1>), which is later used. dbarts/src/R_interface_common.cpp:317
   [UP] allocating function rc_setDims may destroy its unprotected argument (slotExpr <arg 1>), which is later used. dbarts/src/R_interface_common.cpp:323
   [UP] unprotected variable slotExpr while calling allocating function Rf_install dbarts/src/R_interface_common.cpp:325
   [UP] unprotected variable slotExpr while calling allocating function rc_allocateInSlot(?,S:fit.total,?,?) dbarts/src/R_interface_common.cpp:325
   [UP] unprotected variable slotExpr while calling allocating function Rf_install dbarts/src/R_interface_common.cpp:326
   [UP] unprotected variable slotExpr while calling allocating function rc_allocateInSlot(?,S:trees,?,?) dbarts/src/R_interface_common.cpp:326
-  [UP] unprotected variable slotExpr while calling allocating function Rf_mkChar dbarts/src/R_interface_common.cpp:357
 
 Function ext_rng_createDefault
   [UP] unprotected variable seedsExpr while calling allocating function GetRNGstate dbarts/src/external/randomBase.c:154

@@ -1,6 +1,6 @@
 Package unfoldr version 0.6.1
-Package built using 73615/R 3.5.0; x86_64-pc-linux-gnu; 2017-10-26 01:12:00 UTC; unix   
-Checked with rchk version 97ceff3509ba01fd98333a063217cf304ce9009c
+Package built using 73707/R 3.5.0; x86_64-pc-linux-gnu; 2017-11-10 16:17:40 UTC; unix   
+Checked with rchk version 63f79d910f5835174fcaa5a0a7d2409348f7d2ac
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
 Function SetupSphereSystem
@@ -21,26 +21,11 @@ Function buildRCallSpheres(SEXPREC*, SEXPREC*)
 Function convert_C_Cylinder(SEXPREC*)
   [UP] unprotected variable R_angles while calling allocating function Rf_asReal unfoldr/src/SimCylinder.cpp:532
   [UP] unprotected variable R_angles while calling allocating function getListElement(SEXPREC*, char const*) unfoldr/src/SimCylinder.cpp:532
-  [UP] allocating function REAL may destroy its unprotected argument (R_angles <arg 1>), which is later used. unfoldr/src/SimCylinder.cpp:533
   [UP] unprotected variable R_angles while calling allocating function Rf_asReal unfoldr/src/SimCylinder.cpp:533
   [UP] unprotected variable R_angles while calling allocating function getListElement(SEXPREC*, char const*) unfoldr/src/SimCylinder.cpp:533
 
-Function convert_C_Sphere(SEXPREC*)
-  [UP] allocating function REAL may destroy its unprotected argument (R_ctr <arg 1>), which is later used. unfoldr/src/SimSphere.cpp:377
-
-Function convert_C_Spheroid(SEXPREC*)
-  [UP] allocating function REAL may destroy its unprotected argument (R_ab <arg 1>), which is later used. unfoldr/src/SimEllipsoid.cpp:516
-  [UP] allocating function REAL may destroy its unprotected argument (R_angles <arg 1>), which is later used. unfoldr/src/SimEllipsoid.cpp:516
-  [UP] unprotected variable R_angles while calling allocating function REAL unfoldr/src/SimEllipsoid.cpp:516
-
 Function getCall(SEXPREC*, SEXPREC*, SEXPREC*)
-  [UP] unprotected variable names while calling allocating function VECTOR_ELT unfoldr/src/Utils.cpp:72
-  [UP] allocating function STRING_ELT may destroy its unprotected argument (names <arg 1>), which is later used. unfoldr/src/Utils.cpp:73
   [UP] unprotected variable names while calling allocating function Rf_install unfoldr/src/Utils.cpp:73
-
-Function getListElement(SEXPREC*, char const*)
-  [UP] unprotected variable names while calling allocating function Rf_length unfoldr/src/Utils.cpp:230
-  [UP] allocating function STRING_ELT may destroy its unprotected argument (names <arg 1>), which is later used. unfoldr/src/Utils.cpp:231
 
 Function getRCallParam(SEXPREC*, SEXPREC*)
   [PB] has possible protection stack imbalance unfoldr/src/Utils.cpp:154

@@ -1,6 +1,7 @@
 Package igraph version 1.1.2
-Package built using 73252/R 3.5.0; x86_64-pc-linux-gnu; 2017-09-14 05:18:25 UTC; unix   
-Checked with rchk version b118bbcfd496724b04ea20eaa5e1eeeb8635c2dd
+Package built using 73707/R 3.5.0; x86_64-pc-linux-gnu; 2017-11-10 16:22:56 UTC; unix   
+Checked with rchk version 63f79d910f5835174fcaa5a0a7d2409348f7d2ac
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
 Suspicious call (two or more unprotected arguments) to Rf_lang2 at R_igraph_ac_all_other igraph/src/rinterface.c:1641
 Suspicious call (two or more unprotected arguments) to Rf_lang3 at R_igraph_ac_all_other igraph/src/rinterface.c:1645
@@ -27,20 +28,6 @@ Function R_SEXP_to_attr_comb
 
 Function R_SEXP_to_igraph_copy
   [PB] has possible protection stack imbalance igraph/src/rinterface.c:3118
-
-Function R_SEXP_to_sparsemat
-  [UP] unprotected variable Dim while calling allocating function R_do_slot(?,S:i) igraph/src/rinterface.c:2759
-  [UP] unprotected variable Dim while calling allocating function Rf_install igraph/src/rinterface.c:2759
-  [UP] unprotected variable Dim while calling allocating function R_do_slot(?,S:p) igraph/src/rinterface.c:2760
-  [UP] unprotected variable Dim while calling allocating function Rf_install igraph/src/rinterface.c:2760
-  [UP] unprotected variable i while calling allocating function R_do_slot(?,S:p) igraph/src/rinterface.c:2760
-  [UP] unprotected variable i while calling allocating function Rf_install igraph/src/rinterface.c:2760
-  [UP] unprotected variable Dim while calling allocating function R_do_slot(?,S:x) igraph/src/rinterface.c:2761
-  [UP] unprotected variable Dim while calling allocating function Rf_install igraph/src/rinterface.c:2761
-  [UP] unprotected variable i while calling allocating function R_do_slot(?,S:x) igraph/src/rinterface.c:2761
-  [UP] unprotected variable i while calling allocating function Rf_install igraph/src/rinterface.c:2761
-  [UP] unprotected variable p while calling allocating function R_do_slot(?,S:x) igraph/src/rinterface.c:2761
-  [UP] unprotected variable p while calling allocating function Rf_install igraph/src/rinterface.c:2761
 
 Function R_igraph_attribute_combine_edges
   [PB] has possible protection stack imbalance igraph/src/rinterface.c:2044
@@ -89,8 +76,7 @@ Function R_igraph_dominator_tree
 Function R_igraph_get_incidence
   [UP] unprotected variable row_ids while calling allocating function igraph_vector_init igraph/src/rinterface.c:12026
   [UP] unprotected variable row_ids while calling allocating function igraph_error igraph/src/rinterface.c:12027
-  [UP] unprotected variable row_ids while calling allocating function Rf_allocVector igraph/srERROR: too many states (abstraction error?) in function R_igraph_scg_adjacency
-c/rinterface.c:12030
+  [UP] unprotected variable row_ids while calling allocating function Rf_allocVector igraph/src/rinterface.c:12030
 
 Function R_igraph_isomorphic_bliss
   [UP] unprotected variable map12 while calling allocating function igraph_vector_init igraph/src/rinterface.c:14753
@@ -110,7 +96,8 @@ Function R_igraph_layout_sugiyama
 Function R_igraph_maxflow
   [UP] unprotected variable flow while calling allocating function igraph_vector_init igraph/src/rinterface.c:13898
   [UP] unprotected variable flow while calling allocating function igraph_error igraph/src/rinterface.c:13899
-  [UP] unprotected variable flow while calling allocating function Rf_allocVector igraph/src/rinterface.c:13902
+  [UP] unprotected variable flow while calling allocating function Rf_allocVector igrapERROR: too many states (abstraction error?) in function R_igraph_scg_adjacency
+h/src/rinterface.c:13902
   [UP] unprotected variable cut while calling allocating function igraph_vector_init igraph/src/rinterface.c:13903
   [UP] unprotected variable flow while calling allocating function igraph_vector_init igraph/src/rinterface.c:13903
   [UP] unprotected variable cut while calling allocating function igraph_error igraph/src/rinterface.c:13904

@@ -1,6 +1,6 @@
 Package OpenMx version 2.8.3
-Package built using 73681/R 3.5.0; x86_64-pc-linux-gnu; 2017-11-07 04:52:49 UTC; unix   
-Checked with rchk version 97ceff3509ba01fd98333a063217cf304ce9009c
+Package built using 73707/R 3.5.0; x86_64-pc-linux-gnu; 2017-11-10 16:54:52 UTC; unix   
+Checked with rchk version 63f79d910f5835174fcaa5a0a7d2409348f7d2ac
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
 Suspicious call (two or more unprotected arguments) to Rf_setAttrib at MLFitState::populateAttr(SEXPREC*) OpenMx/src/omxMLFitFunction.cpp:290
@@ -23,18 +23,12 @@ Function ComputeBenchmark::initFromFrontend(omxState*, SEXPREC*)
   [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:1983
 
 Function ComputeBootstrap::computeImpl(FitContext*)
-  [UP] allocating function SET_STRING_ELT(V,?,?) may destroy its unprotected argument (colNames <arg 1>), which is later used. OpenMx/src/Compute.cpp:3152
   [UP] unprotected variable colNames while calling allocating function Rf_mkChar OpenMx/src/Compute.cpp:3152
   [UP] unprotected variable colNames while calling allocating function Rf_allocVector OpenMx/src/Compute.cpp:3153
-  [UP] unprotected variable colNames while calling allocating function SET_VECTOR_ELT(?,?,V) OpenMx/src/Compute.cpp:3153
-  [UP] allocating function SET_STRING_ELT(V,?,?) may destroy its unprotected argument (colNames <arg 1>), which is later used. OpenMx/src/Compute.cpp:3154
   [UP] unprotected variable colNames while calling allocating function Rf_mkChar OpenMx/src/Compute.cpp:3154
   [UP] unprotected variable colNames while calling allocating function Rf_allocVector OpenMx/src/Compute.cpp:3155
-  [UP] unprotected variable colNames while calling allocating function SET_VECTOR_ELT(?,?,V) OpenMx/src/Compute.cpp:3155
-  [UP] allocating function SET_STRING_ELT(V,?,?) may destroy its unprotected argument (colNames <arg 1>), which is later used. OpenMx/src/Compute.cpp:3157
   [UP] unprotected variable colNames while calling allocating function Rf_mkChar OpenMx/src/Compute.cpp:3157
   [UP] unprotected variable colNames while calling allocating function Rf_allocVector OpenMx/src/Compute.cpp:3158
-  [UP] unprotected variable colNames while calling allocating function SET_VECTOR_ELT(?,?,V) OpenMx/src/Compute.cpp:3158
   [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:3271
 
 Function ComputeBootstrap::initFromFrontend(omxState*, SEXPREC*)
@@ -139,9 +133,6 @@ Function omxState::omxExportResults(MxRList*, FitContext*)
   [PB] has possible protection stack imbalance OpenMx/src/omxExportBackendState.cpp:79
 
 Function omxState::omxProcessMxDataEntities(SEXPREC*, SEXPREC*)
-  [UP] unprotected variable listNames while calling allocating function Rf_length OpenMx/src/omxImportFrontendState.cpp:38
-  [UP] unprotected variable listNames while calling allocating function VECTOR_ELT OpenMx/src/omxImportFrontendState.cpp:39
-  [UP] allocating function STRING_ELT may destroy its unprotected argument (listNames <arg 1>), which is later used. OpenMx/src/omxImportFrontendState.cpp:40
   [UP] unprotected variable listNames while calling allocating function omxState::omxNewDataFromMxData(SEXPREC*, char const*) OpenMx/src/omxImportFrontendState.cpp:40
 
 Function omxStateSpaceExpectation::populateAttr(SEXPREC*)
