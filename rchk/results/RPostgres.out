@@ -1,0 +1,10 @@
+Package RPostgres version 1.0-3
+Package built using 73859/R 3.5.0; x86_64-pc-linux-gnu; 2017-12-07 18:29:38 UTC; unix   
+Checked with rchk version 63f79d910f5835174fcaa5a0a7d2409348f7d2ac
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+Function DbColumn::operator SEXPREC*() const
+  [UP] allocating function DbColumnStorage::copy_to(SEXPREC*, DATA_TYPE, int) const may destroy its unprotected argument (ret <arg 2>), which is later used. RPostgres/src/DbColumn.cpp:79
+
+Function DbColumnStorage::allocate(long, DATA_TYPE)
+  [UP] allocating function DbColumnStorage::set_attribs_from_datatype(SEXPREC*, DATA_TYPE) may destroy its unprotected argument (ret <arg 1>), which is later used. RPostgres/src/DbColumnStorage.cpp:43
