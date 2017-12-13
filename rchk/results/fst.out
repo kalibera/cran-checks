@@ -1,0 +1,49 @@
+Package fst version 0.8.0
+Package built using 73905/R 3.5.0; x86_64-pc-linux-gnu; 2017-12-13 10:44:29 UTC; unix   
+Checked with rchk version 63f79d910f5835174fcaa5a0a7d2409348f7d2ac
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at DoubleColumn::Annotate(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) fst/src/./fst_column.h:278
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at FstTable::SetFactorColumn(IFactorColumn*, int) fst/src/fst_table.cpp:456
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at IntegerColumn::Annotate(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) fst/src/./fst_column.h:374
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at IntegerColumn::Annotate(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) fst/src/./fst_column.h:379
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at fdsReadFactorVec_v5(std::__1::basic_ifstream<char, std::__1::char_traits<char> >&, SEXPREC*&, unsigned long long, unsigned int, unsigned int, unsigned int) fst/src/fstcore_v1/factor/factor_v5.cpp:66
+
+Function BlobContainer::BlobContainer(unsigned long long)
+  [PB] has possible protection stack imbalance fst/src/./fst_type_factory.h:40
+
+Function BlockReaderChar::AllocateVec(unsigned long long)
+  [PB] has possible protection stack imbalance fst/src/fst_blockrunner_char.cpp:132
+
+Function ByteColumn::ByteColumn(int)
+  [PB] has possible protection stack imbalance fst/src/./fst_column.h:395
+
+Function DoubleColumn::Annotate(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+  [UP] unprotected variable timeZone while calling allocating function Rf_install fst/src/./fst_column.h:274
+
+Function DoubleColumn::DoubleColumn(int, FstColumnAttribute, short)
+  [PB] has possible protection stack imbalance fst/src/./fst_column.h:254
+
+Function FactorColumn::FactorColumn(int, FstColumnAttribute)
+  [PB] has possible protection stack imbalance fst/src/./fst_column.h:91
+
+Function FstTable::InitTable(unsigned int, unsigned long long)
+  [PB] has possible protection stack imbalance fst/src/fst_table.cpp:379
+
+Function Int64Column::Int64Column(int, FstColumnAttribute, short)
+  [PB] has possible protection stack imbalance fst/src/./fst_column.h:172
+
+Function IntegerColumn::IntegerColumn(int, FstColumnAttribute, short)
+  [PB] has possible protection stack imbalance fst/src/./fst_column.h:355
+
+Function LogicalColumn::LogicalColumn(int)
+  [PB] has possible protection stack imbalance fst/src/./fst_column.h:124
+
+Function StringArray::AllocateArray(unsigned int)
+  [PB] has possible protection stack imbalance fst/src/./fst_column.h:45
+
+Function fstcomp(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] unprotected variable <unnamed var:   %121 = alloca %struct.SEXPREC*, align 8> while calling allocating function FstCompressor::~FstCompressor() fst/src/fst_compress.cpp:126
+
+Function fstdecomp(SEXPREC*)
+  [UP] unprotected variable <unnamed var:   %118 = alloca %struct.SEXPREC*, align 8> while calling allocating function FstCompressor::~FstCompressor() fst/src/fst_compress.cpp:156
