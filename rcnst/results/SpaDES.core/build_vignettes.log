@@ -1,112 +1,27 @@
-* using log directory ‘/home/tomas/cran/rcnst/check/SpaDES.tools.Rcheck’
-* using R Under development (unstable) (2017-12-14 r73916)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* checking for file ‘SpaDES.tools/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘SpaDES.tools’ version ‘0.1.0’
-* checking package namespace information ... OK
-* checking package dependencies ... OK
-* checking if this is a source package ... OK
-* checking if there is a namespace ... OK
-* checking for executable files ... OK
-* checking for hidden files and directories ... OK
-* checking for portable file names ... OK
-* checking for sufficient/correct file permissions ... OK
-* checking whether package ‘SpaDES.tools’ can be installed ... OK
-* checking package directory ... OK
-* checking DESCRIPTION meta-information ... OK
-* checking top-level files ... OK
-* checking for left-over files ... OK
-* checking index information ... OK
-* checking package subdirectories ... OK
-* checking R files for non-ASCII characters ... OK
-* checking R files for syntax errors ... OK
-* checking whether the package can be loaded ... OK
-* checking whether the package can be loaded with stated dependencies ... OK
-* checking whether the package can be unloaded cleanly ... OK
-* checking whether the namespace can be loaded with stated dependencies ... OK
-* checking whether the namespace can be unloaded cleanly ... OK
-* checking loading without being on the library search path ... OK
-* checking dependencies in R code ... NOTE
-Namespace in Imports field not imported from: ‘fastdigest’
-  All declared Imports should be used.
-* checking S3 generic/method consistency ... OK
-* checking replacement functions ... OK
-* checking foreign function calls ... OK
-* checking R code for possible problems ... OK
-* checking Rd files ... OK
-* checking Rd metadata ... OK
-* checking Rd cross-references ... OK
-* checking for missing documentation entries ... OK
-* checking for code/documentation mismatches ... OK
-* checking Rd \usage sections ... OK
-* checking Rd contents ... OK
-* checking for unstated dependencies in examples ... OK
-* checking line endings in C/C++/Fortran sources/headers ... OK
-* checking compiled code ... NOTE
-Note: information on .o files is not available
-* checking examples ... ERROR
-Running examples in ‘SpaDES.tools-Ex.R’ failed
-The error most likely occurred in:
+Warning in engine$weave(file, quiet = quiet, encoding = enc) :
+  Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
+Warning in engine$weave(file, quiet = quiet, encoding = enc) :
+  Pandoc (>= 1.12.3) and/or pandoc-citeproc not available. Falling back to R Markdown v1.
 
-> ### Name: cir
-> ### Title: Identify pixels in a circle or ring (donut) around an object.
-> ### Aliases: cir cir,RasterLayer,SpatialPoints,missing-method
-> ###   cir,RasterLayer,missing,numeric-method
-> ###   cir,RasterLayer,missing,missing-method
-> ###   cir,RasterLayer,matrix,missing-method
-> 
-> ### ** Examples
-> 
-> library(data.table)
-> library(sp)
-> library(raster)
+Attaching package: 'igraph'
 
-Attaching package: ‘raster’
+The following objects are masked from 'package:stats':
 
-The following object is masked from ‘package:data.table’:
+    decompose, spectrum
 
-    shift
+The following object is masked from 'package:base':
 
-> library(quickPlot)
-> 
-> set.seed(1642)
-> 
-> # circle centred
-> ras <- raster(extent(0, 15, 0, 15), res = 1, val = 0)
-> middleCircle <- cir(ras)
-> ras[middleCircle[, "indices"]] <- 1
-> circlePoints <- SpatialPoints(middleCircle[, c("x", "y")])
-> if (interactive()) {
-+   clearPlot()
-+   Plot(ras)
-+   Plot(circlePoints, addTo = "ras")
-+ }
-> 
-> # circles non centred
-> ras <- randomPolygons(ras, numTypes = 4)
-> n <- 2
-> agent <- SpatialPoints(coords = cbind(x = stats::runif(n, xmin(ras), xmax(ras)),
-+                                       y = stats::runif(n, xmin(ras), xmax(ras))))
-> 
-> cirs <- cir(ras, agent, maxRadius = 15, simplify = TRUE)
-> cirsSP <- SpatialPoints(coords = cirs[, c("x", "y")])
-> cirsRas <- raster(ras)
-> cirsRas[] <- 0
-> cirsRas[cirs[, "indices"]] <- 1
-> 
-> if (interactive()) {
-+   clearPlot()
-+   Plot(ras)
-+   Plot(cirsRas, addTo = "ras", cols = c("transparent", "#00000055"))
-+   Plot(agent, addTo = "ras")
-+   Plot(cirsSP, addTo = "ras")
-+ }
-> 
-> # Example comparing rings and cir
-> a <- raster(extent(0, 30, 0, 30), res = 1)
-> hab <- gaussMap(a, speedup = 1) # if raster is large (>1e6 pixels) use speedup > 1
+    union
+
+Loading required package: quickPlot
+Loading required package: reproducible
+
+Attaching package: 'SpaDES.core'
+
+The following objects are masked from 'package:stats':
+
+    end, start
+
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "includePixel" "excludePixel" "includeRing"  "excludeRing" 
@@ -890,30 +805,7 @@ ERROR: the modified constant is in this function body:
     }
     return(landscape)
 }
-Error in C_CheckXT(x, y, z, T, grid = grid, distances = distances, dim = dim,  : 
-  promise already under evaluation: recursive default argument reference or earlier problems?
-Calls: gaussMap -> raster -> RFsimulate -> rfInit -> C_CheckXT
+Quitting from lines 326-354 (ii-modules.Rmd) 
+Error: processing vignette 'ii-modules.Rmd' failed with diagnostics:
+promise already under evaluation: recursive default argument reference or earlier problems?
 Execution halted
-* checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... ERROR
-  Running ‘test-all.R’
-Running the tests in ‘tests/test-all.R’ failed.
-Last 13 lines of output:
-              landscape[pixVal$indices] <- pixVal$V1
-          }
-      }
-      else {
-          landscape[wh] <- spreads[wh]
-          if (exists("potentials")) 
-              if (NROW(potentials) > 0) 
-                  landscape[potentials[, 1L]] <- spreads[potentials[, 
-                    2L]]
-      }
-      return(landscape)
-  }
-  S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature RasterLayer has this body.
-  Fatal error: compiler constants were modified!
-  
-* checking PDF version of manual ... OK
-* DONE
-Status: 2 ERRORs, 2 NOTEs
