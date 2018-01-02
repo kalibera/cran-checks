@@ -1,0 +1,149 @@
+
+R Under development (unstable) (2017-12-29 r73982) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> library(TeXCheckR)
+> 
+> test_check("TeXCheckR")
+
+\caption present without label.
+✖ 72: \caption{Figure caption}
+(All captions must have a \label and the label must occur on the same line.)
+
+Dash likely masquerading as hyphen. Use -- for a dash.
+✖ 7: But hyphens pretending to be hyphens are not acceptable - ever.
+
+IMPORTANT: make sure you are replacing a hyphen with two hyphens, not a unicode dash  –
+
+
+Dash likely masquerading as hyphen. Use -- for a dash.
+✖ 9: Sometimes, inline equations are tricky: \(x - (a - b)\) I might - by mistake - but dashes between equations \(x \neq 3\).
+
+IMPORTANT: make sure you are replacing a hyphen with two hyphens, not a unicode dash  –
+
+
+Hyphen adjacent to en-dash.
+✖ 4: Teachers get stressed when students don't engage in learning -– even
+
+
+Hyphen adjacent to en-dash.
+✖ 4: Teachers get stressed when students don't engage in learning –- even
+
+
+Em-dashes not permitted.
+✖ 6: Teachers get stressed when students don't engage in learning — even
+
+
+Unescaped $.
+✖ 4: Some forbidden math $1 + 1 = 2$.
+                          ^
+If you meant to print a dollar sign, use \$. If you want to use math-mode, use \(...\), not $...$ .
+
+Ellipsis typed without using macro.
+✖ 4: A forbidden ellipsis ...
+Use \dots{} for an ellipsis, rather than three dots (...) or \u2026 (…).
+
+\label used without prefix.
+✖ 1: \section{Example section with a label but no prefix}\label{invalid-prefix}
+Use fig: tbl: box: chap: subsec: paragraph: rec: fn: in every label.
+✖ 1: \chapter{A chapter with wrong prefix}\label{sec:should-be-chap:}
+Unlabelled chapter or \label without chap: prefix.
+✖ 1: \chapter{A chapter with wrong prefix}\label{sec:should-be-chap:}
+For every \chapter{} ensure there is a \label{chap:...} on the same line.
+✖ 1: \chapter{A chapter without a label}
+Unlabelled chapter or \label without chap: prefix.
+✖ 1: \chapter{A chapter without a label}
+For every \chapter{} ensure there is a \label{chap:...} on the same line.
+
+Cross-reference to chapter using Vref or Cref.
+✖ 2: \Vref{chap:good} should be \Chapref{chap:good}.
+Cross-references to chapters must use Chapref or topref.
+
+Mislabeled or empty cross-references target for Chapref or topref
+✖ : Mislabeled / empty cross-reference target for a \Chapref / \topref etc. You have entered a \Chapref to cross-reference a chapter (which is correct!). However the label you have referenced does not exist (perhaps it was renamed or removed?). I saw:
+	\Chapref{chap:incorrectly-refd}
+Yet the only valid labels are:
+	chap:not-correct-refd
+
+
+Closing quote used at beginning of word. Use a backtick for an opening quote, e.g. The word `ossifrage' is quoted.
+✖ 4: 'There is a...
+    ^
+
+
+Closing quote used at beginning of word. Use a backtick for an opening quote, e.g. The word `ossifrage' is quoted.
+✖ 4: "There is a ba...
+       ^
+
+
+Closing quote used at beginning of word. Use a backtick for an opening quote, e.g. The word `ossifrage' is quoted.
+✖ 4: ('There is a b...
+       ^
+
+
+Closing quote used at beginning of word. Use a backtick for an opening quote, e.g. The word `ossifrage' is quoted.
+✖ 4: He interrupted---'There is a b...
+                       ^
+
+
+Capital letter ends sentence, but sentence-ending period mark absent.
+✖ 165: Many governments have tried to change the GST. But few have succeeded.
+Sentences which end with a capital letter need to be signalled with a sentence-ending period. (\@.)
+
+Lower-case \Cref used. \Vref and \Cref are case-sensitive and the lower-case forms are not permitted.
+✖ 6: Don't use \vref{sec:some.label}
+
+
+Hard-coded xref in document.
+✖ 6: But sometimes I will. (See Section 5.)
+All xrefs need to use \Cref or \Vref (or \Chapref for cross-references to chapters). If you need to use this phrase, you can use a non-breaking space e.g. 'Section~81 of the Constitution.
+
+Use postnote for pagerefs.
+✖ 4: This is a citation without a postnote: \textcite[32]{Knuth-A}.
+
+
+Unnecessary p in postnote.
+✖ 4: This is a citation without a postnote: \textcite[][p. 32]{Knuth-A}.
+
+
+Unnecessary p in postnote.
+✖ 4: This is a citation with a double-p: \textcite[][pp. 32--34]{Knuth-A}.
+
+
+Use of singular form of textcite or footcite.
+✖ 5: Should be plural form \footcite{ref1}{ref2}
+
+
+Page reference not in correct format.
+✖ 4: This is a citation with an extended postnote: \textcite[][Chapter~4, p. 32]{Knuth-A}.
+Use a tilde to separate explicit page-number references. (e.g. p.~32)
+
+Page reference not in correct format.
+✖ 4: This is a citation with an extended postnote: \textcite[][Chapter~4, p.32]{Knuth-A}.
+Use a tilde to separate explicit page-number references. (e.g. p.~32)
+ERROR: modification of compiler constant of type character, length 2
+ERROR: the modified value of the constant is:
+[1] "." "?"
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "." "?"
+ERROR: the modified constant is at index 1
+ERROR: the modified constant is in this function body:
+c(".", "?")
+Fatal error: compiler constants were modified!
+
