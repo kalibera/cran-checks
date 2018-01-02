@@ -1,0 +1,1520 @@
+
+R Under development (unstable) (2018-01-02 r74022) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "pkgmaker"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('pkgmaker')
+Loading required package: registry
+
+Attaching package: ‘pkgmaker’
+
+The following objects are masked from ‘package:base’:
+
+    isFALSE, isNamespaceLoaded
+
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("RdSection2latex")
+> ### * RdSection2latex
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: RdSection2latex
+> ### Title: Format Rd Sections into LatTeX
+> ### Aliases: RdSection2latex
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> RdSection2latex('RdSection2latex', package = 'pkgmaker')
+This is a nice section, with a bullet list: \begin{itemize}
+
+\item tata \item toto 
+\end{itemize}
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Rversion")
+> ### * Rversion
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Rversion
+> ### Title: Complete R version
+> ### Aliases: Rversion
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> Rversion()
+[1] "3.5.0"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Sys.getenv_value")
+> ### * Sys.getenv_value
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Sys.getenv_value
+> ### Title: System Environment Variables
+> ### Aliases: Sys.getenv_value
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> # undefined returns FALSE
+> Sys.getenv_value('TOTO')
+[1] FALSE
+> # raw undefined returns NA
+> Sys.getenv_value('TOTO', raw = TRUE)
+[1] NA
+> 
+> Sys.setenv(TOTO='bla')
+> Sys.getenv_value('TOTO')
+[1] "bla"
+> 
+> # anything false-like returns FALSE
+> Sys.setenv(TOTO='false'); Sys.getenv_value('TOTO')
+[1] FALSE
+> Sys.setenv(TOTO='0'); Sys.getenv_value('TOTO')
+[1] FALSE
+> 
+> # cleanup
+> Sys.unsetenv('TOTO')
+> 
+> 
+> 
+> cleanEx()
+> nameEx("add_lib")
+> ### * add_lib
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: add_lib
+> ### Title: Adding Package Libraries
+> ### Aliases: add_lib
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> ol <- .libPaths()
+> # called sequentially, .libPaths only add the last library
+> show( .libPaths('.') )
+[1] "/home/tomas/cran/rlibro/check/pkgmaker.Rcheck"
+[2] "/home/tomas/cran/rlibro/build/library"        
+> show( .libPaths(tempdir()) )
+[1] "/tmp/RtmpgQq9zV"                      
+[2] "/home/tomas/cran/rlibro/build/library"
+> # restore
+> .libPaths(ol)
+> 
+> # .libPaths does not keep the standard user library
+> show( .libPaths() )
+[1] "/homero/tomas/cran/rlibro/lib"        
+[2] "/home/tomas/cran/rlibro/build/library"
+> show( .libPaths('.') )
+[1] "/home/tomas/cran/rlibro/check/pkgmaker.Rcheck"
+[2] "/home/tomas/cran/rlibro/build/library"        
+> # restore
+> .libPaths(ol)
+> 
+> # with add_lib
+> show( add_lib('.') )
+[1] "/home/tomas/cran/rlibro/check/pkgmaker.Rcheck"
+[2] "/homero/tomas/cran/rlibro/lib"                
+[3] "/home/tomas/cran/rlibro/build/library"        
+> show( add_lib(tempdir()) )
+[1] "/tmp/RtmpgQq9zV"                              
+[2] "/home/tomas/cran/rlibro/check/pkgmaker.Rcheck"
+[3] "/homero/tomas/cran/rlibro/lib"                
+[4] "/home/tomas/cran/rlibro/build/library"        
+> show( add_lib('..', append=TRUE) )
+[1] "/tmp/RtmpgQq9zV"                              
+[2] "/home/tomas/cran/rlibro/check/pkgmaker.Rcheck"
+[3] "/homero/tomas/cran/rlibro/lib"                
+[4] "/home/tomas/cran/rlibro/build/library"        
+[5] "/home/tomas/cran/rlibro/check"                
+> 
+> # restore
+> .libPaths(ol)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("alphacol")
+> ### * alphacol
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: alphacol
+> ### Title: Colour utilities
+> ### Aliases: alphacol
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> # Alphas
+> alphacol('red') # do nothing
+[1] "#ff0000"
+> alphacol('red', 10)
+[1] "#ff0000ff"
+> alphacol('#aabbcc', 5)
+[1] "#aabbccff"
+> alphacol(4, 5)
+[1] "#0000ffff"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("exitCheck")
+> ### * exitCheck
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: exitCheck
+> ### Title: Exit Error Checks
+> ### Aliases: exitCheck
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> # define some function
+> f <- function(err){
++ 
++  # initialise an error checker
++ 	success <- exitCheck()
++ 
++  # do something on exit that depends on the error status
++ 	on.exit({
++ 		if(success()) cat("Exit with no error: do nothing\n")
++ 		else cat("Exit with error: cleaning up the mess ...\n")
++ 	})
++ 
++  # throw an error here
++ 	if( err ) stop('There is an error')
++ 
++ 	success(1+1)
++ }
+> 
+> # without error
+> f(FALSE)
+Exit with no error: do nothing
+[1] 2
+> # with error
+> try( f(TRUE) )
+Exit with error: cleaning up the mess ...
+Error in f(TRUE) : There is an error
+> 
+> 
+> 
+> cleanEx()
+> nameEx("expand_list")
+> ### * expand_list
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: expand_list
+> ### Title: Expanding Lists
+> ### Aliases: expand_dots expand_list
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> #----------
+> # expand_list
+> #----------
+> expand_list(list(a=1, b=2), c=3)
+$a
+[1] 1
+
+$b
+[1] 2
+
+$c
+[1] 3
+
+> expand_list(list(a=1, b=2, c=4), c=3)
+$a
+[1] 1
+
+$b
+[1] 2
+
+$c
+[1] 4
+
+> # with a list
+> expand_list(list(a=1, b=2), list(c=3, d=10))
+$a
+[1] 1
+
+$b
+[1] 2
+
+$c
+[1] 3
+
+$d
+[1] 10
+
+> # no partial match
+> expand_list(list(a=1, b=2, c=5), cd=3)
+$a
+[1] 1
+
+$b
+[1] 2
+
+$c
+[1] 5
+
+$cd
+[1] 3
+
+> # partial match with names expanded
+> expand_list(list(a=1, b=2, c=5), cd=3, .exact=FALSE)
+$a
+[1] 1
+
+$b
+[1] 2
+
+$cd
+[1] 5
+
+> # partial match without expanding names
+> expand_list(list(a=1, b=2, c=5), cd=3, .exact=FALSE, .names=FALSE)
+$a
+[1] 1
+
+$b
+[1] 2
+
+$c
+[1] 5
+
+> 
+> # works also inside a function to expand a call with default arguments
+> f <- function(...){
++ 	cl  <- match.call()
++ 	expand_list(cl, list(a=3, b=4), .exact=FALSE)
++ }
+> f()
+f(a = 3, b = 4)
+> f(c=1)
+f(c = 1, a = 3, b = 4)
+> f(a=2)
+f(a = 2, b = 4)
+> f(c=1, a=2)
+f(c = 1, a = 2, b = 4)
+> 
+> #----------
+> # expand_dots
+> #----------
+> # expanding dot arguments
+> 
+> f <- function(...){
++ 	expand_dots(list(a=2, bcd='a', xxx=20), .exclude='xxx')
++ }
+> 
+> # add default value for all arguments
+> f()
+$a
+[1] 2
+
+$bcd
+[1] "a"
+
+> # add default value for `bcd` only
+> f(a=10)
+$a
+[1] 10
+
+$bcd
+[1] "a"
+
+> # expand names
+> f(a=10, b=4)
+$a
+[1] 10
+
+$bcd
+[1] 4
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("file_extension")
+> ### * file_extension
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: file_extension
+> ### Title: Extract File Extension
+> ### Aliases: file_extension
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> file_extension('alpha.txt')
+[1] "txt"
+> file_extension(paste('aa.tt', 1:5, sep=''))
+[1] "tt1" "tt2" "tt3" "tt4" "tt5"
+> # change extension
+> file_extension(paste('aa.tt', 1:5, sep=''), 'pdf')
+[1] "aa.df" "aa.df" "aa.df" "aa.df" "aa.df"
+> file_extension(paste('aatt', 1:5, sep=''), 'pdf')
+[1] "aatt1.df" "aatt2.df" "aatt3.df" "aatt4.df" "aatt5.df"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("graphics-utils")
+> ### * graphics-utils
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: graphics-utils
+> ### Title: Utility Functions for Graphics
+> ### Aliases: graphics-utils mfrow
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> mfrow(1)
+[1] 1 1
+> mfrow(2)
+[1] 1 2
+> mfrow(3)
+[1] 2 2
+> mfrow(4)
+[1] 2 2
+> mfrow(10)
+[1] 3 3
+> 
+> 
+> 
+> cleanEx()
+> nameEx("hasArg2")
+> ### * hasArg2
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: hasArg2
+> ### Title: Checking for Missing Arguments
+> ### Aliases: hasArg2
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> f <- function(...){ hasArg2('abc') }
+> f(a=1)
+[1] FALSE
+> f(abc=1)
+[1] TRUE
+> f(b=1)
+[1] FALSE
+> 
+> 
+> 
+> cleanEx()
+> nameEx("hasEnvar")
+> ### * hasEnvar
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: hasEnvar
+> ### Title: Check Environment Variables
+> ### Aliases: hasEnvar
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> hasEnvar('_R_CHECK_TIMINGS_')
+[1] TRUE
+> hasEnvar('ABCD')
+[1] TRUE
+> 
+> 
+> 
+> cleanEx()
+> nameEx("inSweave")
+> ### * inSweave
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: inSweave
+> ### Title: Identifying Sweave Run
+> ### Aliases: inSweave
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> # Not in a Sweave document
+> inSweave()
+[1] FALSE
+> 
+> # Within a Sweave document
+> 
+> 
+> 
+> cleanEx()
+> nameEx("install.dependencies")
+> ### * install.dependencies
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: install.dependencies
+> ### Title: Installing All Package Dependencies
+> ### Aliases: install.dependencies
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> try( install.dependencies('Matrix', dryrun=TRUE) )
+Package dependencies for Matrix: 'methods', 'graphics', 'grid', 'stats', 'utils', 'lattice'
+Missing: none
+> ## Not run: 
+> ##D install.dependencies("mypackage_1.0.tar.gz", dryrun=TRUE)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("isCRANcheck")
+> ### * isCRANcheck
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: isCRANcheck
+> ### Title: Package Check Utils
+> ### Aliases: isCHECK isCRANcheck isCRAN_timing
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> isCHECK()
+[1] TRUE
+> 
+> 
+> 
+> cleanEx()
+> nameEx("knit_ex")
+> ### * knit_ex
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: knit_ex
+> ### Title: Knitr Extensions
+> ### Aliases: hook_backspace hook_toggle hook_try knit_ex
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> #----------
+> # knit_ex
+> #----------
+> library(knitr)
+> knit_ex("1 + 1")
+<pre><code class="r">1 + 1
+</code></pre>
+
+<pre><code>## [1] 2
+</code></pre>
+> 
+> #----------
+> # hook_try
+> #----------
+> library(knitr)
+> 
+> # standard error message is caught
+> knit_ex("stop('ah ah')")
+<pre><code class="r">stop(&#39;ah ah&#39;)
+</code></pre>
+
+<pre><code>## Error in eval(expr, envir, enclos): ah ah
+</code></pre>
+> 
+> # with try the error is output on stderr but not caughted by knitr
+> knit_ex("try( stop('ah ah') )")
+Error in try(stop("ah ah")) : ah ah
+<pre><code class="r">try( stop(&#39;ah ah&#39;) )
+</code></pre>
+> 
+> # no message caught
+> knit_ex("
++ ^^^{r, include = FALSE}
++ knit_hooks$set(try = pkgmaker::hook_try)
++ ^^^
++ 
++ ^^^{r, try=TRUE}
++ try( stop('ah ah') )
++ ^^^")
+<pre><code class="r">try( stop(&#39;ah ah&#39;) )
+</code></pre>
+
+<pre><code>## Error: ah ah
+</code></pre>
+> 
+> #----------
+> # hook_backspace
+> #----------
+> # Correctly formatting backspaces in chunk outputs
+> tmp <- tempfile(fileext = '.Rmd')
+> cat(file = tmp, "
++ ^^^{r, include = FALSE}
++ library(knitr)
++ knit_hooks$set(backspace = pkgmaker::hook_backspace())
++ ^^^
++ Default knitr does not handle backspace and adds a special character:
++ ^^^{r}
++ cat('abc\bd')
++ ^^^
++ 
++ Using the hook backspace solves the issue:
++ ^^^{r, backspace=TRUE}
++ cat('abc\bd')
++ ^^^
++ ")
+> 
+> # knit
+> out <- knitr::knit2html(tmp, fragment.only = TRUE)
+
+
+processing file: /tmp/RtmpgQq9zV/file391e7dd67a61.Rmd
+  ordinary text without R code
+
+output file: file391e7dd67a61.md
+
+> # look at output
+> ## Not run: 
+> ##D   browseURL(out)
+> ##D   edit( file = out)
+> ## End(Not run)
+> # cleanup
+> unlink(c(tmp, out))
+> 
+> #----------
+> # hook_toggle
+> #----------
+> knit_ex("
++ 
++ Declare chunk hook:
++ ^^^{r, setup}
++ library(knitr)
++ knit_hooks$set(toggle = hook_toggle())
++ ^^^
++ 
++ The R code of this chunk can be toggled on/off, and starts visible:
++ ^^^{r, toggle=TRUE}
++ print(1:10)
++ ^^^
++ The R code of this chunk can be toggled on/off, and starts hidden:
++ ^^^{r, toggle=FALSE}
++ print(1:10)
++ ^^^
++ 
++ This is a plain chunk that cannot be toggled on/off:
++ ^^^{r}
++ print(1:10)
++ ^^^
++ 
++ Now all chunks can be toggled and start visible:
++ ^^^{r, toggle_all}
++ opts_chunk$set(toggle = TRUE)
++ ^^^
++ 
++ ^^^{r}
++ sample(5)
++ ^^^
++ 
++ To diable the toggle link, one can pass anything except TRUE/FALSE:
++ ^^^{r, toggle = NA}
++ sample(5)
++ ^^^
++ 
++ ", open = TRUE)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:knitr’
+
+> nameEx("latex")
+> ### * latex
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: latex_preamble
+> ### Title: LaTeX Utilities for Vignettes
+> ### Aliases: latex_bibliography latex_preamble
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> latex_preamble()
+%%%% PKGMAKER COMMANDS %%%%%%
+\usepackage{xspace}
+
+% R
+\let\proglang=\textit
+\let\code=\texttt 
+\newcommand{\Rcode}{\code}
+\newcommand{\pkgname}[1]{\textit{#1}\xspace}
+\newcommand{\Rpkg}[1]{\pkgname{#1} package\xspace}
+\newcommand{\citepkg}[1]{\cite{#1}}
+
+% CRAN
+\newcommand{\CRANurl}[1]{\url{http://cran.r-project.org/package=#1}}
+%% CRANpkg
+\makeatletter
+\def\CRANpkg{\@ifstar\@CRANpkg\@@CRANpkg}
+\def\@CRANpkg#1{\href{http://cran.r-project.org/package=#1}{\pkgname{#1}}\footnote{\CRANurl{#1}}}
+\def\@@CRANpkg#1{\href{http://cran.r-project.org/package=#1}{\pkgname{#1}} package\footnote{\CRANurl{#1}}}
+\makeatother
+%% citeCRANpkg
+\makeatletter
+\def\citeCRANpkg{\@ifstar\@citeCRANpkg\@@citeCRANpkg}
+\def\@citeCRANpkg#1{\CRANpkg{#1}\cite*{Rpackage:#1}}
+\def\@@citeCRANpkg#1{\CRANpkg{#1}~\cite{Rpackage:#1}}
+\makeatother
+\newcommand{\CRANnmf}{\href{http://cran.r-project.org/package=NMF}{CRAN}}
+\newcommand{\CRANnmfURL}{\url{http://cran.r-project.org/package=NMF}}
+
+% Bioconductor
+\newcommand{\BioCurl}[1]{\url{http://www.bioconductor.org/packages/release/bioc/html/#1.html}}
+\newcommand{\BioCpkg}[1]{\href{http://www.bioconductor.org/packages/release/bioc/html/#1.html}{\pkgname{#1}} package\footnote{\BioCurl{#1}}}
+\newcommand{\citeBioCpkg}[1]{\BioCpkg{#1}~\cite{Rpackage:#1}}
+% Bioconductor annotation
+\newcommand{\BioCAnnurl}[1]{\url{http://www.bioconductor.org/packages/release/data/annotation/html/#1.html}}
+\newcommand{\BioCAnnpkg}[1]{\href{http://www.bioconductor.org/packages/release/data/annotation/html/#1.html}{\Rcode{#1}} annotation package\footnote{\BioCAnnurl{#1}}}
+\newcommand{\citeBioCAnnpkg}[1]{\BioCAnnpkg{#1}~\cite{Rpackage:#1}}
+
+% GEO
+\newcommand{\GEOurl}[1]{\href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=#1}{#1}\xspace}
+\newcommand{\GEOhref}[1]{\GEOurl{#1}\footnote{\url{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=#1}}}
+
+% ArrayExpress
+\newcommand{\ArrayExpressurl}[1]{\href{http://www.ebi.ac.uk/arrayexpress/experiments/#1}{#1}\xspace}
+\newcommand{\ArrayExpresshref}[1]{\ArrayExpressurl{#1}\footnote{\url{http://www.ebi.ac.uk/arrayexpress/experiments/#1}}}
+
+%%%% END: PKGMAKER COMMANDS %%%%%%
+> latex_preamble(R=TRUE, only=TRUE)
+%%%% PKGMAKER COMMANDS %%%%%%
+\usepackage{xspace}
+
+% R
+\let\proglang=\textit
+\let\code=\texttt 
+\newcommand{\Rcode}{\code}
+\newcommand{\pkgname}[1]{\textit{#1}\xspace}
+\newcommand{\Rpkg}[1]{\pkgname{#1} package\xspace}
+\newcommand{\citepkg}[1]{\cite{#1}}
+
+%%%% END: PKGMAKER COMMANDS %%%%%%
+> latex_preamble(R=FALSE, CRAN=FALSE, GEO=FALSE)
+%%%% PKGMAKER COMMANDS %%%%%%
+\usepackage{xspace}
+
+% Bioconductor
+\newcommand{\BioCurl}[1]{\url{http://www.bioconductor.org/packages/release/bioc/html/#1.html}}
+\newcommand{\BioCpkg}[1]{\href{http://www.bioconductor.org/packages/release/bioc/html/#1.html}{\pkgname{#1}} package\footnote{\BioCurl{#1}}}
+\newcommand{\citeBioCpkg}[1]{\BioCpkg{#1}~\cite{Rpackage:#1}}
+% Bioconductor annotation
+\newcommand{\BioCAnnurl}[1]{\url{http://www.bioconductor.org/packages/release/data/annotation/html/#1.html}}
+\newcommand{\BioCAnnpkg}[1]{\href{http://www.bioconductor.org/packages/release/data/annotation/html/#1.html}{\Rcode{#1}} annotation package\footnote{\BioCAnnurl{#1}}}
+\newcommand{\citeBioCAnnpkg}[1]{\BioCAnnpkg{#1}~\cite{Rpackage:#1}}
+
+% ArrayExpress
+\newcommand{\ArrayExpressurl}[1]{\href{http://www.ebi.ac.uk/arrayexpress/experiments/#1}{#1}\xspace}
+\newcommand{\ArrayExpresshref}[1]{\ArrayExpressurl{#1}\footnote{\url{http://www.ebi.ac.uk/arrayexpress/experiments/#1}}}
+
+%%%% END: PKGMAKER COMMANDS %%%%%%
+> latex_preamble(GEO=TRUE, only=TRUE)
+%%%% PKGMAKER COMMANDS %%%%%%
+\usepackage{xspace}
+
+% GEO
+\newcommand{\GEOurl}[1]{\href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=#1}{#1}\xspace}
+\newcommand{\GEOhref}[1]{\GEOurl{#1}\footnote{\url{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=#1}}}
+
+%%%% END: PKGMAKER COMMANDS %%%%%%
+> 
+> 
+> 
+> cleanEx()
+> nameEx("libutils")
+> ### * libutils
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: list.libs
+> ### Title: Library Files Utilities
+> ### Aliases: libname list.libs
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> libname('mylib.so')
+[1] "mylib"
+> libname('/some/path/somewhere/mylib.dll')
+[1] "mylib.dll"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("load")
+> ### * load
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: onLoad
+> ### Title: Default Load/Unload Functions
+> ### Aliases: onLoad onUnload
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> #----------
+> # onLoad
+> #----------
+> # in a package namespace:
+> .onLoad <- function(libname=NULL, pkgname){
++ 
++ 	pkgmaker::onLoad(libname, pkgname)
++ 
++ }
+> 
+> #----------
+> # onUnload
+> #----------
+> # in a package namespace:
+> .onUnload <- function(libpath){
++ 
++ 	pkgmaker::onUnload(libpath)
++ 
++ }
+> 
+> 
+> 
+> cleanEx()
+> nameEx("local-options")
+> ### * local-options
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: mkoptions
+> ### Title: Quick Option-like Feature
+> ### Aliases: mkoptions .options
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> f <- mkoptions(a=3, b=list(1,2,3))
+> str(f())
+List of 2
+ $ a: num 3
+ $ b:List of 3
+  ..$ : num 1
+  ..$ : num 2
+  ..$ : num 3
+> f('a')
+$a
+[1] 3
+
+> f('b')
+$b
+$b[[1]]
+[1] 1
+
+$b[[2]]
+[1] 2
+
+$b[[3]]
+[1] 3
+
+
+> str(old <- f(a = 10))
+List of 1
+ $ a: num 3
+> str(f())
+List of 2
+ $ a: num 10
+ $ b:List of 3
+  ..$ : num 1
+  ..$ : num 2
+  ..$ : num 3
+> f(old)
+> str(f())
+List of 2
+ $ a: num 3
+ $ b:List of 3
+  ..$ : num 1
+  ..$ : num 2
+  ..$ : num 3
+> 
+> 
+> 
+> cleanEx()
+> nameEx("mirrors")
+> ### * mirrors
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setBiocMirror
+> ### Title: Setting Mirrors and Repositories
+> ### Aliases: CRAN getBiocMirror getBiocRepos setBiocMirror setCRANMirror
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> ## Not run: 
+> ##D install.packages('pkgmaker', repos=CRAN)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("new2")
+> ### * new2
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: new2
+> ### Title: Alternative S4 Constructor
+> ### Aliases: new2
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> setClass('A', contain='character', representation(x='numeric', y='character'))
+> 
+> # identical behaviour with standard calls
+> identical(new('A'), new2('A'))
+[1] TRUE
+> identical(new('A', x=1), new2('A', x=1))
+[1] TRUE
+> 
+> # but if passing that are names not slots
+> identical(new('A'), new2('A', b=1))
+[1] TRUE
+> identical(new('A', x=1), new2('A', x=1, b=3))
+[1] TRUE
+> identical(new('A', x=1), new2('A', x=1, b=3))
+[1] TRUE
+> 
+> # standard `new` would coerce first unnamed argument into parent of 'A' (i.e. 'character')
+> new('A', list(x=1))
+An object of class "A"
+[1] "1"
+Slot "x":
+numeric(0)
+
+Slot "y":
+character(0)
+
+> new('A', list(x=1, y='other'))
+An object of class "A"
+[1] "1"     "other"
+Slot "x":
+numeric(0)
+
+Slot "y":
+character(0)
+
+> # `new2` rather use it to initialise the slots it can find in the list
+> identical(new('A', x=1), new2('A', list(x=1)))
+[1] TRUE
+> identical(new('A', x=1, y='other'), new2('A', list(x=1, y='other')))
+[1] TRUE
+> 
+> 
+> 
+> cleanEx()
+> nameEx("oneoffVariable")
+> ### * oneoffVariable
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: oneoffVariable
+> ### Title: One-off Global Variables
+> ### Aliases: oneoffVariable
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> x <- oneoffVariable(0)
+> # returns default value
+> x()
+[1] 0
+> # assign a value
+> x(3)
+> # get the value
+> x()
+[1] 3
+> # second call returns default value again
+> x()
+[1] 0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("options")
+> ### * options
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: option_symlink
+> ### Title: 'option_symlink' creates a symbolic link to option 'x'.
+> ### Aliases: as.package_options is_option_symlink listPackageOptions
+> ###   option_symlink option_symlink_target [[.package_options
+> ###   packageOptions
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> listPackageOptions()
+character(0)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("orderVersion")
+> ### * orderVersion
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: orderVersion
+> ### Title: Ordering Version Numbers
+> ### Aliases: orderVersion sortVersion
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> #----------
+> # orderVersion
+> #----------
+> v <- c('1.0', '1.03', '1.2')
+> order(v)
+[1] 1 2 3
+> orderVersion(v)
+[1] 1 3 2
+> 
+> #----------
+> # sortVersion
+> #----------
+> sort(v)
+[1] "1.0"  "1.03" "1.2" 
+> sortVersion(v)
+[1] "1.0"  "1.2"  "1.03"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("packageData")
+> ### * packageData
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: packageData
+> ### Title: Loading Package Data
+> ### Aliases: ldata packageData
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> #----------
+> # packageData
+> #----------
+> ## Not run:  mydata <- packageData('mydata') 
+> 
+> #----------
+> # ldata
+> #----------
+> ## Not run: 
+> ##D # in a package' source => won't issue a NOTE
+> ##D myfunction function(){
+> ##D 	mydata <- ldata('mydata')
+> ##D }
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("postponeAction")
+> ### * postponeAction
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: postponeAction
+> ### Title: Postponing Actions
+> ### Aliases: postponeAction runPostponedAction
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> opt <- options(verbose=2)
+> 
+> # define actions
+> postponeAction(function(){print(10)}, "print")
+# Postponing action 'print'
+> postponeAction(function(){print(1:10)}, "more")
+# Postponing action 'more'
+> postponeAction()
+[1] "print" "more" 
+> # execute actions
+> runPostponedAction()
+# Executing postponed action(s) in package 'R_GlobalEnv' ... 
+** Action 'print' [R_GlobalEnv]
+[1] 10
+** Action 'more' [R_GlobalEnv]
+ [1]  1  2  3  4  5  6  7  8  9 10
+OK [2]
+> runPostponedAction()
+# Executing postponed action(s) in package 'R_GlobalEnv' ... OK [0]
+> 
+> # restore options
+> options(opt)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("sVariable")
+> ### * sVariable
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: sVariable
+> ### Title: Global Static Variable
+> ### Aliases: sVariable
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> # define variable
+> x <- sVariable(1)
+> # get value (default)
+> x()
+[1] 1
+> # set new value: return old value
+> old <- x(3)
+> old
+[1] 1
+> # get new value
+> x()
+[1] 3
+> 
+> 
+> 
+> cleanEx()
+> nameEx("str_diff")
+> ### * str_diff
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: str_diff
+> ### Title: Finding Differences Between Strings
+> ### Aliases: str_diff
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> # strings to compare
+> x <- "once upon a time"
+> y <- "once upon a time there was"
+> z <- "once upon two times"
+> 
+> # diff: x - y
+> d <- str_diff(x, y)
+> d
+once upon a time 
+................---------- 
+once upon a time there was 
+> str(d)
+ 'str_diff' Named int(0) 
+ - attr(*, "names")= chr(0) 
+ - attr(*, "str")=List of 2
+  ..$ x: chr "once upon a time"
+  ..$ y: chr "once upon a time there was"
+> 
+> # other comparisons
+> str_diff(y, x)
+once upon a time there was 
+................++++++++++ 
+once upon a time 
+> str_diff(x, x)
+once upon a time 
+................ 
+once upon a time 
+> str_diff(x, z)
+once upon a time 
+..........******--- 
+once upon two times 
+> str_diff(y, z)
+once upon a time there was 
+..........*********+++++++ 
+once upon two times 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("str_out")
+> ### * str_out
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: str_out
+> ### Title: Formatting Utilities
+> ### Aliases: str_bs str_desc str_fun str_out
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> #----------
+> # str_out
+> #----------
+> x <- letters[1:10]
+> str_out(x)
+[1] "'a', 'b', ..., 'j'"
+> str_out(x, 8)
+[1] "'a', 'b', 'c', 'd', 'e', 'f', 'g', ..., 'j'"
+> str_out(x, Inf)
+[1] "'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'"
+> str_out(x, quote=FALSE)
+[1] "a, b, ..., j"
+> str_out(x, total = TRUE)
+[1] "'a', 'b', ..., 'j' (10 total)"
+> 
+> #----------
+> # str_fun
+> #----------
+> str_fun(install.packages)
+[1] "function (pkgs, lib, repos = getOption(\"repos\"), contriburl = contrib.url(repos, \n    type), method, available = NULL, destdir = NULL, dependencies = NA, \n    type = getOption(\"pkgType\"), configure.args = getOption(\"configure.args\"), \n    configure.vars = getOption(\"configure.vars\"), clean = FALSE, \n    Ncpus = getOption(\"Ncpus\", 1L), verbose = getOption(\"verbose\"), \n    libs_only = FALSE, INSTALL_opts, quiet = FALSE, keep_outputs = FALSE, \n    ...) "
+> 
+> #----------
+> # str_bs
+> #----------
+> # Backspace substitution
+> str_bs("abc")
+[1] "abc"
+> str_bs("abc\b")
+[1] "ab"
+> str_bs("abc\b\b")
+[1] "a"
+> str_bs("abc\bd")
+[1] "abd"
+> str_bs("abc\b\bde\b")
+[1] "ad"
+> 
+> # more complex example
+> x <- "\bab\nc\bd\n\babc\b\bd"
+> cat(x, "\n")
+ab
+cd
+abcd 
+> y <- str_bs(x)
+> y
+[1] "ab\nd\nad"
+> cat(y, "\n")
+ab
+d
+ad 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("testRversion")
+> ### * testRversion
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: testRversion
+> ### Title: Testing R Version
+> ### Aliases: testRversion
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> testRversion("2.14")
+[1] TRUE
+> testRversion("2.15")
+[1] TRUE
+> testRversion("10")
+[1] FALSE
+> testRversion("10", test = -1)
+[1] TRUE
+> testRversion("< 10")
+[1] TRUE
+> testRversion(Rversion())
+[1] FALSE
+> testRversion(paste0('=', Rversion()))
+[1] TRUE
+> 
+> 
+> 
+> cleanEx()
+> nameEx("uchecks")
+> ### * uchecks
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: checkWarning
+> ### Title: Extra Check Functions for RUnit
+> ### Aliases: checkWarning
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> # check warnings
+> checkWarning({ warning('ah ah'); 3})
+Using RUnit framework provider: RUnit
+Warning in eval(expr, envir = pf) : ah ah
+[1] TRUE
+> checkWarning({ warning('ah oh ah'); 3}, 'oh')
+Warning in eval(expr, envir = pf) : ah oh ah
+[1] TRUE
+> try( checkWarning(3) )
+Error in checkWarning(3) : Warning not generated as expected
+
+> try( checkWarning({ warning('ah ah'); 3}, 'warn you') )
+Warning in eval(expr, envir = pf) : ah ah
+Error in checkWarning({ : Warning does not match expected pattern:
+  - Warning(s): 'ah ah'
+  - Pattern: 'warn you'
+
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:RUnit’
+
+> nameEx("write.pkgbib")
+> ### * write.pkgbib
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: write.pkgbib
+> ### Title: Generate a Bibtex File from Package Citations
+> ### Aliases: write.pkgbib
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> # roxygen generated flag
+> options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
+> ## End(Don't show)
+> 
+> write.pkgbib(c('bibtex', 'utils', 'tools'), file='references')
+Converted 3 of 3 package citations to BibTeX
+Writing 3 Bibtex entries ... OK
+Results written to file 'references.bib'
+> bibs <- bibtex::read.bib('references.bib')
+> write.pkgbib(bibs, 'references2.bib')
+Writing 3 Bibtex entries ... OK
+Results written to file 'references2.bib'
+> md5 <- tools::md5sum(c('references.bib', 'references2.bib'))
+> md5[1] == md5[2]
+references.bib 
+          TRUE 
+> ## Don't show: 
+>  stopifnot(md5[1] == md5[2]) 
+> ## End(Don't show)
+> 
+> # write to stdout()
+> write.pkgbib(c('bibtex', 'utils', 'tools'), file=NULL)
+@Manual{bibtex,
+  title = {bibtex: Bibtex Parser},
+  author = {Romain Francois},
+  year = {2017},
+  note = {R package version 0.4.2},
+  url = {https://CRAN.R-project.org/package=bibtex},
+}
+
+@Manual{utils,
+  title = {R: A Language and Environment for Statistical Computing},
+  author = {{R Core Team}},
+  organization = {R Foundation for Statistical Computing},
+  address = {Vienna, Austria},
+  year = {2018},
+  url = {https://www.R-project.org/},
+}
+
+@Manual{tools,
+  title = {R: A Language and Environment for Statistical Computing},
+  author = {{R Core Team}},
+  organization = {R Foundation for Statistical Computing},
+  address = {Vienna, Austria},
+  year = {2018},
+  url = {https://www.R-project.org/},
+}
+> 
+> # clean up
+> unlink(c('references.bib', 'references2.bib'))
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  3.82 0.044 3.869 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

@@ -1,0 +1,192 @@
+
+R Under development (unstable) (2018-01-02 r74022) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "krm"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('krm')
+Loading required package: kyotil
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("getSeqKernel")
+> ### * getSeqKernel
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getSeqKernel
+> ### Title: Protein Sequence Kernels
+> ### Aliases: getSeqKernel
+> 
+> ### ** Examples
+> 
+> 
+> fileName=paste(system.file(package="krm")[1],'/misc/SETpfamseed_aligned_for_testing.fasta',
++      sep="")
+> K=getSeqKernel (fileName, kern.type="mi", tau=1, call.C=TRUE)
+> K
+               [,1]          [,2]          [,3]          [,4]          [,5]
+ [1,]  1.000000e+00  4.552530e-99 4.093694e-100 7.958919e-106 2.665694e-111
+ [2,]  4.552530e-99  1.000000e+00  1.168557e-88  2.360753e-95  1.016965e-99
+ [3,] 4.093694e-100  1.168557e-88  1.000000e+00  5.898105e-92 7.048302e-102
+ [4,] 7.958919e-106  2.360753e-95  5.898105e-92  1.000000e+00  1.257419e-62
+ [5,] 2.665694e-111  1.016965e-99 7.048302e-102  1.257419e-62  1.000000e+00
+ [6,] 3.446685e-122 6.201626e-117 4.050874e-124 2.615271e-116 3.601984e-120
+ [7,] 4.213302e-122 4.514318e-110 4.093978e-121 1.636509e-117 8.015522e-123
+ [8,] 2.083898e-139 6.041493e-147 1.602399e-142 4.348688e-142 5.020101e-152
+ [9,] 1.348699e-133 1.993887e-134 3.129521e-137 1.123604e-133 2.647957e-134
+[10,] 4.473849e-138 4.053006e-139 1.915000e-140 9.894326e-137 1.189453e-135
+[11,] 5.849106e-106 1.166588e-106 1.133693e-100  4.603333e-85 2.540300e-105
+               [,6]          [,7]          [,8]          [,9]         [,10]
+ [1,] 3.446685e-122 4.213302e-122 2.083898e-139 1.348699e-133 4.473849e-138
+ [2,] 6.201626e-117 4.514318e-110 6.041493e-147 1.993887e-134 4.053006e-139
+ [3,] 4.050874e-124 4.093978e-121 1.602399e-142 3.129521e-137 1.915000e-140
+ [4,] 2.615271e-116 1.636509e-117 4.348688e-142 1.123604e-133 9.894326e-137
+ [5,] 3.601984e-120 8.015522e-123 5.020101e-152 2.647957e-134 1.189453e-135
+ [6,]  1.000000e+00  5.568313e-98 1.228306e-154 4.550369e-140 6.951581e-142
+ [7,]  5.568313e-98  1.000000e+00 3.371385e-156 4.971975e-141 1.710289e-144
+ [8,] 1.228306e-154 3.371385e-156  1.000000e+00 1.010447e-172 9.210510e-174
+ [9,] 4.550369e-140 4.971975e-141 1.010447e-172  1.000000e+00  5.600887e-50
+[10,] 6.951581e-142 1.710289e-144 9.210510e-174  5.600887e-50  1.000000e+00
+[11,] 1.040711e-119 3.669313e-123 1.604133e-143 1.417246e-134 4.511580e-138
+              [,11]
+ [1,] 5.849106e-106
+ [2,] 1.166588e-106
+ [3,] 1.133693e-100
+ [4,]  4.603333e-85
+ [5,] 2.540300e-105
+ [6,] 1.040711e-119
+ [7,] 3.669313e-123
+ [8,] 1.604133e-143
+ [9,] 1.417246e-134
+[10,] 4.511580e-138
+[11,]  1.000000e+00
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("krm.most")
+> ### * krm.most
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: krm.most
+> ### Title: Kernel-based Regression Model Maximum of adjusted Score Test
+> ### Aliases: krm.most
+> 
+> ### ** Examples
+> 
+> 
+> # in addition to the examples listed here, there are more examples 
+> # under folder R/library/krm/unitTests
+> 
+> ## Not run: 
+> ##D # the examples are not run during package build because it takes a little too long to run
+> ##D 
+> ##D # an Euclidean kernel example from Liu et al. (2008)
+> ##D data=sim.liu.2008 (n=100, a=.1, seed=1) 
+> ##D test = krm.most(y~x, data, formula.kern=~z.1+z.2+z.3+z.4+z.5, kern.type="rbf")
+> ##D 
+> ##D 
+> ##D # a protein sequence kernel example
+> ##D dat.file.name=paste(system.file(package="krm")[1],'/misc/y1.txt', sep="") 
+> ##D seq.file.name=paste(system.file(package="krm")[1],'/misc/sim1.fasta', sep="")
+> ##D dat=read.table(dat.file.name); names(dat)="y"
+> ##D test = krm.most (y~1, dat, seq.file.name=seq.file.name, kern.type="mi")
+> ##D 
+> ##D 
+> ## End(Not run) 
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("krm.score.test")
+> ### * krm.score.test
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: krm.score.test
+> ### Title: Adjusted Score Test
+> ### Aliases: krm.score.test
+> ### Keywords: ~kwd1 ~kwd2
+> 
+> ### ** Examples
+> 
+> 
+> dat=sim.liu.2008(n=100, a=0, seed=1)
+Loading required namespace: MASS
+> z=as.matrix(subset(dat, select=c(z.1,z.2,z.3,z.4,z.5)))
+> rho=1
+> K=kyotil::getK(z,kernel="rbf",para=rho^-2)
+> krm.score.test (y~x, dat, K, regression.type="logistic") 
+     chiI     chiII     normI    normII 
+0.3708008 0.2130736 0.3552138 0.2102588 
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("seq_read_write")
+> ### * seq_read_write
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: readFastaFile
+> ### Title: Read a Fasta Sequence File
+> ### Aliases: readFastaFile writeFastaFile aa2arabic string2arabic
+> ###   fastaFile2arabicFile selexFile2arabicFile stringList2arabicFile
+> ###   arabic2arabicFile readSelexFile readSelexAsMatrix arabic2fastaFile
+> ###   readArabicFile readBlockFile
+> 
+> ### ** Examples
+> 
+> 
+> library(RUnit)
+> fileName=paste(system.file(package="krm")[1],'/misc/SETpfamseed_aligned_for_testing.fasta', sep="")
+> seqs = readFastaFile (fileName, sep=" ")
+> checkEquals(length(seqs),11)
+[1] TRUE
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+
+detaching ‘package:RUnit’
+
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.896 0.028 0.926 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

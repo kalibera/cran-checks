@@ -1,0 +1,214 @@
+
+R Under development (unstable) (2018-01-02 r74022) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "hypergea"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('hypergea')
+hypergea 1.3.3 loaded
+
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("getExpectedValues")
+> ### * getExpectedValues
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getExpectedValues
+> ### Title: Expected values of multidimensional contingency tables
+> ### Aliases: getExpectedValues
+> ### Keywords: contingency table marginal expected value
+> 
+> ### ** Examples
+> 
+> x <- array(c(1:8), dim=c(2,2,2))
+> getExpectedValues(x)
+, , 1
+
+         [,1]     [,2]
+[1,] 1.728395 2.716049
+[2,] 2.160494 3.395062
+
+, , 2
+
+         [,1]     [,2]
+[1,] 4.493827 7.061728
+[2,] 5.617284 8.827160
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getMargins")
+> ### * getMargins
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getMargins
+> ### Title: Marginal sums of multidimensional contingency tables
+> ### Aliases: getMargins
+> 
+> ### ** Examples
+> 
+> x <- matrix(c(1:4), nrow=2, ncol=2)
+> getMargins(x)
+[[1]]
+[1] 4 6
+
+[[2]]
+[1] 3 7
+
+> 
+> x <- matrix(c(1:6), nrow=2, ncol=3)
+> getMargins(x)
+[[1]]
+[1]  9 12
+
+[[2]]
+[1]  3  7 11
+
+> 
+> x <- array(c(1:8), dim=c(2,2,2))
+> getMargins(x)
+[[1]]
+[1] 16 20
+
+[[2]]
+[1] 14 22
+
+[[3]]
+[1] 10 26
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getOddsRatio")
+> ### * getOddsRatio
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getOddsRatio
+> ### Title: Odds ratio
+> ### Aliases: getOddsRatio
+> ### Keywords: contingency table odds ratio
+> 
+> ### ** Examples
+> 
+> CT <- matrix(c(1:4), nrow=2)
+> getOddsRatio(CT)
+[1] 0.6666667
+> 
+> CT <- array(c(1:8), dim=c(2,2,2))
+> getOddsRatio(CT)
+[1] 0.7
+> 
+> 
+> 
+> cleanEx()
+> nameEx("hypergeom.test")
+> ### * hypergeom.test
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: hypergeom.test
+> ### Title: Hypergeometric test
+> ### Aliases: hypergeom.test
+> ### Keywords: hypergeometric test OpenMP
+> 
+> ### ** Examples
+> 
+> 	##########
+> 	## example from Zelterman (1999), p. 119, Table 4.1
+> 	## mice were exposed to a fungicide (or not), some have a tumor
+> 	##########
+> 	dmn <- list(Tumor=c('y', 'n'), Exposition=c('y', 'n'))
+> 	CT <- matrix(c(4,12,5,74), nrow=2, dimnames=dmn)
+> 	## Not run: CT
+> 	hypergeom.test(CT)
+
+	Exact hypergeometric test for a 2x2 table
+
+data:  CT
+a = 4, p-value = 0.04106
+alternative hypothesis: two.sided
+95 percent confidence interval:
+  1.157905 21.018797
+sample estimates:
+odds ratio 
+  4.933333 
+
+> 
+> 	## Not run: 
+> ##D 	##########
+> ##D 	## example from Agresti (1992), Table 2
+> ##D 	## Fisher's tea tasting experiment
+> ##D 	##########
+> ##D 	dmn <- list('poured first'=c('m', 't'), guess=c('m', 't'))
+> ##D 	CT <- matrix(c(3,1,1,3), nrow=2, dimnames=dmn)
+> ##D 	hypergeom.test(CT, alternative="two.sided")
+> ##D 	hypergeom.test(CT, alternative="two.sided", pval.method="double")
+> ##D 	out <- hypergeom.test(CT, alternative="two.sided", pval.method=NULL)
+> ##D 	hypergeom.test(CT, alternative="less")
+> ##D 	hypergeom.test(CT, alternative="greater")
+> ##D 	
+> ## End(Not run)
+> 
+> 
+> 	##########
+> 	## example from Zelterman (1999), p. 44, Table 1.2
+> 	## Response to three drugs
+> 	##########
+> 	dmn <- list(A=c('F', 'U'), B=c('F', 'U'), C=c('F', 'U'))
+> 	CT <- array(c(6,16,2,4,2,4,6,6), dim=c(2,2,2), dimnames=dmn)
+> 	## Not run: CT
+> 	hypergeom.test(CT)
+
+	Exact hypergeometric test for a 2x2x2 table
+
+data:  CT
+a = 6, p-value = 0.02515
+alternative hypothesis: two.sided
+95 percent confidence interval:
+  0.08987184 25.03564990
+sample estimates:
+odds ratio 
+       1.5 
+
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.316 0.008 0.323 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

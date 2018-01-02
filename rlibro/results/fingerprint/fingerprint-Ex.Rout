@@ -1,0 +1,314 @@
+
+R Under development (unstable) (2018-01-02 r74022) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "fingerprint"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('fingerprint')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("distance-methods")
+> ### * distance-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: distance-methods
+> ### Title: Calculates the Similarity or Dissimilarity Between Two
+> ###   Fingerprints
+> ### Aliases: distance distance-methods
+> ###   distance,featvec,featvec,character,missing,missing-method
+> ###   distance,featvec,featvec,missing,missing,missing-method
+> ###   distance,fingerprint,fingerprint,character,missing,missing-method
+> ###   distance,fingerprint,fingerprint,character,numeric,numeric-method
+> ###   distance,fingerprint,fingerprint,missing,missing,missing-method
+> ### Keywords: logic
+> 
+> ### ** Examples
+> 
+> # make a 2 fingerprint vectors
+> fp1 <- new("fingerprint", nbit=6, bits=c(1,2,5,6))
+> fp2 <- new("fingerprint", nbit=6, bits=c(1,2,5,6))
+> 
+> # calculate the tanimoto coefficient
+> distance(fp1,fp2) # should be 1
+[1] 1
+> 
+> # Invert the second fingerprint
+> fp3 <- !fp2
+> 
+> distance(fp1,fp3) # should be 0
+[1] 0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("facmat")
+> ### * facmat
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: fp.factor.matrix
+> ### Title: Converts a List of Fingerprints to a data.frame of Factors
+> ### Aliases: fp.factor.matrix
+> ### Keywords: logic
+> 
+> ### ** Examples
+> 
+> # make fingerprint objects
+> fp1 <- new("fingerprint", nbit=6, bits=c(1,2,5,6))
+> fp2 <- new("fingerprint", nbit=6, bits=c(1,4,5,6))
+> fp3 <- new("fingerprint", nbit=6, bits=c(2,3,4,5,6))
+> 
+> fp.factor.matrix( list(fp1,fp2,fp3) )
+  X1 X2 X3 X4 X5 X6
+1  1  1  0  0  1  1
+2  1  0  0  1  1  1
+3  0  1  1  1  1  1
+> 
+> 
+> 
+> cleanEx()
+> nameEx("feature")
+> ### * feature
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: feature-class
+> ### Title: Class "feature"
+> ### Aliases: feature-class
+> ### Keywords: classes logic
+> 
+> ### ** Examples
+> 
+>   ## create a new feature
+>   f <- new("feature", feature='ABCD', count=as.integer(1))
+> 
+>   ## modify the feature string and the count
+>   feature(f) <- 'UXYZ'
+>   count(f) <- 10
+> 
+> 
+> 
+> cleanEx()
+> nameEx("fingerprint")
+> ### * fingerprint
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: fingerprint-class
+> ### Title: Class "fingerpint"
+> ### Aliases: fingerprint-class euc.vector,fingerprint-method
+> ###   fold,fingerprint-method random.fingerprint,numeric,numeric-method
+> ### Keywords: classes logic
+> 
+> ### ** Examples
+> 
+> ## make fingerprints
+> x <- new("fingerprint", nbit=128, bits=sample(1:128, 100))
+> y <- x
+> distance(x,y) # should be 1
+[1] 1
+> x <- new("fingerprint", nbit=128, bits=sample(1:128, 100))
+> distance(x,y)
+[1] 0.6260163
+> folded <- fold(x)
+> 
+> ## binary operations on fingerprints
+> x <- new("fingerprint", nbit=8, bits=c(1,2,3,6,8))
+> y <- new("fingerprint", nbit=8, bits=c(1,2,4,5,7,8))
+> x & y
+Fingerprint object
+ name =   
+ length =  8 
+ folded =  FALSE 
+ source =  R 
+ bits on =  1 2 8 
+> x | y
+Fingerprint object
+ name =   
+ length =  8 
+ folded =  FALSE 
+ source =  R 
+ bits on =  1 2 3 4 5 6 7 8 
+> !x
+Fingerprint object
+ name =   
+ length =  8 
+ folded =  FALSE 
+ source =  R 
+ bits on =  4 5 7 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("fold")
+> ### * fold
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: fold
+> ### Title: Fold a fingerprint
+> ### Aliases: fold
+> ### Keywords: logic
+> 
+> ### ** Examples
+> 
+> # make a fingerprint vector
+> fp <- new("fingerprint", nbit=64, bits=sample(1:64, 30))
+> fold(fp)
+Fingerprint object
+ name =   
+ length =  32 
+ folded =  TRUE 
+ source =  R 
+ bits on =  1 3 4 6 7 10 11 12 13 15 16 17 18 20 21 22 23 24 25 27 28 29 30 32 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("mat")
+> ### * mat
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: fp.to.matrix
+> ### Title: Converts a List of Fingerprints to a Matrix
+> ### Aliases: fp.to.matrix
+> ### Keywords: logic
+> 
+> ### ** Examples
+> 
+> # make fingerprint objects
+> fp1 <- new("fingerprint", nbit=6, bits=c(1,2,5,6))
+> fp2 <- new("fingerprint", nbit=6, bits=c(1,4,5,6))
+> fp3 <- new("fingerprint", nbit=6, bits=c(2,3,4,5,6))
+> 
+> fp.to.matrix( list(fp1,fp2,fp3) )
+     [,1] [,2] [,3] [,4] [,5] [,6]
+[1,]    1    1    0    0    1    1
+[2,]    1    0    0    1    1    1
+[3,]    0    1    1    1    1    1
+> 
+> 
+> 
+> cleanEx()
+> nameEx("rndfp")
+> ### * rndfp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: random.fingerprint
+> ### Title: Generate Randomized Fingerprints
+> ### Aliases: random.fingerprint
+> ### Keywords: logic
+> 
+> ### ** Examples
+> 
+> # make a fingerprint vector
+> fp <- random.fingerprint(32, 16)
+> as.character(fp)
+[1] "01011101100101011101000010101001"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("sim")
+> ### * sim
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: fp.sim.matrix
+> ### Title: Calculates a Similarity Matrix for a Set of Fingerprints
+> ### Aliases: fp.sim.matrix
+> ### Keywords: logic
+> 
+> ### ** Examples
+> 
+> # make fingerprint objects
+> fp1 <- new("fingerprint", nbit=6, bits=c(1,2,5,6))
+> fp2 <- new("fingerprint", nbit=6, bits=c(1,4,5,6))
+> fp3 <- new("fingerprint", nbit=6, bits=c(2,3,4,5,6))
+> 
+> fp.sim.matrix( list(fp1,fp2,fp3) )
+     [,1] [,2] [,3]
+[1,]  1.0  0.6  0.5
+[2,]  0.6  1.0  0.5
+[3,]  0.5  0.5  1.0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("string")
+> ### * string
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: as.character
+> ### Title: Generates a String Representation of a Fingerprint
+> ### Aliases: as.character as.character,fingerprint-method
+> ###   as.character,featvec-method as.character,feature-method
+> ### Keywords: logic methods
+> 
+> ### ** Examples
+> 
+> # make a fingerprint vector
+> fp <- new("fingerprint", nbit=32, bits=sample(1:32, 20))
+> 
+> # print out the string representation
+> as.character(fp)
+[1] "01011101101101111101000010111011"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("vec")
+> ### * vec
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: euc.vector
+> ### Title: Euclidean Representation of Binary Fingerprints
+> ### Aliases: euc.vector
+> ### Keywords: logic
+> 
+> ### ** Examples
+> 
+> # make a fingerprint vector
+> fp <- new("fingerprint", nbit=8, bits=c(1,3,4,5,7))
+> vec <- euc.vector(fp)
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.556 0 0.558 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

@@ -1,0 +1,278 @@
+
+R Under development (unstable) (2018-01-02 r74022) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "lhs"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('lhs')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("augmentLHS")
+> ### * augmentLHS
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: augmentLHS
+> ### Title: Augment a Latin Hypercube Design
+> ### Aliases: augmentLHS
+> ### Keywords: design
+> 
+> ### ** Examples
+> 
+>   a <- randomLHS(4,3)
+>   a
+          [,1]      [,2]       [,3]
+[1,] 0.1717557 0.1794046 0.48367631
+[2,] 0.3460259 0.9979765 0.80303563
+[3,] 0.6924604 0.3450088 0.66291844
+[4,] 0.8744248 0.6943613 0.03138877
+>   augmentLHS(a, 2)
+          [,1]      [,2]       [,3]
+[1,] 0.1717557 0.1794046 0.48367631
+[2,] 0.3460259 0.9979765 0.80303563
+[3,] 0.6924604 0.3450088 0.66291844
+[4,] 0.8744248 0.6943613 0.03138877
+[5,] 0.1114111 0.0179906 0.86436960
+[6,] 0.6323733 0.6206185 0.30456222
+> 
+> 
+> 
+> cleanEx()
+> nameEx("geneticLHS")
+> ### * geneticLHS
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: geneticLHS
+> ### Title: Latin Hypercube Sampling with a Genetic Algorithm
+> ### Aliases: geneticLHS
+> ### Keywords: design
+> 
+> ### ** Examples
+> 
+>   geneticLHS(4, 3, 50, 5, .25)
+      variables
+points          1         2         3
+     1 0.37297615 0.8758705 0.7422324
+     2 0.79200507 0.2702780 0.9689422
+     3 0.54722364 0.6986741 0.1764633
+     4 0.04788881 0.1428368 0.2788387
+> 
+> 
+> 
+> cleanEx()
+> nameEx("improvedLHS")
+> ### * improvedLHS
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: improvedLHS
+> ### Title: Improved Latin Hypercube Sample
+> ### Aliases: improvedLHS
+> ### Keywords: design
+> 
+> ### ** Examples
+> 
+>   improvedLHS(4, 3, 2)
+          [,1]        [,2]      [,3]
+[1,] 0.1028186 0.955236574 0.4117650
+[2,] 0.6957332 0.638259078 0.1324299
+[3,] 0.9473391 0.005832801 0.8693075
+[4,] 0.4330784 0.423182889 0.6194049
+> 
+> 
+> 
+> cleanEx()
+> nameEx("maximinLHS")
+> ### * maximinLHS
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: maximinLHS
+> ### Title: Maximin Latin Hypercube Sample
+> ### Aliases: maximinLHS
+> ### Keywords: design
+> 
+> ### ** Examples
+> 
+>   maximinLHS(4, 3, dup=2)
+          [,1]       [,2]      [,3]
+[1,] 0.8163772 0.09303097 0.3932133
+[2,] 0.4770519 0.80042048 0.7245974
+[3,] 0.2361688 0.66519945 0.1572785
+[4,] 0.5154466 0.30149364 0.7941392
+>   maximinLHS(4, 3, method="build", dup=2)
+          [,1]      [,2]      [,3]
+[1,] 0.2153024 0.3595243 0.5611993
+[2,] 0.5176698 0.7748665 0.8290679
+[3,] 0.8796586 0.1655013 0.1017075
+[4,] 0.4782190 0.5734008 0.3647664
+>   maximinLHS(4, 3, method="iterative", eps=0.05, maxIter=100, optimize.on="grid")
+           [,1]       [,2]       [,3]
+[1,] 0.06756504 0.03234309 0.49404267
+[2,] 0.99817102 0.86952951 0.93294813
+[3,] 0.65837332 0.48101862 0.08918173
+[4,] 0.30330203 0.64969024 0.60786842
+>   maximinLHS(4, 3, method="iterative", eps=0.05, maxIter=100, optimize.on="result")
+          [,1]      [,2]       [,3]
+[1,] 0.4036612 0.1251102 0.05317488
+[2,] 0.8892899 0.2952166 0.56943898
+[3,] 0.5821943 0.8824077 0.32119762
+[4,] 0.1132829 0.5188189 0.97377353
+> 
+> 
+> 
+> cleanEx()
+> nameEx("optAugmentLHS")
+> ### * optAugmentLHS
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: optAugmentLHS
+> ### Title: Optimal Augmented Latin Hypercube Sample
+> ### Aliases: optAugmentLHS
+> ### Keywords: design
+> 
+> ### ** Examples
+> 
+>   a <- randomLHS(4,3)
+>   a
+          [,1]      [,2]       [,3]
+[1,] 0.1717557 0.1794046 0.48367631
+[2,] 0.3460259 0.9979765 0.80303563
+[3,] 0.6924604 0.3450088 0.66291844
+[4,] 0.8744248 0.6943613 0.03138877
+>   optAugmentLHS(a, 2, 3)
+          [,1]      [,2]       [,3]
+[1,] 0.1717557 0.1794046 0.48367631
+[2,] 0.3460259 0.9979765 0.80303563
+[3,] 0.6924604 0.3450088 0.66291844
+[4,] 0.8744248 0.6943613 0.03138877
+[5,] 0.6323733 0.0179906 0.86436960
+[6,] 0.1114111 0.6206185 0.30456222
+> 
+> 
+> 
+> cleanEx()
+> nameEx("optSeededLHS")
+> ### * optSeededLHS
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: optSeededLHS
+> ### Title: Optimum Seeded Latin Hypercube Sample
+> ### Aliases: optSeededLHS
+> ### Keywords: design
+> 
+> ### ** Examples
+> 
+>   a <- randomLHS(4,3)
+>   a
+          [,1]      [,2]       [,3]
+[1,] 0.1717557 0.1794046 0.48367631
+[2,] 0.3460259 0.9979765 0.80303563
+[3,] 0.6924604 0.3450088 0.66291844
+[4,] 0.8744248 0.6943613 0.03138877
+>   optSeededLHS(a, 2, 2, .1)
+          [,1]      [,2]       [,3]
+[1,] 0.1717557 0.0179906 0.48367631
+[2,] 0.3460259 0.9979765 0.30456222
+[3,] 0.8744248 0.6943613 0.66291844
+[4,] 0.6924604 0.3450088 0.03138877
+[5,] 0.6323733 0.1794046 0.86436960
+[6,] 0.1114111 0.6206185 0.80303563
+> 
+> 
+> 
+> cleanEx()
+> nameEx("optimumLHS")
+> ### * optimumLHS
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: optimumLHS
+> ### Title: Optimum Latin Hypercube Sample
+> ### Aliases: optimumLHS
+> ### Keywords: design
+> 
+> ### ** Examples
+> 
+>   optimumLHS(4, 3, 5, .05)
+          [,1]       [,2]       [,3]
+[1,] 0.1717557 0.09602593 0.44246035
+[2,] 0.3744248 0.67940463 0.99797652
+[3,] 0.8450088 0.44436131 0.73367631
+[4,] 0.5530356 0.91291844 0.03138877
+> 
+> 
+> 
+> cleanEx()
+> nameEx("randomLHS")
+> ### * randomLHS
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: randomLHS
+> ### Title: Random Latin Hypercube
+> ### Aliases: randomLHS 'latin hypercube'
+> ### Keywords: design
+> 
+> ### ** Examples
+> 
+>   # draw a Latin hypercube
+>   randomLHS(4, 3)
+          [,1]      [,2]       [,3]
+[1,] 0.1717557 0.1794046 0.48367631
+[2,] 0.3460259 0.9979765 0.80303563
+[3,] 0.6924604 0.3450088 0.66291844
+[4,] 0.8744248 0.6943613 0.03138877
+>   
+>   # transform a Latin hypercube
+>   X <- randomLHS(5, 2)
+>   Y <- matrix(0, nrow=5, ncol=2)
+>   Y[,1] <- qnorm(X[,1], mean=3, sd=0.1)
+>   Y[,2] <- qbeta(X[,2], shape1=2, shape2=3)
+>   
+>   # check the preserveDraw option
+>   set.seed(1976)
+>   X <- randomLHS(6,3,preserveDraw=TRUE)
+>   set.seed(1976)
+>   Y <- randomLHS(6,5,preserveDraw=TRUE)
+>   all(abs(X - Y[,1:3]) < 1E-12) # TRUE
+[1] TRUE
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.416 0.016 0.433 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

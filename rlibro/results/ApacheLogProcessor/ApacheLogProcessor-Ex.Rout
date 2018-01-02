@@ -1,0 +1,201 @@
+
+R Under development (unstable) (2018-01-02 r74022) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "ApacheLogProcessor"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('ApacheLogProcessor')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("clear.urls")
+> ### * clear.urls
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: clear.urls
+> ### Title: Clear a list of URLs according parameters.
+> ### Aliases: clear.urls
+> 
+> ### ** Examples
+> 
+> 
+> #Load the path to the log file
+> path_combined = system.file("examples", "access_log_combined.txt", package = "ApacheLogProcessor")
+> 
+> #Read a log file with combined format and return it in a data frame
+> df1 = read.apache.access.log(path_combined)
+> 
+> #Clear the urls
+> urls <- clear.urls(df1$url)
+> 
+> #Clear the urls but do not remove query strings
+> urlsWithQS <- clear.urls(df1$url, remove_query_string = FALSE)
+> 
+> #Load a log which the urls have parameters inside
+> path2 = system.file("examples", 
++ "access_log_with_params_inside_url.txt", package = "ApacheLogProcessor")
+> 
+> #Read a log file with combined format and return it in a data frame
+> df2 = read.apache.access.log(path2, format = "common")
+> 
+> #Clear the urls with parameters inside
+> urls2 <- clear.urls(df2$url)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get.url.params")
+> ### * get.url.params
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get.url.params
+> ### Title: Extract from the data frame with the access log the urls query
+> ###   strings parameters and values.
+> ### Aliases: get.url.params
+> 
+> ### ** Examples
+> 
+> #Load a log which the urls have query strings
+> path = system.file("examples", "access_log_with_query_string.log", package = "ApacheLogProcessor")
+> 
+> #Read a log file with combined format and return it in a data frame
+> df = read.apache.access.log(path, format = "common")
+> 
+> #Clear the urls with parameters inside
+> params <- get.url.params(df)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("parse.php.msgs")
+> ### * parse.php.msgs
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: parse.php.msgs
+> ### Title: Parses PHP mesages and store its parts in a data frame that
+> ###   contains level, message, file, line number and referer.
+> ### Aliases: parse.php.msgs
+> 
+> ### ** Examples
+> 
+> 
+> #Loads the path of the erro log
+> path <- system.file("examples", "error_log.log", package = "ApacheLogProcessor")
+> 
+> #Loads the error log to a data frame
+> dfELog <- read.apache.error.log(path)
+> 
+> dfPHPMsgs <- parse.php.msgs(dfELog)
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("read.apache.access.log")
+> ### * read.apache.access.log
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: read.apache.access.log
+> ### Title: read.apache.log
+> ### Aliases: read.apache.access.log
+> 
+> ### ** Examples
+> 
+> path_combined = system.file("examples", "access_log_combined.txt", package = "ApacheLogProcessor")
+> path_common = system.file("examples", "access_log_common.txt", package = "ApacheLogProcessor")
+> 
+> #Read a log file with combined format and return it in a data frame
+> df1 = read.apache.access.log(path_combined)
+> 
+> #Read a log file with common format and return it in a data frame
+> df2 = read.apache.access.log(path_common, format="common") 
+> 
+> #Read only the lines that url matches with the pattern passed
+> df3 = read.apache.access.log(path_combined, url_includes="infinance")
+> 
+> #Read only the lines that url matches with the pattern passed, but do not matche the exclude pattern
+> df4 = read.apache.access.log(path_combined, 
++ url_includes="infinance", url_excludes="infinanceclient")
+> 
+> #Return only the ip, url and datetime columns
+> df5 = read.apache.access.log(path_combined, columns=c("ip", "url", "datetime"))
+> 
+> #Process using 2 cores in parallel for speed up. 
+> df6 = read.apache.access.log(path_combined, num_cores=2)
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("read.apache.error.log")
+> ### * read.apache.error.log
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: read.apache.error.log
+> ### Title: Read the apache erro log file and loads it to a data frame.
+> ### Aliases: read.apache.error.log
+> 
+> ### ** Examples
+> 
+> 
+> #Loads the path of the erro log
+> path <- system.file("examples", "error_log.log", package = "ApacheLogProcessor")
+> 
+> #Loads the error log to a data frame
+> dfELog <- read.apache.error.log(path)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("read.multiple.apache.access.log")
+> ### * read.multiple.apache.access.log
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: read.multiple.apache.access.log
+> ### Title: Reads multiple files of apache web server.
+> ### Aliases: read.multiple.apache.access.log
+> 
+> ### ** Examples
+> 
+> path <- system.file("examples", package="ApacheLogProcessor")
+> path <- paste(path, "/", sep="")
+> 
+> #read multiple gziped logs with the prefix m_access_log_combined_
+> dfLog <- read.multiple.apache.access.log(path, "m_access_log_combined_")
+[1] "Starting the log processing. This may take a long time..."
+[1] "Processing file  m_access_log_combined_1.log.gz"
+[1] "Unziping  m_access_log_combined_1.log.gz"
+Warning in file(file, ifelse(append, "a", "w")) :
+  cannot open file '/homero/tomas/cran/rlibro/lib/ApacheLogProcessor/examples/m_access_log_combined_1.log': Read-only file system
+Error in file(file, ifelse(append, "a", "w")) : 
+  cannot open the connection
+Calls: read.multiple.apache.access.log -> write -> cat -> file
+Execution halted

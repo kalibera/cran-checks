@@ -1,0 +1,22 @@
+* installing *source* package ‘kyotil’ ...
+** package ‘kyotil’ successfully unpacked and MD5 sums checked
+** libs
+make[1]: Entering directory '/tmp/Rtmp41YQ0X/R.INSTALL260259cd0aaf/kyotil/src'
+gcc -I"/home/tomas/cran/rlibro/build/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -c Call_kernel.c -o Call_kernel.o
+gcc -I"/home/tomas/cran/rlibro/build/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -c Call_matrix.c -o Call_matrix.o
+gcc -I"/home/tomas/cran/rlibro/build/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -c fromKutil.c -o fromKutil.o
+gcc -I"/home/tomas/cran/rlibro/build/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -c kernels.c -o kernels.o
+gcc -I"/home/tomas/cran/rlibro/build/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -c matrix.c -o matrix.o
+gcc -I"/home/tomas/cran/rlibro/build/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -c registerDynamicSymbol.c -o registerDynamicSymbol.o
+gcc -I"/home/tomas/cran/rlibro/build/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -c sresids.c -o sresids.o
+gcc -shared -L/usr/local/lib -o kyotil.so Call_kernel.o Call_matrix.o fromKutil.o kernels.o matrix.o registerDynamicSymbol.o sresids.o -L/home/tomas/cran/rlibro/build/lib -lRlapack -L/home/tomas/cran/rlibro/build/lib -lRblas -lgfortran -lm -lquadmath
+make[1]: Leaving directory '/tmp/Rtmp41YQ0X/R.INSTALL260259cd0aaf/kyotil/src'
+installing to /home/tomas/cran/rlibro/lib/kyotil/libs
+** R
+** inst
+** preparing package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded
+* DONE (kyotil)

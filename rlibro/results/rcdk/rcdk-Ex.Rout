@@ -1,0 +1,579 @@
+
+R Under development (unstable) (2018-01-02 r74022) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "rcdk"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('rcdk')
+Loading required package: rcdklibs
+Loading required package: rJava
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("atomcontainer")
+> ### * atomcontainer
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Molecule
+> ### Title: Operations on molecules
+> ### Aliases: get.exact.mass get.natural.mass is.neutral
+> ###   convert.implicit.to.explicit
+> ### Keywords: programming
+> 
+> ### ** Examples
+> 
+>   m <- parse.smiles('c1ccccc1')[[1]]
+> 
+>   ## Need to configure the molecule
+>   do.aromaticity(m)
+[1] FALSE
+>   do.typing(m)
+>   do.isotopes(m)
+> 
+>   get.exact.mass(m)
+[1] 78.04695
+>   get.natural.mass(m)
+[1] 78.11206
+> 
+>   convert.implicit.to.explicit(m)
+>   get.natural.mass(m) 
+[1] 78.11206
+>   do.isotopes(m) # Configure isotopes of newly added hydrogens
+>   get.exact.mass(m)
+[1] 78.04695
+> 
+>   is.neutral(m)
+[1] TRUE
+> 
+> 
+> 
+> cleanEx()
+> nameEx("evaldesc")
+> ### * evaldesc
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: eval.desc
+> ### Title: Evaluate a Molecular Descriptor
+> ### Aliases: eval.desc
+> ### Keywords: programming
+> 
+> ### ** Examples
+> 
+> smiles <- c('CCC', 'c1ccccc1', 'CC(=O)C')
+> mols <- sapply(smiles, parse.smiles)
+> 
+> dnames <- get.desc.names('constitutional')
+> descs <- eval.desc(mols, dnames, verbose=TRUE)
+Processing  XLogPDescriptor 
+Processing  WeightDescriptor 
+Processing  RuleOfFiveDescriptor 
+Processing  RotatableBondsCountDescriptor 
+Processing  MannholdLogPDescriptor 
+Processing  LongestAliphaticChainDescriptor 
+Processing  LargestPiSystemDescriptor 
+Processing  LargestChainDescriptor 
+Processing  BondCountDescriptor 
+Processing  BasicGroupCountDescriptor 
+Processing  AtomCountDescriptor 
+Processing  AromaticBondsCountDescriptor 
+Processing  AromaticAtomsCountDescriptor 
+Processing  ALOGPDescriptor 
+Processing  AcidicGroupCountDescriptor 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("frags")
+> ### * frags
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get.murcko.fragments
+> ### Title: Molecule Fragmentation Methods
+> ### Aliases: fragment get.exhaustive.fragments get.murcko.fragments
+> ### Keywords: programming
+> 
+> ### ** Examples
+> 
+> mol <- parse.smiles('c1ccc(cc1)CN(c2cc(ccc2[N+](=O)[O-])c3c(nc(nc3CC)N)N)C')[[1]]
+> mf1 <- get.murcko.fragments(mol, as.smiles=TRUE, single.framework=TRUE)
+> mf1 <- get.murcko.fragments(mol, as.smiles=TRUE, single.framework=FALSE)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("generateformula")
+> ### * generateformula
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: generate.formula
+> ### Title: Generate molecular formulae given a target mass and a set of
+> ###   elements and counts.
+> ### Aliases: generate.formula generate.formula.iter
+> ### Keywords: programming
+> 
+> ### ** Examples
+> 
+> 
+> mfSet <- generate.formula(18.03383,charge=1,
++                           elements=list(c("C",0,50),c("H",0,50),c("N",0,50)))
+Warning in `[<-`(`*tmp*`, count, value = new("cdkFormula",
+mass = 18.0338255480907,  :
+  implicit list embedding of S4 objects is deprecated
+> for (i in mfSet) {
++   print(i)
++ }
+cdkFormula:  H4N , mass =  18.03383 , charge =  1 
+> 
+> mit <- generate.formula.iter(18.03383,charge=1,
++                           elements=list(C=c(0,50), H=c(0,50), N=c(0,50)))
+> hit <- itertools::ihasNext(mit)
+> while (itertools::hasNext(hit)) 
++   print(iterators::nextElem(hit))			  
+[1] "H4N"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get.adjacency.matrix")
+> ### * get.adjacency.matrix
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get.adjacency.matrix
+> ### Title: Get adjacency matrix for a molecule.
+> ### Aliases: get.adjacency.matrix
+> 
+> ### ** Examples
+> 
+> m <- parse.smiles("CC=C")[[1]]
+> get.adjacency.matrix(m)
+     [,1] [,2] [,3]
+[1,]    0    1    0
+[2,]    1    0    1
+[3,]    0    1    0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get.connection.matrix")
+> ### * get.connection.matrix
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get.connection.matrix
+> ### Title: Get connection matrix for a molecule.
+> ### Aliases: get.connection.matrix
+> 
+> ### ** Examples
+> 
+> m <- parse.smiles("CC=C")[[1]]
+> get.connection.matrix(m)
+     [,1] [,2] [,3]
+[1,]    0    1    0
+[2,]    1    0    2
+[3,]    0    2    0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getformula")
+> ### * getformula
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get.formula
+> ### Title: Get the formula object from a formula character.
+> ### Aliases: get.formula
+> ### Keywords: programming
+> 
+> ### ** Examples
+> 
+> formula <- get.formula('NH4', charge = 1)
+> formula
+cdkFormula:  H4N , mass =  18.03383 , charge =  1 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getfp")
+> ### * getfp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get.fingerprint
+> ### Title: Evaluate Fingerprints
+> ### Aliases: get.fingerprint
+> ### Keywords: programming
+> 
+> ### ** Examples
+> 
+> ## get some molecules
+> sp <- get.smiles.parser()
+> smiles <- c('CCC', 'CCN', 'CCN(C)(C)', 'c1ccccc1Cc1ccccc1','C1CCC1CC(CN(C)(C))CC(=O)CC')
+> mols <- parse.smiles(smiles)
+> 
+> ## get a single fingerprint using the standard
+> ## (hashed, path based) fingerprinter
+> fp <- get.fingerprint(mols[[1]])
+> 
+> ## get MACCS keys for all the molecules
+> fps <- lapply(mols, get.fingerprint, type='maccs')
+> 
+> ## get Signature fingerprint
+> ## feature, count fingerprinter
+> fps <- lapply(mols, get.fingerprint, type='signature', fp.mode='raw')
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getlargestcomp")
+> ### * getlargestcomp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: is.connected
+> ### Title: Get the Largest Component in a Disconnected Molecule
+> ### Aliases: get.largest.component is.connected
+> ### Keywords: programming
+> 
+> ### ** Examples
+> 
+> m <- parse.smiles("CC.CCCCCC.CCCC")[[1]]
+> largest <- get.largest.component(m)
+> length(get.atoms(largest)) == 6
+[1] TRUE
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getmol2formula")
+> ### * getmol2formula
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get.mol2formula
+> ### Title: Parser a molecule to formula object.
+> ### Aliases: get.mol2formula
+> ### Keywords: programming
+> 
+> ### ** Examples
+> 
+> molecule <- parse.smiles("N")[[1]]
+> convert.implicit.to.explicit(molecule)
+> formula <- get.mol2formula(molecule,charge=0)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getproperty")
+> ### * getproperty
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get.property
+> ### Title: Get the Value of a Molecule Property
+> ### Aliases: get.property get.title
+> ### Keywords: programming
+> 
+> ### ** Examples
+> 
+> smiles <- 'c1ccccc1'
+> mol <- parse.smiles(smiles)[[1]]
+> set.property(mol, 'prop1', 23.45)
+> set.property(mol, 'prop2', 'inactive')
+> get.property(mol, 'prop1')
+[1] 23.45
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getprops")
+> ### * getprops
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get.properties
+> ### Title: Get All Property Values of a Molecule
+> ### Aliases: get.properties
+> ### Keywords: programming
+> 
+> ### ** Examples
+> 
+> smiles <- 'c1ccccc1'
+> mol <- parse.smiles(smiles)[[1]]
+> set.property(mol, 'prop1', 23.45)
+> set.property(mol, 'prop2', 'inactive')
+> get.properties(mol)
+$`cdk:Title`
+[1] NA
+
+$prop1
+[1] 23.45
+
+$prop2
+[1] "inactive"
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getsmiles")
+> ### * getsmiles
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get.smiles
+> ### Title: Get the SMILES for a Molecule
+> ### Aliases: get.smiles
+> ### Keywords: programming
+> 
+> ### ** Examples
+> 
+> m <- parse.smiles('C1C=CCC1N(C)c1ccccc1')[[1]]
+> get.smiles(m)
+[1] "C1C=CCC1N(C)C2=CC=CC=C2"
+> get.smiles(m, smiles.flavors(c('Generic','UseAromaticSymbols')))
+[1] "C1C=CCC1N(C)c2ccccc2"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("isvalidformula")
+> ### * isvalidformula
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: isvalid.formula
+> ### Title: Validate a cdkFormula object.
+> ### Aliases: isvalid.formula
+> ### Keywords: programming
+> 
+> ### ** Examples
+> 
+> formula <- get.formula('NH4', charge = 0)
+> isvalid.formula(formula, rule = c("nitrogen","RDBE"))
+[1] FALSE
+> 
+> 
+> 
+> cleanEx()
+> nameEx("loadmol")
+> ### * loadmol
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: load.molecules
+> ### Title: Load Molecular Structures From Disk
+> ### Aliases: load.molecules iload.molecules
+> ### Keywords: programming
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D 
+> ##D ## load a single file
+> ##D amol <- load.molecules('foo.sdf')
+> ##D 
+> ##D ## load multiple files
+> ##D mols <- load.molecules(c('mol1.sdf', 'mol2.smi', 
+> ##D           'https://github.com/rajarshi/cdkr/blob/master/data/set2/dhfr00008.sdf?raw=true'))
+> ##D 
+> ##D ## iterate over a large file
+> ##D moliter <- iload.molecules("big.sdf", type="sdf")
+> ##D while(hasNext(moliter)) {
+> ##D   mol <- nextElem(moliter)
+> ##D   print(get.property(mol, "cdk:Title"))
+> ##D }
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("match")
+> ### * match
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: matches
+> ### Title: Perform Substructure Searching & MCS Detection
+> ### Aliases: match matches smarts substructure is.subgraph get.mcs mcs
+> ### Keywords: programming
+> 
+> ### ** Examples
+> 
+> smiles <- c('CCC', 'c1ccccc1', 'C(C)(C=O)C(CCNC)C1CC1C(=O)')
+> mols <- sapply(smiles, parse.smiles)
+> query <- '[#6]=O'
+> doesMatch <- matches(query, mols)
+> 
+> ## get mappings
+> mappings <- matches("CCC", mols, TRUE)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("parsesmiles")
+> ### * parsesmiles
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: parse.smiles
+> ### Title: Parse a Vector of SMILES Strings
+> ### Aliases: parse.smiles
+> ### Keywords: programming
+> 
+> ### ** Examples
+> 
+> smiles <- c('CCC', 'c1ccccc1', 'C(C)(C=O)C(CCNC)C1CC1C(=O)')
+> mol <- parse.smiles(smiles[1])
+> mols <- parse.smiles(smiles)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setproperty")
+> ### * setproperty
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: set.property
+> ### Title: Set A Property On A Molecule
+> ### Aliases: set.property
+> ### Keywords: programming
+> 
+> ### ** Examples
+> 
+> smiles <- 'c1ccccc1'
+> mol <- parse.smiles(smiles)[[1]]
+> set.property(mol, 'prop1', 23.45)
+> set.property(mol, 'prop2', 'inactive')
+> get.properties(mol)
+$`cdk:Title`
+[1] NA
+
+$prop1
+[1] 23.45
+
+$prop2
+[1] "inactive"
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("smiles.flavors")
+> ### * smiles.flavors
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: smiles.flavors
+> ### Title: Generate flag for customizing SMILES generation.
+> ### Aliases: smiles.flavors
+> 
+> ### ** Examples
+> 
+> m <- parse.smiles('C1C=CCC1N(C)c1ccccc1')[[1]]
+> get.smiles(m)
+[1] "C1C=CCC1N(C)C2=CC=CC=C2"
+> get.smiles(m, smiles.flavors(c('Generic','UseAromaticSymbols')))
+[1] "C1C=CCC1N(C)c2ccccc2"
+> 
+> m <- parse.smiles("OS(=O)(=O)c1ccc(cc1)C(CC)CC |Sg:n:13:m:ht,Sg:n:11:n:ht|")[[1]]
+> get.smiles(m,flavor = smiles.flavors(c("CxSmiles")))
+[1] "OS(=O)(=O)C1=CC=C(C=C1)C(CC)CC |Sg:n:11:n:ht,Sg:n:13:m:ht|"
+> get.smiles(m,flavor = smiles.flavors(c("CxSmiles","UseAromaticSymbols")))
+[1] "OS(=O)(=O)c1ccc(cc1)C(CC)CC |Sg:n:11:n:ht,Sg:n:13:m:ht|"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("viewmol2d")
+> ### * viewmol2d
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: view.molecule.2d
+> ### Title: View and Copy 2D Structure Diagrams
+> ### Aliases: get.depictor view.molecule.2d view.image.2d
+> ###   copy.image.to.clipboard depict
+> ### Keywords: programming
+> 
+> ### ** Examples
+> 
+> m <- parse.smiles('c1ccccc1C(=O)NC')[[1]]
+> 
+> ## Not run: 
+> ##D dep <- get.depictor(width=200, height=200)
+> ##D img <- view.image.2d(m, dep)
+> ##D plot(1:10, 1:10, pch=19)
+> ##D rasterImage(img, 0,8, 2,10)
+> ##D 
+> ##D dep$setHeight(as.integer(400))
+> ##D dep$setWidth(as.integer(400))
+> ##D copy.image.to.clipboard(m,d) ## Paste into Word
+> ##D 
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("viewtable")
+> ### * viewtable
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: view.table
+> ### Title: View 2D Structures With Data
+> ### Aliases: view.table
+> ### Keywords: programming
+> 
+> ### ** Examples
+> 
+> smiles <- c('CCC', 'CCN', 'CCN(C)(C)',
++             'c1ccccc1Cc1ccccc1',
++             'C1CCC1CC(CN(C)(C))CC(=O)CC')
+> mols <- parse.smiles(smiles)
+> dframe <- data.frame(x = runif(4),
++                      toxicity = factor(c('Toxic', 'Toxic', 'Nontoxic', 'Nontoxic')),
++                      solubility = c('yes', 'yes', 'no', 'yes'))
+> ## Not run: view.table(mols[1:4], dframe)
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  5.168 0.192 3.5 0 0.016 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

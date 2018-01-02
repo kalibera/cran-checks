@@ -1,0 +1,218 @@
+
+R Under development (unstable) (2018-01-02 r74022) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "FishResp"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('FishResp')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("QC.activity")
+> ### * QC.activity
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: QC.activity
+> ### Title: Quality Control of Animal Activity
+> ### Aliases: QC.activity
+> 
+> ### ** Examples
+> 
+> # if the data have been already loaded to R,
+> # skip the first two lines of the code:
+> setwd(path.package("FishResp", quiet = FALSE))
+> load("data/SMR.clean.RData")
+> 
+> QC.activity(SMR.clean, compare = TRUE)
+> 
+> 
+> 
+> 
+> cleanEx()
+Warning: working directory was changed to ‘/homero/tomas/cran/rlibro/lib/FishResp’, resetting
+> nameEx("QC.meas")
+> ### * QC.meas
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: QC.meas
+> ### Title: Quality Control of Raw Data
+> ### Aliases: QC.meas
+> 
+> ### ** Examples
+> 
+> # if the data have been already loaded to R,
+> # skip the first two lines of the code:
+> setwd(path.package("FishResp", quiet = FALSE))
+> load("data/SMR.clean.RData")
+> 
+> QC.meas(SMR.clean, "Temperature")
+> QC.meas(SMR.clean, "Total.O2.phases")
+> QC.meas(SMR.clean, "Corrected.O2.phases")
+> QC.meas(SMR.clean, "Total.O2.chambers")
+> QC.meas(SMR.clean, "Corrected.O2.chambers")
+> 
+> 
+> 
+> 
+> cleanEx()
+Warning: working directory was changed to ‘/homero/tomas/cran/rlibro/lib/FishResp’, resetting
+> nameEx("QC.slope")
+> ### * QC.slope
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: QC.slope
+> ### Title: Quality Control of Slope(s)
+> ### Aliases: QC.slope
+> 
+> ### ** Examples
+> 
+> # if the data have been already loaded to R,
+> # skip the first five lines of the code:
+> setwd(path.package("FishResp", quiet = FALSE))
+> load("data/SMR.slope.RData")
+> load("data/SMR.clean.RData")
+> load("data/AMR.slope.RData")
+> load("data/AMR.clean.RData")
+> 
+> QC.slope(SMR.slope, SMR.clean,
++          chamber = "CH1", current = 1200, alter = 600)
+> QC.slope(SMR.slope, SMR.clean,
++          chamber = "CH2", current = 1200, alter = 600)
+> QC.slope(SMR.slope, SMR.clean,
++          chamber = "CH3", current = 1200, alter = 600)
+> QC.slope(SMR.slope, SMR.clean,
++          chamber = "CH4", current = 1200, alter = 600)
+> 
+> QC.slope(AMR.slope, AMR.clean,
++          chamber = "CH1", current = 300, alter = 600)
+> QC.slope(AMR.slope, AMR.clean,
++          chamber = "CH2", current = 300, alter = 600)
+> QC.slope(AMR.slope, AMR.clean,
++          chamber = "CH3", current = 300, alter = 600)
+> QC.slope(AMR.slope, AMR.clean,
++          chamber = "CH4", current = 300, alter = 600)
+> 
+> 
+> 
+> 
+> cleanEx()
+Warning: working directory was changed to ‘/homero/tomas/cran/rlibro/lib/FishResp’, resetting
+> nameEx("calculate.MR")
+> ### * calculate.MR
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: calculate.MR
+> ### Title: Calculation of Metabolic Rate
+> ### Aliases: calculate.MR
+> 
+> ### ** Examples
+> 
+> # if the data have been already loaded to R,
+> # skip the first three lines of the code:
+> setwd(path.package("FishResp", quiet = FALSE))
+> load("data/SMR.slope.RData")
+> load("data/AMR.slope.RData")
+> 
+> SMR <- calculate.MR(SMR.slope,
++                     density = 1000,
++                     plot.BR = TRUE,
++                     plot.MR.abs = TRUE,
++                     plot.MR.mass = TRUE)
+> 
+> AMR <- calculate.MR(AMR.slope,
++                     density = 1000,
++                     plot.BR = TRUE,
++                     plot.MR.abs = TRUE,
++                     plot.MR.mass = TRUE)
+> 
+> 
+> 
+> 
+> cleanEx()
+Warning: working directory was changed to ‘/homero/tomas/cran/rlibro/lib/FishResp’, resetting
+> nameEx("correct.meas")
+> ### * correct.meas
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: correct.meas
+> ### Title: Correction of Metabolic Rate Measurements
+> ### Aliases: correct.meas
+> 
+> ### ** Examples
+> 
+> # if the data have been already loaded to R,
+> # skip the first six lines of the code:
+> setwd(path.package("FishResp", quiet = FALSE))
+> load("data/info.RData")
+> load("data/pre.RData")
+> load("data/post.RData")
+> load("data/SMR.raw.RData")
+> load("data/AMR.raw.RData")
+> 
+> SMR.clean <- correct.meas(info.data = info,
++                           pre.data = pre,
++                           meas.data = SMR.raw,
++                           method = "pre.test")
+> 
+> AMR.clean <- correct.meas(info.data = info,
++                           post.data = post,
++                           meas.data = AMR.raw,
++                           method = "post.test")
+> 
+> 
+> 
+> 
+> cleanEx()
+Warning: working directory was changed to ‘/homero/tomas/cran/rlibro/lib/FishResp’, resetting
+> nameEx("export.MR")
+> ### * export.MR
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: export.MR
+> ### Title: Export Metabolic Rate
+> ### Aliases: export.MR
+> 
+> ### ** Examples
+> 
+> # if the data have been already loaded to R,
+> # skip the first three lines of the code:
+> setwd(path.package("FishResp", quiet = FALSE))
+> load("data/SMR.RData")
+> load("data/AMR.RData")
+> 
+> results <- export.MR(SMR, AMR,
++                      file = "results.txt",
++                      simplify = TRUE,
++                      MS = TRUE,
++                      plot.MS.abs = TRUE,
++                      plot.MS.mass = TRUE,
++                      plot.MS.fact = TRUE)
+Warning in file(file, ifelse(append, "a", "w")) :
+  cannot open file 'results.txt': Read-only file system
+Error in file(file, ifelse(append, "a", "w")) : 
+  cannot open the connection
+Calls: export.MR -> write.table -> file
+Execution halted

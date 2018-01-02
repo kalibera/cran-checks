@@ -1,0 +1,146 @@
+
+R Under development (unstable) (2018-01-02 r74022) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "biclique"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('biclique')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("bi.clique")
+> ### * bi.clique
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bi.clique
+> ### Title: Biclique enumeration
+> ### Aliases: bi.clique
+> 
+> ### ** Examples
+> 
+> bicliques = bi.clique(system.file("extdata", "example1.el", package = "biclique"))
+biclique	Number
+K3,1		1
+K4,1		2
+K5,1		2
+K1,2		3
+K2,2		1
+K3,2		2
+K2,3		1
+K1,4		1
+
+Number of left vertices     : 10
+Number of right vertices    : 5
+Number of edges             : 21
+Number of bicliques         : 13
+Maximum edge biclique       : K3,2
+Maximum vertex biclique     : K5,1
+> bicliques = bi.clique(system.file("extdata", "example1.el", package = "biclique"), 3, 2)
+biclique	Number
+K3,2		2
+
+Number of left vertices     : 10
+Number of right vertices    : 5
+Number of edges             : 21
+Number of bicliques         : 2
+Maximum edge biclique       : K3,2
+Maximum vertex biclique     : K3,2
+> bicliques = bi.clique(system.file("extdata", "example4.bmat", package = "biclique"), filetype = 1)
+biclique	Number
+K9,1		1
+K12,1		1
+K13,1		1
+K15,1		1
+K18,1		1
+K21,1		1
+K26,1		2
+K29,1		1
+K31,1		1
+K7,2		1
+K8,2		1
+K10,2		2
+K24,2		1
+K8,3		1
+K19,3		1
+K7,4		1
+K9,4		1
+K6,5		1
+K4,8		1
+
+Number of left vertices     : 100
+Number of right vertices    : 10
+Number of edges             : 200
+Number of bicliques         : 21
+Maximum edge biclique       : K19,3
+Maximum vertex biclique     : K31,1
+> # check a biclique
+> bicliques$biclique1
+$left
+ [1] "1"  "2"  "3"  "4"  "11" "12" "13" "24" "25" "26" "71" "72" "73" "74" "75"
+
+$right
+[1] "A"
+
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("bi.degree")
+> ### * bi.degree
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bi.degree
+> ### Title: Get the degree list
+> ### Aliases: bi.degree
+> 
+> ### ** Examples
+> 
+> degreelist = bi.degree(system.file("extdata", "example1.el", package = "biclique")) 
+> degreelist = bi.degree(system.file("extdata", "example4.bmat", package = "biclique"), 1)
+> #get the vertex degree
+> degreelist['A']
+ A 
+15 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("bi.format")
+> ### * bi.format
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bi.format
+> ### Title: Add number of vertices and edges to the input file
+> ### Aliases: bi.format
+> 
+> ### ** Examples
+> 
+> bi.format(system.file("extdata", "example2.el", package = "biclique"))
+Warning in file(file, ifelse(append, "a", "w")) :
+  cannot open file '/homero/tomas/cran/rlibro/lib/biclique/extdata/example2.el': Read-only file system
+Error in file(file, ifelse(append, "a", "w")) : 
+  cannot open the connection
+Calls: bi.format -> cat -> file
+Execution halted

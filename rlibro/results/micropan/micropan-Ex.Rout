@@ -1,0 +1,110 @@
+
+R Under development (unstable) (2018-01-02 r74022) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "micropan"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('micropan')
+Loading required package: igraph
+
+Attaching package: ‘igraph’
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union
+
+Loading required package: microseq
+
+Attaching package: ‘microseq’
+
+The following object is masked from ‘package:base’:
+
+    gregexpr
+
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("bClust")
+> ### * bClust
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bClust
+> ### Title: Clustering sequences based on pairwise distances
+> ### Aliases: bClust
+> 
+> ### ** Examples
+> 
+> # Loading distance data in the micropan package
+> data(Mpneumoniae.blast.distances,package="micropan")
+> 
+> # Clustering with default settings
+> clustering.blast.single <- bClust(Mpneumoniae.blast.distances)
+bClust:
+...constructing graph with 9573 sequences (nodes) and 139543 distances (edges)
+...found 646 single linkage clusters
+...ended with 646 clusters, largest cluster has 4091 members
+> 
+> # Clustering with complete linkage and a liberal threshold
+> clustering.blast.complete <- bClust(Mpneumoniae.blast.distances,linkage="complete",threshold=0.75)
+bClust:
+...constructing graph with 9573 sequences (nodes) and 80624 distances (edges)
+...found 1105 single linkage clusters
+...found 49 incomplete clusters, splitting:
+.................................................
+...ended with 1210 clusters, largest cluster has 71 members
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("bDist")
+> ### * bDist
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bDist
+> ### Title: Computes distances between sequences based on BLAST results
+> ### Aliases: bDist
+> 
+> ### ** Examples
+> 
+> # Using BLAST result files in this package...
+> # We need to uncompress them first:
+> extdata.path <- file.path(path.package("micropan"),"extdata")
+> filenames <- c("GID1_vs_GID1.txt",
++ "GID1_vs_GID2.txt",
++ "GID1_vs_GID3.txt",
++ "GID2_vs_GID1.txt",
++ "GID2_vs_GID2.txt",
++ "GID2_vs_GID3.txt",
++ "GID3_vs_GID1.txt",
++ "GID3_vs_GID2.txt",
++ "GID3_vs_GID3.txt")
+> pth <- lapply( file.path( extdata.path, paste( filenames, ".xz", sep="" ) ), xzuncompress )
+Warning in file(destname, open = "wb") :
+  cannot open file '/homero/tomas/cran/rlibro/lib/micropan/extdata/GID1_vs_GID1.txt': Read-only file system
+Error in file(destname, open = "wb") : cannot open the connection
+Calls: lapply -> FUN -> file
+Execution halted

@@ -1,0 +1,148 @@
+* using log directory ‘/home/tomas/cran/rlibro/check/COMBIA.Rcheck’
+* using R Under development (unstable) (2018-01-02 r74022)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* checking for file ‘COMBIA/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘COMBIA’ version ‘1.0.5’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘COMBIA’ can be installed ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking examples ... ERROR
+Running examples in ‘COMBIA-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: analyzeCOMBO
+> ### Title: This function calculates significant synergy/antagonism
+> ###   according to Bliss or Loewe model and saves scientific publication
+> ###   ready graphs.
+> ### Aliases: analyzeCOMBO
+> 
+> ### ** Examples
+> 
+> fl <- system.file("extdata", "testData.csv", package="COMBIA")
+> wellR <- list(c("l3:l10","m3:m10","b3:k10", "l13:l20","m13:m20","b13:k20", 
++            "l23:l30","m23:m30","b23:k30", "l33:l40","m33:m40","b33:k40") )
+> mdl <- "bliss"
+> xConc <- c(0.00,  0.20,  0.39,  0.78,  1.56,  3.12,  6.25, 12.50, 25.00, 50) 
+> yConc <- c(128,  64,  32,  16,   8,   4,   2,   0)
+> xDrug <- "A"
+> yDrug <- "B"
+> cellLine <-"Cell"
+> analyzeCOMBO(filename = c(fl), model = "bliss", inputFormates = "macsynergy", 
++                  wells = wellR, yConcentration = yConc, xConcentration = xConc,
++                  xDrug = xDrug, yDrug=yDrug, cellLine = cellLine, nBoot=500)
+[1] "Ratio between empty and control 215.34756097561"
+[1] "CV for control: 1 : 2.30698484671909"
+[1] "Ratio between empty and control 216.431571815718"
+[1] "CV for control: 2 : 3.97477131010254"
+[1] "Ratio between empty and control 212.255570117955"
+[1] "CV for control: 3 : 6.4008999376604"
+[1] "Ratio between empty and control 191.453473132372"
+[1] "CV for control: 4 : 5.87005801002331"
+[1] "Number of the variable datapoints before data removal= 22"
+          [,1]      [,2]      [,3]      [,4]      [,5]      [,6]      [,7]
+[1,] 0.4959273 0.4544325 0.4527889 0.5141335 0.7657826 0.8754745 0.9742680
+[2,] 0.5282520 0.4508880 0.4907902 0.5426933 0.7353865 0.9182928 0.9180664
+[3,] 0.4939636 0.4681056 0.5032695 0.5585093 0.7629166 0.8590776 0.9670757
+[4,] 0.5893432 0.5392455 0.5748920 0.6414779 0.8667800 0.9914462 1.0411311
+          [,8]      [,9]     [,10]     [,11]     [,12]     [,13]     [,14]
+[1,] 0.9653167 0.3883595 0.4311439 0.5377761 0.5499641 0.7446938 0.8205780
+[2,] 0.8856867 0.4417552 0.5078481 0.5198489 0.6046601 0.7495008 0.8080710
+[3,] 1.0026615 0.3025846 0.4016490 0.5368700 0.5787590 0.7088183 0.8592761
+[4,] 0.9958504 0.4488219 0.5907471 0.5606334 0.6452214 0.7078161 0.8624584
+         [,15]     [,16]     [,17]     [,18]     [,19]     [,20]     [,21]
+[1,] 0.9662776 0.9516621 0.3719992 0.4589335 0.5391416 0.5714069 0.6952844
+[2,] 0.8874478 0.8987191 0.4345346 0.5168550 0.5483290 0.5782179 0.6729921
+[3,] 0.9738752 0.9966561 0.3164069 0.4027905 0.5139402 0.5712646 0.7147492
+[4,] 0.9743249 0.8783960 0.4989471 0.5837279 0.5916279 0.6235858 0.7095227
+         [,22]     [,23]     [,24]      [,25]     [,26]     [,27]     [,28]
+[1,] 0.8367865 0.9272861 0.9249851 0.14439735 0.2005835 0.3076203 0.5062694
+[2,] 0.8237954 0.8538857 0.8311670 0.08167886 0.2314255 0.0000000 0.3672844
+[3,] 0.8314577 0.9330037 0.9559334 0.06050699 0.0000000 0.1937179 0.4452006
+[4,] 0.8354551 0.8611646 0.8680737 0.05142586 0.0000000 0.1851207 0.6040147
+         [,29]     [,30]     [,31]     [,32]      [,33]      [,34]      [,35]
+[1,] 0.4562531 0.6521713 0.6713130 0.7385240 0.05020593 0.05465631 0.06740060
+[2,] 0.4803995 0.5218113 0.6356309 0.6285863 0.03475723 0.05490963 0.06658343
+[3,] 0.4499404 0.6100268 0.6939040 0.8689294 0.02834578 0.04132442 0.06430379
+[4,] 0.4855143 0.5217113 0.6216590 0.6994481 0.03135924 0.05079276 0.13865645
+          [,36]     [,37]     [,38]     [,39]     [,40]      [,41]      [,42]
+[1,] 0.12429475 0.1606059 0.2181069 0.2718402 0.3368766 0.02754941 0.04739915
+[2,] 0.08167886 0.1406768 0.2105184 0.2518295 0.3291433 0.03548684 0.04884630
+[3,] 0.08065737 0.1508611 0.1835683 0.2876951 0.3136276 0.03569124 0.04281336
+[4,] 0.13160973 0.2082152 0.2306766 0.3238528 0.3092915 0.05068265 0.04264499
+          [,43]      [,44]     [,45]     [,46]     [,47]     [,48]      [,49]
+[1,] 0.06808333 0.08942496 0.1572175 0.1623506 0.2106727 0.2543674 0.01933137
+[2,] 0.07347701 0.11561843 0.1250531 0.1410291 0.2056878 0.2528611 0.03053051
+[3,] 0.08353600 0.08701020 0.1579832 0.2060017 0.3179703 0.2390066 0.02948731
+[4,] 0.11102012 0.08302596 0.1467216 0.1699538 0.2212626 0.2220058 0.04085579
+          [,50]      [,51]      [,52]     [,53]     [,54]     [,55]     [,56]
+[1,] 0.03738578 0.06740060 0.09645455 0.1303635 0.1664470 0.1984847 0.2228354
+[2,] 0.04690905 0.06693566 0.07219390 0.1162222 0.1463879 0.1632948 0.1580617
+[3,] 0.05544457 0.08321339 0.11244634 0.1846601 0.1907400 0.2458806 0.2747413
+[4,] 0.05445374 0.08222770 0.12626965 0.1550896 0.2057103 0.2272083 0.2090685
+          [,57]      [,58]      [,59]      [,60]      [,61]     [,62]     [,63]
+[1,] 0.01025359 0.01930608 0.04671642 0.04841060 0.10983099 0.1492017 0.1828325
+[2,] 0.03060599 0.03719766 0.05735006 0.04758835 0.10417106 0.1408530 0.1359973
+[3,] 0.01926322 0.05350895 0.05651165 0.08440455 0.09614239 0.1644601 0.1522012
+[4,] 0.02222054 0.04581051 0.04608577 0.06967574 0.11129538 0.1729541 0.1654670
+         [,64]         [,65]       [,66]       [,67]       [,68]       [,69]
+[1,] 0.0000000 -0.0005689415 0.001226385 0.006915800 0.001555107 0.007674388
+[2,] 0.1718489  0.0030316658 0.001496964 0.002729757 0.015233806 0.041273425
+[3,] 0.1958769  0.0100813956 0.008840608 0.015441596 0.042292230 0.029065439
+[4,] 0.1998748  0.0032825016 0.011320157 0.007466487 0.002208979 0.045507721
+           [,70]      [,71]      [,72]       [,73]        [,74]        [,75]
+[1,] 0.005423909 0.03877652 0.00643536 0.000265506 0.0006700866 0.0003160786
+[2,] 0.012994651 0.04655683 0.02595156 0.001673077 0.0009434645 0.0061765474
+[3,] 0.012165918 0.04110107 0.02296077 0.002115542 0.0017184902 0.0017184902
+[4,] 0.019302761 0.02464285 0.09648628 0.001135457 0.0005849321 0.0001720389
+             [,76]        [,77]         [,78]        [,79]         [,80]
+[1,] -2.149334e-04 0.0003919375 -0.0002402197 0.0016056793  0.0011758124
+[2,]  5.157606e-04 0.0005157606  0.0001383748 0.0020756218  0.0010189416
+[3,] -1.861181e-05 0.0013958855  0.0001799141 0.0007258605  0.0001302827
+[4,]  1.720389e-04 0.0014657711  0.0008601943 0.0012730876 -0.0002959069
+[1] "Number of the variable datapoints after data removal= 19"
+[1] "Applying Bliss model"
+Warning in file(file, ifelse(append, "a", "w")) :
+  cannot open file '/homero/tomas/cran/rlibro/lib/COMBIAAnalyzedData_A_B_Cell.csv': Read-only file system
+Error in file(file, ifelse(append, "a", "w")) : 
+  cannot open the connection
+Calls: analyzeCOMBO ... write.csv -> eval.parent -> eval -> eval -> write.table -> file
+Execution halted
+* checking PDF version of manual ... OK
+* DONE
+Status: 1 ERROR

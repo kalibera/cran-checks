@@ -1,0 +1,60 @@
+
+R Under development (unstable) (2018-01-02 r74022) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # From SamplerCompare, (c) 2010 Madeleine Thompson
+> 
+> # This script makes sure the indep-mh-sampler.c example works as
+> # described in glue.Rnw.
+> 
+> library(SamplerCompare)
+Loading required package: mvtnorm
+> 
+> # Change working directory to the doc dir, where indep-mh-sampler.c
+> # is found.
+> 
+> setwd(system.file("doc", package="SamplerCompare"))
+> 
+> # Set CPPFLAGS to add .../include to the search path so that
+> # SamplerCompare.h can be found.
+> 
+> include.dir <- system.file("include", package="SamplerCompare")
+> Sys.setenv(MAKEFLAGS=sprintf("CPPFLAGS=-I%s", include.dir))
+> 
+> # "R CMD SHLIB" inside "R CMD check" breaks if you change the working
+> # directory, so unset R_TESTS.
+> 
+> Sys.unsetenv("R_TESTS")
+> 
+> # Build and link indep-mh-sampler.c.  Windows does not automatically
+> # include Rblas, unix does.
+> 
+> if (.Platform$OS.type=="windows") {
++   rcmd <- file.path(R.home(), paste("bin", Sys.getenv("R_ARCH"), sep=""),
++                     "Rcmd SHLIB indep-mh-sampler.c -lRblas 2>&1")
++ } else {
++   rcmd <- file.path(R.home(), "bin", "R CMD SHLIB indep-mh-sampler.c")
++ }
+> 
+> r <- system(rcmd)
+gcc -I"/home/tomas/cran/rlibro/build/include" -DNDEBUG   -I/homero/tomas/cran/rlibro/lib/SamplerCompare/include   -fpic  -g -O2  -c indep-mh-sampler.c -o indep-mh-sampler.o
+Assembler messages:
+Fatal error: can't create indep-mh-sampler.o: Read-only file system
+/home/tomas/cran/rlibro/build/etc/Makeconf:159: recipe for target 'indep-mh-sampler.o' failed
+make: *** [indep-mh-sampler.o] Error 1
+> stopifnot(r==0)
+Error: r == 0 is not TRUE
+Execution halted

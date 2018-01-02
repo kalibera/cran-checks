@@ -1,0 +1,247 @@
+
+R Under development (unstable) (2018-01-02 r74022) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ## unit tests will not be done if RUnit is not available
+> if(require("RUnit", quietly=TRUE)) {
++  
++   ## --- Setup ---
++  
++   pkg <- "schwartz97"
++   if(Sys.getenv("RCMDCHECK") == "FALSE") {
++     ## Path to unit tests for standalone running under Makefile (not R CMD check)
++     ## PKG/tests/../inst/unitTests
++     path <- file.path(getwd(), "..", "inst", "unitTests")
++   } else {
++     ## Path to unit tests for R CMD check
++     ## PKG.Rcheck/tests/../PKG/unitTests
++     path <- system.file(package=pkg, "unitTests")
++   }
++   cat("\nRunning unit tests\n")
++   print(list(pkg=pkg, getwd=getwd(), pathToUnitTests=path))
++  
++   library(package=pkg, character.only=TRUE)
++  
++   ## If desired, load the name space to allow testing of private functions
++   ## if (is.element(pkg, loadedNamespaces()))
++   ##     attach(loadNamespace(pkg), name=paste("namespace", pkg, sep=":"), pos=3)
++   ##
++   ## or simply call PKG:::myPrivateFunction() in tests
++  
++   ## --- Testing ---
++  
++   ## Define tests
++   testSuite <- defineTestSuite(name=paste(pkg, "unit testing"),
++                                           dirs=path)
++   ## Run
++   tests <- runTestSuite(testSuite)
++  
++   ## Default report name
++   pathReport <- file.path(path, "report")
++  
++   ## Report to stdout and text files
++   cat("------------------- UNIT TEST SUMMARY ---------------------\n\n")
++   printTextProtocol(tests, showDetails=FALSE)
++   printTextProtocol(tests, showDetails=FALSE,
++                     fileName=paste(pathReport, "Summary.txt", sep=""))
++   printTextProtocol(tests, showDetails=TRUE,
++                     fileName=paste(pathReport, ".txt", sep=""))
++  
++   ## Report to HTML file
++   printHTMLProtocol(tests, fileName=paste(pathReport, ".html", sep=""))
++  
++   ## Return stop() to cause R CMD check stop in case of
++   ##  - failures i.e. FALSE to unit tests or
++   ##  - errors i.e. R errors
++   tmp <- getErrors(tests)
++   if(tmp$nFail > 0 | tmp$nErr > 0) {
++     stop(paste("\n\nunit testing failed (#test failures: ", tmp$nFail,
++                ", #R errors: ",  tmp$nErr, ")\n\n", sep=""))
++   }
++ } else {
++   warning("cannot run unit tests -- package RUnit is not available")
++ }
+
+Running unit tests
+$pkg
+[1] "schwartz97"
+
+$getwd
+[1] "/home/tomas/cran/rlibro/check/schwartz97.Rcheck/tests"
+
+$pathToUnitTests
+[1] "/homero/tomas/cran/rlibro/lib/schwartz97/unitTests"
+
+Loading required package: FKF
+Loading required package: mvtnorm
+
+
+Executing test function test.convergence  ...  done successfully.
+
+
+
+Executing test function test.initializations  ... --> i: 2; logL: 3.6440E+04; rel.tol: NA; abs.tol: NA; mu: 1.00E-01; sigmaS: 3.00E-01; kappa: 1.00E+00; alpha: 0.00E+00; sigmaE: 5.00E-01; rho: 7.50E-01; lambda: 0.00E+00; meas.sd1: 1.00E+00; 
+--> i: 3; logL: 3.6430E+04; rel.tol: 2.54E-04; abs.tol: 9.27E+00; mu: 3.41E-01; sigmaS: 3.00E-01; kappa: 1.00E+00; alpha: 0.00E+00; sigmaE: 5.00E-01; rho: 7.50E-01; lambda: 0.00E+00; meas.sd1: 1.00E+00; 
+--> i: 4; logL: 3.6362E+04; rel.tol: 1.89E-03; abs.tol: 6.90E+01; mu: 1.00E-01; sigmaS: 3.82E-01; kappa: 1.00E+00; alpha: 0.00E+00; sigmaE: 5.00E-01; rho: 7.50E-01; lambda: 0.00E+00; meas.sd1: 1.00E+00; 
+--> i: 5; logL: 3.6480E+04; rel.tol: 3.27E-03; abs.tol: 1.19E+02; mu: 1.00E-01; sigmaS: 3.00E-01; kappa: 1.27E+00; alpha: 0.00E+00; sigmaE: 5.00E-01; rho: 7.50E-01; lambda: 0.00E+00; meas.sd1: 1.00E+00; 
+--> i: 6; logL: 3.6104E+04; rel.tol: 1.03E-02; abs.tol: 3.76E+02; mu: 1.00E-01; sigmaS: 3.00E-01; kappa: 1.00E+00; alpha: 2.41E-01; sigmaE: 5.00E-01; rho: 7.50E-01; lambda: 0.00E+00; meas.sd1: 1.00E+00; 
+--> i: 7; logL: 3.6317E+04; rel.tol: 5.88E-03; abs.tol: 2.12E+02; mu: 1.00E-01; sigmaS: 3.00E-01; kappa: 1.00E+00; alpha: 0.00E+00; sigmaE: 6.37E-01; rho: 7.50E-01; lambda: 0.00E+00; meas.sd1: 1.00E+00; 
+--> i: 8; logL: 3.6449E+04; rel.tol: 3.63E-03; abs.tol: 1.32E+02; mu: 1.00E-01; sigmaS: 3.00E-01; kappa: 1.00E+00; alpha: 0.00E+00; sigmaE: 5.00E-01; rho: 7.71E-01; lambda: 0.00E+00; meas.sd1: 1.00E+00; 
+--> i: 9; logL: 3.5980E+04; rel.tol: 1.29E-02; abs.tol: 4.69E+02; mu: 1.00E-01; sigmaS: 3.00E-01; kappa: 1.00E+00; alpha: 0.00E+00; sigmaE: 5.00E-01; rho: 7.50E-01; lambda: 2.41E-01; meas.sd1: 1.00E+00; 
+--> i: 10; logL: 3.0218E+04; rel.tol: 1.60E-01; abs.tol: 5.76E+03; mu: 1.00E-01; sigmaS: 3.00E-01; kappa: 1.00E+00; alpha: 0.00E+00; sigmaE: 5.00E-01; rho: 7.50E-01; lambda: 0.00E+00; meas.sd1: 1.27E+00; 
+--> i: 11; logL: 4.2468E+04; rel.tol: 4.05E-01; abs.tol: 1.23E+04; mu: 1.60E-01; sigmaS: 3.19E-01; kappa: 1.06E+00; alpha: 6.04E-02; sigmaE: 5.31E-01; rho: 7.56E-01; lambda: 6.04E-02; meas.sd1: 7.86E-01; 
+--> i: 12; logL: 4.8249E+04; rel.tol: 1.36E-01; abs.tol: 5.78E+03; mu: 1.91E-01; sigmaS: 3.28E-01; kappa: 1.09E+00; alpha: 9.05E-02; sigmaE: 5.47E-01; rho: 7.58E-01; lambda: 9.05E-02; meas.sd1: 6.17E-01; 
+--> i: 13; logL: 3.8723E+04; rel.tol: 1.97E-01; abs.tol: 9.53E+03; mu: 1.83E-01; sigmaS: 3.26E-01; kappa: 1.09E+00; alpha: 8.30E-02; sigmaE: 5.43E-01; rho: 7.58E-01; lambda: -2.19E-01; meas.sd1: 8.86E-01; 
+--> i: 14; logL: 3.8522E+04; rel.tol: 5.20E-03; abs.tol: 2.01E+02; mu: 1.62E-01; sigmaS: 3.19E-01; kappa: 1.06E+00; alpha: 6.22E-02; sigmaE: 5.32E-01; rho: 7.56E-01; lambda: -1.04E-01; meas.sd1: 9.13E-01; 
+--> i: 15; logL: 3.9847E+04; rel.tol: 3.44E-02; abs.tol: 1.33E+03; mu: 2.04E-01; sigmaS: 3.33E-01; kappa: 1.11E+00; alpha: -1.98E-01; sigmaE: 5.55E-01; rho: 7.59E-01; lambda: -3.21E-02; meas.sd1: 8.60E-01; 
+--> i: 16; logL: 3.9214E+04; rel.tol: 1.59E-02; abs.tol: 6.33E+02; mu: 1.78E-01; sigmaS: 3.24E-01; kappa: 1.08E+00; alpha: -8.82E-02; sigmaE: 5.40E-01; rho: 7.57E-01; lambda: -2.40E-02; meas.sd1: 8.93E-01; 
+--> i: 17; logL: 4.1210E+04; rel.tol: 5.09E-02; abs.tol: 2.00E+03; mu: 2.30E-01; sigmaS: 3.42E-01; kappa: 1.14E+00; alpha: -6.13E-03; sigmaE: 4.21E-01; rho: 7.62E-01; lambda: -4.01E-02; meas.sd1: 8.28E-01; 
+--> i: 18; logL: 4.0028E+04; rel.tol: 2.87E-02; abs.tol: 1.18E+03; mu: 1.97E-01; sigmaS: 3.31E-01; kappa: 1.10E+00; alpha: -4.60E-03; sigmaE: 4.67E-01; rho: 7.59E-01; lambda: -3.01E-02; meas.sd1: 8.68E-01; 
+--> i: 19; logL: 4.2382E+04; rel.tol: 5.88E-02; abs.tol: 2.35E+03; mu: 2.62E-01; sigmaS: 2.61E-01; kappa: 1.18E+00; alpha: -7.66E-03; sigmaE: 5.13E-01; rho: 7.64E-01; lambda: -5.01E-02; meas.sd1: 7.90E-01; 
+--> i: 20; logL: 4.0919E+04; rel.tol: 3.45E-02; abs.tol: 1.46E+03; mu: 2.22E-01; sigmaS: 2.87E-01; kappa: 1.13E+00; alpha: -5.75E-03; sigmaE: 5.10E-01; rho: 7.61E-01; lambda: -3.76E-02; meas.sd1: 8.38E-01; 
+--> i: 21; logL: 4.3803E+04; rel.tol: 7.05E-02; abs.tol: 2.88E+03; mu: 8.32E-04; sigmaS: 3.21E-01; kappa: 1.22E+00; alpha: -9.58E-03; sigmaE: 5.17E-01; rho: 7.68E-01; lambda: -6.26E-02; meas.sd1: 7.45E-01; 
+--> i: 22; logL: 4.2003E+04; rel.tol: 4.11E-02; abs.tol: 1.80E+03; mu: 8.60E-02; sigmaS: 3.15E-01; kappa: 1.16E+00; alpha: -7.18E-03; sigmaE: 5.12E-01; rho: 7.63E-01; lambda: -4.70E-02; meas.sd1: 8.02E-01; 
+--> i: 23; logL: 4.5570E+04; rel.tol: 8.49E-02; abs.tol: 3.57E+03; mu: 2.17E-01; sigmaS: 3.26E-01; kappa: 1.29E+00; alpha: -1.20E-02; sigmaE: 5.21E-01; rho: 7.72E-01; lambda: -7.83E-02; meas.sd1: 6.92E-01; 
+--> i: 24; logL: 4.3356E+04; rel.tol: 4.86E-02; abs.tol: 2.21E+03; mu: 1.88E-01; sigmaS: 3.19E-01; kappa: 1.21E+00; alpha: -8.98E-03; sigmaE: 5.16E-01; rho: 7.67E-01; lambda: -5.87E-02; meas.sd1: 7.59E-01; 
+--> i: 25; logL: 4.7714E+04; rel.tol: 1.01E-01; abs.tol: 4.36E+03; mu: 2.47E-01; sigmaS: 3.33E-01; kappa: 1.37E+00; alpha: -1.50E-02; sigmaE: 5.26E-01; rho: 7.51E-01; lambda: -9.79E-02; meas.sd1: 6.31E-01; 
+--> i: 26; logL: 4.5016E+04; rel.tol: 5.65E-02; abs.tol: 2.70E+03; mu: 2.10E-01; sigmaS: 3.24E-01; kappa: 1.27E+00; alpha: -1.12E-02; sigmaE: 5.20E-01; rho: 7.56E-01; lambda: -7.34E-02; meas.sd1: 7.08E-01; 
+--> i: 27; logL: 5.0197E+04; rel.tol: 1.15E-01; abs.tol: 5.18E+03; mu: 2.84E-01; sigmaS: 3.42E-01; kappa: 1.10E+00; alpha: -1.87E-02; sigmaE: 5.33E-01; rho: 7.72E-01; lambda: -1.22E-01; meas.sd1: 5.62E-01; 
+--> i: 28; logL: 5.5584E+04; rel.tol: 1.07E-01; abs.tol: 5.39E+03; mu: 3.75E-01; sigmaS: 3.65E-01; kappa: 1.02E+00; alpha: -2.81E-02; sigmaE: 5.51E-01; rho: 7.82E-01; lambda: -1.83E-01; meas.sd1: 4.22E-01; 
+--> i: 29; logL: 5.0152E+04; rel.tol: 9.77E-02; abs.tol: 5.43E+03; mu: 2.49E-01; sigmaS: 3.24E-01; kappa: 1.27E+00; alpha: -1.29E-01; sigmaE: 4.92E-01; rho: 7.72E-01; lambda: 1.05E-01; meas.sd1: 5.27E-01; 
+--> i: 30; logL: 4.8678E+04; rel.tol: 2.94E-02; abs.tol: 1.47E+03; mu: 2.32E-01; sigmaS: 3.24E-01; kappa: 1.22E+00; alpha: -7.63E-02; sigmaE: 5.05E-01; rho: 7.68E-01; lambda: 2.43E-02; meas.sd1: 6.00E-01; 
+--> i: 31; logL: 5.2275E+04; rel.tol: 7.39E-02; abs.tol: 3.60E+03; mu: 2.39E-01; sigmaS: 3.15E-01; kappa: 1.28E+00; alpha: 1.69E-01; sigmaE: 4.68E-01; rho: 7.73E-01; lambda: -4.71E-02; meas.sd1: 4.81E-01; 
+--> i: 32; logL: 5.0423E+04; rel.tol: 3.54E-02; abs.tol: 1.85E+03; mu: 2.30E-01; sigmaS: 3.19E-01; kappa: 1.24E+00; alpha: 7.70E-02; sigmaE: 4.88E-01; rho: 7.70E-01; lambda: -4.33E-02; meas.sd1: 5.56E-01; 
+--> i: 33; logL: 5.5867E+04; rel.tol: 1.08E-01; abs.tol: 5.44E+03; mu: 2.16E-01; sigmaS: 3.00E-01; kappa: 1.29E+00; alpha: 2.05E-02; sigmaE: 6.33E-01; rho: 7.74E-01; lambda: -4.08E-02; meas.sd1: 4.36E-01; 
+--> i: 34; logL: 6.1490E+04; rel.tol: 1.01E-01; abs.tol: 5.62E+03; mu: 2.08E-01; sigmaS: 2.82E-01; kappa: 1.37E+00; alpha: 3.38E-02; sigmaE: 7.77E-01; rho: 7.79E-01; lambda: -4.12E-02; meas.sd1: 3.16E-01; 
+--> i: 35; logL: 5.8969E+04; rel.tol: 4.10E-02; abs.tol: 2.52E+03; mu: 1.70E-01; sigmaS: 4.01E-01; kappa: 1.30E+00; alpha: 3.24E-02; sigmaE: 5.76E-01; rho: 7.75E-01; lambda: -2.86E-02; meas.sd1: 3.63E-01; 
+--> i: 36; logL: 5.5539E+04; rel.tol: 5.82E-02; abs.tol: 3.43E+03; mu: 1.93E-01; sigmaS: 3.60E-01; kappa: 1.26E+00; alpha: 2.24E-02; sigmaE: 5.60E-01; rho: 7.72E-01; lambda: -3.39E-02; meas.sd1: 4.41E-01; 
+--> i: 37; logL: 6.1327E+04; rel.tol: 1.04E-01; abs.tol: 5.79E+03; mu: 4.73E-01; sigmaS: 3.45E-01; kappa: 1.26E+00; alpha: 4.48E-02; sigmaE: 5.88E-01; rho: 7.74E-01; lambda: -7.52E-03; meas.sd1: 3.22E-01; 
+--> i: 38; logL: 5.7690E+04; rel.tol: 5.93E-02; abs.tol: 3.64E+03; mu: 3.55E-01; sigmaS: 3.39E-01; kappa: 1.25E+00; alpha: 3.12E-02; sigmaE: 5.69E-01; rho: 7.72E-01; lambda: -2.13E-02; meas.sd1: 3.97E-01; 
+--> i: 39; logL: 6.3157E+04; rel.tol: 9.48E-02; abs.tol: 5.47E+03; mu: 3.20E-01; sigmaS: 3.44E-01; kappa: 1.19E+00; alpha: 6.14E-02; sigmaE: 6.01E-01; rho: 7.70E-01; lambda: 2.58E-02; meas.sd1: 2.86E-01; 
+--> i: 40; logL: 6.6341E+04; rel.tol: 5.04E-02; abs.tol: 3.18E+03; mu: 3.72E-01; sigmaS: 3.53E-01; kappa: 1.15E+00; alpha: 9.82E-02; sigmaE: 6.46E-01; rho: 7.69E-01; lambda: 7.79E-02; meas.sd1: 1.84E-01; 
+--> i: 41; logL: 6.5574E+04; rel.tol: 1.16E-02; abs.tol: 7.66E+02; mu: 3.22E-01; sigmaS: 3.42E-01; kappa: 1.07E+00; alpha: 9.27E-02; sigmaE: 6.26E-01; rho: 7.91E-01; lambda: 8.93E-02; meas.sd1: 2.31E-01; 
+--> i: 42; logL: 6.2715E+04; rel.tol: 4.36E-02; abs.tol: 2.86E+03; mu: 3.03E-01; sigmaS: 3.40E-01; kappa: 1.14E+00; alpha: 6.58E-02; sigmaE: 6.00E-01; rho: 7.82E-01; lambda: 4.25E-02; meas.sd1: 2.96E-01; 
+--> i: 43; logL: 6.5509E+04; rel.tol: 4.45E-02; abs.tol: 2.79E+03; mu: 4.12E-01; sigmaS: 3.50E-01; kappa: 1.34E+00; alpha: -1.22E-02; sigmaE: 6.23E-01; rho: 7.93E-01; lambda: -9.94E-02; meas.sd1: 1.84E-01; 
+--> i: 44; logL: 6.4618E+04; rel.tol: 1.36E-02; abs.tol: 8.91E+02; mu: 3.56E-01; sigmaS: 3.45E-01; kappa: 1.27E+00; alpha: 1.35E-02; sigmaE: 6.03E-01; rho: 7.85E-01; lambda: -5.19E-02; meas.sd1: 2.49E-01; 
+--> i: 45; logL: 2.6123E+04; rel.tol: 5.96E-01; abs.tol: 3.85E+04; mu: 3.94E-01; sigmaS: 3.63E-01; kappa: 1.17E+00; alpha: 2.37E-01; sigmaE: 7.34E-01; rho: 7.88E-01; lambda: -1.65E-01; meas.sd1: 1.66E-01; 
+--> i: 46; logL: 5.7588E+04; rel.tol: 1.20E+00; abs.tol: 3.15E+04; mu: 2.85E-01; sigmaS: 3.33E-01; kappa: 1.24E+00; alpha: -3.78E-02; sigmaE: 5.44E-01; rho: 7.76E-01; lambda: 3.77E-02; meas.sd1: 3.95E-01; 
+--> i: 47; logL: 6.0187E+04; rel.tol: 4.51E-02; abs.tol: 2.60E+03; mu: 4.15E-01; sigmaS: 3.78E-01; kappa: 1.15E+00; alpha: -1.13E-01; sigmaE: 8.02E-01; rho: 7.87E-01; lambda: 8.27E-03; meas.sd1: 1.73E-01; 
+--> i: 48; logL: 6.5189E+04; rel.tol: 8.31E-02; abs.tol: 5.00E+03; mu: 3.71E-01; sigmaS: 3.61E-01; kappa: 1.18E+00; alpha: -4.24E-02; sigmaE: 7.01E-01; rho: 7.84E-01; lambda: -5.57E-03; meas.sd1: 2.24E-01; 
+--> i: 49; logL: 6.3750E+04; rel.tol: 2.21E-02; abs.tol: 1.44E+03; mu: 2.78E-01; sigmaS: 3.25E-01; kappa: 1.49E+00; alpha: 8.04E-02; sigmaE: 7.24E-01; rho: 7.79E-01; lambda: 1.89E-01; meas.sd1: 1.68E-01; 
+--> i: 50; logL: 6.5827E+04; rel.tol: 3.26E-02; abs.tol: 2.08E+03; mu: 3.02E-01; sigmaS: 3.35E-01; kappa: 1.36E+00; alpha: 5.33E-02; sigmaE: 6.76E-01; rho: 7.80E-01; lambda: 9.60E-02; meas.sd1: 2.12E-01; 
+--> i: 51; logL: 6.0665E+04; rel.tol: 7.84E-02; abs.tol: 5.16E+03; mu: 3.73E-01; sigmaS: 3.57E-01; kappa: 1.25E+00; alpha: 1.13E-01; sigmaE: 7.74E-01; rho: 7.86E-01; lambda: -1.74E-02; meas.sd1: 1.54E-01; 
+--> i: 52; logL: 6.5314E+04; rel.tol: 7.66E-02; abs.tol: 4.65E+03; mu: 3.51E-01; sigmaS: 3.51E-01; kappa: 1.25E+00; alpha: 7.53E-02; sigmaE: 7.08E-01; rho: 7.83E-01; lambda: -3.64E-03; meas.sd1: 1.95E-01; 
+--> i: 53; logL: 6.2588E+04; rel.tol: 4.17E-02; abs.tol: 2.73E+03; mu: 5.33E-01; sigmaS: 2.87E-01; kappa: 1.19E+00; alpha: 5.35E-02; sigmaE: 7.69E-01; rho: 7.89E-01; lambda: 5.50E-02; meas.sd1: 1.43E-01; 
+--> i: 54; logL: 6.6117E+04; rel.tol: 5.64E-02; abs.tol: 3.53E+03; mu: 4.42E-01; sigmaS: 3.12E-01; kappa: 1.22E+00; alpha: 4.82E-02; sigmaE: 7.16E-01; rho: 7.85E-01; lambda: 3.41E-02; meas.sd1: 1.81E-01; 
+--> i: 55; logL: 6.2780E+04; rel.tol: 5.05E-02; abs.tol: 3.34E+03; mu: 2.22E-01; sigmaS: 3.25E-01; kappa: 1.21E+00; alpha: 4.19E-02; sigmaE: 7.92E-01; rho: 7.92E-01; lambda: 4.44E-02; meas.sd1: 1.40E-01; 
+--> i: 56; logL: 6.5953E+04; rel.tol: 5.05E-02; abs.tol: 3.17E+03; mu: 2.85E-01; sigmaS: 3.30E-01; kappa: 1.22E+00; alpha: 4.26E-02; sigmaE: 7.35E-01; rho: 7.88E-01; lambda: 3.14E-02; meas.sd1: 1.72E-01; 
+--> i: 57; logL: 6.0938E+04; rel.tol: 7.60E-02; abs.tol: 5.02E+03; mu: 5.06E-01; sigmaS: 4.13E-01; kappa: 1.09E+00; alpha: 5.51E-02; sigmaE: 5.91E-01; rho: 7.89E-01; lambda: 9.62E-02; meas.sd1: 1.23E-01; 
+--> i: 58; logL: 6.4694E+04; rel.tol: 6.16E-02; abs.tol: 3.76E+03; mu: 2.83E-01; sigmaS: 3.10E-01; kappa: 1.29E+00; alpha: 3.92E-02; sigmaE: 7.25E-01; rho: 7.82E-01; lambda: -6.83E-03; meas.sd1: 2.49E-01; 
+--> i: 59; logL: 6.5546E+04; rel.tol: 1.32E-02; abs.tol: 8.53E+02; mu: 4.32E-01; sigmaS: 3.76E-01; kappa: 1.15E+00; alpha: 4.98E-02; sigmaE: 6.33E-01; rho: 7.87E-01; lambda: 6.19E-02; meas.sd1: 1.55E-01; 
+--> i: 60; logL: 6.6311E+04; rel.tol: 1.17E-02; abs.tol: 7.65E+02; mu: 3.94E-01; sigmaS: 3.58E-01; kappa: 1.18E+00; alpha: 4.71E-02; sigmaE: 6.55E-01; rho: 7.86E-01; lambda: 4.47E-02; meas.sd1: 1.75E-01; 
+--> i: 61; logL: 6.3876E+04; rel.tol: 3.67E-02; abs.tol: 2.44E+03; mu: 3.49E-01; sigmaS: 3.22E-01; kappa: 1.26E+00; alpha: 1.54E-01; sigmaE: 6.44E-01; rho: 7.86E-01; lambda: 7.32E-02; meas.sd1: 1.63E-01; 
+--> i: 62; logL: 6.6055E+04; rel.tol: 3.41E-02; abs.tol: 2.18E+03; mu: 3.66E-01; sigmaS: 3.51E-01; kappa: 1.20E+00; alpha: 6.63E-03; sigmaE: 6.86E-01; rho: 7.84E-01; lambda: 1.41E-02; meas.sd1: 2.07E-01; 
+--> i: 63; logL: 6.5601E+04; rel.tol: 6.87E-03; abs.tol: 4.54E+02; mu: 3.73E-01; sigmaS: 3.32E-01; kappa: 1.18E+00; alpha: 1.88E-02; sigmaE: 6.32E-01; rho: 7.86E-01; lambda: 7.57E-02; meas.sd1: 1.90E-01; 
+--> i: 64; logL: 6.6234E+04; rel.tol: 9.65E-03; abs.tol: 6.33E+02; mu: 3.68E-01; sigmaS: 3.36E-01; kappa: 1.20E+00; alpha: 3.29E-02; sigmaE: 6.50E-01; rho: 7.85E-01; lambda: 5.59E-02; meas.sd1: 1.91E-01; 
+--> i: 65; logL: 6.3441E+04; rel.tol: 4.22E-02; abs.tol: 2.79E+03; mu: 3.01E-01; sigmaS: 3.29E-01; kappa: 1.07E+00; alpha: 1.18E-01; sigmaE: 7.27E-01; rho: 7.73E-01; lambda: 2.10E-01; meas.sd1: 2.02E-01; 
+--> i: 66; logL: 6.6292E+04; rel.tol: 4.49E-02; abs.tol: 2.85E+03; mu: 3.84E-01; sigmaS: 3.45E-01; kappa: 1.26E+00; alpha: 2.02E-02; sigmaE: 6.47E-01; rho: 7.89E-01; lambda: -2.20E-02; meas.sd1: 1.89E-01; 
+--> i: 67; logL: 6.4898E+04; rel.tol: 2.10E-02; abs.tol: 1.39E+03; mu: 4.06E-01; sigmaS: 3.37E-01; kappa: 1.40E+00; alpha: -5.41E-03; sigmaE: 7.29E-01; rho: 7.75E-01; lambda: -6.29E-03; meas.sd1: 1.54E-01; 
+--> i: 68; logL: 6.6186E+04; rel.tol: 1.99E-02; abs.tol: 1.29E+03; mu: 3.43E-01; sigmaS: 3.41E-01; kappa: 1.14E+00; alpha: 6.82E-02; sigmaE: 6.50E-01; rho: 7.87E-01; lambda: 6.54E-02; meas.sd1: 2.08E-01; 
+--> i: 69; logL: 6.5583E+04; rel.tol: 9.12E-03; abs.tol: 6.03E+02; mu: 4.36E-01; sigmaS: 3.46E-01; kappa: 1.06E+00; alpha: 3.77E-02; sigmaE: 6.69E-01; rho: 7.89E-01; lambda: -2.06E-02; meas.sd1: 1.67E-01; 
+--> i: 70; logL: 6.6232E+04; rel.tol: 9.89E-03; abs.tol: 6.49E+02; mu: 3.36E-01; sigmaS: 3.38E-01; kappa: 1.27E+00; alpha: 4.94E-02; sigmaE: 6.74E-01; rho: 7.82E-01; lambda: 6.68E-02; meas.sd1: 2.00E-01; 
+--> i: 71; logL: 6.6218E+04; rel.tol: 2.12E-04; abs.tol: 1.40E+01; mu: 4.66E-01; sigmaS: 3.53E-01; kappa: 1.18E+00; alpha: 5.01E-02; sigmaE: 6.02E-01; rho: 7.79E-01; lambda: 5.28E-02; meas.sd1: 2.12E-01; 
+--> i: 72; logL: 6.6376E+04; rel.tol: 2.39E-03; abs.tol: 1.59E+02; mu: 4.21E-01; sigmaS: 3.47E-01; kappa: 1.19E+00; alpha: 4.82E-02; sigmaE: 6.33E-01; rho: 7.81E-01; lambda: 4.75E-02; meas.sd1: 2.02E-01; 
+--> i: 73; logL: 6.6366E+04; rel.tol: 1.55E-04; abs.tol: 1.03E+01; mu: 3.99E-01; sigmaS: 3.31E-01; kappa: 1.20E+00; alpha: 9.65E-02; sigmaE: 6.32E-01; rho: 7.82E-01; lambda: 7.85E-02; meas.sd1: 1.76E-01; 
+--> i: 74; logL: 6.6457E+04; rel.tol: 1.37E-03; abs.tol: 9.07E+01; mu: 3.91E-01; sigmaS: 3.36E-01; kappa: 1.20E+00; alpha: 7.40E-02; sigmaE: 6.45E-01; rho: 7.83E-01; lambda: 6.24E-02; meas.sd1: 1.83E-01; 
+--> i: 75; logL: 6.6402E+04; rel.tol: 8.19E-04; abs.tol: 5.44E+01; mu: 3.10E-01; sigmaS: 3.80E-01; kappa: 1.18E+00; alpha: 6.14E-02; sigmaE: 5.90E-01; rho: 7.81E-01; lambda: 6.55E-02; meas.sd1: 2.02E-01; 
+--> i: 76; logL: 6.6466E+04; rel.tol: 9.59E-04; abs.tol: 6.37E+01; mu: 3.43E-01; sigmaS: 3.62E-01; kappa: 1.19E+00; alpha: 5.81E-02; sigmaE: 6.19E-01; rho: 7.82E-01; lambda: 5.77E-02; meas.sd1: 1.96E-01; 
+--> i: 77; logL: 6.6322E+04; rel.tol: 2.17E-03; abs.tol: 1.44E+02; mu: 4.09E-01; sigmaS: 3.53E-01; kappa: 1.27E+00; alpha: 3.89E-02; sigmaE: 6.42E-01; rho: 7.77E-01; lambda: 3.23E-02; meas.sd1: 1.73E-01; 
+--> i: 78; logL: 6.6453E+04; rel.tol: 1.97E-03; abs.tol: 1.31E+02; mu: 3.93E-01; sigmaS: 3.50E-01; kappa: 1.24E+00; alpha: 4.62E-02; sigmaE: 6.44E-01; rho: 7.80E-01; lambda: 4.06E-02; meas.sd1: 1.81E-01; 
+--> i: 79; logL: 6.6186E+04; rel.tol: 4.01E-03; abs.tol: 2.66E+02; mu: 4.31E-01; sigmaS: 3.59E-01; kappa: 1.13E+00; alpha: 5.68E-02; sigmaE: 6.12E-01; rho: 7.82E-01; lambda: 2.43E-02; meas.sd1: 1.76E-01; 
+--> i: 80; logL: 6.6411E+04; rel.tol: 3.40E-03; abs.tol: 2.25E+02; mu: 3.60E-01; sigmaS: 3.43E-01; kappa: 1.24E+00; alpha: 5.13E-02; sigmaE: 6.58E-01; rho: 7.82E-01; lambda: 5.62E-02; meas.sd1: 1.93E-01; 
+--> i: 81; logL: 6.5961E+04; rel.tol: 6.79E-03; abs.tol: 4.51E+02; mu: 3.97E-01; sigmaS: 3.63E-01; kappa: 1.22E+00; alpha: 7.79E-02; sigmaE: 6.36E-01; rho: 7.77E-01; lambda: 3.54E-02; meas.sd1: 1.85E-01; 
+--> i: 82; logL: 6.6436E+04; rel.tol: 7.20E-03; abs.tol: 4.75E+02; mu: 3.75E-01; sigmaS: 3.43E-01; kappa: 1.20E+00; alpha: 4.42E-02; sigmaE: 6.47E-01; rho: 7.84E-01; lambda: 5.07E-02; meas.sd1: 1.89E-01; 
+--> i: 83; logL: 6.6227E+04; rel.tol: 3.13E-03; abs.tol: 2.08E+02; mu: 3.78E-01; sigmaS: 3.53E-01; kappa: 1.14E+00; alpha: 9.66E-02; sigmaE: 6.39E-01; rho: 7.73E-01; lambda: 1.31E-01; meas.sd1: 1.87E-01; 
+--> i: 84; logL: 6.6424E+04; rel.tol: 2.96E-03; abs.tol: 1.96E+02; mu: 3.83E-01; sigmaS: 3.47E-01; kappa: 1.23E+00; alpha: 3.93E-02; sigmaE: 6.45E-01; rho: 7.85E-01; lambda: 1.64E-02; meas.sd1: 1.88E-01; 
+--> i: 85; logL: 6.6328E+04; rel.tol: 1.44E-03; abs.tol: 9.57E+01; mu: 3.65E-01; sigmaS: 3.37E-01; kappa: 1.23E+00; alpha: 6.78E-02; sigmaE: 6.29E-01; rho: 7.76E-01; lambda: 5.76E-02; meas.sd1: 2.06E-01; 
+--> i: 86; logL: 6.6437E+04; rel.tol: 1.65E-03; abs.tol: 1.09E+02; mu: 3.72E-01; sigmaS: 3.42E-01; kappa: 1.22E+00; alpha: 6.26E-02; sigmaE: 6.36E-01; rho: 7.78E-01; lambda: 5.44E-02; meas.sd1: 1.97E-01; 
+--> i: 87; logL: 6.6387E+04; rel.tol: 7.50E-04; abs.tol: 4.98E+01; mu: 3.87E-01; sigmaS: 3.39E-01; kappa: 1.28E+00; alpha: 7.82E-03; sigmaE: 6.36E-01; rho: 7.93E-01; lambda: 1.86E-02; meas.sd1: 1.99E-01; 
+--> i: 88; logL: 6.6468E+04; rel.tol: 1.22E-03; abs.tol: 8.12E+01; mu: 3.83E-01; sigmaS: 3.43E-01; kappa: 1.25E+00; alpha: 3.04E-02; sigmaE: 6.38E-01; rho: 7.88E-01; lambda: 3.34E-02; meas.sd1: 1.95E-01; 
+--> i: 89; logL: 6.6435E+04; rel.tol: 5.02E-04; abs.tol: 3.33E+01; mu: 3.29E-01; sigmaS: 3.44E-01; kappa: 1.25E+00; alpha: 5.33E-02; sigmaE: 6.50E-01; rho: 7.84E-01; lambda: 4.55E-02; meas.sd1: 1.80E-01; 
+--> i: 90; logL: 6.6482E+04; rel.tol: 7.05E-04; abs.tol: 4.68E+01; mu: 3.52E-01; sigmaS: 3.45E-01; kappa: 1.24E+00; alpha: 5.20E-02; sigmaE: 6.46E-01; rho: 7.83E-01; lambda: 4.60E-02; meas.sd1: 1.85E-01; 
+--> i: 91; logL: 6.6490E+04; rel.tol: 1.27E-04; abs.tol: 8.42E+00; mu: 3.88E-01; sigmaS: 3.49E-01; kappa: 1.20E+00; alpha: 5.04E-02; sigmaE: 6.22E-01; rho: 7.83E-01; lambda: 3.42E-02; meas.sd1: 1.85E-01; 
+--> i: 92; logL: 6.6398E+04; rel.tol: 1.38E-03; abs.tol: 9.20E+01; mu: 4.03E-01; sigmaS: 3.52E-01; kappa: 1.19E+00; alpha: 5.00E-02; sigmaE: 6.05E-01; rho: 7.84E-01; lambda: 2.31E-02; meas.sd1: 1.82E-01; 
+--> i: 93; logL: 6.6488E+04; rel.tol: 1.36E-03; abs.tol: 9.00E+01; mu: 3.67E-01; sigmaS: 3.45E-01; kappa: 1.20E+00; alpha: 6.52E-02; sigmaE: 6.29E-01; rho: 7.80E-01; lambda: 7.84E-02; meas.sd1: 1.90E-01; 
+--> i: 94; logL: 6.6506E+04; rel.tol: 2.67E-04; abs.tol: 1.77E+01; mu: 3.71E-01; sigmaS: 3.46E-01; kappa: 1.21E+00; alpha: 5.87E-02; sigmaE: 6.33E-01; rho: 7.81E-01; lambda: 6.29E-02; meas.sd1: 1.89E-01; 
+--> i: 95; logL: 6.6457E+04; rel.tol: 7.34E-04; abs.tol: 4.88E+01; mu: 3.73E-01; sigmaS: 3.50E-01; kappa: 1.23E+00; alpha: 6.39E-02; sigmaE: 6.24E-01; rho: 7.81E-01; lambda: 4.71E-02; meas.sd1: 1.89E-01; 
+--> i: 96; logL: 6.6495E+04; rel.tol: 5.76E-04; abs.tol: 3.83E+01; mu: 3.74E-01; sigmaS: 3.48E-01; kappa: 1.23E+00; alpha: 5.90E-02; sigmaE: 6.30E-01; rho: 7.82E-01; lambda: 4.80E-02; meas.sd1: 1.89E-01; 
+--> i: 97; logL: 6.6468E+04; rel.tol: 4.09E-04; abs.tol: 2.72E+01; mu: 3.76E-01; sigmaS: 3.52E-01; kappa: 1.22E+00; alpha: 4.46E-02; sigmaE: 6.34E-01; rho: 7.87E-01; lambda: 4.19E-02; meas.sd1: 1.79E-01; 
+--> i: 98; logL: 6.6502E+04; rel.tol: 5.11E-04; abs.tol: 3.40E+01; mu: 3.75E-01; sigmaS: 3.49E-01; kappa: 1.22E+00; alpha: 4.91E-02; sigmaE: 6.34E-01; rho: 7.85E-01; lambda: 4.50E-02; meas.sd1: 1.84E-01; 
+--> i: 99; logL: 6.6493E+04; rel.tol: 1.37E-04; abs.tol: 9.14E+00; mu: 3.52E-01; sigmaS: 3.44E-01; kappa: 1.20E+00; alpha: 6.18E-02; sigmaE: 6.23E-01; rho: 7.87E-01; lambda: 5.68E-02; meas.sd1: 1.96E-01; 
+--> i: 100; logL: 6.6511E+04; rel.tol: 2.71E-04; abs.tol: 1.80E+01; mu: 3.62E-01; sigmaS: 3.46E-01; kappa: 1.21E+00; alpha: 5.79E-02; sigmaE: 6.28E-01; rho: 7.85E-01; lambda: 5.28E-02; meas.sd1: 1.92E-01; 
+--> i: 101; logL: 6.6506E+04; rel.tol: 7.51E-05; abs.tol: 4.99E+00; mu: 3.46E-01; sigmaS: 3.61E-01; kappa: 1.23E+00; alpha: 2.99E-02; sigmaE: 6.18E-01; rho: 7.84E-01; lambda: 3.26E-02; meas.sd1: 1.96E-01; 
+--> i: 102; logL: 6.6519E+04; rel.tol: 1.92E-04; abs.tol: 1.28E+01; mu: 3.57E-01; sigmaS: 3.54E-01; kappa: 1.23E+00; alpha: 4.09E-02; sigmaE: 6.25E-01; rho: 7.84E-01; lambda: 4.00E-02; meas.sd1: 1.93E-01; 
+ done successfully.
+
+
+
+Executing test function test.convergence.density  ...  done successfully.
+
+
+
+Executing test function test.convergence.monte.carlo  ...  done successfully.
+
+
+
+Executing test function test.futures.relations  ...  done successfully.
+
+
+
+Executing test function test.futures.valuation  ...  done successfully.
+
+
+
+Executing test function test.mean  ...  done successfully.
+
+
+
+Executing test function test.r.sim  ...  done successfully.
+
+
+
+Executing test function test.vcov  ...  done successfully.
+
+------------------- UNIT TEST SUMMARY ---------------------
+
+RUNIT TEST PROTOCOL -- Tue Jan  2 12:34:30 2018 
+*********************************************** 
+Number of test functions: 9 
+Number of errors: 0 
+Number of failures: 0 
+
+ 
+1 Test Suite : 
+schwartz97 unit testing - 9 test functions, 0 errors, 0 failures
+Error in file(file, ifelse(append, "a", "w")) : 
+  cannot open the connection
+Calls: printTextProtocol -> cat -> file
+In addition: Warning messages:
+1: In .local(n, time, ttm, s0, ...) :
+  Both 'lambda' and 'alphaT' are missing!
+The market price of risk is set to zero
+2: In file(file, ifelse(append, "a", "w")) :
+  cannot open file '/homero/tomas/cran/rlibro/lib/schwartz97/unitTests/reportSummary.txt': Read-only file system
+Execution halted

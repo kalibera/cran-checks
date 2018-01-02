@@ -1,0 +1,279 @@
+
+R Under development (unstable) (2018-01-02 r74022) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "pdmod"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('pdmod')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("TimedVector")
+> ### * TimedVector
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: TimedVector
+> ### Title: Create a TimedVector
+> ### Aliases: TimedVector
+> 
+> ### ** Examples
+> 
+> # One session of 20 rewarded trials every minute
+> TimedVector(rep(1, 20), 1:20)
+      time value
+ [1,]    1     1
+ [2,]    2     1
+ [3,]    3     1
+ [4,]    4     1
+ [5,]    5     1
+ [6,]    6     1
+ [7,]    7     1
+ [8,]    8     1
+ [9,]    9     1
+[10,]   10     1
+[11,]   11     1
+[12,]   12     1
+[13,]   13     1
+[14,]   14     1
+[15,]   15     1
+[16,]   16     1
+[17,]   17     1
+[18,]   18     1
+[19,]   19     1
+[20,]   20     1
+> 
+> # Three sessions of rewarded trials, then one session of non-rewarded trials,
+> # with trials every 2 min and sessions every day
+> trialTime = as.vector(sapply(0:3, function(x) seq(2, 20, 2) + x * TV_DAY))
+> TimedVector(c(rep(1, 30), rep(0, 10)), trialTime)
+      time value
+ [1,]    2     1
+ [2,]    4     1
+ [3,]    6     1
+ [4,]    8     1
+ [5,]   10     1
+ [6,]   12     1
+ [7,]   14     1
+ [8,]   16     1
+ [9,]   18     1
+[10,]   20     1
+[11,] 1442     1
+[12,] 1444     1
+[13,] 1446     1
+[14,] 1448     1
+[15,] 1450     1
+[16,] 1452     1
+[17,] 1454     1
+[18,] 1456     1
+[19,] 1458     1
+[20,] 1460     1
+[21,] 2882     1
+[22,] 2884     1
+[23,] 2886     1
+[24,] 2888     1
+[25,] 2890     1
+[26,] 2892     1
+[27,] 2894     1
+[28,] 2896     1
+[29,] 2898     1
+[30,] 2900     1
+[31,] 4322     0
+[32,] 4324     0
+[33,] 4326     0
+[34,] 4328     0
+[35,] 4330     0
+[36,] 4332     0
+[37,] 4334     0
+[38,] 4336     0
+[39,] 4338     0
+[40,] 4340     0
+> 
+> # The above schedule of sessions, but 50% probability of reward
+> TimedVector(sample(0:1, 40, replace = TRUE), trialTime)
+      time value
+ [1,]    2     0
+ [2,]    4     0
+ [3,]    6     1
+ [4,]    8     1
+ [5,]   10     0
+ [6,]   12     1
+ [7,]   14     1
+ [8,]   16     1
+ [9,]   18     1
+[10,]   20     0
+[11,] 1442     0
+[12,] 1444     0
+[13,] 1446     1
+[14,] 1448     0
+[15,] 1450     1
+[16,] 1452     0
+[17,] 1454     1
+[18,] 1456     1
+[19,] 1458     0
+[20,] 1460     1
+[21,] 2882     1
+[22,] 2884     0
+[23,] 2886     1
+[24,] 2888     0
+[25,] 2890     0
+[26,] 2892     0
+[27,] 2894     0
+[28,] 2896     0
+[29,] 2898     1
+[30,] 2900     0
+[31,] 4322     0
+[32,] 4324     1
+[33,] 4326     0
+[34,] 4328     0
+[35,] 4330     1
+[36,] 4332     1
+[37,] 4334     1
+[38,] 4336     0
+[39,] 4338     1
+[40,] 4340     0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("averageBySession")
+> ### * averageBySession
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: averageBySession
+> ### Title: Average by session
+> ### Aliases: averageBySession
+> 
+> ### ** Examples
+> 
+> # Create vector of values (i.e. estimates, respones, etc.)
+> values = runif(100)
+> # Specify sessions, here a group of 10 trials
+> sessionBoundaries = seq(1, 101, 10)
+> valuesBySession = averageBySession(values, sessionBoundaries)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("calculateResponse")
+> ### * calculateResponse
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: calculateResponse
+> ### Title: Calculate response from the estimate
+> ### Aliases: calculateResponse
+> 
+> ### ** Examples
+> 
+> calculateResponse(0.8, 10, runif(20))
+ [1] 3.112274 4.255642 6.263631 9.251929 2.400014 9.170255 9.552450 7.088891
+ [9] 6.795188 0.760580 2.448595 2.113664 7.328990 4.380641 8.069885 5.532820
+[17] 7.605728 9.935144 4.338266 8.136621
+> 
+> 
+> 
+> cleanEx()
+> nameEx("computeModel")
+> ### * computeModel
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: computeModel
+> ### Title: Calculates proximal/distal model
+> ### Aliases: computeModel
+> 
+> ### ** Examples
+> 
+> # Create 5 sessions of 20 rewarded trials,
+> # then 2 sessions of 20 unrewarded trials
+> trialTime = as.vector(sapply(0:6, function(x) 1:20 + x * TV_DAY))
+> trials =  TimedVector(c(rep(1, 5*20), rep(0, 2*20)), trialTime)
+> 
+> estimates = computeModel(trials, mFast = 0.7, mSlow = 0.1, n = 0.05,
++ 						 g = 500, h = 0.2, verbose = TRUE)
+> plot(estimates, trials)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("isTimedVector")
+> ### * isTimedVector
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: isTimedVector
+> ### Title: Is TimedVector
+> ### Aliases: isTimedVector
+> 
+> ### ** Examples
+> 
+> # A TimedVector
+> tv = TimedVector(rep(1, 10), 1:10)
+> isTimedVector(tv)
+[1] TRUE
+> 
+> # Not a TimedVector
+> isTimedVector(1:10)
+[1] FALSE
+> isTimedVector(time(tv))
+[1] FALSE
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plot.pdmod")
+> ### * plot.pdmod
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plot.pdmod
+> ### Title: Plot model
+> ### Aliases: plot.pdmod
+> 
+> ### ** Examples
+> 
+> # Create 5 sessions of 20 rewarded trials,
+> # then 2 sessions of 20 unrewarded trials
+> trialTime = as.vector(sapply(0:6, function(x) 1:20 + x * TV_DAY))
+> trials =  TimedVector(c(rep(1, 5*20), rep(0, 2*20)), trialTime)
+> 
+> estimates = computeModel(trials, mFast = 0.7, mSlow = 0.1, n = 0.05,
++ 						 g = 500, h = 0.2, verbose = TRUE)
+> plot(estimates, trials)
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.324 0.004 0.327 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

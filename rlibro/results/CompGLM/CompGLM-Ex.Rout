@@ -1,0 +1,178 @@
+
+R Under development (unstable) (2018-01-02 r74022) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "CompGLM"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('CompGLM')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("dcomp")
+> ### * dcomp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dcomp
+> ### Title: Conway-Maxwell-Poisson Probability Density Function
+> ### Aliases: dcomp
+> 
+> ### ** Examples
+> 
+> dcomp(-5:5, 2.5, 1)
+ [1] 0.00000000 0.00000000 0.00000000 0.00000000 0.00000000 0.08208500
+ [7] 0.20521250 0.25651562 0.21376302 0.13360189 0.06680094
+> dcomp(2, 2.5, 1.5)
+[1] 0.307163
+> require(graphics)
+> require(stats)
+> comp <- dcomp(0:10, 2.5, 0.9)
+> poisson <- dpois(0:10, 2.5)
+> barplot(rbind(comp, poisson), beside = TRUE, names= 0:10, legend.text = TRUE)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("glm.comp")
+> ### * glm.comp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: glm.comp
+> ### Title: Conway-Maxwell Poisson GLM Fitting Function
+> ### Aliases: glm.comp
+> 
+> ### ** Examples
+> 
+> set.seed(1)
+> n <- 5000
+> x1 <- rnorm(n, -1.0, 0.5)
+> x2 <- rnorm(n, 1.0, 0.7)
+> x3 <- rnorm(n, 2.0, 0.4)
+> y <- rpois(n, exp(-0.5 + 0.3 * x1 + 0.8 * x2 + 0.2 * x3))
+> data <- data.frame(y, x1, x2, x3)
+> model <- glm.comp(y ~ ., data = data)
+> print(model)
+
+Call:
+glm.comp(lamFormula = y ~ ., data = data)
+
+Beta:
+(Intercept)          x1          x2          x3 
+ -0.5530372   0.2782162   0.7864904   0.2165911 
+
+Zeta:
+(Intercept) 
+-0.03438994 
+
+Degrees of Freedom: 4999 Total (i.e. Null); 4995 Residual
+AIC: 15486.82 
+Log-Likelihood: -7738.409 
+> summary(model)
+
+Call:
+glm.comp(lamFormula = y ~ ., data = data)
+
+Beta:
+             Estimate Std.Error  t.value   p.value    
+(Intercept) -0.553037  0.031370 -17.6297 < 2.2e-16 ***
+x1           0.278216  0.062496   4.4517 8.703e-06 ***
+x2           0.786490  0.021145  37.1948 < 2.2e-16 ***
+x3           0.216591  0.022510   9.6220 < 2.2e-16 ***
+
+Zeta:
+             Estimate Std.Error t.value p.value
+(Intercept) -0.034390  0.027128 -1.2677   0.205
+
+AIC: 15486.82 
+Log-Likelihood: -7738.409 
+> coef(model)
+$beta
+(Intercept)          x1          x2          x3 
+ -0.5530372   0.2782162   0.7864904   0.2165911 
+
+$zeta
+(Intercept) 
+-0.03438994 
+
+> head(predict(model))
+        lambda        nu
+[1,] 0.5470368 0.9661947
+[2,] 1.9518960 0.9661947
+[3,] 0.4764250 0.9661947
+[4,] 3.1808341 0.9661947
+[5,] 2.7352346 0.9661947
+[6,] 0.6359565 0.9661947
+> AIC(model)
+[1] 15486.82
+> 
+> 
+> 
+> cleanEx()
+> nameEx("pcomp")
+> ### * pcomp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: pcomp
+> ### Title: Conway-Maxwell-Poisson Cumulative Density Function
+> ### Aliases: pcomp
+> 
+> ### ** Examples
+> 
+> pcomp(1:10, 1.5, 1.2)
+ [1] 0.6229116 0.8669358 0.9648800 0.9927155 0.9987678 0.9998252 0.9999788
+ [8] 0.9999977 0.9999998 1.0000000
+> 
+> 
+> 
+> cleanEx()
+> nameEx("rcomp")
+> ### * rcomp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: rcomp
+> ### Title: Conway-Maxwell-Poisson Random Sample
+> ### Aliases: rcomp
+> 
+> ### ** Examples
+> 
+> require(graphics)
+> sample <- rcomp(1000, 8.5, 0.9)
+> barplot(table(sample))
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  5.244 0.024 5.269 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

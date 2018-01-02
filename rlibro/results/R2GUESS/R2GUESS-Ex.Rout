@@ -1,0 +1,304 @@
+
+R Under development (unstable) (2018-01-02 r74022) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "R2GUESS"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('R2GUESS')
+Loading required package: fields
+Loading required package: spam
+Loading required package: dotCall64
+Loading required package: grid
+Spam version 2.1-2 (2017-12-21) is loaded.
+Type 'help( Spam)' or 'demo( spam)' for a short introduction 
+and overview of this package.
+Help for individual functions is also obtained by adding the
+suffix '.spam' to the function name, e.g. 'help( chol.spam)'.
+
+Attaching package: ‘spam’
+
+The following objects are masked from ‘package:base’:
+
+    backsolve, forwardsolve
+
+Loading required package: maps
+Loading required package: MCMCpack
+Loading required package: coda
+Loading required package: MASS
+##
+## Markov Chain Monte Carlo Package (MCMCpack)
+## Copyright (C) 2003-2018 Andrew D. Martin, Kevin M. Quinn, and Jong Hee Park
+##
+## Support provided by the U.S. National Science Foundation
+## (Grants SES-0350646 and SES-0350613)
+##
+Loading required package: mixOmics
+Loading required package: lattice
+Loading required package: ggplot2
+
+Loaded mixOmics 6.3.1
+
+Visit http://www.mixOmics.org for more details about our methods.
+Any bug reports or comments? Notify us at mixomics at math.univ-toulouse.fr or https://bitbucket.org/klecao/package-mixomics/issues
+
+Thank you for using mixOmics!
+
+Attaching package: ‘mixOmics’
+
+The following object is masked from ‘package:maps’:
+
+    map
+
+Loading required package: mvtnorm
+Loading required package: snowfall
+Loading required package: snow
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("Analysis.permutation")
+> ### * Analysis.permutation
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Analysis.permutation
+> ### Title: Computing the FDR-controlled level for the significance of the
+> ###   MPPI
+> ### Aliases: Analysis.permutation
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D path.output.perm <- tempdir()
+> ##D path.input.perm <-path.output.perm
+> ##D 
+> ##D cutoff.1 <- FDR.permutation(x=modelY_Hopx,Npermut=6,start.counter=1,
+> ##D           path.output=path.output.perm,path.input=path.input.perm,nbcpu=3)
+> ##D 
+> ##D cutoff.2 <- FDR.permutation(x=modelY_Hopx,Npermut=6,start.counter=7,
+> ##D           path.output=path.output.perm,path.input=path.input.perm,nbcpu=3)
+> ##D 
+> ##D namePermut <- "Permut-Example-GUESS-Y-Hopx"
+> ##D 
+> ##D cutoff.pool <-Analysis.permutation(modelY_Hopx,namePermut=namePermut,
+> ##D       Npermut=9,threshold=0.05,path.output=path.output.perm,number.cutoff=10)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Extend.R2GUESS")
+> ### * Extend.R2GUESS
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Extend.R2GUESS
+> ### Title: Extends an already finished 'R2GUESS' run for an extra
+> ###   user-defined number of iterations
+> ### Aliases: Extend.R2GUESS
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D modelY_Hopx <- example.as.ESS.object()
+> ##D ## Be careful the Output files will be created in modelY_Hopx$path.output
+> ##D ## If you want to save the new Ouput copy/paste the 
+> ##D ## folder modelY_Hopx$out in an appropriate place
+> ##D ## and change modelY_Hopx$path.output
+> ##D modelY_Hopx_extend <- Extend.R2GUESS(modelY_Hopx,100)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("FDR.permutation")
+> ### * FDR.permutation
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: FDR.permutation
+> ### Title: Performs parallel permuted runs of 'R2GUESS' and returns the
+> ###   empirical FDR-controlled level for the significance of the MPPI
+> ### Aliases: FDR.permutation
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D modelY_Hopx <- example.as.ESS.object()
+> ##D path.output.perm <- tempdir()
+> ##D path.input.perm <-path.output.perm
+> ##D 
+> ##D cutoff <- FDR.permutation(x=modelY_Hopx,Npermut=100,start.counter=1,
+> ##D            path.output=path.output.perm,path.input=path.input.perm,nbcpu=3)
+> ##D  
+> ## End(Not run) 
+> 
+> 
+> cleanEx()
+> nameEx("Postprocess.R2GUESS")
+> ### * Postprocess.R2GUESS
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Postprocess.R2GUESS
+> ### Title: Performs posterior inference from an interrupted 'R2GUESS' run.
+> ### Aliases: Postprocess.R2GUESS
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D ## First we are creating a run which has been not finished in 1 hour
+> ##D path.input <- system.file("Input", package="R2GUESS")
+> ##D path.output <- tempdir()
+> ##D path.par <- system.file("extdata", package="R2GUESS")
+> ##D file.par.Hopx <- "Par_file_example_Hopx.xml"
+> ##D print(paste(path.par,file.par.Hopx,sep=""))
+> ##D root.file.output.Hopx <- "Example-GUESS-Y-Hopx"
+> ##D label.Y <- c("ADR","Fat","Heart","Kidney")
+> ##D data(data.Y.Hopx)
+> ##D data(data.X)
+> ##D data(MAP.file)
+> ##D 
+> ##D modelY_Hopx<-R2GUESS(dataY=data.Y.Hopx,dataX=data.X,,choice.Y=1:4,
+> ##D label.Y=label.Y,MAP.file=MAP.file,file.par=file.par.Hopx,
+> ##D file.init=NULL,file.log=NULL,root.file.output=root.file.output.Hopx,
+> ##D path.input=path.input,path.output=path.output,path.par=path.par,
+> ##D path.init=NULL,nsweep=510000,burn.in=10000,Egam=5,Sgam=5,top=100,
+> ##D history=TRUE,time=TRUE,nb.chain=3,conf=0,cuda=FALSE,time.limit=1)
+> ##D 
+> ##D modelY_Hopx_postprocess <- Postprocess.R2GUESS(modelY_Hopx)
+> ##D 
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("R2GUESS")
+> ### * R2GUESS
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: R2GUESS
+> ### Title: Wrapper function that reads the input files and parameter values
+> ###   required by GUESS, runs the C++ code from R and stores the main GUESS
+> ###   output in an 'ESS' object
+> ### Aliases: R2GUESS
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D path.input <- system.file("Input", package="R2GUESS")
+> ##D path.output <- tempdir()
+> ##D path.par <- system.file("extdata", package="R2GUESS")
+> ##D file.par.Hopx <- "Par_file_example_Hopx.xml"
+> ##D #you can have a look of the parameter file in
+> ##D print(paste(path.par,file.par.Hopx,sep=""))
+> ##D ##To reach convergence you may need to increase nsweep=110000 and the burn.in=10000
+> ##D ## RUNNING is APPROX 5 minutes
+> ##D root.file.output.Hopx <- "Example-GUESS-Y-Hopx"
+> ##D label.Y <- c("ADR","Fat","Heart","Kidney")
+> ##D data(data.Y.Hopx)
+> ##D data(data.X)
+> ##D data(MAP.file)
+> ##D 
+> ##D modelY_Hopx<-R2GUESS(dataY=data.Y.Hopx,dataX=data.X,choice.Y=1:4,
+> ##D label.Y=label.Y,,MAP.file=MAP.file,file.par=file.par.Hopx,file.init=NULL,
+> ##D file.log=NULL,root.file.output=root.file.output.Hopx,path.input=path.input,
+> ##D path.output=path.output,path.par=path.par,path.init=NULL,nsweep=11000,
+> ##D burn.in=1000,Egam=5,Sgam=5,top=100,history=TRUE,time=TRUE,
+> ##D nb.chain=3,conf=NULL,cuda=FALSE)
+> ##D 
+> ##D summary(modelY_Hopx,20) # 20 best models
+> ##D 
+> ##D print(modelY_Hopx)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Resume.R2GUESS")
+> ### * Resume.R2GUESS
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Resume.R2GUESS
+> ### Title: Function resuming an interrupted 'R2GUESS' run
+> ### Aliases: Resume.R2GUESS
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D ## First we are creating a run which has been not finished in 1 hour
+> ##D path.input <- system.file("Input", package="R2GUESS")
+> ##D path.output <- tempdir()
+> ##D path.par <- system.file("extdata", package="R2GUESS")
+> ##D file.par.Hopx <- "Par_file_example_Hopx.xml"
+> ##D print(paste(path.par,file.par.Hopx,sep=""))
+> ##D root.file.output.Hopx <- "Example-GUESS-Y-Hopx"
+> ##D label.Y <- c("ADR","Fat","Heart","Kidney")
+> ##D data(data.Y.Hopx)
+> ##D data(data.X)
+> ##D data(MAP.file)
+> ##D 
+> ##D modelY_Hopx<-R2GUESS(dataY=data.Y.Hopx,dataX=data.X,choice.Y=1:4,
+> ##D label.Y=label.Y,,MAP.file=MAP.file,file.par=file.par.Hopx,
+> ##D file.init=NULL,file.log=NULL,root.file.output=root.file.output.Hopx,
+> ##D path.input=path.input,path.output=path.output,path.par=path.par
+> ##D ,path.init=NULL,nsweep=510000,burn.in=10000,Egam=5,Sgam=5,top=100
+> ##D ,history=TRUE,time=TRUE,nb.chain=3,conf=0,cuda=FALSE,time.limit=1)
+> ##D 
+> ##D modelY_Hopx_resume <- Resume.R2GUESS(modelY_Hopx)
+> ##D 
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("as.ESS.object")
+> ### * as.ESS.object
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: as.ESS.object
+> ### Title: Compiles the main input and output files from a previous run of
+> ###   'R2GUESS' and creates an ESS object.
+> ### Aliases: as.ESS.object
+> 
+> ### ** Examples
+> 
+> dataX <- "data-X-C-CODE.txt"
+> dataY <- "data-Y-ALL-C-CODE.txt"
+> 
+> path.input <- system.file("Input", package="R2GUESS")
+> path.output <- system.file("Output", package="R2GUESS")
+> path.par <- system.file("extdata", package="R2GUESS")
+> file.par <- "Par_file_example_Hopx.xml"
+> root.file.output <- "Example-GUESS-Y-Hopx"
+> label.Y <- c("ADR","Fat","Heart","Kidney")
+> my.env <- new.env()
+> data(MAP.file,envir=my.env)
+> MAP.file <- my.env$MAP.file
+> modelY_Hopx <-as.ESS.object(dataY=dataY,dataX=dataX,path.input=path.input,
++     path.output=path.output,root.file.output=root.file.output,label.X=NULL,
++     label.Y=label.Y,path.par=path.par,file.par=file.par,MAP.file=MAP.file)
+Warning in gzfile(file, "wb") :
+  cannot open compressed file '/homero/tomas/cran/rlibro/lib/R2GUESS/Output/Example-GUESS-Y-Hopx_output_best_visited_models.RData', probable reason 'Read-only file system'
+Error in gzfile(file, "wb") : cannot open the connection
+Calls: as.ESS.object -> get.best.models -> save -> gzfile
+Execution halted

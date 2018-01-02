@@ -1,0 +1,3254 @@
+
+R Under development (unstable) (2018-01-02 r74022) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "odfWeave"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('odfWeave')
+Loading required package: lattice
+Loading required package: XML
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("PreProc")
+> ### * PreProc
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: odfTranslate
+> ### Title: Translation of text to XML
+> ### Aliases: odfTranslate
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> 
+> y <- "This is an &quot;interesting&quot; function."
+> 
+> cat(odfTranslate(y))
+This is an "interesting" function.> 
+> 
+> 
+> cleanEx()
+> nameEx("adjustImageSize")
+> ### * adjustImageSize
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: adjustImageSize
+> ### Title: Automate image size adjustments
+> ### Aliases: adjustImageSize
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> getImageDefs()
+$type
+[1] "png"
+
+$device
+[1] "png"
+
+$plotHeight
+[1] 480
+
+$plotWidth
+[1] 480
+
+$dispHeight
+[1] 5
+
+$dispWidth
+[1] 5
+
+$args
+list()
+
+> adjustImageSize(2, 5, scale = 1.75)
+> getImageDefs()
+$type
+[1] "png"
+
+$device
+[1] "png"
+
+$plotHeight
+[1] 840
+
+$plotWidth
+[1] 336
+
+$dispHeight
+[1] 5
+
+$dispWidth
+[1] 2
+
+$args
+list()
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("announce")
+> ### * announce
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: announce
+> ### Title: cat and flush console
+> ### Aliases: announce
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> announce()
+> announce(FALSE, "this will not be printed")
+> announce(TRUE, "but this will be")
+but this will be> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("listString")
+> ### * listString
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: listString
+> ### Title: Convert a vector to a textual list
+> ### Aliases: listString
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> listString(letters[1])
+[1] "a"
+> listString(letters[1:2])
+[1] "a and b"
+> listString(letters[1:4])
+[1] "a, b, c and d"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("matrixPaste")
+> ### * matrixPaste
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: matrixPaste
+> ### Title: Element-Wise Paste of Conforming Matrices
+> ### Aliases: matrixPaste
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> mat1 <- matrix(letters[1:6], nrow = 2)
+> mat2 <- matrix(LETTERS[1:6], nrow = 2)
+> mat3 <- matrix(paste(1:6), nrow = 2)
+> 
+> matrixPaste(mat1, mat2)
+     [,1]  [,2]  [,3] 
+[1,] "a A" "c C" "e E"
+[2,] "b B" "d D" "f F"
+> matrixPaste(mat1, mat2, sep = "+")
+     [,1]  [,2]  [,3] 
+[1,] "a+A" "c+C" "e+E"
+[2,] "b+B" "d+D" "f+F"
+> matrixPaste(mat1, mat2, mat3, sep = c("+", "plus"))
+     [,1]       [,2]       [,3]      
+[1,] "a+Aplus1" "c+Cplus3" "e+Eplus5"
+[2,] "b+Bplus2" "d+Dplus4" "f+Fplus6"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("odfCat")
+> ### * odfCat
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: odfCat
+> ### Title: Concatenate and Print in Native ODF
+> ### Aliases: odfCat
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> odfCat("\"hello world\"")
+<text:p text:style-name="ArialNormal">&quot;hello world&quot;</text:p>
+> odfCat("these are the first letters", letters[1:5])
+<text:p text:style-name="ArialNormal">these are the first letters a b c d e</text:p>
+> odfCat("some random normal data:", rnorm(5))
+<text:p text:style-name="ArialNormal">some random normal data: -0.6265<text:s text:c="2"/>0.1836 -0.8356<text:s text:c="2"/>1.5953<text:s text:c="2"/>0.3295</text:p>
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("odfFigureCaption")
+> ### * odfFigureCaption
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: odfFigureCaption
+> ### Title: Provide a Caption for a Figure
+> ### Aliases: odfFigureCaption
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D odfFigureCaption("This is a very interesting figure")
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("odfInsertPlot")
+> ### * odfInsertPlot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: odfInsertPlot
+> ### Title: Write XML for image inseration
+> ### Aliases: odfInsertPlot
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> odfInsertPlot("plot.png", 4, 4)
+[1] "<text:p>\n    <draw:frame \n      draw:name=\"graphics265\"\n      text:anchor-type=\"paragraph\"\n      svg:width=\"4in\"\n      svg:height=\"4in\"\n      draw:z-index=\"0\">\n      <draw:image\n         xlink:href=\"Pictures/plot.png\"\n         xlink:type=\"simple\"\n         xlink:show=\"embed\"\n         xlink:actuate=\"onLoad\"/>\n    </draw:frame>\n</text:p>\n\n"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("odfItemize")
+> ### * odfItemize
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: odfItemize
+> ### Title: Write XML for one layer lists
+> ### Aliases: odfItemize
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> odfItemize(levels(iris$Species))
+     <text:list text:style-name="Rbullet" > 
+     <text:list-item>
+      <text:p text:style-name="RbulletParagraph" > setosa     </text:p>
+     </text:list-item>
+     <text:list-item>
+      <text:p text:style-name="RbulletParagraph" > versicolor </text:p>
+     </text:list-item>
+     <text:list-item>
+      <text:p text:style-name="RbulletParagraph" > virginica  </text:p>
+     </text:list-item>
+    </text:list>
+> 
+> 
+> 
+> cleanEx()
+> nameEx("odfPageBreak")
+> ### * odfPageBreak
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: odfPageBreak
+> ### Title: Generate a Page Break
+> ### Aliases: odfPageBreak
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D odfPageBreak()
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("odfSetPageStyle")
+> ### * odfSetPageStyle
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: odfSetPageStyle
+> ### Title: Set the Page Style
+> ### Aliases: odfSetPageStyle
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D odfSetPageStyle("RlandscapePage")
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("odfTable")
+> ### * odfTable
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: odfTable
+> ### Title: Create an Open Document Format table
+> ### Aliases: odfTable odfTable.data.frame odfTable.matrix
+> ###   odfTable.character odfTable.factor odfTable.numeric
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> odfTable(iris[1:5,])
+
+<table:table table:name="Table265"  table:style-name="RTable1" >
+  <table:table-column table:number-columns-repeated="6"/>
+   <table:table-header-rows>
+
+    <table:table-row>
+
+    <table:table-cell  table:style-name="lowerBorder" office:value-type="string">
+      <text:p  text:style-name="ArialCenteredBold" ></text:p>
+    </table:table-cell>
+    <table:table-cell  table:style-name="lowerBorder" office:value-type="string">
+      <text:p  text:style-name="ArialCenteredBold" >Sepal.Length</text:p>
+    </table:table-cell>
+    <table:table-cell  table:style-name="lowerBorder" office:value-type="string">
+      <text:p  text:style-name="ArialCenteredBold" >Sepal.Width</text:p>
+    </table:table-cell>
+    <table:table-cell  table:style-name="lowerBorder" office:value-type="string">
+      <text:p  text:style-name="ArialCenteredBold" >Petal.Length</text:p>
+    </table:table-cell>
+    <table:table-cell  table:style-name="lowerBorder" office:value-type="string">
+      <text:p  text:style-name="ArialCenteredBold" >Petal.Width</text:p>
+    </table:table-cell>
+    <table:table-cell  table:style-name="lowerBorder" office:value-type="string">
+      <text:p  text:style-name="ArialCenteredBold" >Species</text:p>
+    </table:table-cell>
+    </table:table-row>
+   </table:table-header-rows>
+<table:table-row>
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >1</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >5.1</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >3.5</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >1.4</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >0.2</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >setosa</text:p>
+  </table:table-cell>
+
+</table:table-row>
+ <table:table-row>
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >2</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >4.9</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >3.0</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >1.4</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >0.2</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >setosa</text:p>
+  </table:table-cell>
+
+</table:table-row>
+ <table:table-row>
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >3</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >4.7</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >3.2</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >1.3</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >0.2</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >setosa</text:p>
+  </table:table-cell>
+
+</table:table-row>
+ <table:table-row>
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >4</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >4.6</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >3.1</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >1.5</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >0.2</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >setosa</text:p>
+  </table:table-cell>
+
+</table:table-row>
+ <table:table-row>
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >5</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >5.0</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >3.6</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >1.4</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >0.2</text:p>
+  </table:table-cell>
+
+ 
+ <table:table-cell office:value-type="string"   table:style-name="noBorder"  >
+       <text:p text:style-name="ArialCentered" >setosa</text:p>
+  </table:table-cell>
+
+</table:table-row>
+
+</table:table>
+> 
+> 
+> 
+> cleanEx()
+> nameEx("odfTableCaption")
+> ### * odfTableCaption
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: odfTableCaption
+> ### Title: Provide a Caption for a Table
+> ### Aliases: odfTableCaption
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D odfTableCaption("This is a very boring table")
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("odfWeave")
+> ### * odfWeave
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: odfWeave
+> ### Title: Sweave processing of Open Document Format (ODF) files
+> ### Aliases: odfWeave
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> 
+> ## Not run: vignette("odfWeave")
+> 
+> ## Not run: 
+> ##D demoFile <- system.file("examples", "examples.odt", package = "odfWeave")
+> ##D demoFile <- system.file("examples", "testCases.odt", package ="odfWeave")
+> ##D demoFile <- system.file("examples", "formatting.odt", package = "odfWeave")
+> ## End(Not run)
+> 
+> demoFile <- system.file("examples", "simple.odt", package = "odfWeave")
+> outputFile <- gsub("simple.odt", "output.odt", demoFile)
+> 
+> library(odfWeave)
+> odfWeave(demoFile, outputFile)
+  Creating  /tmp/Rtmpixwdb0/odfWeave02115550266 
+  Copying  /homero/tomas/cran/rlibro/lib/odfWeave/examples/simple.odt 
+  Setting wd to  /tmp/Rtmpixwdb0/odfWeave02115550266 
+  Unzipping ODF file using unzip -o simple.odt 
+Archive:  simple.odt
+ extracting: mimetype                
+   creating: Configurations2/statusbar/
+  inflating: Configurations2/accelerator/current.xml  
+   creating: Configurations2/floater/
+   creating: Configurations2/popupmenu/
+   creating: Configurations2/progressbar/
+   creating: Configurations2/menubar/
+   creating: Configurations2/toolbar/
+   creating: Configurations2/images/Bitmaps/
+  inflating: layout-cache            
+  inflating: content.xml             
+  inflating: styles.xml              
+  inflating: meta.xml                
+  inflating: Thumbnails/thumbnail.png  
+  inflating: settings.xml            
+  inflating: META-INF/manifest.xml   
+
+  Removing  simple.odt 
+  Creating a Pictures directory
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+
+  Pre-processing the contents
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+Warning in structure(x$children, class = "XMLNodeList") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+  Sweaving  content.Rnw 
+
+  Writing to file content_1.xml
+  Processing code chunks ...
+    1 : term hide(label=loadLibs)
+    2 : term xml(label=showOutputList)
+    3 : term hide(label=irisSplom)
+    4 : term xml(label=corrTable)
+    5 : term xml(label=meanTable)
+    6 : term xml(label=meanTable2)
+    7 : term xml(label=pkgList)
+
+  'content_1.xml' has been Sweaved
+
+  Removing content.xml
+
+  Post-processing the contents
+  Removing content.Rnw 
+  Removing styles.xml
+  Renaming styles_2.xml to styles.xml
+  Collected picture file content_1-irisSplom.png
+  Removing manifest.xml
+  Renaming manifest_2.xml to manifest.xml
+  Removing extra files
+
+  Packaging file using zip -r simple.odt . 
+  adding: meta.xml (deflated 57%)
+  adding: Configurations2/ (stored 0%)
+  adding: Configurations2/toolbar/ (stored 0%)
+  adding: Configurations2/floater/ (stored 0%)
+  adding: Configurations2/accelerator/ (stored 0%)
+  adding: Configurations2/accelerator/current.xml (stored 0%)
+  adding: Configurations2/progressbar/ (stored 0%)
+  adding: Configurations2/popupmenu/ (stored 0%)
+  adding: Configurations2/images/ (stored 0%)
+  adding: Configurations2/images/Bitmaps/ (stored 0%)
+  adding: Configurations2/menubar/ (stored 0%)
+  adding: Configurations2/statusbar/ (stored 0%)
+  adding: Pictures/ (stored 0%)
+  adding: Pictures/content_1-irisSplom.png (deflated 3%)
+  adding: styles.xml (deflated 83%)
+  adding: mimetype (stored 0%)
+  adding: settings.xml (deflated 84%)
+  adding: Thumbnails/ (stored 0%)
+  adding: Thumbnails/thumbnail.png (deflated 5%)
+  adding: layout-cache (deflated 22%)
+  adding: content.xml (deflated 88%)
+  adding: META-INF/ (stored 0%)
+  adding: META-INF/manifest.xml (deflated 83%)
+  Copying  simple.odt 
+Warning in file.create(to[okay]) :
+  cannot create file '/homero/tomas/cran/rlibro/lib/odfWeave/examples/output.odt', reason 'Read-only file system'
+Error in odfWeave(demoFile, outputFile) : Error copying odt file
+Execution halted

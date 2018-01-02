@@ -1,0 +1,3492 @@
+
+R Under development (unstable) (2018-01-02 r74022) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "XLConnect"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('XLConnect')
+Loading required package: XLConnectJars
+XLConnect 0.2-13 by Mirai Solutions GmbH [aut],
+  Martin Studer [cre],
+  The Apache Software Foundation [ctb, cph] (Apache POI),
+  Graph Builder [ctb, cph] (Curvesapi Java library)
+http://www.mirai-solutions.com ,
+http://miraisolutions.wordpress.com
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("XLConnect-package")
+> ### * XLConnect-package
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: XLConnect-package
+> ### Title: Excel Connector for R
+> ### Aliases: XLConnect-package XLConnect
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> # Load workbook; create if not existing
+> wb <- loadWorkbook("XLConnect.xlsx", create = TRUE)
+> 
+> # Create a worksheet
+> createSheet(wb, name = "mtcars")
+> 
+> # Create a name reference
+> createName(wb, name = "mtcars", formula = "mtcars!$C$5")
+> 
+> # Write built-in data.frame 'mtcars' to the specified named region
+> writeNamedRegion(wb, mtcars, name = "mtcars")
+> 
+> # Save workbook
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("addImage-methods")
+> ### * addImage-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: addImage-methods
+> ### Title: Adding images to a worksheet
+> ### Aliases: addImage addImage-methods addImage,workbook-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> ## Write an R plot to a specified named region
+> ## This example makes use of the 'Tonga Trench Earthquakes' example
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("earthquake.xlsx", create = TRUE)
+> 
+> # Create a sheet named 'earthquake'
+> createSheet(wb, name = "earthquake")
+> 
+> # Create a named region called 'earthquake' referring to the sheet
+> # called 'earthquake' 
+> createName(wb, name = "earthquake", formula = "earthquake!$B$2")
+> 
+> # Create R plot to a png device
+> require(lattice)
+Loading required package: lattice
+> png(filename = "earthquake.png", width = 800, height = 600)
+> devAskNewPage(ask = FALSE)
+> 
+> Depth <- equal.count(quakes$depth, number=8, overlap=.1)
+> xyplot(lat ~ long | Depth, data = quakes)
+> update(trellis.last.object(),
++        strip = strip.custom(strip.names = TRUE, strip.levels = TRUE),
++        par.strip.text = list(cex = 0.75),
++        aspect = "iso")
+> 
+> dev.off()
+pdf 
+  2 
+> 
+> # Write image to the named region created above using the image's
+> # original size; i.e. the image's top left corner will match the
+> # specified cell's top left corner 
+> addImage(wb, filename = "earthquake.png", name = "earthquake",
++          originalSize = TRUE)
+> 
+> # Save workbook (this actually writes the file to disk)
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:lattice’
+
+> nameEx("appendNamedRegion-methods")
+> ### * appendNamedRegion-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: appendNamedRegion-methods
+> ### Title: Appending data to a named region
+> ### Aliases: appendNamedRegion appendNamedRegion-methods
+> ###   appendNamedRegion,workbook-method
+> ###   appendNamedRegion,workbook,ANY-method
+> ### Keywords: methods IO
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Append mtcars data set to named region named 'mtcars'
+> appendNamedRegion(wb, mtcars, name = "mtcars")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("appendWorksheet-methods")
+> ### * appendWorksheet-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: appendWorksheet-methods
+> ### Title: Appending data to worksheets
+> ### Aliases: appendWorksheet appendWorksheet-methods
+> ###   appendWorksheet,workbook,ANY,character-method
+> ###   appendWorksheet,workbook,ANY,numeric-method
+> ### Keywords: methods IO
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Append mtcars data set to worksheet named 'mtcars'
+> appendWorksheet(wb, mtcars, sheet = "mtcars")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("aref")
+> ### * aref
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: aref
+> ### Title: Constructing Excel area references
+> ### Aliases: aref
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> aref("A1", dim(mtcars))
+[1] "A1:K32"
+> aref(c(1, 1), dim(mtcars))
+[1] "A1:K32"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("aref2idx")
+> ### * aref2idx
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: aref2idx
+> ### Title: Converting Excel cell references to row and column based cell
+> ###   references
+> ### Aliases: aref2idx
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> aref2idx(c("A1:B6", "B6:C17"))
+     [,1] [,2] [,3] [,4]
+[1,]    1    1    6    2
+[2,]    6    2   17    3
+> 
+> 
+> 
+> cleanEx()
+> nameEx("cellstyle-class")
+> ### * cellstyle-class
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: cellstyle-class
+> ### Title: Class "cellstyle"
+> ### Aliases: cellstyle-class
+> ### Keywords: classes utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("cellstyles.xlsx", create = TRUE)
+> 
+> # We don't set a specific style action in this demo, so the 
+> # default 'XLConnect' will be used (XLC$"STYLE_ACTION.XLCONNECT")
+> 
+> # Create a sheet named 'mtcars'
+> createSheet(wb, name = "mtcars")
+> 
+> # Create a named region called 'mtcars' referring to the sheet
+> # called 'mtcars'
+> createName(wb, name = "mtcars", formula = "mtcars!$C$4")
+> 
+> # Write built-in data set 'mtcars' to the above defined named region.
+> # This will use the default style action 'XLConnect'.
+> writeNamedRegion(wb, mtcars, name = "mtcars")
+> 
+> # Now let's color all weight cells of cars with a weight > 3.5 in red
+> # (mtcars$wt > 3.5)
+> 
+> # First, create a corresponding (named) cell style
+> heavyCar <- createCellStyle(wb, name = "HeavyCar")
+> 
+> # Specify the cell style to use a solid foreground color
+> setFillPattern(heavyCar, fill = XLC$"FILL.SOLID_FOREGROUND")
+> 
+> # Specify the foreground color to be used
+> setFillForegroundColor(heavyCar, color = XLC$"COLOR.RED")
+> 
+> # Which cars have a weight > 3.5 ?
+> rowIndex <- which(mtcars$wt > 3.5)
+> 
+> # NOTE: The mtcars data.frame has been written offset with top 
+> # left cell C4 - and we have also written a header row!
+> # So, let's take that into account appropriately. Obviously,
+> # the two steps could be combined directly into one ...
+> rowIndex <- rowIndex + 4
+> 
+> # The same holds for the column index
+> colIndex <- which(names(mtcars) == "wt") + 2
+> 
+> # Set the 'HeavyCar' cell style for the corresponding cells.
+> # Note: the row and col arguments are vectorized!
+> setCellStyle(wb, sheet = "mtcars", row = rowIndex, col = colIndex,
++              cellstyle = heavyCar)
+> 
+> # Save workbook (this actually writes the file to disk)
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("clearNamedRegion-methods")
+> ### * clearNamedRegion-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: clearNamedRegion-methods
+> ### Title: Clearing named regions in a workbook
+> ### Aliases: clearNamedRegion clearNamedRegion-methods
+> ###   clearNamedRegion,workbook,character-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of 
+> # package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", 
++                              package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Read named region 'mtcars'
+> data <- readNamedRegion(wb, name = "mtcars", header = TRUE)
+> 
+> # Only consider cars with a weight >= 5
+> data <- data[data$wt >= 5, ]
+> 
+> # Clear original named region
+> clearNamedRegion(wb, name = "mtcars")
+> 
+> # Write subsetted data back
+> # Note: this is covering a smaller area now -
+> # writeNamedRegion automatically redefines the named region
+> # to the size/area of the data
+> writeNamedRegion(wb, data = data, name = "mtcars",
++                  header = TRUE) 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("clearRange-methods")
+> ### * clearRange-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: clearRange-methods
+> ### Title: Clearing cell ranges in a workbook
+> ### Aliases: clearRange clearRange-methods
+> ###   clearRange,workbook,numeric-method
+> ###   clearRange,workbook,character-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of 
+> # package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", 
++                              package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Clear range from top left corner (4,2) ^= B4 to
+> # bottom right corner (6,4) ^= D6
+> clearRange(wb, sheet = "mtcars", coords = c(4, 2, 6, 4))
+> 
+> # Clear two ranges in one go ...
+> mat = matrix(c(5, 1, 6, 4, 5, 7, 7, 9), ncol = 4,
++              byrow = TRUE)
+> clearRange(wb, sheet = "mtcars", coords = mat)
+> 
+> # The above is equivalent to ...
+> clearRange(wb, sheet = "mtcars",
++            coords = aref2idx(c("A5:D6", "G5:I7")))
+>            
+> # This in turn is the same as ...
+> clearRangeFromReference(wb, reference = c("mtcars!A5:D6",
++                         "mtcars!G5:I7"))
+> 
+> 
+> 
+> cleanEx()
+> nameEx("clearRangeFromReference-methods")
+> ### * clearRangeFromReference-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: clearRangeFromReference-methods
+> ### Title: Clearing cell ranges in a workbook
+> ### Aliases: clearRangeFromReference clearRangeFromReference-methods
+> ###   clearRangeFromReference,workbook,character-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of 
+> # package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", 
++                              package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Clear ranges A5:D6 and G5:I7 on sheet mtcars
+> clearRangeFromReference(wb, reference = c("mtcars!A5:D6",
++                         "mtcars!G5:I7"))
+> 
+> 
+> 
+> cleanEx()
+> nameEx("clearSheet-methods")
+> ### * clearSheet-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: clearSheet-methods
+> ### Title: Clearing worksheets in a workbook
+> ### Aliases: clearSheet clearSheet-methods
+> ###   clearSheet,workbook,numeric-method
+> ###   clearSheet,workbook,character-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of 
+> # package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", 
++                              package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Clear worksheets named 'mtcars' and 'mtcars2'
+> clearSheet(wb, sheet = c("mtcars", "mtcars2"))
+> 
+> # Clear 3rd worksheet
+> clearSheet(wb, sheet = 3) 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("cloneSheet-methods")
+> ### * cloneSheet-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: cloneSheet-methods
+> ### Title: Cloning/copying worksheets
+> ### Aliases: cloneSheet cloneSheet-methods
+> ###   cloneSheet,workbook,character-method
+> ###   cloneSheet,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Clone the 'mtcars' worksheet and assign it the name 'mtcars cloned'
+> cloneSheet(wb, sheet = "mtcars", name = "mtcars cloned")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("col2idx")
+> ### * col2idx
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: col2idx
+> ### Title: Converting Excel column names to indices
+> ### Aliases: col2idx
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> col2idx(c("A", "BTG"))
+[1]    1 1879
+> 
+> 
+> 
+> cleanEx()
+> nameEx("createCellStyle-methods")
+> ### * createCellStyle-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: createCellStyle-methods
+> ### Title: Creating custom named and anonymous cell styles
+> ### Aliases: createCellStyle createCellStyle-methods
+> ###   createCellStyle,workbook,character-method
+> ###   createCellStyle,workbook,missing-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("createCellstyles.xlsx", create = TRUE)
+> 
+> # We don't set a specific style action in this demo, so the 
+> # default 'XLConnect' will be used (XLC$"STYLE_ACTION.XLCONNECT")
+> 
+> # Create a sheet named 'mtcars'
+> createSheet(wb, name = "mtcars")
+> 
+> # Create a named region called 'mtcars' referring to the sheet
+> # called 'mtcars'
+> createName(wb, name = "mtcars", formula = "mtcars!$C$4")
+> 
+> # Write built-in data set 'mtcars' to the above defined named region.
+> # This will use the default style action 'XLConnect'.
+> writeNamedRegion(wb, mtcars, name = "mtcars")
+> 
+> # Now let's color all weight cells of cars with a weight > 3.5 in red
+> # (mtcars$wt > 3.5)
+> 
+> # First, create a corresponding (named) cell style
+> heavyCar <- createCellStyle(wb, name = "HeavyCar")
+> 
+> # Specify the cell style to use a solid foreground color
+> setFillPattern(heavyCar, fill = XLC$"FILL.SOLID_FOREGROUND")
+> 
+> # Specify the foreground color to be used
+> setFillForegroundColor(heavyCar, color = XLC$"COLOR.RED")
+> 
+> # Which cars have a weight > 3.5 ?
+> rowIndex <- which(mtcars$wt > 3.5)
+> 
+> # NOTE: The mtcars data.frame has been written offset with 
+> # top left cell C4 - and we have also written a header row!
+> # So, let's take that into account appropriately. Obviously, 
+> # the two steps could be combined directly into one ...
+> rowIndex <- rowIndex + 4
+> 
+> # The same holds for the column index
+> colIndex <- which(names(mtcars) == "wt") + 2
+> 
+> # Set the 'HeavyCar' cell style for the corresponding cells.
+> # Note: the row and col arguments are vectorized!
+> setCellStyle(wb, sheet = "mtcars", row = rowIndex, col = colIndex, 
++              cellstyle = heavyCar)
+> 
+> # Save workbook (this actually writes the file to disk)
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("createFreezePane-methods")
+> ### * createFreezePane-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: createFreezePane-methods
+> ### Title: Creating a freeze pane on a worksheet
+> ### Aliases: createFreezePane createFreezePane-methods
+> ###   createFreezePane,workbook,character-method
+> ###   createFreezePane,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("freezePaneTest.xlsx", create = TRUE)
+> 
+> # Create a worksheet named 'Sheet1'
+> createSheet(wb, name = "Sheet1")
+> 
+> # Create a freeze pane on Sheet1, using as reference position the 5th column and the 5th row,
+> # showing the 10th column as the leftmost visible one in the right pane
+> # and the 10th row as the top visible one in the bottom pane.
+> createFreezePane(wb, "Sheet1", 5, 5, 10, 10)
+> 
+> # Save workbook (this actually writes the file to disk)
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("createName-methods")
+> ### * createName-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: createName-methods
+> ### Title: Creating names in a workbook
+> ### Aliases: createName createName-methods createName,workbook-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("createName.xlsx", create = TRUE)
+> 
+> # Create a worksheet named 'mtcars'
+> createSheet(wb, name = "mtcars")
+> 
+> # Create a named region called 'mtcars' on the sheet called 'mtcars'
+> createName(wb, name = "mtcars", formula = "mtcars!$A$1")
+> 
+> # Write built-in data set 'mtcars' to the above defined named region
+> writeNamedRegion(wb, mtcars, name = "mtcars")
+> 
+> # Save workbook
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("createSheet-methods")
+> ### * createSheet-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: createSheet-methods
+> ### Title: Creating worksheets in a workbook
+> ### Aliases: createSheet createSheet-methods createSheet,workbook-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("createSheet.xlsx", create = TRUE)
+> 
+> # Create a worksheet called 'CO2'
+> createSheet(wb, name = "CO2")
+> 
+> # Save workbook (this actually writes the file to disk)
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("createSplitPane-methods")
+> ### * createSplitPane-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: createSplitPane-methods
+> ### Title: Creating a split pane on a worksheet
+> ### Aliases: createSplitPane createSplitPane-methods
+> ###   createSplitPane,workbook,character-method
+> ###   createSplitPane,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("splitPaneTest.xlsx", create = TRUE)
+> 
+> # Create a worksheet named 'Sheet1'
+> createSheet(wb, name = "Sheet1")
+> 
+> # Create a split pane on Sheet1, with coordinates (10000, 5000) expressed as 1/20th of a point,
+> # 10 (-> J) as left column visible in right pane and 10 as top row visible in bottom pane 
+> createSplitPane(wb, "Sheet1", 10000, 5000, 10, 10)
+> 
+> # Save workbook (this actually writes the file to disk)
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("cref2idx")
+> ### * cref2idx
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: cref2idx
+> ### Title: Converting Excel cell references to indices
+> ### Aliases: cref2idx
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> cref2idx(c("$A$20", "B18"))
+     [,1] [,2]
+[1,]   20    1
+[2,]   18    2
+> 
+> 
+> 
+> cleanEx()
+> nameEx("dollar-methods")
+> ### * dollar-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: $-methods
+> ### Title: Executing workbook methods in object$method(...) form
+> ### Aliases: $ $-methods $,workbook-method $,cellstyle-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("dollar.xlsx", create = TRUE)
+> 
+> # Create a worksheet called 'CO2'
+> wb$createSheet(name = "CO2")
+> 
+> # Write built-in data set 'CO2' to the worksheet created above
+> wb$writeWorksheet(CO2, sheet = "CO2", startRow = 4, startCol = 2)
+> 
+> # Save workbook
+> wb$saveWorkbook()
+> 
+> 
+> 
+> cleanEx()
+> nameEx("existsName-methods")
+> ### * existsName-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: existsName-methods
+> ### Title: Checking existence of names in a workbook
+> ### Aliases: existsName existsName-methods existsName,workbook-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> mtcarsFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(mtcarsFile)
+> 
+> # Check if the name 'mtcars' exists
+> # (should return TRUE since the name is defined as 'mtcars!$A$1:$K$33')
+> existsName(wb, name = "mtcars")
+mtcars 
+  TRUE 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("existsSheet-methods")
+> ### * existsSheet-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: existsSheet-methods
+> ### Title: Checking for existence of worksheets in a workbook
+> ### Aliases: existsSheet existsSheet-methods existsSheet,workbook-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Check for existence of a worksheet called 'mtcars'
+> existsSheet(wb, "mtcars")
+mtcars 
+  TRUE 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("extractSheetName")
+> ### * extractSheetName
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: extractSheetName
+> ### Title: Extracting the sheet name from a formula
+> ### Aliases: extractSheetName
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> extractSheetName(c("MySheet!$A$1", "'My Sheet'!$A$1", "'My!Sheet'!$A$1"))
+[1] "MySheet"  "My Sheet" "My!Sheet"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("extraction-methods")
+> ### * extraction-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: extraction-methods
+> ### Title: Workbook data extraction & replacement operators
+> ### Aliases: [ [[ [<- [[<- [-methods [[-methods [<--methods [[<--methods
+> ###   [,workbook-method [[,workbook-method [<-,workbook-method
+> ###   [[<-,workbook-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("extraction.xlsx", create = TRUE)
+> 
+> # Write mtcars data set on a worksheet named 'mtcars1'.
+> # Note: The 'mtcars1' sheet will be created automatically if it does
+> # not exist yet. Also, default values for other writeWorksheet arguments
+> # hold, i.e. the data set is written starting at the top left corner. 
+> wb["mtcars1"] = mtcars
+> 
+> # Write mtcars data set on a worksheet named 'mtcars2'.
+> # Again, the 'mtcars2' worksheet is created automatically.
+> # Additionally specify arguments passed to the underlying method
+> # writeWorksheet.
+> wb["mtcars2", startRow = 6, startCol = 11, header = FALSE] = mtcars
+> 
+> # Read worksheets 'mtcars1' and 'mtcars2'.
+> # Note: The default arguments hold for the underlying method
+> # readWorksheet.
+> wb["mtcars1"]
+    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+1  21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+2  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+3  22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+4  21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+5  18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+6  18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+7  14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+8  24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+9  22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+10 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+11 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+12 16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+13 17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+14 15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+15 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+16 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+17 14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+18 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+19 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+20 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+21 21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+22 15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+23 15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+24 13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+25 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+26 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+27 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+28 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+29 15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+30 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+31 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+32 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+> wb["mtcars2"]
+    X21 X6  X160 X110 X3.9 X2.62 X16.46 X0 X1 X4 X4.1
+1  21.0  6 160.0  110 3.90 2.875  17.02  0  1  4    4
+2  22.8  4 108.0   93 3.85 2.320  18.61  1  1  4    1
+3  21.4  6 258.0  110 3.08 3.215  19.44  1  0  3    1
+4  18.7  8 360.0  175 3.15 3.440  17.02  0  0  3    2
+5  18.1  6 225.0  105 2.76 3.460  20.22  1  0  3    1
+6  14.3  8 360.0  245 3.21 3.570  15.84  0  0  3    4
+7  24.4  4 146.7   62 3.69 3.190  20.00  1  0  4    2
+8  22.8  4 140.8   95 3.92 3.150  22.90  1  0  4    2
+9  19.2  6 167.6  123 3.92 3.440  18.30  1  0  4    4
+10 17.8  6 167.6  123 3.92 3.440  18.90  1  0  4    4
+11 16.4  8 275.8  180 3.07 4.070  17.40  0  0  3    3
+12 17.3  8 275.8  180 3.07 3.730  17.60  0  0  3    3
+13 15.2  8 275.8  180 3.07 3.780  18.00  0  0  3    3
+14 10.4  8 472.0  205 2.93 5.250  17.98  0  0  3    4
+15 10.4  8 460.0  215 3.00 5.424  17.82  0  0  3    4
+16 14.7  8 440.0  230 3.23 5.345  17.42  0  0  3    4
+17 32.4  4  78.7   66 4.08 2.200  19.47  1  1  4    1
+18 30.4  4  75.7   52 4.93 1.615  18.52  1  1  4    2
+19 33.9  4  71.1   65 4.22 1.835  19.90  1  1  4    1
+20 21.5  4 120.1   97 3.70 2.465  20.01  1  0  3    1
+21 15.5  8 318.0  150 2.76 3.520  16.87  0  0  3    2
+22 15.2  8 304.0  150 3.15 3.435  17.30  0  0  3    2
+23 13.3  8 350.0  245 3.73 3.840  15.41  0  0  3    4
+24 19.2  8 400.0  175 3.08 3.845  17.05  0  0  3    2
+25 27.3  4  79.0   66 4.08 1.935  18.90  1  1  4    1
+26 26.0  4 120.3   91 4.43 2.140  16.70  0  1  5    2
+27 30.4  4  95.1  113 3.77 1.513  16.90  1  1  5    2
+28 15.8  8 351.0  264 4.22 3.170  14.50  0  1  5    4
+29 19.7  6 145.0  175 3.62 2.770  15.50  0  1  5    6
+30 15.0  8 301.0  335 3.54 3.570  14.60  0  1  5    8
+31 21.4  4 121.0  109 4.11 2.780  18.60  1  1  4    2
+> 
+> # Write mtcars data set to a named region named 'mtcars3'. Since
+> # it doesn't exist yet we also need to specify the formula to
+> # define it. Also note that the sheet 'mtcars3' referenced in the
+> # formula does not yet exist - it will be created automatically!
+> # Moreover, default values for other writeNamedRegion arguments hold.
+> wb[["mtcars3", "mtcars3!$B$7"]] = mtcars
+> 
+> # Redefine named region 'mtcars3'. Note that no formula specification
+> # is required since named region is already defined (see above example).
+> wb[["mtcars3"]] = mtcars
+> 
+> # Write mtcars data set to a named region 'mtcars4'. Since the named
+> # region does not yet exist a formula specification is required. Also,
+> # additional arguments are specified that are passed to the underlying
+> # method writeNamedRegion.
+> wb[["mtcars4", "mtcars4!$D$8", rownames = "Car"]] = mtcars
+> 
+> # Read the named regions 'mtcars3' and 'mtcars4'.
+> # Note: Default values hold for the underlying method readNamedRegion.
+> wb[["mtcars3"]]
+    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+1  21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+2  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+3  22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+4  21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+5  18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+6  18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+7  14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+8  24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+9  22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+10 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+11 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+12 16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+13 17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+14 15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+15 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+16 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+17 14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+18 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+19 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+20 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+21 21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+22 15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+23 15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+24 13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+25 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+26 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+27 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+28 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+29 15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+30 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+31 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+32 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+> wb[["mtcars4"]]
+                   Car  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+1            Mazda RX4 21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+2        Mazda RX4 Wag 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+3           Datsun 710 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+4       Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+5    Hornet Sportabout 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+6              Valiant 18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+7           Duster 360 14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+8            Merc 240D 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+9             Merc 230 22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+10            Merc 280 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+11           Merc 280C 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+12          Merc 450SE 16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+13          Merc 450SL 17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+14         Merc 450SLC 15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+15  Cadillac Fleetwood 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+16 Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+17   Chrysler Imperial 14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+18            Fiat 128 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+19         Honda Civic 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+20      Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+21       Toyota Corona 21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+22    Dodge Challenger 15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+23         AMC Javelin 15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+24          Camaro Z28 13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+25    Pontiac Firebird 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+26           Fiat X1-9 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+27       Porsche 914-2 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+28        Lotus Europa 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+29      Ford Pantera L 15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+30        Ferrari Dino 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+31       Maserati Bora 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+32          Volvo 142E 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getActiveSheetIndex-methods")
+> ### * getActiveSheetIndex-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getActiveSheetIndex-methods
+> ### Title: Querying the active worksheet index
+> ### Aliases: getActiveSheetIndex getActiveSheetIndex-methods
+> ###   getActiveSheetIndex,workbook-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Query the active sheet index
+> activeSheet <- getActiveSheetIndex(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getActiveSheetName-methods")
+> ### * getActiveSheetName-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getActiveSheetName-methods
+> ### Title: Querying the active worksheet name
+> ### Aliases: getActiveSheetName getActiveSheetName-methods
+> ###   getActiveSheetName,workbook-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Query the active sheet name
+> activeSheet <- getActiveSheetName(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getBoundingBox-methods")
+> ### * getBoundingBox-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getBoundingBox-methods
+> ### Title: Querying the coordinates of a worksheet bounding box
+> ### Aliases: getBoundingBox getBoundingBox-methods
+> ###   getBoundingBox,workbook,character-method
+> ###   getBoundingBox,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # multiregion xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/multiregion.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Query bounding box for the second sheet
+> print(getBoundingBox(wb, sheet="SecondSheet"))
+     SecondSheet
+[1,]           3
+[2,]           2
+[3,]         153
+[4,]           6
+> 
+> # Query bounding box for the first sheet, selecting the columns from 5 to 8
+> print(getBoundingBox(wb, sheet="FirstSheet", startCol=5, endCol=8))
+     FirstSheet
+[1,]          2
+[2,]          5
+[3,]         14
+[4,]          8
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getCellFormula-methods")
+> ### * getCellFormula-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getCellFormula-methods
+> ### Title: Retrieving formula definitions from cells
+> ### Aliases: getCellFormula getCellFormula-methods
+> ###   getCellFormula,workbook,character-method
+> ###   getCellFormula,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("cellFormula.xlsx", create = TRUE)
+> 
+> createSheet(wb, "Formula")
+> 
+> # Assign a formula to A1
+> setCellFormula(wb, "Formula", 1, 1, "SUM($B$1:$B$29)")
+> 
+> # Returns the formula for Sheet1!A1
+> getCellFormula(wb, "Formula", 1, 1)
+          Formula 
+"SUM($B$1:$B$29)" 
+> # The same with a numeric sheet index
+> getCellFormula(wb, 1, 1, 1)
+[1] "SUM($B$1:$B$29)"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getCellStyle-methods")
+> ### * getCellStyle-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getCellStyle-methods
+> ### Title: Retrieving named cell styles
+> ### Aliases: getCellStyle getCellStyle-methods getCellStyle,workbook-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("getCellstyles.xlsx", create = TRUE)
+> 
+> # You wouldn't usually ignore the return value here...
+> createCellStyle(wb, 'Header')
+An object of class "cellstyle"
+Slot "jobj":
+[1] "Java-Object{com.miraisolutions.xlconnect.integration.r.RCellStyleWrapper@5f16132a}"
+
+> 
+> # ... but if you did it doesn't hurt.
+> cs <- getCellStyle(wb, 'Header')
+> 
+> # Specify the cell style to use a solid foreground color
+> setFillPattern(cs, fill = XLC$"FILL.SOLID_FOREGROUND")
+> 
+> # Specify the foreground color to be used
+> setFillForegroundColor(cs, color = XLC$"COLOR.RED")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getCellStyleForType-methods")
+> ### * getCellStyleForType-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getCellStyleForType-methods
+> ### Title: Querying the cell style per data type for the DATATYPE style
+> ###   action
+> ### Aliases: getCellStyleForType getCellStyleForType-methods
+> ###   getCellStyleForType,workbook-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> file.copy(system.file("demoFiles/template2.xlsx", 
++                       package = "XLConnect"),
++           "datatype.xlsx", overwrite = TRUE)
+[1] TRUE
+> 
+> # Load workbook
+> wb <- loadWorkbook("datatype.xlsx")
+> 
+> # Get current (existing) cell style for numerics
+> cs <- getCellStyleForType(wb, XLC$"DATA_TYPE.NUMERIC")
+> # Could also say cs <- getCellStyleForType(wb, "numeric")
+> 
+> # Change style
+> setBorder(cs, side = c("bottom", "right"), type = XLC$"BORDER.THICK", 
++           color = c(XLC$"COLOR.BLACK", XLC$"COLOR.RED"))
+>           
+> # Set style action to 'datatype'
+> setStyleAction(wb, XLC$"STYLE_ACTION.DATATYPE")
+> 
+> # Write built-in data set 'mtcars' to the named region 
+> # 'mtcars' as defined by the Excel template.
+> writeNamedRegion(wb, mtcars, name = "mtcars")
+> 
+> # Save workbook
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getDefinedNames-methods")
+> ### * getDefinedNames-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getDefinedNames-methods
+> ### Title: Retrieving defined names in a workbook
+> ### Aliases: getDefinedNames getDefinedNames-methods
+> ###   getDefinedNames,workbook-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> mtcarsFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(mtcarsFile)
+> 
+> # Retrieve defined names with valid references
+> getDefinedNames(wb)
+[1] "mtcars"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getForceFormulaRecalculation-methods")
+> ### * getForceFormulaRecalculation-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getForceFormulaRecalculation-methods
+> ### Title: Querying the coordinates of the range reference by an Excel name
+> ### Aliases: getForceFormulaRecalculation
+> ###   getForceFormulaRecalculation-methods
+> ###   getForceFormulaRecalculation,workbook,character-method
+> ###   getForceFormulaRecalculation,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Ask whether Excel will automatically recalculate formulas on sheet mtcars
+> print(getForceFormulaRecalculation(wb, sheet = "mtcars"))
+mtcars 
+ FALSE 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getLastColumn-methods")
+> ### * getLastColumn-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getLastColumn-methods
+> ### Title: Querying the last (non-empty) column on a worksheet
+> ### Aliases: getLastColumn getLastColumn-methods
+> ###   getLastColumn,workbook,character-method
+> ###   getLastColumn,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Query the last row of the 'mtcars' worksheet
+> getLastColumn(wb, "mtcars")
+mtcars 
+    11 
+> 
+> # Query the last row of the 'mtcars2' worksheet
+> getLastColumn(wb, "mtcars2")
+mtcars2 
+     15 
+> 
+> # Query the last row of the 'mtcars3' worksheet
+> getLastColumn(wb, "mtcars3")
+mtcars3 
+     19 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getLastRow-methods")
+> ### * getLastRow-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getLastRow-methods
+> ### Title: Querying the last (non-empty) row on a worksheet
+> ### Aliases: getLastRow getLastRow-methods
+> ###   getLastRow,workbook,character-method
+> ###   getLastRow,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Query the last row of the 'mtcars' worksheet
+> getLastRow(wb, "mtcars")
+mtcars 
+    33 
+> 
+> # Query the last row of the 'mtcars2' worksheet
+> getLastRow(wb, "mtcars2")
+mtcars2 
+     41 
+> 
+> # Query the last row of the 'mtcars3' worksheet
+> getLastRow(wb, "mtcars3")
+mtcars3 
+     49 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getReferenceCoordinates-methods")
+> ### * getReferenceCoordinates-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getReferenceCoordinates-methods
+> ### Title: Querying the coordinates of the range reference by an Excel name
+> ### Aliases: getReferenceCoordinates getReferenceCoordinates-methods
+> ###   getReferenceCoordinates,workbook-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Query reference coordinate for name 'mtcars'
+> print(getReferenceCoordinatesForName(wb, name = "mtcars"))
+     [,1] [,2]
+[1,]    1    1
+[2,]   33   11
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getReferenceCoordinatesForName-methods")
+> ### * getReferenceCoordinatesForName-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getReferenceCoordinatesForName-methods
+> ### Title: Querying the coordinates of the range reference by an Excel name
+> ### Aliases: getReferenceCoordinatesForName
+> ###   getReferenceCoordinatesForName-methods
+> ###   getReferenceCoordinatesForName,workbook-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Query reference coordinate for name 'mtcars'
+> print(getReferenceCoordinatesForName(wb, name = "mtcars"))
+     [,1] [,2]
+[1,]    1    1
+[2,]   33   11
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getReferenceCoordinatesForTable-methods")
+> ### * getReferenceCoordinatesForTable-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getReferenceCoordinatesForTable-methods
+> ### Title: Querying the coordinates of the range of an Excel table
+> ### Aliases: getReferenceCoordinatesForTable
+> ###   getReferenceCoordinatesForTable-methods
+> ###   getReferenceCoordinatesForTable,workbook,numeric-method
+> ###   getReferenceCoordinatesForTable,workbook,character-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Query reference coordinates for table 'MtcarsTable' on sheet
+> # 'mtcars_table'
+> print(getReferenceCoordinatesForTable(wb, sheet = "mtcars_table", 
++                                       table = "MtcarsTable"))
+     [,1] [,2]
+[1,]    5    3
+[2,]   37   13
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getReferenceFormula-methods")
+> ### * getReferenceFormula-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getReferenceFormula-methods
+> ### Title: Querying reference formulas of Excel names
+> ### Aliases: getReferenceFormula getReferenceFormula-methods
+> ###   getReferenceFormula,workbook-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Query reference formula for name 'mtcars'
+> print(getReferenceFormula(wb, name = "mtcars"))
+             mtcars 
+"mtcars!$A$1:$K$33" 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getSheetPos-methods")
+> ### * getSheetPos-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getSheetPos-methods
+> ### Title: Querying worksheet position
+> ### Aliases: getSheetPos getSheetPos-methods
+> ###   getSheetPos,workbook,character-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Query worksheet positions for the worksheets 'mtcars2', 'mtcars3',
+> # 'mtcars' and 'NotThere' (which actually does not exist)
+> print(getSheetPos(wb, sheet = c("mtcars2", "mtcars3", "mtcars", "NotThere")))
+ mtcars2  mtcars3   mtcars NotThere 
+       2        3        1        0 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getSheets-methods")
+> ### * getSheets-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getSheets-methods
+> ### Title: Querying available worksheets in a workbook
+> ### Aliases: getSheets getSheets-methods getSheets,workbook-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Query available worksheets
+> sheets <- getSheets(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getTables-methods")
+> ### * getTables-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getTables-methods
+> ### Title: Querying available Excel tables in a workbook
+> ### Aliases: getTables getTables-methods getTables,workbook,numeric-method
+> ###   getTables,workbook,character-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Query available tables (table names) on sheet 'mtcars_table'
+> tables <- getTables(wb, sheet = "mtcars_table")
+> 
+> # ... or via sheet index
+> tables <- getTables(wb, sheet = 4)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("hideSheet-methods")
+> ### * hideSheet-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: hideSheet-methods
+> ### Title: Hiding worksheets in a workbook
+> ### Aliases: hideSheet hideSheet-methods
+> ###   hideSheet,workbook,character-method hideSheet,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("hiddenWorksheet.xlsx", create = TRUE)
+> 
+> # Write a couple of built-in data.frame's into sheets
+> # with corresponding name
+> for(obj in c("CO2", "airquality", "swiss")) {
++   createSheet(wb, name = obj)
++   writeWorksheet(wb, get(obj), sheet = obj)
++ }
+> 
+> # Hide sheet 'airquality';
+> # the sheet may be unhidden by a user from within Excel
+> # since veryHidden defaults to FALSE
+> hideSheet(wb, sheet = "airquality")
+> 
+> # Save workbook
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("idx2aref")
+> ### * idx2aref
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: idx2aref
+> ### Title: Converting row and column based area references to Excel area
+> ###   references
+> ### Aliases: idx2aref
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> idx2aref(c(1, 1, 5, 4))
+[1] "A1:D5"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("idx2col")
+> ### * idx2col
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: idx2col
+> ### Title: Converting column indices to Excel column names
+> ### Aliases: idx2col
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> idx2col(c(1, 347))
+[1] "A"  "MI"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("idx2cref")
+> ### * idx2cref
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: idx2cref
+> ### Title: Converting indices to Excel cell references
+> ### Aliases: idx2cref
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> idx2cref(c(5, 8, 14, 38))
+[1] "$H$5"   "$AL$14"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("isSheetHidden-methods")
+> ### * isSheetHidden-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: isSheetHidden-methods
+> ### Title: Checking if worksheets are hidden in a workbook
+> ### Aliases: isSheetHidden isSheetHidden-methods
+> ###   isSheetHidden,workbook,character-method
+> ###   isSheetHidden,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("isSheetHidden.xlsx", create = TRUE)
+> 
+> # Write a couple of built-in data.frame's into sheets
+> # with corresponding name
+> for(obj in c("CO2", "airquality", "swiss")) {
++   createSheet(wb, name = obj)
++   writeWorksheet(wb, get(obj), sheet = obj)
++ }
+> 
+> # Hide sheet 'airquality'
+> hideSheet(wb, sheet = "airquality")
+> 
+> # Check if sheet 'airquality' is hidden;
+> # this should obviously return TRUE
+> isSheetHidden(wb, "airquality")
+airquality 
+      TRUE 
+> 
+> # Check if sheet 'swiss' is hidden;
+> # this should obviously return FALSE
+> isSheetHidden(wb, "swiss")
+swiss 
+FALSE 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("isSheetVeryHidden-methods")
+> ### * isSheetVeryHidden-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: isSheetVeryHidden-methods
+> ### Title: Checking if worksheets are very hidden in a workbook
+> ### Aliases: isSheetVeryHidden isSheetVeryHidden-methods
+> ###   isSheetVeryHidden,workbook,character-method
+> ###   isSheetVeryHidden,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("isSheetVeryHidden.xlsx", create = TRUE)
+> 
+> # Write a couple of built-in data.frame's into sheets
+> # with corresponding name
+> for(obj in c("CO2", "airquality", "swiss")) {
++   createSheet(wb, name = obj)
++   writeWorksheet(wb, get(obj), sheet = obj)
++ }
+> 
+> # Very hide sheet 'airquality'
+> hideSheet(wb, sheet = "airquality", veryHidden = TRUE)
+> 
+> # Hide sheet 'CO2'
+> hideSheet(wb, sheet = "CO2", veryHidden = FALSE)
+> 
+> # Check if sheet 'airquality' is very hidden;
+> # this should obviously return TRUE
+> isSheetVeryHidden(wb, "airquality")
+airquality 
+      TRUE 
+> 
+> # Check if sheet 'swiss' is very hidden;
+> # this should obviously return FALSE
+> isSheetVeryHidden(wb, "swiss")
+swiss 
+FALSE 
+> 
+> # Check if sheet 'CO2' is very hidden;
+> # this should also return FALSE - the sheet
+> # is just hidden but not very hidden
+> isSheetVeryHidden(wb, "CO2")
+  CO2 
+FALSE 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("isSheetVisible-methods")
+> ### * isSheetVisible-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: isSheetVisible-methods
+> ### Title: Checking if worksheets are visible in a workbook
+> ### Aliases: isSheetVisible isSheetVisible-methods
+> ###   isSheetVisible,workbook,character-method
+> ###   isSheetVisible,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("isSheetVisible.xlsx", create = TRUE)
+> 
+> # Write a couple of built-in data.frame's into sheets
+> # with corresponding name
+> for(obj in c("CO2", "airquality", "swiss")) {
++   createSheet(wb, name = obj)
++   writeWorksheet(wb, get(obj), sheet = obj)
++ }
+> 
+> # Hide sheet 'CO2'
+> hideSheet(wb, sheet = "CO2", veryHidden = FALSE)
+> 
+> # Very hide sheet 'airquality'
+> hideSheet(wb, sheet = "airquality", veryHidden = TRUE)
+> 
+> # Check if sheet 'swiss' is visible;
+> # this should obviously return TRUE
+> isSheetVisible(wb, "swiss")
+[1] TRUE
+> 
+> # Check if sheet 'CO2' is visible;
+> # this should obviously return FALSE
+> isSheetVisible(wb, "CO2")
+[1] FALSE
+> 
+> # Check if sheet 'airquality' is visible;
+> # this should obviously return FALSE
+> isSheetVisible(wb, "airquality")
+[1] FALSE
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("jTryCatch")
+> ### * jTryCatch
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: jTryCatch
+> ### Title: Standard Java exception handling for XLConnect
+> ### Aliases: jTryCatch
+> ### Keywords: error internal
+> 
+> ### ** Examples
+> 
+> try(XLConnect:::jTryCatch(J("java.lang.Integer")$valueOf("not an integer")))
+Error in J("java.lang.Integer") : could not find function "J"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("loadWorkbook")
+> ### * loadWorkbook
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: loadWorkbook
+> ### Title: Loading Microsoft Excel workbooks
+> ### Aliases: loadWorkbook
+> ### Keywords: file
+> 
+> ### ** Examples
+> 
+> # Load existing demo Excel file 'mtcars.xlsx' from the XLConnect package
+> wb.mtcars <- loadWorkbook(system.file("demoFiles/mtcars.xlsx", 
++                           package = "XLConnect"))
+> 
+> # Create new workbook
+> wb.new <- loadWorkbook("myNewExcelFile.xlsx", create = TRUE)
+> 
+> # NOTE: The above statement does not write the file to disk! 
+> # saveWorkbook(wb.new) would need to be called in order to write/save 
+> # the file to disk!
+> 
+> 
+> 
+> cleanEx()
+> nameEx("mergeCells-methods")
+> ### * mergeCells-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: mergeCells-methods
+> ### Title: Merging cells
+> ### Aliases: mergeCells mergeCells-methods
+> ###   mergeCells,workbook,character-method
+> ###   mergeCells,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("mergeCells.xlsx", create = TRUE)
+> 
+> # Create a worksheet called 'merge'
+> createSheet(wb, name = "merge")
+> 
+> # Merge the cells A1:B8 on the worksheet created above
+> mergeCells(wb, sheet = "merge", reference = "A1:B8")
+> 
+> # Save workbook
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("onErrorCell-methods")
+> ### * onErrorCell-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: onErrorCell-methods
+> ### Title: Behavior when error cells are detected
+> ### Aliases: onErrorCell onErrorCell-methods onErrorCell,workbook-method
+> ### Keywords: utilities error
+> 
+> ### ** Examples
+> 
+> # errorCell xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/errorCell.xlsx", 
++ 							  package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Set error behavior to XLC$ERROR.WARN when detecting error cells
+> # Note: this is the default behavior
+> onErrorCell(wb, XLC$ERROR.WARN)
+> # Alternatively: wb$onErrorCell(XLC$ERROR.WARN)
+> 
+> # Read named region 'MyData' (with default header = TRUE)
+> data <- readNamedRegion(wb, name = "MyData")
+Warning: Error when trying to evaluate cell C10 - Specified named range 'MYNAME' does not exist in the current workbook.
+Warning: Error detected in cell D8 - Incompatible type
+Warning: Error detected in cell F11 - Division by 0
+Warning: Error when trying to evaluate cell G9 - Could not resolve external workbook name 'MySheet2'. Workbook environment has not been set up.
+> 
+> # Now set error behavior to XLC$ERROR.STOP to immediately
+> # issue an exception and stop in case an error cell is
+> # detected
+> onErrorCell(wb, XLC$ERROR.STOP)
+> # Alternatively: wb$onErrorCell(XLC$ERROR.STOP)
+> 
+> # Read (again) named region 'MyData' (with default header = TRUE)
+> res <- try(readNamedRegion(wb, name = "MyData"))
+Error : IllegalArgumentException (Java): Error when trying to evaluate cell C10 - Specified named range 'MYNAME' does not exist in the current workbook.
+> # Did we get an error?
+> print(is(res, "try-error"))
+[1] TRUE
+> 
+> 
+> 
+> cleanEx()
+> nameEx("print-methods")
+> ### * print-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: print-methods
+> ### Title: Print a workbook's filename
+> ### Aliases: print print-methods print,workbook-method
+> ### Keywords: methods print
+> 
+> ### ** Examples
+> 
+> # Load existing demo Excel file 'mtcars.xlsx' from the XLConnect package
+> wb.mtcars <- loadWorkbook(system.file("demoFiles/mtcars.xlsx", 
++                           package = "XLConnect"))
+> 
+> # Print the workbook's underlying filename
+> print(wb.mtcars)
+[1] "/homero/tomas/cran/rlibro/lib/XLConnect/demoFiles/mtcars.xlsx"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("readNamedRegion-methods")
+> ### * readNamedRegion-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: readNamedRegion
+> ### Title: Reading named regions from a workbook
+> ### Aliases: readNamedRegion readNamedRegion-methods
+> ###   readNamedRegion,workbook-method
+> ### Keywords: methods IO
+> 
+> ### ** Examples
+> 
+> ## Example 1:
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Read named region 'mtcars' (with default header = TRUE)
+> data <- readNamedRegion(wb, name = "mtcars")
+> 
+> ## Example 2;
+> # conversion xlsx file from demoFiles subfolder of package XLConnect
+> excelFile <- system.file("demoFiles/conversion.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(excelFile)
+> 
+> # Read named region 'conversion' with pre-specified column types
+> # Note: in the worksheet all data was entered as strings!
+> # forceConversion = TRUE is used to force conversion from String
+> # into the less generic data types Numeric, DateTime & Boolean
+> df <- readNamedRegion(wb, name = "conversion", header = TRUE,
++                       colTypes = c(XLC$DATA_TYPE.NUMERIC,
++                                    XLC$DATA_TYPE.DATETIME,
++                                    XLC$DATA_TYPE.BOOLEAN),
++                       forceConversion = TRUE,
++                       dateTimeFormat = "%Y-%m-%d %H:%M:%S")
+>                       
+> ## Example 3:
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Read the columns 1, 3 and 5 of the named region 'mtcars' (with default header = TRUE)
+> data <- readNamedRegion(wb, name = "mtcars", keep=c(1,3,5))
+> 
+> 
+> 
+> cleanEx()
+> nameEx("readNamedRegionFromFile")
+> ### * readNamedRegionFromFile
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: readNamedRegionFromFile
+> ### Title: Reading named regions from an Excel file (wrapper function)
+> ### Aliases: readNamedRegionFromFile
+> ### Keywords: IO
+> 
+> ### ** Examples
+> 
+> # multiregion xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/multiregion.xlsx", 
++                              package = "XLConnect")
+>                              
+> # Load a single named region into a single data.frame.
+> df <- readNamedRegionFromFile(demoExcelFile, name="Iris")
+> 
+> # Load multiple regions at once - returns a (named) list 
+> # of data.frames.
+> df <- readNamedRegionFromFile(demoExcelFile, 
++                               name=c("Calendar", "Iris", "IQ"))
+> 
+> 
+> 
+> cleanEx()
+> nameEx("readTable-methods")
+> ### * readTable-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: readTable
+> ### Title: Reading Excel tables from a workbook
+> ### Aliases: readTable readTable-methods readTable,workbook,numeric-method
+> ###   readTable,workbook,character-method
+> ### Keywords: methods IO
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Read table 'MtcarsTable' from sheet 'mtcars_table'
+> data <- readTable(wb, sheet = "mtcars_table", table = "MtcarsTable")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("readWorksheet-methods")
+> ### * readWorksheet-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: readWorksheet-methods
+> ### Title: Reading data from worksheets
+> ### Aliases: readWorksheet readWorksheet-methods
+> ###   readWorksheet,workbook,character-method
+> ###   readWorksheet,workbook,numeric-method
+> ### Keywords: methods IO
+> 
+> ### ** Examples
+> 
+> ## Example 1:
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Read worksheet 'mtcars' (providing no specific area bounds;
+> # with default header = TRUE)
+> data <- readWorksheet(wb, sheet = "mtcars")
+> 
+> 
+> ## Example 2:
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Read worksheet 'mtcars' (providing area bounds; with default header = TRUE)
+> data <- readWorksheet(wb, sheet = "mtcars", startRow = 1, startCol = 3,
++                       endRow = 15, endCol = 8)
+> 
+> 
+> ## Example 3:
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Read worksheet 'mtcars' (providing area bounds using the region argument;
+> # with default header = TRUE)
+> data <- readWorksheet(wb, sheet = "mtcars", region = "C1:H15")
+> 
+> 
+> ## Example 4:
+> # conversion xlsx file from demoFiles subfolder of package XLConnect
+> excelFile <- system.file("demoFiles/conversion.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(excelFile)
+> 
+> # Read worksheet 'Conversion' with pre-specified column types
+> # Note: in the worksheet all data was entered as strings!
+> # forceConversion = TRUE is used to force conversion from String
+> # into the less generic data types Numeric, DateTime & Boolean
+> df <- readWorksheet(wb, sheet = "Conversion", header = TRUE,
++                     colTypes = c(XLC$DATA_TYPE.NUMERIC,
++                                  XLC$DATA_TYPE.DATETIME,
++                                  XLC$DATA_TYPE.BOOLEAN),
++                     forceConversion = TRUE,
++                     dateTimeFormat = "%Y-%m-%d %H:%M:%S")
+>                     
+> ## Example 5:
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Read the columns 1, 3 and 5 from the sheet 'mtcars' (with default header = TRUE)
+> data <- readWorksheet(wb, sheet = "mtcars", keep=c(1,3,5))
+> 
+> 
+> 
+> cleanEx()
+> nameEx("readWorksheetFromFile")
+> ### * readWorksheetFromFile
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: readWorksheetFromFile
+> ### Title: Reading data from worksheets in an Excel file (wrapper function)
+> ### Aliases: readWorksheetFromFile
+> ### Keywords: IO
+> 
+> ### ** Examples
+> 
+> # multiregion xlsx file from demoFiles subfolder of 
+> # package XLConnect
+> demoExcelFile <- system.file("demoFiles/multiregion.xlsx", 
++                              package = "XLConnect")
+> 
+> # Read single area from first sheet of existing file,
+> # "B2:C3" in Excel speak
+> df.one <- readWorksheetFromFile(demoExcelFile, sheet = 1, 
++                                 header = FALSE, startCol = 2, 
++                                 startRow = 2, endCol = 3, 
++                                 endRow = 3)
+> 
+> # Read three data sets in one from known positions
+> dflist <- readWorksheetFromFile(demoExcelFile,
++                                 sheet = c("FirstSheet", 
++                                           "FirstSheet", 
++                                           "SecondSheet"),
++                                 header = TRUE, 
++                                 startRow = c(2,2,3), 
++                                 startCol = c(2,5,2),
++                                 endCol = c(5,8,6), 
++                                 endRow = c(9,15,153))
+> 
+> 
+> 
+> cleanEx()
+> nameEx("removeName-methods")
+> ### * removeName-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: removeName-methods
+> ### Title: Removing names from workbooks
+> ### Aliases: removeName removeName-methods removeName,workbook-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> mtcarsFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(mtcarsFile)
+> 
+> # Remove the named region called 'mtcars' from the above file
+> # (this named region is defined as 'mtcars!$A$1:$K$33')
+> removeName(wb, name = "mtcars")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("removePane-methods")
+> ### * removePane-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: removePane-methods
+> ### Title: Removing panes from worksheet
+> ### Aliases: removePane removePane-methods
+> ###   removePane,workbook,character-method
+> ###   removePane,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("removePaneTest.xlsx", create = TRUE)
+> 
+> # Create a worksheet named 'Sheet1'
+> createSheet(wb, name = "Sheet1")
+> 
+> # Create a split pane on Sheet1, with coordinates (10000, 5000) expressed as 1/20th of a point,
+> # 10 (-> J) as left column visible in right pane and 10 as top row visible in bottom pane 
+> createSplitPane(wb, "Sheet1", 10000, 5000, 10, 10)
+> 
+> # Remove the split pane from Sheet1
+> removePane(wb, "Sheet1")
+> 
+> # Save workbook (this actually writes the file to disk). Now the workbook has no split pane.
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("removeSheet-methods")
+> ### * removeSheet-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: removeSheet-methods
+> ### Title: Removing worksheets from workbooks
+> ### Aliases: removeSheet removeSheet-methods
+> ###   removeSheet,workbook,character-method
+> ###   removeSheet,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> mtcarsFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(mtcarsFile)
+> 
+> # Remove the worksheet called 'mtcars' from the above file
+> removeSheet(wb, sheet = "mtcars")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("renameSheet-methods")
+> ### * renameSheet-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: renameSheet-methods
+> ### Title: Renaming worksheets from workbooks
+> ### Aliases: renameSheet renameSheet-methods
+> ###   renameSheet,workbook,character-method
+> ###   renameSheet,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> mtcarsFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(mtcarsFile)
+> 
+> # Rename the worksheet called 'mtcars' from the above file to 'MyCars'
+> renameSheet(wb, sheet = "mtcars", newName = "MyCars")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("saveWorkbook-methods")
+> ### * saveWorkbook-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: saveWorkbook-methods
+> ### Title: Saving Microsoft Excel workbooks
+> ### Aliases: saveWorkbook saveWorkbook-methods
+> ###   saveWorkbook,workbook,missing-method
+> ###   saveWorkbook,workbook,character-method
+> ### Keywords: methods file
+> 
+> ### ** Examples
+> 
+> # Create a new workbook 'saveMe.xlsx'
+> # (assuming the file to not exist already)
+> wb <- loadWorkbook("saveMe.xlsx", create = TRUE)
+> 
+> # Create a worksheet called 'mtcars'
+> createSheet(wb, name = "mtcars")
+> 
+> # Write built-in dataset 'mtcars' to sheet 'mtcars' created above
+> writeWorksheet(wb, mtcars, sheet = "mtcars")
+> 
+> # Save workbook - this actually writes the file 'saveMe.xlsx' to disk
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setActiveSheet-methods")
+> ### * setActiveSheet-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setActiveSheet-methods
+> ### Title: Setting the active worksheet in a workbook
+> ### Aliases: setActiveSheet setActiveSheet-methods
+> ###   setActiveSheet,workbook,character-method
+> ###   setActiveSheet,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> mtcarsFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(mtcarsFile)
+> 
+> # Sets the active sheet to the sheet 'mtcars3'
+> setActiveSheet(wb, sheet = "mtcars3")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setAutoFilter-methods")
+> ### * setAutoFilter-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setAutoFilter-methods
+> ### Title: Setting auto-filters on worksheets
+> ### Aliases: setAutoFilter setAutoFilter-methods
+> ###   setAutoFilter,workbook,character-method
+> ###   setAutoFilter,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("autofilter.xlsx", create = TRUE)
+> 
+> # Create a worksheet named 'mtcars'
+> createSheet(wb, name = "mtcars")
+> 
+> # Create a named region called 'mtcars' on the sheet called 'mtcars'
+> createName(wb, name = "mtcars", formula = "mtcars!$A$1")
+> 
+> # Write built-in data set 'mtcars' to the above defined named region
+> # (using header = TRUE)
+> writeNamedRegion(wb, mtcars, name = "mtcars")
+> 
+> # Set an auto-filter for the named region written above
+> setAutoFilter(wb, sheet = "mtcars", reference = aref("A1", dim(mtcars)))
+> 
+> # Save workbook (this actually writes the file to disk)
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setBorder-methods")
+> ### * setBorder-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setBorder-methods
+> ### Title: Specifying borders for cell styles
+> ### Aliases: setBorder setBorder-methods setBorder,cellstyle-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("setBorder.xlsx", create = TRUE)
+> 
+> # Create a worksheet
+> createSheet(wb, name = "cellstyles")
+> 
+> # Create a custom anonymous cell style
+> cs <- createCellStyle(wb)
+> 
+> # Specify the border for the cell style created above
+> setBorder(cs, side = c("bottom", "right"), type = XLC$"BORDER.THICK", 
++           color = c(XLC$"COLOR.BLACK", XLC$"COLOR.RED"))
+> 
+> # Set the cell style created above for the top left cell (A1) in the 
+> # 'cellstyles' worksheet
+> setCellStyle(wb, sheet = "cellstyles", row = 1, col = 1, cellstyle = cs)
+> 
+> # Save the workbook
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setCellFormula-methods")
+> ### * setCellFormula-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setCellFormula-methods
+> ### Title: Setting cell formulas
+> ### Aliases: setCellFormula setCellFormula-methods
+> ###   setCellFormula,workbook,character-method
+> ###   setCellFormula,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("setCellFormula.xls", create = TRUE)
+> 
+> # Create a sheet named 'mtcars'
+> createSheet(wb, name = "mtcars")
+> 
+> # Create a named region called 'mtcars' referring to the sheet
+> # called 'mtcars'
+> createName(wb, name = "mtcars", formula = "mtcars!$A$1")
+> 
+> # Write built-in data set 'mtcars' to the above defined named region.
+> writeNamedRegion(wb, mtcars, name = "mtcars")
+> 
+> # Now, let us get Excel to calculate average weights.
+> # Where did we write the dataset?
+> corners <- getReferenceCoordinatesForName(wb, "mtcars")
+> # Put the average under the wt column
+> colIndex <- which(names(mtcars) == "wt") 
+> rowIndex <- corners[2,1] + 1
+> 
+> # Construct the input range & formula
+> input <- paste(idx2cref(c(corners[1,1], colIndex, 
++                           corners[2,1], colIndex)), collapse=":")
+> formula <- paste("AVERAGE(", input, ")", sep="") 
+>             
+> setCellFormula(wb, "mtcars", rowIndex, colIndex, formula)
+> 
+> # Save workbook (this actually writes the file to disk)
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setCellStyle-methods")
+> ### * setCellStyle-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setCellStyle-methods
+> ### Title: Setting cell styles
+> ### Aliases: setCellStyle setCellStyle-methods
+> ###   setCellStyle,workbook,missing,character-method
+> ###   setCellStyle,workbook,missing,numeric-method
+> ###   setCellStyle,workbook,character,missing-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("setCellStyle.xlsx", create = TRUE)
+> 
+> # We don't set a specific style action in this demo, so the default 
+> # 'XLConnect' will be used (XLC$"STYLE_ACTION.XLCONNECT")
+> 
+> # Create a sheet named 'mtcars'
+> createSheet(wb, name = "mtcars")
+> 
+> # Create a named region called 'mtcars' referring to the sheet
+> # called 'mtcars'
+> createName(wb, name = "mtcars", formula = "mtcars!$C$4")
+> 
+> # Write built-in data set 'mtcars' to the above defined named region.
+> # This will use the default style action 'XLConnect'.
+> writeNamedRegion(wb, mtcars, name = "mtcars")
+> 
+> # Now let's color all weight cells of cars with a weight > 3.5 in red
+> # (mtcars$wt > 3.5)
+> 
+> # First, create a corresponding (named) cell style
+> heavyCar <- createCellStyle(wb, name = "HeavyCar")
+> 
+> # Specify the cell style to use a solid foreground color
+> setFillPattern(heavyCar, fill = XLC$"FILL.SOLID_FOREGROUND")
+> 
+> # Specify the foreground color to be used
+> setFillForegroundColor(heavyCar, color = XLC$"COLOR.RED")
+> 
+> # Which cars have a weight > 3.5 ?
+> rowIndex <- which(mtcars$wt > 3.5)
+> 
+> # NOTE: The mtcars data.frame has been written offset with
+> # top left cell C4 - and we have also written a header row!
+> # So, let's take that into account appropriately. Obviously,
+> # the two steps could be combined directly into one ...
+> rowIndex <- rowIndex + 4
+> 
+> # The same holds for the column index
+> colIndex <- which(names(mtcars) == "wt") + 2
+> 
+> # Set the 'HeavyCar' cell style for the corresponding cells.
+> # Note: the row and col arguments are vectorized!
+> setCellStyle(wb, sheet = "mtcars", row = rowIndex, col = colIndex, 
++              cellstyle = heavyCar)
+> 
+> # Save workbook (this actually writes the file to disk)
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setCellStyleForType-methods")
+> ### * setCellStyleForType-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setCellStyleForType-methods
+> ### Title: Setting the cell style per data type for the DATATYPE style
+> ###   action
+> ### Aliases: setCellStyleForType setCellStyleForType-methods
+> ###   setCellStyleForType,workbook-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> file.copy(system.file("demoFiles/template2.xlsx", 
++                       package = "XLConnect"),
++           "datatype.xlsx", overwrite = TRUE)
+[1] TRUE
+> 
+> # Load workbook
+> wb <- loadWorkbook("datatype.xlsx")
+> 
+> # Create a new cell style to be used
+> cs <- createCellStyle(wb, name = "mystyle")
+> 
+> # Set data format (number format) as numbers with aligned fractions
+> setDataFormat(cs, format = "# ???/???")
+> 
+> # Define the above created cell style as style to be used for
+> # numerics
+> setCellStyleForType(wb, type = XLC$"DATA_TYPE.NUMERIC", style = cs)
+> # Could also say cs <- setCellStyleForType(wb, "numeric")
+>           
+> # Set style action to 'datatype'
+> setStyleAction(wb, XLC$"STYLE_ACTION.DATATYPE")
+> 
+> # Write built-in data set 'mtcars' to the named region 
+> # 'mtcars' as defined by the Excel template.
+> writeNamedRegion(wb, mtcars, name = "mtcars")
+> 
+> # Save workbook
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setColumnWidth-methods")
+> ### * setColumnWidth-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setColumnWidth-methods
+> ### Title: Setting the width of a column in a worksheet
+> ### Aliases: setColumnWidth setColumnWidth-methods
+> ###   setColumnWidth,workbook,character-method
+> ###   setColumnWidth,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> mtcarsFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(mtcarsFile)
+> 
+> # Sets the column width of the 3rd column on sheet 'mtcars' 
+> # to 4000/256th (= 15.625) character width
+> setColumnWidth(wb, sheet = "mtcars", column = 3, width = 4000)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setDataFormat-methods")
+> ### * setDataFormat-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setDataFormat-methods
+> ### Title: Specifying custom data formats for cell styles
+> ### Aliases: setDataFormat setDataFormat-methods
+> ###   setDataFormat,cellstyle-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("setDataFormat.xlsx", create = TRUE)
+> 
+> # Create a worksheet
+> createSheet(wb, name = "cellstyles")
+> 
+> # Create a dummy data set with the current date/time (as POSIXct)
+> now <- data.frame(Now = Sys.time())
+> 
+> # Write the value to the 'cellstyles' worksheet in the top left 
+> # corner (cell A1)
+> writeWorksheet(wb, now, sheet = "cellstyles", startRow = 1, 
++                startCol = 1, header = FALSE)
+> 
+> # Create a custom anonymous cell style
+> cs <- createCellStyle(wb)
+> 
+> # Specify a custom data format
+> setDataFormat(cs, format = "dddd d-m-yyyy h:mm AM/PM")
+> 
+> # Set the cell style created above for the top left cell (A1) in 
+> # the 'cellstyles' worksheet
+> setCellStyle(wb, sheet = "cellstyles", row = 1, col = 1, cellstyle = cs)
+> 
+> # Set column width to display whole time/date string
+> setColumnWidth(wb, sheet = "cellstyles", column = 1, width = 6000)
+> 
+> # Save the workbook
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setDataFormatForType-methods")
+> ### * setDataFormatForType-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setDataFormatForType-methods
+> ### Title: Setting the data format for the DATA_FORMAT_ONLY style action
+> ### Aliases: setDataFormatForType setDataFormatForType-methods
+> ###   setDataFormatForType,workbook-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Copy existing Excel template to working directory
+> file.copy(system.file("demoFiles/template2.xlsx", 
++                       package = "XLConnect"),
++           "dataformat.xlsx", overwrite = TRUE)
+[1] TRUE
+> 
+> # Load workbook
+> wb <- loadWorkbook("dataformat.xlsx")
+> 
+> # Set the data format for numeric columns (cells)
+> # (keeping the defaults for all other data types)
+> setDataFormatForType(wb, type = XLC$"DATA_TYPE.NUMERIC", 
++                      format = "0.00")
+> 
+> # Set style action to 'data format only'
+> setStyleAction(wb, XLC$"STYLE_ACTION.DATA_FORMAT_ONLY")
+> 
+> # Write built-in data set 'mtcars' to the named region 
+> # 'mtcars' as defined by the Excel template.
+> writeNamedRegion(wb, mtcars, name = "mtcars")
+> 
+> # Save workbook
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setFillBackgroundColor-methods")
+> ### * setFillBackgroundColor-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setFillBackgroundColor-methods
+> ### Title: Specifying the fill background color for cell styles
+> ### Aliases: setFillBackgroundColor setFillBackgroundColor-methods
+> ###   setFillBackgroundColor,cellstyle,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("setFillBackgroundColor.xlsx", create = TRUE)
+> 
+> # Create a worksheet
+> createSheet(wb, name = "cellstyles")
+> 
+> # Create a custom anonymous cell style
+> cs <- createCellStyle(wb)
+> 
+> # Specify the fill background color for the cell style created above
+> setFillBackgroundColor(cs, color = XLC$"COLOR.CORNFLOWER_BLUE")
+> 
+> # Specify the fill foreground color
+> setFillForegroundColor(cs, color = XLC$"COLOR.YELLOW")
+> 
+> # Specify the fill pattern
+> setFillPattern(cs, fill = XLC$"FILL.BIG_SPOTS")
+> 
+> # Set the cell style created above for the top left cell (A1) in the 
+> # 'cellstyles' worksheet
+> setCellStyle(wb, sheet = "cellstyles", row = 1, col = 1, cellstyle = cs)
+> 
+> # Save the workbook
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setFillForegroundColor-methods")
+> ### * setFillForegroundColor-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setFillForegroundColor-methods
+> ### Title: Specifying the fill foreground color for cell styles
+> ### Aliases: setFillForegroundColor setFillForegroundColor-methods
+> ###   setFillForegroundColor,cellstyle,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("setFillForegroundColor.xlsx", create = TRUE)
+> 
+> # Create a worksheet
+> createSheet(wb, name = "cellstyles")
+> 
+> # Create a custom anonymous cell style
+> cs <- createCellStyle(wb)
+> 
+> # Specify the fill background color for the cell style created above
+> setFillBackgroundColor(cs, color = XLC$"COLOR.CORNFLOWER_BLUE")
+> 
+> # Specify the fill foreground color
+> setFillForegroundColor(cs, color = XLC$"COLOR.YELLOW")
+> 
+> # Specify the fill pattern
+> setFillPattern(cs, fill = XLC$"FILL.BIG_SPOTS")
+> 
+> # Set the cell style created above for the top left cell (A1) in the
+> # 'cellstyles' worksheet
+> setCellStyle(wb, sheet = "cellstyles", row = 1, col = 1, cellstyle = cs)
+> 
+> # Save the workbook
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setFillPattern-methods")
+> ### * setFillPattern-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setFillPattern-methods
+> ### Title: Specifying the fill pattern for cell styles
+> ### Aliases: setFillPattern setFillPattern-methods
+> ###   setFillPattern,cellstyle-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("setFillPattern.xlsx", create = TRUE)
+> 
+> # Create a worksheet
+> createSheet(wb, name = "cellstyles")
+> 
+> # Create a custom anonymous cell style
+> cs <- createCellStyle(wb)
+> 
+> # Specify the fill background color for the cell style created above
+> setFillBackgroundColor(cs, color = XLC$"COLOR.CORNFLOWER_BLUE")
+> 
+> # Specify the fill foreground color
+> setFillForegroundColor(cs, color = XLC$"COLOR.YELLOW")
+> 
+> # Specify the fill pattern
+> setFillPattern(cs, fill = XLC$"FILL.BIG_SPOTS")
+> 
+> # Set the cell style created above for the top left cell (A1) in the
+> # 'cellstyles' worksheet
+> setCellStyle(wb, sheet = "cellstyles", row = 1, col = 1, cellstyle = cs)
+> 
+> # Save the workbook
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setForceFormulaRecalculation-methods")
+> ### * setForceFormulaRecalculation-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setForceFormulaRecalculation-methods
+> ### Title: Forcing Excel to recalculate formula values when opening a
+> ###   workbook
+> ### Aliases: setForceFormulaRecalculation
+> ###   setForceFormulaRecalculation-methods
+> ###   setForceFormulaRecalculation,workbook,character-method
+> ###   setForceFormulaRecalculation,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Tell Excel to automatically recalculate formulas on sheet mtcars
+> setForceFormulaRecalculation(wb, sheet = "mtcars", TRUE)
+> # The same with a numerical sheet index
+> setForceFormulaRecalculation(wb, sheet = 1, TRUE)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setHyperlink-methods")
+> ### * setHyperlink-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setHyperlink-methods
+> ### Title: Setting hyperlinks
+> ### Aliases: setHyperlink setHyperlink-methods
+> ###   setHyperlink,workbook,missing,character-method
+> ###   setHyperlink,workbook,missing,numeric-method
+> ###   setHyperlink,workbook,character,missing-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("setHyperlink.xlsx", create = TRUE)
+> 
+> # Create a sheet named 'mtcars'
+> createSheet(wb, name = "mtcars")
+> 
+> 
+> # Write built-in data set 'mtcars' to the above defined worksheet
+> writeWorksheet(wb, mtcars, sheet = "mtcars", rownames = "Car")
+> 
+> # Set hyperlinks
+> links <- paste0("http://www.google.com?q=", gsub(" ", "+", rownames(mtcars)))
+> setHyperlink(wb, sheet = "mtcars", row = seq_len(nrow(mtcars)) + 1, col = 1,
++   type = XLC$HYPERLINK.URL, address = links)
+> 
+> # Save workbook (this actually writes the file to disk)
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setMissingValue-methods")
+> ### * setMissingValue-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setMissingValue-methods
+> ### Title: Setting missing value identifiers
+> ### Aliases: setMissingValue setMissingValue-methods
+> ###   setMissingValue,workbook-method setMissingValue,workbook,ANY-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("missingValue.xlsx", create = TRUE)
+> 
+> # Create a worksheet named 'airquality'
+> createSheet(wb, name = "airquality")
+> 
+> # Create a named region called 'airquality' on the sheet called
+> # 'airquality'
+> createName(wb, name = "airquality", formula = "airquality!$A$1")
+> 
+> # Set the missing value string to 'missing'
+> setMissingValue(wb, value = "missing")
+> 
+> # Write built-in data set 'airquality' to the above defined named region
+> writeNamedRegion(wb, airquality, name = "airquality")
+> 
+> # Save workbook
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setRowHeight-methods")
+> ### * setRowHeight-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setRowHeight-methods
+> ### Title: Setting the height of a row in a worksheet
+> ### Aliases: setRowHeight setRowHeight-methods
+> ###   setRowHeight,workbook,character-method
+> ###   setRowHeight,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> mtcarsFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(mtcarsFile)
+> 
+> # Sets the row height of the 1st row on sheet 'mtcars'
+> # to 20 points
+> setRowHeight(wb, sheet = "mtcars", row = 1, height = 20)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setSheetColor-methods")
+> ### * setSheetColor-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setSheetColor-methods
+> ### Title: Setting colors on worksheet tabs
+> ### Aliases: setSheetColor setSheetColor-methods
+> ###   setSheetColor,workbook,character-method
+> ###   setSheetColor,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("sheetcolor.xlsx", create = TRUE)
+> 
+> # Create a worksheet named 'Sheet1'
+> createSheet(wb, name = "Sheet1")
+> 
+> # Set the "Sheet1" tab color as red
+> setSheetColor(wb, "Sheet1", XLC$COLOR.RED)
+> 
+> # Create a worksheet named 'Sheet2'
+> createSheet(wb, name = "Sheet2")
+> 
+> # Set the tab color of the second workbook sheet as green
+> setSheetColor(wb, 2, XLC$COLOR.GREEN)
+> 
+> # Save workbook (this actually writes the file to disk)
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setSheetPos-methods")
+> ### * setSheetPos-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setSheetPos-methods
+> ### Title: Setting worksheet position
+> ### Aliases: setSheetPos setSheetPos-methods
+> ###   setSheetPos,workbook,character,missing-method
+> ###   setSheetPos,workbook,character,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # mtcars xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+> 
+> # Load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # Move the 'mtcars3' worksheet to the front
+> setSheetPos(wb, sheet = "mtcars3", pos = 1)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setStyleAction-methods")
+> ### * setStyleAction-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setStyleAction-methods
+> ### Title: Controlling application of cell styles when writing data to
+> ###   Excel
+> ### Aliases: setStyleAction setStyleAction-methods
+> ###   setStyleAction,workbook-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("styleaction.xlsx", create = TRUE)
+> 
+> # Set style action to 'name prefix' 
+> setStyleAction(wb, XLC$"STYLE_ACTION.NAME_PREFIX")
+> # Set the name prefix to 'MyPersonalStyle'
+> setStyleNamePrefix(wb, "MyPersonalStyle")
+> 
+> # We now create a named cell style to be used for the header 
+> # (column names) of a data.frame
+> headerCellStyle <- createCellStyle(wb, 
++                              name = "MyPersonalStyle.Header")
+> 
+> # Specify the cell style to use a solid foreground color
+> setFillPattern(headerCellStyle, 
++                fill = XLC$"FILL.SOLID_FOREGROUND")
+> 
+> # Specify the foreground color to be used
+> setFillForegroundColor(headerCellStyle, 
++                     color = XLC$"COLOR.LIGHT_CORNFLOWER_BLUE")
+> 
+> # Specify a thick black bottom border
+> setBorder(headerCellStyle, side = "bottom", 
++           type = XLC$"BORDER.THICK", 
++           color = XLC$"COLOR.BLACK")
+> 
+> # We now create a named cell style to be used for 
+> # the column named 'wt' (as you will see below, we will 
+> # write the built-in data.frame 'mtcars')
+> wtColumnCellStyle <- createCellStyle(wb, 
++                            name = "MyPersonalStyle.Column.wt")
+> 
+> # Specify the cell style to use a solid foreground color
+> setFillPattern(wtColumnCellStyle, 
++                fill = XLC$"FILL.SOLID_FOREGROUND")
+> 
+> # Specify the foreground color to be used
+> setFillForegroundColor(wtColumnCellStyle, 
++                        color = XLC$"COLOR.LIGHT_ORANGE")
+> 
+> # We now create a named cell style to be used for 
+> # the 3rd column in the data.frame
+> wtColumnCellStyle <- createCellStyle(wb, 
++                             name = "MyPersonalStyle.Column.3")
+> 
+> # Specify the cell style to use a solid foreground color
+> setFillPattern(wtColumnCellStyle, 
++                fill = XLC$"FILL.SOLID_FOREGROUND")
+> 
+> # Specify the foreground color to be used
+> setFillForegroundColor(wtColumnCellStyle, 
++                        color = XLC$"COLOR.LIME")
+> 
+> # Create a sheet named 'mtcars'
+> createSheet(wb, name = "mtcars")
+> 
+> # Create a named region called 'mtcars' referring to 
+> # the sheet called 'mtcars'
+> createName(wb, name = "mtcars", formula = "mtcars!$A$1")
+> 
+> # Write built-in data set 'mtcars' to the above defined named region.
+> # The style action 'name prefix' will be used when writing the data
+> # as defined above.
+> writeNamedRegion(wb, mtcars, name = "mtcars")
+> 
+> # Save workbook (this actually writes the file to disk)
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setWrapText-methods")
+> ### * setWrapText-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setWrapText-methods
+> ### Title: Specifying text wrapping behaviour
+> ### Aliases: setWrapText setWrapText-methods setWrapText,cellstyle-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("setWrapText.xlsx", create = TRUE)
+> 
+> # Create a worksheet
+> createSheet(wb, name = "cellstyles")
+> 
+> # Create a dummy data set with some long text
+> text <- data.frame(
++      Text = "Some very very very very very very very long text")
+> 
+> # Write the value to the 'cellstyles' worksheet in the 
+> # top left corner (cell A1)
+> writeWorksheet(wb, text, sheet = "cellstyles", startRow = 1, 
++                startCol = 1, header = FALSE)
+> 
+> # Create a custom anonymous cell style
+> cs <- createCellStyle(wb)
+> 
+> # Specify to wrap the text
+> setWrapText(cs, wrap = TRUE)
+> 
+> # Set the cell style created above for the top left cell (A1) 
+> # in the 'cellstyles' worksheet
+> setCellStyle(wb, sheet = "cellstyles", row = 1, col = 1, 
++              cellstyle = cs)
+> 
+> # Save the workbook
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("show-methods")
+> ### * show-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: show-methods
+> ### Title: Display a workbook object
+> ### Aliases: show show-methods show,workbook-method
+> ### Keywords: methods print
+> 
+> ### ** Examples
+> 
+> # Load existing demo Excel file 'mtcars.xlsx' from the XLConnect package
+> wb.mtcars <- loadWorkbook(system.file("demoFiles/mtcars.xlsx", 
++                           package = "XLConnect"))
+> 
+> # Display the wb.mtcars object
+> wb.mtcars
+[1] "/homero/tomas/cran/rlibro/lib/XLConnect/demoFiles/mtcars.xlsx"
+> 
+> # Alternatively, show can be called explicitely
+> show(wb.mtcars)
+[1] "/homero/tomas/cran/rlibro/lib/XLConnect/demoFiles/mtcars.xlsx"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("summary-methods")
+> ### * summary-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: summary-methods
+> ### Title: Summarizing workbook objects
+> ### Aliases: summary summary-methods summary,workbook-method
+> ### Keywords: methods print utilities
+> 
+> ### ** Examples
+> 
+> # Load existing demo Excel file 'mtcars.xlsx' from the XLConnect package
+> wb.mtcars <- loadWorkbook(system.file("demoFiles/mtcars.xlsx", 
++                           package = "XLConnect"))
+> 
+> # Print a workbook summary
+> summary(wb.mtcars)
+*** XLConnect Workbook Summary ***
+> Filename: '/homero/tomas/cran/rlibro/lib/XLConnect/demoFiles/mtcars.xlsx'
+> Sheets (all):
+mtcars, mtcars2, mtcars3, mtcars_table
+> Hidden Sheets:
+<NONE>
+> Very Hidden Sheets:
+<NONE>
+> Names:
+mtcars
+> Active Sheet:  mtcars_table 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("unhideSheet-methods")
+> ### * unhideSheet-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: unhideSheet-methods
+> ### Title: Unhiding worksheets in a workbook
+> ### Aliases: unhideSheet unhideSheet-methods
+> ###   unhideSheet,workbook,character-method
+> ###   unhideSheet,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("unhideWorksheet.xlsx", create = TRUE)
+> 
+> # Create sheet 'airquality'
+> createSheet(wb, name = "airquality")
+> 
+> # Write the built-in data set airquality to worksheet
+> # 'airquality'
+> writeWorksheet(wb, airquality, sheet = "airquality")
+> 
+> # Create sheet 'CO2'
+> createSheet(wb, name = "CO2")
+> 
+> # Write the built-in data set CO2 to worksheet 'C02'
+> writeWorksheet(wb, CO2, sheet = "CO2")
+> 
+> # Hide sheet 'airquality'
+> hideSheet(wb, sheet = "airquality")
+> 
+> # Unhide sheet 'airquality'
+> unhideSheet(wb, sheet = "airquality")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("unmergeCells-methods")
+> ### * unmergeCells-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: unmergeCells-methods
+> ### Title: Unmerging cells
+> ### Aliases: unmergeCells unmergeCells-methods
+> ###   unmergeCells,workbook,character-method
+> ###   unmergeCells,workbook,numeric-method
+> ### Keywords: methods utilities
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("unmergeCells.xlsx", create = TRUE)
+> 
+> # Create a worksheet called 'merge'
+> createSheet(wb, name = "merge")
+> 
+> # Merge the cells A1:B8 on the worksheet created above
+> mergeCells(wb, sheet = "merge", reference = "A1:B8")
+> 
+> # Unmerge the cells A1:B8
+> unmergeCells(wb, sheet = "merge", reference = "A1:B8")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("with.workbook")
+> ### * with.workbook
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: with.workbook
+> ### Title: Evaluate an R expression in a workbook environment
+> ### Aliases: with.workbook
+> ### Keywords: IO
+> 
+> ### ** Examples
+> 
+> # multiregion xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/multiregion.xlsx",
++                              package = "XLConnect")
+> 
+> # load workbook
+> wb <- loadWorkbook(demoExcelFile)
+> 
+> # named regions: Calendar, IQ, Iris
+> print(getDefinedNames(wb))
+[1] "Calendar" "IQ"       "Iris"    
+> 
+> # named regions as variables
+> with(wb, { 
++   print(Calendar)
++   summary(IQ)
++   summary(Iris)
++ })
+  Year Days
+1 1999  365
+2 2000  365
+3 2001  365
+4 2002  365
+5 2003  365
+6 2004  366
+7 2005  365
+  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
+ Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
+ 1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
+ Median :5.800   Median :3.000   Median :4.350   Median :1.300  
+ Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
+ 3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
+ Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  
+   Species         
+ Length:150        
+ Class :character  
+ Mode  :character  
+                   
+                   
+                   
+> 
+> 
+> 
+> cleanEx()
+> nameEx("workbook-class")
+> ### * workbook-class
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: workbook-class
+> ### Title: Class "workbook"
+> ### Aliases: workbook-class
+> ### Keywords: classes
+> 
+> ### ** Examples
+> 
+> # Create a new workbook 'myWorkbook.xlsx' 
+> # (assuming the file to not exist already)
+> wb <- loadWorkbook("myWorkbook.xlsx", create = TRUE)
+> 
+> # Create a worksheet called 'mtcars'
+> createSheet(wb, name = "mtcars")
+> 
+> # Write built-in dataset 'mtcars' to sheet 'mtcars' created above
+> writeWorksheet(wb, mtcars, sheet = "mtcars")
+> 
+> # Save workbook - this actually writes the file 'myWorkbook.xlsx' to disk
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("writeNamedRegion-methods")
+> ### * writeNamedRegion-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: writeNamedRegion-methods
+> ### Title: Writing named regions to a workbook
+> ### Aliases: writeNamedRegion writeNamedRegion-methods
+> ###   writeNamedRegion,workbook-method writeNamedRegion,workbook,ANY-method
+> ### Keywords: methods IO
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("writeNamedRegion.xlsx", create = TRUE)
+> 
+> # Create a worksheet named 'mtcars'
+> createSheet(wb, name = "mtcars")
+> 
+> # Create a named region called 'mtcars' on the sheet called 'mtcars'
+> createName(wb, name = "mtcars", formula = "mtcars!$A$1")
+> 
+> # Write built-in data set 'mtcars' to the above defined named region
+> # (using header = TRUE)
+> writeNamedRegion(wb, mtcars, name = "mtcars")
+> 
+> # Save workbook (this actually writes the file to disk)
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("writeNamedRegionToFile")
+> ### * writeNamedRegionToFile
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: writeNamedRegionToFile
+> ### Title: Writing named regions to an Excel file (wrapper function)
+> ### Aliases: writeNamedRegionToFile
+> ### Keywords: IO
+> 
+> ### ** Examples
+> 
+> # multiregion xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/multiregion.xlsx", 
++                              package = "XLConnect")
+> 
+> template <- "template-ws.xlsx"
+> file.copy(demoExcelFile, template) 
+[1] TRUE
+> 
+> # Write single data.frame to a named region in an existing file
+> writeNamedRegionToFile(template, name = "Iris", iris)
+> 
+> # Write to a new file, defining the sheet and named region as we write.
+> # Format according to XLConnect defaults
+> writeNamedRegionToFile("iris.xlsx", name = "Iris", data = iris,
++                        formula = "IrisData!$C$4", 
++                        styleAction = "XLCONNECT")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("writeWorksheet-methods")
+> ### * writeWorksheet-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: writeWorksheet-methods
+> ### Title: Writing data to worksheets
+> ### Aliases: writeWorksheet writeWorksheet-methods
+> ###   writeWorksheet,workbook,ANY,character-method
+> ###   writeWorksheet,workbook,ANY,numeric-method
+> ### Keywords: methods IO
+> 
+> ### ** Examples
+> 
+> # Load workbook (create if not existing)
+> wb <- loadWorkbook("writeWorksheet.xlsx", create = TRUE)
+> 
+> # Create a worksheet called 'CO2'
+> createSheet(wb, name = "CO2")
+> 
+> # Write built-in data set 'CO2' to the worksheet created above;
+> # offset from the top left corner and with default header = TRUE
+> writeWorksheet(wb, CO2, sheet = "CO2", startRow = 4, startCol = 2)
+> 
+> # Save workbook (this actually writes the file to disk)
+> saveWorkbook(wb)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("writeWorksheetToFile")
+> ### * writeWorksheetToFile
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: writeWorksheetToFile
+> ### Title: Writing data to worksheets in an Excel file (wrapper function)
+> ### Aliases: writeWorksheetToFile
+> ### Keywords: IO
+> 
+> ### ** Examples
+> 
+> # multiregion xlsx file from demoFiles subfolder of package XLConnect
+> demoExcelFile <- system.file("demoFiles/multiregion.xlsx",
++                              package = "XLConnect")
+> 
+> # create a copy of the template
+> template <- "template-ws.xlsx"
+> file.copy(demoExcelFile, template) 
+[1] FALSE
+> 
+> # Write single data.frame to a specified location in an existing file
+> writeWorksheetToFile(template, data=iris, sheet="FirstSheet",
++                      startRow=9, startCol = 9)
+> 
+> # create a copy of the template
+> template <- "template-multi-ws.xlsx"
+> 
+> # Write a few copies of the data.frame all over a new file
+> writeWorksheetToFile(template, data = list(i1 = iris, i2 = iris, i3 = iris),
++                      sheet = c("FirstSheet", "SecondSheet", "FirstSheet"),
++                      startRow = c(1,101,201), startCol = c(1,11,21))
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("xlcDump")
+> ### * xlcDump
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: xlcDump
+> ### Title: Dumping data sets to Excel files
+> ### Aliases: xlcDump
+> ### Keywords: utilities file
+> 
+> ### ** Examples
+> 
+> require(datasets)
+> xlcDump(c("airquality", "CO2", "iris", "PlantGrowth", "swiss"),
++         file = "myDump.xlsx", pos = "package:datasets")
+ airquality         CO2        iris PlantGrowth       swiss 
+       TRUE        TRUE        TRUE        TRUE        TRUE 
+> xlcRestore(file = "myDump.xlsx", overwrite = TRUE)
+ airquality         CO2        iris PlantGrowth       swiss 
+       TRUE        TRUE        TRUE        TRUE        TRUE 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("xlcEdit")
+> ### * xlcEdit
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: xlcEdit
+> ### Title: Editing data sets in an Excel file editor
+> ### Aliases: xlcEdit
+> ### Keywords: utilities misc
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D myObj = mtcars
+> ##D xlcEdit(myObj)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("xlcFreeMemory")
+> ### * xlcFreeMemory
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: xlcFreeMemory
+> ### Title: Freeing Java Virtual Machine memory
+> ### Aliases: xlcFreeMemory
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> xlcFreeMemory()
+> 
+> 
+> 
+> cleanEx()
+> nameEx("xlcMemoryReport")
+> ### * xlcMemoryReport
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: xlcMemoryReport
+> ### Title: Reporting free Java Virtual Machine memory
+> ### Aliases: xlcMemoryReport
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> xlcMemoryReport()
+Amount of free memory in the Java Virtual Machine (JVM):  347.5397 MB
+> 
+> 
+> 
+> cleanEx()
+> nameEx("xlcRestore")
+> ### * xlcRestore
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: xlcRestore
+> ### Title: Restoring objects from Excel files
+> ### Aliases: xlcRestore
+> ### Keywords: utilities file
+> 
+> ### ** Examples
+> 
+> require(datasets)
+> xlcDump(c("airquality", "CO2", "iris", "PlantGrowth", "swiss"),
++         file = "myDump.xlsx", pos = "package:datasets")
+ airquality         CO2        iris PlantGrowth       swiss 
+      FALSE       FALSE       FALSE       FALSE       FALSE 
+> xlcRestore(file = "myDump.xlsx", overwrite = TRUE)
+ airquality         CO2        iris PlantGrowth       swiss 
+       TRUE        TRUE        TRUE        TRUE        TRUE 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  34.78 0.804 22.369 0 0.008 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

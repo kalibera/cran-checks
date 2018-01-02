@@ -1,0 +1,883 @@
+
+R Under development (unstable) (2018-01-02 r74022) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "TTR"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('TTR')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("ADX")
+> ### * ADX
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ADX
+> ### Title: Welles Wilder's Directional Movement Index
+> ### Aliases: ADX DI DX
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> dmi.adx <- ADX(ttrc[,c("High","Low","Close")])
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ATR")
+> ### * ATR
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ATR
+> ### Title: True Range / Average True Range
+> ### Aliases: ATR TR
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> atr <- ATR(ttrc[,c("High","Low","Close")], n=14)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("CCI")
+> ### * CCI
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: CCI
+> ### Title: Commodity Channel Index
+> ### Aliases: CCI
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> cci <- CCI(ttrc[,c("High","Low","Close")])
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("CLV")
+> ### * CLV
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: CLV
+> ### Title: Close Location Value
+> ### Aliases: CLV
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> clv <- CLV(ttrc[,c("High","Low","Close")])
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("CMF")
+> ### * CMF
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: CMF
+> ### Title: Chaikin Money Flow
+> ### Aliases: CMF
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> cmf <- CMF(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("CMO")
+> ### * CMO
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: CMO
+> ### Title: Chande Momentum Oscillator
+> ### Aliases: CMO
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> cmo <- CMO(ttrc[,"Close"])
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("DPO")
+> ### * DPO
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: DPO
+> ### Title: De-Trended Price Oscillator
+> ### Aliases: DPO
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> priceDPO <- DPO(ttrc[,"Close"])
+> volumeDPO <- DPO(ttrc[,"Volume"])
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("DVI")
+> ### * DVI
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: DVI
+> ### Title: DV Intermediate Oscillator
+> ### Aliases: DVI
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> dvi <- DVI(ttrc[,"Close"])
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("DonchianChannel")
+> ### * DonchianChannel
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: DonchianChannel
+> ### Title: Donchian Channel
+> ### Aliases: DonchianChannel Donchian
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> dc <- DonchianChannel( ttrc[,c("High","Low")] )
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("EMV")
+> ### * EMV
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: EMV
+> ### Title: Arms' Ease of Movement Value
+> ### Aliases: EMV
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> emv <- EMV(ttrc[,c("High","Low")], ttrc[,"Volume"])
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("GMMA")
+> ### * GMMA
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: GMMA
+> ### Title: Guppy Multiple Moving Averages
+> ### Aliases: GMMA Guppy guppy
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> gmma <- GMMA(ttrc[,"Close"])
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("KST")
+> ### * KST
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: KST
+> ### Title: Know Sure Thing
+> ### Aliases: KST
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> kst <- KST(ttrc[,"Close"])
+> 
+> kst4MA <- KST(ttrc[,"Close"],
++   maType=list(list(SMA),list(EMA),list(DEMA),list(WMA)))
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("MACD")
+> ### * MACD
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: MACD
+> ### Title: MACD Oscillator
+> ### Aliases: MACD
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> 
+> macd  <- MACD( ttrc[,"Close"], 12, 26, 9, maType="EMA" )
+> macd2 <- MACD( ttrc[,"Close"], 12, 26, 9,
++          maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA)) )
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("MFI")
+> ### * MFI
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: MFI
+> ### Title: Money Flow Index
+> ### Aliases: MFI moneyFlow
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> mfi <- MFI(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("MovingAverages")
+> ### * MovingAverages
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: SMA
+> ### Title: Moving Averages
+> ### Aliases: SMA MovingAverages EMA WMA DEMA GD T3 EVWMA ZLEMA VWAP VWMA
+> ###   VMA MA EMA DEMA WMA EVWMA ZLEMA VWAP VMA HMA ALMA
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> ema.20 <-   EMA(ttrc[,"Close"], 20)
+> sma.20 <-   SMA(ttrc[,"Close"], 20)
+> dema.20 <-  DEMA(ttrc[,"Close"], 20)
+> evwma.20 <- EVWMA(ttrc[,"Close"], ttrc[,"Volume"], 20)
+> zlema.20 <- ZLEMA(ttrc[,"Close"], 20)
+> alma <- ALMA(ttrc[,"Close"])
+> hma <- HMA(ttrc[,"Close"])
+> 
+> ## Example of Tim Tillson's T3 indicator
+> T3 <- function(x, n=10, v=1) DEMA(DEMA(DEMA(x,n,v),n,v),n,v)
+> t3 <- T3(ttrc[,"Close"])
+> 
+> ## Example of short-term instability of EMA
+> ## (and other indicators mentioned above)
+> x <- rnorm(100)
+> tail( EMA(x[90:100],10), 1 )
+[1] 0.06642909
+> tail( EMA(x[70:100],10), 1 )
+[1] -0.1724048
+> tail( EMA(x[50:100],10), 1 )
+[1] -0.1739069
+> tail( EMA(x[30:100],10), 1 )
+[1] -0.1739221
+> tail( EMA(x[10:100],10), 1 )
+[1] -0.1739224
+> tail( EMA(x[ 1:100],10), 1 )
+[1] -0.1739224
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("OBV")
+> ### * OBV
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: OBV
+> ### Title: On Balance Volume (OBV)
+> ### Aliases: OBV
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> obv <- OBV(ttrc[,"Close"], ttrc[,"Volume"])
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("RSI")
+> ### * RSI
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: RSI
+> ### Title: Relative Strength Index
+> ### Aliases: RSI
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> price <- ttrc[,"Close"]
+> 
+> # Default case
+> rsi <- RSI(price)
+> 
+> # Case of one 'maType' for both MAs
+> rsiMA1 <- RSI(price, n=14, maType="WMA", wts=ttrc[,"Volume"])
+> 
+> # Case of two different 'maType's for both MAs
+> rsiMA2 <- RSI(price, n=14, maType=list(maUp=list(EMA,ratio=1/5),
++              maDown=list(WMA,wts=1:10)))
+Warning in formals(fun) : argument is not a function
+Warning in formals(fun) : argument is not a function
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("SAR")
+> ### * SAR
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: SAR
+> ### Title: Parabolic Stop-and-Reverse
+> ### Aliases: SAR
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> sar <- SAR(ttrc[,c("High","Low")])
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("TDI")
+> ### * TDI
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: TDI
+> ### Title: Trend Detection Index
+> ### Aliases: TDI
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> tdi <- TDI(ttrc[,"Close"], n=30)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("TRIX")
+> ### * TRIX
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: TRIX
+> ### Title: Triple Smoothed Exponential Oscillator
+> ### Aliases: TRIX
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> trix  <- TRIX(ttrc[,"Close"])
+> trix4 <- TRIX(ttrc[,"Close"],
++ maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA), list(DEMA)))
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("TTR")
+> ### * TTR
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: TTR
+> ### Title: Functions to create Technical Trading Rules (TTR)
+> ### Aliases: TTR TTR-package
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> 
+> # Bollinger Bands
+> bbands <- BBands( ttrc[,c("High","Low","Close")] )
+> 
+> # Directional Movement Index
+> adx <- ADX(ttrc[,c("High","Low","Close")])
+> 
+> # Moving Averages
+> ema <- EMA(ttrc[,"Close"], n=20)
+> sma <- SMA(ttrc[,"Close"], n=20)
+> 
+> # MACD
+> macd <- MACD( ttrc[,"Close"] )
+> 
+> # RSI
+> rsi <- RSI(ttrc[,"Close"])
+> 
+> # Stochastics
+> stochOsc <- stoch(ttrc[,c("High","Low","Close")])
+> 
+> ### Note: you must have a working internet connection
+> ### for the examples below to work!
+> 
+> # Fetch U.S. symbols from the internet
+> nyseSymbols <- stockSymbols("NYSE")
+Fetching NYSE symbols...
+> 
+> # Fetch Yahoo! Finance data from the internet
+> ge <- getYahooData("GE", 19990404, 20050607, adjust = FALSE)
+Warning: TTR::getYahooData is deprecated and will be removed in a future release.
+Please use quantmod::getSymbols instead.
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+ 52 32495   52 17109    0     0  54897      0 --:--:-- --:--:-- --:--:-- 54897100 32495  100 32495    0     0  92082      0 --:--:-- --:--:-- --:--:--  366k
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("VHF")
+> ### * VHF
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: VHF
+> ### Title: Vertical Horizontal Filter
+> ### Aliases: VHF
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> vhf.close <- VHF(ttrc[,"Close"])
+> vhf.hilow <- VHF(ttrc[,c("High","Low","Close")])
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("WPR")
+> ### * WPR
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: WPR
+> ### Title: William's %R
+> ### Aliases: WPR
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> stochOsc <- stoch(ttrc[,c("High","Low","Close")])
+> stochWPR<- WPR(ttrc[,c("High","Low","Close")])
+> 
+> plot(tail(stochOsc[,"fastK"], 100), type="l",
++     main="Fast %K and Williams %R", ylab="",
++     ylim=range(cbind(stochOsc, stochWPR), na.rm=TRUE) )
+> lines(tail(stochWPR, 100), col="blue")
+> lines(tail(1-stochWPR, 100), col="red", lty="dashed")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("WebData")
+> ### * WebData
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: stockSymbols
+> ### Title: Fetch Internet Data
+> ### Aliases: stockSymbols WebData getYahooData getYahooData
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> ### Note: you must have a working internet
+> ### connection for these examples to work!
+> ge <- getYahooData("GE", 19990404, 20050607, adjust = FALSE)
+Warning: TTR::getYahooData is deprecated and will be removed in a future release.
+Please use quantmod::getSymbols instead.
+100 32495  100 32495    0     0  91097      0 --:--:-- --:--:-- --:--:-- 91097
+> 
+> nyse.symbols <- stockSymbols("NYSE")
+Fetching NYSE symbols...
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ZigZag")
+> ### * ZigZag
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ZigZag
+> ### Title: Zig Zag
+> ### Aliases: ZigZag zigzag
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> ## Get Data and Indicator ##
+> data(ttrc)
+> zz <- ZigZag( ttrc[,c("High", "Low")], change=20 )
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("aroon")
+> ### * aroon
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: aroon
+> ### Title: Aroon
+> ### Aliases: aroon
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> ## Get Data and Indicator ##
+> data(ttrc)
+> trend <- aroon( ttrc[,c("High", "Low")], n=20 )
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("bollingerBands")
+> ### * bollingerBands
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: BBands
+> ### Title: Bollinger Bands
+> ### Aliases: BBands bollingerBands
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> ## The examples below show the differences between using a
+> ## High-Low-Close series, and just a close series when
+> ## calculating Bollinger Bands.
+> data(ttrc)
+> bbands.HLC <- BBands( ttrc[,c("High","Low","Close")] )
+> bbands.close <- BBands( ttrc[,"Close"] )
+> 
+> 
+> 
+> cleanEx()
+> nameEx("chaikinAD")
+> ### * chaikinAD
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: chaikinAD
+> ### Title: Chaikin Accumulation / Distribution
+> ### Aliases: chaikinAD
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> ad <- chaikinAD(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("chaikinVolatility")
+> ### * chaikinVolatility
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: chaikinVolatility
+> ### Title: Chaikin Volatility
+> ### Aliases: chaikinVolatility
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> volatility <- chaikinVolatility(ttrc[,c("High","Low")])
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("changes")
+> ### * changes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ROC
+> ### Title: Rate of Change / Momentum
+> ### Aliases: ROC changes momentum momentum
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> roc <- ROC(ttrc[,"Close"])
+> mom <- momentum(ttrc[,"Close"])
+> 
+> 
+> 
+> cleanEx()
+> nameEx("priceBands")
+> ### * priceBands
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: PBands
+> ### Title: Construct (optionally further smoothed and centered ) volatility
+> ###   bands around prices
+> ### Aliases: PBands priceBands
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+>   data(ttrc)
+>   pbands.close <- PBands( ttrc[,"Close"] )
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("stochastics")
+> ### * stochastics
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: stoch
+> ### Title: Stochastic Oscillator / Stochastic Momentum Index
+> ### Aliases: stoch stochastics stochastic SMI %K %D SMI
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> stochOSC <- stoch(ttrc[,c("High","Low","Close")])
+> stochWPR <- WPR(ttrc[,c("High","Low","Close")])
+> 
+> plot(tail(stochOSC[,"fastK"], 100), type="l",
++     main="Fast %K and Williams %R", ylab="",
++     ylim=range(cbind(stochOSC, stochWPR), na.rm=TRUE) )
+> lines(tail(stochWPR, 100), col="blue")
+> lines(tail(1-stochWPR, 100), col="red", lty="dashed")
+> 
+> stoch2MA <- stoch( ttrc[,c("High","Low","Close")],
++     maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA)) )
+> 
+> SMI3MA <- SMI(ttrc[,c("High","Low","Close")],
++     maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA)) )
+> 
+> stochRSI <- stoch( RSI(ttrc[,"Close"]) )
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ttrc")
+> ### * ttrc
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ttrc
+> ### Title: Technical Trading Rule Composite data
+> ### Aliases: ttrc
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> plot(tail(ttrc[,"Close"],100), type="l")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ultimateOscillator")
+> ### * ultimateOscillator
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ultimateOscillator
+> ### Title: The Ultimate Oscillator
+> ### Aliases: ultimateOscillator
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> ult.osc <- ultimateOscillator(ttrc[,c("High","Low","Close")])
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("volatility")
+> ### * volatility
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: volatility
+> ### Title: Volatility
+> ### Aliases: volatility garman.klass parkinson rogers.satchell gk.yz
+> ###   yang.zhang
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> ohlc <- ttrc[,c("Open","High","Low","Close")]
+> vClose <- volatility(ohlc, calc="close")
+> vClose0 <- volatility(ohlc, calc="close", mean0=TRUE)
+> vGK <- volatility(ohlc, calc="garman")
+> vParkinson <- volatility(ohlc, calc="parkinson")
+> vRS <- volatility(ohlc, calc="rogers")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("williamsAD")
+> ### * williamsAD
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: williamsAD
+> ### Title: Williams Accumulation / Distribution
+> ### Aliases: williamsAD
+> ### Keywords: ts
+> 
+> ### ** Examples
+> 
+> 
+> data(ttrc)
+> ad <- williamsAD(ttrc[,c("High","Low","Close")])
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  4.472 0.096 8.757 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

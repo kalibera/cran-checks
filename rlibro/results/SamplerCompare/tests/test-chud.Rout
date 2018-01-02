@@ -1,0 +1,53 @@
+
+R Under development (unstable) (2018-01-02 r74022) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # From SamplerCompare, (c) 2010 Madeleine Thompson
+> 
+> # This tests the chud (Cholesky update) and chdd (Cholesky downdate)
+> # functions in chud.R.
+> 
+> library(SamplerCompare)
+Loading required package: mvtnorm
+> 
+> ### test chud ###
+> 
+> # Define a matrix R and a vector x.  Compute Q so that:
+> #   t(Q) %*% Q # = t(R) %*% R + x %*% t(x)
+> # with both chud and by doing a Cholesky factorization.  Fail if
+> # the two methods do not compute the same answer.
+> 
+> R <- array(c(1, 0, 2, 1), c(2,2))
+> x <- array(c(0.5, 0.8), c(2,1))
+> 
+> 
+> Q <- chud(R,x)
+> Q.real <- chol(t(R) %*% R + x %*% t(x))
+> 
+> stopifnot(max(abs(Q-Q.real)) < 1e-8)
+> 
+> ### test chdd ###
+> 
+> # Use chdd to invert the previous operation on Q.  Fail if we do
+> # not get the original R back.
+> 
+> R2 <- chdd(Q, x)
+> 
+> stopifnot(max(abs(R-R2)) < 1e-8)
+> 
+> proc.time()
+   user  system elapsed 
+  0.232   0.028   0.253 

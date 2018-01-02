@@ -1,0 +1,97 @@
+
+R Under development (unstable) (2018-01-02 r74022) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # Run all unit tests in installed directory unitTests
+> # 
+> # Author: Renaud Gaujoux
+> ###############################################################################
+> 
+> pkgmaker::utest('package:rngtools', quiet=FALSE)
+#########################
+Loading required package: pkgmaker
+Loading required package: registry
+
+Attaching package: 'pkgmaker'
+
+The following objects are masked from 'package:base':
+
+    isFALSE, isNamespaceLoaded
+
+Running unit tests in: '/homero/tomas/cran/rlibro/lib/rngtools/tests'
+Using unit test framework: RUnit
+Using RUnit framework provider: RUnit
+List of 6
+ $ name          : chr "package:rngtools"
+ $ dirs          : chr "/homero/tomas/cran/rlibro/lib/rngtools/tests"
+ $ testFileRegexp: chr "^runit.*\\.[rR]$"
+ $ testFuncRegexp: chr "^test\\."
+ $ rngKind       : chr "Marsaglia-Multicarry"
+ $ rngNormalKind : chr "Kinderman-Ramage"
+ - attr(*, "class")= chr "RUnitTestSuite"
+
+
+Executing test function test.getRNG  ...  done successfully.
+
+
+
+Executing test function test.setRNG  ... Restoring RNG settings probably due to an error in setRNG
+Error : setRNG - Invalid numeric seed [2, 3]: '.Random.seed' has wrong length.
+In addition: Warning message:
+In dir.create(opath, recursive = TRUE) :
+  cannot create dir '/homero/tomas/cran/rlibro/lib/rngtools/tests-results', reason 'Read-only file system'
+Restoring RNG settings probably due to an error in setRNG
+Error : setRNG - Invalid RNG kind [1234L]: '.Random.seed[1]' is not a valid integer, so ignored.
+Restoring RNG settings probably due to an error in setRNG
+Error : setRNG - Invalid RNG kind [123L]: '.Random.seed[1]' is not a valid RNG kind so ignored.
+ done successfully.
+
+
+
+Executing test function test.RNGseq  ...  done successfully.
+
+
+
+Executing test function test.RNGseq_seed  ... Error in RNGseq_seed(NA) : 
+  RNGseq_seed - Invalid seed value: should be a numeric or NULL
+In addition: Warning messages:
+1: In runif(1) : '.Random.seed[1]' is not a valid integer, so ignored
+2: In runif(1) : '.Random.seed[1]' is not a valid RNG kind so ignored
+ done successfully.
+
+
+
+Executing test function test.RNGdigest  ...  done successfully.
+
+
+
+Executing test function test.RNGtype  ... Restoring RNG settings probably due to an error in setRNG
+Error : setRNG - Invalid numeric seed [2, 3]: '.Random.seed' has wrong length.
+Restoring RNG settings probably due to an error in setRNG
+Error : setRNG - Invalid RNG kind [123L]: '.Random.seed[1]' is not a valid RNG kind so ignored.
+Restoring RNG settings probably due to an error in setRNG
+Error : setRNG - Invalid RNG kind [1234L]: '.Random.seed[1]' is not a valid integer, so ignored.
+ done successfully.
+
+------------------- UNIT TEST SUMMARY ---------------------
+
+Error in file(file, ifelse(append, "a", "w")) : 
+  cannot open the connection
+Calls: <Anonymous> ... utest -> .local -> printTextProtocol -> cat -> file
+In addition: Warning message:
+In file(file, ifelse(append, "a", "w")) :
+  cannot open file '/homero/tomas/cran/rlibro/lib/rngtools/tests-results/utest.package_rngtools.Summary.txt': No such file or directory
+Execution halted
