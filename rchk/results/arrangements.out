@@ -1,0 +1,37 @@
+Package arrangements version 1.0.1
+Package built using 74111/R 3.5.0; x86_64-pc-linux-gnu; 2018-01-12 15:48:24 UTC; unix   
+Checked with rchk version 63f79d910f5835174fcaa5a0a7d2409348f7d2ac
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+Suspicious call (two or more unprotected arguments) to Rf_defineVar at next_asc_partitions arrangements/src/partitions.c:162
+Suspicious call (two or more unprotected arguments) to Rf_defineVar at next_desc_partitions arrangements/src/partitions.c:324
+Suspicious call (two or more unprotected arguments) to Rf_defineVar at next_desc_partitions arrangements/src/partitions.c:325
+
+Function next_asc_partitions
+  [UP] unprotected variable as while calling allocating function Rf_findVarInFrame(?,S:k) arrangements/src/partitions.c:48
+  [UP] unprotected variable as while calling allocating function Rf_install arrangements/src/partitions.c:48
+  [UP] unprotected variable ks while calling allocating function Rf_allocVector arrangements/src/partitions.c:54
+  [UP] unprotected variable ks while calling allocating function Rf_defineVar(S:a,V,?) arrangements/src/partitions.c:55
+  [UP] unprotected variable ks while calling allocating function Rf_install arrangements/src/partitions.c:55
+
+Function next_desc_partitions
+  [UP] unprotected variable as while calling allocating function Rf_findVarInFrame(?,S:h) arrangements/src/partitions.c:208
+  [UP] unprotected variable as while calling allocating function Rf_install arrangements/src/partitions.c:208
+  [UP] unprotected variable as while calling allocating function Rf_findVarInFrame(?,S:k) arrangements/src/partitions.c:209
+  [UP] unprotected variable as while calling allocating function Rf_install arrangements/src/partitions.c:209
+  [UP] unprotected variable hs while calling allocating function Rf_findVarInFrame(?,S:k) arrangements/src/partitions.c:209
+  [UP] unprotected variable hs while calling allocating function Rf_install arrangements/src/partitions.c:209
+  [UP] unprotected variable hs while calling allocating function Rf_allocVector arrangements/src/partitions.c:215
+  [UP] unprotected variable ks while calling allocating function Rf_allocVector arrangements/src/partitions.c:215
+  [UP] unprotected variable hs while calling allocating function Rf_defineVar(S:a,V,?) arrangements/src/partitions.c:216
+  [UP] unprotected variable hs while calling allocating function Rf_install arrangements/src/partitions.c:216
+  [UP] unprotected variable ks while calling allocating function Rf_defineVar(S:a,V,?) arrangements/src/partitions.c:216
+  [UP] unprotected variable ks while calling allocating function Rf_install arrangements/src/partitions.c:216
+  [UP] unprotected variable ks while calling allocating function Rf_asInteger arrangements/src/partitions.c:227
+
+Function next_multiset_combinations
+  [UP] unprotected variable ms while calling allocating function Rf_findVarInFrame(?,S:a) arrangements/src/multiset_combinations.c:57
+  [UP] unprotected variable ms while calling allocating function Rf_install arrangements/src/multiset_combinations.c:57
+  [UP] unprotected variable as while calling allocating function Rf_allocVector arrangements/src/multiset_combinations.c:64
+  [UP] unprotected variable as while calling allocating function Rf_defineVar(S:m,V,?) arrangements/src/multiset_combinations.c:65
+  [UP] unprotected variable as while calling allocating function Rf_install arrangements/src/multiset_combinations.c:65
