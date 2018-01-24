@@ -1,10 +1,11 @@
-* using log directory ‘/home/tomas/cran/rlibro/check/SamplerCompare.Rcheck’
-* using R Under development (unstable) (2018-01-02 r74022)
+* using log directory ‘/home/tomas/cran/rlibro/check/cancensus.Rcheck’
+* using R Under development (unstable) (2018-01-24 r74156)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* checking for file ‘SamplerCompare/DESCRIPTION’ ... OK
+* checking for file ‘cancensus/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘SamplerCompare’ version ‘1.2.7’
+* this is package ‘cancensus’ version ‘0.1.6’
+* package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -13,7 +14,7 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘SamplerCompare’ can be installed ... OK
+* checking whether package ‘cancensus’ can be installed ... OK
 * checking package directory ... OK
 * checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -42,42 +43,34 @@
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
-* checking line endings in C/C++/Fortran sources/headers ... OK
-* checking line endings in Makefiles ... OK
-* checking compilation flags in Makevars ... OK
-* checking for GNU extensions in Makefiles ... OK
-* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
-* checking compiled code ... NOTE
-Note: information on .o files is not available
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
-* checking examples ... OK
-* checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... ERROR
-  Running ‘test-chud.R’
-  Running ‘test-gradients.R’
-  Running ‘test-indep-mh.R’
-Running the tests in ‘tests/test-indep-mh.R’ failed.
-Last 13 lines of output:
-  +   rcmd <- file.path(R.home(), paste("bin", Sys.getenv("R_ARCH"), sep=""),
-  +                     "Rcmd SHLIB indep-mh-sampler.c -lRblas 2>&1")
-  + } else {
-  +   rcmd <- file.path(R.home(), "bin", "R CMD SHLIB indep-mh-sampler.c")
-  + }
-  > 
-  > r <- system(rcmd)
-  gcc -I"/home/tomas/cran/rlibro/build/include" -DNDEBUG   -I/homero/tomas/cran/rlibro/lib/SamplerCompare/include   -fpic  -g -O2  -c indep-mh-sampler.c -o indep-mh-sampler.o
-  Assembler messages:
-  Fatal error: can't create indep-mh-sampler.o: Read-only file system
-  /home/tomas/cran/rlibro/build/etc/Makeconf:159: recipe for target 'indep-mh-sampler.o' failed
-  make: *** [indep-mh-sampler.o] Error 1
-  > stopifnot(r==0)
-  Error: r == 0 is not TRUE
-  Execution halted
+* checking examples ... ERROR
+Running examples in ‘cancensus-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: child_census_vectors
+> ### Title: List all child variables from vector hierarchical based on a
+> ###   (sub-)list of census variables returned by 'list_census_vectors' or
+> ###   'search_census_vectors'.
+> ### Aliases: child_census_vectors
+> 
+> ### ** Examples
+> 
+> library(dplyr, warn.conflicts = FALSE)
+> 
+> list_census_vectors("CA16") %>%
++   filter(vector == "v_CA16_4092") %>%
++   child_census_vectors(TRUE)
+Warning in gzfile(file, "wb") :
+  cannot open compressed file '/homero/tomas/cran/rlibro/lib/cancensus/cache/CA16_vectors.rda', probable reason 'Read-only file system'
+Error in gzfile(file, "wb") : cannot open the connection
+Calls: %>% ... eval -> eval -> list_census_vectors -> save -> gzfile
+Execution halted
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
-* checking running R code from vignettes ... OK
+* checking running R code from vignettes ... NONE
 * checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 ERROR, 1 NOTE
+Status: 1 ERROR

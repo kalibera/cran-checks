@@ -1,0 +1,105 @@
+
+R Under development (unstable) (2018-01-24 r74156) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "cancensus"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('cancensus')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("as_census_region_list")
+> ### * as_census_region_list
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: as_census_region_list
+> ### Title: Convert a (suitably filtered) data frame from
+> ###   'list_census_regions' to a list suitable for passing to 'get_census'.
+> ### Aliases: as_census_region_list
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D library(dplyr, warn.conflicts = FALSE)
+> ##D 
+> ##D # Query the CensusMapper API for the total occupied dwellings
+> ##D # of 20 random Census Subdivisions, in Census 2016.
+> ##D regions <- list_census_regions("CA16") %>%
+> ##D   filter(level == "CSD") %>%
+> ##D   sample_n(20) %>%
+> ##D   as_census_region_list()
+> ##D 
+> ##D occupied <- get_census("CA16", regions = regions,
+> ##D                             vectors = c("v_CA16_408"),
+> ##D                             level = "Regions")
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("census_vectors")
+> ### * census_vectors
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: census_vectors
+> ### Title: Return Census variable names and labels as a tidy data frame
+> ###   (Deprecated)
+> ### Aliases: census_vectors
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # Query census data with truncated labels:
+> ##D census_data <- get_census(dataset='CA16', regions=list(CMA="59933"),
+> ##D                           vectors=c("v_CA16_408","v_CA16_409","v_CA16_410"),
+> ##D                           level='CSD', geo_format = "sf", labels="short")
+> ##D 
+> ##D # Get details for truncated vectors:
+> ##D census_vectors(census_data)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("child_census_vectors")
+> ### * child_census_vectors
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: child_census_vectors
+> ### Title: List all child variables from vector hierarchical based on a
+> ###   (sub-)list of census variables returned by 'list_census_vectors' or
+> ###   'search_census_vectors'.
+> ### Aliases: child_census_vectors
+> 
+> ### ** Examples
+> 
+> library(dplyr, warn.conflicts = FALSE)
+> 
+> list_census_vectors("CA16") %>%
++   filter(vector == "v_CA16_4092") %>%
++   child_census_vectors(TRUE)
+Warning in gzfile(file, "wb") :
+  cannot open compressed file '/homero/tomas/cran/rlibro/lib/cancensus/cache/CA16_vectors.rda', probable reason 'Read-only file system'
+Error in gzfile(file, "wb") : cannot open the connection
+Calls: %>% ... eval -> eval -> list_census_vectors -> save -> gzfile
+Execution halted
