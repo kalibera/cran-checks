@@ -1,5 +1,5 @@
 * using log directory ‘/home/tomas/cran/rcnst/check/SpaDES.core.Rcheck’
-* using R Under development (unstable) (2018-01-28 r74177)
+* using R Under development (unstable) (2018-01-29 r74183)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘SpaDES.core/DESCRIPTION’ ... OK
@@ -74,31 +74,31 @@ Last 13 lines of output:
 * checking re-building of vignette outputs ... WARNING
 Error in re-building vignettes:
   ...
-        else {
-            spreadsDT <- data.table(spreads)
-            if (returnDistances & allowOverlap) {
-                pixVal <- spreadsDT[, min(dists), by = indices]
-                message("returnDistances is TRUE, allowOverlap is TRUE, but returnIndices is FALSE; ", 
-                  "returning minimum distance raster.")
-            }
-            else {
-                pixVal <- spreadsDT[, sum(id), by = indices]
-            }
-            landscape[pixVal$indices] <- pixVal$V1
-        }
-    }
-    else {
-        landscape[wh] <- spreads[wh]
-        if (exists("potentials")) 
-            if (NROW(potentials) > 0) 
-                landscape[potentials[, 1L]] <- spreads[potentials[, 
-                  2L]]
-    }
-    return(landscape)
-}
-S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature RasterLayer has this body.
-Fatal error: compiler constants were modified!
-
+25: withCallingHandlers(withVisible(eval(expr, envir, enclos)), warning = wHandler,     error = eHandler, message = mHandler)
+26: handle(ev <- withCallingHandlers(withVisible(eval(expr, envir,     enclos)), warning = wHandler, error = eHandler, message = mHandler))
+27: timing_fn(handle(ev <- withCallingHandlers(withVisible(eval(expr,     envir, enclos)), warning = wHandler, error = eHandler, message = mHandler)))
+28: evaluate_call(expr, parsed$src[[i]], envir = envir, enclos = enclos,     debug = debug, last = i == length(out), use_try = stop_on_error !=         2L, keep_warning = keep_warning, keep_message = keep_message,     output_handler = output_handler, include_timing = include_timing)
+29: evaluate::evaluate(...)
+30: evaluate(code, envir = env, new_device = FALSE, keep_warning = !isFALSE(options$warning),     keep_message = !isFALSE(options$message), stop_on_error = if (options$error &&         options$include) 0L else 2L, output_handler = knit_handlers(options$render,         options))
+31: in_dir(input_dir(), evaluate(code, envir = env, new_device = FALSE,     keep_warning = !isFALSE(options$warning), keep_message = !isFALSE(options$message),     stop_on_error = if (options$error && options$include) 0L else 2L,     output_handler = knit_handlers(options$render, options)))
+32: block_exec(params)
+33: call_block(x)
+34: process_group.block(group)
+35: process_group(group)
+36: withCallingHandlers(if (tangle) process_tangle(group) else process_group(group),     error = function(e) {        setwd(wd)        cat(res, sep = "\n", file = output %n% "")        message("Quitting from lines ", paste(current_lines(i),             collapse = "-"), " (", knit_concord$get("infile"),             ") ")    })
+37: process_file(text, output)
+38: knit(input, text = text, envir = envir, encoding = encoding,     quiet = quiet)
+39: knit2html(..., force_v1 = TRUE)
+40: (if (grepl("\\.[Rr]md$", file)) knit2html_v1 else if (grepl("\\.[Rr]rst$",     file)) knit2pandoc else knit)(file, encoding = encoding,     quiet = quiet, envir = globalenv())
+41: vweave(...)
+42: engine$weave(file, quiet = quiet, encoding = enc)
+43: doTryCatch(return(expr), name, parentenv, handler)
+44: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+45: tryCatchList(expr, classes, parentenv, handlers)
+46: tryCatch({    engine$weave(file, quiet = quiet, encoding = enc)    setwd(startdir)    find_vignette_product(name, by = "weave", engine = engine)}, error = function(e) {    stop(gettextf("processing vignette '%s' failed with diagnostics:\n%s",         file, conditionMessage(e)), domain = NA, call. = FALSE)})
+47: buildVignettes(dir = "/home/tomas/cran/rcnst/check/SpaDES.core.Rcheck/vign_test/SpaDES.core")
+An irrecoverable exception occurred. R is aborting now ...
+Segmentation fault (core dumped)
 
 * checking PDF version of manual ... OK
 * DONE
