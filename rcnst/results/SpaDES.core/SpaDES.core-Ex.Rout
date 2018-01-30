@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2018-01-29 r74183) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-01-30 r74185) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -23,13 +23,6 @@ Type 'q()' to quit R.
 > library('SpaDES.core')
 Loading required package: quickPlot
 Loading required package: reproducible
-
-Attaching package: ‘SpaDES.core’
-
-The following objects are masked from ‘package:stats’:
-
-    end, start
-
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 > base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
@@ -66,7 +59,7 @@ The following objects are masked from ‘package:stats’:
 +   #  are real data, then rerun the POM function next,
 +   #  comparing these "data" with the simulated values
 +   #  using Mean Absolute Deviation
-+   outData <- spades(Copy(mySim), .plotInitialTime = NA)
++   outData <- spades(reproducible::Copy(mySim), .plotInitialTime = NA)
 + 
 +   # Extract the "true" data, in this case, the "proportion of cells burned"
 +   # Function defined that will use landscape$Fires map from simList,
@@ -147,7 +140,7 @@ The following objects are masked from ‘package:stats’:
 +     ### data
 + 
 +     # make a copy of simList because it will possibly be altered by spades call
-+     sim1 <- Copy(sim)
++     sim1 <- reproducible::Copy(sim)
 + 
 +     # take the parameters and assign them to simList
 +     params(sim1)$fireSpread$spreadprob <- pars[1]
@@ -496,31 +489,6 @@ detaching ‘package:igraph’
 +   defineParameter("lambda", "numeric", 1.23, desc = "intrinsic rate of increase"),
 +   defineParameter("P", "numeric", 0.2, 0, 1, "probability of attack")
 + )
-> 
-> 
-> 
-> 
-> cleanEx()
-> nameEx("dwrpnorm2")
-> ### * dwrpnorm2
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: dwrpnorm2
-> ### Title: Vectorized wrapped normal density function
-> ### Aliases: dwrpnorm2
-> 
-> ### ** Examples
-> 
-> # Values for which to evaluate density
-> theta <- c(1:500) * 2 * pi / 500
-> # Compute wrapped normal density function
-> density <- c(1:500)
-> for(i in 1:500) density[i] <- dwrpnorm2(theta[i], pi, .75)
-> if (interactive()) plot(theta, density)
-> # Approximate area under density curve
-> sum(density * 2 * pi / 500)
-[1] 1
 > 
 > 
 > 
@@ -913,172 +881,87 @@ detaching ‘package:igraph’
 > mySim <- simInit(
 +    times = list(start = 2000.0, end = 2002.0, timeunit = "year"),
 +    params = list(
-+      .globals = list(stackName = "landscape", burnStats = "nPixelsBurned")
++      .globals = list(stackName = "landscape")
 +    ),
-+    modules = list("randomLandscapes", "fireSpread", "caribouMovement"),
++    modules = list("caribouMovement"),
 +    paths = list(modulePath = system.file("sampleModules", package = "SpaDES.core"))
 + )
+Loading required package: SpaDES.tools
+Loading required package: grid
+
+Attaching package: ‘grid’
+
+The following object is masked from ‘package:quickPlot’:
+
+    gpar
+
+Loading required package: raster
+Loading required package: sp
 > moduleMetadata(sim = mySim)
-$randomLandscapes
-$randomLandscapes$name
-[1] "randomLandscapes"
-
-$randomLandscapes$description
-[1] "Generate RasterStack of random maps representative of a forest landscape (DEM, forestAge, forestCover, habitatQuality, percentPine). Requires a global simulation parameter `stackName` be set."
-
-$randomLandscapes$keywords
-[1] "random map"       "random landscape"
-
-$randomLandscapes$childModules
-character(0)
-
-$randomLandscapes$authors
-[1] "Alex M Chubaty <alexander.chubaty@canada.ca> [aut, cre]" 
-[2] "Eliot J B McIntire <eliot.mcintire@canada.ca> [aut, cre]"
-
-$randomLandscapes$version
-$randomLandscapes$version$SpaDES.core
-[1] "0.1.0"
-
-$randomLandscapes$version$SpaDES.tools
-[1] "0.1.0"
-
-$randomLandscapes$version$randomLandscapes
-[1] "1.6.0"
-
-
-$randomLandscapes$spatialExtent
-class       : Extent 
-xmin        : NA 
-xmax        : NA 
-ymin        : NA 
-ymax        : NA 
-
-$randomLandscapes$timeframe
-[1] NA NA
-
-$randomLandscapes$timeunit
-[1] "year"
-
-$randomLandscapes$citation
-list()
-
-$randomLandscapes$documentation
-list()
-
-$randomLandscapes$reqdPkgs
-$randomLandscapes$reqdPkgs[[1]]
-[1] "raster"
-
-$randomLandscapes$reqdPkgs[[2]]
-[1] "RColorBrewer"
-
-$randomLandscapes$reqdPkgs[[3]]
-[1] "tkrplot"
-
-$randomLandscapes$reqdPkgs[[4]]
-[1] "RandomFields"
-
-$randomLandscapes$reqdPkgs[[5]]
-[1] "SpaDES.tools"
-
-
-$randomLandscapes$parameters
-         paramName paramClass    default        min   max
-1            inRAM    logical      FALSE       TRUE FALSE
-2               nx    numeric        100         10   500
-3               ny    numeric        100         10   500
-4        stackName  character  landscape         NA    NA
-5 .plotInitialTime    numeric start(sim) start(sim)    NA
-6    .plotInterval    numeric         NA         NA    NA
-7 .saveInitialTime    numeric         NA         NA    NA
-8    .saveInterval    numeric         NA         NA    NA
-9        .useCache    logical      FALSE init, plot    NA
-                                          paramDesc
-1            should the raster be stored in memory?
-2 size of map (number of pixels) in the x dimension
-3 size of map (number of pixels) in the y dimension
-4                           name of the RasterStack
-5                 time to schedule first plot event
-6                 time interval between plot events
-7                 time to schedule first save event
-8                 time interval between save events
-9 should the module result be cached for future use
-
-$randomLandscapes$inputObjects
-  objectName objectClass desc sourceURL other
-1       <NA>        <NA> <NA>      <NA>    NA
-
-$randomLandscapes$outputObjects
-                            objectName objectClass desc other
-1 P(sim, "randomLandscapes")$stackName RasterStack <NA>    NA
-
-
-$caribouMovement
-$caribouMovement$name
+$name
 [1] "caribouMovement"
 
-$caribouMovement$description
+$description
 [1] "Simulate caribou movement via correlated random walk."
 
-$caribouMovement$keywords
+$keywords
 [1] "caribou"                         "individual based movement model"
 [3] "correlated random walk"         
 
-$caribouMovement$childModules
+$childModules
 character(0)
 
-$caribouMovement$authors
+$authors
 [1] "Eliot J B McIntire <eliot.mcintire@canada.ca> [aut, cre]"
 
-$caribouMovement$version
-$caribouMovement$version$SpaDES.core
+$version
+$version$SpaDES.core
 [1] "0.1.0"
 
-$caribouMovement$version$SpaDES.tools
+$version$SpaDES.tools
 [1] "0.1.0"
 
-$caribouMovement$version$caribouMovement
+$version$caribouMovement
 [1] "1.6.0"
 
 
-$caribouMovement$spatialExtent
+$spatialExtent
 class       : Extent 
 xmin        : NA 
 xmax        : NA 
 ymin        : NA 
 ymax        : NA 
 
-$caribouMovement$timeframe
+$timeframe
 [1] NA NA
 
-$caribouMovement$timeunit
+$timeunit
 [1] "month"
 
-$caribouMovement$citation
+$citation
 list()
 
-$caribouMovement$documentation
+$documentation
 list()
 
-$caribouMovement$reqdPkgs
-$caribouMovement$reqdPkgs[[1]]
+$reqdPkgs
+$reqdPkgs[[1]]
 [1] "grid"
 
-$caribouMovement$reqdPkgs[[2]]
+$reqdPkgs[[2]]
 [1] "raster"
 
-$caribouMovement$reqdPkgs[[3]]
+$reqdPkgs[[3]]
 [1] "sp"
 
-$caribouMovement$reqdPkgs[[4]]
+$reqdPkgs[[4]]
 [1] "stats"
 
-$caribouMovement$reqdPkgs[[5]]
+$reqdPkgs[[5]]
 [1] "SpaDES.tools"
 
 
-$caribouMovement$parameters
+$parameters
          paramName paramClass      default          min      max
 1        stackName  character    landscape           NA       NA
 2  moveInitialTime    numeric start(si.... start(si.... end(sim)
@@ -1100,13 +983,13 @@ $caribouMovement$parameters
 8        time to schedule first save event
 9        time interval between save events
 
-$caribouMovement$inputObjects
+$inputObjects
                            objectName objectClass                         desc
 1 P(sim, "caribouMovement")$stackName RasterStack layername = "habitatQuality"
   sourceURL
 1      <NA>
 
-$caribouMovement$outputObjects
+$outputObjects
                            objectName            objectClass
 1 P(sim, "caribouMovement")$stackName            RasterStack
 2                             caribou SpatialPointsDataFrame
@@ -1114,110 +997,14 @@ $caribouMovement$outputObjects
 1 layername = "habitatQuality"
 2                         <NA>
 
-
-$fireSpread
-$fireSpread$name
-[1] "fireSpread"
-
-$fireSpread$description
-[1] "Simulate fire ignition and spread on a landscape, where spread probability varies according to percent pine. Fire size statistics are collected immediately after each burn event. Requires a global simulation parameter `stackName` be set."
-
-$fireSpread$keywords
-[1] "fire"              "percolation model" "spread algorithm" 
-
-$fireSpread$childModules
-character(0)
-
-$fireSpread$authors
-[1] "Alex M Chubaty <alexander.chubaty@canada.ca> [aut, cre]" 
-[2] "Eliot J B McIntire <eliot.mcintire@canada.ca> [aut, cre]"
-[3] "Steve Cumming <Steve.Cumming@sbf.ulaval.ca> [aut]"       
-
-$fireSpread$version
-$fireSpread$version$SpaDES.core
-[1] "0.1.0"
-
-$fireSpread$version$SpaDES.tools
-[1] "0.1.0"
-
-$fireSpread$version$fireSpread
-[1] "1.6.0"
-
-
-$fireSpread$spatialExtent
-class       : Extent 
-xmin        : NA 
-xmax        : NA 
-ymin        : NA 
-ymax        : NA 
-
-$fireSpread$timeframe
-[1] NA NA
-
-$fireSpread$timeunit
-[1] "year"
-
-$fireSpread$citation
-list()
-
-$fireSpread$documentation
-list()
-
-$fireSpread$reqdPkgs
-$fireSpread$reqdPkgs[[1]]
-[1] "methods"
-
-$fireSpread$reqdPkgs[[2]]
-[1] "raster"
-
-$fireSpread$reqdPkgs[[3]]
-[1] "RColorBrewer"
-
-$fireSpread$reqdPkgs[[4]]
-[1] "SpaDES.tools"
-
-
-$fireSpread$parameters
-          paramName paramClass      default        min          max
-1         stackName  character    landscape         NA           NA
-2            nFires    numeric           10          1          100
-3               its    numeric        1e+06      1e+06        1e+06
-4       persistprob    numeric            0          0            1
-5    returnInterval    numeric            1          1            1
-6        spreadprob    numeric        0.225       0.05          0.5
-7         startTime    numeric start(si....          0     end(sim)
-8  .plotInitialTime    numeric   start(sim) start(sim) end(sim) + 1
-9     .plotInterval    numeric            1          1            1
-10 .saveInitialTime    numeric           NA         NA           NA
-11    .saveInterval    numeric           NA         NA           NA
-                                    paramDesc
-1                     name of the RasterStack
-2                 number of fires to initiate
-3        number of iterations for fire spread
-4   probability of fire persisting in a pixel
-5                        fire return interval
-6  probability of fire spreading into a pixel
-7               time of initial fire ignition
-8           time to schedule first plot event
-9           time interval between plot events
-10          time to schedule first save event
-11          time interval between save events
-
-$fireSpread$inputObjects
-                      objectName objectClass desc sourceURL
-1 P(sim, "fireSpread")$stackName RasterStack <NA>      <NA>
-2         globals(sim)$burnStats     numeric <NA>      <NA>
-
-$fireSpread$outputObjects
-                      objectName objectClass desc other
-1 P(sim, "fireSpread")$stackName RasterStack <NA>    NA
-2         globals(sim)$burnStats     numeric <NA>    NA
-
-
 > 
 > 
 > 
 > cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’, ‘package:grid’,
+  ‘package:SpaDES.tools’
+
 > nameEx("moduleVersion")
 > ### * moduleVersion
 > 
@@ -1243,15 +1030,31 @@ $fireSpread$outputObjects
 +    params = list(
 +      .globals = list(stackName = "landscape", burnStats = "nPixelsBurned")
 +    ),
-+    modules = list("randomLandscapes", "fireSpread", "caribouMovement"),
++    modules = list("caribouMovement"),
 +    paths = list(modulePath = path)
 + )
+Loading required package: SpaDES.tools
+Loading required package: grid
+
+Attaching package: ‘grid’
+
+The following object is masked from ‘package:quickPlot’:
+
+    gpar
+
+Loading required package: raster
+Loading required package: sp
+Global parameter(s) not used in any module: burnStats.
 > moduleVersion("caribouMovement", sim = mySim)
 [1] ‘1.6.0’
 > 
 > 
 > 
 > cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’, ‘package:grid’,
+  ‘package:SpaDES.tools’
+
 > nameEx("newModule")
 > ### * newModule
 > 
@@ -1326,7 +1129,7 @@ $fireSpread$outputObjects
 > ### Title: Get and set simulation parameters.
 > ### Aliases: params simList-accessors-params params,.simList-method
 > ###   params<- params<- params<-,.simList-method P simList-accessors-params
-> ###   P,.simList-method parameters parameters,.simList-method
+> ###   parameters parameters,.simList-method
 > 
 > ### ** Examples
 > 
@@ -1334,6 +1137,10 @@ $fireSpread$outputObjects
 > paths <- list(modulePath = system.file("sampleModules", package = "SpaDES.core"))
 > mySim <- simInit(modules = modules, paths = paths,
 +                  params = list(.globals = list(stackName = "landscape")))
+Loading required package: RColorBrewer
+Loading required package: SpaDES.tools
+Loading required package: raster
+Loading required package: sp
 > parameters(mySim)
 $randomLandscapes
 $randomLandscapes$inRAM
@@ -1380,6 +1187,10 @@ $randomLandscapes$.useCache
 > 
 > 
 > cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’, ‘package:SpaDES.tools’,
+  ‘package:RColorBrewer’
+
 > nameEx("progress")
 > ### * progress
 > 
@@ -1418,6 +1229,32 @@ $randomLandscapes$.useCache
 > ##D                       # In this example, "chkpnt.RData"
 > ##D checkpointInterval(mySim) # 10
 > ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("remoteFileSize")
+> ### * remoteFileSize
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: remoteFileSize
+> ### Title: Determine the size of a remotely hosted file
+> ### Aliases: remoteFileSize
+> 
+> ### ** Examples
+> 
+> urls <- c("https://www.alexchubaty.com/uploads/2011/11/open-forest-science-journal.csl",
++           "https://www.alexchubaty.com/uploads/2011/08/models_GUI_2011-08-07.zip",
++           "http://example.com/doesntexist.csv")
+> try(remoteFileSize(urls))
+https://www.alexchubaty.com/uploads/2011/11/open-forest-science-journal.csl 
+                                                                       5429 
+      https://www.alexchubaty.com/uploads/2011/08/models_GUI_2011-08-07.zip 
+                                                                    3997384 
+                                         http://example.com/doesntexist.csv 
+                                                                          0 
+> 
 > 
 > 
 > 
@@ -1580,7 +1417,7 @@ $randomLandscapes$.useCache
 > ##D  modules = list("randomLandscapes", "fireSpread", "caribouMovement"),
 > ##D  paths = list(modulePath = system.file("sampleModules", package = "SpaDES.core"))
 > ##D )
-> ##D spades(mySim, .plotInitialTime = NA)
+> ##D spades(mySim) # shows plotting
 > ##D 
 > ##D # Change more parameters, removing plotting
 > ##D mySim <- simInit(
@@ -1727,14 +1564,14 @@ The following object is masked from ‘package:base’:
 > inputs(sim) <- data.frame(file = tmpFile) # using only required column, "file"
 > inputs(sim) # see that it is not yet loaded, but when it is scheduled to be loaded
                              file     fun package objectName loadTime loaded
-1 /tmp/RtmpxvOice/inputs/test.rds readRDS    base       test        0     NA
+1 /tmp/RtmpxoazcI/inputs/test.rds readRDS    base       test        0     NA
   arguments intervals
 1        NA        NA
 > simOut <- spades(sim)
-test read from /tmp/RtmpxvOice/inputs/test.rds using readRDS
+test read from /tmp/RtmpxoazcI/inputs/test.rds using readRDS
 > inputs(simOut) # confirm it was loaded
                              file     fun package objectName loadTime loaded
-1 /tmp/RtmpxvOice/inputs/test.rds readRDS    base       test        0   TRUE
+1 /tmp/RtmpxoazcI/inputs/test.rds readRDS    base       test        0   TRUE
   arguments intervals
 1        NA        NA
 > simOut$test
@@ -1796,6 +1633,29 @@ Maps5 read from /home/tomas/cran/rcnst/lib/quickPlot/maps/percentPine.tif using 
 Maps5 read from /home/tomas/cran/rcnst/lib/quickPlot/maps/percentPine.tif using raster(inMemory=FALSE)
   at time 10
 > 
+>   # Example showing loading multiple objects from global environment onto the
+>   #   same object in the simList, but at different load times
+>   a1 <- 1
+>   a2 <- 2
+>   # Note arguments must be a list of NROW(inputs), with each element itself being a list,
+>   #  which is passed to do.call(fun[x], arguments[[x]]), where x is row number, one at a time
+>   args <- lapply(1:2, function(x) {
++                  list(x = paste0("a", x),
++                       envir = environment()) # may be necessary to specify in which envir a1, a2
++                                              # are located, if not in an interactive sessino
++                  })
+>   inputs <- data.frame(objectName = "a", loadTime = 1:2, fun = "base::get", arguments = I(args))
+>   a <- simInit(inputs = inputs, times = list(start = 0, end = 1))
+>   a <- spades(a)
+a loaded into simList
+>   identical(a1, a$a)
+[1] TRUE
+> 
+>   end(a) <- 3
+>   a <- spades(a) # different object (a2) loaded onto a$a
+a loaded into simList
+>   identical(a2, a$a)
+[1] TRUE
 > 
 > # Clean up after
 > unlink(tmpdir, recursive = TRUE)
@@ -1814,14 +1674,14 @@ Maps5 read from /home/tomas/cran/rcnst/lib/quickPlot/maps/percentPine.tif using 
 +                outputs = data.frame(objectName = "tempObj"),
 +                paths = list(outputPath = tmpdir))
 > outputs(sim) # To see what will be saved, when, what filename
-  objectName                                         file     fun package
-1    tempObj /tmp/RtmpxvOice/outputs/tempObj_second10.rds saveRDS    base
+  objectName                                       file     fun package
+1    tempObj /tmp/RtmpxoazcI/outputs/tempObj_year10.rds saveRDS    base
   saveTime saved arguments
 1       10    NA        NA
 > sim <- spades(sim)
 > outputs(sim) # To see that it was saved, when, what filename
-  objectName                                         file     fun package
-1    tempObj /tmp/RtmpxvOice/outputs/tempObj_second10.rds saveRDS    base
+  objectName                                       file     fun package
+1    tempObj /tmp/RtmpxoazcI/outputs/tempObj_year10.rds saveRDS    base
   saveTime saved arguments
 1       10  TRUE        NA
 > 
@@ -1830,17 +1690,17 @@ Maps5 read from /home/tomas/cran/rcnst/lib/quickPlot/maps/percentPine.tif using 
 > outputs(sim) <- data.frame(objectName = "tempObj", saveTime = 1:10)
 > sim <- spades(sim)
 > outputs(sim) # To see that it was saved, when, what filename.
-   objectName saveTime                                         file     fun
-1     tempObj        1 /tmp/RtmpxvOice/outputs/tempObj_second01.rds saveRDS
-2     tempObj        2 /tmp/RtmpxvOice/outputs/tempObj_second02.rds saveRDS
-3     tempObj        3 /tmp/RtmpxvOice/outputs/tempObj_second03.rds saveRDS
-4     tempObj        4 /tmp/RtmpxvOice/outputs/tempObj_second04.rds saveRDS
-5     tempObj        5 /tmp/RtmpxvOice/outputs/tempObj_second05.rds saveRDS
-6     tempObj        6 /tmp/RtmpxvOice/outputs/tempObj_second06.rds saveRDS
-7     tempObj        7 /tmp/RtmpxvOice/outputs/tempObj_second07.rds saveRDS
-8     tempObj        8 /tmp/RtmpxvOice/outputs/tempObj_second08.rds saveRDS
-9     tempObj        9 /tmp/RtmpxvOice/outputs/tempObj_second09.rds saveRDS
-10    tempObj       10 /tmp/RtmpxvOice/outputs/tempObj_second10.rds saveRDS
+   objectName saveTime                                       file     fun
+1     tempObj        1 /tmp/RtmpxoazcI/outputs/tempObj_year01.rds saveRDS
+2     tempObj        2 /tmp/RtmpxoazcI/outputs/tempObj_year02.rds saveRDS
+3     tempObj        3 /tmp/RtmpxoazcI/outputs/tempObj_year03.rds saveRDS
+4     tempObj        4 /tmp/RtmpxoazcI/outputs/tempObj_year04.rds saveRDS
+5     tempObj        5 /tmp/RtmpxoazcI/outputs/tempObj_year05.rds saveRDS
+6     tempObj        6 /tmp/RtmpxoazcI/outputs/tempObj_year06.rds saveRDS
+7     tempObj        7 /tmp/RtmpxoazcI/outputs/tempObj_year07.rds saveRDS
+8     tempObj        8 /tmp/RtmpxoazcI/outputs/tempObj_year08.rds saveRDS
+9     tempObj        9 /tmp/RtmpxoazcI/outputs/tempObj_year09.rds saveRDS
+10    tempObj       10 /tmp/RtmpxoazcI/outputs/tempObj_year10.rds saveRDS
    package saved arguments
 1     base  TRUE        NA
 2     base  TRUE        NA
@@ -1876,16 +1736,16 @@ Maps5 read from /home/tomas/cran/rcnst/lib/quickPlot/maps/percentPine.tif using 
 4   tempObj2        6   saveRDS    base
 5   tempObj2        7   saveRDS    base
 6        df1       10 write.csv   utils
-                                           file saved arguments
-1  /tmp/RtmpxvOice/outputs/tempObj_second01.rds  TRUE        NA
-2  /tmp/RtmpxvOice/outputs/tempObj_second04.rds  TRUE        NA
-3 /tmp/RtmpxvOice/outputs/tempObj2_second02.rds  TRUE        NA
-4 /tmp/RtmpxvOice/outputs/tempObj2_second06.rds  TRUE        NA
-5 /tmp/RtmpxvOice/outputs/tempObj2_second07.rds  TRUE        NA
-6      /tmp/RtmpxvOice/outputs/df1_second10.csv  TRUE     FALSE
+                                         file saved arguments
+1  /tmp/RtmpxoazcI/outputs/tempObj_year01.rds  TRUE        NA
+2  /tmp/RtmpxoazcI/outputs/tempObj_year04.rds  TRUE        NA
+3 /tmp/RtmpxoazcI/outputs/tempObj2_year02.rds  TRUE        NA
+4 /tmp/RtmpxoazcI/outputs/tempObj2_year06.rds  TRUE        NA
+5 /tmp/RtmpxoazcI/outputs/tempObj2_year07.rds  TRUE        NA
+6      /tmp/RtmpxoazcI/outputs/df1_year10.csv  TRUE     FALSE
 > 
 > # read one back in just to test it all worked as planned
-> newObj <- read.csv(dir(tmpdir, pattern = "second10.csv", full.name = TRUE))
+> newObj <- read.csv(dir(tmpdir, pattern = "year10.csv", full.name = TRUE))
 > newObj
    col1   col2
 1     1  val 1
@@ -1944,13 +1804,7 @@ detaching ‘package:raster’, ‘package:rgdal’, ‘package:sp’,
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: spades
-> ### Title: setMethod( "scheduleEvent", signature( sim = "simList",
-> ###   eventTime = "NULL", moduleName = "character", eventType =
-> ###   "character", eventPriority = "numeric" ), definition = function(sim,
-> ###   eventTime, moduleName, eventType, eventPriority) warning( paste(
-> ###   "Invalid or missing eventTime. This is usually", "caused by an
-> ###   attempt to scheduleEvent at time NULL", "or by using an undefined
-> ###   parameter."  ) ) return(invisible(sim)) )
+> ### Title: Run a spatial discrete event simulation
 > ### Aliases: spades spades,simList,ANY,ANY,missing-method
 > ###   spades,ANY,ANY,ANY,logical-method
 > 
@@ -1967,7 +1821,10 @@ detaching ‘package:raster’, ‘package:rgdal’, ‘package:sp’,
 > ##D )
 > ##D spades(mySim)
 > ##D 
-> ##D # Different debug options
+> ##D # set default debug printing for the current session
+> ##D # setOption(spades.debug = TRUE)
+> ##D 
+> ##D # Different debug options (overrides the package option 'spades.debug')
 > ##D spades(mySim, debug = TRUE) # Fastest
 > ##D spades(mySim, debug = "simList")
 > ##D spades(mySim, debug = "print(table(sim$landscape$Fires[]))")
@@ -2063,7 +1920,7 @@ list()
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  34.312 2.672 36.445 0.004 0.04 
+Time elapsed:  35.584 3.188 39.592 0 0.036 
 > grDevices::dev.off()
 null device 
           1 
