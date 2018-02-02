@@ -16,17 +16,8 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(testthat)
-> test_check("SpaDES.core")
-Loading required package: SpaDES.core
-Loading required package: quickPlot
-Loading required package: reproducible
-
-Attaching package: 'reproducible'
-
-The following object is masked from 'package:testthat':
-
-    %>%
-
+> test_check("SpaDES.tools")
+Loading required package: SpaDES.tools
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "includePixel" "excludePixel" "includeRing"  "excludeRing" 
@@ -810,24 +801,15 @@ ERROR: the modified constant is in this function body:
     }
     return(landscape)
 }
-S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature RasterLayer has this body.
-── 1. Failure: test cache (@test-cache.R#36)  ──────────────────────────────────
-NROW(out[tagValue == "spades"]) == 2 isn't true.
+── 1. Error: /tmp/Rtmpgu8pRG/R.INSTALL671e53c23c31/SpaDES.tools/man/cir.Rd  ────
+promise already under evaluation: recursive default argument reference or earlier problems?
+1: gaussMap(a, speedup = 1)
+2: raster(RFsimulate(model, y = 1:ncSpeedup, x = 1:nrSpeedup, grid = TRUE, ...))
 
-── 2. Failure: test cache (@test-cache.R#40)  ──────────────────────────────────
-NROW(out[tagKey != "otherFunctions"]) == 16 isn't true.
-
-── 3. Failure: test cache (@test-cache.R#47)  ──────────────────────────────────
-NROW(out2[tagKey == "accessed"]) == 5 isn't true.
-
-  Using cached copy of .inputObjects event in test module
-  Using cached copy of .inputObjects event in test module
-  Using cached copy of burn event in fireSpread module
+[1] "Scales with number of starts, not maxSize of raster"
 ══ testthat results  ═══════════════════════════════════════════════════════════
-OK: 347 SKIPPED: 33 FAILED: 3
-1. Failure: test cache (@test-cache.R#36) 
-2. Failure: test cache (@test-cache.R#40) 
-3. Failure: test cache (@test-cache.R#47) 
+OK: 999 SKIPPED: 24 FAILED: 1
+1. Error: /tmp/Rtmpgu8pRG/R.INSTALL671e53c23c31/SpaDES.tools/man/cir.Rd 
 
 Error: testthat unit tests failed
 Execution halted
