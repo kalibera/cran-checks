@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2018-02-02 r74199) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-02-06 r74231) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -731,10 +731,10 @@ The following object is masked from ‘package:base’:
 > # let's check time of two evaluations of cache function
 > system.time( res <- cache(cacheRepo, fun, 1000) )
    user  system elapsed 
-  2.392   0.076   2.473 
+  2.000   0.004   2.089 
 > system.time( res <- cache(cacheRepo, fun, 1000) ) 
    user  system elapsed 
-  2.436   0.032   2.469 
+  2.016   0.008   2.125 
 > # The second call is much faster. Why is it so? Because the result of fun
 > # function evaluation has been stored in local cacheRepo during the first evaluation
 > # of cache. In the second call of cache we are simply loading the result of fun
@@ -1019,73 +1019,73 @@ The following objects are masked from ‘package:base’:
 > showLocalRepo(exampleRepoDir)
                             md5hash
 1  a63c70e73b58d0823ab3bcbd3b543d6f
-2  960fb31260949092c1867b30e9306b8f
+2  179ead093634a8f82bdc4a70a015c230
 3  403c3921f0fb68cbc8d5c6ca18e49141
-4  960fb31260949092c1867b30e9306b8f
+4  179ead093634a8f82bdc4a70a015c230
 5  403c3921f0fb68cbc8d5c6ca18e49141
-6  24a9abd1be04b9179c9ff8c90bc3f5de
+6  eab2fcd5ea21438bc1f101f0f9f9f748
 7  05c7067c4f4fe4fcb5fad606097815c1
-8  24a9abd1be04b9179c9ff8c90bc3f5de
+8  eab2fcd5ea21438bc1f101f0f9f9f748
 9  05c7067c4f4fe4fcb5fad606097815c1
-10 24a9abd1be04b9179c9ff8c90bc3f5de
+10 eab2fcd5ea21438bc1f101f0f9f9f748
 11 497ae8d6e1657de7bfbb995b3d0555d0
-12 24a9abd1be04b9179c9ff8c90bc3f5de
+12 eab2fcd5ea21438bc1f101f0f9f9f748
 13 d6c834d34a9be232e2ada1455143cac6
-14 24a9abd1be04b9179c9ff8c90bc3f5de
+14 eab2fcd5ea21438bc1f101f0f9f9f748
 15 d87c917f988f8035157eeac8c1acb1a3
-16 24a9abd1be04b9179c9ff8c90bc3f5de
+16 eab2fcd5ea21438bc1f101f0f9f9f748
 17 d87c917f988f8035157eeac8c1acb1a3
-18 24a9abd1be04b9179c9ff8c90bc3f5de
+18 eab2fcd5ea21438bc1f101f0f9f9f748
 19 d87c917f988f8035157eeac8c1acb1a3
-20 24a9abd1be04b9179c9ff8c90bc3f5de
+20 eab2fcd5ea21438bc1f101f0f9f9f748
 21 61151f9db7da9f6e15f485cf083d4f89
-22 24a9abd1be04b9179c9ff8c90bc3f5de
+22 eab2fcd5ea21438bc1f101f0f9f9f748
                                                                                                                                             name
 1                                                                                                                                         mtcars
-2                                                                                                               960fb31260949092c1867b30e9306b8f
+2                                                                                                               179ead093634a8f82bdc4a70a015c230
 3                                                                                                                                        res_val
-4                                                                                                               960fb31260949092c1867b30e9306b8f
+4                                                                                                               179ead093634a8f82bdc4a70a015c230
 5                                                                                                                   mtcars %a% group_by(cyl, am)
-6                                                                                                               24a9abd1be04b9179c9ff8c90bc3f5de
+6                                                                                                               eab2fcd5ea21438bc1f101f0f9f9f748
 7                                                                                                                                        res_val
-8                                                                                                               24a9abd1be04b9179c9ff8c90bc3f5de
+8                                                                                                               eab2fcd5ea21438bc1f101f0f9f9f748
 9                                                                                      mtcars %a% group_by(cyl, am) %a% select(mpg, cyl, wt, am)
-10                                                                                                              24a9abd1be04b9179c9ff8c90bc3f5de
+10                                                                                                              eab2fcd5ea21438bc1f101f0f9f9f748
 11                                                                                                                                       res_val
-12                                                                                                              24a9abd1be04b9179c9ff8c90bc3f5de
+12                                                                                                              eab2fcd5ea21438bc1f101f0f9f9f748
 13                             mtcars %a% group_by(cyl, am) %a% select(mpg, cyl, wt, am) %a%     summarise(avgmpg = mean(mpg), avgwt = mean(wt))
-14                                                                                                              24a9abd1be04b9179c9ff8c90bc3f5de
+14                                                                                                              eab2fcd5ea21438bc1f101f0f9f9f748
 15                                                                                                                                       res_val
-16                                                                                                              24a9abd1be04b9179c9ff8c90bc3f5de
+16                                                                                                              eab2fcd5ea21438bc1f101f0f9f9f748
 17                                                                                                                                         __LHS
-18                                                                                                              24a9abd1be04b9179c9ff8c90bc3f5de
+18                                                                                                              eab2fcd5ea21438bc1f101f0f9f9f748
 19 mtcars %a% group_by(cyl, am) %a% select(mpg, cyl, wt, am) %a%     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %a% filter(avgmpg >     20)
-20                                                                                                              24a9abd1be04b9179c9ff8c90bc3f5de
+20                                                                                                              eab2fcd5ea21438bc1f101f0f9f9f748
 21                                                                                                                                       res_val
-22                                                                                                              24a9abd1be04b9179c9ff8c90bc3f5de
+22                                                                                                              eab2fcd5ea21438bc1f101f0f9f9f748
            createdDate
-1  2018-02-03 09:38:13
-2  2018-02-03 09:38:13
-3  2018-02-03 09:38:13
-4  2018-02-03 09:38:13
-5  2018-02-03 09:38:14
-6  2018-02-03 09:38:15
-7  2018-02-03 09:38:15
-8  2018-02-03 09:38:15
-9  2018-02-03 09:38:15
-10 2018-02-03 09:38:15
-11 2018-02-03 09:38:16
-12 2018-02-03 09:38:16
-13 2018-02-03 09:38:16
-14 2018-02-03 09:38:16
-15 2018-02-03 09:38:16
-16 2018-02-03 09:38:16
-17 2018-02-03 09:38:16
-18 2018-02-03 09:38:16
-19 2018-02-03 09:38:16
-20 2018-02-03 09:38:17
-21 2018-02-03 09:38:17
-22 2018-02-03 09:38:17
+1  2018-02-07 00:57:32
+2  2018-02-07 00:57:32
+3  2018-02-07 00:57:32
+4  2018-02-07 00:57:32
+5  2018-02-07 00:57:33
+6  2018-02-07 00:57:33
+7  2018-02-07 00:57:33
+8  2018-02-07 00:57:33
+9  2018-02-07 00:57:34
+10 2018-02-07 00:57:34
+11 2018-02-07 00:57:34
+12 2018-02-07 00:57:34
+13 2018-02-07 00:57:34
+14 2018-02-07 00:57:34
+15 2018-02-07 00:57:34
+16 2018-02-07 00:57:34
+17 2018-02-07 00:57:34
+18 2018-02-07 00:57:35
+19 2018-02-07 00:57:35
+20 2018-02-07 00:57:35
+21 2018-02-07 00:57:35
+22 2018-02-07 00:57:35
 > showLocalRepo(exampleRepoDir, method = "tags")
                             artifact
 1   a63c70e73b58d0823ab3bcbd3b543d6f
@@ -1103,7 +1103,7 @@ The following objects are masked from ‘package:base’:
 13  a63c70e73b58d0823ab3bcbd3b543d6f
 14  a63c70e73b58d0823ab3bcbd3b543d6f
 15  a63c70e73b58d0823ab3bcbd3b543d6f
-16  960fb31260949092c1867b30e9306b8f
+16  179ead093634a8f82bdc4a70a015c230
 17  a63c70e73b58d0823ab3bcbd3b543d6f
 18  a63c70e73b58d0823ab3bcbd3b543d6f
 19  403c3921f0fb68cbc8d5c6ca18e49141
@@ -1126,7 +1126,7 @@ The following objects are masked from ‘package:base’:
 36  403c3921f0fb68cbc8d5c6ca18e49141
 37  403c3921f0fb68cbc8d5c6ca18e49141
 38  403c3921f0fb68cbc8d5c6ca18e49141
-39  960fb31260949092c1867b30e9306b8f
+39  179ead093634a8f82bdc4a70a015c230
 40  403c3921f0fb68cbc8d5c6ca18e49141
 41  403c3921f0fb68cbc8d5c6ca18e49141
 42  403c3921f0fb68cbc8d5c6ca18e49141
@@ -1147,7 +1147,7 @@ The following objects are masked from ‘package:base’:
 57  403c3921f0fb68cbc8d5c6ca18e49141
 58  403c3921f0fb68cbc8d5c6ca18e49141
 59  403c3921f0fb68cbc8d5c6ca18e49141
-60  24a9abd1be04b9179c9ff8c90bc3f5de
+60  eab2fcd5ea21438bc1f101f0f9f9f748
 61  403c3921f0fb68cbc8d5c6ca18e49141
 62  403c3921f0fb68cbc8d5c6ca18e49141
 63  05c7067c4f4fe4fcb5fad606097815c1
@@ -1163,7 +1163,7 @@ The following objects are masked from ‘package:base’:
 73  05c7067c4f4fe4fcb5fad606097815c1
 74  05c7067c4f4fe4fcb5fad606097815c1
 75  05c7067c4f4fe4fcb5fad606097815c1
-76  24a9abd1be04b9179c9ff8c90bc3f5de
+76  eab2fcd5ea21438bc1f101f0f9f9f748
 77  05c7067c4f4fe4fcb5fad606097815c1
 78  05c7067c4f4fe4fcb5fad606097815c1
 79  05c7067c4f4fe4fcb5fad606097815c1
@@ -1177,7 +1177,7 @@ The following objects are masked from ‘package:base’:
 87  05c7067c4f4fe4fcb5fad606097815c1
 88  05c7067c4f4fe4fcb5fad606097815c1
 89  05c7067c4f4fe4fcb5fad606097815c1
-90  24a9abd1be04b9179c9ff8c90bc3f5de
+90  eab2fcd5ea21438bc1f101f0f9f9f748
 91  05c7067c4f4fe4fcb5fad606097815c1
 92  05c7067c4f4fe4fcb5fad606097815c1
 93  497ae8d6e1657de7bfbb995b3d0555d0
@@ -1193,7 +1193,7 @@ The following objects are masked from ‘package:base’:
 103 497ae8d6e1657de7bfbb995b3d0555d0
 104 497ae8d6e1657de7bfbb995b3d0555d0
 105 497ae8d6e1657de7bfbb995b3d0555d0
-106 24a9abd1be04b9179c9ff8c90bc3f5de
+106 eab2fcd5ea21438bc1f101f0f9f9f748
 107 497ae8d6e1657de7bfbb995b3d0555d0
 108 497ae8d6e1657de7bfbb995b3d0555d0
 109 d6c834d34a9be232e2ada1455143cac6
@@ -1207,7 +1207,7 @@ The following objects are masked from ‘package:base’:
 117 d6c834d34a9be232e2ada1455143cac6
 118 d6c834d34a9be232e2ada1455143cac6
 119 d6c834d34a9be232e2ada1455143cac6
-120 24a9abd1be04b9179c9ff8c90bc3f5de
+120 eab2fcd5ea21438bc1f101f0f9f9f748
 121 d6c834d34a9be232e2ada1455143cac6
 122 d6c834d34a9be232e2ada1455143cac6
 123 d87c917f988f8035157eeac8c1acb1a3
@@ -1223,7 +1223,7 @@ The following objects are masked from ‘package:base’:
 133 d87c917f988f8035157eeac8c1acb1a3
 134 d87c917f988f8035157eeac8c1acb1a3
 135 d87c917f988f8035157eeac8c1acb1a3
-136 24a9abd1be04b9179c9ff8c90bc3f5de
+136 eab2fcd5ea21438bc1f101f0f9f9f748
 137 d87c917f988f8035157eeac8c1acb1a3
 138 d87c917f988f8035157eeac8c1acb1a3
 139 d87c917f988f8035157eeac8c1acb1a3
@@ -1237,7 +1237,7 @@ The following objects are masked from ‘package:base’:
 147 d87c917f988f8035157eeac8c1acb1a3
 148 d87c917f988f8035157eeac8c1acb1a3
 149 d87c917f988f8035157eeac8c1acb1a3
-150 24a9abd1be04b9179c9ff8c90bc3f5de
+150 eab2fcd5ea21438bc1f101f0f9f9f748
 151 d87c917f988f8035157eeac8c1acb1a3
 152 d87c917f988f8035157eeac8c1acb1a3
 153 d87c917f988f8035157eeac8c1acb1a3
@@ -1251,7 +1251,7 @@ The following objects are masked from ‘package:base’:
 161 d87c917f988f8035157eeac8c1acb1a3
 162 d87c917f988f8035157eeac8c1acb1a3
 163 d87c917f988f8035157eeac8c1acb1a3
-164 24a9abd1be04b9179c9ff8c90bc3f5de
+164 eab2fcd5ea21438bc1f101f0f9f9f748
 165 d87c917f988f8035157eeac8c1acb1a3
 166 d87c917f988f8035157eeac8c1acb1a3
 167 61151f9db7da9f6e15f485cf083d4f89
@@ -1260,7 +1260,7 @@ The following objects are masked from ‘package:base’:
 170 61151f9db7da9f6e15f485cf083d4f89
 171 61151f9db7da9f6e15f485cf083d4f89
 172 61151f9db7da9f6e15f485cf083d4f89
-173 24a9abd1be04b9179c9ff8c90bc3f5de
+173 eab2fcd5ea21438bc1f101f0f9f9f748
 174 61151f9db7da9f6e15f485cf083d4f89
                                                                                                                                                    tag
 1                                                                                                                                           format:rda
@@ -1277,9 +1277,9 @@ The following objects are masked from ‘package:base’:
 12                                                                                                                                          varname:am
 13                                                                                                                                        varname:gear
 14                                                                                                                                        varname:carb
-15                                                                                                                            date:2018-02-03 09:38:13
+15                                                                                                                            date:2018-02-07 00:57:32
 16                                                                                                                                          format:rda
-17                                                                                                       session_info:960fb31260949092c1867b30e9306b8f
+17                                                                                                       session_info:179ead093634a8f82bdc4a70a015c230
 18                                                                                                                                          format:txt
 19                                                                                                                                          format:rda
 20                                                                                                                                        name:res_val
@@ -1298,11 +1298,11 @@ The following objects are masked from ‘package:base’:
 33                                                                                                                                          varname:am
 34                                                                                                                                        varname:gear
 35                                                                                                                                        varname:carb
-36                                                                                                                            date:2018-02-03 09:38:13
+36                                                                                                                            date:2018-02-07 00:57:32
 37                                                                                                                LHS:a63c70e73b58d0823ab3bcbd3b543d6f
 38                                                                                                                               RHS:group_by(cyl, am)
 39                                                                                                                                          format:rda
-40                                                                                                       session_info:960fb31260949092c1867b30e9306b8f
+40                                                                                                       session_info:179ead093634a8f82bdc4a70a015c230
 41                                                                                                                                          format:txt
 42                                                                                                                                          format:rda
 43                                                                                                                   name:mtcars %a% group_by(cyl, am)
@@ -1321,9 +1321,9 @@ The following objects are masked from ‘package:base’:
 56                                                                                                                                          varname:am
 57                                                                                                                                        varname:gear
 58                                                                                                                                        varname:carb
-59                                                                                                                            date:2018-02-03 09:38:14
+59                                                                                                                            date:2018-02-07 00:57:33
 60                                                                                                                                          format:rda
-61                                                                                                       session_info:24a9abd1be04b9179c9ff8c90bc3f5de
+61                                                                                                       session_info:eab2fcd5ea21438bc1f101f0f9f9f748
 62                                                                                                                                          format:txt
 63                                                                                                                                          format:rda
 64                                                                                                                                        name:res_val
@@ -1335,11 +1335,11 @@ The following objects are masked from ‘package:base’:
 70                                                                                                                                         varname:cyl
 71                                                                                                                                          varname:wt
 72                                                                                                                                          varname:am
-73                                                                                                                            date:2018-02-03 09:38:15
+73                                                                                                                            date:2018-02-07 00:57:33
 74                                                                                                                LHS:403c3921f0fb68cbc8d5c6ca18e49141
 75                                                                                                                        RHS:select(mpg, cyl, wt, am)
 76                                                                                                                                          format:rda
-77                                                                                                       session_info:24a9abd1be04b9179c9ff8c90bc3f5de
+77                                                                                                       session_info:eab2fcd5ea21438bc1f101f0f9f9f748
 78                                                                                                                                          format:txt
 79                                                                                                                                          format:rda
 80                                                                                      name:mtcars %a% group_by(cyl, am) %a% select(mpg, cyl, wt, am)
@@ -1351,9 +1351,9 @@ The following objects are masked from ‘package:base’:
 86                                                                                                                                         varname:cyl
 87                                                                                                                                          varname:wt
 88                                                                                                                                          varname:am
-89                                                                                                                            date:2018-02-03 09:38:15
+89                                                                                                                            date:2018-02-07 00:57:34
 90                                                                                                                                          format:rda
-91                                                                                                       session_info:24a9abd1be04b9179c9ff8c90bc3f5de
+91                                                                                                       session_info:eab2fcd5ea21438bc1f101f0f9f9f748
 92                                                                                                                                          format:txt
 93                                                                                                                                          format:rda
 94                                                                                                                                        name:res_val
@@ -1365,11 +1365,11 @@ The following objects are masked from ‘package:base’:
 100                                                                                                                                         varname:am
 101                                                                                                                                     varname:avgmpg
 102                                                                                                                                      varname:avgwt
-103                                                                                                                           date:2018-02-03 09:38:16
+103                                                                                                                           date:2018-02-07 00:57:34
 104                                                                                                               LHS:05c7067c4f4fe4fcb5fad606097815c1
 105                                                                                                RHS:summarise(avgmpg = mean(mpg), avgwt = mean(wt))
 106                                                                                                                                         format:rda
-107                                                                                                      session_info:24a9abd1be04b9179c9ff8c90bc3f5de
+107                                                                                                      session_info:eab2fcd5ea21438bc1f101f0f9f9f748
 108                                                                                                                                         format:txt
 109                                                                                                                                         format:rda
 110                             name:mtcars %a% group_by(cyl, am) %a% select(mpg, cyl, wt, am) %a%     summarise(avgmpg = mean(mpg), avgwt = mean(wt))
@@ -1381,9 +1381,9 @@ The following objects are masked from ‘package:base’:
 116                                                                                                                                         varname:am
 117                                                                                                                                     varname:avgmpg
 118                                                                                                                                      varname:avgwt
-119                                                                                                                           date:2018-02-03 09:38:16
+119                                                                                                                           date:2018-02-07 00:57:34
 120                                                                                                                                         format:rda
-121                                                                                                      session_info:24a9abd1be04b9179c9ff8c90bc3f5de
+121                                                                                                      session_info:eab2fcd5ea21438bc1f101f0f9f9f748
 122                                                                                                                                         format:txt
 123                                                                                                                                         format:rda
 124                                                                                                                                       name:res_val
@@ -1395,11 +1395,11 @@ The following objects are masked from ‘package:base’:
 130                                                                                                                                         varname:am
 131                                                                                                                                     varname:avgmpg
 132                                                                                                                                      varname:avgwt
-133                                                                                                                           date:2018-02-03 09:38:16
+133                                                                                                                           date:2018-02-07 00:57:34
 134                                                                                                               LHS:d6c834d34a9be232e2ada1455143cac6
 135                                                                                                                            RHS:filter(avgmpg > 20)
 136                                                                                                                                         format:rda
-137                                                                                                      session_info:24a9abd1be04b9179c9ff8c90bc3f5de
+137                                                                                                      session_info:eab2fcd5ea21438bc1f101f0f9f9f748
 138                                                                                                                                         format:txt
 139                                                                                                                                         format:rda
 140                                                                                                                                         name:__LHS
@@ -1411,9 +1411,9 @@ The following objects are masked from ‘package:base’:
 146                                                                                                                                         varname:am
 147                                                                                                                                     varname:avgmpg
 148                                                                                                                                      varname:avgwt
-149                                                                                                                           date:2018-02-03 09:38:16
+149                                                                                                                           date:2018-02-07 00:57:34
 150                                                                                                                                         format:rda
-151                                                                                                      session_info:24a9abd1be04b9179c9ff8c90bc3f5de
+151                                                                                                      session_info:eab2fcd5ea21438bc1f101f0f9f9f748
 152                                                                                                                                         format:txt
 153                                                                                                                                         format:rda
 154 name:mtcars %a% group_by(cyl, am) %a% select(mpg, cyl, wt, am) %a%     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %a% filter(avgmpg >     20)
@@ -1425,193 +1425,193 @@ The following objects are masked from ‘package:base’:
 160                                                                                                                                         varname:am
 161                                                                                                                                     varname:avgmpg
 162                                                                                                                                      varname:avgwt
-163                                                                                                                           date:2018-02-03 09:38:16
+163                                                                                                                           date:2018-02-07 00:57:35
 164                                                                                                                                         format:rda
-165                                                                                                      session_info:24a9abd1be04b9179c9ff8c90bc3f5de
+165                                                                                                      session_info:eab2fcd5ea21438bc1f101f0f9f9f748
 166                                                                                                                                         format:txt
 167                                                                                                                                         format:rda
 168                                                                                                                                       name:res_val
 169                                                                                                                                    class:character
-170                                                                                                                           date:2018-02-03 09:38:17
+170                                                                                                                           date:2018-02-07 00:57:35
 171                                                                                                               LHS:d87c917f988f8035157eeac8c1acb1a3
 172                                                                                                                     RHS:saveToRepo(exampleRepoDir)
 173                                                                                                                                         format:rda
-174                                                                                                      session_info:24a9abd1be04b9179c9ff8c90bc3f5de
+174                                                                                                      session_info:eab2fcd5ea21438bc1f101f0f9f9f748
             createdDate
-1   2018-02-03 09:38:13
-2   2018-02-03 09:38:13
-3   2018-02-03 09:38:13
-4   2018-02-03 09:38:13
-5   2018-02-03 09:38:13
-6   2018-02-03 09:38:13
-7   2018-02-03 09:38:13
-8   2018-02-03 09:38:13
-9   2018-02-03 09:38:13
-10  2018-02-03 09:38:13
-11  2018-02-03 09:38:13
-12  2018-02-03 09:38:13
-13  2018-02-03 09:38:13
-14  2018-02-03 09:38:13
-15  2018-02-03 09:38:13
-16  2018-02-03 09:38:13
-17  2018-02-03 09:38:13
-18  2018-02-03 09:38:13
-19  2018-02-03 09:38:13
-20  2018-02-03 09:38:13
-21  2018-02-03 09:38:13
-22  2018-02-03 09:38:13
-23  2018-02-03 09:38:13
-24  2018-02-03 09:38:13
-25  2018-02-03 09:38:13
-26  2018-02-03 09:38:13
-27  2018-02-03 09:38:13
-28  2018-02-03 09:38:13
-29  2018-02-03 09:38:13
-30  2018-02-03 09:38:13
-31  2018-02-03 09:38:13
-32  2018-02-03 09:38:13
-33  2018-02-03 09:38:13
-34  2018-02-03 09:38:13
-35  2018-02-03 09:38:13
-36  2018-02-03 09:38:13
-37  2018-02-03 09:38:13
-38  2018-02-03 09:38:13
-39  2018-02-03 09:38:13
-40  2018-02-03 09:38:13
-41  2018-02-03 09:38:14
-42  2018-02-03 09:38:14
-43  2018-02-03 09:38:14
-44  2018-02-03 09:38:14
-45  2018-02-03 09:38:14
-46  2018-02-03 09:38:14
-47  2018-02-03 09:38:14
-48  2018-02-03 09:38:14
-49  2018-02-03 09:38:15
-50  2018-02-03 09:38:15
-51  2018-02-03 09:38:15
-52  2018-02-03 09:38:15
-53  2018-02-03 09:38:15
-54  2018-02-03 09:38:15
-55  2018-02-03 09:38:15
-56  2018-02-03 09:38:15
-57  2018-02-03 09:38:15
-58  2018-02-03 09:38:15
-59  2018-02-03 09:38:15
-60  2018-02-03 09:38:15
-61  2018-02-03 09:38:15
-62  2018-02-03 09:38:15
-63  2018-02-03 09:38:15
-64  2018-02-03 09:38:15
-65  2018-02-03 09:38:15
-66  2018-02-03 09:38:15
-67  2018-02-03 09:38:15
-68  2018-02-03 09:38:15
-69  2018-02-03 09:38:15
-70  2018-02-03 09:38:15
-71  2018-02-03 09:38:15
-72  2018-02-03 09:38:15
-73  2018-02-03 09:38:15
-74  2018-02-03 09:38:15
-75  2018-02-03 09:38:15
-76  2018-02-03 09:38:15
-77  2018-02-03 09:38:15
-78  2018-02-03 09:38:15
-79  2018-02-03 09:38:15
-80  2018-02-03 09:38:15
-81  2018-02-03 09:38:15
-82  2018-02-03 09:38:15
-83  2018-02-03 09:38:15
-84  2018-02-03 09:38:15
-85  2018-02-03 09:38:15
-86  2018-02-03 09:38:15
-87  2018-02-03 09:38:15
-88  2018-02-03 09:38:15
-89  2018-02-03 09:38:15
-90  2018-02-03 09:38:15
-91  2018-02-03 09:38:15
-92  2018-02-03 09:38:16
-93  2018-02-03 09:38:16
-94  2018-02-03 09:38:16
-95  2018-02-03 09:38:16
-96  2018-02-03 09:38:16
-97  2018-02-03 09:38:16
-98  2018-02-03 09:38:16
-99  2018-02-03 09:38:16
-100 2018-02-03 09:38:16
-101 2018-02-03 09:38:16
-102 2018-02-03 09:38:16
-103 2018-02-03 09:38:16
-104 2018-02-03 09:38:16
-105 2018-02-03 09:38:16
-106 2018-02-03 09:38:16
-107 2018-02-03 09:38:16
-108 2018-02-03 09:38:16
-109 2018-02-03 09:38:16
-110 2018-02-03 09:38:16
-111 2018-02-03 09:38:16
-112 2018-02-03 09:38:16
-113 2018-02-03 09:38:16
-114 2018-02-03 09:38:16
-115 2018-02-03 09:38:16
-116 2018-02-03 09:38:16
-117 2018-02-03 09:38:16
-118 2018-02-03 09:38:16
-119 2018-02-03 09:38:16
-120 2018-02-03 09:38:16
-121 2018-02-03 09:38:16
-122 2018-02-03 09:38:16
-123 2018-02-03 09:38:16
-124 2018-02-03 09:38:16
-125 2018-02-03 09:38:16
-126 2018-02-03 09:38:16
-127 2018-02-03 09:38:16
-128 2018-02-03 09:38:16
-129 2018-02-03 09:38:16
-130 2018-02-03 09:38:16
-131 2018-02-03 09:38:16
-132 2018-02-03 09:38:16
-133 2018-02-03 09:38:16
-134 2018-02-03 09:38:16
-135 2018-02-03 09:38:16
-136 2018-02-03 09:38:16
-137 2018-02-03 09:38:16
-138 2018-02-03 09:38:16
-139 2018-02-03 09:38:16
-140 2018-02-03 09:38:16
-141 2018-02-03 09:38:16
-142 2018-02-03 09:38:16
-143 2018-02-03 09:38:16
-144 2018-02-03 09:38:16
-145 2018-02-03 09:38:16
-146 2018-02-03 09:38:16
-147 2018-02-03 09:38:16
-148 2018-02-03 09:38:16
-149 2018-02-03 09:38:16
-150 2018-02-03 09:38:16
-151 2018-02-03 09:38:16
-152 2018-02-03 09:38:16
-153 2018-02-03 09:38:16
-154 2018-02-03 09:38:16
-155 2018-02-03 09:38:16
-156 2018-02-03 09:38:16
-157 2018-02-03 09:38:16
-158 2018-02-03 09:38:16
-159 2018-02-03 09:38:17
-160 2018-02-03 09:38:17
-161 2018-02-03 09:38:17
-162 2018-02-03 09:38:17
-163 2018-02-03 09:38:17
-164 2018-02-03 09:38:17
-165 2018-02-03 09:38:17
-166 2018-02-03 09:38:17
-167 2018-02-03 09:38:17
-168 2018-02-03 09:38:17
-169 2018-02-03 09:38:17
-170 2018-02-03 09:38:17
-171 2018-02-03 09:38:17
-172 2018-02-03 09:38:17
-173 2018-02-03 09:38:17
-174 2018-02-03 09:38:17
+1   2018-02-07 00:57:32
+2   2018-02-07 00:57:32
+3   2018-02-07 00:57:32
+4   2018-02-07 00:57:32
+5   2018-02-07 00:57:32
+6   2018-02-07 00:57:32
+7   2018-02-07 00:57:32
+8   2018-02-07 00:57:32
+9   2018-02-07 00:57:32
+10  2018-02-07 00:57:32
+11  2018-02-07 00:57:32
+12  2018-02-07 00:57:32
+13  2018-02-07 00:57:32
+14  2018-02-07 00:57:32
+15  2018-02-07 00:57:32
+16  2018-02-07 00:57:32
+17  2018-02-07 00:57:32
+18  2018-02-07 00:57:32
+19  2018-02-07 00:57:32
+20  2018-02-07 00:57:32
+21  2018-02-07 00:57:32
+22  2018-02-07 00:57:32
+23  2018-02-07 00:57:32
+24  2018-02-07 00:57:32
+25  2018-02-07 00:57:32
+26  2018-02-07 00:57:32
+27  2018-02-07 00:57:32
+28  2018-02-07 00:57:32
+29  2018-02-07 00:57:32
+30  2018-02-07 00:57:32
+31  2018-02-07 00:57:32
+32  2018-02-07 00:57:32
+33  2018-02-07 00:57:32
+34  2018-02-07 00:57:32
+35  2018-02-07 00:57:32
+36  2018-02-07 00:57:32
+37  2018-02-07 00:57:32
+38  2018-02-07 00:57:32
+39  2018-02-07 00:57:32
+40  2018-02-07 00:57:32
+41  2018-02-07 00:57:33
+42  2018-02-07 00:57:33
+43  2018-02-07 00:57:33
+44  2018-02-07 00:57:33
+45  2018-02-07 00:57:33
+46  2018-02-07 00:57:33
+47  2018-02-07 00:57:33
+48  2018-02-07 00:57:33
+49  2018-02-07 00:57:33
+50  2018-02-07 00:57:33
+51  2018-02-07 00:57:33
+52  2018-02-07 00:57:33
+53  2018-02-07 00:57:33
+54  2018-02-07 00:57:33
+55  2018-02-07 00:57:33
+56  2018-02-07 00:57:33
+57  2018-02-07 00:57:33
+58  2018-02-07 00:57:33
+59  2018-02-07 00:57:33
+60  2018-02-07 00:57:33
+61  2018-02-07 00:57:33
+62  2018-02-07 00:57:33
+63  2018-02-07 00:57:33
+64  2018-02-07 00:57:33
+65  2018-02-07 00:57:33
+66  2018-02-07 00:57:33
+67  2018-02-07 00:57:33
+68  2018-02-07 00:57:33
+69  2018-02-07 00:57:33
+70  2018-02-07 00:57:33
+71  2018-02-07 00:57:33
+72  2018-02-07 00:57:33
+73  2018-02-07 00:57:33
+74  2018-02-07 00:57:33
+75  2018-02-07 00:57:33
+76  2018-02-07 00:57:33
+77  2018-02-07 00:57:33
+78  2018-02-07 00:57:34
+79  2018-02-07 00:57:34
+80  2018-02-07 00:57:34
+81  2018-02-07 00:57:34
+82  2018-02-07 00:57:34
+83  2018-02-07 00:57:34
+84  2018-02-07 00:57:34
+85  2018-02-07 00:57:34
+86  2018-02-07 00:57:34
+87  2018-02-07 00:57:34
+88  2018-02-07 00:57:34
+89  2018-02-07 00:57:34
+90  2018-02-07 00:57:34
+91  2018-02-07 00:57:34
+92  2018-02-07 00:57:34
+93  2018-02-07 00:57:34
+94  2018-02-07 00:57:34
+95  2018-02-07 00:57:34
+96  2018-02-07 00:57:34
+97  2018-02-07 00:57:34
+98  2018-02-07 00:57:34
+99  2018-02-07 00:57:34
+100 2018-02-07 00:57:34
+101 2018-02-07 00:57:34
+102 2018-02-07 00:57:34
+103 2018-02-07 00:57:34
+104 2018-02-07 00:57:34
+105 2018-02-07 00:57:34
+106 2018-02-07 00:57:34
+107 2018-02-07 00:57:34
+108 2018-02-07 00:57:34
+109 2018-02-07 00:57:34
+110 2018-02-07 00:57:34
+111 2018-02-07 00:57:34
+112 2018-02-07 00:57:34
+113 2018-02-07 00:57:34
+114 2018-02-07 00:57:34
+115 2018-02-07 00:57:34
+116 2018-02-07 00:57:34
+117 2018-02-07 00:57:34
+118 2018-02-07 00:57:34
+119 2018-02-07 00:57:34
+120 2018-02-07 00:57:34
+121 2018-02-07 00:57:34
+122 2018-02-07 00:57:34
+123 2018-02-07 00:57:34
+124 2018-02-07 00:57:34
+125 2018-02-07 00:57:34
+126 2018-02-07 00:57:34
+127 2018-02-07 00:57:34
+128 2018-02-07 00:57:34
+129 2018-02-07 00:57:34
+130 2018-02-07 00:57:34
+131 2018-02-07 00:57:34
+132 2018-02-07 00:57:34
+133 2018-02-07 00:57:34
+134 2018-02-07 00:57:34
+135 2018-02-07 00:57:34
+136 2018-02-07 00:57:34
+137 2018-02-07 00:57:34
+138 2018-02-07 00:57:34
+139 2018-02-07 00:57:34
+140 2018-02-07 00:57:34
+141 2018-02-07 00:57:34
+142 2018-02-07 00:57:34
+143 2018-02-07 00:57:34
+144 2018-02-07 00:57:34
+145 2018-02-07 00:57:34
+146 2018-02-07 00:57:34
+147 2018-02-07 00:57:34
+148 2018-02-07 00:57:34
+149 2018-02-07 00:57:34
+150 2018-02-07 00:57:35
+151 2018-02-07 00:57:35
+152 2018-02-07 00:57:35
+153 2018-02-07 00:57:35
+154 2018-02-07 00:57:35
+155 2018-02-07 00:57:35
+156 2018-02-07 00:57:35
+157 2018-02-07 00:57:35
+158 2018-02-07 00:57:35
+159 2018-02-07 00:57:35
+160 2018-02-07 00:57:35
+161 2018-02-07 00:57:35
+162 2018-02-07 00:57:35
+163 2018-02-07 00:57:35
+164 2018-02-07 00:57:35
+165 2018-02-07 00:57:35
+166 2018-02-07 00:57:35
+167 2018-02-07 00:57:35
+168 2018-02-07 00:57:35
+169 2018-02-07 00:57:35
+170 2018-02-07 00:57:35
+171 2018-02-07 00:57:35
+172 2018-02-07 00:57:35
+173 2018-02-07 00:57:35
+174 2018-02-07 00:57:35
 > 
 > # We search for a Tag with default "name" regular expression corresponding to 
 > # hash md5hash.
@@ -1634,10 +1634,10 @@ The following objects are masked from ‘package:base’:
 > showLocalRepo(exampleRepoDir)
                            md5hash                             name
 1 ff575c261c949d073b2895b05d1097c3                             iris
-2 24a9abd1be04b9179c9ff8c90bc3f5de 24a9abd1be04b9179c9ff8c90bc3f5de
+2 eab2fcd5ea21438bc1f101f0f9f9f748 eab2fcd5ea21438bc1f101f0f9f9f748
           createdDate
-1 2018-02-03 09:38:17
-2 2018-02-03 09:38:17
+1 2018-02-07 00:57:35
+2 2018-02-07 00:57:35
 > showLocalRepo(exampleRepoDir, method = "tags")
                            artifact
 1  ff575c261c949d073b2895b05d1097c3
@@ -1649,22 +1649,22 @@ The following objects are masked from ‘package:base’:
 7  ff575c261c949d073b2895b05d1097c3
 8  ff575c261c949d073b2895b05d1097c3
 9  ff575c261c949d073b2895b05d1097c3
-10 24a9abd1be04b9179c9ff8c90bc3f5de
+10 eab2fcd5ea21438bc1f101f0f9f9f748
 11 ff575c261c949d073b2895b05d1097c3
 12 ff575c261c949d073b2895b05d1097c3
                                              tag         createdDate
-1                                     format:rda 2018-02-03 09:38:17
-2                                      name:iris 2018-02-03 09:38:17
-3                               class:data.frame 2018-02-03 09:38:17
-4                           varname:Sepal.Length 2018-02-03 09:38:17
-5                            varname:Sepal.Width 2018-02-03 09:38:17
-6                           varname:Petal.Length 2018-02-03 09:38:17
-7                            varname:Petal.Width 2018-02-03 09:38:17
-8                                varname:Species 2018-02-03 09:38:17
-9                       date:2018-02-03 09:38:17 2018-02-03 09:38:17
-10                                    format:rda 2018-02-03 09:38:17
-11 session_info:24a9abd1be04b9179c9ff8c90bc3f5de 2018-02-03 09:38:17
-12                                    format:txt 2018-02-03 09:38:17
+1                                     format:rda 2018-02-07 00:57:35
+2                                      name:iris 2018-02-07 00:57:35
+3                               class:data.frame 2018-02-07 00:57:35
+4                           varname:Sepal.Length 2018-02-07 00:57:35
+5                            varname:Sepal.Width 2018-02-07 00:57:35
+6                           varname:Petal.Length 2018-02-07 00:57:35
+7                            varname:Petal.Width 2018-02-07 00:57:35
+8                                varname:Species 2018-02-07 00:57:35
+9                       date:2018-02-07 00:57:35 2018-02-07 00:57:35
+10                                    format:rda 2018-02-07 00:57:35
+11 session_info:eab2fcd5ea21438bc1f101f0f9f9f748 2018-02-07 00:57:35
+12                                    format:txt 2018-02-07 00:57:35
 > 
 > # We can notice that there is only one md5hash 
 > # (and second for archiveSessionInfo) in repo so we will use it
@@ -2259,10 +2259,10 @@ detaching ‘package:dplyr’
 > showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
                            md5hash                             name
 1 4c43fa8a4d8f0cbf65353e397f37338c                            swiss
-2 b4ee4de7f8fa252e88d544c6a14cb3a0 b4ee4de7f8fa252e88d544c6a14cb3a0
+2 22810d5ddca7f1564d740a8229d4b401 22810d5ddca7f1564d740a8229d4b401
           createdDate
-1 2018-02-03 09:38:18
-2 2018-02-03 09:38:18
+1 2018-02-07 00:57:36
+2 2018-02-07 00:57:36
 > showLocalRepo(method = "tags", repoDir = exampleRepoDir)
                            artifact
 1  4c43fa8a4d8f0cbf65353e397f37338c
@@ -2275,23 +2275,23 @@ detaching ‘package:dplyr’
 8  4c43fa8a4d8f0cbf65353e397f37338c
 9  4c43fa8a4d8f0cbf65353e397f37338c
 10 4c43fa8a4d8f0cbf65353e397f37338c
-11 b4ee4de7f8fa252e88d544c6a14cb3a0
+11 22810d5ddca7f1564d740a8229d4b401
 12 4c43fa8a4d8f0cbf65353e397f37338c
 13 4c43fa8a4d8f0cbf65353e397f37338c
                                              tag         createdDate
-1                                     format:rda 2018-02-03 09:38:18
-2                                     name:swiss 2018-02-03 09:38:18
-3                               class:data.frame 2018-02-03 09:38:18
-4                              varname:Fertility 2018-02-03 09:38:18
-5                            varname:Agriculture 2018-02-03 09:38:18
-6                            varname:Examination 2018-02-03 09:38:18
-7                              varname:Education 2018-02-03 09:38:18
-8                               varname:Catholic 2018-02-03 09:38:18
-9                       varname:Infant.Mortality 2018-02-03 09:38:18
-10                      date:2018-02-03 09:38:18 2018-02-03 09:38:18
-11                                    format:rda 2018-02-03 09:38:18
-12 session_info:b4ee4de7f8fa252e88d544c6a14cb3a0 2018-02-03 09:38:18
-13                                    format:txt 2018-02-03 09:38:18
+1                                     format:rda 2018-02-07 00:57:36
+2                                     name:swiss 2018-02-07 00:57:36
+3                               class:data.frame 2018-02-07 00:57:36
+4                              varname:Fertility 2018-02-07 00:57:36
+5                            varname:Agriculture 2018-02-07 00:57:36
+6                            varname:Examination 2018-02-07 00:57:36
+7                              varname:Education 2018-02-07 00:57:36
+8                               varname:Catholic 2018-02-07 00:57:36
+9                       varname:Infant.Mortality 2018-02-07 00:57:36
+10                      date:2018-02-07 00:57:36 2018-02-07 00:57:36
+11                                    format:rda 2018-02-07 00:57:36
+12 session_info:22810d5ddca7f1564d740a8229d4b401 2018-02-07 00:57:36
+13                                    format:txt 2018-02-07 00:57:36
 > 
 > loadFromLocalRepo(md5hash = '2a6e492cb6982f230e48cf46023e2e4f',
 +   repoDir = system.file("graphGallery", package = "archivist"), value = TRUE) -> model

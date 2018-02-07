@@ -1,5 +1,5 @@
 * using log directory ‘/home/tomas/cran/rlibro/check/archivist.Rcheck’
-* using R Under development (unstable) (2018-02-02 r74199)
+* using R Under development (unstable) (2018-02-06 r74231)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘archivist/DESCRIPTION’ ... OK
@@ -62,10 +62,10 @@ The error most likely occurred in:
 > showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
                            md5hash                             name
 1 4c43fa8a4d8f0cbf65353e397f37338c                            swiss
-2 b4ee4de7f8fa252e88d544c6a14cb3a0 b4ee4de7f8fa252e88d544c6a14cb3a0
+2 22810d5ddca7f1564d740a8229d4b401 22810d5ddca7f1564d740a8229d4b401
           createdDate
-1 2018-02-03 09:38:18
-2 2018-02-03 09:38:18
+1 2018-02-07 00:57:36
+2 2018-02-07 00:57:36
 > showLocalRepo(method = "tags", repoDir = exampleRepoDir)
                            artifact
 1  4c43fa8a4d8f0cbf65353e397f37338c
@@ -78,23 +78,23 @@ The error most likely occurred in:
 8  4c43fa8a4d8f0cbf65353e397f37338c
 9  4c43fa8a4d8f0cbf65353e397f37338c
 10 4c43fa8a4d8f0cbf65353e397f37338c
-11 b4ee4de7f8fa252e88d544c6a14cb3a0
+11 22810d5ddca7f1564d740a8229d4b401
 12 4c43fa8a4d8f0cbf65353e397f37338c
 13 4c43fa8a4d8f0cbf65353e397f37338c
                                              tag         createdDate
-1                                     format:rda 2018-02-03 09:38:18
-2                                     name:swiss 2018-02-03 09:38:18
-3                               class:data.frame 2018-02-03 09:38:18
-4                              varname:Fertility 2018-02-03 09:38:18
-5                            varname:Agriculture 2018-02-03 09:38:18
-6                            varname:Examination 2018-02-03 09:38:18
-7                              varname:Education 2018-02-03 09:38:18
-8                               varname:Catholic 2018-02-03 09:38:18
-9                       varname:Infant.Mortality 2018-02-03 09:38:18
-10                      date:2018-02-03 09:38:18 2018-02-03 09:38:18
-11                                    format:rda 2018-02-03 09:38:18
-12 session_info:b4ee4de7f8fa252e88d544c6a14cb3a0 2018-02-03 09:38:18
-13                                    format:txt 2018-02-03 09:38:18
+1                                     format:rda 2018-02-07 00:57:36
+2                                     name:swiss 2018-02-07 00:57:36
+3                               class:data.frame 2018-02-07 00:57:36
+4                              varname:Fertility 2018-02-07 00:57:36
+5                            varname:Agriculture 2018-02-07 00:57:36
+6                            varname:Examination 2018-02-07 00:57:36
+7                              varname:Education 2018-02-07 00:57:36
+8                               varname:Catholic 2018-02-07 00:57:36
+9                       varname:Infant.Mortality 2018-02-07 00:57:36
+10                      date:2018-02-07 00:57:36 2018-02-07 00:57:36
+11                                    format:rda 2018-02-07 00:57:36
+12 session_info:22810d5ddca7f1564d740a8229d4b401 2018-02-07 00:57:36
+13                                    format:txt 2018-02-07 00:57:36
 > 
 > loadFromLocalRepo(md5hash = '2a6e492cb6982f230e48cf46023e2e4f',
 +   repoDir = system.file("graphGallery", package = "archivist"), value = TRUE) -> model
@@ -630,36 +630,19 @@ Error in gzfile(file, "wb") : cannot open the connection
 Calls: asave -> save -> gzfile
 Execution halted
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... ERROR
+* checking tests ... OK
   Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-         user = user, repo = repo, branch = branch, subdir = subdir)
-  3: stop_for_status(req)
-  
-  ── 3. Error: zip*Repo reacts properly on proper arguments  (@test_zip.R#12)  ───
-  Forbidden (HTTP 403).
-  1: stop_for_status(req) at testthat/test_zip.R:12
-  
-  ══ testthat results  ═══════════════════════════════════════════════════════════
-  OK: 35 SKIPPED: 0 FAILED: 3
-  1. Error: createMD works (@test_createMD.R#14) 
-  2. Error: copying from other repositories and showRepo (@test_jss_artilce.R#42) 
-  3. Error: zip*Repo reacts properly on proper arguments  (@test_zip.R#12) 
-  
-  Error: testthat unit tests failed
-  Execution halted
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
 * checking re-building of vignette outputs ... WARNING
 Error in re-building vignettes:
   ...
-Quitting from lines 306-311 (jss2342.Rnw) 
+Quitting from lines 358-360 (jss2342.Rnw) 
 Error: processing vignette 'jss2342.Rnw' failed with diagnostics:
-Forbidden (HTTP 403).
+cannot open the connection
 Execution halted
 
 * checking PDF version of manual ... OK
 * DONE
-Status: 2 ERRORs, 1 WARNING
+Status: 1 ERROR, 1 WARNING
