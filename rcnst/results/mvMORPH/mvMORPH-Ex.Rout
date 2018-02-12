@@ -1,0 +1,95 @@
+
+R Under development (unstable) (2018-02-11 r74244) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "mvMORPH"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('mvMORPH')
+Loading required package: phytools
+Loading required package: ape
+Loading required package: maps
+Loading required package: corpcor
+Loading required package: subplex
+##
+## mvMORPH package (1.0.9)
+## Multivariate evolutionary models
+##
+## See the tutorials: browseVignettes("mvMORPH")
+##
+## To cite package 'mvMORPH': citation("mvMORPH")
+##
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("LRT")
+> ### * LRT
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: LRT
+> ### Title: Likelihood Ratio Test
+> ### Aliases: LRT
+> ### Keywords: LRT Loglikelihood ratio test Models comparison
+> 
+> ### ** Examples
+> 
+> 
+> 
+> ## Simulated dataset
+> set.seed(14)
+> # Generating a random tree
+> tree<-pbtree(n=50)
+> 
+> # Setting the regime states of tip species
+> sta<-as.vector(c(rep("Forest",20),rep("Savannah",30))); names(sta)<-tree$tip.label
+> 
+> # Making the simmap tree with mapped states
+> tree<-make.simmap(tree,sta , model="ER", nsim=1)
+make.simmap is sampling character histories conditioned on the transition matrix
+
+Q =
+              Forest    Savannah
+Forest   -0.01865646  0.01865646
+Savannah  0.01865646 -0.01865646
+(estimated using likelihood);
+and (mean) root node prior probabilities
+pi =
+  Forest Savannah 
+     0.5      0.5 
+Done.
+> col<-c("blue","orange"); names(col)<-c("Forest","Savannah")
+> 
+> # Plot of the phylogeny for illustration
+> plotSimmap(tree,col,fsize=0.6,node.numbers=FALSE,lwd=3, pts=FALSE)
+> 
+> # Simulate two correlated traits evolving along the phylogeny
+> traits<-mvSIM(tree,nsim=1, model="BMM", param=list(sigma=list(matrix(c(2,1,1,1.5),2,2),
++          matrix(c(4,1,1,4),2,2)), ntraits=2, names_traits=c("head.size","mouth.size")))
+No values provided for theta, default value fixed to: 0 0 
+> 
+> # Fit of model 1
+> mod1<-mvBM(tree,traits,model="BMM")
+Error in bm_fun_matrix(C, buildSigma(par[seq_len(nparsig)], index.mat,  : 
+  cannot get ALTVEC DATAPTR during GC
+Calls: mvBM ... optim -> <Anonymous> -> fn -> lik.Mult -> bm_fun_matrix
+Execution halted
+Error in levels(f) <- as.character(levels) : 
+  cannot get ALTSTRING_ELT during GC
+Calls: <Anonymous> ... tryCatch -> tryCatchList -> tryCatchOne -> <Anonymous>
