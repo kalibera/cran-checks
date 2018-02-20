@@ -1,10 +1,10 @@
 * using log directory ‘/home/tomas/cran/rlibro/check/archivist.Rcheck’
-* using R Under development (unstable) (2018-02-13 r74247)
+* using R Under development (unstable) (2018-02-19 r74276)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘archivist/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘archivist’ version ‘2.2’
+* this is package ‘archivist’ version ‘2.3’
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -54,7 +54,7 @@ The error most likely occurred in:
 > 
 > ### ** Examples
 > 
-> exampleRepoDir <- tempfile()
+> exampleRepoDir <- tempfile(tmpdir = ".")
 > createLocalRepo(repoDir = exampleRepoDir)
 > data(swiss)
 > saveToLocalRepo(swiss, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
@@ -62,10 +62,10 @@ The error most likely occurred in:
 > showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
                            md5hash                             name
 1 4c43fa8a4d8f0cbf65353e397f37338c                            swiss
-2 64e6d31c25d5020ba3d0a49e8f1998de 64e6d31c25d5020ba3d0a49e8f1998de
+2 afc705b11b37f50c2c7d4165794342bb afc705b11b37f50c2c7d4165794342bb
           createdDate
-1 2018-02-13 23:19:45
-2 2018-02-13 23:19:45
+1 2018-02-19 21:37:39
+2 2018-02-19 21:37:39
 > showLocalRepo(method = "tags", repoDir = exampleRepoDir)
                            artifact
 1  4c43fa8a4d8f0cbf65353e397f37338c
@@ -78,23 +78,23 @@ The error most likely occurred in:
 8  4c43fa8a4d8f0cbf65353e397f37338c
 9  4c43fa8a4d8f0cbf65353e397f37338c
 10 4c43fa8a4d8f0cbf65353e397f37338c
-11 64e6d31c25d5020ba3d0a49e8f1998de
+11 afc705b11b37f50c2c7d4165794342bb
 12 4c43fa8a4d8f0cbf65353e397f37338c
 13 4c43fa8a4d8f0cbf65353e397f37338c
                                              tag         createdDate
-1                                     format:rda 2018-02-13 23:19:45
-2                                     name:swiss 2018-02-13 23:19:45
-3                               class:data.frame 2018-02-13 23:19:45
-4                              varname:Fertility 2018-02-13 23:19:45
-5                            varname:Agriculture 2018-02-13 23:19:45
-6                            varname:Examination 2018-02-13 23:19:45
-7                              varname:Education 2018-02-13 23:19:45
-8                               varname:Catholic 2018-02-13 23:19:45
-9                       varname:Infant.Mortality 2018-02-13 23:19:45
-10                      date:2018-02-13 23:19:45 2018-02-13 23:19:45
-11                                    format:rda 2018-02-13 23:19:45
-12 session_info:64e6d31c25d5020ba3d0a49e8f1998de 2018-02-13 23:19:45
-13                                    format:txt 2018-02-13 23:19:45
+1                                     format:rda 2018-02-19 21:37:39
+2                                     name:swiss 2018-02-19 21:37:39
+3                               class:data.frame 2018-02-19 21:37:39
+4                              varname:Fertility 2018-02-19 21:37:39
+5                            varname:Agriculture 2018-02-19 21:37:39
+6                            varname:Examination 2018-02-19 21:37:39
+7                              varname:Education 2018-02-19 21:37:39
+8                               varname:Catholic 2018-02-19 21:37:39
+9                       varname:Infant.Mortality 2018-02-19 21:37:39
+10                      date:2018-02-19 21:37:39 2018-02-19 21:37:39
+11                                    format:rda 2018-02-19 21:37:39
+12 session_info:afc705b11b37f50c2c7d4165794342bb 2018-02-19 21:37:39
+13                                    format:txt 2018-02-19 21:37:39
 > 
 > loadFromLocalRepo(md5hash = '2a6e492cb6982f230e48cf46023e2e4f',
 +   repoDir = system.file("graphGallery", package = "archivist"), value = TRUE) -> model

@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2018-02-13 r74247) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-02-19 r74276) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -21,7 +21,7 @@ Type 'q()' to quit R.
 > source(file.path(R.home("share"), "R", "examples-header.R"))
 > options(warn = 1)
 > library('archivist')
-Welcome to archivist (version: 2.2).
+Welcome to archivist (version: 2.3).
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 > base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
@@ -506,6 +506,17 @@ https://raw.githubusercontent.com/pbiecek/graphGallery/master/gallery/f5185c458b
 > ##D showRemoteRepo(subdir = 'ex2')
 > ##D 
 > ##D aoptions('subdir')
+> ##D 
+> ##D ## EXAMPLE 4 : SET sha256 as a hasing algorithm
+> ##D aoptions("hashFunction", value = "sha256")
+> ##D exampleRepoDir <- tempfile()
+> ##D createLocalRepo(exampleRepoDir)
+> ##D aoptions(key = "repoDir", value = exampleRepoDir)
+> ##D 
+> ##D data(iris)
+> ##D saveToLocalRepo(iris)
+> ##D getTagsLocal(digest::digest(iris, algo = "sha256"))
+> ##D 
 > ## End(Not run)
 > 
 > 
@@ -710,63 +721,52 @@ Untracing function "lm" in package "stats"
 > 
 > ### ** Examples
 > 
-> 
-> # objects preparation
-> library(lubridate)
-
-Attaching package: ‘lubridate’
-
-The following object is masked from ‘package:base’:
-
-    date
-
-> cacheRepo <- tempfile()
-> createLocalRepo( cacheRepo )
-> 
-> ## Example 1:
-> # cache is useful when objects used by FUN are not that big but calculations
-> # are time-comsuming. Take a look at this example:
-> fun <- function(n) {replicate(n, summary(lm(Sepal.Length~Species, iris))$r.squared)}
-> 
-> # let's check time of two evaluations of cache function
-> system.time( res <- cache(cacheRepo, fun, 1000) )
-   user  system elapsed 
-  1.944   0.172   2.119 
-> system.time( res <- cache(cacheRepo, fun, 1000) ) 
-   user  system elapsed 
-  2.008   0.008   2.082 
-> # The second call is much faster. Why is it so? Because the result of fun
-> # function evaluation has been stored in local cacheRepo during the first evaluation
-> # of cache. In the second call of cache we are simply loading the result of fun
-> # from local cacheRepo Repository.
-> 
-> ## Example 2:
-> testFun <- function(x) {cat(x);x}
-> 
-> # testFun will be executed and saved to cacheRepo
-> tmp <- cache(cacheRepo, testFun, "Say hallo!")
-Say hallo!> 
-> # testFun execution will be loaded from repository
-> tmp <- cache(cacheRepo, testFun, "Say hallo!")
-Say hallo!> 
-> # testFun will be executed once again as it fails with expiration date. It will
-> # be saved to cacheRepo.
-> tmp <- cache(cacheRepo, testFun, "Say hallo!", notOlderThan = now())
-Say hallo!> 
-> # testFun execution will be loaded from repository as it
-> # passes with expiration date [within hour]
-> tmp <- cache(cacheRepo, testFun, "Say hallo!", notOlderThan = now() - hours(1))
-Say hallo!> 
-> deleteLocalRepo( cacheRepo, TRUE)
-> rm( cacheRepo )
+> ## Not run: 
+> ##D 
+> ##D # objects preparation
+> ##D library("lubridate")
+> ##D cacheRepo <- tempfile()
+> ##D createLocalRepo( cacheRepo )
+> ##D 
+> ##D ## Example 1:
+> ##D # cache is useful when objects used by FUN are not that big but calculations
+> ##D # are time-comsuming. Take a look at this example:
+> ##D fun <- function(n) {replicate(n, summary(lm(Sepal.Length~Species, iris))$r.squared)}
+> ##D 
+> ##D # let's check time of two evaluations of cache function
+> ##D system.time( res <- cache(cacheRepo, fun, 1000) )
+> ##D system.time( res <- cache(cacheRepo, fun, 1000) ) 
+> ##D # The second call is much faster. Why is it so? Because the result of fun
+> ##D # function evaluation has been stored in local cacheRepo during the first evaluation
+> ##D # of cache. In the second call of cache we are simply loading the result of fun
+> ##D # from local cacheRepo Repository.
+> ##D 
+> ##D ## Example 2:
+> ##D testFun <- function(x) {cat(x);x}
+> ##D 
+> ##D # testFun will be executed and saved to cacheRepo
+> ##D tmp <- cache(cacheRepo, testFun, "Say hallo!")
+> ##D 
+> ##D # testFun execution will be loaded from repository
+> ##D tmp <- cache(cacheRepo, testFun, "Say hallo!")
+> ##D 
+> ##D # testFun will be executed once again as it fails with expiration date. It will
+> ##D # be saved to cacheRepo.
+> ##D tmp <- cache(cacheRepo, testFun, "Say hallo!", notOlderThan = now())
+> ##D 
+> ##D # testFun execution will be loaded from repository as it
+> ##D # passes with expiration date [within hour]
+> ##D tmp <- cache(cacheRepo, testFun, "Say hallo!", notOlderThan = now() - hours(1))
+> ##D 
+> ##D deleteLocalRepo( cacheRepo, TRUE)
+> ##D rm( cacheRepo )
+> ##D 
+> ## End(Not run)
 > 
 > 
 > 
 > 
 > cleanEx()
-
-detaching ‘package:lubridate’
-
 > nameEx("copyToRepo")
 > ### * copyToRepo
 > 
@@ -779,7 +779,6 @@ detaching ‘package:lubridate’
 > ### ** Examples
 > 
 > ## Not run: 
-> ##D 
 > ##D 
 > ##D ## Using archivist remote Repository to copy artifacts
 > ##D # creating example Repository
@@ -942,14 +941,13 @@ detaching ‘package:lubridate’
 > 
 > ### ** Examples
 > 
-> 
-> exampleRepoDir <- tempfile()
-> createLocalRepo( repoDir = exampleRepoDir, default =  TRUE )
-> data(iris)
-> saveToLocalRepo(iris)
-[1] "ff575c261c949d073b2895b05d1097c3"
-> deleteLocalRepo( repoDir = exampleRepoDir, unset = TRUE, deleteRoot = TRUE)
-NULL
+> ## Not run: 
+> ##D exampleRepoDir <- tempfile()
+> ##D createLocalRepo( repoDir = exampleRepoDir, default =  TRUE )
+> ##D data(iris)
+> ##D saveToLocalRepo(iris)
+> ##D deleteLocalRepo( repoDir = exampleRepoDir, unset = TRUE, deleteRoot = TRUE)
+> ## End(Not run)
 > 
 > 
 > 
@@ -988,777 +986,79 @@ NULL
 > 
 > 
 > ### Local version
-> 
-> ## EXAMPLE with pipe operator %a%
-> 
-> # Creating empty repository
-> exampleRepoDir <- tempfile()
-> createLocalRepo( exampleRepoDir )
-> 
-> library(dplyr)
-
-Attaching package: ‘dplyr’
-
-The following objects are masked from ‘package:stats’:
-
-    filter, lag
-
-The following objects are masked from ‘package:base’:
-
-    intersect, setdiff, setequal, union
-
-> data(mtcars)
-> setLocalRepo(repoDir = exampleRepoDir)
-> hash <- mtcars %a% 
-+  group_by(cyl, am) %a%
-+    select(mpg, cyl, wt, am) %a%
-+      summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %a%
-+        filter(avgmpg > 20) %a%
-+        saveToRepo( exampleRepoDir )
->        
-> showLocalRepo(exampleRepoDir)
-                            md5hash
-1  a63c70e73b58d0823ab3bcbd3b543d6f
-2  790992e213aad6bb1790efbb12ea61cc
-3  403c3921f0fb68cbc8d5c6ca18e49141
-4  790992e213aad6bb1790efbb12ea61cc
-5  403c3921f0fb68cbc8d5c6ca18e49141
-6  cecf29a75dd5e2134c1e563af8be1edc
-7  05c7067c4f4fe4fcb5fad606097815c1
-8  cecf29a75dd5e2134c1e563af8be1edc
-9  05c7067c4f4fe4fcb5fad606097815c1
-10 cecf29a75dd5e2134c1e563af8be1edc
-11 497ae8d6e1657de7bfbb995b3d0555d0
-12 cecf29a75dd5e2134c1e563af8be1edc
-13 d6c834d34a9be232e2ada1455143cac6
-14 cecf29a75dd5e2134c1e563af8be1edc
-15 d87c917f988f8035157eeac8c1acb1a3
-16 cecf29a75dd5e2134c1e563af8be1edc
-17 d87c917f988f8035157eeac8c1acb1a3
-18 cecf29a75dd5e2134c1e563af8be1edc
-19 d87c917f988f8035157eeac8c1acb1a3
-20 cecf29a75dd5e2134c1e563af8be1edc
-21 61151f9db7da9f6e15f485cf083d4f89
-22 cecf29a75dd5e2134c1e563af8be1edc
-                                                                                                                                            name
-1                                                                                                                                         mtcars
-2                                                                                                               790992e213aad6bb1790efbb12ea61cc
-3                                                                                                                                        res_val
-4                                                                                                               790992e213aad6bb1790efbb12ea61cc
-5                                                                                                                   mtcars %a% group_by(cyl, am)
-6                                                                                                               cecf29a75dd5e2134c1e563af8be1edc
-7                                                                                                                                        res_val
-8                                                                                                               cecf29a75dd5e2134c1e563af8be1edc
-9                                                                                      mtcars %a% group_by(cyl, am) %a% select(mpg, cyl, wt, am)
-10                                                                                                              cecf29a75dd5e2134c1e563af8be1edc
-11                                                                                                                                       res_val
-12                                                                                                              cecf29a75dd5e2134c1e563af8be1edc
-13                             mtcars %a% group_by(cyl, am) %a% select(mpg, cyl, wt, am) %a%     summarise(avgmpg = mean(mpg), avgwt = mean(wt))
-14                                                                                                              cecf29a75dd5e2134c1e563af8be1edc
-15                                                                                                                                       res_val
-16                                                                                                              cecf29a75dd5e2134c1e563af8be1edc
-17                                                                                                                                         __LHS
-18                                                                                                              cecf29a75dd5e2134c1e563af8be1edc
-19 mtcars %a% group_by(cyl, am) %a% select(mpg, cyl, wt, am) %a%     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %a% filter(avgmpg >     20)
-20                                                                                                              cecf29a75dd5e2134c1e563af8be1edc
-21                                                                                                                                       res_val
-22                                                                                                              cecf29a75dd5e2134c1e563af8be1edc
-           createdDate
-1  2018-02-13 23:19:41
-2  2018-02-13 23:19:41
-3  2018-02-13 23:19:41
-4  2018-02-13 23:19:41
-5  2018-02-13 23:19:42
-6  2018-02-13 23:19:42
-7  2018-02-13 23:19:42
-8  2018-02-13 23:19:42
-9  2018-02-13 23:19:43
-10 2018-02-13 23:19:43
-11 2018-02-13 23:19:43
-12 2018-02-13 23:19:43
-13 2018-02-13 23:19:43
-14 2018-02-13 23:19:43
-15 2018-02-13 23:19:43
-16 2018-02-13 23:19:43
-17 2018-02-13 23:19:43
-18 2018-02-13 23:19:43
-19 2018-02-13 23:19:44
-20 2018-02-13 23:19:44
-21 2018-02-13 23:19:44
-22 2018-02-13 23:19:44
-> showLocalRepo(exampleRepoDir, method = "tags")
-                            artifact
-1   a63c70e73b58d0823ab3bcbd3b543d6f
-2   a63c70e73b58d0823ab3bcbd3b543d6f
-3   a63c70e73b58d0823ab3bcbd3b543d6f
-4   a63c70e73b58d0823ab3bcbd3b543d6f
-5   a63c70e73b58d0823ab3bcbd3b543d6f
-6   a63c70e73b58d0823ab3bcbd3b543d6f
-7   a63c70e73b58d0823ab3bcbd3b543d6f
-8   a63c70e73b58d0823ab3bcbd3b543d6f
-9   a63c70e73b58d0823ab3bcbd3b543d6f
-10  a63c70e73b58d0823ab3bcbd3b543d6f
-11  a63c70e73b58d0823ab3bcbd3b543d6f
-12  a63c70e73b58d0823ab3bcbd3b543d6f
-13  a63c70e73b58d0823ab3bcbd3b543d6f
-14  a63c70e73b58d0823ab3bcbd3b543d6f
-15  a63c70e73b58d0823ab3bcbd3b543d6f
-16  790992e213aad6bb1790efbb12ea61cc
-17  a63c70e73b58d0823ab3bcbd3b543d6f
-18  a63c70e73b58d0823ab3bcbd3b543d6f
-19  403c3921f0fb68cbc8d5c6ca18e49141
-20  403c3921f0fb68cbc8d5c6ca18e49141
-21  403c3921f0fb68cbc8d5c6ca18e49141
-22  403c3921f0fb68cbc8d5c6ca18e49141
-23  403c3921f0fb68cbc8d5c6ca18e49141
-24  403c3921f0fb68cbc8d5c6ca18e49141
-25  403c3921f0fb68cbc8d5c6ca18e49141
-26  403c3921f0fb68cbc8d5c6ca18e49141
-27  403c3921f0fb68cbc8d5c6ca18e49141
-28  403c3921f0fb68cbc8d5c6ca18e49141
-29  403c3921f0fb68cbc8d5c6ca18e49141
-30  403c3921f0fb68cbc8d5c6ca18e49141
-31  403c3921f0fb68cbc8d5c6ca18e49141
-32  403c3921f0fb68cbc8d5c6ca18e49141
-33  403c3921f0fb68cbc8d5c6ca18e49141
-34  403c3921f0fb68cbc8d5c6ca18e49141
-35  403c3921f0fb68cbc8d5c6ca18e49141
-36  403c3921f0fb68cbc8d5c6ca18e49141
-37  403c3921f0fb68cbc8d5c6ca18e49141
-38  403c3921f0fb68cbc8d5c6ca18e49141
-39  790992e213aad6bb1790efbb12ea61cc
-40  403c3921f0fb68cbc8d5c6ca18e49141
-41  403c3921f0fb68cbc8d5c6ca18e49141
-42  403c3921f0fb68cbc8d5c6ca18e49141
-43  403c3921f0fb68cbc8d5c6ca18e49141
-44  403c3921f0fb68cbc8d5c6ca18e49141
-45  403c3921f0fb68cbc8d5c6ca18e49141
-46  403c3921f0fb68cbc8d5c6ca18e49141
-47  403c3921f0fb68cbc8d5c6ca18e49141
-48  403c3921f0fb68cbc8d5c6ca18e49141
-49  403c3921f0fb68cbc8d5c6ca18e49141
-50  403c3921f0fb68cbc8d5c6ca18e49141
-51  403c3921f0fb68cbc8d5c6ca18e49141
-52  403c3921f0fb68cbc8d5c6ca18e49141
-53  403c3921f0fb68cbc8d5c6ca18e49141
-54  403c3921f0fb68cbc8d5c6ca18e49141
-55  403c3921f0fb68cbc8d5c6ca18e49141
-56  403c3921f0fb68cbc8d5c6ca18e49141
-57  403c3921f0fb68cbc8d5c6ca18e49141
-58  403c3921f0fb68cbc8d5c6ca18e49141
-59  403c3921f0fb68cbc8d5c6ca18e49141
-60  cecf29a75dd5e2134c1e563af8be1edc
-61  403c3921f0fb68cbc8d5c6ca18e49141
-62  403c3921f0fb68cbc8d5c6ca18e49141
-63  05c7067c4f4fe4fcb5fad606097815c1
-64  05c7067c4f4fe4fcb5fad606097815c1
-65  05c7067c4f4fe4fcb5fad606097815c1
-66  05c7067c4f4fe4fcb5fad606097815c1
-67  05c7067c4f4fe4fcb5fad606097815c1
-68  05c7067c4f4fe4fcb5fad606097815c1
-69  05c7067c4f4fe4fcb5fad606097815c1
-70  05c7067c4f4fe4fcb5fad606097815c1
-71  05c7067c4f4fe4fcb5fad606097815c1
-72  05c7067c4f4fe4fcb5fad606097815c1
-73  05c7067c4f4fe4fcb5fad606097815c1
-74  05c7067c4f4fe4fcb5fad606097815c1
-75  05c7067c4f4fe4fcb5fad606097815c1
-76  cecf29a75dd5e2134c1e563af8be1edc
-77  05c7067c4f4fe4fcb5fad606097815c1
-78  05c7067c4f4fe4fcb5fad606097815c1
-79  05c7067c4f4fe4fcb5fad606097815c1
-80  05c7067c4f4fe4fcb5fad606097815c1
-81  05c7067c4f4fe4fcb5fad606097815c1
-82  05c7067c4f4fe4fcb5fad606097815c1
-83  05c7067c4f4fe4fcb5fad606097815c1
-84  05c7067c4f4fe4fcb5fad606097815c1
-85  05c7067c4f4fe4fcb5fad606097815c1
-86  05c7067c4f4fe4fcb5fad606097815c1
-87  05c7067c4f4fe4fcb5fad606097815c1
-88  05c7067c4f4fe4fcb5fad606097815c1
-89  05c7067c4f4fe4fcb5fad606097815c1
-90  cecf29a75dd5e2134c1e563af8be1edc
-91  05c7067c4f4fe4fcb5fad606097815c1
-92  05c7067c4f4fe4fcb5fad606097815c1
-93  497ae8d6e1657de7bfbb995b3d0555d0
-94  497ae8d6e1657de7bfbb995b3d0555d0
-95  497ae8d6e1657de7bfbb995b3d0555d0
-96  497ae8d6e1657de7bfbb995b3d0555d0
-97  497ae8d6e1657de7bfbb995b3d0555d0
-98  497ae8d6e1657de7bfbb995b3d0555d0
-99  497ae8d6e1657de7bfbb995b3d0555d0
-100 497ae8d6e1657de7bfbb995b3d0555d0
-101 497ae8d6e1657de7bfbb995b3d0555d0
-102 497ae8d6e1657de7bfbb995b3d0555d0
-103 497ae8d6e1657de7bfbb995b3d0555d0
-104 497ae8d6e1657de7bfbb995b3d0555d0
-105 497ae8d6e1657de7bfbb995b3d0555d0
-106 cecf29a75dd5e2134c1e563af8be1edc
-107 497ae8d6e1657de7bfbb995b3d0555d0
-108 497ae8d6e1657de7bfbb995b3d0555d0
-109 d6c834d34a9be232e2ada1455143cac6
-110 d6c834d34a9be232e2ada1455143cac6
-111 d6c834d34a9be232e2ada1455143cac6
-112 d6c834d34a9be232e2ada1455143cac6
-113 d6c834d34a9be232e2ada1455143cac6
-114 d6c834d34a9be232e2ada1455143cac6
-115 d6c834d34a9be232e2ada1455143cac6
-116 d6c834d34a9be232e2ada1455143cac6
-117 d6c834d34a9be232e2ada1455143cac6
-118 d6c834d34a9be232e2ada1455143cac6
-119 d6c834d34a9be232e2ada1455143cac6
-120 cecf29a75dd5e2134c1e563af8be1edc
-121 d6c834d34a9be232e2ada1455143cac6
-122 d6c834d34a9be232e2ada1455143cac6
-123 d87c917f988f8035157eeac8c1acb1a3
-124 d87c917f988f8035157eeac8c1acb1a3
-125 d87c917f988f8035157eeac8c1acb1a3
-126 d87c917f988f8035157eeac8c1acb1a3
-127 d87c917f988f8035157eeac8c1acb1a3
-128 d87c917f988f8035157eeac8c1acb1a3
-129 d87c917f988f8035157eeac8c1acb1a3
-130 d87c917f988f8035157eeac8c1acb1a3
-131 d87c917f988f8035157eeac8c1acb1a3
-132 d87c917f988f8035157eeac8c1acb1a3
-133 d87c917f988f8035157eeac8c1acb1a3
-134 d87c917f988f8035157eeac8c1acb1a3
-135 d87c917f988f8035157eeac8c1acb1a3
-136 cecf29a75dd5e2134c1e563af8be1edc
-137 d87c917f988f8035157eeac8c1acb1a3
-138 d87c917f988f8035157eeac8c1acb1a3
-139 d87c917f988f8035157eeac8c1acb1a3
-140 d87c917f988f8035157eeac8c1acb1a3
-141 d87c917f988f8035157eeac8c1acb1a3
-142 d87c917f988f8035157eeac8c1acb1a3
-143 d87c917f988f8035157eeac8c1acb1a3
-144 d87c917f988f8035157eeac8c1acb1a3
-145 d87c917f988f8035157eeac8c1acb1a3
-146 d87c917f988f8035157eeac8c1acb1a3
-147 d87c917f988f8035157eeac8c1acb1a3
-148 d87c917f988f8035157eeac8c1acb1a3
-149 d87c917f988f8035157eeac8c1acb1a3
-150 cecf29a75dd5e2134c1e563af8be1edc
-151 d87c917f988f8035157eeac8c1acb1a3
-152 d87c917f988f8035157eeac8c1acb1a3
-153 d87c917f988f8035157eeac8c1acb1a3
-154 d87c917f988f8035157eeac8c1acb1a3
-155 d87c917f988f8035157eeac8c1acb1a3
-156 d87c917f988f8035157eeac8c1acb1a3
-157 d87c917f988f8035157eeac8c1acb1a3
-158 d87c917f988f8035157eeac8c1acb1a3
-159 d87c917f988f8035157eeac8c1acb1a3
-160 d87c917f988f8035157eeac8c1acb1a3
-161 d87c917f988f8035157eeac8c1acb1a3
-162 d87c917f988f8035157eeac8c1acb1a3
-163 d87c917f988f8035157eeac8c1acb1a3
-164 cecf29a75dd5e2134c1e563af8be1edc
-165 d87c917f988f8035157eeac8c1acb1a3
-166 d87c917f988f8035157eeac8c1acb1a3
-167 61151f9db7da9f6e15f485cf083d4f89
-168 61151f9db7da9f6e15f485cf083d4f89
-169 61151f9db7da9f6e15f485cf083d4f89
-170 61151f9db7da9f6e15f485cf083d4f89
-171 61151f9db7da9f6e15f485cf083d4f89
-172 61151f9db7da9f6e15f485cf083d4f89
-173 cecf29a75dd5e2134c1e563af8be1edc
-174 61151f9db7da9f6e15f485cf083d4f89
-                                                                                                                                                   tag
-1                                                                                                                                           format:rda
-2                                                                                                                                          name:mtcars
-3                                                                                                                                     class:data.frame
-4                                                                                                                                          varname:mpg
-5                                                                                                                                          varname:cyl
-6                                                                                                                                         varname:disp
-7                                                                                                                                           varname:hp
-8                                                                                                                                         varname:drat
-9                                                                                                                                           varname:wt
-10                                                                                                                                        varname:qsec
-11                                                                                                                                          varname:vs
-12                                                                                                                                          varname:am
-13                                                                                                                                        varname:gear
-14                                                                                                                                        varname:carb
-15                                                                                                                            date:2018-02-13 23:19:41
-16                                                                                                                                          format:rda
-17                                                                                                       session_info:790992e213aad6bb1790efbb12ea61cc
-18                                                                                                                                          format:txt
-19                                                                                                                                          format:rda
-20                                                                                                                                        name:res_val
-21                                                                                                                                    class:grouped_df
-22                                                                                                                                        class:tbl_df
-23                                                                                                                                           class:tbl
-24                                                                                                                                    class:data.frame
-25                                                                                                                                         varname:mpg
-26                                                                                                                                         varname:cyl
-27                                                                                                                                        varname:disp
-28                                                                                                                                          varname:hp
-29                                                                                                                                        varname:drat
-30                                                                                                                                          varname:wt
-31                                                                                                                                        varname:qsec
-32                                                                                                                                          varname:vs
-33                                                                                                                                          varname:am
-34                                                                                                                                        varname:gear
-35                                                                                                                                        varname:carb
-36                                                                                                                            date:2018-02-13 23:19:41
-37                                                                                                                LHS:a63c70e73b58d0823ab3bcbd3b543d6f
-38                                                                                                                               RHS:group_by(cyl, am)
-39                                                                                                                                          format:rda
-40                                                                                                       session_info:790992e213aad6bb1790efbb12ea61cc
-41                                                                                                                                          format:txt
-42                                                                                                                                          format:rda
-43                                                                                                                   name:mtcars %a% group_by(cyl, am)
-44                                                                                                                                    class:grouped_df
-45                                                                                                                                        class:tbl_df
-46                                                                                                                                           class:tbl
-47                                                                                                                                    class:data.frame
-48                                                                                                                                         varname:mpg
-49                                                                                                                                         varname:cyl
-50                                                                                                                                        varname:disp
-51                                                                                                                                          varname:hp
-52                                                                                                                                        varname:drat
-53                                                                                                                                          varname:wt
-54                                                                                                                                        varname:qsec
-55                                                                                                                                          varname:vs
-56                                                                                                                                          varname:am
-57                                                                                                                                        varname:gear
-58                                                                                                                                        varname:carb
-59                                                                                                                            date:2018-02-13 23:19:42
-60                                                                                                                                          format:rda
-61                                                                                                       session_info:cecf29a75dd5e2134c1e563af8be1edc
-62                                                                                                                                          format:txt
-63                                                                                                                                          format:rda
-64                                                                                                                                        name:res_val
-65                                                                                                                                    class:grouped_df
-66                                                                                                                                        class:tbl_df
-67                                                                                                                                           class:tbl
-68                                                                                                                                    class:data.frame
-69                                                                                                                                         varname:mpg
-70                                                                                                                                         varname:cyl
-71                                                                                                                                          varname:wt
-72                                                                                                                                          varname:am
-73                                                                                                                            date:2018-02-13 23:19:42
-74                                                                                                                LHS:403c3921f0fb68cbc8d5c6ca18e49141
-75                                                                                                                        RHS:select(mpg, cyl, wt, am)
-76                                                                                                                                          format:rda
-77                                                                                                       session_info:cecf29a75dd5e2134c1e563af8be1edc
-78                                                                                                                                          format:txt
-79                                                                                                                                          format:rda
-80                                                                                      name:mtcars %a% group_by(cyl, am) %a% select(mpg, cyl, wt, am)
-81                                                                                                                                    class:grouped_df
-82                                                                                                                                        class:tbl_df
-83                                                                                                                                           class:tbl
-84                                                                                                                                    class:data.frame
-85                                                                                                                                         varname:mpg
-86                                                                                                                                         varname:cyl
-87                                                                                                                                          varname:wt
-88                                                                                                                                          varname:am
-89                                                                                                                            date:2018-02-13 23:19:43
-90                                                                                                                                          format:rda
-91                                                                                                       session_info:cecf29a75dd5e2134c1e563af8be1edc
-92                                                                                                                                          format:txt
-93                                                                                                                                          format:rda
-94                                                                                                                                        name:res_val
-95                                                                                                                                    class:grouped_df
-96                                                                                                                                        class:tbl_df
-97                                                                                                                                           class:tbl
-98                                                                                                                                    class:data.frame
-99                                                                                                                                         varname:cyl
-100                                                                                                                                         varname:am
-101                                                                                                                                     varname:avgmpg
-102                                                                                                                                      varname:avgwt
-103                                                                                                                           date:2018-02-13 23:19:43
-104                                                                                                               LHS:05c7067c4f4fe4fcb5fad606097815c1
-105                                                                                                RHS:summarise(avgmpg = mean(mpg), avgwt = mean(wt))
-106                                                                                                                                         format:rda
-107                                                                                                      session_info:cecf29a75dd5e2134c1e563af8be1edc
-108                                                                                                                                         format:txt
-109                                                                                                                                         format:rda
-110                             name:mtcars %a% group_by(cyl, am) %a% select(mpg, cyl, wt, am) %a%     summarise(avgmpg = mean(mpg), avgwt = mean(wt))
-111                                                                                                                                   class:grouped_df
-112                                                                                                                                       class:tbl_df
-113                                                                                                                                          class:tbl
-114                                                                                                                                   class:data.frame
-115                                                                                                                                        varname:cyl
-116                                                                                                                                         varname:am
-117                                                                                                                                     varname:avgmpg
-118                                                                                                                                      varname:avgwt
-119                                                                                                                           date:2018-02-13 23:19:43
-120                                                                                                                                         format:rda
-121                                                                                                      session_info:cecf29a75dd5e2134c1e563af8be1edc
-122                                                                                                                                         format:txt
-123                                                                                                                                         format:rda
-124                                                                                                                                       name:res_val
-125                                                                                                                                   class:grouped_df
-126                                                                                                                                       class:tbl_df
-127                                                                                                                                          class:tbl
-128                                                                                                                                   class:data.frame
-129                                                                                                                                        varname:cyl
-130                                                                                                                                         varname:am
-131                                                                                                                                     varname:avgmpg
-132                                                                                                                                      varname:avgwt
-133                                                                                                                           date:2018-02-13 23:19:43
-134                                                                                                               LHS:d6c834d34a9be232e2ada1455143cac6
-135                                                                                                                            RHS:filter(avgmpg > 20)
-136                                                                                                                                         format:rda
-137                                                                                                      session_info:cecf29a75dd5e2134c1e563af8be1edc
-138                                                                                                                                         format:txt
-139                                                                                                                                         format:rda
-140                                                                                                                                         name:__LHS
-141                                                                                                                                   class:grouped_df
-142                                                                                                                                       class:tbl_df
-143                                                                                                                                          class:tbl
-144                                                                                                                                   class:data.frame
-145                                                                                                                                        varname:cyl
-146                                                                                                                                         varname:am
-147                                                                                                                                     varname:avgmpg
-148                                                                                                                                      varname:avgwt
-149                                                                                                                           date:2018-02-13 23:19:43
-150                                                                                                                                         format:rda
-151                                                                                                      session_info:cecf29a75dd5e2134c1e563af8be1edc
-152                                                                                                                                         format:txt
-153                                                                                                                                         format:rda
-154 name:mtcars %a% group_by(cyl, am) %a% select(mpg, cyl, wt, am) %a%     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %a% filter(avgmpg >     20)
-155                                                                                                                                   class:grouped_df
-156                                                                                                                                       class:tbl_df
-157                                                                                                                                          class:tbl
-158                                                                                                                                   class:data.frame
-159                                                                                                                                        varname:cyl
-160                                                                                                                                         varname:am
-161                                                                                                                                     varname:avgmpg
-162                                                                                                                                      varname:avgwt
-163                                                                                                                           date:2018-02-13 23:19:44
-164                                                                                                                                         format:rda
-165                                                                                                      session_info:cecf29a75dd5e2134c1e563af8be1edc
-166                                                                                                                                         format:txt
-167                                                                                                                                         format:rda
-168                                                                                                                                       name:res_val
-169                                                                                                                                    class:character
-170                                                                                                                           date:2018-02-13 23:19:44
-171                                                                                                               LHS:d87c917f988f8035157eeac8c1acb1a3
-172                                                                                                                     RHS:saveToRepo(exampleRepoDir)
-173                                                                                                                                         format:rda
-174                                                                                                      session_info:cecf29a75dd5e2134c1e563af8be1edc
-            createdDate
-1   2018-02-13 23:19:41
-2   2018-02-13 23:19:41
-3   2018-02-13 23:19:41
-4   2018-02-13 23:19:41
-5   2018-02-13 23:19:41
-6   2018-02-13 23:19:41
-7   2018-02-13 23:19:41
-8   2018-02-13 23:19:41
-9   2018-02-13 23:19:41
-10  2018-02-13 23:19:41
-11  2018-02-13 23:19:41
-12  2018-02-13 23:19:41
-13  2018-02-13 23:19:41
-14  2018-02-13 23:19:41
-15  2018-02-13 23:19:41
-16  2018-02-13 23:19:41
-17  2018-02-13 23:19:41
-18  2018-02-13 23:19:41
-19  2018-02-13 23:19:41
-20  2018-02-13 23:19:41
-21  2018-02-13 23:19:41
-22  2018-02-13 23:19:41
-23  2018-02-13 23:19:41
-24  2018-02-13 23:19:41
-25  2018-02-13 23:19:41
-26  2018-02-13 23:19:41
-27  2018-02-13 23:19:41
-28  2018-02-13 23:19:41
-29  2018-02-13 23:19:41
-30  2018-02-13 23:19:41
-31  2018-02-13 23:19:41
-32  2018-02-13 23:19:41
-33  2018-02-13 23:19:41
-34  2018-02-13 23:19:41
-35  2018-02-13 23:19:41
-36  2018-02-13 23:19:41
-37  2018-02-13 23:19:41
-38  2018-02-13 23:19:41
-39  2018-02-13 23:19:41
-40  2018-02-13 23:19:41
-41  2018-02-13 23:19:42
-42  2018-02-13 23:19:42
-43  2018-02-13 23:19:42
-44  2018-02-13 23:19:42
-45  2018-02-13 23:19:42
-46  2018-02-13 23:19:42
-47  2018-02-13 23:19:42
-48  2018-02-13 23:19:42
-49  2018-02-13 23:19:42
-50  2018-02-13 23:19:42
-51  2018-02-13 23:19:42
-52  2018-02-13 23:19:42
-53  2018-02-13 23:19:42
-54  2018-02-13 23:19:42
-55  2018-02-13 23:19:42
-56  2018-02-13 23:19:42
-57  2018-02-13 23:19:42
-58  2018-02-13 23:19:42
-59  2018-02-13 23:19:42
-60  2018-02-13 23:19:42
-61  2018-02-13 23:19:42
-62  2018-02-13 23:19:42
-63  2018-02-13 23:19:42
-64  2018-02-13 23:19:42
-65  2018-02-13 23:19:42
-66  2018-02-13 23:19:42
-67  2018-02-13 23:19:42
-68  2018-02-13 23:19:42
-69  2018-02-13 23:19:42
-70  2018-02-13 23:19:42
-71  2018-02-13 23:19:42
-72  2018-02-13 23:19:42
-73  2018-02-13 23:19:42
-74  2018-02-13 23:19:42
-75  2018-02-13 23:19:42
-76  2018-02-13 23:19:42
-77  2018-02-13 23:19:42
-78  2018-02-13 23:19:43
-79  2018-02-13 23:19:43
-80  2018-02-13 23:19:43
-81  2018-02-13 23:19:43
-82  2018-02-13 23:19:43
-83  2018-02-13 23:19:43
-84  2018-02-13 23:19:43
-85  2018-02-13 23:19:43
-86  2018-02-13 23:19:43
-87  2018-02-13 23:19:43
-88  2018-02-13 23:19:43
-89  2018-02-13 23:19:43
-90  2018-02-13 23:19:43
-91  2018-02-13 23:19:43
-92  2018-02-13 23:19:43
-93  2018-02-13 23:19:43
-94  2018-02-13 23:19:43
-95  2018-02-13 23:19:43
-96  2018-02-13 23:19:43
-97  2018-02-13 23:19:43
-98  2018-02-13 23:19:43
-99  2018-02-13 23:19:43
-100 2018-02-13 23:19:43
-101 2018-02-13 23:19:43
-102 2018-02-13 23:19:43
-103 2018-02-13 23:19:43
-104 2018-02-13 23:19:43
-105 2018-02-13 23:19:43
-106 2018-02-13 23:19:43
-107 2018-02-13 23:19:43
-108 2018-02-13 23:19:43
-109 2018-02-13 23:19:43
-110 2018-02-13 23:19:43
-111 2018-02-13 23:19:43
-112 2018-02-13 23:19:43
-113 2018-02-13 23:19:43
-114 2018-02-13 23:19:43
-115 2018-02-13 23:19:43
-116 2018-02-13 23:19:43
-117 2018-02-13 23:19:43
-118 2018-02-13 23:19:43
-119 2018-02-13 23:19:43
-120 2018-02-13 23:19:43
-121 2018-02-13 23:19:43
-122 2018-02-13 23:19:43
-123 2018-02-13 23:19:43
-124 2018-02-13 23:19:43
-125 2018-02-13 23:19:43
-126 2018-02-13 23:19:43
-127 2018-02-13 23:19:43
-128 2018-02-13 23:19:43
-129 2018-02-13 23:19:43
-130 2018-02-13 23:19:43
-131 2018-02-13 23:19:43
-132 2018-02-13 23:19:43
-133 2018-02-13 23:19:43
-134 2018-02-13 23:19:43
-135 2018-02-13 23:19:43
-136 2018-02-13 23:19:43
-137 2018-02-13 23:19:43
-138 2018-02-13 23:19:43
-139 2018-02-13 23:19:43
-140 2018-02-13 23:19:43
-141 2018-02-13 23:19:43
-142 2018-02-13 23:19:43
-143 2018-02-13 23:19:43
-144 2018-02-13 23:19:43
-145 2018-02-13 23:19:43
-146 2018-02-13 23:19:43
-147 2018-02-13 23:19:43
-148 2018-02-13 23:19:43
-149 2018-02-13 23:19:43
-150 2018-02-13 23:19:43
-151 2018-02-13 23:19:43
-152 2018-02-13 23:19:44
-153 2018-02-13 23:19:44
-154 2018-02-13 23:19:44
-155 2018-02-13 23:19:44
-156 2018-02-13 23:19:44
-157 2018-02-13 23:19:44
-158 2018-02-13 23:19:44
-159 2018-02-13 23:19:44
-160 2018-02-13 23:19:44
-161 2018-02-13 23:19:44
-162 2018-02-13 23:19:44
-163 2018-02-13 23:19:44
-164 2018-02-13 23:19:44
-165 2018-02-13 23:19:44
-166 2018-02-13 23:19:44
-167 2018-02-13 23:19:44
-168 2018-02-13 23:19:44
-169 2018-02-13 23:19:44
-170 2018-02-13 23:19:44
-171 2018-02-13 23:19:44
-172 2018-02-13 23:19:44
-173 2018-02-13 23:19:44
-174 2018-02-13 23:19:44
-> 
-> # We search for a Tag with default "name" regular expression corresponding to 
-> # hash md5hash.
-> getTagsLocal( md5hash = hash, exampleRepoDir )
-[1] "name:res_val"                                                                                                                                      
-[2] "name:__LHS"                                                                                                                                        
-[3] "name:mtcars %a% group_by(cyl, am) %a% select(mpg, cyl, wt, am) %a%     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %a% filter(avgmpg >     20)"
-> 
-> # Deleting example respository
-> deleteLocalRepo( exampleRepoDir, TRUE) 
-> rm( exampleRepoDir ) 
-> 
-> ## EXAMPLE with data iris
-> exampleRepoDir <- tempfile()
-> createLocalRepo( exampleRepoDir )
-> 
-> data(iris)
-> saveToRepo(iris, repoDir = exampleRepoDir )
-[1] "ff575c261c949d073b2895b05d1097c3"
-> showLocalRepo(exampleRepoDir)
-                           md5hash                             name
-1 ff575c261c949d073b2895b05d1097c3                             iris
-2 cecf29a75dd5e2134c1e563af8be1edc cecf29a75dd5e2134c1e563af8be1edc
-          createdDate
-1 2018-02-13 23:19:44
-2 2018-02-13 23:19:44
-> showLocalRepo(exampleRepoDir, method = "tags")
-                           artifact
-1  ff575c261c949d073b2895b05d1097c3
-2  ff575c261c949d073b2895b05d1097c3
-3  ff575c261c949d073b2895b05d1097c3
-4  ff575c261c949d073b2895b05d1097c3
-5  ff575c261c949d073b2895b05d1097c3
-6  ff575c261c949d073b2895b05d1097c3
-7  ff575c261c949d073b2895b05d1097c3
-8  ff575c261c949d073b2895b05d1097c3
-9  ff575c261c949d073b2895b05d1097c3
-10 cecf29a75dd5e2134c1e563af8be1edc
-11 ff575c261c949d073b2895b05d1097c3
-12 ff575c261c949d073b2895b05d1097c3
-                                             tag         createdDate
-1                                     format:rda 2018-02-13 23:19:44
-2                                      name:iris 2018-02-13 23:19:44
-3                               class:data.frame 2018-02-13 23:19:44
-4                           varname:Sepal.Length 2018-02-13 23:19:44
-5                            varname:Sepal.Width 2018-02-13 23:19:44
-6                           varname:Petal.Length 2018-02-13 23:19:44
-7                            varname:Petal.Width 2018-02-13 23:19:44
-8                                varname:Species 2018-02-13 23:19:44
-9                       date:2018-02-13 23:19:44 2018-02-13 23:19:44
-10                                    format:rda 2018-02-13 23:19:44
-11 session_info:cecf29a75dd5e2134c1e563af8be1edc 2018-02-13 23:19:44
-12                                    format:txt 2018-02-13 23:19:44
-> 
-> # We can notice that there is only one md5hash 
-> # (and second for archiveSessionInfo) in repo so we will use it
-> hash <- showLocalRepo(exampleRepoDir)[1,1]
-> 
-> # We search for a Tag with "varname" regular expression corresponding to 
-> # hash md5hash.
-> getTagsLocal( md5hash = hash, exampleRepoDir, tag = "varname" ) 
-[1] "varname:Sepal.Length" "varname:Sepal.Width"  "varname:Petal.Length"
-[4] "varname:Petal.Width"  "varname:Species"     
-> # There are 5 different Tags with "varname" regular expression
-> 
-> # We needn't use the whole expression "varname". We may use its abbreviation
-> # and get the same result.
-> getTagsLocal( md5hash = hash, exampleRepoDir, tag = "varna" ) 
-[1] "varname:Sepal.Length" "varname:Sepal.Width"  "varname:Petal.Length"
-[4] "varname:Petal.Width"  "varname:Species"     
-> 
-> deleteLocalRepo( exampleRepoDir, TRUE) 
-> rm( exampleRepoDir ) 
-> 
-> ### Remote version
-> ## EXAMPLE: pbiecek archivist repository on GitHub
-> 
-> showRemoteRepo(user="pbiecek", repo="archivist")
-                            md5hash                             name
-1  ff575c261c949d073b2895b05d1097c3                             iris
-2  f7804cb74efa70d9795ace8c32e333c3                        myplot123
-3  5c3b6d82ab29e7b3a2137b6a537e55ec 5c3b6d82ab29e7b3a2137b6a537e55ec
-4  cd6557c6163a6f9800f308f343e75e72                            model
-5  7a761a2ae54f3d90060a9f6ca04b3506 7a761a2ae54f3d90060a9f6ca04b3506
-6  db864b3dcc09888f5f7f2750b4ab553d                             agn1
-7  c2380a7b8c090d6564ff12cdd60aaf7f c2380a7b8c090d6564ff12cdd60aaf7f
-8  c1ce897de77e8cb793a69b54e7f2b8b5                           fannyx
-9  ebe92bb4f9af6c343da4986f84c42b9b ebe92bb4f9af6c343da4986f84c42b9b
-10 2ae5f73c0b979532555fb3800458a4d4                             lda1
-11 53a9f3aa4235e111524dda17aad2ee3a 53a9f3aa4235e111524dda17aad2ee3a
-12 fdf1922d88bb7369896886dfa7da16f6                             qda1
-13 4d504b6c315c9be389f2e84186fa64c5 4d504b6c315c9be389f2e84186fa64c5
-14 1e05d1a3f103da0d99fba79643f71487                          glmnet1
-15 942ca3ecb05524e95375728c114bf619 942ca3ecb05524e95375728c114bf619
-16 134ecbbe2a8814d98f0c2758000c408e                     trellis.plot
-17 f49104cd336e6417f89141855c0fe4a7 f49104cd336e6417f89141855c0fe4a7
-18 df598bf17a3f149e004eede9c68313fa                        this.test
-19 3c6ee510336926b494cf8375b903246a 3c6ee510336926b494cf8375b903246a
-20 1d85e04b24e5129f0b7577b270d24ab4                            myFit
-21 917b56fd9edd81e088f8f7ada48cda95 917b56fd9edd81e088f8f7ada48cda95
-22 617ded4953ac986524a1c24703363980 617ded4953ac986524a1c24703363980
-23 5629bc43e36d219b613076b17c665eda 5629bc43e36d219b613076b17c665eda
-           createdDate
-1  2015-11-16 12:47:13
-2  2015-11-16 12:47:14
-3  2015-11-16 12:47:14
-4  2015-11-16 12:47:14
-5  2015-11-16 12:47:14
-6  2015-11-16 12:47:14
-7  2015-11-16 12:47:14
-8  2015-11-16 12:47:14
-9  2015-11-16 12:47:14
-10 2015-11-16 12:47:15
-11 2015-11-16 12:47:15
-12 2015-11-16 12:47:15
-13 2015-11-16 12:47:15
-14 2015-11-16 12:47:16
-15 2015-11-16 12:47:16
-16 2015-11-16 12:47:18
-17 2015-11-16 12:47:18
-18 2015-11-16 12:47:19
-19 2015-11-16 12:47:19
-20 2015-11-16 12:47:19
-21 2015-11-16 12:47:19
-22 2015-11-16 12:47:24
-23 2015-11-16 12:47:24
-> # We search for a Tag with default "name" regular expression corresponding to 
-> # "cd6557c6163a6f9800f308f343e75e72" md5hash.
-> getTagsRemote( "cd6557c6163a6f9800f308f343e75e72",
-+                 user="pbiecek", repo="archivist")
-[1] "name:model"
->                 
-> ## EXAMPLE: many archivist-like Repositories on one Github repository
-> # We search for a Tag with default "name" regular expression corresponding to 
-> # "ff575c261c949d073b2895b05d1097c3" md5hash.
-> getTagsRemote("ff575c261c949d073b2895b05d1097c3", user="MarcinKosinski",
-+                repo="Museum", branch="master", subdir="ex1")
-[1] "name:iris"
->                
+> ## Not run: 
+> ##D ## EXAMPLE with pipe operator %a%
+> ##D 
+> ##D # Creating empty repository
+> ##D exampleRepoDir <- tempfile()
+> ##D createLocalRepo( exampleRepoDir )
+> ##D 
+> ##D library(dplyr)
+> ##D data(mtcars)
+> ##D setLocalRepo(repoDir = exampleRepoDir)
+> ##D hash <- mtcars %a% 
+> ##D  group_by(cyl, am) %a%
+> ##D    select(mpg, cyl, wt, am) %a%
+> ##D      summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %a%
+> ##D        filter(avgmpg > 20) %a%
+> ##D        saveToRepo( exampleRepoDir )
+> ##D        
+> ##D showLocalRepo(exampleRepoDir)
+> ##D showLocalRepo(exampleRepoDir, method = "tags")
+> ##D 
+> ##D # We search for a Tag with default "name" regular expression corresponding to 
+> ##D # hash md5hash.
+> ##D getTagsLocal( md5hash = hash, exampleRepoDir )
+> ##D 
+> ##D # Deleting example respository
+> ##D deleteLocalRepo( exampleRepoDir, TRUE) 
+> ##D rm( exampleRepoDir ) 
+> ##D 
+> ##D ## EXAMPLE with data iris
+> ##D exampleRepoDir <- tempfile()
+> ##D createLocalRepo( exampleRepoDir )
+> ##D 
+> ##D data(iris)
+> ##D saveToRepo(iris, repoDir = exampleRepoDir )
+> ##D showLocalRepo(exampleRepoDir)
+> ##D showLocalRepo(exampleRepoDir, method = "tags")
+> ##D 
+> ##D # We can notice that there is only one md5hash 
+> ##D # (and second for archiveSessionInfo) in repo so we will use it
+> ##D hash <- showLocalRepo(exampleRepoDir)[1,1]
+> ##D 
+> ##D # We search for a Tag with "varname" regular expression corresponding to 
+> ##D # hash md5hash.
+> ##D getTagsLocal( md5hash = hash, exampleRepoDir, tag = "varname" ) 
+> ##D # There are 5 different Tags with "varname" regular expression
+> ##D 
+> ##D # We needn't use the whole expression "varname". We may use its abbreviation
+> ##D # and get the same result.
+> ##D getTagsLocal( md5hash = hash, exampleRepoDir, tag = "varna" ) 
+> ##D 
+> ##D deleteLocalRepo( exampleRepoDir, TRUE) 
+> ##D rm( exampleRepoDir ) 
+> ##D 
+> ##D ### Remote version
+> ##D ## EXAMPLE: pbiecek archivist repository on GitHub
+> ##D 
+> ##D showRemoteRepo(user="pbiecek", repo="archivist")
+> ##D # We search for a Tag with default "name" regular expression corresponding to 
+> ##D # "cd6557c6163a6f9800f308f343e75e72" md5hash.
+> ##D getTagsRemote( "cd6557c6163a6f9800f308f343e75e72",
+> ##D                 user="pbiecek", repo="archivist")
+> ##D                 
+> ##D ## EXAMPLE: many archivist-like Repositories on one Github repository
+> ##D # We search for a Tag with default "name" regular expression corresponding to 
+> ##D # "ff575c261c949d073b2895b05d1097c3" md5hash.
+> ##D getTagsRemote("ff575c261c949d073b2895b05d1097c3", user="MarcinKosinski",
+> ##D                repo="Museum", branch="master", subdir="ex1")
+> ## End(Not run)               
 > 
 > 
 > 
 > 
 > cleanEx()
-
-detaching ‘package:dplyr’
-
 > nameEx("loadFromRepo")
 > ### * loadFromRepo
 > 
@@ -1893,7 +1193,7 @@ detaching ‘package:dplyr’
 > 
 > ## Not run: 
 > ##D 
-> ##D library(dplyr)
+> ##D library("dplyr")
 > ##D 
 > ##D ## Usage of %a% operator without setting default repository
 > ##D # We will receive sepcial warning
@@ -1978,6 +1278,7 @@ detaching ‘package:dplyr’
 > 
 > ## Not run: 
 > ##D ## objects preparation
+> ##D ## be aware! this will probably downgrade many of your libraries
 > ##D restoreLibs(md5hash = "pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad")
 > ## End(Not run)
 > 
@@ -2251,7 +1552,7 @@ detaching ‘package:dplyr’
 > 
 > ### ** Examples
 > 
-> exampleRepoDir <- tempfile()
+> exampleRepoDir <- tempfile(tmpdir = ".")
 > createLocalRepo(repoDir = exampleRepoDir)
 > data(swiss)
 > saveToLocalRepo(swiss, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
@@ -2259,10 +1560,10 @@ detaching ‘package:dplyr’
 > showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
                            md5hash                             name
 1 4c43fa8a4d8f0cbf65353e397f37338c                            swiss
-2 64e6d31c25d5020ba3d0a49e8f1998de 64e6d31c25d5020ba3d0a49e8f1998de
+2 afc705b11b37f50c2c7d4165794342bb afc705b11b37f50c2c7d4165794342bb
           createdDate
-1 2018-02-13 23:19:45
-2 2018-02-13 23:19:45
+1 2018-02-19 21:37:39
+2 2018-02-19 21:37:39
 > showLocalRepo(method = "tags", repoDir = exampleRepoDir)
                            artifact
 1  4c43fa8a4d8f0cbf65353e397f37338c
@@ -2275,23 +1576,23 @@ detaching ‘package:dplyr’
 8  4c43fa8a4d8f0cbf65353e397f37338c
 9  4c43fa8a4d8f0cbf65353e397f37338c
 10 4c43fa8a4d8f0cbf65353e397f37338c
-11 64e6d31c25d5020ba3d0a49e8f1998de
+11 afc705b11b37f50c2c7d4165794342bb
 12 4c43fa8a4d8f0cbf65353e397f37338c
 13 4c43fa8a4d8f0cbf65353e397f37338c
                                              tag         createdDate
-1                                     format:rda 2018-02-13 23:19:45
-2                                     name:swiss 2018-02-13 23:19:45
-3                               class:data.frame 2018-02-13 23:19:45
-4                              varname:Fertility 2018-02-13 23:19:45
-5                            varname:Agriculture 2018-02-13 23:19:45
-6                            varname:Examination 2018-02-13 23:19:45
-7                              varname:Education 2018-02-13 23:19:45
-8                               varname:Catholic 2018-02-13 23:19:45
-9                       varname:Infant.Mortality 2018-02-13 23:19:45
-10                      date:2018-02-13 23:19:45 2018-02-13 23:19:45
-11                                    format:rda 2018-02-13 23:19:45
-12 session_info:64e6d31c25d5020ba3d0a49e8f1998de 2018-02-13 23:19:45
-13                                    format:txt 2018-02-13 23:19:45
+1                                     format:rda 2018-02-19 21:37:39
+2                                     name:swiss 2018-02-19 21:37:39
+3                               class:data.frame 2018-02-19 21:37:39
+4                              varname:Fertility 2018-02-19 21:37:39
+5                            varname:Agriculture 2018-02-19 21:37:39
+6                            varname:Examination 2018-02-19 21:37:39
+7                              varname:Education 2018-02-19 21:37:39
+8                               varname:Catholic 2018-02-19 21:37:39
+9                       varname:Infant.Mortality 2018-02-19 21:37:39
+10                      date:2018-02-19 21:37:39 2018-02-19 21:37:39
+11                                    format:rda 2018-02-19 21:37:39
+12 session_info:afc705b11b37f50c2c7d4165794342bb 2018-02-19 21:37:39
+13                                    format:txt 2018-02-19 21:37:39
 > 
 > loadFromLocalRepo(md5hash = '2a6e492cb6982f230e48cf46023e2e4f',
 +   repoDir = system.file("graphGallery", package = "archivist"), value = TRUE) -> model
