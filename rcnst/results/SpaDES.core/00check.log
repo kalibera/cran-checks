@@ -1,5 +1,5 @@
 * using log directory ‘/home/tomas/cran/rcnst/check/SpaDES.core.Rcheck’
-* using R Under development (unstable) (2018-02-20 r74278)
+* using R Under development (unstable) (2018-02-25 r74301)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘SpaDES.core/DESCRIPTION’ ... OK
@@ -13,10 +13,7 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘SpaDES.core’ can be installed ... WARNING
-Found the following significant warnings:
-  Note: possible error in 'updateIds(doc, save = x)': unused argument (save = x) 
-See ‘/home/tomas/cran/rcnst/check/SpaDES.core.Rcheck/00install.out’ for details.
+* checking whether package ‘SpaDES.core’ can be installed ... OK
 * checking package directory ... OK
 * checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -76,6 +73,7 @@ Last 13 lines of output:
 * checking re-building of vignette outputs ... WARNING
 Error in re-building vignettes:
   ...
+        else {
             spreadsDT <- data.table(spreads)
             if (returnDistances & allowOverlap) {
                 pixVal <- spreadsDT[, min(dists), by = indices]
@@ -97,11 +95,10 @@ Error in re-building vignettes:
     }
     return(landscape)
 }
-Quitting from lines 326-354 (ii-modules.Rmd) 
-Error: processing vignette 'ii-modules.Rmd' failed with diagnostics:
-promise already under evaluation: recursive default argument reference or earlier problems?
-Execution halted
+S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature RasterLayer has this body.
+Fatal error: compiler constants were modified!
+
 
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 ERROR, 2 WARNINGs, 1 NOTE
+Status: 1 ERROR, 1 WARNING, 1 NOTE
