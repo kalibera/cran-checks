@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2018-02-28 r74311) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-03-02 r74345) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -1564,14 +1564,14 @@ The following object is masked from ‘package:base’:
 > inputs(sim) <- data.frame(file = tmpFile) # using only required column, "file"
 > inputs(sim) # see that it is not yet loaded, but when it is scheduled to be loaded
                              file     fun package objectName loadTime loaded
-1 /tmp/RtmpGjZRTz/inputs/test.rds readRDS    base       test        0     NA
+1 /tmp/RtmpWAv3pc/inputs/test.rds readRDS    base       test        0     NA
   arguments intervals
 1        NA        NA
 > simOut <- spades(sim)
-test read from /tmp/RtmpGjZRTz/inputs/test.rds using readRDS
+test read from /tmp/RtmpWAv3pc/inputs/test.rds using readRDS
 > inputs(simOut) # confirm it was loaded
                              file     fun package objectName loadTime loaded
-1 /tmp/RtmpGjZRTz/inputs/test.rds readRDS    base       test        0   TRUE
+1 /tmp/RtmpWAv3pc/inputs/test.rds readRDS    base       test        0   TRUE
   arguments intervals
 1        NA        NA
 > simOut$test
@@ -1675,13 +1675,13 @@ a loaded into simList
 +                paths = list(outputPath = tmpdir))
 > outputs(sim) # To see what will be saved, when, what filename
   objectName                                       file     fun package
-1    tempObj /tmp/RtmpGjZRTz/outputs/tempObj_year10.rds saveRDS    base
+1    tempObj /tmp/RtmpWAv3pc/outputs/tempObj_year10.rds saveRDS    base
   saveTime saved arguments
 1       10    NA        NA
 > sim <- spades(sim)
 > outputs(sim) # To see that it was saved, when, what filename
   objectName                                       file     fun package
-1    tempObj /tmp/RtmpGjZRTz/outputs/tempObj_year10.rds saveRDS    base
+1    tempObj /tmp/RtmpWAv3pc/outputs/tempObj_year10.rds saveRDS    base
   saveTime saved arguments
 1       10  TRUE        NA
 > 
@@ -1691,16 +1691,16 @@ a loaded into simList
 > sim <- spades(sim)
 > outputs(sim) # To see that it was saved, when, what filename.
    objectName saveTime                                       file     fun
-1     tempObj        1 /tmp/RtmpGjZRTz/outputs/tempObj_year01.rds saveRDS
-2     tempObj        2 /tmp/RtmpGjZRTz/outputs/tempObj_year02.rds saveRDS
-3     tempObj        3 /tmp/RtmpGjZRTz/outputs/tempObj_year03.rds saveRDS
-4     tempObj        4 /tmp/RtmpGjZRTz/outputs/tempObj_year04.rds saveRDS
-5     tempObj        5 /tmp/RtmpGjZRTz/outputs/tempObj_year05.rds saveRDS
-6     tempObj        6 /tmp/RtmpGjZRTz/outputs/tempObj_year06.rds saveRDS
-7     tempObj        7 /tmp/RtmpGjZRTz/outputs/tempObj_year07.rds saveRDS
-8     tempObj        8 /tmp/RtmpGjZRTz/outputs/tempObj_year08.rds saveRDS
-9     tempObj        9 /tmp/RtmpGjZRTz/outputs/tempObj_year09.rds saveRDS
-10    tempObj       10 /tmp/RtmpGjZRTz/outputs/tempObj_year10.rds saveRDS
+1     tempObj        1 /tmp/RtmpWAv3pc/outputs/tempObj_year01.rds saveRDS
+2     tempObj        2 /tmp/RtmpWAv3pc/outputs/tempObj_year02.rds saveRDS
+3     tempObj        3 /tmp/RtmpWAv3pc/outputs/tempObj_year03.rds saveRDS
+4     tempObj        4 /tmp/RtmpWAv3pc/outputs/tempObj_year04.rds saveRDS
+5     tempObj        5 /tmp/RtmpWAv3pc/outputs/tempObj_year05.rds saveRDS
+6     tempObj        6 /tmp/RtmpWAv3pc/outputs/tempObj_year06.rds saveRDS
+7     tempObj        7 /tmp/RtmpWAv3pc/outputs/tempObj_year07.rds saveRDS
+8     tempObj        8 /tmp/RtmpWAv3pc/outputs/tempObj_year08.rds saveRDS
+9     tempObj        9 /tmp/RtmpWAv3pc/outputs/tempObj_year09.rds saveRDS
+10    tempObj       10 /tmp/RtmpWAv3pc/outputs/tempObj_year10.rds saveRDS
    package saved arguments
 1     base  TRUE        NA
 2     base  TRUE        NA
@@ -1737,12 +1737,12 @@ a loaded into simList
 5   tempObj2        7   saveRDS    base
 6        df1       10 write.csv   utils
                                          file saved arguments
-1  /tmp/RtmpGjZRTz/outputs/tempObj_year01.rds  TRUE        NA
-2  /tmp/RtmpGjZRTz/outputs/tempObj_year04.rds  TRUE        NA
-3 /tmp/RtmpGjZRTz/outputs/tempObj2_year02.rds  TRUE        NA
-4 /tmp/RtmpGjZRTz/outputs/tempObj2_year06.rds  TRUE        NA
-5 /tmp/RtmpGjZRTz/outputs/tempObj2_year07.rds  TRUE        NA
-6      /tmp/RtmpGjZRTz/outputs/df1_year10.csv  TRUE     FALSE
+1  /tmp/RtmpWAv3pc/outputs/tempObj_year01.rds  TRUE        NA
+2  /tmp/RtmpWAv3pc/outputs/tempObj_year04.rds  TRUE        NA
+3 /tmp/RtmpWAv3pc/outputs/tempObj2_year02.rds  TRUE        NA
+4 /tmp/RtmpWAv3pc/outputs/tempObj2_year06.rds  TRUE        NA
+5 /tmp/RtmpWAv3pc/outputs/tempObj2_year07.rds  TRUE        NA
+6      /tmp/RtmpWAv3pc/outputs/df1_year10.csv  TRUE     FALSE
 > 
 > # read one back in just to test it all worked as planned
 > newObj <- read.csv(dir(tmpdir, pattern = "year10.csv", full.name = TRUE))
@@ -1920,7 +1920,7 @@ list()
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  31.715 2.984 33.866 0 0 
+Time elapsed:  32.833 2.646 34.905 0 0 
 > grDevices::dev.off()
 null device 
           1 
