@@ -1,0 +1,23 @@
+Package dbarts version 0.9-0
+Package built using 74345/R 3.5.0; x86_64-pc-linux-gnu; 2018-03-04 12:56:10 UTC; unix   
+Checked with rchk version 63f79d910f5835174fcaa5a0a7d2409348f7d2ac
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+Function (anonymous namespace)::createCustomLoss(dbarts::xval::LossFunctorDefinition const&, unsigned long, unsigned long)
+  [PB] has possible protection stack imbalance dbarts/src/R_interface_crossvalidate.cpp:288
+
+Function createMatrix
+  [UP] unprotected variable names while calling allocating function Rf_mkChar dbarts/src/makeModelMatrixFromDataFrame.c:330
+  [UP] unprotected variable names while calling allocating function Rf_mkChar dbarts/src/makeModelMatrixFromDataFrame.c:336
+  [UP] unprotected variable names while calling allocating function Rf_mkChar dbarts/src/makeModelMatrixFromDataFrame.c:360
+  [UP] unprotected variable names while calling allocating function Rf_mkChar dbarts/src/makeModelMatrixFromDataFrame.c:366
+  [UP] allocating function setFactorColumnName may destroy its unprotected argument (names <arg 1>), which is later used. dbarts/src/makeModelMatrixFromDataFrame.c:390
+  [UP] allocating function setFactorColumnName may destroy its unprotected argument (names <arg 1>), which is later used. dbarts/src/makeModelMatrixFromDataFrame.c:395
+  [UP] allocating function setFactorColumnName may destroy its unprotected argument (names <arg 1>), which is later used. dbarts/src/makeModelMatrixFromDataFrame.c:411
+  [UP] allocating function setFactorColumnName may destroy its unprotected argument (names <arg 1>), which is later used. dbarts/src/makeModelMatrixFromDataFrame.c:417
+
+Function ext_rng_createDefault
+  [UP] unprotected variable seedsExpr while calling allocating function ext_issueWarning dbarts/src/external/randomBase.c:170
+  [UP] unprotected variable seedsExpr while calling allocating function ext_issueWarning dbarts/src/external/randomBase.c:174
+  [UP] unprotected variable seedsExpr while calling allocating function Rf_type2char dbarts/src/external/randomBase.c:176
+  [UP] unprotected variable seedsExpr while calling allocating function ext_issueWarning dbarts/src/external/randomBase.c:176
