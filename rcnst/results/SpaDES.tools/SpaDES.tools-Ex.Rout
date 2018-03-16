@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2018-03-13 r74401) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-03-16 r74418) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -98,6 +98,19 @@ The following object is masked from ‘package:data.table’:
 > cirs <- cir(ras, agent, maxRadius = 15, simplify = TRUE)
 > cirsSP <- SpatialPoints(coords = cirs[, c("x", "y")])
 > cirsRas <- raster(ras)
+> cirsRas[] <- 0
+> cirsRas[cirs[, "indices"]] <- 1
+> 
+> if (interactive()) {
++   clearPlot()
++   Plot(ras)
++   Plot(cirsRas, addTo = "ras", cols = c("transparent", "#00000055"))
++   Plot(agent, addTo = "ras")
++   Plot(cirsSP, addTo = "ras")
++ }
+> 
+> # Example comparing rings and cir
+> a <- raster(extent(0, 30, 0, 30), res = 1)
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "includePixel" "excludePixel" "includeRing"  "excludeRing" 
