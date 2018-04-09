@@ -1,9 +1,10 @@
-* using log directory ‘/home/tomas/cran/rlibro/check/R2GUESS.Rcheck’
+* using log directory ‘/home/tomas/cran/rlibro/check/phyreg.Rcheck’
 * using R Under development (unstable) (2018-04-09 r74553)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* checking for file ‘R2GUESS/DESCRIPTION’ ... OK
-* this is package ‘R2GUESS’ version ‘1.7’
+* checking for file ‘phyreg/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘phyreg’ version ‘1.0.1’
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -12,7 +13,7 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘R2GUESS’ can be installed ... OK
+* checking whether package ‘phyreg’ can be installed ... OK
 * checking package directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
@@ -43,43 +44,25 @@
 * checking contents of ‘data’ directory ... OK
 * checking data for non-ASCII characters ... OK
 * checking data for ASCII and uncompressed saves ... OK
-* checking line endings in shell scripts ... OK
-* checking line endings in C/C++/Fortran sources/headers ... OK
-* checking line endings in Makefiles ... OK
-* checking compilation flags in Makevars ... OK
-* checking for GNU extensions in Makefiles ... OK
-* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
-* checking compiled code ... OK
 * checking examples ... ERROR
-Running examples in ‘R2GUESS-Ex.R’ failed
+Running examples in ‘phyreg-Ex.R’ failed
 The error most likely occurred in:
 
-> ### Name: as.ESS.object
-> ### Title: Compiles the main input and output files from a previous run of
-> ###   'R2GUESS' and creates an ESS object.
-> ### Aliases: as.ESS.object
+> ### Name: phyreg
+> ### Title: Performs a phylogenetic regression
+> ### Aliases: phyreg
+> ### Keywords: linear model comparative data
 > 
 > ### ** Examples
 > 
-> dataX <- "data-X-C-CODE.txt"
-> dataY <- "data-Y-ALL-C-CODE.txt"
-> 
-> path.input <- system.file("Input", package="R2GUESS")
-> path.output <- system.file("Output", package="R2GUESS")
-> path.par <- system.file("extdata", package="R2GUESS")
-> file.par <- "Par_file_example_Hopx.xml"
-> root.file.output <- "Example-GUESS-Y-Hopx"
-> label.Y <- c("ADR","Fat","Heart","Kidney")
-> my.env <- new.env()
-> data(MAP.file,envir=my.env)
-> MAP.file <- my.env$MAP.file
-> modelY_Hopx <-as.ESS.object(dataY=dataY,dataX=dataX,path.input=path.input,
-+     path.output=path.output,root.file.output=root.file.output,label.X=NULL,
-+     label.Y=label.Y,path.par=path.par,file.par=file.par,MAP.file=MAP.file)
+> ## First get some data
+> data(myd0,myd1, myd2, myd3, extax)
+> ## Then do our first analysis
+> phyreg(y~X1,"A",myd0,taxmatrix=extax)
 Warning in gzfile(file, "wb") :
-  cannot open compressed file '/homero/tomas/cran/rlibro/lib/R2GUESS/Output/Example-GUESS-Y-Hopx_output_best_visited_models.RData', probable reason 'Read-only file system'
+  cannot open compressed file '/homero/tomas/cran/rlibro/lib/phyreg/defparms', probable reason 'Read-only file system'
 Error in gzfile(file, "wb") : cannot open the connection
-Calls: as.ESS.object -> get.best.models -> save -> gzfile
+Calls: phyreg -> factory_default -> save_defparms -> save -> gzfile
 Execution halted
 * checking PDF version of manual ... OK
 * DONE
