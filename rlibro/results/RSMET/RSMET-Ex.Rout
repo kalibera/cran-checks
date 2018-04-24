@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2018-03-13 r74401) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-04-24 r74637) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -22,6 +22,7 @@ Type 'q()' to quit R.
 > options(warn = 1)
 > library('RSMET')
 Loading required package: stringr
+Loading required package: reshape2
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 > base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
@@ -87,10 +88,17 @@ Loading required package: stringr
 > 
 > # In case of multiple station, it return a list of SMET-class objects: 
 > 
+> ## This opton works for more than one station, 
+> #in case of one station this works too only if it is FORCED!
+> 
 > sm_multi <- as.smet(meteofrance,variables=variables)
 > 
 > 
->   
+> onestation <- meteofrance[meteofrance$station_id=="07499",]
+> sm_o <- as.smet(onestation,variables=variables,force.multistation=TRUE)
+> 
+> 
+>  
 > 
 > 
 > 
@@ -271,29 +279,33 @@ station_url =                  http://webgis.arpa.piemonte.it/webmeteo/meteo.php
 > 
 >  
 > 
+> 
+> 
+> 
 > library(ggmap)
 Loading required package: ggplot2
 > data(meteofrance)
 > 
-> dates <- as.Date(meteofrance$timestamp)
-> 
-> data=meteofrance[dates==dates[1],]
-> 
-> 
-> 
-> map <- get_map(location ="France", zoom = 6)
-Map from URL : http://maps.googleapis.com/maps/api/staticmap?center=France&zoom=6&size=640x640&scale=2&maptype=terrain&language=en-EN&sensor=false
-Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=France&sensor=false
-> 
-> size <- 3
-> 
-> gsnow <- ggmap(map) +
-+ 		geom_point(data = data,aes(x = longitude, y = latitude),size=size,  alpha
-+ 						=1, color="blue",show.legend  = FALSE)
-> 
-> ## Uncomment if you want to save in PDF format the otput of gsnow
-> ## ggsave("test-map.pdf", gsnow,width=10,height=10)
->  
+> ## Not run: 
+> ##D ## See help(get_map) documentation and run the example with a connection to Google!
+> ##D 
+> ##D dates <- as.Date(meteofrance$timestamp)
+> ##D 
+> ##D data=meteofrance[dates==dates[1],]
+> ##D 
+> ##D 
+> ##D 
+> ##D map <- get_map(location ="France", zoom = 6)
+> ##D 
+> ##D size <- 3
+> ##D 
+> ##D gsnow <- ggmap(map) +
+> ##D 		geom_point(data = data,aes(x = longitude, y = latitude),size=size,  alpha
+> ##D 						=1, color="blue",show.legend  = FALSE)
+> ##D 
+> ##D ## Uncomment if you want to save in PDF format the otput of gsnow
+> ##D ## ggsave("test-map.pdf", gsnow,width=10,height=10)
+> ## End(Not run)
 > 
 > 
 > 
@@ -319,25 +331,23 @@ Loading required package: ggplot2
 > data(meteofranceSynop)
 > 
 > 
-> 
-> 
-> data=meteofranceSynop[meteofranceSynop$timestamp==meteofranceSynop$timestamp[250],]
-> 
-> 
-> 
-> map <- get_map(location ="France", zoom = 6)
-Map from URL : http://maps.googleapis.com/maps/api/staticmap?center=France&zoom=6&size=640x640&scale=2&maptype=terrain&language=en-EN&sensor=false
-Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=France&sensor=false
-> 
-> size <- 3
-> 
-> gsynop <- ggmap(map) +
-+ 		geom_point(data = data,aes(x = longitude, y = latitude),size=size,  alpha
-+ 						=1, color="blue",show.legend  = FALSE)
-> 
-> ## Uncomment if you want to save in PDF format the otput of gsynop
-> ## ggsave("test-map.pdf", gsynop,width=10,height=10)
->  
+> ## Not run: 
+> ##D ## See help(get_map) documentation and run the example with a connection to Google!
+> ##D data=meteofranceSynop[meteofranceSynop$timestamp==meteofranceSynop$timestamp[250],]
+> ##D 
+> ##D 
+> ##D 
+> ##D map <- get_map(location ="France", zoom = 6)
+> ##D 
+> ##D size <- 3
+> ##D 
+> ##D gsynop <- ggmap(map) +
+> ##D 		geom_point(data = data,aes(x = longitude, y = latitude),size=size,  alpha
+> ##D 						=1, color="blue",show.legend  = FALSE)
+> ##D 
+> ##D ## Uncomment if you want to save in PDF format the otput of gsynop
+> ##D ## ggsave("test-map.pdf", gsynop,width=10,height=10)
+> ## End(Not run) 
 > 
 > 
 > 
