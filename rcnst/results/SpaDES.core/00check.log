@@ -1,5 +1,5 @@
 * using log directory ‘/home/tomas/cran/rcnst/check/SpaDES.core.Rcheck’
-* using R Under development (unstable) (2018-04-26 r74643)
+* using R Under development (unstable) (2018-04-29 r74672)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘SpaDES.core/DESCRIPTION’ ... OK
@@ -70,35 +70,7 @@ Last 13 lines of output:
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
-* checking re-building of vignette outputs ... WARNING
-Error in re-building vignettes:
-  ...
-            spreadsDT <- data.table(spreads)
-            if (returnDistances & allowOverlap) {
-                pixVal <- spreadsDT[, min(dists), by = indices]
-                message("returnDistances is TRUE, allowOverlap is TRUE, but returnIndices is FALSE; ", 
-                  "returning minimum distance raster.")
-            }
-            else {
-                pixVal <- spreadsDT[, sum(id), by = indices]
-            }
-            landscape[pixVal$indices] <- pixVal$V1
-        }
-    }
-    else {
-        landscape[wh] <- spreads[wh]
-        if (exists("potentials")) 
-            if (NROW(potentials) > 0) 
-                landscape[potentials[, 1L]] <- spreads[potentials[, 
-                  2L]]
-    }
-    return(landscape)
-}
-Quitting from lines 326-354 (ii-modules.Rmd) 
-Error: processing vignette 'ii-modules.Rmd' failed with diagnostics:
-promise already under evaluation: recursive default argument reference or earlier problems?
-Execution halted
-
+* checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 ERROR, 1 WARNING, 1 NOTE
+Status: 1 ERROR, 1 NOTE
