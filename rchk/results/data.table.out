@@ -1,7 +1,10 @@
-Package data.table version 1.10.4-3
-Package built using 74301/R 3.5.0; x86_64-pc-linux-gnu; 2018-02-26 09:31:16 UTC; unix   
+Package data.table version 1.11.0
+Package built using 74679/R 3.6.0; x86_64-pc-linux-gnu; 2018-05-02 05:47:36 UTC; unix   
 Checked with rchk version 63f79d910f5835174fcaa5a0a7d2409348f7d2ac
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+Function allocateDT
+  [PB] has possible protection stack imbalance data.table/src/freadR.c:370
 
 Function checkVars
   [UP] unprotected variable dtnames while calling allocating function Rf_allocVector data.table/src/fmelt.c:176
@@ -14,14 +17,14 @@ Function checkVars
   [UP] unprotected variable dtnames while calling allocating function set_diff(V,?) data.table/src/fmelt.c:209
   [UP] unprotected variable dtnames while calling allocating function Rf_allocVector data.table/src/fmelt.c:210
   [UP] unprotected variable dtnames while calling allocating function Rprintf data.table/src/fmelt.c:214
-  [UPERROR: too many states (abstraction error?) in function dogroups
-] allocating function chmatch may destroy its unprotected argument (dtnames <arg 2>), which is later used. data.table/src/fmelt.c:219
+  [UP] allocating function chmatch may destroy its unprotected argument (dtnames <arg 2>), which is later used. data.table/src/fmelt.c:219
   [UP] unprotected variable dtnames while calling allocating function Rf_coerceVector data.table/src/fmelt.c:220
   [UP] allocating function measurelist may destroy its unprotected argument (dtnames <arg 2>), which is later used. data.table/src/fmelt.c:222
   [UP] unprotected variable dtnames while calling allocating function unlist_ data.table/src/fmelt.c:227
   [UP] unprotected variable dtnames while calling allocating function Rf_duplicated data.table/src/fmelt.c:229
   [UP] unprotected variable dtnames while calling allocating function Rf_allocVector data.table/src/fmelt.c:236
-  [UP] unprotected variable dtnames while calling allocating function set_diff(V,?) data.table/src/fmelt.c:243
+  [UP] unprotected variable dtnames while calling allocating function set_diff(V,?) /home/tomas/cran/rchk/pkgbuild/lCEpKXaERROR: too many states (abstraction error?) in function dogroups
+L/data.table/src/fmelt.c:243
   [UP] unprotected variable dtnames while calling allocating function Rf_allocVector data.table/src/fmelt.c:246
   [UP] unprotected variable dtnames while calling allocating function Rprintf data.table/src/fmelt.c:250
   [UP] allocating function chmatch may destroy its unprotected argument (dtnames <arg 2>), which is later used. data.table/src/fmelt.c:255
@@ -31,168 +34,168 @@ Function combineFactorLevels
   [PB] has possible protection stack imbalance data.table/src/rbindlist.c:322
 
 Function dogroups
+  [UP] unprotected variable SDall while calling allocating function Rf_allocVector data.table/src/dogroups.c:46
+  [UP] unprotected variable SDall while calling allocating function Rf_defineVar(S:.BY,V,?) data.table/src/dogroups.c:46
+  [UP] unprotected variable BY while calling allocating function Rf_allocVector data.table/src/dogroups.c:47
   [UP] unprotected variable SDall while calling allocating function Rf_allocVector data.table/src/dogroups.c:47
-  [UP] unprotected variable SDall while calling allocating function Rf_defineVar(S:.BY,V,?) data.table/src/dogroups.c:47
-  [UP] unprotected variable BY while calling allocating function Rf_allocVector data.table/src/dogroups.c:48
-  [UP] unprotected variable SDall while calling allocating function Rf_allocVector data.table/src/dogroups.c:48
-  [UP] unprotected variable SDall while calling allocating function Rf_setAttrib(V,S:names,V) data.table/src/dogroups.c:60
-  [UP] unprotected variable BY while calling allocating function R_LockBinding(S:.BY,?) data.table/src/dogroups.c:61
-  [UP] unprotected variable SDall while calling allocating function R_LockBinding(S:.BY,?) data.table/src/dogroups.c:61
-  [UP] unprotected variable BY while calling allocating function Rf_findVar(S:.N,?) data.table/src/dogroups.c:65
+  [UP] unprotected variable SDall while calling allocating function Rf_setAttrib(V,S:names,V) data.table/src/dogroups.c:59
+  [UP] unprotected variable BY while calling allocating function R_LockBinding(S:.BY,?) data.table/src/dogroups.c:60
+  [UP] unprotected variable SDall while calling allocating function R_LockBinding(S:.BY,?) data.table/src/dogroups.c:60
+  [UP] unprotected variable BY while calling allocating function Rf_findVar(S:.N,?) data.table/src/dogroups.c:64
+  [UP] unprotected variable BY while calling allocating function Rf_install data.table/src/dogroups.c:64
+  [UP] unprotected variable SDall while calling allocating function Rf_findVar(S:.N,?) data.table/src/dogroups.c:64
+  [UP] unprotected variable SDall while calling allocating function Rf_install data.table/src/dogroups.c:64
+  [UP] unprotected variable BY while calling allocating function Rf_findVar(S:.GRP,?) data.table/src/dogroups.c:65
   [UP] unprotected variable BY while calling allocating function Rf_install data.table/src/dogroups.c:65
-  [UP] unprotected variable SDall while calling allocating function Rf_findVar(S:.N,?) data.table/src/dogroups.c:65
+  [UP] unprotected variable N while calling allocating function Rf_findVar(S:.GRP,?) data.table/src/dogroups.c:65
+  [UP] unprotected variable N while calling allocating function Rf_install data.table/src/dogroups.c:65
+  [UP] unprotected variable SDall while calling allocating function Rf_findVar(S:.GRP,?) data.table/src/dogroups.c:65
   [UP] unprotected variable SDall while calling allocating function Rf_install data.table/src/dogroups.c:65
-  [UP] unprotected variable BY while calling allocating function Rf_findVar(S:.GRP,?) data.table/src/dogroups.c:66
+  [UP] unprotected variable BY while calling allocating function Rf_findVar(S:.iSD,?) data.table/src/dogroups.c:66
   [UP] unprotected variable BY while calling allocating function Rf_install data.table/src/dogroups.c:66
-  [UP] unprotected variable N while calling allocating function Rf_findVar(S:.GRP,?) data.table/src/dogroups.c:66
+  [UP] unprotected variable GRP while calling allocating function Rf_findVar(S:.iSD,?) data.table/src/dogroups.c:66
+  [UP] unprotected variable GRP while calling allocating function Rf_install data.table/src/dogroups.c:66
+  [UP] unprotected variable N while calling allocating function Rf_findVar(S:.iSD,?) data.table/src/dogroups.c:66
   [UP] unprotected variable N while calling allocating function Rf_install data.table/src/dogroups.c:66
-  [UP] unprotected variable SDall while calling allocating function Rf_findVar(S:.GRP,?) data.table/src/dogroups.c:66
+  [UP] unprotected variable SDall while calling allocating function Rf_findVar(S:.iSD,?) data.table/src/dogroups.c:66
   [UP] unprotected variable SDall while calling allocating function Rf_install data.table/src/dogroups.c:66
-  [UP] unprotected variable BY while calling allocating function Rf_findVar(S:.iSD,?) data.table/src/dogroups.c:67
+  [UP] unprotected variable BY while calling allocating function Rf_findVar(S:.xSD,?) data.table/src/dogroups.c:67
   [UP] unprotected variable BY while calling allocating function Rf_install data.table/src/dogroups.c:67
-  [UP] unprotected variable GRP while calling allocating function Rf_findVar(S:.iSD,?) data.table/src/dogroups.c:67
+  [UP] unprotected variable GRP while calling allocating function Rf_findVar(S:.xSD,?) data.table/src/dogroups.c:67
   [UP] unprotected variable GRP while calling allocating function Rf_install data.table/src/dogroups.c:67
-  [UP] unprotected variable N while calling allocating function Rf_findVar(S:.iSD,?) data.table/src/dogroups.c:67
+  [UP] unprotected variable N while calling allocating function Rf_findVar(S:.xSD,?) data.table/src/dogroups.c:67
   [UP] unprotected variable N while calling allocating function Rf_install data.table/src/dogroups.c:67
-  [UP] unprotected variable SDall while calling allocating function Rf_findVar(S:.iSD,?) data.table/src/dogroups.c:67
+  [UP] unprotected variable SDall while calling allocating function Rf_findVar(S:.xSD,?) data.table/src/dogroups.c:67
   [UP] unprotected variable SDall while calling allocating function Rf_install data.table/src/dogroups.c:67
-  [UP] unprotected variable BY while calling allocating function Rf_findVar(S:.xSD,?) data.table/src/dogroups.c:68
+  [UP] unprotected variable iSD while calling allocating function Rf_findVar(S:.xSD,?) data.table/src/dogroups.c:67
+  [UP] unprotected variable iSD while calling allocating function Rf_install data.table/src/dogroups.c:67
+  [UP] unprotected variable BY while calling allocating function Rf_findVar(S:.I,?) data.table/src/dogroups.c:68
   [UP] unprotected variable BY while calling allocating function Rf_install data.table/src/dogroups.c:68
-  [UP] unprotected variable GRP while calling allocating function Rf_findVar(S:.xSD,?) data.table/src/dogroups.c:68
+  [UP] unprotected variable GRP while calling allocating function Rf_findVar(S:.I,?) data.table/src/dogroups.c:68
   [UP] unprotected variable GRP while calling allocating function Rf_install data.table/src/dogroups.c:68
-  [UP] unprotected variable N while calling allocating function Rf_findVar(S:.xSD,?) data.table/src/dogroups.c:68
+  [UP] unprotected variable N while calling allocating function Rf_findVar(S:.I,?) data.table/src/dogroups.c:68
   [UP] unprotected variable N while calling allocating function Rf_install data.table/src/dogroups.c:68
-  [UP] unprotected variable SDall while calling allocating function Rf_findVar(S:.xSD,?) data.table/src/dogroups.c:68
+  [UP] unprotected variable SDall while calling allocating function Rf_findVar(S:.I,?) data.table/src/dogroups.c:68
   [UP] unprotected variable SDall while calling allocating function Rf_install data.table/src/dogroups.c:68
-  [UP] unprotected variable iSD while calling allocating function Rf_findVar(S:.xSD,?) data.table/src/dogroups.c:68
+  [UP] unprotected variable iSD while calling allocating function Rf_findVar(S:.I,?) data.table/src/dogroups.c:68
   [UP] unprotected variable iSD while calling allocating function Rf_install data.table/src/dogroups.c:68
-  [UP] unprotected variable BY while calling allocating function Rf_findVar(S:.I,?) data.table/src/dogroups.c:69
-  [UP] unprotected variable BY while calling allocating function Rf_install data.table/src/dogroups.c:69
-  [UP] unprotected variable GRP while calling allocating function Rf_findVar(S:.I,?) data.table/src/dogroups.c:69
-  [UP] unprotected variable GRP while calling allocating function Rf_install data.table/src/dogroups.c:69
-  [UP] unprotected variable N while calling allocating function Rf_findVar(S:.I,?) data.table/src/dogroups.c:69
-  [UP] unprotected variable N while calling allocating function Rf_install data.table/src/dogroups.c:69
-  [UP] unprotected variable SDall while calling allocating function Rf_findVar(S:.I,?) data.table/src/dogroups.c:69
-  [UP] unprotected variable SDall while calling allocating function Rf_install data.table/src/dogroups.c:69
-  [UP] unprotected variable iSD while calling allocating function Rf_findVar(S:.I,?) data.table/src/dogroups.c:69
-  [UP] unprotected variable iSD while calling allocating function Rf_install data.table/src/dogroups.c:69
-  [UP] unprotected variable xSD while calling allocating function Rf_findVar(S:.I,?) data.table/src/dogroups.c:69
-  [UP] unprotected variable xSD while calling allocating function Rf_install data.table/src/dogroups.c:69
-  [UP] unprotected variable BY while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:71
-  [UP] unprotected variable GRP while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:71
-  [UP] unprotected variable I while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:71
-  [UP] unprotected variable N while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:71
-  [UP] unprotected variable SDall while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:71
-  [UP] unprotected variable iSD while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:71
-  [UP] unprotected variable xSD while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:71
-  [UP] allocating function Rf_getAttrib(?,S:names) may destroy its unprotected argument (SDall <arg 1>), which is later used. data.table/src/dogroups.c:82
-  [UP] unprotected variable BY while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:82
-  [UP] unprotected variable GRP while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:82
-  [UP] unprotected variable I while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:82
-  [UP] unprotected variable N while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:82
-  [UP] unprotected variable dtnames while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:82
-  [UP] unprotected variable iSD while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:82
-  [UP] unprotected variable xSD while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:82
-  [UP] unprotected variable BY while calling allocating function R_alloc data.table/src/dogroups.c:84
-  [UP] unprotected variable GRP while calling allocating function R_alloc data.table/src/dogroups.c:84
-  [UP] unprotected variable I while calling allocating function R_alloc data.table/src/dogroups.c:84
-  [UP] unprotected variable N while calling allocating function R_alloc data.table/src/dogroups.c:84
-  [UP] unprotected variable SDall while calling allocating function R_alloc data.table/src/dogroups.c:84
-  [UP] unprotected variable dtnames while calling allocating function R_alloc data.table/src/dogroups.c:84
-  [UP] unprotected variable iSD while calling allocating function R_alloc data.table/src/dogroups.c:84
-  [UP] unprotected variable xSD while calling allocating function R_alloc data.table/src/dogroups.c:84
-  [UP] allocating function Rf_getAttrib(?,S:names) may destroy its unprotected argument (xSD <arg 1>), which is later used. data.table/src/dogroups.c:96
-  [UP] unprotected variable BY while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:96
-  [UP] unprotected variable GRP while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:96
-  [UP] unprotected variable I while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:96
-  [UP] unprotected variable N while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:96
-  [UP] unprotected variable SDall while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:96
-  [UP] unprotected variable dtnames while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:96
-  [UP] unprotected variable iSD while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:96
-  [UP] unprotected variable BY while calling allocating function R_alloc data.table/src/dogroups.c:98
-  [UP] unprotected variable GRP while calling allocating function R_alloc data.table/src/dogroups.c:98
-  [UP] unprotected variable I while calling allocating function R_alloc data.table/src/dogroups.c:98
-  [UP] unprotected variable N while calling allocating function R_alloc data.table/src/dogroups.c:98
-  [UP] unprotected variable SDall while calling allocating function R_alloc data.table/src/dogroups.c:98
-  [UP] unprotected variable dtnames while calling allocating function R_alloc data.table/src/dogroups.c:98
-  [UP] unprotected variable iSD while calling allocating function R_alloc data.table/src/dogroups.c:98
-  [UP] unprotected variable xSD while calling allocating function R_alloc data.table/src/dogroups.c:98
-  [UP] unprotected variable BY while calling allocating function Rf_allocVector data.table/src/dogroups.c:109
-  [UP] unprotected variable GRP while calling allocating function Rf_allocVector data.table/src/dogroups.c:109
-  [UP] unprotected variable I while calling allocating function Rf_allocVector data.table/src/dogroups.c:109
-  [UP] unprotected variable N while calling allocating function Rf_allocVector data.table/src/dogroups.c:109
-  [UP] unprotected variable SDall while calling allocating function Rf_allocVector data.table/src/dogroups.c:109
-  [UP] unprotected variable dtnames while calling allocating function Rf_allocVector data.table/src/dogroups.c:109
-  [UP] unprotected variable iSD while calling allocating function Rf_allocVector data.table/src/dogroups.c:109
-  [UP] unprotected variable xSD while calling allocating function Rf_allocVector data.table/src/dogroups.c:109
-  [UP] unprotected variable BY while calling allocating function Rf_defineVar data.table/src/dogroups.c:233
-  [UP] unprotected variable GRP while calling allocating function Rf_defineVar data.table/src/dogroups.c:233
-  [UP] unprotected variable I while calling allocating function Rf_defineVar data.table/src/dogroups.c:233
-  [UP] unprotected variable N while calling allocating function Rf_defineVar data.table/src/dogroups.c:233
-  [UP] unprotected variable SDall while calling allocating function Rf_defineVar data.table/src/dogroups.c:233
-  [UP] unprotected variable dtnames while calling allocating function Rf_defineVar data.table/src/dogroups.c:233
-  [UP] unprotected variable iSD while calling allocating function Rf_defineVar data.table/src/dogroups.c:233
-  [UP] unprotected variable xSD while calling allocating function Rf_defineVar data.table/src/dogroups.c:233
-  [UP] unprotected variable BY while calling allocating function Rf_defineVar data.table/src/dogroups.c:238
-  [UP] unprotected variable GRP while calling allocating function Rf_defineVar data.table/src/dogroups.c:238
-  [UP] unprotected variable I while calling allocating function Rf_defineVar data.table/src/dogroups.c:238
-  [UP] unprotected variable N while calling allocating function Rf_defineVar data.table/src/dogroups.c:238
-  [UP] unprotected variable SDall while calling allocating function Rf_defineVar data.table/src/dogroups.c:238
-  [UP] unprotected variable dtnames while calling allocating function Rf_defineVar data.table/src/dogroups.c:238
-  [UP] unprotected variable iSD while calling allocating function Rf_defineVar data.table/src/dogroups.c:238
-  [UP] unprotected variable xSD while calling allocating function Rf_defineVar data.table/src/dogroups.c:238
-  [UP] unprotected variable BY while calling allocating function Rf_eval data.table/src/dogroups.c:243
-  [UP] unprotected variable GRP while calling allocating function Rf_eval data.table/src/dogroups.c:243
-  [UP] unprotected variable I while calling allocating function Rf_eval data.table/src/dogroups.c:243
-  [UP] unprotected variable N while calling allocating function Rf_eval data.table/src/dogroups.c:243
-  [UP] unprotected variable SDall while calling allocating function Rf_eval data.table/src/dogroups.c:243
-  [UP] unprotected variable dtnames while calling allocating function Rf_eval data.table/src/dogroups.c:243
-  [UP] unprotected variable iSD while calling allocating function Rf_eval data.table/src/dogroups.c:243
-  [UP] unprotected variable xSD while calling allocating function Rf_eval data.table/src/dogroups.c:243
-  [UP] unprotected variable BY while calling allocating function allocNAVector data.table/src/dogroups.c:279
-  [UP] unprotected variable GRP while calling allocating function allocNAVector data.table/src/dogroups.c:279
-  [UP] unprotected variable I while calling allocating function allocNAVector data.table/src/dogroups.c:279
-  [UP] unprotected variable N while calling allocating function allocNAVector data.table/src/dogroups.c:279
-  [UP] unprotected variable SDall while calling allocating function allocNAVector data.table/src/dogroups.c:279
-  [UP] unprotected variable dtnames while calling allocating function allocNAVector data.table/src/dogroups.c:279
-  [UP] unprotected variable iSD while calling allocating function allocNAVector data.table/src/dogroups.c:279
-  [UP] unprotected variable xSD while calling allocating function allocNAVector data.table/src/dogroups.c:279
-  [UP] unprotected variable BY while calling allocating function Rf_warning data.table/src/dogroups.c:294
-  [UP] unprotected variable GRP while calling allocating function Rf_warning data.table/src/dogroups.c:294
-  [UP] unprotected variable I while calling allocating function Rf_warning data.table/src/dogroups.c:294
-  [UP] unprotected variable N while calling allocating function Rf_warning data.table/src/dogroups.c:294
-  [UP] unprotected variable SDall while calling allocating function Rf_warning data.table/src/dogroups.c:294
-  [UP] unprotected variable dtnames while calling allocating function Rf_warning data.table/src/dogroups.c:294
-  [UP] unprotected variable iSD while calling allocating function Rf_warning data.table/src/dogroups.c:294
-  [UP] unprotected variable xSD while calling allocating function Rf_warning data.table/src/dogroups.c:294
-  [UP] unprotected variable BY while calling allocating function Rf_warning data.table/src/dogroups.c:297
-  [UP] unprotected variable GRP while calling allocating function Rf_warning data.table/src/dogroups.c:297
-  [UP] unprotected variable I while calling allocating function Rf_warning data.table/src/dogroups.c:297
-  [UP] unprotected variable N while calling allocating function Rf_warning data.table/src/dogroups.c:297
-  [UP] unprotected variable SDall while calling allocating function Rf_warning data.table/src/dogroups.c:297
-  [UP] unprotected variable dtnames while calling allocating function Rf_warning data.table/src/dogroups.c:297
-  [UP] unprotected variable iSD while calling allocating function Rf_warning data.table/src/dogroups.c:297
-  [UP] unprotected variable xSD while calling allocating function Rf_warning data.table/src/dogroups.c:297
-  [UP] unprotected variable BY while calling allocating function memrecycle data.table/src/dogroups.c:299
-  [UP] unprotected variable GRP while calling allocating function memrecycle data.table/src/dogroups.c:299
-  [UP] unprotected variable I while calling allocating function memrecycle data.table/src/dogroups.c:299
-  [UP] unprotected variable N while calling allocating function memrecycle data.table/src/dogroups.c:299
-  [UP] unprotected variable SDall while calling allocating function memrecycle data.table/src/dogroups.c:299
-  [UP] unprotected variable dtnames while calling allocating function memrecycle data.table/src/dogroups.c:299
-  [UP] unprotected variable iSD while calling allocating function memrecycle data.table/src/dogroups.c:299
-  [UP] unprotected variable xSD while calling allocating function memrecycle data.table/src/dogroups.c:299
-  [UP] unprotected variable BY while calling allocating function Rf_copyMostAttrib data.table/src/dogroups.c:301
-  [UP] unprotected variable GRP while calling allocating function Rf_copyMostAttrib data.table/src/dogroups.c:301
-  [UP] unprotected variable I while calling allocating function Rf_copyMostAttrib data.table/src/dogroups.c:301
-  [UP] unprotected variable N while calling allocating function Rf_copyMostAttrib data.table/src/dogroups.c:301
-  [UP] unprotected variable SDall while calling allocating function Rf_copyMostAttrib data.table/src/dogroups.c:301
-  [UP] unprotected variable dtnames while calling allocating function Rf_copyMostAttrib data.table/src/dogroups.c:301
-  [UP] unprotected variable iSD while calling allocating function Rf_copyMostAttrib data.table/src/dogroups.c:301
-  [UP] unprotected variable xSD while calling allocating function Rf_copyMostAttrib data.table/src/dogroups.c:301
-  [UP] unprotected variable I while calling allocating function Rprintf data.table/src/dogroups.c:438
-  [UP] unprotected variable SDall while calling allocating function Rprintf data.table/src/dogroups.c:438
-  [UP] unprotected variable I while calling allocating function growVector data.table/src/dogroups.c:439
-  [UP] unprotected variable SDall while calling allocating function growVector data.table/src/dogroups.c:439
+  [UP] unprotected variable xSD while calling allocating function Rf_findVar(S:.I,?) data.table/src/dogroups.c:68
+  [UP] unprotected variable xSD while calling allocating function Rf_install data.table/src/dogroups.c:68
+  [UP] unprotected variable BY while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:70
+  [UP] unprotected variable GRP while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:70
+  [UP] unprotected variable I while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:70
+  [UP] unprotected variable N while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:70
+  [UP] unprotected variable SDall while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:70
+  [UP] unprotected variable iSD while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:70
+  [UP] unprotected variable xSD while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:70
+  [UP] allocating function Rf_getAttrib(?,S:names) may destroy its unprotected argument (SDall <arg 1>), which is later used. data.table/src/dogroups.c:81
+  [UP] unprotected variable BY while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:81
+  [UP] unprotected variable GRP while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:81
+  [UP] unprotected variable I while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:81
+  [UP] unprotected variable N while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:81
+  [UP] unprotected variable dtnames while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:81
+  [UP] unprotected variable iSD while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:81
+  [UP] unprotected variable xSD while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:81
+  [UP] unprotected variable BY while calling allocating function R_alloc data.table/src/dogroups.c:83
+  [UP] unprotected variable GRP while calling allocating function R_alloc data.table/src/dogroups.c:83
+  [UP] unprotected variable I while calling allocating function R_alloc data.table/src/dogroups.c:83
+  [UP] unprotected variable N while calling allocating function R_alloc data.table/src/dogroups.c:83
+  [UP] unprotected variable SDall while calling allocating function R_alloc data.table/src/dogroups.c:83
+  [UP] unprotected variable dtnames while calling allocating function R_alloc data.table/src/dogroups.c:83
+  [UP] unprotected variable iSD while calling allocating function R_alloc data.table/src/dogroups.c:83
+  [UP] unprotected variable xSD while calling allocating function R_alloc data.table/src/dogroups.c:83
+  [UP] allocating function Rf_getAttrib(?,S:names) may destroy its unprotected argument (xSD <arg 1>), which is later used. data.table/src/dogroups.c:95
+  [UP] unprotected variable BY while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:95
+  [UP] unprotected variable GRP while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:95
+  [UP] unprotected variable I while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:95
+  [UP] unprotected variable N while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:95
+  [UP] unprotected variable SDall while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:95
+  [UP] unprotected variable dtnames while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:95
+  [UP] unprotected variable iSD while calling allocating function Rf_getAttrib(?,S:names) data.table/src/dogroups.c:95
+  [UP] unprotected variable BY while calling allocating function R_alloc data.table/src/dogroups.c:97
+  [UP] unprotected variable GRP while calling allocating function R_alloc data.table/src/dogroups.c:97
+  [UP] unprotected variable I while calling allocating function R_alloc data.table/src/dogroups.c:97
+  [UP] unprotected variable N while calling allocating function R_alloc data.table/src/dogroups.c:97
+  [UP] unprotected variable SDall while calling allocating function R_alloc data.table/src/dogroups.c:97
+  [UP] unprotected variable dtnames while calling allocating function R_alloc data.table/src/dogroups.c:97
+  [UP] unprotected variable iSD while calling allocating function R_alloc data.table/src/dogroups.c:97
+  [UP] unprotected variable xSD while calling allocating function R_alloc data.table/src/dogroups.c:97
+  [UP] unprotected variable BY while calling allocating function Rf_allocVector data.table/src/dogroups.c:107
+  [UP] unprotected variable GRP while calling allocating function Rf_allocVector data.table/src/dogroups.c:107
+  [UP] unprotected variable I while calling allocating function Rf_allocVector data.table/src/dogroups.c:107
+  [UP] unprotected variable N while calling allocating function Rf_allocVector data.table/src/dogroups.c:107
+  [UP] unprotected variable SDall while calling allocating function Rf_allocVector data.table/src/dogroups.c:107
+  [UP] unprotected variable dtnames while calling allocating function Rf_allocVector data.table/src/dogroups.c:107
+  [UP] unprotected variable iSD while calling allocating function Rf_allocVector data.table/src/dogroups.c:107
+  [UP] unprotected variable xSD while calling allocating function Rf_allocVector data.table/src/dogroups.c:107
+  [UP] unprotected variable BY while calling allocating function Rf_defineVar data.table/src/dogroups.c:239
+  [UP] unprotected variable GRP while calling allocating function Rf_defineVar data.table/src/dogroups.c:239
+  [UP] unprotected variable I while calling allocating function Rf_defineVar data.table/src/dogroups.c:239
+  [UP] unprotected variable N while calling allocating function Rf_defineVar data.table/src/dogroups.c:239
+  [UP] unprotected variable SDall while calling allocating function Rf_defineVar data.table/src/dogroups.c:239
+  [UP] unprotected variable dtnames while calling allocating function Rf_defineVar data.table/src/dogroups.c:239
+  [UP] unprotected variable iSD while calling allocating function Rf_defineVar data.table/src/dogroups.c:239
+  [UP] unprotected variable xSD while calling allocating function Rf_defineVar data.table/src/dogroups.c:239
+  [UP] unprotected variable BY while calling allocating function Rf_defineVar data.table/src/dogroups.c:244
+  [UP] unprotected variable GRP while calling allocating function Rf_defineVar data.table/src/dogroups.c:244
+  [UP] unprotected variable I while calling allocating function Rf_defineVar data.table/src/dogroups.c:244
+  [UP] unprotected variable N while calling allocating function Rf_defineVar data.table/src/dogroups.c:244
+  [UP] unprotected variable SDall while calling allocating function Rf_defineVar data.table/src/dogroups.c:244
+  [UP] unprotected variable dtnames while calling allocating function Rf_defineVar data.table/src/dogroups.c:244
+  [UP] unprotected variable iSD while calling allocating function Rf_defineVar data.table/src/dogroups.c:244
+  [UP] unprotected variable xSD while calling allocating function Rf_defineVar data.table/src/dogroups.c:244
+  [UP] unprotected variable BY while calling allocating function Rf_eval data.table/src/dogroups.c:248
+  [UP] unprotected variable GRP while calling allocating function Rf_eval data.table/src/dogroups.c:248
+  [UP] unprotected variable I while calling allocating function Rf_eval data.table/src/dogroups.c:248
+  [UP] unprotected variable N while calling allocating function Rf_eval data.table/src/dogroups.c:248
+  [UP] unprotected variable SDall while calling allocating function Rf_eval data.table/src/dogroups.c:248
+  [UP] unprotected variable dtnames while calling allocating function Rf_eval data.table/src/dogroups.c:248
+  [UP] unprotected variable iSD while calling allocating function Rf_eval data.table/src/dogroups.c:248
+  [UP] unprotected variable xSD while calling allocating function Rf_eval data.table/src/dogroups.c:248
+  [UP] unprotected variable BY while calling allocating function allocNAVector data.table/src/dogroups.c:284
+  [UP] unprotected variable GRP while calling allocating function allocNAVector data.table/src/dogroups.c:284
+  [UP] unprotected variable I while calling allocating function allocNAVector data.table/src/dogroups.c:284
+  [UP] unprotected variable N while calling allocating function allocNAVector data.table/src/dogroups.c:284
+  [UP] unprotected variable SDall while calling allocating function allocNAVector data.table/src/dogroups.c:284
+  [UP] unprotected variable dtnames while calling allocating function allocNAVector data.table/src/dogroups.c:284
+  [UP] unprotected variable iSD while calling allocating function allocNAVector data.table/src/dogroups.c:284
+  [UP] unprotected variable xSD while calling allocating function allocNAVector data.table/src/dogroups.c:284
+  [UP] unprotected variable BY while calling allocating function Rf_warning data.table/src/dogroups.c:299
+  [UP] unprotected variable GRP while calling allocating function Rf_warning data.table/src/dogroups.c:299
+  [UP] unprotected variable I while calling allocating function Rf_warning data.table/src/dogroups.c:299
+  [UP] unprotected variable N while calling allocating function Rf_warning data.table/src/dogroups.c:299
+  [UP] unprotected variable SDall while calling allocating function Rf_warning data.table/src/dogroups.c:299
+  [UP] unprotected variable dtnames while calling allocating function Rf_warning data.table/src/dogroups.c:299
+  [UP] unprotected variable iSD while calling allocating function Rf_warning data.table/src/dogroups.c:299
+  [UP] unprotected variable xSD while calling allocating function Rf_warning data.table/src/dogroups.c:299
+  [UP] unprotected variable BY while calling allocating function Rf_warning data.table/src/dogroups.c:302
+  [UP] unprotected variable GRP while calling allocating function Rf_warning data.table/src/dogroups.c:302
+  [UP] unprotected variable I while calling allocating function Rf_warning data.table/src/dogroups.c:302
+  [UP] unprotected variable N while calling allocating function Rf_warning data.table/src/dogroups.c:302
+  [UP] unprotected variable SDall while calling allocating function Rf_warning data.table/src/dogroups.c:302
+  [UP] unprotected variable dtnames while calling allocating function Rf_warning data.table/src/dogroups.c:302
+  [UP] unprotected variable iSD while calling allocating function Rf_warning data.table/src/dogroups.c:302
+  [UP] unprotected variable xSD while calling allocating function Rf_warning data.table/src/dogroups.c:302
+  [UP] unprotected variable BY while calling allocating function memrecycle data.table/src/dogroups.c:304
+  [UP] unprotected variable GRP while calling allocating function memrecycle data.table/src/dogroups.c:304
+  [UP] unprotected variable I while calling allocating function memrecycle data.table/src/dogroups.c:304
+  [UP] unprotected variable N while calling allocating function memrecycle data.table/src/dogroups.c:304
+  [UP] unprotected variable SDall while calling allocating function memrecycle data.table/src/dogroups.c:304
+  [UP] unprotected variable dtnames while calling allocating function memrecycle data.table/src/dogroups.c:304
+  [UP] unprotected variable iSD while calling allocating function memrecycle data.table/src/dogroups.c:304
+  [UP] unprotected variable xSD while calling allocating function memrecycle data.table/src/dogroups.c:304
+  [UP] unprotected variable BY while calling allocating function Rf_copyMostAttrib data.table/src/dogroups.c:306
+  [UP] unprotected variable GRP while calling allocating function Rf_copyMostAttrib data.table/src/dogroups.c:306
+  [UP] unprotected variable I while calling allocating function Rf_copyMostAttrib data.table/src/dogroups.c:306
+  [UP] unprotected variable N while calling allocating function Rf_copyMostAttrib data.table/src/dogroups.c:306
+  [UP] unprotected variable SDall while calling allocating function Rf_copyMostAttrib data.table/src/dogroups.c:306
+  [UP] unprotected variable dtnames while calling allocating function Rf_copyMostAttrib data.table/src/dogroups.c:306
+  [UP] unprotected variable iSD while calling allocating function Rf_copyMostAttrib data.table/src/dogroups.c:306
+  [UP] unprotected variable xSD while calling allocating function Rf_copyMostAttrib data.table/src/dogroups.c:306
+  [UP] unprotected variable I while calling allocating function Rprintf data.table/src/dogroups.c:443
+  [UP] unprotected variable SDall while calling allocating function Rprintf data.table/src/dogroups.c:443
+  [UP] unprotected variable I while calling allocating function growVector data.table/src/dogroups.c:444
+  [UP] unprotected variable SDall while calling allocating function growVector data.table/src/dogroups.c:444
 
 Function preprocess
   [PB] has possible protection stack imbalance data.table/src/fmelt.c:354
@@ -203,57 +206,5 @@ Function set_diff
 Function shallow
   [UP] unprotected variable names while calling allocating function Rf_allocVector data.table/src/assign.c:161
 
-Function shift
-  [UP] unprotected variable x while calling allocating function Rf_allocVector data.table/src/shift.c:35
-  [UP] unprotected variable x while calling allocating function Rf_coerceVector data.table/src/shift.c:43
-  [UP] unprotected variable x while calling allocating function Rf_allocVector data.table/src/shift.c:46
-  [UP] unprotected variable x while calling allocating function Rf_copyMostAttrib(?,V) data.table/src/shift.c:54
-  [UP] unprotected variable x while calling allocating function Rf_setAttrib(V,S:levels,?) data.table/src/shift.c:56
-  [UP] unprotected variable x while calling allocating function Rf_allocVector data.table/src/shift.c:63
-  [UP] unprotected variable x while calling allocating function Rf_coerceVector data.table/src/shift.c:69
-  [UP] unprotected variable x while calling allocating function Rf_allocVector data.table/src/shift.c:73
-  [UP] unprotected variable x while calling allocating function Rf_copyMostAttrib(?,V) data.table/src/shift.c:83
-  [UP] unprotected variable x while calling allocating function Rf_coerceVector data.table/src/shift.c:88
-  [UP] unprotected variable x while calling allocating function Rf_allocVector data.table/src/shift.c:91
-  [UP] unprotected variable x while calling allocating function Rf_copyMostAttrib(?,V) data.table/src/shift.c:99
-  [UP] unprotected variable x while calling allocating function Rf_coerceVector data.table/src/shift.c:104
-  [UP] unprotected variable x while calling allocating function Rf_allocVector data.table/src/shift.c:106
-  [UP] unprotected variable x while calling allocating function Rf_copyMostAttrib(?,V) data.table/src/shift.c:110
-  [UP] unprotected variable x while calling allocating function Rf_coerceVector data.table/src/shift.c:115
-  [UP] unprotected variable x while calling allocating function Rf_allocVector data.table/src/shift.c:117
-  [UP] unprotected variable x while calling allocating function Rf_copyMostAttrib(?,V) data.table/src/shift.c:121
-  [UP] unprotected variable x while calling allocating function Rf_copyMostAttrib data.table/src/shift.c:128
-  [UP] unprotected variable x while calling allocating function Rf_copyMostAttrib(?,V) data.table/src/shift.c:128
-  [UP] unprotected variable x while calling allocating function Rf_setAttrib(?,S:levels,?) data.table/src/shift.c:130
-  [UP] unprotected variable x while calling allocating function Rf_setAttrib(V,S:levels,?) data.table/src/shift.c:130
-  [UP] unprotected variable x while calling allocating function Rf_coerceVector data.table/src/shift.c:140
-  [UP] unprotected variable x while calling allocating function Rf_allocVector data.table/src/shift.c:143
-  [UP] unprotected variable x while calling allocating function Rf_copyMostAttrib(?,V) data.table/src/shift.c:151
-  [UP] unprotected variable x while calling allocating function Rf_setAttrib(V,S:levels,?) data.table/src/shift.c:153
-  [UP] unprotected variable x while calling allocating function Rf_allocVector data.table/src/shift.c:160
-  [UP] unprotected variable x while calling allocating function Rf_coerceVector data.table/src/shift.c:166
-  [UP] unprotected variable x while calling allocating function Rf_allocVector data.table/src/shift.c:170
-  [UP] unprotected variable x while calling allocating function Rf_copyMostAttrib(?,V) data.table/src/shift.c:178
-  [UP] unprotected variable x while calling allocating function Rf_coerceVector data.table/src/shift.c:183
-  [UP] unprotected variable x while calling allocating function Rf_allocVector data.table/src/shift.c:186
-  [UP] unprotected variable x while calling allocating function Rf_copyMostAttrib(?,V) data.table/src/shift.c:194
-  [UP] unprotected variable x while calling allocating function Rf_coerceVector data.table/src/shift.c:199
-  [UP] unprotected variable x while calling allocating function Rf_allocVector data.table/src/shift.c:201
-  [UP] unprotected variable x while calling allocating function Rf_copyMostAttrib(?,V) data.table/src/shift.c:205
-  [UP] unprotected variable x while calling allocating function Rf_coerceVector data.table/src/shift.c:210
-  [UP] unprotected variable x while calling allocating function Rf_allocVector data.table/src/shift.c:212
-  [UP] unprotected variable x while calling allocating function Rf_copyMostAttrib(?,V) data.table/src/shift.c:216
-
-Function writefile
-  [UP] unprotected variable rowNames while calling allocating function Rprintf data.table/src/fwrite.c:729
-  [UP] unprotected variable rowNames while calling allocating function Rprintf data.table/src/fwrite.c:754
-  [UP] unprotected variable rowNames while calling allocating function Rprintf data.table/src/fwrite.c:755
-  [UP] unprotected variable rowNames while calling allocating function Rf_getAttrib(?,S:names) data.table/src/fwrite.c:758
-  [UP] unprotected variable rowNames while calling allocating function Rprintf data.table/src/fwrite.c:779
-  [UP] unprotected variable rowNames while calling allocating function Rprintf data.table/src/fwrite.c:789
-  [UP] unprotected variable rowNames while calling allocating function Rprintf data.table/src/fwrite.c:816
-  [UP] unprotected variable rowNames while calling allocating function Rprintf data.table/src/fwrite.c:818
-  [UP] unprotected variable rowNames while calling allocating function Rprintf data.table/src/fwrite.c:891
-  [UP] unprotected variable rowNames while calling allocating function Rprintf data.table/src/fwrite.c:913
-  [UP] unprotected variable rowNames while calling allocating function Rprintf data.table/src/fwrite.c:914
-  [UP] unprotected variable rowNames while calling allocating function R_FlushConsole data.table/src/fwrite.c:918
+Function userOverride
+  [PB] has possible protection stack imbalance data.table/src/freadR.c:312
