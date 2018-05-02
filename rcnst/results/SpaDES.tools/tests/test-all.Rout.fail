@@ -16,17 +16,8 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(testthat)
-> test_check("SpaDES.core")
-Loading required package: SpaDES.core
-Loading required package: quickPlot
-Loading required package: reproducible
-
-Attaching package: 'reproducible'
-
-The following object is masked from 'package:testthat':
-
-    %>%
-
+> test_check("SpaDES.tools")
+Loading required package: SpaDES.tools
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "includePixel" "excludePixel" "includeRing"  "excludeRing" 
@@ -810,6 +801,154 @@ ERROR: the modified constant is in this function body:
     }
     return(landscape)
 }
-S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature RasterLayer has this body.
-Fatal error: compiler constants were modified!
+── 1. Error: /tmp/Rtmpa2NjRO/R.INSTALL9b3d52c932f8/SpaDES.tools/man/cir.Rd  ────
+promise already under evaluation: recursive default argument reference or earlier problems?
+1: gaussMap(a, speedup = 1)
+2: raster(RFsimulate(model, y = 1:ncSpeedup, x = 1:nrSpeedup, grid = TRUE, ...))
+3: RFsimulate(model, y = 1:ncSpeedup, x = 1:nrSpeedup, grid = TRUE, ...)
+4: rfInit(model = list("Simulate", setseed = eval(parse(text = "quote(set.seed(seed=seed))")), 
+       env = .GlobalEnv, model), x = x, y = y, z = z, T = T, grid = grid, distances = distances, 
+       dim = dim, reg = reg, old.seed = RFoptOld[[1]]$basic$seed)
+5: C_CheckXT(x, y, z, T, grid = grid, distances = distances, dim = dim, y.ok = !dosimulate)
 
+── 2. Error: /tmp/Rtmpa2NjRO/R.INSTALL9b3d52c932f8/SpaDES.tools/man/rings.Rd  ──
+SETLENGTH() cannot be applied to an ALTVEC object.
+1: rings(emptyRas, loci = loci, allowOverlap = TRUE, returnIndices = TRUE)
+2: rings(emptyRas, loci = loci, allowOverlap = TRUE, returnIndices = TRUE)
+3: spread(landscape, loci = loci, circle = TRUE, circleMaxRadius = maxRadius, spreadProb = 1, 
+       id = TRUE, returnDistances = TRUE, returnIndices = TRUE, allowOverlap = allowOverlap, 
+       ...)
+4: spread(landscape, loci = loci, circle = TRUE, circleMaxRadius = maxRadius, spreadProb = 1, 
+       id = TRUE, returnDistances = TRUE, returnIndices = TRUE, allowOverlap = allowOverlap, 
+       ...)
+5: d[, `:=`(duplicated, duplicated(indices)), by = id]
+6: `[.data.table`(d, , `:=`(duplicated, duplicated(indices)), by = id)
+
+── 3. Error: /tmp/Rtmpa2NjRO/R.INSTALL9b3d52c932f8/SpaDES.tools/man/specnumperpa
+SETLENGTH() cannot be applied to an ALTVEC object.
+1: specificNumPerPatch(ras, patchDT)
+2: dt2[, list(cells = resample(wh, unique(num.in.pop))), by = "pops"]
+3: `[.data.table`(dt2, , list(cells = resample(wh, unique(num.in.pop))), by = "pops")
+
+── 4. Error: /tmp/Rtmpa2NjRO/R.INSTALL9b3d52c932f8/SpaDES.tools/man/spread.Rd  ─
+SETLENGTH() cannot be applied to an ALTVEC object.
+1: fires[, list(size = length(initialLocus)), by = id]
+2: `[.data.table`(fires, , list(size = length(initialLocus)), by = id)
+
+── 5. Error: /tmp/Rtmpa2NjRO/R.INSTALL9b3d52c932f8/SpaDES.tools/man/spread2.Rd  
+SETLENGTH() cannot be applied to an ALTVEC object.
+1: spread2(a, start = sams, 0.225, maxSize = maxSizes, asRaster = FALSE)
+2: dtPotential[, list(size = as.integer(.N)), by = "initialPixels"]
+3: `[.data.table`(dtPotential, , list(size = as.integer(.N)), by = "initialPixels")
+
+── 6. Error: spread produces legal RasterLayer (@test-spread.R#42)  ────────────
+SETLENGTH() cannot be applied to an ALTVEC object.
+1: spread(a, loci = as.integer(sample(1:ncell(a), 10)), returnIndices = TRUE, spreadProb = 0.235, 
+       0, NULL, 1e+08, 8, iterations = 2, id = TRUE, spreadState = fires[[i - 1]]) at testthat/test-spread.R:42
+2: spread(a, loci = as.integer(sample(1:ncell(a), 10)), returnIndices = TRUE, spreadProb = 0.235, 
+       0, NULL, 1e+08, 8, iterations = 2, id = TRUE, spreadState = fires[[i - 1]])
+3: d[, `:=`(duplicated, duplicated(indices)), by = id]
+4: `[.data.table`(d, , `:=`(duplicated, duplicated(indices)), by = id)
+
+── 7. Failure: spread stopRule does not work correctly (@test-spread.R#165)  ───
+sum(getValues(circs4) > 0) > sum(getValues(circs2) > 0) isn't true.
+
+── 8. Error: spread stopRule does not work correctly (@test-spread.R#227)  ─────
+SETLENGTH() cannot be applied to an ALTVEC object.
+1: expect_silent(circs <- spread(hab2, spreadProb = 1, circle = TRUE, loci = initialLoci, 
+       id = TRUE, circleMaxRadius = maxRadius, allowOverlap = TRUE)) at testthat/test-spread.R:227
+2: quasi_capture(enquo(object), evaluate_promise)
+3: capture(act$val <- eval_bare(get_expr(quo), get_env(quo)))
+4: withr::with_output_sink(temp, withCallingHandlers(withVisible(code), warning = handle_warning, 
+       message = handle_message))
+5: force(code)
+6: withCallingHandlers(withVisible(code), warning = handle_warning, message = handle_message)
+7: withVisible(code)
+8: eval_bare(get_expr(quo), get_env(quo))
+9: spread(hab2, spreadProb = 1, circle = TRUE, loci = initialLoci, id = TRUE, circleMaxRadius = maxRadius, 
+       allowOverlap = TRUE)
+10: spread(hab2, spreadProb = 1, circle = TRUE, loci = initialLoci, id = TRUE, circleMaxRadius = maxRadius, 
+       allowOverlap = TRUE)
+11: d[, `:=`(duplicated, duplicated(indices)), by = id]
+12: `[.data.table`(d, , `:=`(duplicated, duplicated(indices)), by = id)
+
+── 9. Error: rings and cir (@test-spread.R#636)  ───────────────────────────────
+SETLENGTH() cannot be applied to an ALTVEC object.
+1: rings(hab, loci, minRadius = radius, maxRadius = radius * 1.5001, allowOverlap = TRUE, 
+       returnIndices = TRUE, includeBehavior = "includeRing") at testthat/test-spread.R:636
+2: rings(hab, loci, minRadius = radius, maxRadius = radius * 1.5001, allowOverlap = TRUE, 
+       returnIndices = TRUE, includeBehavior = "includeRing")
+3: spread(landscape, loci = loci, circle = TRUE, circleMaxRadius = maxRadius, spreadProb = 1, 
+       id = TRUE, returnDistances = TRUE, returnIndices = TRUE, allowOverlap = allowOverlap, 
+       ...)
+4: spread(landscape, loci = loci, circle = TRUE, circleMaxRadius = maxRadius, spreadProb = 1, 
+       id = TRUE, returnDistances = TRUE, returnIndices = TRUE, allowOverlap = allowOverlap, 
+       ...)
+5: d[, `:=`(duplicated, duplicated(indices)), by = id]
+6: `[.data.table`(d, , `:=`(duplicated, duplicated(indices)), by = id)
+
+── 10. Error: simple cir does not work correctly (@test-spread.R#1073)  ────────
+SETLENGTH() cannot be applied to an ALTVEC object.
+1: cir(hab, coords = coords, maxRadius = 2, minRadius = 0, includeBehavior = "includePixels", 
+       closest = FALSE, returnIndices = FALSE, allowOverlap = TRUE, returnDistances = TRUE) at testthat/test-spread.R:1073
+2: matDT[, sum(1/dists), by = indices]
+3: `[.data.table`(matDT, , sum(1/dists), by = indices)
+
+── 11. Error: spread2 tests (@test-spread2.R#35)  ──────────────────────────────
+SETLENGTH() cannot be applied to an ALTVEC object.
+1: spread2(a, start = sams, 0.225, maxSize = maxSizes, asRaster = FALSE) at testthat/test-spread2.R:35
+2: dtPotential[, list(size = as.integer(.N)), by = "initialPixels"]
+3: `[.data.table`(dtPotential, , list(size = as.integer(.N)), by = "initialPixels")
+
+── 12. Error: spread2 tests -- asymmetry (@test-spread2.R#630)  ────────────────
+SETLENGTH() cannot be applied to an ALTVEC object.
+1: expect_silent(out <- spread2(a, start = sams, 0.215, asRaster = FALSE, asymmetry = 2, 
+       asymmetryAngle = 90)) at testthat/test-spread2.R:630
+2: quasi_capture(enquo(object), evaluate_promise)
+3: capture(act$val <- eval_bare(get_expr(quo), get_env(quo)))
+4: withr::with_output_sink(temp, withCallingHandlers(withVisible(code), warning = handle_warning, 
+       message = handle_message))
+5: force(code)
+6: withCallingHandlers(withVisible(code), warning = handle_warning, message = handle_message)
+7: withVisible(code)
+8: eval_bare(get_expr(quo), get_env(quo))
+9: spread2(a, start = sams, 0.215, asRaster = FALSE, asymmetry = 2, asymmetryAngle = 90)
+10: asymmetryAdjust(angleQualities, actualSpreadProb, actualAsymmetry)
+11: dd[, `:=`(quantityAdj2, quantityAdj/(mean(quantityAdj)/mean(quantity))), by = "id"]
+12: `[.data.table`(dd, , `:=`(quantityAdj2, quantityAdj/(mean(quantityAdj)/mean(quantity))), 
+       by = "id")
+
+── 13. Error: spread2 tests (@test-spread2.R#876)  ─────────────────────────────
+SETLENGTH() cannot be applied to an ALTVEC object.
+1: expect_silent({
+       out <- spread2(a, start = sams, 1, circle = TRUE, asymmetry = 4, asymmetryAngle = 120, 
+           iterations = 10, asRaster = FALSE, returnDistances = TRUE, allowOverlap = TRUE)
+   }) at testthat/test-spread2.R:876
+2: quasi_capture(enquo(object), evaluate_promise)
+3: capture(act$val <- eval_bare(get_expr(quo), get_env(quo)))
+4: withr::with_output_sink(temp, withCallingHandlers(withVisible(code), warning = handle_warning, 
+       message = handle_message))
+5: force(code)
+6: withCallingHandlers(withVisible(code), warning = handle_warning, message = handle_message)
+7: withVisible(code)
+8: eval_bare(get_expr(quo), get_env(quo))
+9: spread2(a, start = sams, 1, circle = TRUE, asymmetry = 4, asymmetryAngle = 120, iterations = 10, 
+       asRaster = FALSE, returnDistances = TRUE, allowOverlap = TRUE) at testthat/test-spread2.R:877
+10: pureCircle[, `:=`(proportion, proportion/sum(proportion)), by = "id"]
+11: `[.data.table`(pureCircle, , `:=`(proportion, proportion/sum(proportion)), by = "id")
+
+══ testthat results  ═══════════════════════════════════════════════════════════
+OK: 682 SKIPPED: 18 FAILED: 13
+1. Error: /tmp/Rtmpa2NjRO/R.INSTALL9b3d52c932f8/SpaDES.tools/man/cir.Rd 
+2. Error: /tmp/Rtmpa2NjRO/R.INSTALL9b3d52c932f8/SpaDES.tools/man/rings.Rd 
+3. Error: /tmp/Rtmpa2NjRO/R.INSTALL9b3d52c932f8/SpaDES.tools/man/specnumperpatch-probs.Rd 
+4. Error: /tmp/Rtmpa2NjRO/R.INSTALL9b3d52c932f8/SpaDES.tools/man/spread.Rd 
+5. Error: /tmp/Rtmpa2NjRO/R.INSTALL9b3d52c932f8/SpaDES.tools/man/spread2.Rd 
+6. Error: spread produces legal RasterLayer (@test-spread.R#42) 
+7. Failure: spread stopRule does not work correctly (@test-spread.R#165) 
+8. Error: spread stopRule does not work correctly (@test-spread.R#227) 
+9. Error: rings and cir (@test-spread.R#636) 
+1. ...
+
+Error: testthat unit tests failed
+Execution halted
