@@ -1,108 +1,38 @@
-Package CRF version 0.3-14
-Package built using 74301/R 3.5.0; x86_64-pc-linux-gnu; 2018-02-26 09:39:35 UTC; unix   
+Package CRF version 0.3-16
+Package built using 74708/R 3.6.0; x86_64-pc-linux-gnu; 2018-05-11 11:48:38 UTC; unix   
 Checked with rchk version 63f79d910f5835174fcaa5a0a7d2409348f7d2ac
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
 Function CRF::Init_Belief()
-  [PB] has possible protection stack imbalance CRF/src/CRF.cpp:184
+  [PB] has possible protection stack imbalance CRF/src/CRF.cpp:186
 
 Function CRF::Init_EdgeBel()
-  [PB] has possible protection stack imbalance CRF/src/CRF.cpp:164
+  [PB] has possible protection stack imbalance CRF/src/CRF.cpp:166
 
 Function CRF::Init_Labels()
-  [PB] has possible protection stack imbalance CRF/src/CRF.cpp:138
+  [PB] has possible protection stack imbalance CRF/src/CRF.cpp:140
 
 Function CRF::Init_LogZ()
-  [PB] has possible protection stack imbalance CRF/src/CRF.cpp:172
+  [PB] has possible protection stack imbalance CRF/src/CRF.cpp:174
 
 Function CRF::Init_NodeBel()
-  [PB] has possible protection stack imbalance CRF/src/CRF.cpp:147
+  [PB] has possible protection stack imbalance CRF/src/CRF.cpp:149
 
 Function CRF::Init_Samples(int)
-  [PB] has possible protection stack imbalance CRF/src/CRF.cpp:194
+  [PB] has possible protection stack imbalance CRF/src/CRF.cpp:196
 
 Function CRF::Set_Data(SEXPREC*)
-  [PB] has possible protection stack imbalance CRF/src/CRF.cpp:130
+  [PB] has possible protection stack imbalance CRF/src/CRF.cpp:132
 
 Function CRF::Set_Samples(SEXPREC*)
-  [PB] has possible protection stack imbalance CRF/src/CRF.cpp:207
-
-Function CRF::Update_Pot()
-  [UP] unprotected variable _edgePar while calling allocating function Rf_coerceVector CRF/src/Train.cpp:182
-
-Function CRF::Update_Pot(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
-  [UP] unprotected variable _edgePar while calling allocating function Rf_coerceVector CRF/src/Train.cpp:71
+  [PB] has possible protection stack imbalance CRF/src/CRF.cpp:209
 
 Function CRF_NLL
-  [UP] unprotected variable _nll while calling allocating function GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:372
-  [UP] unprotected variable _nll while calling allocating function int* R_allocVector<int>(int) CRF/src/Train.cpp:376
-  [UP] allocating function CRF::Update_Pot(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*) may destroy its unprotected argument (_edgeFeaN <arg 3>), which is later used. CRF/src/Train.cpp:389
-  [UP] allocating function CRF::Update_Pot(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*) may destroy its unprotected argument (_nodeFeaN <arg 2>), which is later used. CRF/src/Train.cpp:389
-  [UP] unprotected variable _nll while calling allocating function CRF::Update_Pot(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*) CRF/src/Train.cpp:389
-  [UP] unprotected variable _edgeFeaN while calling allocating function Rf_eval CRF/src/Train.cpp:395
-  [UP] unprotected variable _nll while calling allocating function Rf_eval CRF/src/Train.cpp:395
-  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_eval CRF/src/Train.cpp:395
-  [UP] unprotected variable _edgeFeaN while calling allocating function GetListElement(SEXPREC*, char const*) CRF/src/Train.cpp:398
-  [UP] unprotected variable _edgeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:398
-  [UP] unprotected variable _nll while calling allocating function GetListElement(SEXPREC*, char const*) CRF/src/Train.cpp:398
-  [UP] unprotected variable _nll while calling allocating function Rf_coerceVector CRF/src/Train.cpp:398
-  [UP] unprotected variable _nodeFeaN while calling allocating function GetListElement(SEXPREC*, char const*) CRF/src/Train.cpp:398
-  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:398
-  [UP] unprotected variable _edgeFeaN while calling allocating function GetListElement(SEXPREC*, char const*) CRF/src/Train.cpp:401
-  [UP] unprotected variable _nll while calling allocating function GetListElement(SEXPREC*, char const*) CRF/src/Train.cpp:401
-  [UP] unprotected variable _nodeFeaN while calling allocating function GetListElement(SEXPREC*, char const*) CRF/src/Train.cpp:401
-  [UP] unprotected variable _edgeFeaN while calling allocating function R_alloc CRF/src/Train.cpp:402
-  [UP] unprotected variable _nll while calling allocating function R_alloc CRF/src/Train.cpp:402
-  [UP] unprotected variable _nodeFeaN while calling allocating function R_alloc CRF/src/Train.cpp:402
-  [UP] unprotected variable _edgeFeaN while calling allocating function Rf_allocVector CRF/src/Train.cpp:404
-  [UP] unprotected variable _nll while calling allocating function Rf_allocVector CRF/src/Train.cpp:404
-  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_allocVector CRF/src/Train.cpp:404
-  [UP] unprotected variable _edgeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:407
-  [UP] unprotected variable _nll while calling allocating function Rf_coerceVector CRF/src/Train.cpp:407
-  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:407
-  [UP] unprotected variable _edgeFeaN while calling allocating function GetListElement(SEXPREC*, char const*) CRF/src/Train.cpp:411
-  [UP] unprotected variable _edgeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:411
-  [UP] unprotected variable _nll while calling allocating function GetListElement(SEXPREC*, char const*) CRF/src/Train.cpp:411
-  [UP] unprotected variable _nll while calling allocating function Rf_coerceVector CRF/src/Train.cpp:411
-  [UP] unprotected variable _nodeFeaN while calling allocating function GetListElement(SEXPREC*, char const*) CRF/src/Train.cpp:411
-  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:411
-  [UP] unprotected variable _edgeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:415
-  [UP] unprotected variable _nll while calling allocating function Rf_coerceVector CRF/src/Train.cpp:415
-  [UP] unprotected variable _nll while calling allocating function Rf_coerceVector CRF/src/Train.cpp:448
-  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:448
-  [UP] unprotected variable _edgeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:486
-  [UP] unprotected variable _nll while calling allocating function Rf_coerceVector CRF/src/Train.cpp:486
-  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:486
-  [UP] unprotected variable _edgeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:521
-  [UP] unprotected variable _nll while calling allocating function Rf_coerceVector CRF/src/Train.cpp:521
-  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:521
+  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:466
+  [UP] unprotected variable _edgeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:504
+  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:504
+  [UP] unprotected variable _edgeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:539
+  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:539
 
 Function CRFclamped::CRFclamped(SEXPREC*)
   [PB] has possible protection stack imbalance CRF/src/Clamp.cpp:29
-
-Function MRF_NLL
-  [UP] unprotected variable _nll while calling allocating function GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:277
-  [UP] unprotected variable _nll while calling allocating function CRF::Update_Pot() CRF/src/Train.cpp:281
-  [UP] unprotected variable _nll while calling allocating function Rf_eval CRF/src/Train.cpp:284
-  [UP] unprotected variable _nll while calling allocating function GetListElement(SEXPREC*, char const*) CRF/src/Train.cpp:286
-  [UP] unprotected variable _nll while calling allocating function Rf_coerceVector CRF/src/Train.cpp:286
-  [UP] unprotected variable _nll while calling allocating function GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:294
-  [UP] unprotected variable _nll while calling allocating function Rf_coerceVector CRF/src/Train.cpp:294
-  [UP] unprotected variable _nll while calling allocating function GetListElement(SEXPREC*, char const*) CRF/src/Train.cpp:295
-  [UP] unprotected variable _nll while calling allocating function Rf_coerceVector CRF/src/Train.cpp:295
-  [UP] unprotected variable _nll while calling allocating function GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:310
-  [UP] unprotected variable _edgePar while calling allocating function GetListElement(SEXPREC*, char const*) CRF/src/Train.cpp:311
-  [UP] unprotected variable _nll while calling allocating function GetListElement(SEXPREC*, char const*) CRF/src/Train.cpp:311
-  [UP] unprotected variable _edgePar while calling allocating function Rf_allocVector CRF/src/Train.cpp:313
-  [UP] unprotected variable _nll while calling allocating function Rf_allocVector CRF/src/Train.cpp:313
-  [UP] unprotected variable _edgePar while calling allocating function Rf_allocVector CRF/src/Train.cpp:314
-  [UP] unprotected variable _nll while calling allocating function Rf_allocVector CRF/src/Train.cpp:314
-  [UP] unprotected variable _edgePar while calling allocating function Rf_coerceVector CRF/src/Train.cpp:317
-  [UP] unprotected variable _nll while calling allocating function Rf_coerceVector CRF/src/Train.cpp:317
-  [UP] unprotected variable _edgePar while calling allocating function Rf_coerceVector CRF/src/Train.cpp:319
-  [UP] unprotected variable _nll while calling allocating function Rf_coerceVector CRF/src/Train.cpp:319
-
-Function MRF_Stat
-  [UP] unprotected variable _edgePar while calling allocating function R_alloc CRF/src/Train.cpp:217
-  [UP] unprotected variable _edgePar while calling allocating function Rf_allocVector CRF/src/Train.cpp:219
-  [UP] unprotected variable _edgePar while calling allocating function Rf_coerceVector CRF/src/Train.cpp:222
