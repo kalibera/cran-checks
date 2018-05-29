@@ -1,13 +1,16 @@
-Package data.table version 1.11.2
-Package built using 74708/R 3.6.0; x86_64-pc-linux-gnu; 2018-05-11 11:48:39 UTC; unix   
+Package data.table version 1.11.4
+Package built using 74800/R 3.6.0; x86_64-pc-linux-gnu; 2018-05-29 11:53:24 UTC; unix   
 Checked with rchk version 63f79d910f5835174fcaa5a0a7d2409348f7d2ac
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
-Function allocateDT
-  [PB] has possible protection stack imbalance data.table/src/freadR.c:378
+Function fmelt
+  [UP] unprotected variable dtnames while calling allocating function Rf_allocVector data.table/src/fmelt.c:663
+  [UP] unprotected variable dtnames while calling allocating function preprocess(?,?,?,V,V,?,?,?) data.table/src/fmelt.c:664
+  [UP] allocating function getvaluecols may destroy its unprotected argument (dtnames <arg 2>), which is later used. data.table/src/fmelt.c:670
+  [UP] allocating function getvarcols may destroy its unprotected argument (dtnames <arg 2>), which is later used. data.table/src/fmelt.c:671
+  [UP] allocating function getidcols may destroy its unprotected argument (dtnames <arg 2>), which is later used. data.table/src/fmelt.c:672
+  [UP] unprotected variable dtnames while calling allocating function Rf_allocVector data.table/src/fmelt.c:675
+  [UP] unprotected variable dtnames while calling allocating function Rf_allocVector data.table/src/fmelt.c:684
 
-Function preprocess
-  [PB] has possible protection stack imbalance data.table/src/fmelt.c:352
-
-Function userOverride
-  [PB] has possible protection stack imbalance data.table/src/freadR.c:310
+Function reorder
+  [PB] has possible protection stack imbalance data.table/src/reorder.c:109
