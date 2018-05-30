@@ -1,8 +1,20 @@
 Package tau version 0.0-20
-Package built using 74301/R 3.5.0; x86_64-pc-linux-gnu; 2018-02-26 09:34:17 UTC; unix   
-Checked with rchk version 63f79d910f5835174fcaa5a0a7d2409348f7d2ac
+Package built using 74804/R 3.6.0; x86_64-pc-linux-gnu; 2018-05-30 16:02:05 UTC; unix   
+Checked with rchk version 3d43fe28045c41944a28afb89478b9891808dd42
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
 Function tau_copyTruncate
   [UP] unprotected variable s while calling allocating function Rf_allocVector tau/src/textcnt.c:699
   [UP] unprotected variable s while calling allocating function Rf_setAttrib(V,S:names,V) tau/src/textcnt.c:699
+
+Function tau_latin1locale
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lcons(S:l10n_info,?) tau/src/encoding.c:18
+
+Function tau_latin1locale.21
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lcons(S:l10n_info,?) tau/src/textcnt.c:30
+
+Function tau_utf8locale
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lcons(S:l10n_info,?) tau/src/encoding.c:13
+
+Function tau_utf8locale.20
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lcons(S:l10n_info,?) tau/src/textcnt.c:25

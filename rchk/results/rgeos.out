@@ -1,7 +1,39 @@
 Package rgeos version 0.3-26
-Package built using 74301/R 3.5.0; x86_64-pc-linux-gnu; 2018-02-26 09:38:17 UTC; unix   
-Checked with rchk version 63f79d910f5835174fcaa5a0a7d2409348f7d2ac
+Package built using 74804/R 3.6.0; x86_64-pc-linux-gnu; 2018-05-30 16:06:10 UTC; unix   
+Checked with rchk version 3d43fe28045c41944a28afb89478b9891808dd42
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
 Function GC_Contains
   [PB] has possible protection stack imbalance rgeos/src/rgeos_validate.c:164
+
+Function RGEOS_Polygon_c
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS sp/include/sp_xports.c:77
+
+Function RGEOS_Polygons_c
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS sp/include/sp_xports.c:237
+
+Function RGEOS_SpatialPolygons_c
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS sp/include/sp_xports.c:324
+
+Function rgeos_Init
+  [UP] calling allocating function R_MakeExternalPtr with argument allocated using Rf_mkChar rgeos/src/rgeos.c:60
+
+Function rgeos_convert_geos2R
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS rgeos/src/rgeos_geos2R.c:173
+
+Function rgeos_geosline2SpatialLines
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS rgeos/src/rgeos_geos2R.c:772
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS rgeos/src/rgeos_geos2R.c:780
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS rgeos/src/rgeos_geos2R.c:797
+
+Function rgeos_geospoint2SpatialPoints
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS rgeos/src/rgeos_geos2R.c:703
+
+Function rgeos_geospolygon2Polygons
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS rgeos/src/rgeos_geos2R.c:582
+
+Function rgeos_geospolygon2SpatialPolygons
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS rgeos/src/rgeos_geos2R.c:332
+
+Function rgeos_geosring2Polygon
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS rgeos/src/rgeos_geos2R.c:661

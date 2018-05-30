@@ -1,6 +1,6 @@
 Package gsl version 1.9-10.3
-Package built using 74301/R 3.5.0; x86_64-pc-linux-gnu; 2018-02-26 09:31:52 UTC; unix   
-Checked with rchk version 63f79d910f5835174fcaa5a0a7d2409348f7d2ac
+Package built using 74804/R 3.6.0; x86_64-pc-linux-gnu; 2018-05-30 15:59:33 UTC; unix   
+Checked with rchk version 3d43fe28045c41944a28afb89478b9891808dd42
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
 Function df_wrapper
@@ -11,6 +11,8 @@ Function df_wrapper
   [UP] unprotected variable df_body while calling allocating function Rf_defineVar(S:x,V,?) gsl/src/multimin.c:64
   [UP] unprotected variable df_body while calling allocating function Rf_install gsl/src/multimin.c:64
   [UP] unprotected variable rho while calling allocating function Rf_install gsl/src/multimin.c:64
+  [UP] calling allocating function Rf_eval with a fresh pointer (df_body <arg 1>) gsl/src/multimin.c:67
+  [UP] calling allocating function Rf_eval with a fresh pointer (rho <arg 2>) gsl/src/multimin.c:67
 
 Function f_wrapper
   [UP] unprotected variable f_body while calling allocating function Rf_findVar(S:rho,?) gsl/src/multimin.c:46
@@ -20,6 +22,8 @@ Function f_wrapper
   [UP] unprotected variable f_body while calling allocating function Rf_defineVar(S:x,V,?) gsl/src/multimin.c:50
   [UP] unprotected variable f_body while calling allocating function Rf_install gsl/src/multimin.c:50
   [UP] unprotected variable rho while calling allocating function Rf_install gsl/src/multimin.c:50
+  [UP] calling allocating function Rf_eval with a fresh pointer (f_body <arg 1>) gsl/src/multimin.c:53
+  [UP] calling allocating function Rf_eval with a fresh pointer (rho <arg 2>) gsl/src/multimin.c:53
 
 Function fdf_wrapper
   [UP] unprotected variable fdf_body while calling allocating function Rf_findVar(S:rho,?) gsl/src/multimin.c:74
@@ -29,11 +33,26 @@ Function fdf_wrapper
   [UP] unprotected variable fdf_body while calling allocating function Rf_defineVar(S:x,V,?) gsl/src/multimin.c:79
   [UP] unprotected variable fdf_body while calling allocating function Rf_install gsl/src/multimin.c:79
   [UP] unprotected variable rho while calling allocating function Rf_install gsl/src/multimin.c:79
+  [UP] calling allocating function Rf_eval with a fresh pointer (fdf_body <arg 1>) gsl/src/multimin.c:81
+  [UP] calling allocating function Rf_eval with a fresh pointer (rho <arg 2>) gsl/src/multimin.c:81
 
 Function multimin_f_new
+  [UP] calling allocating function R_MakeExternalPtr with argument allocated using Rf_mkChar gsl/src/multimin.c:139
   [UP] unprotected variable ptr while calling allocating function Rf_install gsl/src/multimin.c:141
+  [UP] calling allocating function R_MakeExternalPtr with argument allocated using Rf_mkChar gsl/src/multimin.c:143
   [UP] unprotected variable ptr while calling allocating function Rf_install gsl/src/multimin.c:145
 
 Function multimin_fdf_new
+  [UP] calling allocating function R_MakeExternalPtr with argument allocated using Rf_mkChar gsl/src/multimin.c:188
   [UP] unprotected variable ptr while calling allocating function Rf_install gsl/src/multimin.c:190
+  [UP] calling allocating function R_MakeExternalPtr with argument allocated using Rf_mkChar gsl/src/multimin.c:192
   [UP] unprotected variable ptr while calling allocating function Rf_install gsl/src/multimin.c:194
+
+Function qrng_alloc
+  [UP] calling allocating function R_MakeExternalPtr with a fresh pointer (dimension <arg 2>) gsl/src/qrng.c:32
+
+Function qrng_clone
+  [UP] calling allocating function R_MakeExternalPtr with argument allocated using Rf_duplicate gsl/src/qrng.c:44
+
+Function rng_clone
+  [UP] calling allocating function R_MakeExternalPtr with argument allocated using Rf_duplicate gsl/src/rng.c:98

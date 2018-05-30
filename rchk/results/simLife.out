@@ -1,6 +1,6 @@
 Package simLife version 0.3
-Package built using 74301/R 3.5.0; x86_64-pc-linux-gnu; 2018-02-26 09:39:06 UTC; unix   
-Checked with rchk version 63f79d910f5835174fcaa5a0a7d2409348f7d2ac
+Package built using 74804/R 3.6.0; x86_64-pc-linux-gnu; 2018-05-30 16:07:04 UTC; unix   
+Checked with rchk version 3d43fe28045c41944a28afb89478b9891808dd42
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
 Suspicious call (two or more unprotected arguments) to Rf_setAttrib at SEXPREC* convert_R_result<STGM::CCylinder>(STGM::ClusterList<STGM::CCylinder>::Type&, siminfo_t const&) simLife/src/sim2Life.cpp:488
@@ -16,9 +16,15 @@ Suspicious call (two or more unprotected arguments) to Rf_setAttrib at SEXPREC* 
 Suspicious call (two or more unprotected arguments) to Rf_setAttrib at SEXPREC* convert_R_result<STGM::CSpheroid>(STGM::ClusterList<STGM::CSpheroid>::Type&, siminfo_t const&) simLife/src/sim2Life.cpp:490
 Suspicious call (two or more unprotected arguments) to Rf_setAttrib at SEXPREC* convert_R_result<STGM::CSpheroid>(STGM::ClusterList<STGM::CSpheroid>::Type&, siminfo_t const&) simLife/src/sim2Life.cpp:491
 
+Function Cluster
+  [UP] calling allocating function Rf_asReal with argument allocated using Rf_coerceVector simLife/src/cluster.cpp:80
+  [UP] calling allocating function Rf_asReal with argument allocated using Rf_coerceVector simLife/src/cluster.cpp:88
+
 Function SimDefect
+  [UP] calling allocating function Rf_asReal with argument allocated using Rf_coerceVector simLife/src/sim2Life.cpp:512
   [UP] unprotected variable Rs while calling allocating function Rf_asReal simLife/src/sim2Life.cpp:512
   [UP] unprotected variable Rs while calling allocating function Rf_coerceVector simLife/src/sim2Life.cpp:512
+  [UP] calling allocating function Rf_asReal with argument allocated using Rf_coerceVector simLife/src/sim2Life.cpp:513
   [UP] unprotected variable Rs while calling allocating function Rf_asReal simLife/src/sim2Life.cpp:513
   [UP] unprotected variable Rs while calling allocating function Rf_coerceVector simLife/src/sim2Life.cpp:513
   [UP] unprotected variable Rs while calling allocating function Rf_asChar simLife/src/sim2Life.cpp:515
@@ -29,6 +35,9 @@ Function convert_C_Cylinder(SEXPREC*)
   [UP] unprotected variable R_angles while calling allocating function getListElement(SEXPREC*, char const*) simLife/src/convert.cpp:114
   [UP] unprotected variable R_angles while calling allocating function Rf_asReal simLife/src/convert.cpp:115
   [UP] unprotected variable R_angles while calling allocating function getListElement(SEXPREC*, char const*) simLife/src/convert.cpp:115
+
+Function convert_C_Ellipses(SEXPREC*)
+  [UP] calling allocating function Rf_asReal with argument allocated using Rf_coerceVector simLife/src/convert.cpp:210
 
 Function convert_C_Sphere(SEXPREC*)
   [PB] has possible protection stack imbalance simLife/src/convert.cpp:78

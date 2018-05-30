@@ -1,6 +1,6 @@
 Package RGtk2 version 2.20.34
-Package built using 74301/R 3.5.0; x86_64-pc-linux-gnu; 2018-02-26 09:33:35 UTC; unix   
-Checked with rchk version 63f79d910f5835174fcaa5a0a7d2409348f7d2ac
+Package built using 74804/R 3.6.0; x86_64-pc-linux-gnu; 2018-05-30 16:01:21 UTC; unix   
+Checked with rchk version 3d43fe28045c41944a28afb89478b9891808dd42
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
 Suspicious call (two or more unprotected arguments) to retByVal at S_g_input_stream_read_all RGtk2/src/gioManuals.c:55
@@ -48,6 +48,7 @@ Function S_g_initable_new
   [UP] calling allocating function retByVal with argument allocated using asRGError RGtk2/src/gioManuals.c:274
 
 Function S_g_input_stream_read
+  [UP] calling allocating function retByVal(V,?,?,?,?,?) with a fresh pointer (_result <arg 1>) RGtk2/src/gioManuals.c:23
   [UP] calling allocating function retByVal(V,?,?,?,?,?) with argument allocated using asRGError RGtk2/src/gioManuals.c:23
 
 Function S_g_input_stream_read_all
@@ -68,18 +69,22 @@ Function S_g_object_private
   [UP] unprotected variable private while calling allocating function Rf_install RGtk2/src/classes.c:227
 
 Function S_g_socket_receive
+  [UP] calling allocating function retByVal(V,?,?,?,?,?) with a fresh pointer (_result <arg 1>) RGtk2/src/gioManuals.c:304
   [UP] calling allocating function retByVal(V,?,?,?,?,?) with argument allocated using asRGError RGtk2/src/gioManuals.c:304
 
 Function S_g_socket_receive_from
+  [UP] calling allocating function retByVal(V,?,?,?,?,?,?,?) with a fresh pointer (_result <arg 1>) RGtk2/src/gioManuals.c:336
   [UP] calling allocating function retByVal(V,?,?,?,?,?,?,?) with argument allocated using asRGError RGtk2/src/gioManuals.c:336
   [UP] calling allocating function retByVal(V,?,?,?,?,?,?,?) with argument allocated using toRPointerWithFinalizer RGtk2/src/gioManuals.c:336
 
 Function S_g_socket_receive_message
+  [UP] calling allocating function retByVal(V,?,?,?,?,?,?,?,V,?,V,?,?,?) with a fresh pointer (_result <arg 1>) RGtk2/src/gioManuals.c:383
   [UP] calling allocating function retByVal(V,?,?,?,?,?,?,?,V,?,V,?,?,?) with argument allocated using Rf_ScalarInteger RGtk2/src/gioManuals.c:383
   [UP] calling allocating function retByVal(V,?,?,?,?,?,?,?,V,?,V,?,?,?) with argument allocated using asRGError RGtk2/src/gioManuals.c:383
   [UP] calling allocating function retByVal(V,?,?,?,?,?,?,?,V,?,V,?,?,?) with argument allocated using toRPointerWithFinalizer RGtk2/src/gioManuals.c:383
 
 Function S_g_socket_send_message
+  [UP] calling allocating function retByVal(V,?,?,?) with a fresh pointer (_result <arg 1>) RGtk2/src/gioManuals.c:429
   [UP] calling allocating function retByVal(V,?,?,?) with argument allocated using asRGError RGtk2/src/gioManuals.c:429
 
 Function S_gapp_launch_context_class_init
@@ -167,6 +172,9 @@ Function S_giostream_class_init
 Function S_gobject_class_init
   [UP] unprotected variable s_props while calling allocating function asCGParamSpec RGtk2/src/classes.c:137
   [UP] unprotected variable s_prop_overrides while calling allocating function asCString RGtk2/src/classes.c:143
+
+Function S_gobject_class_new
+  [UP] calling allocating function Rf_findFun(S:.instanceEnv,?) with argument allocated using R_FindNamespace RGtk2/src/classes.c:269
 
 Function S_gobject_instance_init
   [UP] unprotected variable s_fun while calling allocating function Rf_allocVector RGtk2/src/classes.c:169
@@ -309,6 +317,9 @@ Function S_gtk_input_dialog_class_init
 
 Function S_gtk_item_class_init
   [UP] unprotected variable s while calling allocating function S_gtk_bin_class_init RGtk2/src/gtkClasses.c:6907
+
+Function S_gtk_item_factory_create_items
+  [UP] calling allocating function S_gtk_item_factory_create_items_ac(?,?,?,V) with argument allocated using Rf_ScalarInteger RGtk2/src/gtkManuals.c:262
 
 Function S_gtk_label_class_init
   [UP] unprotected variable s while calling allocating function S_gtk_misc_class_init RGtk2/src/gtkClasses.c:7066
@@ -489,3 +500,6 @@ Function S_pango_fontset_class_init
 
 Function S_pango_renderer_class_init
   [UP] unprotected variable s while calling allocating function S_gobject_class_init RGtk2/src/pangoClasses.c:1278
+
+Function S_virtual_gobject_get_property
+  [UP] calling allocating function R_setGValueFromSValue with a fresh pointer (s_ans <arg 2>) RGtk2/src/classes.c:95

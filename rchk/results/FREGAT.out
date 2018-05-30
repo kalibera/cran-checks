@@ -1,11 +1,12 @@
 Package FREGAT version 1.1.0
-Package built using 74301/R 3.5.0; x86_64-pc-linux-gnu; 2018-02-26 09:39:49 UTC; unix   
-Checked with rchk version 63f79d910f5835174fcaa5a0a7d2409348f7d2ac
+Package built using 74804/R 3.6.0; x86_64-pc-linux-gnu; 2018-05-30 16:09:50 UTC; unix   
+Checked with rchk version 3d43fe28045c41944a28afb89478b9891808dd42
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
 Suspicious call (two or more unprotected arguments) to R_do_slot_assign at subset FREGAT/src/subset.c:96
 
 Function subset
+  [UP] calling allocating function R_do_slot(?,V) with argument allocated using Rf_mkString FREGAT/src/subset.c:17
   [UP] unprotected variable Diploid while calling allocating function Rf_allocMatrix FREGAT/src/subset.c:52
   [UP] unprotected variable Diploid while calling allocating function Rf_allocVector FREGAT/src/subset.c:54
   [UP] unprotected variable Diploid while calling allocating function Rf_mkChar FREGAT/src/subset.c:56
@@ -23,4 +24,6 @@ Function subset
   [UP] unprotected variable Diploid while calling allocating function Rf_allocVector FREGAT/src/subset.c:79
   [UP] unprotected variable Diploid while calling allocating function Rf_duplicate FREGAT/src/subset.c:84
   [UP] unprotected variable Diploid while calling allocating function Rf_setAttrib(?,S:dimnames,V) FREGAT/src/subset.c:86
+  [UP] calling allocating function R_do_slot_assign(?,V,V) with argument allocated using Rf_mkString FREGAT/src/subset.c:93
+  [UP] calling allocating function R_do_slot_assign(?,V,?) with argument allocated using Rf_mkString FREGAT/src/subset.c:96
   [UP] unprotected variable Diploid while calling allocating function Rf_mkString FREGAT/src/subset.c:96
