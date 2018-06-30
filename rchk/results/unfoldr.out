@@ -1,56 +1,62 @@
-Package unfoldr version 0.6.1
-Package built using 74847/R 3.6.0; x86_64-pc-linux-gnu; 2018-06-05 10:44:33 UTC; unix   
+Package unfoldr version 0.6.5
+Package built using 74942/R 3.6.0; x86_64-pc-linux-gnu; 2018-06-30 23:56:11 UTC; unix   
 Checked with rchk version b882e37fb462917a8ab94e70394f3a797250b4e1
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
 Function InitCylinderSystem(SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rf_asReal with argument allocated using Rf_coerceVector unfoldr/src/SimCylinder.cpp:106
+  [UP] calling allocating function Rf_asReal with argument allocated using Rf_coerceVector unfoldr/src/SimCylinder.cpp:107
 
 Function InitSphereSystem(SEXPREC*, SEXPREC*)
   [UP] calling allocating function Rf_asReal with argument allocated using Rf_coerceVector unfoldr/src/SimSphere.cpp:84
 
 Function InitSpheroidSystem(SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rf_asReal with argument allocated using Rf_coerceVector unfoldr/src/SimEllipsoid.cpp:96
+  [UP] calling allocating function Rf_asReal with argument allocated using Rf_coerceVector unfoldr/src/SimEllipsoid.cpp:94
+
+Function IntersectCylinderSystem
+  [UP] unprotected variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> while calling allocating function std::__1::vector<STGM::Intersector<STGM::CCylinder>, std::__1::allocator<STGM::Intersector<STGM::CCylinder> > >::~vector() unfoldr/src/SimCylinder.cpp:525
 
 Function R_eval_t<double>::operator()()
-  [UP] calling allocating function Rf_asReal with argument allocated using Rf_eval unfoldr/src/./Utils.h:78
+  [UP] calling allocating function Rf_asReal with argument allocated using Rf_eval unfoldr/src/./Utils.h:81
 
 Function SetupSphereSystem
-  [UP] unprotected variable R_ptr while calling allocating function Rprintf unfoldr/src/SimSphere.cpp:235
-  [UP] allocating function getExternalPtr(SEXPREC*) may destroy its unprotected argument (R_ptr <arg 1>), which is later used. unfoldr/src/SimSphere.cpp:239
-  [UP] unprotected variable R_ptr while calling allocating function convert_C_Spheres(SEXPREC*) unfoldr/src/SimSphere.cpp:240
-  [UP] unprotected variable R_ptr while calling allocating function std::__1::vector<STGM::CSphere, std::__1::allocator<STGM::CSphere> >::~vector() unfoldr/src/SimSphere.cpp:240
-  [UP] unprotected variable R_ptr while calling allocating function Rf_install unfoldr/src/SimSphere.cpp:242
+  [UP] unprotected variable R_ptr while calling allocating function Rprintf unfoldr/src/SimSphere.cpp:233
+  [UP] allocating function getExternalPtr(SEXPREC*) may destroy its unprotected argument (R_ptr <arg 1>), which is later used. unfoldr/src/SimSphere.cpp:237
+  [UP] unprotected variable R_ptr while calling allocating function convert_C_Spheres(SEXPREC*) unfoldr/src/SimSphere.cpp:238
+  [UP] unprotected variable R_ptr while calling allocating function std::__1::vector<STGM::CSphere, std::__1::allocator<STGM::CSphere> >::~vector() unfoldr/src/SimSphere.cpp:238
+  [UP] unprotected variable R_ptr while calling allocating function Rf_install unfoldr/src/SimSphere.cpp:240
   [UP] unprotected variable R_ptr while calling allocating function std::__1::vector<STGM::CSphere, std::__1::allocator<STGM::CSphere> >::__move_assign(std::__1::vector<STGM::CSphere, std::__1::allocator<STGM::CSphere> >&, std::__1::integral_constant<bool, true>) /usr/include/c++/v1/vector:1311
 
 Function SetupSpheroidSystem
-  [UP] unprotected variable R_ptr while calling allocating function Rprintf unfoldr/src/SimEllipsoid.cpp:124
-  [UP] allocating function getExternalPtr(SEXPREC*) may destroy its unprotected argument (R_ptr <arg 1>), which is later used. unfoldr/src/SimEllipsoid.cpp:126
-  [UP] unprotected variable R_ptr while calling allocating function convert_C_Spheroids(SEXPREC*) unfoldr/src/SimEllipsoid.cpp:127
-  [UP] unprotected variable R_ptr while calling allocating function std::__1::vector<STGM::CSpheroid, std::__1::allocator<STGM::CSpheroid> >::~vector() unfoldr/src/SimEllipsoid.cpp:127
-  [UP] unprotected variable R_ptr while calling allocating function Rf_install unfoldr/src/SimEllipsoid.cpp:128
+  [UP] unprotected variable R_ptr while calling allocating function Rprintf unfoldr/src/SimEllipsoid.cpp:122
+  [UP] allocating function getExternalPtr(SEXPREC*) may destroy its unprotected argument (R_ptr <arg 1>), which is later used. unfoldr/src/SimEllipsoid.cpp:124
+  [UP] unprotected variable R_ptr while calling allocating function convert_C_Spheroids(SEXPREC*) unfoldr/src/SimEllipsoid.cpp:125
+  [UP] unprotected variable R_ptr while calling allocating function std::__1::vector<STGM::CSpheroid, std::__1::allocator<STGM::CSpheroid> >::~vector() unfoldr/src/SimEllipsoid.cpp:125
+  [UP] unprotected variable R_ptr while calling allocating function Rf_install unfoldr/src/SimEllipsoid.cpp:126
   [UP] unprotected variable R_ptr while calling allocating function std::__1::vector<STGM::CSpheroid, std::__1::allocator<STGM::CSpheroid> >::__move_assign(std::__1::vector<STGM::CSpheroid, std::__1::allocator<STGM::CSpheroid> >&, std::__1::integral_constant<bool, true>) /usr/include/c++/v1/vector:1311
 
+Function SimulateCylindersAndIntersect
+  [UP] calling allocating function Rf_asReal with argument allocated using Rf_coerceVector unfoldr/src/SimCylinder.cpp:198
+
 Function SimulateSpheresAndIntersect
-  [UP] calling allocating function Rf_asReal with argument allocated using Rf_coerceVector unfoldr/src/SimSphere.cpp:294
+  [UP] calling allocating function Rf_asReal with argument allocated using Rf_coerceVector unfoldr/src/SimSphere.cpp:292
 
 Function SimulateSpheroidsAndIntersect
-  [UP] calling allocating function Rf_asReal with argument allocated using Rf_coerceVector unfoldr/src/SimEllipsoid.cpp:271
+  [UP] calling allocating function Rf_asReal with argument allocated using Rf_coerceVector unfoldr/src/SimEllipsoid.cpp:267
 
 Function buildRCallSpheres(SEXPREC*, SEXPREC*)
   [PB] has possible protection stack imbalance unfoldr/src/SimSphere.cpp:44
 
 Function convert_C_Cylinder(SEXPREC*)
-  [UP] unprotected variable R_angles while calling allocating function Rf_asReal unfoldr/src/SimCylinder.cpp:532
-  [UP] unprotected variable R_angles while calling allocating function getListElement(SEXPREC*, char const*) unfoldr/src/SimCylinder.cpp:532
-  [UP] unprotected variable R_angles while calling allocating function Rf_asReal unfoldr/src/SimCylinder.cpp:533
-  [UP] unprotected variable R_angles while calling allocating function getListElement(SEXPREC*, char const*) unfoldr/src/SimCylinder.cpp:533
+  [UP] unprotected variable R_angles while calling allocating function Rf_asReal unfoldr/src/SimCylinder.cpp:739
+  [UP] unprotected variable R_angles while calling allocating function getListElement(SEXPREC*, char const*) unfoldr/src/SimCylinder.cpp:739
+  [UP] unprotected variable R_angles while calling allocating function Rf_asReal unfoldr/src/SimCylinder.cpp:740
+  [UP] unprotected variable R_angles while calling allocating function getListElement(SEXPREC*, char const*) unfoldr/src/SimCylinder.cpp:740
 
 Function convert_C_Ellipses(SEXPREC*)
-  [UP] calling allocating function Rf_asReal with argument allocated using Rf_coerceVector unfoldr/src/SimEllipsoid.cpp:536
+  [UP] calling allocating function Rf_asReal with argument allocated using Rf_coerceVector unfoldr/src/SimEllipsoid.cpp:532
 
 Function convert_C_Sphere(SEXPREC*)
-  [UP] calling allocating function Rf_asReal with argument allocated using Rf_coerceVector unfoldr/src/SimSphere.cpp:368
+  [UP] calling allocating function Rf_asReal with argument allocated using Rf_coerceVector unfoldr/src/SimSphere.cpp:366
 
 Function getCall(SEXPREC*, SEXPREC*, SEXPREC*)
   [UP] unprotected variable names while calling allocating function Rf_install unfoldr/src/Utils.cpp:73
