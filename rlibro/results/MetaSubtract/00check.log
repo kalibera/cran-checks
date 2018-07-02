@@ -1,0 +1,78 @@
+* using log directory ‘/home/tomas/cran/rlibro/check/MetaSubtract.Rcheck’
+* using R Under development (unstable) (2018-07-01 r74950)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* checking for file ‘MetaSubtract/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘MetaSubtract’ version ‘1.42’
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘MetaSubtract’ can be installed ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking examples ... ERROR
+Running examples in ‘MetaSubtract-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: meta.subtract
+> ### Title: Subtracts GWAS results from one or more cohorts from the
+> ###   meta-GWAS results
+> ### Aliases: meta.subtract
+> ### Keywords: Correct meta-GWAS results Leave-one-out
+> 
+> ### ** Examples
+> 
+> metafile="meta_results.txt"
+> cohortfiles=c("cohort1_results.txt","cohort2_results.txt","cohort3_results.txt")
+> # Subtract summary statistics of the two cohorts from the meta summary statistics in metafile.
+> # Genomic control correction of the imported meta summary statistics will be undone using 
+> # lambda.meta. Genomic control will be applied to the corrected meta summary statistics 
+> # (gc_meta=TRUE by default) based on a lambda derived from the new meta summary statistics 
+> # (calculate_lambda.meta=TRUE by default). The cohorts summary statistics will always be first 
+> # corrected for genomic control before subtracting them from the meta summary statistics. By 
+> # default, the lambda will be calculated from the data (calculate_lambdas.cohort=TRUE by default).
+> m1<-meta.subtract(metafile=metafile, cohortfiles=cohortfiles, lambda.meta=1.046, dir=tempdir())
+Analysis started Mon Jul  2 08:35:48 2018 
+Reading /homero/tomas/cran/rlibro/lib/MetaSubtract/extdata/meta_results.txt 
+Subtracting effects of /homero/tomas/cran/rlibro/lib/MetaSubtract/extdata/cohort1_results.txt  
+ - Number of genetic markers removed because of mismatch in alleles: 1 (0.12%)  
+Warning in file(file, ifelse(append, "a", "w")) :
+  cannot open file '/homero/tomas/cran/rlibro/lib/MetaSubtract/extdata/cohort1_results.txt.allele_mismatch.txt': Read-only file system
+Error in file(file, ifelse(append, "a", "w")) : 
+  cannot open the connection
+Calls: meta.subtract -> write.table -> file
+Execution halted
+* checking PDF version of manual ... OK
+* DONE
+Status: 1 ERROR
