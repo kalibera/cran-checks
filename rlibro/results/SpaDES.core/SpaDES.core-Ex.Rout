@@ -23,6 +23,13 @@ Type 'q()' to quit R.
 > library('SpaDES.core')
 Loading required package: quickPlot
 Loading required package: reproducible
+
+Attaching package: ‘SpaDES.core’
+
+The following objects are masked from ‘package:stats’:
+
+    end, start
+
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 > base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
@@ -46,7 +53,7 @@ Loading required package: reproducible
 +     times = list(start = 0.0, end = 2.0, timeunit = "year"),
 +     params = list(
 +       .globals = list(stackName = "landscape", burnStats = "nPixelsBurned"),
-+       fireSpread = list(nFires = 5),
++       fireSpread = list(nfires = 5),
 +       randomLandscapes = list(nx = 300, ny = 300)
 +     ),
 +     modules = list("randomLandscapes", "fireSpread", "caribouMovement"),
@@ -62,18 +69,18 @@ Loading required package: reproducible
 +   outData <- spades(reproducible::Copy(mySim), .plotInitialTime = NA)
 + 
 +   # Extract the "true" data, in this case, the "proportion of cells burned"
-+   # Function defined that will use landscape$Fires map from simList,
-+   #  i.e., sim$landscape$Fires
++   # Function defined that will use landscape$fires map from simList,
++   #  i.e., sim$landscape$fires
 +   #  the return value being compared via MAD with propCellBurnedData
 +   propCellBurnedFn <- function(landscape) {
-+     sum(getValues(landscape$Fires) > 0) / ncell(landscape$Fires)
++     sum(getValues(landscape$fires) > 0) / ncell(landscape$fires)
 +   }
 +   # visualize the burned maps of true "data"
 +   propCellBurnedData <- propCellBurnedFn(outData$landscape)
 +   clearPlot()
 +   if (interactive()) {
-+     Fires <- outData$landscape$Fires # Plot doesn't do well with many nested layers
-+     Plot(Fires)
++     fires <- outData$landscape$fires # Plot doesn't do well with many nested layers
++     Plot(fires)
 +   }
 + 
 +   # Example 1 - 1 parameter
@@ -98,18 +105,18 @@ Loading required package: reproducible
 + 
 +   # Example 2 - 2 parameters
 +   # Function defined that will use caribou from sim$caribou, with
-+   #  the return value being compared via MAD with NPattern
++   #  the return value being compared via MAD with nPattern
 +   #  module, parameter N, is from 10 to 1000)
 +   caribouFn <- function(caribou) length(caribou)
 + 
 +   # Extract "data" from simList object (normally, this would be actual data)
-+   NPattern <- caribouFn(outData$caribou)
++   nPattern <- caribouFn(outData$caribou)
 + 
 +   aTime <- Sys.time()
 +   parsToVary <- c("spreadprob", "N")
 +   out2 <- POM(mySim, parsToVary,
 +               list(propCellBurnedData = propCellBurnedFn,
-+                    NPattern = caribouFn), logObjFnVals = TRUE)
++                    nPattern = caribouFn), logObjFnVals = TRUE)
 +                    #optimControl = list(parallelType = 1))
 +                    #cl = cl) # not yet implemented, waiting for DEoptim
 +   bTime <- Sys.time()
@@ -136,7 +143,7 @@ Loading required package: reproducible
 +   #   - pass data that will be used internally for objective function
 +   objFnEx <- function(pars, # param values
 +                       sim, # simList object
-+                       NPattern, propCellBurnedData, caribouFn, propCellBurnedFn) {
++                       nPattern, propCellBurnedData, caribouFn, propCellBurnedFn) {
 +     ### data
 + 
 +     # make a copy of simList because it will possibly be altered by spades call
@@ -151,9 +158,9 @@ Loading required package: reproducible
 + 
 +     # calculate outputs
 +     propCellBurnedOut <- propCellBurnedFn(out$landscape)
-+     NPattern_Out <- caribouFn(out$caribou)
++     nPattern_Out <- caribouFn(out$caribou)
 + 
-+     minimizeFn <- abs(NPattern_Out - NPattern) +
++     minimizeFn <- abs(nPattern_Out - nPattern) +
 +                   abs(propCellBurnedOut - propCellBurnedData)
 + 
 +     # have more info reported to console, if desired
@@ -173,7 +180,7 @@ Loading required package: reproducible
 +   # Change optimization parameters to alter how convergence is achieved
 +   out5 <- POM(mySim, params = c("spreadprob", "N"),
 +               objFn = objFnEx,
-+               NPattern = NPattern,
++               nPattern = nPattern,
 +               propCellBurnedData = propCellBurnedData,
 +               caribouFn = caribouFn,
 +               propCellBurnedFn = propCellBurnedFn,
@@ -191,7 +198,7 @@ Loading required package: reproducible
 +   library(DEoptim)
 +   out7 <- DEoptim(fn = objFnEx,
 +                  sim = mySim,
-+                  NPattern = NPattern,
++                  nPattern = nPattern,
 +                  propCellBurnedData = propCellBurnedData,
 +                  caribouFn = caribouFn,
 +                  propCellBurnedFn = propCellBurnedFn,
@@ -263,38 +270,6 @@ attr(,"type")
 
 detaching ‘package:igraph’
 
-> nameEx("checksums")
-> ### * checksums
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: checksums
-> ### Title: Calculate checksums for a module's data files
-> ### Aliases: checksums checksums,character,character,logical-method
-> ###   checksums,character,character,missing-method
-> 
-> ### ** Examples
-> 
-> ## Not run: 
-> ##D moduleName <- "my_module"
-> ##D modulePath <- file.path("path", "to", "modules")
-> ##D 
-> ##D ## verify checksums of all data files
-> ##D checksums(moduleName, modulePath)
-> ##D 
-> ##D ## write new CHECKSUMS.txt file
-> ##D 
-> ##D # 1. verify that all data files are present (and no extra files are present)
-> ##D list.files(file.path(modulePath, moduleName, "data"))
-> ##D 
-> ##D # 2. calculate file checksums and write to file (this will overwrite CHECKSUMS.txt)
-> ##D checksums(moduleName, modulePath, write = TRUE)
-> ## End(Not run)
-> 
-> 
-> 
-> 
-> cleanEx()
 > nameEx("classFilter")
 > ### * classFilter
 > 
@@ -494,6 +469,34 @@ detaching ‘package:igraph’
 > 
 > 
 > cleanEx()
+> nameEx("downloadData")
+> ### * downloadData
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: downloadData
+> ### Title: Download module data
+> ### Aliases: downloadData downloadData,character,character,logical-method
+> ###   downloadData,character,missing,missing-method
+> ###   downloadData,character,missing,logical-method
+> ###   downloadData,character,character,missing-method
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # For a Google Drive example
+> ##D # In metadata:
+> ##D expectsInputs("theFilename.zip", "NA", "NA",
+> ##D   sourceURL = "https://drive.google.com/open?id=1Ngb-jIRCSs1G6zcuaaCEFUwldbkI_K8Ez")
+> ##D # create the checksums file
+> ##D checksums("thisModule", "there", write = TRUE)
+> ##D downloadData("thisModule", "there", files = "theFilename.zip")
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
 > nameEx("expectsInput")
 > ### * expectsInput
 > 
@@ -561,7 +564,7 @@ detaching ‘package:igraph’
 +   #   numerics here -- e.g., list(0.2, 0.23) for spreadprob in fireSpread module,
 +   #   but they can be anything, as long as it is a list.
 +   experimentParams <- list(fireSpread = list(spreadprob = list(0.2, 0.23),
-+                                              nFires = list(20, 10)),
++                                              nfires = list(20, 10)),
 +                            caribouMovement = list(N = list(100, 1000)))
 + 
 +   sims <- experiment(mySim, params = experimentParams)
@@ -570,9 +573,9 @@ detaching ‘package:igraph’
 +   attr(sims, "experiment")
 + 
 +   # Read in outputs from sims object
-+   FireMaps <- do.call(stack, lapply(1:NROW(attr(sims, "experiment")$expDesign),
-+                                     function(x) sims[[x]]$landscape$Fires))
-+   if (interactive()) Plot(FireMaps, new = TRUE)
++   fireMaps <- do.call(stack, lapply(1:NROW(attr(sims, "experiment")$expDesign),
++                                     function(x) sims[[x]]$landscape$fires))
++   if (interactive()) Plot(fireMaps, new = TRUE)
 + 
 +   # Or reload objects from files, useful if sim objects too large to store in RAM
 +   caribouMaps <- lapply(sims, function(sim) {
@@ -679,12 +682,12 @@ detaching ‘package:igraph’
 +   landscapeFiles <- dir(outputPath(mySimNoRL), recursive = TRUE, pattern = "landscape",
 +                         full.names = TRUE)
 + 
-+   # Can read in Fires layers from disk since they were saved, or from the sims
++   # Can read in fires layers from disk since they were saved, or from the sims
 +   #  object
-+   # Fires <- lapply(sims, function(x) x$landscape$Fires) %>% stack
-+   Fires <- lapply(landscapeFiles, function(x) readRDS(x)$Fires) %>% stack()
-+   Fires[Fires > 0] <- 1 # convert to 1s and 0s
-+   fireProb <- sum(Fires) / nlayers(Fires) # sum them and convert to probability
++   # fires <- lapply(sims, function(x) x$landscape$fires) %>% stack
++   fires <- lapply(landscapeFiles, function(x) readRDS(x)$fires) %>% stack()
++   fires[fires > 0] <- 1 # convert to 1s and 0s
++   fireProb <- sum(fires) / nlayers(fires) # sum them and convert to probability
 +   if (interactive()) Plot(fireProb, new = TRUE)
 + 
 +   # Example 9 - Pass in inputs, i.e., input data objects taken from disk
@@ -867,19 +870,20 @@ detaching ‘package:igraph’
 > ### Name: moduleMetadata
 > ### Title: Parse and extract module metadata
 > ### Aliases: moduleMetadata
-> ###   moduleMetadata,character,character,missing-method
-> ###   moduleMetadata,character,missing,missing-method
-> ###   moduleMetadata,ANY,missing,simList-method
+> ###   moduleMetadata,missing,character,character-method
+> ###   moduleMetadata,missing,character,missing-method
+> ###   moduleMetadata,ANY,ANY,ANY-method
 > 
 > ### ** Examples
 > 
 > path <- system.file("sampleModules", package = "SpaDES.core")
 > sampleModules <- dir(path)
-> x <- moduleMetadata(sampleModules[3], path)
+> x <- moduleMetadata(sampleModules[3], path = path)
+Assuming sim is a module name
 > 
 > # using simList
 > mySim <- simInit(
-+    times = list(start = 2000.0, end = 2002.0, timeunit = "year"),
++    times = list(start = 2000.0, end = 2001.0, timeunit = "year"),
 +    params = list(
 +      .globals = list(stackName = "landscape")
 +    ),

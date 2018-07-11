@@ -4,7 +4,7 @@
 * using session charset: UTF-8
 * checking for file ‘SpaDES.core/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘SpaDES.core’ version ‘0.1.1’
+* this is package ‘SpaDES.core’ version ‘0.2.0’
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -30,7 +30,8 @@
 * checking whether the namespace can be unloaded cleanly ... OK
 * checking loading without being on the library search path ... OK
 * checking dependencies in R code ... NOTE
-Namespace in Imports field not imported from: ‘sp’
+Namespaces in Imports field not imported from:
+  ‘SpaDES.tools’ ‘sp’
   All declared Imports should be used.
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
@@ -53,19 +54,20 @@ The error most likely occurred in:
 > ### Name: moduleMetadata
 > ### Title: Parse and extract module metadata
 > ### Aliases: moduleMetadata
-> ###   moduleMetadata,character,character,missing-method
-> ###   moduleMetadata,character,missing,missing-method
-> ###   moduleMetadata,ANY,missing,simList-method
+> ###   moduleMetadata,missing,character,character-method
+> ###   moduleMetadata,missing,character,missing-method
+> ###   moduleMetadata,ANY,ANY,ANY-method
 > 
 > ### ** Examples
 > 
 > path <- system.file("sampleModules", package = "SpaDES.core")
 > sampleModules <- dir(path)
-> x <- moduleMetadata(sampleModules[3], path)
+> x <- moduleMetadata(sampleModules[3], path = path)
+Assuming sim is a module name
 > 
 > # using simList
 > mySim <- simInit(
-+    times = list(start = 2000.0, end = 2002.0, timeunit = "year"),
++    times = list(start = 2000.0, end = 2001.0, timeunit = "year"),
 +    params = list(
 +      .globals = list(stackName = "landscape")
 +    ),
@@ -83,16 +85,16 @@ Execution halted
 Running the tests in ‘tests/test-all.R’ failed.
 Last 13 lines of output:
   ══ testthat results  ═══════════════════════════════════════════════════════════
-  OK: 91 SKIPPED: 29 FAILED: 31
-  1. Error: test cache (@test-cache.R#15) 
-  2. Error: test cache (@test-cache.R#7) 
-  3. Error: test event-level cache (@test-cache.R#70) 
-  4. Error: test event-level cache (@test-cache.R#63) 
-  5. Error: test module-level cache (@test-cache.R#126) 
-  6. Error: test module-level cache (@test-cache.R#114) 
-  7. Error: test .prepareOutput (@test-cache.R#202) 
-  8. Error: test .prepareOutput (@test-cache.R#185) 
-  9. Error: test .robustDigest for simLists (@test-cache.R#260) 
+  OK: 117 SKIPPED: 35 FAILED: 33
+  1. Error: test cache (@test-cache.R#14) 
+  2. Error: test event-level cache (@test-cache.R#73) 
+  3. Error: test module-level cache (@test-cache.R#129) 
+  4. Error: test .prepareOutput (@test-cache.R#207) 
+  5. Error: test .robustDigest for simLists (@test-cache.R#266) 
+  6. Error: test checkpointing (@test-checkpoint.R#26) 
+  7. Error: test checkpointing with disk-backed raster (@test-checkpoint.R#77) 
+  8. Error: /tmp/RtmpCdyCQt/R.INSTALL22c930fb484a/SpaDES.core/man/moduleMetadata.Rd 
+  9. Error: /tmp/RtmpCdyCQt/R.INSTALL22c930fb484a/SpaDES.core/man/moduleVersion.Rd 
   1. ...
   
   Error: testthat unit tests failed
@@ -104,16 +106,16 @@ Last 13 lines of output:
 Error in re-building vignettes:
   ...
 
-    union
-
-Loading required package: quickPlot
-Loading required package: reproducible
-
-Attaching package: 'reproducible'
-
 The following object is masked from 'package:igraph':
 
     %>%
+
+
+Attaching package: 'SpaDES.core'
+
+The following objects are masked from 'package:stats':
+
+    end, start
 
 
 Attaching package: 'SpaDES.tools'
@@ -124,7 +126,7 @@ The following objects are masked from 'package:reproducible':
 
 Warning in gzfile(file, mode) :
   cannot open compressed file '/homero/tomas/cran/rlibro/lib/.snapshot.RDS', probable reason 'Read-only file system'
-Quitting from lines 326-354 (ii-modules.Rmd) 
+Quitting from lines 333-361 (ii-modules.Rmd) 
 Error: processing vignette 'ii-modules.Rmd' failed with diagnostics:
 cannot open the connection
 Execution halted
