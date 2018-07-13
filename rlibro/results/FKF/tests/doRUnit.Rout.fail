@@ -20,8 +20,7 @@ Type 'q()' to quit R.
 +  
 +   ## --- Setup ---
 +  
-+   pkg <- "doParallel" # <-- Change to package name!
-+   
++   pkg <- "FKF"
 +   if(Sys.getenv("RCMDCHECK") == "FALSE") {
 +     ## Path to unit tests for standalone running under Makefile (not R CMD check)
 +     ## PKG/tests/../inst/unitTests
@@ -35,27 +34,18 @@ Type 'q()' to quit R.
 +   print(list(pkg=pkg, getwd=getwd(), pathToUnitTests=path))
 +  
 +   library(package=pkg, character.only=TRUE)
-+   ################################################################
-+   ## BEGIN PACKAGE SPECIFIC CONFIGURATION                        #
-+   ################################################################
-+   registerDoParallel(2)
-+   ################################################################
-+   ## END PACKAGE SPECIFIC CONFIGURATION                          #
-+   ################################################################
-+  
++   
 +   ## If desired, load the name space to allow testing of private functions
 +   ## if (is.element(pkg, loadedNamespaces()))
 +   ##     attach(loadNamespace(pkg), name=paste("namespace", pkg, sep=":"), pos=3)
 +   ##
 +   ## or simply call PKG:::myPrivateFunction() in tests
-+ 
-+  
 +  
 +   ## --- Testing ---
 +  
 +   ## Define tests
 +   testSuite <- defineTestSuite(name=paste(pkg, "unit testing"),
-+                                           dirs=path, testFileRegexp = "^options\\.R$")
++                                           dirs=path)
 +   ## Run
 +   tests <- runTestSuite(testSuite)
 +  
@@ -72,7 +62,6 @@ Type 'q()' to quit R.
 +  
 +   ## Report to HTML file
 +   printHTMLProtocol(tests, fileName=paste(pathReport, ".html", sep=""))
-+ #  printHTMLProtocol(tests, fileName=file.path(dirname(dirname(getwd())),pkg,"gsDesign-RUnit-Test-Summary.html")) #paste(pathReport, ".html", sep=""))  
 +  
 +   ## Return stop() to cause R CMD check stop in case of
 +   ##  - failures i.e. FALSE to unit tests or
@@ -88,48 +77,33 @@ Type 'q()' to quit R.
 
 Running unit tests
 $pkg
-[1] "doParallel"
+[1] "FKF"
 
 $getwd
-[1] "/home/tomas/cran/rlibro/check/doParallel.Rcheck/tests"
+[1] "/home/tomas/cran/rlibro/check/FKF.Rcheck/tests"
 
 $pathToUnitTests
-[1] "/homero/tomas/cran/rlibro/lib/doParallel/unitTests"
-
-Loading required package: foreach
-Loading required package: iterators
-Loading required package: parallel
-
-
-Executing test function test.attach  ...  done successfully.
+[1] "/homero/tomas/cran/rlibro/lib/FKF/unitTests"
 
 
 
-Executing test function test.pkgname.test.stress  ... Timing stopped at: 0 0 0
-Error in DEACTIVATED("Pending fix for caret issue.") : 
-  Pending fix for caret issue.
- done successfully.
-
-
-
-Executing test function test.preschedule  ...  done successfully.
+Executing test function test.compare.to.stats  ...  done successfully.
 
 ------------------- UNIT TEST SUMMARY ---------------------
 
-RUNIT TEST PROTOCOL -- Fri Jul 13 14:53:46 2018 
+RUNIT TEST PROTOCOL -- Fri Jul 13 14:50:41 2018 
 *********************************************** 
-Number of test functions: 2 
-Number of deactivated test functions: 1 
+Number of test functions: 1 
 Number of errors: 0 
 Number of failures: 0 
 
  
 1 Test Suite : 
-doParallel unit testing - 2 test functions, 0 errors, 0 failures
+FKF unit testing - 1 test function, 0 errors, 0 failures
 Error in file(file, ifelse(append, "a", "w")) : 
   cannot open the connection
 Calls: printTextProtocol -> cat -> file
 In addition: Warning message:
 In file(file, ifelse(append, "a", "w")) :
-  cannot open file '/homero/tomas/cran/rlibro/lib/doParallel/unitTests/reportSummary.txt': Read-only file system
+  cannot open file '/homero/tomas/cran/rlibro/lib/FKF/unitTests/reportSummary.txt': Read-only file system
 Execution halted
