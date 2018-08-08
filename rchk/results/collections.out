@@ -1,0 +1,61 @@
+Package collections version 0.1.1
+Package built using 75088/R 3.6.0; x86_64-pc-linux-gnu; 2018-08-08 20:33:59 UTC; unix   
+Checked with rchk version b882e37fb462917a8ab94e70394f3a797250b4e1
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+Suspicious call (two or more unprotected arguments) to Rf_defineVar at heap_pop collections/src/priorityqueue.c:99
+Suspicious call (two or more unprotected arguments) to Rf_defineVar at heap_push collections/src/priorityqueue.c:86
+
+Function deque_pop
+  [UP] unprotected variable last while calling allocating function Rf_defineVar(S:q,?,?) collections/src/deque.c:68
+  [UP] unprotected variable last while calling allocating function Rf_install collections/src/deque.c:68
+  [UP] unprotected variable last while calling allocating function Rf_defineVar(S:last,?,?) collections/src/deque.c:72
+  [UP] unprotected variable last while calling allocating function Rf_install collections/src/deque.c:72
+
+Function deque_popleft
+  [UP] unprotected variable q while calling allocating function Rf_defineVar(S:last,?,?) collections/src/deque.c:81
+  [UP] unprotected variable q while calling allocating function Rf_install collections/src/deque.c:81
+  [UP] unprotected variable q while calling allocating function Rf_defineVar(S:q,?,?) collections/src/deque.c:85
+  [UP] unprotected variable q while calling allocating function Rf_install collections/src/deque.c:85
+
+Function deque_push
+  [UP] unprotected variable q while calling allocating function Rf_allocVector collections/src/deque.c:23
+
+Function deque_pushleft
+  [UP] unprotected variable q while calling allocating function Rf_allocVector collections/src/deque.c:45
+
+Function ensure_capacity
+  [UP] unprotected variable h while calling allocating function Rf_install collections/src/priorityqueue.c:25
+  [UP] unprotected variable h while calling allocating function Rf_allocVector collections/src/priorityqueue.c:27
+  [UP] unprotected variable h2 while calling allocating function Rf_install collections/src/priorityqueue.c:31
+
+Function heap_pop
+  [UP] unprotected variable h while calling allocating function Rf_findVarInFrame(?,S:n) collections/src/priorityqueue.c:92
+  [UP] unprotected variable h while calling allocating function Rf_install collections/src/priorityqueue.c:92
+  [UP] unprotected variable h while calling allocating function Rf_asInteger collections/src/priorityqueue.c:93
+  [UP] calling allocating function sift_down with a fresh pointer (h <arg 1>) collections/src/priorityqueue.c:97
+  [UP] unprotected variable x while calling allocating function Rf_ScalarInteger collections/src/priorityqueue.c:99
+  [UP] unprotected variable x while calling allocating function Rf_defineVar(S:n,V,?) collections/src/priorityqueue.c:99
+  [UP] unprotected variable x while calling allocating function Rf_install collections/src/priorityqueue.c:99
+
+Function heap_push
+  [UP] unprotected variable h while calling allocating function Rf_allocVector collections/src/priorityqueue.c:80
+  [UP] calling allocating function sift_up with a fresh pointer (h <arg 1>) collections/src/priorityqueue.c:84
+
+Function heapify
+  [UP] unprotected variable h while calling allocating function Rf_findVarInFrame(?,S:n) collections/src/priorityqueue.c:63
+  [UP] unprotected variable h while calling allocating function Rf_install collections/src/priorityqueue.c:63
+  [UP] unprotected variable h while calling allocating function Rf_asInteger collections/src/priorityqueue.c:64
+  [UP] allocating function sift_down may destroy its unprotected argument (h <arg 1>), which is later used. collections/src/priorityqueue.c:67
+  [UP] calling allocating function sift_down with a fresh pointer (h <arg 1>) collections/src/priorityqueue.c:67
+
+Function queue_pop
+  [UP] unprotected variable q while calling allocating function Rf_defineVar(S:q,?,?) collections/src/queue.c:25
+  [UP] unprotected variable q while calling allocating function Rf_install collections/src/queue.c:25
+
+Function queue_push
+  [UP] unprotected variable last while calling allocating function Rf_cons collections/src/queue.c:14
+
+Function stack_pop
+  [UP] unprotected variable q while calling allocating function Rf_defineVar(S:q,?,?) collections/src/stack.c:21
+  [UP] unprotected variable q while calling allocating function Rf_install collections/src/stack.c:21

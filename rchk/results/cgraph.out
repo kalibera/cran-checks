@@ -1,0 +1,128 @@
+Package cgraph version 2.0.0
+Package built using 75088/R 3.6.0; x86_64-pc-linux-gnu; 2018-08-08 20:33:55 UTC; unix   
+Checked with rchk version b882e37fb462917a8ab94e70394f3a797250b4e1
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+Suspicious call (two or more unprotected arguments) to Rf_setVar at cg_add_operation cgraph/src/cgraph.c:530
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at cg_add_operation cgraph/src/cgraph.c:611
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at cg_node cgraph/src/cgraph.c:340
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at cg_node cgraph/src/cgraph.c:341
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at cg_node cgraph/src/cgraph.c:342
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at cg_node cgraph/src/cgraph.c:346
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at cg_node cgraph/src/cgraph.c:347
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at cg_node cgraph/src/cgraph.c:348
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at cg_node cgraph/src/cgraph.c:352
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at cg_node cgraph/src/cgraph.c:353
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at cg_node cgraph/src/cgraph.c:354
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at cg_node cgraph/src/cgraph.c:358
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at cg_node cgraph/src/cgraph.c:360
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at cg_node cgraph/src/cgraph.c:361
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at cg_node cgraph/src/cgraph.c:362
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at cgraph cgraph/src/cgraph.c:68
+
+Function cg_add_constant
+  [UP] calling allocating function cg_node(?,V,?) with argument allocated using Rf_ScalarInteger cgraph/src/cgraph.c:378
+
+Function cg_add_input
+  [UP] calling allocating function cg_node(?,V,?) with argument allocated using Rf_ScalarInteger cgraph/src/cgraph.c:394
+
+Function cg_add_node
+  [UP] allocating function Rf_getAttrib(?,S:names) may destroy its unprotected argument (nodes <arg 1>), which is later used. cgraph/src/cgraph.c:159
+  [UP] calling allocating function Rf_getAttrib(?,S:names) with a fresh pointer (nodes <arg 1>) cgraph/src/cgraph.c:159
+  [UP] unprotected variable names while calling allocating function is_cg_node cgraph/src/cgraph.c:161
+  [UP] unprotected variable nodes while calling allocating function is_cg_node cgraph/src/cgraph.c:161
+  [UP] calling allocating function Rf_lengthgets with a fresh pointer (nodes <arg 1>) cgraph/src/cgraph.c:168
+  [UP] unprotected variable names while calling allocating function Rf_lengthgets cgraph/src/cgraph.c:168
+  [UP] calling allocating function Rf_lengthgets with a fresh pointer (names <arg 1>) cgraph/src/cgraph.c:170
+
+Function cg_add_operation
+  [UP] calling allocating function cg_node(?,V,?) with argument allocated using Rf_ScalarInteger cgraph/src/cgraph.c:500
+  [UP] unprotected variable vars while calling allocating function Rf_findVar cgraph/src/cgraph.c:523
+  [UP] unprotected variable vars while calling allocating function Rf_install cgraph/src/cgraph.c:523
+  [UP] calling allocating function Rf_coerceVector with a fresh pointer (value <arg 1>) cgraph/src/cgraph.c:530
+  [UP] unprotected variable value while calling allocating function Rf_install cgraph/src/cgraph.c:530
+  [UP] unprotected variable vars while calling allocating function Rf_coerceVector cgraph/src/cgraph.c:530
+  [UP] unprotected variable vars while calling allocating function Rf_install cgraph/src/cgraph.c:530
+  [UP] unprotected variable vars while calling allocating function Rf_setVar cgraph/src/cgraph.c:530
+
+Function cg_add_parameter
+  [UP] calling allocating function cg_node(?,V,?) with argument allocated using Rf_ScalarInteger cgraph/src/cgraph.c:410
+
+Function cg_add_parms
+  [UP] unprotected variable names while calling allocating function cg_add_parameter cgraph/src/cgraph.c:492
+
+Function cg_add_value
+  [UP] unprotected variable values while calling allocating function is_cg_node cgraph/src/cgraph.c:187
+  [UP] unprotected variable values while calling allocating function Rf_coerceVector cgraph/src/cgraph.c:199
+  [UP] unprotected variable value while calling allocating function Rf_asChar cgraph/src/cgraph.c:202
+  [UP] unprotected variable value while calling allocating function Rf_install cgraph/src/cgraph.c:202
+  [UP] unprotected variable values while calling allocating function Rf_asChar cgraph/src/cgraph.c:202
+  [UP] unprotected variable values while calling allocating function Rf_install cgraph/src/cgraph.c:202
+
+Function cg_adj_mat
+  [UP] unprotected variable nodes while calling allocating function Rf_allocVector cgraph/src/cgraph.c:1037
+  [UP] unprotected variable nodes while calling allocating function Rf_allocMatrix cgraph/src/cgraph.c:1039
+  [UP] unprotected variable nodes while calling allocating function Rf_install cgraph/src/cgraph.c:1047
+  [UP] unprotected variable nodes while calling allocating function Rf_asChar cgraph/src/cgraph.c:1059
+
+Function cg_approx_grad
+  [UP] unprotected variable nodes while calling allocating function Rf_asChar cgraph/src/cgraph.c:935
+  [UP] unprotected variable nodes while calling allocating function Rf_asChar cgraph/src/cgraph.c:940
+  [UP] unprotected variable nodes while calling allocating function Rf_asInteger cgraph/src/cgraph.c:960
+  [UP] unprotected variable nodes while calling allocating function Rf_asReal cgraph/src/cgraph.c:961
+  [UP] unprotected variable nodes while calling allocating function cg_traverse_graph cgraph/src/cgraph.c:963
+  [UP] unprotected variable nodes while calling allocating function cg_node_id cgraph/src/cgraph.c:965
+
+Function cg_find_nodes
+  [UP] allocating function Rf_getAttrib(?,S:names) may destroy its unprotected argument (nodes <arg 1>), which is later used. cgraph/src/cgraph.c:128
+  [UP] calling allocating function Rf_getAttrib(?,S:names) with a fresh pointer (nodes <arg 1>) cgraph/src/cgraph.c:128
+
+Function cg_forward
+  [UP] unprotected variable nodes while calling allocating function Rf_install cgraph/src/cgraph.c:705
+  [UP] unprotected variable nodes while calling allocating function Rf_asInteger cgraph/src/cgraph.c:714
+  [UP] unprotected variable nodes while calling allocating function Rf_install cgraph/src/cgraph.c:716
+  [UP] unprotected variable nodes while calling allocating function Rf_eval cgraph/src/cgraph.c:723
+  [UP] unprotected variable nodes while calling allocating function Rf_asChar cgraph/src/cgraph.c:725
+  [UP] unprotected variable nodes while calling allocating function Rf_defineVar cgraph/src/cgraph.c:725
+  [UP] unprotected variable nodes while calling allocating function Rf_install cgraph/src/cgraph.c:725
+  [UP] unprotected variable nodes while calling allocating function Rf_asChar cgraph/src/cgraph.c:731
+  [UP] unprotected variable nodes while calling allocating function Rf_eval cgraph/src/cgraph.c:731
+  [UP] unprotected variable nodes while calling allocating function Rf_install cgraph/src/cgraph.c:731
+
+Function cg_gen_name
+  [UP] unprotected variable nodes while calling allocating function Rf_install cgraph/src/cgraph.c:222
+  [UP] unprotected variable nodes while calling allocating function Rf_asInteger cgraph/src/cgraph.c:229
+
+Function cg_get_parms
+  [UP] unprotected variable nodes while calling allocating function cg_find_values cgraph/src/cgraph.c:428
+  [UP] unprotected variable nodes while calling allocating function Rf_allocVector cgraph/src/cgraph.c:432
+  [UP] unprotected variable values while calling allocating function Rf_allocVector cgraph/src/cgraph.c:432
+  [UP] unprotected variable nodes while calling allocating function Rf_allocVector cgraph/src/cgraph.c:434
+  [UP] unprotected variable values while calling allocating function Rf_allocVector cgraph/src/cgraph.c:434
+  [UP] unprotected variable nodes while calling allocating function Rf_install cgraph/src/cgraph.c:440
+  [UP] unprotected variable values while calling allocating function Rf_install cgraph/src/cgraph.c:440
+  [UP] unprotected variable nodes while calling allocating function Rf_asInteger cgraph/src/cgraph.c:447
+  [UP] unprotected variable values while calling allocating function Rf_asInteger cgraph/src/cgraph.c:447
+  [UP] allocating function Rf_findVarInFrame may destroy its unprotected argument (values <arg 1>), which is later used. cgraph/src/cgraph.c:449
+  [UP] calling allocating function Rf_findVarInFrame with a fresh pointer (values <arg 1>) cgraph/src/cgraph.c:449
+  [UP] unprotected variable nodes while calling allocating function Rf_asChar cgraph/src/cgraph.c:449
+  [UP] unprotected variable nodes while calling allocating function Rf_findVarInFrame cgraph/src/cgraph.c:449
+  [UP] unprotected variable nodes while calling allocating function Rf_install cgraph/src/cgraph.c:449
+  [UP] unprotected variable values while calling allocating function Rf_asChar cgraph/src/cgraph.c:449
+  [UP] unprotected variable values while calling allocating function Rf_install cgraph/src/cgraph.c:449
+  [UP] unprotected variable nodes while calling allocating function Rf_asChar cgraph/src/cgraph.c:456
+  [UP] unprotected variable values while calling allocating function Rf_asChar cgraph/src/cgraph.c:456
+
+Function cg_node_exists
+  [UP] unprotected variable nodes while calling allocating function Rf_asChar cgraph/src/cgraph.c:295
+
+Function cg_node_id
+  [UP] unprotected variable nodes while calling allocating function Rf_asChar cgraph/src/cgraph.c:273
+
+Function cg_root_grad
+  [UP] unprotected variable grad while calling allocating function Rf_asInteger cgraph/src/cgraph.c:762
+
+Function cg_traverse_graph
+  [UP] unprotected variable nodes while calling allocating function Rf_allocVector cgraph/src/cgraph.c:627
+  [UP] unprotected variable nodes while calling allocating function cg_node_id cgraph/src/cgraph.c:633
+  [UP] unprotected variable nodes while calling allocating function Rf_install cgraph/src/cgraph.c:641
