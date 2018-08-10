@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2018-08-09 r75095) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-08-10 r75098) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -878,6 +878,10 @@ detaching ‘package:igraph’
 > 
 > path <- system.file("sampleModules", package = "SpaDES.core")
 > sampleModules <- dir(path)
+> # turn off code checking -- don't need it here
+> opts <- options("spades.moduleCodeChecks" = FALSE,
++                 "spades.useRequire" = FALSE)
+> 
 > x <- moduleMetadata(sampleModules[3], path = path)
 Assuming sim is a module name
 > 
@@ -889,6 +893,142 @@ Assuming sim is a module name
 +    ),
 +    modules = list("caribouMovement"),
 +    paths = list(modulePath = system.file("sampleModules", package = "SpaDES.core"))
++ )
+Loading required package: SpaDES.tools
+Loading required package: grid
+
+Attaching package: ‘grid’
+
+The following object is masked from ‘package:quickPlot’:
+
+    gpar
+
+Loading required package: raster
+Loading required package: sp
+> moduleMetadata(sim = mySim)
+$name
+[1] "caribouMovement"
+
+$description
+[1] "Simulate caribou movement via correlated random walk."
+
+$keywords
+[1] "caribou"                         "individual based movement model"
+[3] "correlated random walk"         
+
+$childModules
+character(0)
+
+$authors
+[1] "Eliot J B McIntire <eliot.mcintire@canada.ca> [aut, cre]"
+
+$version
+[1] ‘1.6.0’
+
+$spatialExtent
+class       : Extent 
+xmin        : NA 
+xmax        : NA 
+ymin        : NA 
+ymax        : NA 
+
+$timeframe
+[1] NA NA
+
+$timeunit
+[1] "month"
+
+$citation
+list()
+
+$documentation
+list()
+
+$reqdPkgs
+$reqdPkgs[[1]]
+[1] "grid"
+
+$reqdPkgs[[2]]
+[1] "raster"
+
+$reqdPkgs[[3]]
+[1] "sp"
+
+$reqdPkgs[[4]]
+[1] "stats"
+
+$reqdPkgs[[5]]
+[1] "SpaDES.tools"
+
+
+$parameters
+         paramName paramClass   default   min  max
+1        stackName  character landscape    NA   NA
+2  moveInitialTime    numeric      2001  2001 2001
+3     moveInterval    numeric         1     1    1
+4                N    numeric       100    10 1000
+5            torus    logical     FALSE FALSE TRUE
+6 .plotInitialTime    numeric      2000  -Inf  Inf
+7    .plotInterval    numeric         1  -Inf  Inf
+8 .saveInitialTime    numeric        NA  -Inf  Inf
+9    .saveInterval    numeric        NA  -Inf  Inf
+                                 paramDesc
+1                  name of the RasterStack
+2    time to schedule first movement event
+3    time interval between movoment events
+4                initial number of caribou
+5 should the map wrap around like a torus?
+6        time to schedule first plot event
+7        time interval between plot events
+8        time to schedule first save event
+9        time interval between save events
+
+$inputObjects
+  objectName objectClass                         desc sourceURL
+1  landscape RasterStack layername = "habitatQuality"      <NA>
+
+$outputObjects
+  objectName            objectClass desc
+1    caribou SpatialPointsDataFrame <NA>
+
+> 
+> # turn code checking back on -- don't need it here
+> options(opts)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:bindrcpp’, ‘package:raster’, ‘package:sp’,
+  ‘package:grid’, ‘package:SpaDES.tools’
+
+> nameEx("moduleVersion")
+> ### * moduleVersion
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: moduleVersion
+> ### Title: Parse and extract a module's version
+> ### Aliases: moduleVersion moduleVersion,character,character,missing-method
+> ###   moduleVersion,character,missing,missing-method
+> ###   moduleVersion,character,missing,simList-method
+> 
+> ### ** Examples
+> 
+> path <- system.file("sampleModules", package = "SpaDES.core")
+> 
+> # using filepath
+> moduleVersion("caribouMovement", path)
+[1] ‘1.6.0’
+> 
+> # using simList
+> mySim <- simInit(
++    times = list(start = 2000.0, end = 2002.0, timeunit = "year"),
++    params = list(
++      .globals = list(stackName = "landscape", burnStats = "nPixelsBurned")
++    ),
++    modules = list("caribouMovement"),
++    paths = list(modulePath = path)
 + )
 Warning in gzfile(file, mode) :
   cannot open compressed file '/homero/tomas/cran/rlibro/lib/.snapshot.RDS', probable reason 'Read-only file system'

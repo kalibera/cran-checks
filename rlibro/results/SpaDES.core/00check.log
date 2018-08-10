@@ -1,10 +1,11 @@
 * using log directory ‘/home/tomas/cran/rlibro/check/SpaDES.core.Rcheck’
-* using R Under development (unstable) (2018-08-09 r75095)
+* using R Under development (unstable) (2018-08-10 r75098)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘SpaDES.core/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘SpaDES.core’ version ‘0.2.0’
+* this is package ‘SpaDES.core’ version ‘0.2.1’
+* package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -30,8 +31,7 @@
 * checking whether the namespace can be unloaded cleanly ... OK
 * checking loading without being on the library search path ... OK
 * checking dependencies in R code ... NOTE
-Namespaces in Imports field not imported from:
-  ‘SpaDES.tools’ ‘sp’
+Namespace in Imports field not imported from: ‘sp’
   All declared Imports should be used.
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
@@ -51,28 +51,28 @@ Namespaces in Imports field not imported from:
 Running examples in ‘SpaDES.core-Ex.R’ failed
 The error most likely occurred in:
 
-> ### Name: moduleMetadata
-> ### Title: Parse and extract module metadata
-> ### Aliases: moduleMetadata
-> ###   moduleMetadata,missing,character,character-method
-> ###   moduleMetadata,missing,character,missing-method
-> ###   moduleMetadata,ANY,ANY,ANY-method
+> ### Name: moduleVersion
+> ### Title: Parse and extract a module's version
+> ### Aliases: moduleVersion moduleVersion,character,character,missing-method
+> ###   moduleVersion,character,missing,missing-method
+> ###   moduleVersion,character,missing,simList-method
 > 
 > ### ** Examples
 > 
 > path <- system.file("sampleModules", package = "SpaDES.core")
-> sampleModules <- dir(path)
-> x <- moduleMetadata(sampleModules[3], path = path)
-Assuming sim is a module name
+> 
+> # using filepath
+> moduleVersion("caribouMovement", path)
+[1] ‘1.6.0’
 > 
 > # using simList
 > mySim <- simInit(
-+    times = list(start = 2000.0, end = 2001.0, timeunit = "year"),
++    times = list(start = 2000.0, end = 2002.0, timeunit = "year"),
 +    params = list(
-+      .globals = list(stackName = "landscape")
++      .globals = list(stackName = "landscape", burnStats = "nPixelsBurned")
 +    ),
 +    modules = list("caribouMovement"),
-+    paths = list(modulePath = system.file("sampleModules", package = "SpaDES.core"))
++    paths = list(modulePath = path)
 + )
 Warning in gzfile(file, mode) :
   cannot open compressed file '/homero/tomas/cran/rlibro/lib/.snapshot.RDS', probable reason 'Read-only file system'
@@ -85,16 +85,16 @@ Execution halted
 Running the tests in ‘tests/test-all.R’ failed.
 Last 13 lines of output:
   ══ testthat results  ═══════════════════════════════════════════════════════════
-  OK: 117 SKIPPED: 35 FAILED: 33
-  1. Error: test cache (@test-cache.R#14) 
-  2. Error: test event-level cache (@test-cache.R#73) 
-  3. Error: test module-level cache (@test-cache.R#129) 
-  4. Error: test .prepareOutput (@test-cache.R#207) 
-  5. Error: test .robustDigest for simLists (@test-cache.R#266) 
-  6. Error: test checkpointing (@test-checkpoint.R#26) 
-  7. Error: test checkpointing with disk-backed raster (@test-checkpoint.R#77) 
-  8. Error: /tmp/RtmpCdyCQt/R.INSTALL22c930fb484a/SpaDES.core/man/moduleMetadata.Rd 
-  9. Error: /tmp/RtmpCdyCQt/R.INSTALL22c930fb484a/SpaDES.core/man/moduleVersion.Rd 
+  OK: 111 SKIPPED: 35 FAILED: 37
+  1. Error: test cache (@test-cache.R#8) 
+  2. Error: test event-level cache (@test-cache.R#61) 
+  3. Error: test module-level cache (@test-cache.R#109) 
+  4. Error: test .prepareOutput (@test-cache.R#174) 
+  5. Error: test .robustDigest for simLists (@test-cache.R#223) 
+  6. Failure: test .checkCacheRepo with function as spades.cachePath (@test-cache.R#302) 
+  7. Failure: test .checkCacheRepo with function as spades.cachePath (@test-cache.R#306) 
+  8. Failure: test .checkCacheRepo with function as spades.cachePath (@test-cache.R#311) 
+  9. Failure: test .checkCacheRepo with function as spades.cachePath (@test-cache.R#318) 
   1. ...
   
   Error: testthat unit tests failed
@@ -105,7 +105,6 @@ Last 13 lines of output:
 * checking re-building of vignette outputs ... WARNING
 Error in re-building vignettes:
   ...
-
     union
 
 Loading required package: quickPlot
@@ -124,9 +123,10 @@ The following objects are masked from 'package:stats':
 
     end, start
 
+Loading required package: SpaDES.tools
 Warning in gzfile(file, mode) :
   cannot open compressed file '/homero/tomas/cran/rlibro/lib/.snapshot.RDS', probable reason 'Read-only file system'
-Quitting from lines 333-361 (ii-modules.Rmd) 
+Quitting from lines 334-363 (ii-modules.Rmd) 
 Error: processing vignette 'ii-modules.Rmd' failed with diagnostics:
 cannot open the connection
 Execution halted
