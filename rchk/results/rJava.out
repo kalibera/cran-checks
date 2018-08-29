@@ -1,0 +1,232 @@
+Package rJava version 0.9-10
+Package built using 75204/R 3.6.0; x86_64-pc-linux-gnu; 2018-08-29 21:44:54 UTC; unix   
+Checked with rchk version b882e37fb462917a8ab94e70394f3a797250b4e1
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+Suspicious call (two or more unprotected arguments) to R_do_slot_assign at ckx rJava/src/rJava.c:169
+Suspicious call (two or more unprotected arguments) to R_do_slot_assign at new_jarrayRef rJava/src/Rglue.c:845
+Suspicious call (two or more unprotected arguments) to R_do_slot_assign at new_jarrayRef rJava/src/Rglue.c:846
+Suspicious call (two or more unprotected arguments) to R_do_slot_assign at new_jarrayRef rJava/src/Rglue.c:847
+Suspicious call (two or more unprotected arguments) to R_do_slot_assign at new_jclassName rJava/src/Rglue.c:812
+Suspicious call (two or more unprotected arguments) to R_do_slot_assign at new_jobjRef rJava/src/Rglue.c:792
+Suspicious call (two or more unprotected arguments) to R_do_slot_assign at new_jobjRef rJava/src/Rglue.c:794
+Suspicious call (two or more unprotected arguments) to Rf_lcons at throwR rJava/src/rJava.c:101
+
+Function R1par2jvalue
+  [UP] calling allocating function Rpar2jvalue with argument allocated using Rf_cons rJava/src/Rglue.c:409
+
+Function RcallMethod
+  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:525
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:526
+  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:538
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:539
+  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:551
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:552
+  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:564
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:565
+  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:577
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:578
+  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:590
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:591
+  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:603
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:604
+  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:616
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:617
+
+Function RcallSyncMethod
+  [UP] unprotected variable e while calling allocating function REprintf rJava/src/Rglue.c:674
+
+Function RgetField
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/fields.c:161
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/fields.c:171
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/fields.c:181
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/fields.c:191
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/fields.c:201
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/fields.c:211
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/fields.c:221
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/fields.c:231
+
+Function RtoString
+  [UP] unprotected variable r while calling allocating function releaseObject rJava/src/tools.c:91
+
+Function ckx
+  [UP] unprotected variable xclass while calling allocating function Rf_mkString rJava/src/rJava.c:161
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS rJava/src/rJava.c:167
+  [UP] unprotected variable xclass while calling allocating function R_do_MAKE_CLASS rJava/src/rJava.c:167
+  [UP] unprotected variable xclass while calling allocating function R_do_new_object rJava/src/rJava.c:167
+  [UP] unprotected variable xclass while calling allocating function Rf_install rJava/src/rJava.c:169
+  [PB] has possible protection stack imbalance rJava/src/rJava.c:176
+
+Function new_jarrayRef
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS rJava/src/Rglue.c:840
+
+Function new_jclassName
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS rJava/src/Rglue.c:807
+
+Function new_jobjRef
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS rJava/src/Rglue.c:788
+
+Function GetRNGstate
+  [UP] allocating function GetRNGkind.9641 may destroy its unprotected argument (seeds <arg 1>), which is later used. /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/RNG.c:410
+  [UP] calling allocating function GetRNGkind.9641 with a fresh pointer (seeds <arg 1>) /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/RNG.c:410
+
+Function Java_org_rosuda_JRI_Rengine_rniProtect
+  [PB] has possible protection stack imbalance rJava/jri/src/Rengine.c:190
+
+Function KeywordLookup
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:4053
+
+Function NumericValue
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:4455
+
+Function PrintGenericVector
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/print.c:601
+
+Function PrintObjectS3
+  [UP] unprotected variable fun while calling allocating function Rf_cons(S:x,?) /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/print.c:357
+
+Function R_FinalizeSrcRefState
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3451
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3488
+
+Function R_InitSrcRefState
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3446
+
+Function R_LookupMethod
+  [UP] unprotected variable val while calling allocating function Rf_install /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/objects.c:277
+  [UP] unprotected variable val while calling allocating function Rf_findVarInFrame3(?,S:.__S3MethodsTable__.,?) /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/objects.c:278
+  [UP] unprotected variable val while calling allocating function Rf_eval /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/objects.c:281
+  [UP] unprotected variable val while calling allocating function REprintf /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/objects.c:316
+
+Function R_cmpfun1
+  [UP] unprotected variable val while calling allocating function R_gc /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/eval.c:1311
+
+Function Rf_InitTypeTables
+  [UP] unprotected variable rchar while calling allocating function Rf_install /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/util.c:259
+
+Function Rf_applyClosure
+  [UP] calling allocating function R_execClosure.11005 with a fresh pointer (newrho <arg 2>) /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/eval.c:1701
+
+Function Rf_mat2indsub
+  [UP] calling allocating function DATAPTR_RO with a fresh pointer (s <arg 1>) /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/subscript.c:396
+
+Function Rf_setAttrib
+  [UP] calling allocating function row_names_gets.9967 with a fresh pointer (val <arg 2>) /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/attrib.c:267
+
+Function StringValue
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:4826
+
+Function SymbolValue.2261
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:4922
+
+Function asLogicalNoNA
+  [UP] unprotected variable spkg while calling allocating function R_IsNamespaceEnv /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/eval.c:2052
+
+Function do_complex
+  [UP] calling allocating function DATAPTR_RO with a fresh pointer (re <arg 1>) /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/complex.c:770
+  [UP] unprotected variable im while calling allocating function DATAPTR_RO /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/complex.c:770
+  [UP] calling allocating function DATAPTR_RO with a fresh pointer (im <arg 1>) /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/complex.c:775
+
+Function do_getRegNS
+  [UP] calling allocating function checkNSname.10823 with argument allocated using Rf_coerceVector /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/envir.c:3624
+
+Function protectedEval
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/context.c:813
+
+Function setParseFilename
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:4944
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:4945
+
+Function sigactionSegv
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/main.c:628
+
+Function signalInterrupt
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/errors.c:1798
+
+Function xxaddformal0
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:2903
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:2904
+
+Function xxaddformal1
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:2917
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:2919
+
+Function xxbinary
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3229
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3230
+
+Function xxdefun
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3206
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3207
+
+Function xxexprlist0
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:2934
+
+Function xxexprlist2
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:2966
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:2967
+
+Function xxfirstformal0
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:2873
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:2878
+
+Function xxfirstformal1
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:2889
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:2890
+
+Function xxfor
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3119
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3120
+
+Function xxforcond
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3107
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3108
+
+Function xxfuncall
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3173
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3174
+
+Function xxif
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3081
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3082
+
+Function xxifelse
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3093
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3095
+
+Function xxnullformal
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:2867
+
+Function xxnullsub0
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3017
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3022
+
+Function xxnullsub1
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3028
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3034
+
+Function xxnxtbrk
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3152
+
+Function xxsub0
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:2977
+
+Function xxsublist2
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3057
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3058
+
+Function xxsubscript
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3257
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3258
+
+Function xxsymsub1
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3010
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3011
+
+Function xxvalue
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:2857
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:2860
+
+Function xxwhile
+  [PB] has negative depth /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3131
+  [PB] has possible protection stack imbalance /home/tomas/cran/rchk/build/src/main/../../../../rtrunk/src/main/gram.c:3132
