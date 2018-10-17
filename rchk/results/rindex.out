@@ -1,0 +1,25 @@
+Package rindex version 0.12.1
+Package built using 75446/R 3.6.0; x86_64-pc-linux-gnu; 2018-10-17 02:02:55 UTC; unix   
+Checked with rchk version 469bf6658025c101b69dc0a915b0cf1edf4c98f2
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+Function demo_rindex_open
+  [UP] unprotected variable extPtr while calling allocating function Rf_allocVector rindex/src/zzz.c:64
+
+Function rindex_indexAddTree
+  [UP] calling allocating function setListElement with a fresh pointer (extPtr <arg 3>) rindex/src/index.c:341
+
+Function rindex_indexFind
+  [UP] unprotected variable val while calling allocating function Rf_asLogical rindex/src/index.c:509
+  [UP] unprotected variable val while calling allocating function getListElement rindex/src/index.c:521
+  [UP] unprotected variable val while calling allocating function getListElement rindex/src/index.c:522
+  [UP] unprotected variable val while calling allocating function rindex_indexAddTree rindex/src/index.c:524
+  [UP] unprotected variable val while calling allocating function getListElement rindex/src/index.c:526
+  [UP] calling allocating function rindex_recIndexFind with a fresh pointer (val <arg 3>) rindex/src/index.c:528
+
+Function rindex_indexFindlike
+  [UP] unprotected variable val while calling allocating function Rf_asLogical rindex/src/index.c:612
+  [UP] unprotected variable val while calling allocating function getListElement rindex/src/index.c:624
+  [UP] unprotected variable val while calling allocating function getListElement rindex/src/index.c:625
+  [UP] unprotected variable val while calling allocating function rindex_indexAddTree rindex/src/index.c:627
+  [UP] unprotected variable val while calling allocating function getListElement rindex/src/index.c:629

@@ -1,0 +1,66 @@
+Package hdf5r version 1.0.1
+Package built using 75446/R 3.6.0; x86_64-pc-linux-gnu; 2018-10-17 01:50:43 UTC; unix   
+Checked with rchk version 469bf6658025c101b69dc0a915b0cf1edf4c98f2
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at H5ToR_Post_REFERENCE hdf5r/src/convert.c:1131
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at RToH5_REFERENCE hdf5r/src/convert.c:503
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at convert_double_to_int64 hdf5r/src/convert.c:2462
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at convert_int64_to_double hdf5r/src/convert.c:2472
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at convert_int64_to_int hdf5r/src/convert.c:2502
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at convert_int_to_int64 hdf5r/src/convert.c:2488
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at guess_nelem hdf5r/src/convert.c:2227
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at new_H5R_R6_class hdf5r/src/convert.c:2518
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at set_dim_attribute hdf5r/src/convert.c:2415
+
+Function H5ToR_Post_ENUM
+  [UP] calling allocating function R_orderVector with argument allocated using Rf_lang1 hdf5r/src/convert.c:928
+
+Function H5ToR_Post_REFERENCE
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:getNamespace,V) hdf5r/src/convert.c:1131
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(S:set_ref.H5R,?,?) hdf5r/src/convert.c:1132
+
+Function RToH5_FLOAT
+  [UP] calling allocating function RToH5_FLOAT with argument allocated using Rf_coerceVector hdf5r/src/convert.c:421
+
+Function RToH5_INTEGER
+  [UP] calling allocating function RToH5_INTEGER with a fresh pointer (Rval <arg 1>) hdf5r/src/convert.c:301
+  [UP] calling allocating function RToH5_INTEGER with a fresh pointer (Rval <arg 1>) hdf5r/src/convert.c:350
+
+Function RToH5_REFERENCE
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:getNamespace,V) hdf5r/src/convert.c:503
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(S:$,?,S:ref) hdf5r/src/convert.c:504
+
+Function convert_double_to_int64
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:getNamespace,V) hdf5r/src/convert.c:2462
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:as.integer64.double,?) hdf5r/src/convert.c:2464
+
+Function convert_int64_to_double
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:getNamespace,V) hdf5r/src/convert.c:2472
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:as.double.integer64,?) hdf5r/src/convert.c:2474
+
+Function convert_int64_to_int
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:getNamespace,V) hdf5r/src/convert.c:2502
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:as.integer.integer64,?) hdf5r/src/convert.c:2504
+
+Function convert_int_to_int64
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:getNamespace,V) hdf5r/src/convert.c:2488
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:as.integer64.integer,?) hdf5r/src/convert.c:2490
+
+Function guess_nelem
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:getNamespace,V) hdf5r/src/convert.c:2227
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(S:$,?,S:length) hdf5r/src/convert.c:2228
+
+Function is_robj_compound
+  [UP] unprotected variable list_names while calling allocating function Rf_getAttrib(?,S:row.names) hdf5r/src/convert.c:2068
+  [UP] unprotected variable list_names while calling allocating function Rf_install hdf5r/src/convert.c:2068
+  [PB] has possible protection stack imbalance hdf5r/src/convert.c:2093
+
+Function new_H5R_R6_class
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:getNamespace,V) hdf5r/src/convert.c:2518
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(S:$,?,S:new) hdf5r/src/convert.c:2520
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3 hdf5r/src/convert.c:2521
+
+Function set_dim_attribute
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:getNamespace,V) hdf5r/src/convert.c:2415
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(S:dim<-,?,?) hdf5r/src/convert.c:2418
