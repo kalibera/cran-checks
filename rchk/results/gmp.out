@@ -1,0 +1,65 @@
+Package gmp version 0.5-13.2
+Package built using 75450/R 3.6.0; x86_64-pc-linux-gnu; 2018-10-18 10:10:06 UTC; unix   
+Checked with rchk version 469bf6658025c101b69dc0a915b0cf1edf4c98f2
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at bigintegerR::create_SEXP(bigvec const&) gmp/src/bigintegerR.cc:199
+
+Function as_matrixq
+  [UP] unprotected variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> while calling allocating function bigvec_q::~bigvec_q() gmp/src/matrixq.cc:98
+  [UP] unprotected variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> while calling allocating function bigvec_q::~bigvec_q() gmp/src/matrixq.cc:101
+
+Function bigint_transposeR
+  [UP] calling allocating function Rf_getAttrib(?,V) with argument allocated using Rf_mkString gmp/src/matrix.cc:117
+  [UP] unprotected variable dimAttr while calling allocating function bigintegerR::create_bignum(SEXPREC* const&) gmp/src/matrix.cc:118
+
+Function biginteger_pow
+  [UP] calling allocating function bigrational_as(?,V) with argument allocated using Rf_ScalarInteger gmp/src/bigintegerR.cc:346
+  [UP] calling allocating function bigrational_pow(V,?) with a fresh pointer (aq <arg 1>) gmp/src/bigintegerR.cc:348
+  [UP] unprotected variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> while calling allocating function bigvec::~bigvec() gmp/src/bigintegerR.cc:353
+
+Function bigq_transposeR
+  [UP] calling allocating function Rf_getAttrib(?,V) with argument allocated using Rf_mkString gmp/src/matrixq.cc:107
+  [UP] unprotected variable dimAttr while calling allocating function bigrationalR::create_bignum(SEXPREC*) gmp/src/matrixq.cc:108
+
+Function bigrationalR::create_bignum(SEXPREC*)
+  [UP] calling allocating function Rf_getAttrib(?,V) with argument allocated using Rf_mkString gmp/src/bigrationalR.cc:110
+  [UP] calling allocating function Rf_getAttrib(?,V) with argument allocated using Rf_mkString gmp/src/bigrationalR.cc:111
+  [UP] unprotected variable denAttr while calling allocating function Rf_getAttrib(?,V) gmp/src/bigrationalR.cc:111
+  [UP] unprotected variable denAttr while calling allocating function Rf_mkString gmp/src/bigrationalR.cc:111
+  [UP] calling allocating function Rf_getAttrib(?,V) with argument allocated using Rf_mkString gmp/src/bigrationalR.cc:116
+  [UP] unprotected variable denAttr while calling allocating function Rf_getAttrib(?,V) gmp/src/bigrationalR.cc:116
+  [UP] unprotected variable denAttr while calling allocating function Rf_mkString gmp/src/bigrationalR.cc:116
+  [UP] calling allocating function bigrationalR::create_vector(SEXPREC*) with a fresh pointer (denAttr <arg 2>) gmp/src/bigrationalR.cc:121
+
+Function bigrational_get_at
+  [UP] unprotected variable <unnamed var:   %115 = alloca %struct.SEXPREC*, align 8> while calling allocating function bigvec_q::~bigvec_q() gmp/src/bigrationalR.cc:432
+  [UP] unprotected variable <unnamed var:   %115 = alloca %struct.SEXPREC*, align 8> while calling allocating function bigvec_q::~bigvec_q() gmp/src/bigrationalR.cc:458
+
+Function bigrational_max
+  [UP] unprotected variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> while calling allocating function bigvec_q::~bigvec_q() gmp/src/bigrationalR.cc:685
+
+Function bigrational_min
+  [UP] unprotected variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> while calling allocating function bigvec_q::~bigvec_q() gmp/src/bigrationalR.cc:711
+
+Function bigrational_prod
+  [UP] unprotected variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> while calling allocating function bigvec_q::~bigvec_q() gmp/src/bigrationalR.cc:776
+
+Function bigrational_set_at
+  [UP] unprotected variable <unnamed var:   %149 = alloca %struct.SEXPREC*, align 8> while calling allocating function bigvec_q::~bigvec_q() gmp/src/bigrationalR.cc:509
+
+Function inverse_z
+  [UP] unprotected variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> while calling allocating function bigvec_q::~bigvec_q() gmp/src/solve.cc:68
+  [UP] unprotected variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> while calling allocating function bigvec_q::~bigvec_q() gmp/src/solve.cc:69
+  [UP] unprotected variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> while calling allocating function bigvec::~bigvec() gmp/src/solve.cc:70
+
+Function is_matrix_zq
+  [UP] calling allocating function Rf_getAttrib(?,V) with argument allocated using Rf_mkString gmp/src/matrix.cc:34
+
+Function matrix_set_at_q
+  [UP] unprotected variable <unnamed var:   %31 = alloca %struct.SEXPREC*, align 8> while calling allocating function bigvec_q::~bigvec_q() gmp/src/extract_matrix.cc:100
+
+Function solve_z
+  [UP] unprotected variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> while calling allocating function bigvec_q::~bigvec_q() gmp/src/solve.cc:111
+  [UP] unprotected variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> while calling allocating function bigvec::~bigvec() gmp/src/solve.cc:112
+  [UP] unprotected variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> while calling allocating function bigvec_q::~bigvec_q() gmp/src/solve.cc:112
