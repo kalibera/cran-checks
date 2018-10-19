@@ -1,0 +1,147 @@
+Package igraph version 1.2.2
+Package built using 75465/R 3.6.0; x86_64-pc-linux-gnu; 2018-10-19 11:53:45 UTC; unix   
+Checked with rchk version 469bf6658025c101b69dc0a915b0cf1edf4c98f2
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at R_igraph_ac_all_other igraph/src/rinterface.c:1641
+Suspicious call (two or more unprotected arguments) to Rf_lang3 at R_igraph_ac_all_other igraph/src/rinterface.c:1645
+Suspicious call (two or more unprotected arguments) to Rf_defineVar at R_igraph_add_env igraph/src/rinterface_extra.c:310
+Suspicious call (two or more unprotected arguments) to Rf_defineVar at R_igraph_add_env igraph/src/rinterface_extra.c:311
+Suspicious call (two or more unprotected arguments) to Rf_defineVar at R_igraph_add_version_to_env igraph/src/rinterface_extra.c:284
+Suspicious call (two or more unprotected arguments) to Rf_defineVar at R_igraph_add_version_to_env igraph/src/rinterface_extra.c:285
+Suspicious call (two or more unprotected arguments) to Rf_lang3 at R_igraph_attribute_add_edges igraph/src/rinterface.c:729
+Suspicious call (two or more unprotected arguments) to Rf_lang3 at R_igraph_attribute_add_edges igraph/src/rinterface.c:801
+Suspicious call (two or more unprotected arguments) to Rf_lang3 at R_igraph_attribute_add_vertices igraph/src/rinterface.c:394
+Suspicious call (two or more unprotected arguments) to Rf_lang3 at R_igraph_attribute_add_vertices igraph/src/rinterface.c:466
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at R_igraph_finalizer igraph/src/rinterface.c:2152
+Suspicious call (two or more unprotected arguments) to Rf_lang4 at R_igraph_finalizer igraph/src/rinterface.c:2154
+Suspicious call (two or more unprotected arguments) to Rf_lang3 at R_igraph_i_levc_callback igraph/src/rinterface.c:8044
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at R_igraph_progress_handler igraph/src/rinterface.c:2106
+Suspicious call (two or more unprotected arguments) to Rf_lang3 at R_igraph_progress_handler igraph/src/rinterface.c:2109
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at R_igraph_status_handler igraph/src/rinterface.c:2119
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at R_igraph_status_handler igraph/src/rinterface.c:2121
+
+Function R_SEXP_to_attr_comb
+  [UP] unprotected variable names while calling allocating function igraph_attribute_combination_init igraph/src/rinterface.c:158
+  [UP] unprotected variable names while calling allocating function Rf_coerceVector igraph/src/rinterface.c:178
+  [UP] unprotected variable names while calling allocating function igraph_attribute_combination_add igraph/src/rinterface.c:181
+
+Function R_SEXP_to_igraph_copy
+  [PB] has possible protection stack imbalance igraph/src/rinterface.c:3118
+
+Function R_igraph_ac_all_other
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2 igraph/src/rinterface.c:1641
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(S:[,?,V) igraph/src/rinterface.c:1641
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3 igraph/src/rinterface.c:1645
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(S:[,?,V) igraph/src/rinterface.c:1645
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(S:unlist,V,?) igraph/src/rinterface.c:1662
+
+Function R_igraph_ac_func
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2 igraph/src/rinterface.c:1691
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(S:[,?,V) igraph/src/rinterface.c:1691
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(S:unlist,V,?) igraph/src/rinterface.c:1706
+
+Function R_igraph_attribute_combine_edges
+  [UP] calling allocating function R_igraph_ac_all_other(?,?,?,V) with argument allocated using Rf_ScalarInteger igraph/src/rinterface.c:1982
+  [UP] calling allocating function R_igraph_ac_all_other(?,?,?,V) with argument allocated using Rf_ScalarInteger igraph/src/rinterface.c:1990
+  [UP] calling allocating function R_igraph_ac_all_other(?,?,?,V) with argument allocated using Rf_ScalarInteger igraph/src/rinterface.c:1998
+  [PB] has possible protection stack imbalance igraph/src/rinterface.c:2044
+
+Function R_igraph_attribute_combine_vertices
+  [UP] calling allocating function R_igraph_ac_all_other(?,?,?,V) with argument allocated using Rf_ScalarInteger igraph/src/rinterface.c:1818
+  [UP] calling allocating function R_igraph_ac_all_other(?,?,?,V) with argument allocated using Rf_ScalarInteger igraph/src/rinterface.c:1826
+  [UP] calling allocating function R_igraph_ac_all_other(?,?,?,V) with argument allocated using Rf_ScalarInteger igraph/src/rinterface.c:1834
+  [PB] has possible protection stack imbalance igraph/src/rinterface.c:1880
+
+Function R_igraph_attribute_copy
+  [PB] has possible protection stack imbalance igraph/src/rinterface.c:324
+
+Function R_igraph_attribute_destroy
+  [PB] has negative depth igraph/src/rinterface.c:290
+  [PB] has possible protection stack imbalance igraph/src/rinterface.c:293
+
+Function R_igraph_attribute_get_info
+  [UP] calling allocating function R_igraph_SEXP_to_strvector_copy with a fresh pointer (names <arg 1>) igraph/src/rinterface.c:990
+
+Function R_igraph_attribute_init
+  [PB] has possible protection stack imbalance igraph/src/rinterface.c:282
+
+Function R_igraph_attribute_permute_edges
+  [PB] has negative depth igraph/src/rinterface.c:876
+  [UP] unprotected variable newattr while calling allocating function Rf_allocVector igraph/src/rinterface.c:886
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(S:[,?,V) igraph/src/rinterface.c:919
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(S:[,?,V) igraph/src/rinterface.c:958
+  [PB] has possible protection stack imbalance igraph/src/rinterface.c:968
+
+Function R_igraph_attribute_permute_vertices
+  [PB] has negative depth igraph/src/rinterface.c:566
+  [UP] unprotected variable newattr while calling allocating function Rf_allocVector igraph/src/rinterface.c:576
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(S:[,?,V) igraph/src/rinterface.c:609
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(S:[,?,V) igraph/src/rinterface.c:648
+  [PB] has possible protection stack imbalance igraph/src/rinterface.c:658
+
+Function R_igraph_attribute_protected_destroy
+  [PB] has negative depth igraph/src/rinterface.c:191
+  [PB] has possible protection stack imbalance igraph/src/rinterface.c:194
+
+Function R_igraph_bipartite_projection
+  [UP] unprotected variable multiplicity1 while calling allocating function igraph_vector_init igraph/src/rinterface.c:9370
+  [UP] unprotected variable multiplicity1 while calling allocating function igraph_error igraph/src/rinterface.c:9371
+  [UP] unprotected variable multiplicity1 while calling allocating function Rf_allocVector igraph/src/rinterface.c:9374
+
+Function R_igraph_community_multilevel
+  [UP] unprotected variable memberships while calling allocating function igraph_vector_init igraph/src/rinterface.c:13018
+  [UP] unprotected variable memberships while calling allocating function igraph_error igraph/src/rinterface.c:13019
+  [UP] unprotected variable memberships while calling allocating function Rf_allocVector igraph/src/rinterface.c:13022
+
+Function R_igraph_dominator_tree
+  [UP] unprotected variable domtree while calling allocating function igraph_vector_init igraph/src/rinterface.c:13982
+  [UP] unprotected variable domtree while calling allocating function igraph_error igraph/src/rinterface.c:13983
+
+Function R_igraph_finalizer
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:getNamespace,V) igraph/src/rinterface.c:2152
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang4(S:.igraph.progress,V,V,?) igraph/src/rinterface.c:2154
+
+Function R_igraph_get_incidence
+  [UP] unprotected variable row_ids while calling allocating function igraph_vector_init igraph/src/rinterface.c:12030
+  [UP] unprotected variable row_ids while calling allocating function igraph_error igraph/src/rinterface.c:12031
+  [UP] unprotected variable row_ids while calling allocating function Rf_allocVector igraph/src/rinterface.c:12034
+
+Function R_igraph_isomorphic_bliss
+  [UP] unprotected variable map12 while calling allocating function igraph_vector_init igraph/src/rinterface.c:14757
+  [UP] unprotected variable map12 while calling allocating function igraph_error igraph/src/rinterface.c:14758
+  [UP] unprotected variable map12 while calling allocating function Rf_allocVector igraph/src/rinterface.c:14761
+
+Function R_igraph_isomorphic_vf2
+  [UP] unprotected variable map12 while calling allocating function igraph_vector_init igraph/src/rinterface.c:14374
+  [UP] unprotected variable map12 while calling allocating function igraph_error igraph/src/rinterface.c:14375
+  [UP] unprotected variable map12 while calling allocating function Rf_allocVector igraph/src/rinterface.c:14378
+
+Function R_igraph_layout_sugiyama
+  [UP] unprotected variable extd_graph while calling allocating function igraph_vector_init igraph/src/rinterface.c:12556
+  [UP] unprotected variable extd_graph while calling allocating function igraph_error igraph/src/rinterface.c:12557
+  [UP] unprotected variable extd_graph while calling allocating function Rf_allocVector igraph/src/rinterface.c:12560
+
+Function R_igraph_maxflow
+  [UP] unprotected variable flow while calling allocating function igraph_vector_init igraph/src/rinterface.c:13902
+  [UP] unprotected variable flow while calling allocating function igraph_error igraph/src/rinterface.c:13903
+  [UP] unprotected variable flow while calling allocating function Rf_allocVector igraph/src/rinterface.c:13906
+  [UP] unprotected variable cut while calling allocating function igraph_vector_init igraph/src/rinterface.c:13907
+  [UP] unprotected variable flow while calling allocating function igraph_vector_init igraph/src/rinterface.c:13907
+  [UP] unprotected variable cut while calling allocating function igraph_error igraph/src/rinterface.c:13908
+  [UP] unprotected variable flow while calling allocating function igraph_error igraph/src/rinterface.c:13908
+  [UP] unprotected variable cut while calling allocating function igraph_vector_init igraph/src/rinterface.c:13911
+  [UP] unprotected variable flow while calling allocating function igraph_vector_init igraph/src/rinterface.c:13911
+  [UP] unprotected variable cut while calling allocating function igraph_error igraph/src/rinterface.c:13912
+  [UP] unprotected variable flow while calling allocating function igraph_error igraph/src/rinterface.c:13912
+
+Function R_igraph_mybracket3_set
+  [UP] unprotected variable names while calling allocating function Rf_allocVector igraph/src/rinterface.c:3410
+  [UP] unprotected variable names while calling allocating function Rf_allocVector igraph/src/rinterface.c:3411
+
+Function R_igraph_progress_handler
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:getNamespace,V) igraph/src/rinterface.c:2106
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(S:.igraph.progress,V,V) igraph/src/rinterface.c:2109
+
+Function R_igraph_read_graph_dimacs
+  [PB] has negative depth igraph/src/rint
