@@ -1,0 +1,139 @@
+* using log directory ‘/home/tomas/cran/rlibro/check/SpaDES.core.Rcheck’
+* using R Under development (unstable) (2018-10-19 r75465)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* checking for file ‘SpaDES.core/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘SpaDES.core’ version ‘0.2.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘SpaDES.core’ can be installed ... OK
+* checking package directory ... OK
+* checking ‘build’ directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... WARNING
+Missing link or links in documentation object 'moduleCoverage.Rd':
+  ‘[covr]{shine}’
+
+See section 'Cross-references' in the 'Writing R Extensions' manual.
+
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... ERROR
+Running examples in ‘SpaDES.core-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: moduleVersion
+> ### Title: Parse and extract a module's version
+> ### Aliases: moduleVersion moduleVersion,character,character,missing-method
+> ###   moduleVersion,character,missing,missing-method
+> ###   moduleVersion,character,missing,simList-method
+> 
+> ### ** Examples
+> 
+> path <- system.file("sampleModules", package = "SpaDES.core")
+> 
+> # using filepath
+> moduleVersion("caribouMovement", path)
+[1] ‘1.6.0’
+> 
+> # using simList
+> mySim <- simInit(
++    times = list(start = 2000.0, end = 2002.0, timeunit = "year"),
++    params = list(
++      .globals = list(stackName = "landscape", burnStats = "nPixelsBurned")
++    ),
++    modules = list("caribouMovement"),
++    paths = list(modulePath = path)
++ )
+Warning in gzfile(file, mode) :
+  cannot open compressed file '/homero/tomas/cran/rlibro/lib/.snapshot.RDS', probable reason 'Read-only file system'
+Error in gzfile(file, mode) : cannot open the connection
+Calls: simInit ... Require -> installedVersionsQuick -> saveRDS -> gzfile
+Execution halted
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... ERROR
+  Running ‘test-all.R’
+Running the tests in ‘tests/test-all.R’ failed.
+Last 13 lines of output:
+  ══ testthat results  ═══════════════════════════════════════════════════════════
+  OK: 117 SKIPPED: 35 FAILED: 31
+  1. Error: test cache (@test-cache.R#8) 
+  2. Error: test event-level cache (@test-cache.R#61) 
+  3. Error: test module-level cache (@test-cache.R#109) 
+  4. Error: test .prepareOutput (@test-cache.R#174) 
+  5. Error: test .robustDigest for simLists (@test-cache.R#221) 
+  6. Error: Cache of sim objects via .Cache attr -- using preDigest and postDigest (@test-cache.R#383) 
+  7. Error: test checkpointing (@test-checkpoint.R#22) 
+  8. Error: test checkpointing with disk-backed raster (@test-checkpoint.R#80) 
+  9. Error: /ssd/tomas/tmp/RtmpfD4DVy/R.INSTALL90285743ef4a/SpaDES.core/man/moduleVersion.Rd 
+  1. ...
+  
+  Error: testthat unit tests failed
+  Execution halted
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+* checking re-building of vignette outputs ... WARNING
+Error in re-building vignettes:
+  ...
+    union
+
+Loading required package: quickPlot
+Loading required package: reproducible
+
+Attaching package: 'reproducible'
+
+The following object is masked from 'package:igraph':
+
+    %>%
+
+
+Attaching package: 'SpaDES.core'
+
+The following objects are masked from 'package:stats':
+
+    end, start
+
+Loading required package: SpaDES.tools
+Warning in gzfile(file, mode) :
+  cannot open compressed file '/homero/tomas/cran/rlibro/lib/.snapshot.RDS', probable reason 'Read-only file system'
+Quitting from lines 334-363 (ii-modules.Rmd) 
+Error: processing vignette 'ii-modules.Rmd' failed with diagnostics:
+cannot open the connection
+Execution halted
+
+* checking PDF version of manual ... OK
+* DONE
+Status: 2 ERRORs, 2 WARNINGs
