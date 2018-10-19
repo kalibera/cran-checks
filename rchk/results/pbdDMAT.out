@@ -1,0 +1,18 @@
+Package pbdDMAT version 0.4-2
+Package built using 75469/R 3.6.0; x86_64-pc-linux-gnu; 2018-10-19 16:45:00 UTC; unix   
+Checked with rchk version 469bf6658025c101b69dc0a915b0cf1edf4c98f2
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at get_machine_eps pbdDMAT/src/util.c:11
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at is_Rnull pbdDMAT/src/../inst/RNACI/RNACI.h:245
+
+Function R_convert_dense_to_csr
+  [UP] calling allocating function make_list with a fresh pointer (R_list_names <arg 1>) pbdDMAT/src/converters.c:109
+
+Function get_machine_eps
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:getNamespace,V) pbdDMAT/src/util.c:11
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang1(S:get_machine_eps) pbdDMAT/src/util.c:15
+
+Function is_Rnull
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:getNamespace,V) pbdDMAT/src/../inst/RNACI/RNACI.h:245
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:is.null,?) pbdDMAT/src/../inst/RNACI/RNACI.h:247

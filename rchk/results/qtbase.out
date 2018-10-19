@@ -1,0 +1,39 @@
+Package qtbase version 1.0.14
+Package built using 75469/R 3.6.0; x86_64-pc-linux-gnu; 2018-10-19 15:52:44 UTC; unix   
+Checked with rchk version 469bf6658025c101b69dc0a915b0cf1edf4c98f2
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+Suspicious call (two or more unprotected arguments) to Rf_lang4 at InstanceObjectTable::methodClosure(char const*) const qtbase/src/InstanceObjectTable.cpp:34
+Suspicious call (two or more unprotected arguments) to Rf_findVarInFrame at RClass::findMethod(MethodCall const&) const qtbase/src/RClass.cpp:62
+Suspicious call (two or more unprotected arguments) to Rf_findVarInFrame at RClass::hasMethod(char const*, QFlags<Method::Qualifier>) const qtbase/src/RClass.cpp:76
+Suspicious call (two or more unprotected arguments) to Rf_findVarInFrame at RClass::implementsMethod(char const*) const qtbase/src/RClass.cpp:122
+Suspicious call (two or more unprotected arguments) to Rf_findVarInFrame at RClass::property(char const*) const qtbase/src/RClass.cpp:107
+
+Function InstanceObjectTable::get(char const*, Rboolean*) const
+  [UP] unprotected variable ans while calling allocating function InstanceObjectTable::methodExists(char const*) const qtbase/src/InstanceObjectTable.cpp:121
+
+Function QHash<QString, QVariant> from_sexp<QHash<QString, QVariant> >(SEXPREC*, SmokeType const&)
+  [UP] calling allocating function QList<QString> from_sexp<QList<QString> >(SEXPREC*, SmokeType const&) with argument allocated using Rf_getAttrib(?,S:names) qtbase/src/convert.cpp:69
+
+Function QMap<QString, QUrl> from_sexp<QMap<QString, QUrl> >(SEXPREC*, SmokeType const&)
+  [UP] calling allocating function QList<QString> from_sexp<QList<QString> >(SEXPREC*, SmokeType const&) with argument allocated using Rf_getAttrib(?,S:names) qtbase/src/type-handlers.cpp:615
+
+Function QMap<QString, QVariant> from_sexp<QMap<QString, QVariant> >(SEXPREC*, SmokeType const&)
+  [UP] calling allocating function QList<QString> from_sexp<QList<QString> >(SEXPREC*, SmokeType const&) with argument allocated using Rf_getAttrib(?,S:names) qtbase/src/convert.cpp:67
+
+Function RClass::findMethod(MethodCall const&) const
+  [UP] unprotected variable fun while calling allocating function RMethod::qualifiers() const qtbase/src/RClass.cpp:66
+
+Function RClass::methods(QFlags<Method::Qualifier>) const
+  [UP] unprotected variable fun while calling allocating function RMethod::qualifiers() const qtbase/src/RClass.cpp:52
+
+Function RClass::property(char const*) const
+  [UP] calling allocating function Rf_findVarInFrame with argument allocated using RClass::properties() const qtbase/src/RClass.cpp:107
+
+Function qvariant_from_sexp(SEXPREC*, int)
+  [UP] unprotected variable rlist while calling allocating function Rf_getAttrib(?,S:names) qtbase/src/convert.cpp:339
+  [UP] calling allocating function asQVariantOfType(SEXPREC*, QMetaType::Type, bool) with a fresh pointer (rlist <arg 2>) qtbase/src/convert.cpp:340
+  [UP] calling allocating function asQVariantOfType(SEXPREC*, QMetaType::Type, bool) with a fresh pointer (rlist <arg 2>) qtbase/src/convert.cpp:341
+
+Function qvariant_into_vector(QVariant, SEXPREC*, int)
+  [UP] calling allocating function Rf_asChar with argument allocated using qstring2sexp(QString) qtbase/src/convert.cpp:315

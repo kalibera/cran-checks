@@ -1,5 +1,5 @@
 Package network version 1.13.0.1
-Package built using 75465/R 3.6.0; x86_64-pc-linux-gnu; 2018-10-19 11:11:40 UTC; unix   
+Package built using 75469/R 3.6.0; x86_64-pc-linux-gnu; 2018-10-19 15:52:16 UTC; unix   
 Checked with rchk version 469bf6658025c101b69dc0a915b0cf1edf4c98f2
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
@@ -24,4 +24,29 @@ Function deleteVertices_R
   [UP] unprotected variable x while calling allocating function Rf_allocVector network/src/access.c:1282
   [UP] allocating function networkSize may destroy its unprotected argument (x <arg 1>), which is later used. network/src/access.c:1283
   [UP] calling allocating function networkSize with a fresh pointer (x <arg 1>) network/src/access.c:1283
-  [UP] calling allocating function setNetworkAttribute(?,?,V) with a fresh pointer (x <arg 1>) /var/scratch2
+  [UP] calling allocating function setNetworkAttribute(?,?,V) with a fresh pointer (x <arg 1>) network/src/access.c:1284
+  [UP] allocating function getListElement may destroy its unprotected argument (x <arg 1>), which is later used. network/src/access.c:1288
+  [UP] calling allocating function getListElement with a fresh pointer (x <arg 1>) network/src/access.c:1288
+  [UP] unprotected variable x while calling allocating function contractList network/srcERROR: too many states (abstraction error?) in function getEdgeIDs
+/access.c:1288
+  [UP] allocating function getListElement may destroy its unprotected argument (x <arg 1>), which is later used. network/src/access.c:1289
+  [UP] calling allocating function getListElement with a fresh pointer (x <arg 1>) network/src/access.c:1289
+  [UP] unprotected variable x while calling allocating function contractList network/src/access.c:1289
+  [UP] allocating function getListElement may destroy its unprotected argument (x <arg 1>), which is later used. network/src/access.c:1290
+  [UP] calling allocating function getListElement with a fresh pointer (x <arg 1>) network/src/access.c:1290
+  [UP] unprotected variable x while calling allocating function contractList network/src/access.c:1290
+  [UP] calling allocating function setListElement with a fresh pointer (x <arg 1>) network/src/access.c:1291
+  [UP] calling allocating function setListElement with a fresh pointer (x <arg 1>) network/src/access.c:1292
+  [UP] calling allocating function setListElement with a fresh pointer (x <arg 1>) network/src/access.c:1293
+
+Function permuteVertexIDs
+  [UP] calling allocating function Rf_coerceVector(V,?) with argument allocated using getEdgeIDs network/src/access.c:778
+  [UP] allocating function getListElement may destroy its unprotected argument (edge <arg 1>), which is later used. network/src/access.c:803
+  [UP] calling allocating function getListElement with a fresh pointer (edge <arg 1>) network/src/access.c:803
+  [UP] unprotected variable edge while calling allocating function Rf_coerceVector network/src/access.c:804
+  [UP] calling allocating function setListElement with a fresh pointer (edge <arg 1>) network/src/access.c:813
+  [UP] calling allocating function setListElement with a fresh pointer (x <arg 1>) network/src/access.c:822
+  [UP] calling allocating function setListElement with a fresh pointer (x <arg 1>) network/src/access.c:823
+
+Function setNetworkAttribute_R
+  [UP] calling allocating function setNetworkAttribute with a fresh pointer (x <arg 1>) network/src/access.c:1648
