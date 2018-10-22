@@ -1,0 +1,30 @@
+Package rgl version 0.99.16
+Package built using 75478/R 3.6.0; x86_64-pc-linux-gnu; 2018-10-22 11:42:22 UTC; unix   
+Checked with rchk version 469bf6658025c101b69dc0a915b0cf1edf4c98f2
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at rgl::X11WindowImpl::getFont(char const*, int, double, bool) rgl/src/x11gui.cpp:354
+Suspicious call (two or more unprotected arguments) to Rf_lang3 at userControl(void*, int, int) rgl/src/callbacks.cpp:21
+
+Function Query(rgl::Device*, rgl::RGLView*, rgl::Subscene*, char const*)
+  [UP] unprotected variable value while calling allocating function getBoundingbox(double*, rgl::Subscene*) rgl/src/par3d.cpp:644
+  [UP] unprotected variable value while calling allocating function getWindowRect(int*, rgl::Device*) rgl/src/par3d.cpp:652
+  [UP] unprotected variable value while calling allocating function getAntialias(rgl::RGLView*) rgl/src/par3d.cpp:688
+  [UP] unprotected variable value while calling allocating function getMaxClipPlanes(rgl::RGLView*) rgl/src/par3d.cpp:692
+
+Function rgl::X11WindowImpl::getFont(char const*, int, double, bool)
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:rglFonts,V) rgl/src/x11gui.cpp:354
+
+Function rgl_par3d
+  [UP] unprotected variable oldnames while calling allocating function Query(rgl::Device*, rgl::RGLView*, rgl::Subscene*, char const*) rgl/src/par3d.cpp:739
+  [UP] unprotected variable oldnames while calling allocating function Specify(rgl::Device*, rgl::RGLView*, rgl::Subscene*, char const*, SEXPREC*) rgl/src/par3d.cpp:741
+  [UP] unprotected variable oldnames while calling allocating function Query(rgl::Device*, rgl::RGLView*, rgl::Subscene*, char const*) rgl/src/par3d.cpp:747
+
+Function userControl(void*, int, int)
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(?,V,V) rgl/src/callbacks.cpp:21
+
+Function userControlEnd(void*)
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang1 rgl/src/callbacks.cpp:27
+
+Function userWheel(void*, int)
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(?,V) rgl/src/callbacks.cpp:43
