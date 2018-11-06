@@ -1,10 +1,18 @@
 Package jsonlite version 1.5
-Package built using 75465/R 3.6.0; x86_64-pc-linux-gnu; 2018-10-19 11:09:35 UTC; unix   
-Checked with rchk version 469bf6658025c101b69dc0a915b0cf1edf4c98f2
+Package built using 75553/R 3.6.0; x86_64-pc-linux-gnu; 2018-11-06 17:33:43 UTC; unix   
+Checked with rchk version 54f92ed9296375adfeb61f73ea1b5819e3bb281b
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
+warning: linking module flags 'Dwarf Version': IDs have conflicting values
 Suspicious call (two or more unprotected arguments) to Rf_setAttrib at R_validate jsonlite/src/validate.c:12
 Suspicious call (two or more unprotected arguments) to Rf_setAttrib at R_validate jsonlite/src/validate.c:36
+
+Function C_row_collapse_array
+  [UP] calling allocating function Rf_asChar with argument allocated using C_collapse_array(V) jsonlite/src/row_collapse.c:48
+
+Function C_row_collapse_object
+  [UP] calling allocating function Rf_asChar with argument allocated using C_collapse_object(?,V) jsonlite/src/row_collapse.c:24
+  [UP] calling allocating function Rf_asChar with argument allocated using C_collapse_object_pretty(?,V,?) jsonlite/src/row_collapse.c:26
 
 Function R_parse_connection
   [UP] unprotected variable out while calling allocating function yajl_free jsonlite/src/push_parser.c:71

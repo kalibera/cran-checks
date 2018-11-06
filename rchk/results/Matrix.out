@@ -1,7 +1,12 @@
 Package Matrix version 1.2-15
-Package built using 75535/R 3.6.0; x86_64-pc-linux-gnu; 2018-11-02 13:17:47 UTC; unix   
-Checked with rchk version 469bf6658025c101b69dc0a915b0cf1edf4c98f2
+Package built using 75553/R 3.6.0; x86_64-pc-linux-gnu; 2018-11-06 17:52:02 UTC; unix   
+Checked with rchk version 54f92ed9296375adfeb61f73ea1b5819e3bb281b
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+warning: linking module flags 'Dwarf Version': IDs have conflicting values
+Suspicious call (two or more unprotected arguments) to R_do_slot_assign at dgCMatrix_QR Matrix/src/dgCMatrix.c:287
+Suspicious call (two or more unprotected arguments) to R_do_slot_assign at install_lu Matrix/src/dgCMatrix.c:418
+Suspicious call (two or more unprotected arguments) to R_do_slot_assign at install_lu Matrix/src/dgCMatrix.c:438
 
 Function CHM_restore_common
   [UP] calling allocating function Rf_asReal with argument allocated using Rf_findVarInFrame(?,S:dbound) Matrix/src/chm_common.c:52
@@ -19,6 +24,18 @@ Function CHM_restore_common
   [UP] calling allocating function Rf_asLogical with argument allocated using Rf_findVarInFrame(?,S:final_upper) Matrix/src/chm_common.c:66
   [UP] calling allocating function Rf_asLogical with argument allocated using Rf_findVarInFrame(?,S:quick_return_if_not_posdef) Matrix/src/chm_common.c:68
   [UP] calling allocating function Rf_asLogical with argument allocated using Rf_findVarInFrame(?,S:postorder) Matrix/src/chm_common.c:71
+
+Function Csparse_to_dense
+  [UP] unprotected variable ans while calling allocating function Rf_asChar Matrix/src/Csparse.c:166
+  [UP] unprotected variable ans while calling allocating function Rf_asChar Matrix/src/Csparse.c:179
+
+Function ddense_skewpart
+  [UP] allocating function R_do_slot(?,S:Dim) may destroy its unprotected argument (dx <arg 1>), which is later used. Matrix/src/dense.c:511
+  [UP] calling allocating function R_do_slot(?,S:Dim) with a fresh pointer (dx <arg 1>) Matrix/src/dense.c:511
+
+Function ddense_symmpart
+  [UP] allocating function R_do_slot(?,S:Dim) may destroy its unprotected argument (dx <arg 1>), which is later used. Matrix/src/dense.c:452
+  [UP] calling allocating function R_do_slot(?,S:Dim) with a fresh pointer (dx <arg 1>) Matrix/src/dense.c:452
 
 Function inv_permutation
   [UP] unprotected variable val while calling allocating function Rf_asLogical Matrix/src/./Mutils.h:307
