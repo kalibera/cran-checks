@@ -1,9 +1,8 @@
 Package igraph version 1.2.2
-Package built using 75553/R 3.6.0; x86_64-pc-linux-gnu; 2018-11-06 18:17:03 UTC; unix   
+Package built using 75554/R 3.6.0; x86_64-pc-linux-gnu; 2018-11-08 06:09:39 UTC; unix   
 Checked with rchk version 54f92ed9296375adfeb61f73ea1b5819e3bb281b
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
-warning: linking module flags 'Dwarf Version': IDs have conflicting values
 Suspicious call (two or more unprotected arguments) to Rf_lang2 at R_igraph_ac_all_other igraph/src/rinterface.c:1641
 Suspicious call (two or more unprotected arguments) to Rf_lang3 at R_igraph_ac_all_other igraph/src/rinterface.c:1645
 Suspicious call (two or more unprotected arguments) to Rf_defineVar at R_igraph_add_env igraph/src/rinterface_extra.c:310
@@ -41,3 +40,32 @@ Function R_igraph_ac_func
   [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2 igraph/src/rinterface.c:1691
   [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(S:[,?,V) igraph/src/rinterface.c:1691
   [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(S:unlist,V,?) igraph/src/rinterface.c:1706
+
+Function R_igraph_attribute_combine_edges
+  [UP] calling allocating function R_igraph_ac_all_other(?,?,?,V) with argument allocated using Rf_ScalarInteger igraph/src/rinterface.c:1982
+  [UP] calling allocating function R_igraph_ac_all_other(?,?,?,V) with argument allocated using Rf_ScalarInteger igraph/src/rinterface.c:1990
+  [UP] calling allocating function R_igraph_ac_all_other(?,?,?,V) with argument allocated using Rf_ScalarInteger igraph/src/rinterface.c:1998
+  [PB] has possible protection stack imbalance igraph/src/rinterface.c:2044
+
+Function R_igraph_attribute_combine_vertices
+  [UP] calling allocating function R_igraph_ac_all_other(?,?,?,V) with argument allocated using Rf_ScalarInteger igraph/src/rinterface.c:1818
+  [UP] calling allocating function R_igraph_ac_all_other(?,?,?,V) with argument allocated using Rf_ScalarInteger igraph/src/rinterface.c:1826
+  [UP] calling allocating function R_igraph_ac_all_other(?,?,?,V) with argument allocated using Rf_ScalarInteger igraph/src/rinterface.c:1834
+  [PB] has possible protection stack imbalance igraph/src/rinterface.c:1880
+
+Function R_igraph_attribute_copy
+  [PB] has possible protection stack imbalance igraph/src/rinterface.c:324
+
+Function R_igraph_attribute_destroy
+  [PB] has negative depth igraph/src/rinterface.c:290
+  [PB] has possible protection stack imbalance igraph/src/rinterface.c:293
+
+Function R_igraph_attribute_get_info
+  [UP] calling allocating function R_igraph_SEXP_to_strvector_copy with a fresh pointer (names <arg 1>) igraph/src/rinterface.c:990
+
+Function R_igraph_attribute_init
+  [PB] has possible protection stack imbalance igraph/src/rinterface.c:282
+
+Function R_igraph_attribute_permute_edges
+  [PB] has negative depth igraph/src/rinterface.c:876
+  [UP] unprotected variable newattr while calling allocating function Rf_a
