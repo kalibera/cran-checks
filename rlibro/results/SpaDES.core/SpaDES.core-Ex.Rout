@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2018-11-16 r75618) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-11-18 r75627) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -29,6 +29,10 @@ Attaching package: ‘SpaDES.core’
 The following objects are masked from ‘package:stats’:
 
     end, start
+
+The following object is masked from ‘package:utils’:
+
+    citation
 
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
@@ -69,17 +73,17 @@ The following objects are masked from ‘package:stats’:
 +   outData <- spades(reproducible::Copy(mySim), .plotInitialTime = NA)
 + 
 +   # Extract the "true" data, in this case, the "proportion of cells burned"
-+   # Function defined that will use landscape$fires map from simList,
-+   #  i.e., sim$landscape$fires
++   # Function defined that will use landscape$Fires map from simList,
++   #  i.e., sim$landscape$Fires
 +   #  the return value being compared via MAD with propCellBurnedData
 +   propCellBurnedFn <- function(landscape) {
-+     sum(getValues(landscape$fires) > 0) / ncell(landscape$fires)
++     sum(getValues(landscape$Fires) > 0) / ncell(landscape$Fires)
 +   }
 +   # visualize the burned maps of true "data"
 +   propCellBurnedData <- propCellBurnedFn(outData$landscape)
 +   clearPlot()
 +   if (interactive()) {
-+     fires <- outData$landscape$fires # Plot doesn't do well with many nested layers
++     fires <- outData$landscape$Fires # Plot doesn't do well with many nested layers
 +     Plot(fires)
 +   }
 + 
@@ -89,9 +93,8 @@ The following objects are masked from ‘package:stats’:
 +   #  is as close as possible to the proportion area burned in
 +   #  the "data", using \code{DEoptim()}.
 + 
-+   # Can use cluster if computer is multi-threaded (but not yet via cl arg, which is not
-+   #                                                implemented yet in DEoptim)
-+   # This example uses parallelType = 1 in DEoptim. For this, you must manually
++   # Can use cluster if computer is multi-threaded.
++   # This example can use parallelType = 1 in DEoptim. For this, you must manually
 +   #  pass all packages and variables as character strings.
 +   # cl <- makeCluster(detectCores() - 1) # not implemented yet in DEoptim
 +   out1 <- POM(mySim, "spreadprob",
@@ -392,7 +395,7 @@ detaching ‘package:igraph’
 > 
 > ### Name: defineModule
 > ### Title: Define a new module.
-> ### Aliases: defineModule defineModule,.simList,list-method
+> ### Aliases: defineModule defineModule,simList,list-method
 > 
 > ### ** Examples
 > 
@@ -464,6 +467,29 @@ detaching ‘package:igraph’
 +   defineParameter("lambda", "numeric", 1.23, desc = "intrinsic rate of increase"),
 +   defineParameter("P", "numeric", 0.2, 0, 1, "probability of attack")
 + )
+> 
+> ## Not run: 
+> ##D # Create a new module, then access parameters using \code{P}
+> ##D tmpdir <- file.path(tempdir(), "test")
+> ##D checkPath(tmpdir, create = TRUE)
+> ##D 
+> ##D # creates a  new, "empty" module -- it has defaults for everything that is required
+> ##D newModule("testModule", tmpdir)
+> ##D 
+> ##D # Look at new module code -- see defineParameter
+> ##D file.edit(file.path(tmpdir, "testModule", "testModule.R"))
+> ##D 
+> ##D # initialize the simList
+> ##D mySim <- simInit(modules = "testModule",
+> ##D                  paths = list(modulePath = tmpdir))
+> ##D 
+> ##D # Access one of the parameters -- because this line is not inside a module
+> ##D #  function, we must specify the module name. If used within a module,
+> ##D #  we can omit the module name
+> ##D P(mySim, "testModule")$.useCache
+> ##D 
+> ## End(Not run)
+> 
 > 
 > 
 > 
@@ -854,8 +880,8 @@ detaching ‘package:igraph’
 > ##D  moduleName <- "forestAge" # sample module to test
 > ##D  downloadModule(name = moduleName, path = modulePath) # download sample module
 > ##D  testResults <- moduleCoverage(name = moduleName, path = modulePath)
-> ##D  shine(testResults$moduleCoverage)
-> ##D  shine(testResults$functionCoverage)
+> ##D  report(testResults$moduleCoverage)
+> ##D  report(testResults$functionCoverage)
 > ##D  unlink(tmpdir, recursive = TRUE)
 > ## End(Not run)
 > 

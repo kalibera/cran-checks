@@ -1,10 +1,10 @@
 * using log directory ‘/var/scratch2/tomas/cran/rlibro/check/SpaDES.core.Rcheck’
-* using R Under development (unstable) (2018-11-16 r75618)
+* using R Under development (unstable) (2018-11-18 r75627)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘SpaDES.core/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘SpaDES.core’ version ‘0.2.2’
+* this is package ‘SpaDES.core’ version ‘0.2.3’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -37,12 +37,7 @@
 * checking R code for possible problems ... OK
 * checking Rd files ... OK
 * checking Rd metadata ... OK
-* checking Rd cross-references ... WARNING
-Missing link or links in documentation object 'moduleCoverage.Rd':
-  ‘[covr]{shine}’
-
-See section 'Cross-references' in the 'Writing R Extensions' manual.
-
+* checking Rd cross-references ... OK
 * checking for missing documentation entries ... OK
 * checking for code/documentation mismatches ... OK
 * checking Rd \usage sections ... OK
@@ -88,16 +83,16 @@ Execution halted
 Running the tests in ‘tests/test-all.R’ failed.
 Last 13 lines of output:
   ══ testthat results  ═══════════════════════════════════════════════════════════
-  OK: 116 SKIPPED: 35 FAILED: 32
+  OK: 118 SKIPPED: 34 FAILED: 33
   1. Error: test cache (@test-cache.R#8) 
   2. Error: test event-level cache (@test-cache.R#61) 
   3. Error: test module-level cache (@test-cache.R#109) 
-  4. Error: test .prepareOutput (@test-cache.R#174) 
-  5. Error: test .robustDigest for simLists (@test-cache.R#221) 
-  6. Failure: test objSize (@test-cache.R#333) 
-  7. Error: Cache of sim objects via .Cache attr -- using preDigest and postDigest (@test-cache.R#383) 
-  8. Error: test checkpointing (@test-checkpoint.R#22) 
-  9. Error: test checkpointing with disk-backed raster (@test-checkpoint.R#80) 
+  4. Error: test .prepareOutput (@test-cache.R#173) 
+  5. Error: test .robustDigest for simLists (@test-cache.R#222) 
+  6. Error: Cache of sim objects via .Cache attr -- using preDigest and postDigest (@test-cache.R#381) 
+  7. Error: test checkpointing (@test-checkpoint.R#22) 
+  8. Error: test checkpointing with disk-backed raster (@test-checkpoint.R#78) 
+  9. Error: /tmp/RtmpnxZwV3/R.INSTALLe1473dfbe4bd/SpaDES.core/man/moduleVersion.Rd 
   1. ...
   
   Error: testthat unit tests failed
@@ -108,32 +103,32 @@ Last 13 lines of output:
 * checking re-building of vignette outputs ... WARNING
 Error in re-building vignettes:
   ...
-    union
-
-Loading required package: quickPlot
-Loading required package: reproducible
-
-Attaching package: 'reproducible'
-
-The following object is masked from 'package:igraph':
-
-    %>%
-
-
-Attaching package: 'SpaDES.core'
-
-The following objects are masked from 'package:stats':
-
-    end, start
+    citation
 
 Loading required package: SpaDES.tools
+Loading required package: RandomFields
+Loading required package: sp
+Loading required package: RandomFieldsUtils
+
+Attaching package: 'RandomFields'
+
+The following object is masked from 'package:RandomFieldsUtils':
+
+    RFoptions
+
+The following objects are masked from 'package:base':
+
+    abs, acosh, asin, asinh, atan, atan2, atanh, cos, cosh, exp,
+    expm1, floor, gamma, lgamma, log, log1p, log2, logb, max, min,
+    round, sin, sinh, sqrt, tan, tanh, trunc
+
 Warning in gzfile(file, mode) :
   cannot open compressed file '/var/scratch2ro/tomas/cran/rlibro/lib/.snapshot.RDS', probable reason 'Read-only file system'
-Quitting from lines 334-363 (ii-modules.Rmd) 
+Quitting from lines 345-374 (ii-modules.Rmd) 
 Error: processing vignette 'ii-modules.Rmd' failed with diagnostics:
 cannot open the connection
 Execution halted
 
 * checking PDF version of manual ... OK
 * DONE
-Status: 2 ERRORs, 2 WARNINGs
+Status: 2 ERRORs, 1 WARNING
