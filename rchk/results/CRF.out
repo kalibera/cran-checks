@@ -1,5 +1,5 @@
-Package CRF version 0.4-0
-Package built using 75862/R 3.6.0; x86_64-pc-linux-gnu; 2018-12-18 17:16:23 UTC; unix   
+Package CRF version 0.4-1
+Package built using 75912/R 3.6.0; x86_64-pc-linux-gnu; 2018-12-27 16:13:00 UTC; unix   
 Checked with rchk version 54f92ed9296375adfeb61f73ea1b5819e3bb281b
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
@@ -22,62 +22,41 @@ Function CRF::Init_Samples(int)
   [PB] has possible protection stack imbalance CRF/src/CRF.cpp:198
 
 Function CRF::Set_Data(SEXPREC*)
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/CRF.cpp:95
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/CRF.cpp:96
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/CRF.cpp:97
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/CRF.cpp:98
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/CRF.cpp:99
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/CRF.cpp:106
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/CRF.cpp:107
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/CRF.cpp:108
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/CRF.cpp:121
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/CRF.cpp:122
   [PB] has possible protection stack imbalance CRF/src/CRF.cpp:134
 
 Function CRF::Set_Samples(SEXPREC*)
   [PB] has possible protection stack imbalance CRF/src/CRF.cpp:211
 
-Function CRF::Update_Pot()
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:151
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:154
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:164
-
-Function CRF::Update_Pot(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:19
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:22
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:37
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:39
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:66
-
 Function CRF_NLL
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:376
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:377
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:378
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:390
-  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:491
-  [UP] unprotected variable _edgeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:529
-  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:529
-  [UP] unprotected variable _edgeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:564
-  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:564
+  [UP] allocating function CRF::Update_Pot(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*) may destroy its unprotected argument (_edgeFeaN <arg 3>), which is later used. CRF/src/Train.cpp:434
+  [UP] allocating function CRF::Update_Pot(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*) may destroy its unprotected argument (_nodeFeaN <arg 2>), which is later used. CRF/src/Train.cpp:434
+  [UP] calling allocating function CRF::Update_Pot(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*) with a fresh pointer (_edgeFeaN <arg 3>) CRF/src/Train.cpp:434
+  [UP] calling allocating function CRF::Update_Pot(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*) with a fresh pointer (_nodeFeaN <arg 2>) CRF/src/Train.cpp:434
+  [UP] unprotected variable _edgeFeaN while calling allocating function Rf_eval CRF/src/Train.cpp:440
+  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_eval CRF/src/Train.cpp:440
+  [UP] unprotected variable _edgeFeaN while calling allocating function GetListElement(SEXPREC*, char const*) CRF/src/Train.cpp:443
+  [UP] unprotected variable _edgeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:443
+  [UP] unprotected variable _nodeFeaN while calling allocating function GetListElement(SEXPREC*, char const*) CRF/src/Train.cpp:443
+  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:443
+  [UP] unprotected variable _edgeFeaN while calling allocating function GetListElement(SEXPREC*, char const*) CRF/src/Train.cpp:447
+  [UP] unprotected variable _nodeFeaN while calling allocating function GetListElement(SEXPREC*, char const*) CRF/src/Train.cpp:447
+  [UP] unprotected variable _edgeFeaN while calling allocating function R_alloc CRF/src/Train.cpp:448
+  [UP] unprotected variable _nodeFeaN while calling allocating function R_alloc CRF/src/Train.cpp:448
+  [UP] unprotected variable _edgeFeaN while calling allocating function Rf_allocVector CRF/src/Train.cpp:450
+  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_allocVector CRF/src/Train.cpp:450
+  [UP] unprotected variable _edgeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:453
+  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:453
+  [UP] unprotected variable _edgeFeaN while calling allocating function GetListElement(SEXPREC*, char const*) CRF/src/Train.cpp:457
+  [UP] unprotected variable _edgeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:457
+  [UP] unprotected variable _nodeFeaN while calling allocating function GetListElement(SEXPREC*, char const*) CRF/src/Train.cpp:457
+  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:457
+  [UP] unprotected variable _edgeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:461
+  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:494
+  [UP] unprotected variable _edgeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:532
+  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:532
+  [UP] unprotected variable _edgeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:567
+  [UP] unprotected variable _nodeFeaN while calling allocating function Rf_coerceVector CRF/src/Train.cpp:567
+  [PB] has possible protection stack imbalance CRF/src/Train.cpp:595
 
 Function CRFclamped::CRFclamped(SEXPREC*)
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Clamp.cpp:16
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Clamp.cpp:17
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Clamp.cpp:18
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Clamp.cpp:19
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Clamp.cpp:25
   [PB] has possible protection stack imbalance CRF/src/Clamp.cpp:29
-
-Function MRF_NLL
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:294
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:303
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:328
-
-Function MRF_Stat
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:239
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Train.cpp:245
-
-Function Make_AdjInfo
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Make_AdjInfo.cpp:8
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Make_AdjInfo.cpp:9
-  [UP] calling allocating function Rf_coerceVector with argument allocated using GetVar(SEXPREC*, char const*) CRF/src/Make_AdjInfo.cpp:10
