@@ -1,8 +1,21 @@
-Package purrr version 0.2.5
-Package built using 75992/R 3.6.0; x86_64-pc-linux-gnu; 2019-01-16 14:39:11 UTC; unix   
+Package purrr version 0.3.0
+Package built using 76018/R 3.6.0; x86_64-pc-linux-gnu; 2019-01-27 21:09:05 UTC; unix   
 Checked with rchk version c132302c5d39a55c436a06df73e539a1bace7486
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
-Function find_offset
-  [UP] unprotected variable names while calling allocating function Rf_translateCharUTF8 purrr/src/extract.c:47
-  [UP] unprotected variable names while calling allocating function Rf_translateCharUTF8 purrr/src/extract.c:55
+Function friendly_typeof
+  [PB] has possible protection stack imbalance purrr/src/utils.c:24
+
+Function map_impl
+  [UP] unprotected variable x_val while calling allocating function Rf_allocVector purrr/src/map.c:74
+  [UP] calling allocating function copy_names with a fresh pointer (x_val <arg 1>) purrr/src/map.c:75
+  [UP] unprotected variable x_val while calling allocating function Rf_lang3(S:[[,?,S:i) purrr/src/map.c:83
+  [UP] unprotected variable x_val while calling allocating function Rf_lang3(?,?,S:...) purrr/src/map.c:84
+  [UP] unprotected variable x_val while calling allocating function call_loop purrr/src/map.c:86
+  [UP] calling allocating function copy_names with a fresh pointer (x_val <arg 1>) purrr/src/map.c:87
+
+Function pluck_impl
+  [UP] calling allocating function extract_vector with a fresh pointer (x <arg 1>) purrr/src/pluck.c:216
+  [UP] calling allocating function extract_vector with a fresh pointer (x <arg 1>) purrr/src/pluck.c:235
+  [UP] calling allocating function extract_env with a fresh pointer (x <arg 1>) purrr/src/pluck.c:238
+  [UP] calling allocating function extract_s4 with a fresh pointer (x <arg 1>) purrr/src/pluck.c:241
