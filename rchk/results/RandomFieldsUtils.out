@@ -1,10 +1,22 @@
-Package RandomFieldsUtils version 0.3.25
-Package built using 76078/R 3.6.0; x86_64-pc-linux-gnu; 2019-02-10 09:20:18 UTC; unix   
+Package RandomFieldsUtils version 0.5
+Package built using 76083/R 3.6.0; x86_64-pc-linux-gnu; 2019-02-11 07:39:37 UTC; unix   
 Checked with rchk version c132302c5d39a55c436a06df73e539a1bace7486
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
+Function Chol
+  [UP] unprotected variable Ans while calling allocating function Rf_allocVector RandomFieldsUtils/src/solve.cc:1789
+  [UP] unprotected variable Ans while calling allocating function Rf_install RandomFieldsUtils/src/solve.cc:1791
+  [UP] unprotected variable Ans while calling allocating function Rf_allocVector RandomFieldsUtils/src/solve.cc:1793
+  [UP] unprotected variable Ans while calling allocating function Rf_install RandomFieldsUtils/src/solve.cc:1795
+  [UP] unprotected variable Ans while calling allocating function Rf_allocVector RandomFieldsUtils/src/solve.cc:1797
+  [UP] unprotected variable Ans while calling allocating function Rf_install RandomFieldsUtils/src/solve.cc:1799
+
 Function RFoptions
-  [UP] unprotected variable names while calling allocating function Rf_getAttrib(?,S:names) RandomFieldsUtils/src/RFoptions.cc:267
-  [UP] unprotected variable names while calling allocating function setparameter(SEXPREC*, char*, char*, bool) RandomFieldsUtils/src/RFoptions.cc:278
-  [UP] unprotected variable subnames while calling allocating function setparameter(SEXPREC*, char*, char*, bool) RandomFieldsUtils/src/RFoptions.cc:278
-  [UP] unprotected variable names while calling allocating function splitAndSet(SEXPREC*, char*, bool) RandomFieldsUtils/src/RFoptions.cc:282
+  [UP] unprotected variable names while calling allocating function Rf_getAttrib(?,S:names) RandomFieldsUtils/src/RFoptions.cc:337
+  [UP] unprotected variable names while calling allocating function setparameter(SEXPREC*, char*, char*, bool, getlist_type*, int) RandomFieldsUtils/src/RFoptions.cc:349
+  [UP] unprotected variable subnames while calling allocating function setparameter(SEXPREC*, char*, char*, bool, getlist_type*, int) RandomFieldsUtils/src/RFoptions.cc:349
+  [UP] unprotected variable names while calling allocating function splitAndSet(SEXPREC*, char*, bool, getlist_type*, int) RandomFieldsUtils/src/RFoptions.cc:353
+  [UP] unprotected variable ans while calling allocating function splitAndSet(SEXPREC*, char*, bool, getlist_type*, int) RandomFieldsUtils/src/RFoptions.cc:379
+
+Function getRFoptions(int, int, int)
+  [PB] has possible protection stack imbalance RandomFieldsUtils/src/RFoptions.cc:182
