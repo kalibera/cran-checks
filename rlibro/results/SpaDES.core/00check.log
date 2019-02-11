@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rlibro/check/SpaDES.core.Rcheck’
-* using R Under development (unstable) (2019-02-08 r76078)
+* using R Under development (unstable) (2019-02-10 r76083)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘SpaDES.core/DESCRIPTION’ ... OK
@@ -89,8 +89,25 @@ Error in gzfile(file, mode) : cannot open the connection
 Calls: simInit ... Require -> installedVersionsQuick -> saveRDS -> gzfile
 Execution halted
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... OK
+* checking tests ... ERROR
   Running ‘test-all.R’
+Running the tests in ‘tests/test-all.R’ failed.
+Last 13 lines of output:
+  49: tryCatchList(expr, classes, parentenv, handlers)
+  50: tryCatch(withCallingHandlers({    eval(code, test_env)    if (!handled && !is.null(test)) {        skip_empty()    }}, expectation = handle_expectation, skip = handle_skip, warning = handle_warning,     message = handle_message, error = handle_error), error = handle_fatal,     skip = function(e) {    })
+  51: test_code(NULL, exprs, env)
+  52: source_file(path, new.env(parent = env), chdir = TRUE, wrap = wrap)
+  53: force(code)
+  54: with_reporter(reporter = reporter, start_end_reporter = start_end_reporter,     {        lister$start_file(basename(path))        source_file(path, new.env(parent = env), chdir = TRUE,             wrap = wrap)        end_context()    })
+  55: FUN(X[[i]], ...)
+  56: lapply(paths, test_file, env = env, reporter = current_reporter,     start_end_reporter = FALSE, load_helpers = FALSE, wrap = wrap)
+  57: force(code)
+  58: with_reporter(reporter = current_reporter, results <- lapply(paths,     test_file, env = env, reporter = current_reporter, start_end_reporter = FALSE,     load_helpers = FALSE, wrap = wrap))
+  59: test_files(paths, reporter = reporter, env = env, stop_on_failure = stop_on_failure,     stop_on_warning = stop_on_warning, wrap = wrap)
+  60: test_dir(path = test_path, reporter = reporter, env = env, filter = filter,     ..., stop_on_failure = stop_on_failure, stop_on_warning = stop_on_warning,     wrap = wrap)
+  61: test_package_dir(package = package, test_path = test_path, filter = filter,     reporter = reporter, ..., stop_on_failure = stop_on_failure,     stop_on_warning = stop_on_warning, wrap = wrap)
+  62: test_check("SpaDES.core")
+  An irrecoverable exception occurred. R is aborting now ...
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
@@ -205,4 +222,4 @@ Execution halted
 
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 ERROR, 1 WARNING
+Status: 2 ERRORs, 1 WARNING
