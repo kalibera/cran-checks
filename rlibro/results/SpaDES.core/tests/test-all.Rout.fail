@@ -1,0 +1,87 @@
+
+R Under development (unstable) (2019-03-01 r76187) -- "Unsuffered Consequences"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> test_check("SpaDES.core")
+Loading required package: SpaDES.core
+Loading required package: quickPlot
+Loading required package: reproducible
+
+Attaching package: 'SpaDES.core'
+
+The following objects are masked from 'package:stats':
+
+    end, start
+
+The following object is masked from 'package:utils':
+
+    citation
+
+  Using cached copy of .inputObjects event in test module.   
+── 1. Failure: simulation runs with simInit and spades (@test-simulation.R#85)  
+mySim$npixelsburned not equal to `burnedLast`.
+10/10 mismatches (average diff: 228)
+[1] 1623 - 1725 == -102
+[2]  201 -  126 ==   75
+[3]  723 -  816 ==  -93
+[4] 2036 - 2136 == -100
+[5] 1561 - 1836 == -275
+[6]  739 -  825 ==  -86
+[7] 1836 - 1381 ==  455
+[8] 2024 - 1507 ==  517
+[9] 1798 - 1509 ==  289
+...
+
+── 2. Failure: simulation runs with simInit and spades (@test-simulation.R#86)  
+mySim$caribou$x not equivalent to `pos_x`.
+100/100 mismatches (average diff: 35.1)
+[1]  13.1 -   1.06 ==  12.0
+[2] -32.9 -  44.45 == -77.3
+[3]  27.4 -  45.88 == -18.5
+[4]  39.0 -  -1.32 ==  40.3
+[5] -29.7 -  17.86 == -47.6
+[6]  17.6 -  48.48 == -30.9
+[7] -18.1 -  10.75 == -28.9
+[8]  24.5 - -24.63 ==  49.2
+[9] -31.7 - -48.51 ==  16.8
+...
+
+── 3. Failure: simulation runs with simInit and spades (@test-simulation.R#87)  
+mySim$caribou$y not equivalent to `pos_y`.
+100/100 mismatches (average diff: 33.6)
+[1] -46.58 - -15.90 == -30.68
+[2]  38.24 -  -8.97 ==  47.21
+[3]  20.03 -  25.27 ==  -5.24
+[4] -21.46 - -39.07 ==  17.61
+[5]  -9.51 - -32.96 ==  23.45
+[6]  14.44 -  19.59 ==  -5.15
+[7]  44.91 -  14.87 ==  30.05
+[8]  11.27 -  38.26 == -26.99
+[9]  24.07 -  -8.17 ==  32.23
+...
+
+  Using cached copy of .inputObjects event in child6 module.   
+  Using memoised copy of .inputObjects event in child6 module
+  Using memoised copy of .inputObjects event in child6 module
+══ testthat results  ═══════════════════════════════════════════════════════════
+OK: 451 SKIPPED: 33 FAILED: 3
+1. Failure: simulation runs with simInit and spades (@test-simulation.R#85) 
+2. Failure: simulation runs with simInit and spades (@test-simulation.R#86) 
+3. Failure: simulation runs with simInit and spades (@test-simulation.R#87) 
+
+Error: testthat unit tests failed
+Execution halted
