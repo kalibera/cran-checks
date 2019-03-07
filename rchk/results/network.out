@@ -1,27 +1,30 @@
-Package network version 1.13.0.1
-Package built using 76078/R 3.6.0; x86_64-pc-linux-gnu; 2019-02-10 09:19:03 UTC; unix   
+Package network version 1.14-377
+Package built using 76205/R 3.6.0; x86_64-pc-linux-gnu; 2019-03-07 00:20:25 UTC; unix   
 Checked with rchk version c132302c5d39a55c436a06df73e539a1bace7486
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
-Suspicious call (two or more unprotected arguments) to vecUnion at getEdges network/src/access.c:210
-Suspicious call (two or more unprotected arguments) to vecAppend at getEdges network/src/access.c:227
-
-Function copyEdges_R
-  [UP] unprotected variable y while calling allocating function getListElement network/src/constructors.c:43
-  [UP] unprotected variable y while calling allocating function Rf_duplicate network/src/constructors.c:44
-  [UP] calling allocating function setListElement with a fresh pointer (y <arg 1>) network/src/constructors.c:45
-  [UP] unprotected variable y while calling allocating function getListElement network/src/constructors.c:46
-  [UP] unprotected variable y while calling allocating function Rf_duplicate network/src/constructors.c:47
-  [UP] calling allocating function setListElement with a fresh pointer (y <arg 1>) network/src/constructors.c:48
-
-Function deleteListElement
-  [UP] unprotected variable names while calling allocating function Rf_allocVector network/src/utils.c:42
-  [UP] unprotected variable names while calling allocating function Rf_allocVector network/src/utils.c:43
-  [UP] unprotected variable names while calling allocating function Rf_mkChar network/src/utils.c:50
-  [UP] unprotected variable names while calling allocating function Rf_mkChar network/src/utils.c:57
-
 Function deleteVertices_R
-  [UP] unprotected variable x while calling allocating function Rf_allocVector network/src/access.c:1282
-  [UP] allocating function networkSize may destroy its unprotected argument (x <arg 1>), which is later used. network/src/access.c:1283
-  [UP] calling allocating function networkSize with a fresh pointer (x <arg 1>) network/src/access.c:1283
-  [UP] calling allo
+  [UP] allocating function getListElement may destroy its unprotected argument (x <arg 1>), which is later used. network/src/access.c:1292
+  [UP] calling allocating function getListElement with a fresh pointer (x <arg 1>) network/src/access.c:1292
+  [UP] unprotected variable x while calling allocating function contractList network/src/access.c:1292
+  [UP] allocating function getListElement may destroy its unprotected argument (x <arg 1>), which is later used. network/src/access.c:1293
+  [UP] calling allocating function getListElement with a fresh pointer (x <arg 1>) network/src/access.c:1293
+  [UP] unprotected variable x while calling allocating function contractList network/src/access.c:1293
+  [UP] allocating function getListElement may destroy its unprotected argument (x <arg 1>), which is later used. network/src/access.c:1294
+  [UP] calling allocating function getListElement with a fresh pointer (x <arg 1>) network/src/access.c:1294
+  [UP] unprotected variable x while calling allocating function contractList network/src/access.c:1294
+  [UP] calling allocating function setListElement with a fresh pointer (x <arg 1>) network/src/access.c:1295
+  [UP] calling allocating function setListElement with a fresh pointer (x <arg 1>) network/src/access.c:1296
+  [UP] calling allocating function setListElement with a fresh pointer (x <arg 1>) network/src/access.c:1297
+
+Function permuteVertexIDs
+  [UP] calling allocating function Rf_coerceVector(V,?) with argument allocated using getEdgeIDs network/src/access.c:782
+  [UP] allocating function getListElement may destroy its unprotected argument (edge <arg 1>), which is later used. network/src/access.c:807
+  [UP] calling allocating function getListElement with a fresh pointer (edge <arg 1>) network/src/access.c:807
+  [UP] unprotected variable edge while calling allocating function Rf_coerceVector network/src/access.c:808
+  [UP] calling allocating function setListElement with a fresh pointer (edge <arg 1>) network/src/access.c:817
+  [UP] calling allocating function setListElement with a fresh pointer (x <arg 1>) network/src/access.c:826
+  [UP] calling allocating function setListElement with a fresh pointer (x <arg 1>) network/src/access.c:827
+
+Function setNetworkAttribute_R
+  [UP] calling allocating function setNetworkAttribute with a fresh pointer (x <arg 1>) network/src/access.c:1652
