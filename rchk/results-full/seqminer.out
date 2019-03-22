@@ -1,0 +1,43 @@
+Package seqminer version 7.1
+Package built using 76260/R 3.6.0; x86_64-pc-linux-gnu; 2019-03-22 12:29:38 UTC; unix   
+Checked with rchk version 6d8483c5be1eff92b9772065e2744ae221981c33
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+ERROR: too many states (abstraction error?) in function sqlite3_str_vappendf
+ERROR: too many states (abstraction error?) in function sqlite3VdbeExec
+
+Function impl_readBGENToMatrixByGene
+  [PB] has negative depth /var/scratch2/tomas/cran/rchk/pkgbuild/WZIQ27On/seqminer/src/bgen2genoLoader.cpp:200
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete /var/scratch2/tomas/cran/rchk/pkgbuild/WZIQ27On/seqminer/src/bgen2genoLoader.cpp:200
+  [PB] has negative depth /var/scratch2/tomas/cran/rchk/pkgbuild/WZIQ27On/seqminer/src/bgen2genoLoader.cpp:207
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete /var/scratch2/tomas/cran/rchk/pkgbuild/WZIQ27On/seqminer/src/bgen2genoLoader.cpp:207
+  [PB] has possible protection stack imbalance /var/scratch2/tomas/cran/rchk/pkgbuild/WZIQ27On/seqminer/src/bgen2genoLoader.cpp:209
+
+Function impl_readTabixByRange
+  [UP] ignoring variable ret as it has address taken, results will be incomplete 
+
+Function impl_readTabixHeader
+  [UP] ignoring variable ret as it has address taken, results will be incomplete 
+
+Function impl_readTabixSkippedLine
+  [UP] ignoring variable ret as it has address taken, results will be incomplete 
+
+Function impl_readVCFToListByGene
+  [UP] unprotected variable <unnamed var:   %217 = alloca %struct.SEXPREC*, align 8> while calling allocating function VCFExtractor::~VCFExtractor() /var/scratch2/tomas/cran/rchk/pkgbuild/WZIQ27On/seqminer/src/vcf2genoLoader.cpp:590
+
+Function impl_readVCFToListByRange
+  [UP] unprotected variable <unnamed var:   %139 = alloca %struct.SEXPREC*, align 8> while calling allocating function VCFExtractor::~VCFExtractor() /var/scratch2/tomas/cran/rchk/pkgbuild/WZIQ27On/seqminer/src/vcf2genoLoader.cpp:515
+
+Function impl_readVCFToMatrixByGene
+  [PB] has negative depth /var/scratch2/tomas/cran/rchk/pkgbuild/WZIQ27On/seqminer/src/vcf2genoLoader.cpp:232
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete /var/scratch2/tomas/cran/rchk/pkgbuild/WZIQ27On/seqminer/src/vcf2genoLoader.cpp:232
+  [PB] has negative depth /var/scratch2/tomas/cran/rchk/pkgbuild/WZIQ27On/seqminer/src/vcf2genoLoader.cpp:243
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete /var/scratch2/tomas/cran/rchk/pkgbuild/WZIQ27On/seqminer/src/vcf2genoLoader.cpp:243
+  [PB] has possible protection stack imbalance /var/scratch2/tomas/cran/rchk/pkgbuild/WZIQ27On/seqminer/src/vcf2genoLoader.cpp:245
+
+Function impl_rvMetaReadData(SEXPREC*, SEXPREC*, OrderedMap<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > const&, int)
+  [UP] ignoring variable s as it has address taken, results will be incomplete 
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete /var/scratch2/tomas/cran/rchk/pkgbuild/WZIQ27On/seqminer/src/rvMetaLoader.cpp:1291
+Analyzed 6375 functions, traversed 106395 states.

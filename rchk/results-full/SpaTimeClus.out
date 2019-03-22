@@ -1,0 +1,46 @@
+Package SpaTimeClus version 1.0
+Package built using 76260/R 3.6.0; x86_64-pc-linux-gnu; 2019-03-22 13:20:17 UTC; unix   
+Checked with rchk version 6d8483c5be1eff92b9772065e2744ae221981c33
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator int<int>() const
+  [UP] calling allocating function int Rcpp::as<int>(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::get() const /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/api/meat/proxy.h:92
+
+Function Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::const_SlotProxy::operator double<double>() const
+  [UP] calling allocating function double Rcpp::as<double>(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::const_SlotProxy::get() const /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/proxy/SlotProxy.h:68
+
+Function Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::const_SlotProxy::operator int<int>() const
+  [UP] calling allocating function int Rcpp::as<int>(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::const_SlotProxy::get() const /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/proxy/SlotProxy.h:68
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function Rcpp::Rcpp_fast_eval(SEXPREC*, SEXPREC*) with argument allocated using Rf_lang2 /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/r_cast.h:34
+
+Function STCXEM::Output(Rcpp::S4_Impl<Rcpp::PreserveStorage>*)
+  [UP] ignoring variable <unnamed var:   %107 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %120 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %126 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %132 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %91 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %101 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %114 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function SpaTimeClus_SpaTimeClusCpp
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Analyzed 1360 functions, traversed 8297 states.

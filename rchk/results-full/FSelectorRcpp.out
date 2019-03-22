@@ -1,0 +1,74 @@
+Package FSelectorRcpp version 0.3.0
+Package built using 76260/R 3.6.0; x86_64-pc-linux-gnu; 2019-03-22 13:29:50 UTC; unix   
+Checked with rchk version 6d8483c5be1eff92b9772065e2744ae221981c33
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::AttributeProxyPolicy<Rcpp::Vector<13, Rcpp::PreserveStorage> >::AttributeProxy::operator char const*<char const*>() const
+  [UP] calling allocating function char const* Rcpp::as<char const*>(SEXPREC*) with argument allocated using Rcpp::AttributeProxyPolicy<Rcpp::Vector<13, Rcpp::PreserveStorage> >::AttributeProxy::get() const /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/api/meat/proxy.h:40
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::as_environment(SEXPREC*)
+  [UP] calling allocating function Rcpp::Rcpp_fast_eval(SEXPREC*, SEXPREC*) with argument allocated using Rf_lang2(S:as.environment,?) /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/Environment.h:36
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::get(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
+  [UP] calling allocating function Rcpp::internal::Rcpp_eval_impl(SEXPREC*, SEXPREC*) with a fresh pointer (res <arg 1>) /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/Environment.h:112
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function Rcpp::Rcpp_fast_eval(SEXPREC*, SEXPREC*) with argument allocated using Rf_lang2 /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/r_cast.h:34
+
+Function Rcpp::traits::Exporter<arma::SpMat<double> >::Exporter(SEXPREC*)
+  [UP] ignoring variable x as it has address taken, results will be incomplete 
+
+Function Rcpp::traits::Exporter<arma::SpMat<double> >::get()
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const /var/scratch2/tomas/cran/rchk/lib/RcppArmadillo/include/RcppArmadilloAs.h:114
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const /var/scratch2/tomas/cran/rchk/lib/RcppArmadillo/include/RcppArmadilloAs.h:135
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const /var/scratch2/tomas/cran/rchk/lib/RcppArmadillo/include/RcppArmadilloAs.h:156
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const /var/scratch2/tomas/cran/rchk/lib/RcppArmadillo/include/RcppArmadilloAs.h:188
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const /var/scratch2/tomas/cran/rchk/lib/RcppArmadillo/include/RcppArmadilloAs.h:198
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const /var/scratch2/tomas/cran/rchk/lib/RcppArmadillo/include/RcppArmadilloAs.h:257
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const /var/scratch2/tomas/cran/rchk/lib/RcppArmadillo/include/RcppArmadilloAs.h:315
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const /var/scratch2/tomas/cran/rchk/lib/RcppArmadillo/include/RcppArmadilloAs.h:453
+
+Function _FSelectorRcpp_cutOff_k
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _FSelectorRcpp_discretize_cpp
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _FSelectorRcpp_fs_count_levels
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _FSelectorRcpp_fs_entropy1d
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _FSelectorRcpp_fs_order
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _FSelectorRcpp_fs_table1d
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _FSelectorRcpp_fs_table_numeric2d
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _FSelectorRcpp_information_gain_cpp
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _FSelectorRcpp_sparse_information_gain_cpp
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Analyzed 3017 functions, traversed 22036 states.

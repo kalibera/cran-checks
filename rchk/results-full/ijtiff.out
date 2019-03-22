@@ -1,0 +1,47 @@
+Package ijtiff version 1.5.0
+Package built using 76260/R 3.6.0; x86_64-pc-linux-gnu; 2019-03-22 14:01:44 UTC; unix   
+Checked with rchk version 6d8483c5be1eff92b9772065e2744ae221981c33
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function Rcpp::Rcpp_fast_eval(SEXPREC*, SEXPREC*) with argument allocated using Rf_lang2 /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/r_cast.h:34
+
+Function _ijtiff_dims_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ijtiff_enlist_img_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ijtiff_float_max
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function count_directories_C
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete /var/scratch2/tomas/cran/rchk/pkgbuild/xGwuE0Ll/ijtiff/src/read.c:582
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete /var/scratch2/tomas/cran/rchk/pkgbuild/xGwuE0Ll/ijtiff/src/read.c:582
+
+Function read_tags_C
+  [UP] calling allocating function Rf_match(?,V,?) with argument allocated using Rf_ScalarInteger /var/scratch2/tomas/cran/rchk/pkgbuild/xGwuE0Ll/ijtiff/src/read.c:512
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete /var/scratch2/tomas/cran/rchk/pkgbuild/xGwuE0Ll/ijtiff/src/read.c:554
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete /var/scratch2/tomas/cran/rchk/pkgbuild/xGwuE0Ll/ijtiff/src/read.c:554
+
+Function read_tif_C
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete /var/scratch2/tomas/cran/rchk/pkgbuild/xGwuE0Ll/ijtiff/src/read.c:485
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete /var/scratch2/tomas/cran/rchk/pkgbuild/xGwuE0Ll/ijtiff/src/read.c:485
+Analyzed 279 functions, traversed 2577 states.

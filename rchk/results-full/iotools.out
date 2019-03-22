@@ -1,0 +1,66 @@
+Package iotools version 0.2-5
+Package built using 76260/R 3.6.0; x86_64-pc-linux-gnu; 2019-03-22 12:23:05 UTC; unix   
+Checked with rchk version 6d8483c5be1eff92b9772065e2744ae221981c33
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+WARNING Suspicious call (two or more unprotected arguments) to Rf_setAttrib at df_split /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/split_df.c:115
+WARNING Suspicious call (two or more unprotected arguments) to Rf_setAttrib at df_split_fw /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/split_df_fw.c:110
+
+
+Function as_output_dataframe
+  [UP] allocating function dybuf_add may destroy its unprotected argument (buf <arg 1>), which is later used. /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:381
+  [UP] allocating function dybuf_add1 may destroy its unprotected argument (buf <arg 1>), which is later used. /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:385
+  [UP] allocating function store may destroy its unprotected argument (buf <arg 1>), which is later used. /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:395
+  [UP] allocating function dybuf_add1 may destroy its unprotected argument (buf <arg 1>), which is later used. /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:397
+  [UP] allocating function store may destroy its unprotected argument (buf <arg 1>), which is later used. /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:401
+  [UP] allocating function dybuf_add1 may destroy its unprotected argument (buf <arg 1>), which is later used. /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:403
+  [UP] allocating function dybuf_add1 may destroy its unprotected argument (buf <arg 1>), which is later used. /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:405
+  [PB] has negative depth /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:408
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:408
+  [PB] has negative depth /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:409
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:409
+  [UP] calling allocating function dybuf_collect with a fresh pointer (buf <arg 1>) /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:410
+  [PB] has negative depth /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:411
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:411
+  [PB] has possible protection stack imbalance /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:412
+
+Function as_output_matrix
+  [UP] allocating function dybuf_add may destroy its unprotected argument (buf <arg 1>), which is later used. /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:274
+  [UP] allocating function dybuf_add1 may destroy its unprotected argument (buf <arg 1>), which is later used. /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:276
+  [UP] allocating function dybuf_add1 may destroy its unprotected argument (buf <arg 1>), which is later used. /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:283
+  [UP] allocating function store may destroy its unprotected argument (buf <arg 1>), which is later used. /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:284
+  [UP] allocating function dybuf_add1 may destroy its unprotected argument (buf <arg 1>), which is later used. /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:286
+  [UP] calling allocating function dybuf_collect with a fresh pointer (buf <arg 1>) /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:289
+  [PB] has negative depth /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:290
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:290
+  [PB] has possible protection stack imbalance /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:291
+
+Function as_output_vector
+  [UP] unprotected variable sRnames while calling allocating function Rf_install /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:424
+  [UP] unprotected variable sRnames while calling allocating function Rf_lang2(S:as.character,?) /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:425
+  [UP] unprotected variable sRnames while calling allocating function Rf_eval /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:426
+  [UP] unprotected variable sRnames while calling allocating function dybuf_alloc /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:447
+  [UP] allocating function dybuf_add may destroy its unprotected argument (buf <arg 1>), which is later used. /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:453
+  [UP] unprotected variable sRnames while calling allocating function dybuf_add /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:453
+  [UP] allocating function dybuf_add1 may destroy its unprotected argument (buf <arg 1>), which is later used. /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:455
+  [UP] unprotected variable sRnames while calling allocating function dybuf_add1 /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:455
+  [UP] allocating function store may destroy its unprotected argument (buf <arg 1>), which is later used. /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:457
+  [UP] unprotected variable sRnames while calling allocating function store /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:457
+  [UP] allocating function dybuf_add1 may destroy its unprotected argument (buf <arg 1>), which is later used. /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:458
+  [UP] unprotected variable sRnames while calling allocating function dybuf_add1 /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:458
+  [UP] calling allocating function dybuf_collect with a fresh pointer (buf <arg 1>) /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:460
+  [PB] has negative depth /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:461
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:461
+  [PB] has possible protection stack imbalance /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:462
+
+Function chunk_apply
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lcons /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/lnchunk.c:255
+
+Function chunk_tapply
+  [PB] has too high protection stack depth results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [PB] has possible protection stack imbalance /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/lnchunk.c:382
+
+Function dybuf_alloc
+  [PB] has possible protection stack imbalance /var/scratch2/tomas/cran/rchk/pkgbuild/uDerW4hU/iotools/src/as_output.c:43
+Analyzed 40 functions, traversed 38025 states.

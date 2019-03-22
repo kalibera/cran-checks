@@ -1,0 +1,125 @@
+Package MixAll version 1.4.2
+Package built using 76260/R 3.6.0; x86_64-pc-linux-gnu; 2019-03-22 13:10:20 UTC; unix   
+Checked with rchk version 6d8483c5be1eff92b9772065e2744ae221981c33
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator STK::RMatrix<double><STK::RMatrix<double> >() const
+  [UP] calling allocating function STK::RMatrix<double> Rcpp::as<STK::RMatrix<double> >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::get() const /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/api/meat/proxy.h:92
+
+Function Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator STK::RMatrix<int><STK::RMatrix<int> >() const
+  [UP] calling allocating function STK::RMatrix<int> Rcpp::as<STK::RMatrix<int> >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::get() const /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/api/meat/proxy.h:92
+
+Function Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator double<double>() const
+  [UP] calling allocating function double Rcpp::as<double>(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::get() const /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/api/meat/proxy.h:92
+
+Function Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator int<int>() const
+  [UP] calling allocating function int Rcpp::as<int>(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::get() const /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/api/meat/proxy.h:92
+
+Function Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> ><std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >() const
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::get() const /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/api/meat/proxy.h:92
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
+  [UP] unprotected variable names while calling allocating function Rf_allocVector /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/vector/Vector.h:684
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function Rcpp::Rcpp_fast_eval(SEXPREC*, SEXPREC*) with argument allocated using Rf_lang2 /var/scratch2/tomas/cran/rchk/lib/Rcpp/include/Rcpp/r_cast.h:34
+
+Function STK::ClusterLauncher::ClusterLauncher(Rcpp::S4_Impl<Rcpp::PreserveStorage>, Rcpp::Vector<13, Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const /var/scratch2/tomas/cran/rchk/pkgbuild/Cx705yaM/MixAll/src/ClusterLauncher.cpp:64
+
+Function STK::ClusterLauncher::ClusterLauncher(Rcpp::S4_Impl<Rcpp::PreserveStorage>, Rcpp::Vector<13, Rcpp::PreserveStorage>, Rcpp::Vector<16, Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const /var/scratch2/tomas/cran/rchk/pkgbuild/Cx705yaM/MixAll/src/ClusterLauncher.cpp:52
+
+Function STK::ClusterLauncher::run()
+  [UP] ignoring variable <unnamed var:   %81 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %84 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %87 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function STK::ClusterPredictor::run()
+  [UP] ignoring variable <unnamed var:   %93 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %96 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %99 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function STK::ClusterPredictorMixedData::run()
+  [UP] ignoring variable <unnamed var:   %106 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %109 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %112 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function STK::ILauncherBase::setCategoricalParametersToComponent(STK::IMixtureStatModel*, STK::IMixtureManager<STK::RDataHandler> const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::S4_Impl<Rcpp::PreserveStorage>)
+  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function STK::ILauncherBase::setDiagGaussianParametersToComponent(STK::IMixtureStatModel*, STK::IMixtureManager<STK::RDataHandler> const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::S4_Impl<Rcpp::PreserveStorage>)
+  [UP] ignoring variable <unnamed var:   %44 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %50 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function STK::ILauncherBase::setGammaParametersToComponent(STK::IMixtureStatModel*, STK::IMixtureManager<STK::RDataHandler> const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::S4_Impl<Rcpp::PreserveStorage>)
+  [UP] ignoring variable <unnamed var:   %44 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %50 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function STK::ILauncherBase::setKernelParametersToComponent(STK::IMixtureStatModel*, STK::KernelMixtureManager const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::S4_Impl<Rcpp::PreserveStorage>)
+  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function STK::ILauncherBase::setPoissonParametersToComponent(STK::IMixtureStatModel*, STK::IMixtureManager<STK::RDataHandler> const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::S4_Impl<Rcpp::PreserveStorage>)
+  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function STK::KmmLauncher::KmmLauncher(Rcpp::S4_Impl<Rcpp::PreserveStorage>, Rcpp::Vector<13, Rcpp::PreserveStorage> const&)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const /var/scratch2/tomas/cran/rchk/pkgbuild/Cx705yaM/MixAll/src/KmmLauncher.cpp:70
+
+Function STK::KmmLauncher::KmmLauncher(Rcpp::S4_Impl<Rcpp::PreserveStorage>, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, Rcpp::Vector<16, Rcpp::PreserveStorage> const&)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const /var/scratch2/tomas/cran/rchk/pkgbuild/Cx705yaM/MixAll/src/KmmLauncher.cpp:57
+
+Function STK::KmmLauncher::createKernel(Rcpp::S4_Impl<Rcpp::PreserveStorage>, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, STK::KernelMixtureManager&)
+  [UP] ignoring variable <unnamed var:   %145 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const /var/scratch2/tomas/cran/rchk/pkgbuild/Cx705yaM/MixAll/src/KmmLauncher.cpp:113
+  [UP] calling allocating function bool Rcpp::as<bool>(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const /var/scratch2/tomas/cran/rchk/pkgbuild/Cx705yaM/MixAll/src/KmmLauncher.cpp:115
+
+Function STK::KmmLauncher::run()
+  [UP] ignoring variable <unnamed var:   %81 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %84 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %87 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function STK::LearnLauncher::LearnLauncher(Rcpp::S4_Impl<Rcpp::PreserveStorage>, Rcpp::S4_Impl<Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const /var/scratch2/tomas/cran/rchk/pkgbuild/Cx705yaM/MixAll/src/LearnLauncher.cpp:64
+
+Function STK::LearnLauncher::LearnLauncher(Rcpp::S4_Impl<Rcpp::PreserveStorage>, Rcpp::Vector<16, Rcpp::PreserveStorage>, Rcpp::S4_Impl<Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const /var/scratch2/tomas/cran/rchk/pkgbuild/Cx705yaM/MixAll/src/LearnLauncher.cpp:50
+
+Function computeKernel(Rcpp::S4_Impl<Rcpp::PreserveStorage>, Rcpp::Vector<16, Rcpp::PreserveStorage> const&, Rcpp::Vector<14, Rcpp::PreserveStorage> const&)
+  [UP] ignoring variable <unnamed var:   %94 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %101 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %108 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %115 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %122 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %129 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function createKernel(Rcpp::S4_Impl<Rcpp::PreserveStorage>, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::Vector<14, Rcpp::PreserveStorage> const&, bool)
+  [UP] ignoring variable <unnamed var:   %77 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::Matrix<13, Rcpp::PreserveStorage> >(Rcpp::Matrix<13, Rcpp::PreserveStorage> const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::Matrix<14, Rcpp::PreserveStorage> >(Rcpp::Matrix<14, Rcpp::PreserveStorage> const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Analyzed 8689 functions, traversed 38742 states.
