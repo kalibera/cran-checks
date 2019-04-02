@@ -1,5 +1,5 @@
-Package network version 1.14-377
-Package built using 76263/R 3.6.0; x86_64-pc-linux-gnu; 2019-03-25 17:06:37 UTC; unix   
+Package network version 1.15
+Package built using 76307/R 3.7.0; x86_64-pc-linux-gnu; 2019-04-02 15:22:09 UTC; unix   
 Checked with rchk version 6d8483c5be1eff92b9772065e2744ae221981c33
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
@@ -63,7 +63,7 @@ Function addVertices_R
   [UP] unprotected variable x while calling allocating function Rf_allocVector network/src/access.c:1048
   [UP] unprotected variable x while calling allocating function Rf_allocVector network/src/access.c:1049
   [UP] unprotected variable x while calling allocating function setListElement(V,?,V) /var/scERROR: too many states (abstraction error?) in function deleteEdges
-ratch2/tomas/cran/rchk/pkgbuild/vLbJc78Z/network/src/access.c:1051
+ratch2/tomas/cran/rchk/pkgbuild/fcB35Alu/network/src/access.c:1051
   [UP] unprotected variable x while calling allocating function getListElement network/src/access.c:1054
   [UP] unprotected variable x while calling allocating function Rf_allocVector network/src/access.c:1055
   [UP] unprotected variable x while calling allocating function setListElement(?,?,V) network/src/access.c:1057
@@ -82,19 +82,73 @@ Function deleteEdges
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete network/src/access.c:760
 
 Function deleteVertices_R
-  [UP] allocating function getListElement may destroy its unprotected argument (x <arg 1>), which is later used. network/src/access.c:1292
-  [UP] calling allocating function getListElement with a fresh pointer (x <arg 1>) network/src/access.c:1292
-  [UP] unprotected variable x while calling allocating function contractList network/src/access.c:1292
-  [UP] allocating function getListElement may destroy its unprotected argument (x <arg 1>), which is later used. network/src/access.c:1293
-  [UP] calling allocating function getListElement with a fresh pointer (x <arg 1>) network/src/access.c:1293
-  [UP] unprotected variable x while calling allocating function contractList network/src/access.c:1293
-  [UP] allocating function getListElement may destroy its unprotected argument (x <arg 1>), which is later used. network/src/access.c:1294
-  [UP] calling allocating function getListElement with a fresh pointer (x <arg 1>) network/src/access.c:1294
-  [UP] unprotected variable x while calling allocating function contractList network/src/access.c:1294
-  [UP] calling allocating function setListElement with a fresh pointer (x <arg 1>) network/src/access.c:1295
-  [UP] calling allocating function setListElement with a fresh pointer (x <arg 1>) network/src/access.c:1296
   [UP] calling allocating function setListElement with a fresh pointer (x <arg 1>) network/src/access.c:1297
+  [UP] calling allocating function setListElement with a fresh pointer (x <arg 1>) network/src/access.c:1298
 
 Function getEdgeAttribute_R
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
-  [UP] unprotected variable iNames whi
+  [UP] unprotected variable iNames while calling allocating function Rf_warning network/src/access.c:1156
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete network/src/access.c:1179
+
+Function getEdgeIDs
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete network/src/access.c:190
+
+Function getEdges
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete network/src/access.c:253
+
+Function getNeighborhood
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] calling allocating function vecAppend(V,?) with argument allocated using Rf_coerceVector network/src/access.c:271
+  [UP] calling allocating function vecAppend(V,?) with argument allocated using Rf_coerceVector network/src/access.c:276
+  [UP] allocating function getEdges may destroy its unprotected argument (x <arg 1>), which is later used. network/src/access.c:292
+  [UP] calling allocating function getEdges with a fresh pointer (x <arg 1>) network/src/access.c:292
+  [UP] calling allocating function vecAppend(V,?) with argument allocated using Rf_coerceVector network/src/access.c:294
+  [UP] unprotected variable x while calling allocating function Rf_coerceVector network/src/access.c:294
+  [UP] unprotected variable x while calling allocating function getListElement network/src/access.c:294
+  [UP] unprotected variable x while calling allocating function vecAppend(V,?) network/src/access.c:294
+  [UP] allocating function getEdges may destroy its unprotected argument (x <arg 1>), which is later used. network/src/access.c:296
+  [UP] calling allocating function getEdges with a fresh pointer (x <arg 1>) network/src/access.c:296
+  [UP] calling allocating function vecAppend(V,?) with argument allocated using Rf_coerceVector network/src/access.c:298
+  [UP] unprotected variable x while calling allocating function Rf_coerceVector network/src/access.c:298
+  [UP] unprotected variable x while calling allocating function getListElement network/src/access.c:298
+  [UP] unprotected variable x while calling allocating function vecAppend(V,?) network/src/access.c:298
+  [UP] calling allocating function setNetworkAttribute(?,?,V) with a fresh pointer (x <arg 1>) network/src/access.c:302
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete network/src/access.c:310
+
+Function isAdjacent
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete network/src/access.c:357
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete network/src/access.c:369
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete network/src/access.c:372
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete network/src/access.c:388
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete network/src/access.c:398
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete network/src/access.c:401
+
+Function permuteVertexIDs
+  [UP] calling allocating function Rf_coerceVector(V,?) with argument allocated using getEdgeIDs network/src/access.c:782
+  [UP] allocating function getListElement may destroy its unprotected argument (edge <arg 1>), which is later used. network/src/access.c:807
+  [UP] calling allocating function getListElement with a fresh pointer (edge <arg 1>) network/src/access.c:807
+  [UP] unprotected variable edge while calling allocating function Rf_coerceVector network/src/access.c:808
+  [UP] calling allocating function setListElement with a fresh pointer (edge <arg 1>) network/src/access.c:817
+  [UP] calling allocating function setListElement with a fresh pointer (x <arg 1>) network/src/access.c:826
+  [UP] calling allocating function setListElement with a fresh pointer (x <arg 1>) network/src/access.c:827
+
+Function setEdgeAttributes_R
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete network/src/access.c:1563
+
+Function setNetworkAttribute_R
+  [UP] calling allocating function setNetworkAttribute with a fresh pointer (x <arg 1>) network/src/access.c:1653
+
+Function setVertexAttributes_R
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete network/src/access.c:1714
