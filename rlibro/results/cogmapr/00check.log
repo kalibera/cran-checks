@@ -1,0 +1,77 @@
+* using log directory ‘/var/scratch2/tomas/cran/rlibro/check/cogmapr.Rcheck’
+* using R Under development (unstable) (2019-04-09 r76356)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* checking for file ‘cogmapr/DESCRIPTION’ ... OK
+* this is package ‘cogmapr’ version ‘0.9’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘cogmapr’ can be installed ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... NOTE
+Namespaces in Imports field not imported from:
+  ‘knitr’ ‘pander’
+  All declared Imports should be used.
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking examples ... ERROR
+Running examples in ‘cogmapr-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: ReportICM
+> ### Title: Create a serie of reports on Individual Cognitive Maps and
+> ###   quotes
+> ### Aliases: ReportICM
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> ReportICM(my.project)
+
+  |                                                                            
+  |                                                                      |   0%Warning in file.create(to[okay]) :
+  cannot create file 'report_icm.spin.R', reason 'Read-only file system'
+Warning in file(con, "r") :
+  cannot open file 'report_icm.spin.R': No such file or directory
+Error in file(con, "r") : cannot open the connection
+Calls: ReportICM ... <Anonymous> -> <Anonymous> -> read_utf8 -> readLines -> file
+Execution halted
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking PDF version of manual ... OK
+* DONE
+Status: 1 ERROR, 1 NOTE

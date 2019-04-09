@@ -1,0 +1,1209 @@
+
+R Under development (unstable) (2019-04-09 r76356) -- "Unsuffered Consequences"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "cogmapr"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('cogmapr')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("ConceptCentrality")
+> ### * ConceptCentrality
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ConceptCentrality
+> ### Title: Centralities of concepts
+> ### Aliases: ConceptCentrality
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> ConceptCentrality(my.project)
+# A tibble: 4 x 3
+# Groups:   num [4]
+  num   name          n
+  <chr> <fct>     <dbl>
+1 1     Concept A     9
+2 2     Concept B     6
+3 3     Concept C     5
+4 4     Concept D     4
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ConceptCentralityIndiv")
+> ### * ConceptCentralityIndiv
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ConceptCentralityIndiv
+> ### Title: Centrality of vertices by document
+> ### Aliases: ConceptCentralityIndiv
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> ConceptCentralityIndiv(my.project)
+Joining, by = c("doc_id", "name", "num")
+   doc_id      name num centrality
+1       1 Concept B   2          3
+2       1 Concept C   3          5
+3       2 Concept B   2          1
+4       2 Concept C   3          1
+5       2 Concept D   4          2
+6       3 Concept B   2          3
+7       3 Concept C   3          1
+8       3 Concept D   4          1
+9       4 Concept B   2          2
+10      4 Concept D   4          2
+11      1 Concept A   1          4
+12      2 Concept A   1          4
+13      3 Concept A   1          5
+14      4 Concept A   1          1
+15      4 Concept C   3          1
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ConceptIndegree")
+> ### * ConceptIndegree
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ConceptIndegree
+> ### Title: Indegrees of concepts
+> ### Aliases: ConceptIndegree
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> ConceptIndegree(my.project)
+# A tibble: 3 x 3
+  num   name          n
+  <chr> <fct>     <dbl>
+1 2     Concept B     5
+2 4     Concept D     4
+3 3     Concept C     3
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ConceptIndegreeIndiv")
+> ### * ConceptIndegreeIndiv
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ConceptIndegreeIndiv
+> ### Title: Indegree of vertices by document
+> ### Aliases: ConceptIndegreeIndiv
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> ConceptIndegreeIndiv(my.project)
+   doc_id      name num indegree
+1       1 Concept B   2        3
+2       1 Concept C   3        3
+3       2 Concept B   2        1
+4       2 Concept C   3        1
+5       2 Concept D   4        2
+6       3 Concept B   2        3
+7       3 Concept C   3        1
+8       3 Concept D   4        1
+9       4 Concept B   2        1
+10      4 Concept D   4        2
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ConceptIndicIndiv")
+> ### * ConceptIndicIndiv
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ConceptIndicIndiv
+> ### Title: Concept Indicators of vertices by document
+> ### Aliases: ConceptIndicIndiv
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> ConceptIndicIndiv(my.project)
+Joining, by = c("doc_id", "name", "num")
+   doc_id      name num indegree outdegree centrality
+1       1 Concept B   2        3         0          3
+2       1 Concept C   3        3         2          5
+3       2 Concept B   2        1         0          1
+4       2 Concept C   3        1         0          1
+5       2 Concept D   4        2         0          2
+6       3 Concept B   2        3         0          3
+7       3 Concept C   3        1         0          1
+8       3 Concept D   4        1         0          1
+9       4 Concept B   2        1         1          2
+10      4 Concept D   4        2         0          2
+11      1 Concept A   1        0         4          4
+12      2 Concept A   1        0         4          4
+13      3 Concept A   1        0         5          5
+14      4 Concept A   1        0         1          1
+15      4 Concept C   3        0         1          1
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ConceptIndicSummary")
+> ### * ConceptIndicSummary
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ConceptIndicSummary
+> ### Title: Summary table on concept comparisons by indicator
+> ### Aliases: ConceptIndicSummary
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> ## More documents are needed for running this function
+> ## ConceptIndicSummary(my.project, units = c("Belgium", "Québec"))
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ConceptIndicators")
+> ### * ConceptIndicators
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ConceptIndicators
+> ### Title: Concepts indicators of a Social Cognitive Map
+> ### Aliases: ConceptIndicators
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> ConceptIndicators(my.project)
+# A tibble: 4 x 7
+# Groups:   num [4]
+  num   name      centrality outdegree indegree receiver transmitter
+  <chr> <fct>          <dbl>     <dbl>    <dbl>    <dbl>       <dbl>
+1 1     Concept A          9         9        0     0           1   
+2 2     Concept B          6         1        5     0.83        0.17
+3 3     Concept C          5         2        3     0.6         0.4 
+4 4     Concept D          4         0        4     1           0   
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ConceptIndicatorsICM")
+> ### * ConceptIndicatorsICM
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ConceptIndicatorsICM
+> ### Title: Concept Indicators of vertices by document (tidy data)
+> ### Aliases: ConceptIndicatorsICM
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> ConceptIndicatorsICM(my.project)
+   num      name   indicator   n doc_id
+1    1 Concept A  centrality 2.0      1
+2    2 Concept B  centrality 2.0      1
+3    3 Concept C  centrality 2.0      1
+4    1 Concept A   outdegree 2.0      1
+5    2 Concept B   outdegree 0.0      1
+6    3 Concept C   outdegree 1.0      1
+7    1 Concept A    indegree 0.0      1
+8    2 Concept B    indegree 2.0      1
+9    3 Concept C    indegree 1.0      1
+10   1 Concept A    receiver 0.0      1
+11   2 Concept B    receiver 1.0      1
+12   3 Concept C    receiver 0.5      1
+13   1 Concept A transmitter 1.0      1
+14   2 Concept B transmitter 0.0      1
+15   3 Concept C transmitter 0.5      1
+16   1 Concept A  centrality 3.0      2
+17   2 Concept B  centrality 1.0      2
+18   3 Concept C  centrality 1.0      2
+19   4 Concept D  centrality 1.0      2
+20   1 Concept A   outdegree 3.0      2
+21   2 Concept B   outdegree 0.0      2
+22   3 Concept C   outdegree 0.0      2
+23   4 Concept D   outdegree 0.0      2
+24   1 Concept A    indegree 0.0      2
+25   2 Concept B    indegree 1.0      2
+26   3 Concept C    indegree 1.0      2
+27   4 Concept D    indegree 1.0      2
+28   1 Concept A    receiver 0.0      2
+29   2 Concept B    receiver 1.0      2
+30   3 Concept C    receiver 1.0      2
+31   4 Concept D    receiver 1.0      2
+32   1 Concept A transmitter 1.0      2
+33   2 Concept B transmitter 0.0      2
+34   3 Concept C transmitter 0.0      2
+35   4 Concept D transmitter 0.0      2
+36   1 Concept A  centrality 3.0      3
+37   2 Concept B  centrality 1.0      3
+38   3 Concept C  centrality 1.0      3
+39   4 Concept D  centrality 1.0      3
+40   1 Concept A   outdegree 3.0      3
+41   2 Concept B   outdegree 0.0      3
+42   3 Concept C   outdegree 0.0      3
+43   4 Concept D   outdegree 0.0      3
+44   1 Concept A    indegree 0.0      3
+45   2 Concept B    indegree 1.0      3
+46   3 Concept C    indegree 1.0      3
+47   4 Concept D    indegree 1.0      3
+48   1 Concept A    receiver 0.0      3
+49   2 Concept B    receiver 1.0      3
+50   3 Concept C    receiver 1.0      3
+51   4 Concept D    receiver 1.0      3
+52   1 Concept A transmitter 1.0      3
+53   2 Concept B transmitter 0.0      3
+54   3 Concept C transmitter 0.0      3
+55   4 Concept D transmitter 0.0      3
+56   2 Concept B  centrality 2.0      4
+57   4 Concept D  centrality 2.0      4
+58   1 Concept A  centrality 1.0      4
+59   3 Concept C  centrality 1.0      4
+60   2 Concept B   outdegree 1.0      4
+61   4 Concept D   outdegree 0.0      4
+62   1 Concept A   outdegree 1.0      4
+63   3 Concept C   outdegree 1.0      4
+64   2 Concept B    indegree 1.0      4
+65   4 Concept D    indegree 2.0      4
+66   1 Concept A    indegree 0.0      4
+67   3 Concept C    indegree 0.0      4
+68   2 Concept B    receiver 0.5      4
+69   4 Concept D    receiver 1.0      4
+70   1 Concept A    receiver 0.0      4
+71   3 Concept C    receiver 0.0      4
+72   2 Concept B transmitter 0.5      4
+73   4 Concept D transmitter 0.0      4
+74   1 Concept A transmitter 1.0      4
+75   3 Concept C transmitter 1.0      4
+> ConceptIndicatorsICM(my.project, 2)
+   num      name   indicator n doc_id
+1    1 Concept A  centrality 3      2
+2    2 Concept B  centrality 1      2
+3    3 Concept C  centrality 1      2
+4    4 Concept D  centrality 1      2
+5    1 Concept A   outdegree 3      2
+6    2 Concept B   outdegree 0      2
+7    3 Concept C   outdegree 0      2
+8    4 Concept D   outdegree 0      2
+9    1 Concept A    indegree 0      2
+10   2 Concept B    indegree 1      2
+11   3 Concept C    indegree 1      2
+12   4 Concept D    indegree 1      2
+13   1 Concept A    receiver 0      2
+14   2 Concept B    receiver 1      2
+15   3 Concept C    receiver 1      2
+16   4 Concept D    receiver 1      2
+17   1 Concept A transmitter 1      2
+18   2 Concept B transmitter 0      2
+19   3 Concept C transmitter 0      2
+20   4 Concept D transmitter 0      2
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ConceptOutdegree")
+> ### * ConceptOutdegree
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ConceptOutdegree
+> ### Title: Compute the outdegree of concepts
+> ### Aliases: ConceptOutdegree
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> ConceptOutdegree(my.project)
+# A tibble: 3 x 3
+  num   name          n
+  <chr> <fct>     <dbl>
+1 1     Concept A     9
+2 3     Concept C     2
+3 2     Concept B     1
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ConceptOutdegreeIndiv")
+> ### * ConceptOutdegreeIndiv
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ConceptOutdegreeIndiv
+> ### Title: Outdegree of vertices by document
+> ### Aliases: ConceptOutdegreeIndiv
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> ConceptOutdegreeIndiv(my.project)
+  doc_id      name num outdegree
+1      1 Concept A   1         4
+2      1 Concept C   3         2
+3      2 Concept A   1         4
+4      3 Concept A   1         5
+5      4 Concept A   1         1
+6      4 Concept B   2         1
+7      4 Concept C   3         1
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ConceptTest")
+> ### * ConceptTest
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ConceptTest
+> ### Title: Compare value of concepts indicators between maps
+> ### Aliases: ConceptTest
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> ## need more documents
+> ## ConceptTest(my.project, units = c("Belgium", "Québec"))
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ConceptTestSummary")
+> ### * ConceptTestSummary
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ConceptTestSummary
+> ### Title: Summary table on concept comparisons
+> ### Aliases: ConceptTestSummary
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> ## More documents are needed for running this function
+> ## ConceptTestSummary(my.project, units = c("Belgium", "Québec"), 0.6)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("EdgCMap")
+> ### * EdgCMap
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: EdgCMap
+> ### Title: Extract all edges from a Qualitative Data Analysis project
+> ### Aliases: EdgCMap
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> EdgCMap(my.project)
+   coding_id doc_id concept_from concept_to coding_sign coding_weight
+1          1      1            1          2           +             1
+2          2      1            3          2           -             3
+3          3      1            3          2           +             2
+4          4      1            1          3           +             2
+5          5      1            1          3           +             2
+6          6      1            1          3           +             2
+7          7      2            1          3           +             6
+8          8      2            1          2           +             4
+9          9      2            1          4           -             2
+10        10      2            1          4           -             7
+11        11      3            1          4           +             3
+12        12      3            1          2           -             3
+13        13      3            1          2           +             3
+14        14      3            1          3           +             5
+15        15      3            1          2           +             3
+16        16      4            1          2           +             3
+17        17      4            2          4           +             3
+18        18      4            3          4           -             6
+     coding_class document_part
+1  Coding_class_I    Doc_Part_A
+2  Coding_class_I    Doc_Part_A
+3  Coding_class_J    Doc_Part_A
+4  Coding_class_J    Doc_Part_B
+5  Coding_class_K    Doc_Part_B
+6  Coding_class_K    Doc_Part_B
+7  Coding_class_I    Doc_Part_A
+8  Coding_class_I    Doc_Part_A
+9  Coding_class_J    Doc_Part_A
+10 Coding_class_J    Doc_Part_B
+11 Coding_class_I    Doc_Part_A
+12 Coding_class_I    Doc_Part_A
+13 Coding_class_I    Doc_Part_B
+14 Coding_class_K    Doc_Part_B
+15 Coding_class_K    Doc_Part_B
+16 Coding_class_K    Doc_Part_A
+17 Coding_class_K    Doc_Part_A
+18 Coding_class_J    Doc_Part_A
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    selected_text
+1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis condimentum leo. Vestibulum non ante erat. Morbi malesuada velit nec leo luctus congue. Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus.
+2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ongue. Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus.(/QCODE){#1>2} Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget liber
+3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus.(/QCODE){#1>2} Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget liber(/QCODE){#3>2}o vitae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cursus ut massa a aliquam. Aenean id placerat nisl. Praesent faucibus malesuada aliquam. Suspendisse purus ex, pharetra hendrerit viverra sed, convallis mollis dolor. Etiam pulvinar, nulla eget
+4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         auctor faucibus, felis purus mollis velit, non dictum leo odio a nisl. Mauris quis ipsum nulla. In id sem at augue gravida gravida. Maecenas suscipit magna a fringilla dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras vestibulum lorem quam, at lobortis ante sodales at. Aenean euismod turpis vel tempor condimentum. Etiam neque augue, ultricies non scelerisque non, feugiat sed ex. Fusce ut risus nec purus sollicitudin vulputate. Suspendisse tempus consectetur nulla pulvinar dictum. Duis lacinia eleifend euismod. Maecenas et risus vel mauris ornare condimentum. Mauris sodales a leo sed malesuada. Etiam non quam ex. Integer scelerisque nisi faucibus, posuere ligula vel, dignissim turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt nisi eget blandit ornare. Pellentesque tempus at nisi id placerat. Donec blandit dignissim sem nec consequat. Sed vel pellentesque ipsum, et vulputate lorem. Morbi sed fringilla metus. Vivamus volutpat lacus nec risus placerat mattis. Ut te
+5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                sodales at. Aenean euismod turpis vel tempor condimentum. Etiam neque augue, ultricies non scelerisque non, feugiat sed ex. Fusce ut risus nec purus sollicitudin vulputate. Suspendisse tempus consectetur nulla pulvinar dictum. Duis lacinia eleifend euismod. Maecenas et risus vel mauris ornare condimentum. Mauris sodales a leo sed malesuada. Etiam non quam ex. Integer scelerisque nisi faucibus, posuere ligula vel,
+6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    a, tempor a ligula. Pellentesque a risus nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque tincidunt est id tempus sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+7                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis condimentum leo. Vestibulum non ante erat. Morbi malesuada velit nec leo luctus congue. Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus. Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget libero vitae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cur
+8                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            cilisis, libero nunc molestie risus, sed aliquet velit nisi a purus. Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget libero vitae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cur(/QCODE){#1>3}sus ut massa a aliquam. Aenean id placerat nisl. Praesent faucibus malesuada aliquam. Suspendisse purus ex, pharetra hendrerit viverra sed, convallis mollis dolor. Etiam pulvinar, nulla eget pellentesque sodales, elit felis consectetur arcu, at laoreet velit risus et sem. Praesent neque lorem, tristique non odio eget, rutrum elementum lectus. Fusce sed libero eget enim pulvinar semper eu vel libero. Quisque eu magna vel arcu iaculis suscipit. Ut porta, tortor in auctor faucibus, felis purus mollis velit, non dictum leo odi
+9                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      as vestibulum lorem quam, at lobortis ante sodales at. Aenean euismod turpis vel tempor condimentum. Etiam neque augue, ultricies non scelerisque non, feugiat sed ex. Fusce ut risus nec purus sollicitudin vulputate. Suspendisse tempus consectetur nulla pulvinar dictum. Duis lacinia eleifend euismod. Maecenas et risus vel mauris ornare condimentum. Mauris sodales a leo sed malesuada. Etiam non quam ex. Integer scelerisque nisi faucibus, posuere ligula vel, dignissim turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt nisi eget blandit ornare. Pellentesque tempus at nisi id placerat. Donec blandit dignissim sem nec consequat. Sed vel pellentesque 
+10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 tellus libero, sagittis id tempus a, tempor a ligula. Pellentesque a risus nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque tincidunt est id tempus sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis condimentum leo. Vestibulum non ante erat. Morbi malesuada velit nec leo luctus congue. Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus. Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget libero vitae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cur
+12                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus. Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. 
+13                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Praesent neque lorem, tristique non odio eget, rutrum elementum lectus. Fusce sed libero eget enim pulvinar semper eu vel libero. Quisque eu magna vel arcu iaculis suscipit. Ut porta, tortor in auctor faucibus, felis purus mollis velit, non dictum leo odio a nisl. Mauris quis ipsum nulla. In id sem at augue gravida gravida. Maecenas suscipit magna a fringilla dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+14                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      quam ex. Integer scelerisque nisi faucibus, posuere ligula vel, dignissim turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt nisi eget blandit ornare. Pellentesque tempus at nisi id placerat. Donec blandit dignissim sem nec consequat. Sed vel pellentesque ipsum, et vulputate lorem. Morbi sed fringilla metus. Vivamus volutpat lacus nec risus placerat mattis. Ut tellus libero, sagittis id tempus a, tempor a ligula. Pellentesque a risus nibh. Vestibulum ante ipsum primis in
+15                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ass aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+16                                                                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis condimentum leo. Vestibulum non ante erat. Morbi malesuada velit nec leo luctus congue. Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus. Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget libero vitae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cursus ut massa a aliquam. Aenean id placerat nisl. Praesent faucibus malesuada aliquam. Suspendisse purus ex, pharetra hendrerit viverra sed, convallis mollis dolor. Etiam pulvinar, nulla eget pellentesque sodales, elit felis consectetur arcu, at laoreet velit risus et sem. Praesent neque lorem, tristique non odio eget, rutrum elementum lectus. Fusce sed libero eget enim pulvinar semper eu vel libero. Quisque eu magna vel arcu iaculis suscipit. Ut porta, tortor in auctor faucibus, felis purus mollis velit, non dictum leo odio a nisl. Mauris quis ipsum nulla. In id sem at augue gravida gravida. Maecenas suscipit magna a fringilla dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras vestibulum lorem quam, at lobortis ante sodales at. Aenean euismod turpis vel tempor condimentum. Etiam neque augue, ultricies non scelerisque non, feugiat sed ex. Fusce ut risus nec purus sollicitudin vulputate. Su
+17 itae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cursus ut massa a aliquam. Aenean id placerat nisl. Praesent faucibus malesuada aliquam. Suspendisse purus ex, pharetra hendrerit viverra sed, convallis mollis dolor. Etiam pulvinar, nulla eget pellentesque sodales, elit felis consectetur arcu, at laoreet velit risus et sem. Praesent neque lorem, tristique non odio eget, rutrum elementum lectus. Fusce sed libero eget enim pulvinar semper eu vel libero. Quisque eu magna vel arcu iaculis suscipit. Ut porta, tortor in auctor faucibus, felis purus mollis velit, non dictum leo odio a nisl. Mauris quis ipsum nulla. In id sem at augue gravida gravida. Maecenas suscipit magna a fringilla dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras vestibulum lorem quam, at lobortis ante sodales at. Aenean euismod turpis vel tempor condimentum. Etiam neque augue, ultricies non scelerisque non, feugiat sed ex. Fusce ut risus nec purus sollicitudin vulputate. Su(/QCODE){#1>2}spendisse tempus consectetur nulla pulvinar dictum. Duis lacinia eleifend euismod. Maecenas et risus vel mauris ornare condimentum. Mauris sodales a leo sed malesuada. Etiam non quam ex. Integer scelerisque nisi faucibus, posuere ligula vel, dignissim turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt nisi eget blandit ornare. Pellentesque tempus at nisi id placerat. Donec blandit dignissim sem nec consequat. Sed vel pellentesque ipsum, et vulputate lorem. Morbi sed fringilla metus. Vivamus volutpat lacus nec risus placerat mattis. Ut tellus libero, sagittis id tempus a, tempor a ligula. Pellentesque a risus nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque tincidunt est id tempus sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+18                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           Pellentesque tempus at nisi id placerat. Donec blandit dignissim sem nec consequat. Sed vel pellentesque ipsum, et vulputate lorem. Morbi sed fringilla metus. Vivamus volutpat lacus nec risus placerat mattis. Ut tellus libero, sagittis id tempus a, tempor a ligula. Pellentesque a risus nibh. Vestibulum ante ipsum primis in
+   edge
+1   1~2
+2   3~2
+3   3~2
+4   1~3
+5   1~3
+6   1~3
+7   1~3
+8   1~2
+9   1~4
+10  1~4
+11  1~4
+12  1~2
+13  1~2
+14  1~3
+15  1~2
+16  1~2
+17  2~4
+18  3~4
+> 
+> 
+> 
+> cleanEx()
+> nameEx("EdgSocCMap")
+> ### * EdgSocCMap
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: EdgSocCMap
+> ### Title: Aggregation of the relationships identified in a serie of
+> ###   Individual Cognitie Maps
+> ### Aliases: EdgSocCMap
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> EdgSocCMap(my.project)
+  edge coding_weight from to
+1  1~2             4    1  2
+2  1~3             3    1  3
+3  1~4             2    1  4
+4  2~4             1    2  4
+5  3~2             1    3  2
+6  3~4             1    3  4
+> EdgSocCMap(my.project)
+  edge coding_weight from to
+1  1~2             4    1  2
+2  1~3             3    1  3
+3  1~4             2    1  4
+4  2~4             1    2  4
+5  3~2             1    3  2
+6  3~4             1    3  4
+> EdgSocCMap(my.project, min.weight=3)
+  edge coding_weight from to
+1  1~2             4    1  2
+2  1~3             3    1  3
+> EdgSocCMap(my.project, min.weight=6, weighted.icm=TRUE)
+  edge coding_weight from to
+1  1~2            17    1  2
+2  1~3            17    1  3
+3  1~4            12    1  4
+4  3~4             6    3  4
+> 
+> 
+> 
+> cleanEx()
+> nameEx("GraphIndicators")
+> ### * GraphIndicators
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: GraphIndicators
+> ### Title: Graph indicators of a social cognitive map
+> ### Aliases: GraphIndicators
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> GraphIndicators(my.project)
+  dimension n_transmitter n_receiver n_ordinary connections density
+1         4             1          1          2           6     0.5
+  complexity_a complexity_b hierarchy
+1            1            3       4.7
+> GraphIndicators(my.project, units = "Belgium")
+  dimension n_transmitter n_receiver n_ordinary connections density
+1         4             1          1          2           6     0.5
+  complexity_a complexity_b hierarchy
+1            1            2       2.5
+> GraphIndicators(my.project, units = "Québec")
+  dimension n_transmitter n_receiver n_ordinary connections   density
+1         4             1          1          2           5 0.4166667
+  complexity_a complexity_b hierarchy
+1            1            2       1.1
+> 
+> 
+> 
+> cleanEx()
+> nameEx("GraphIndicatorsICM")
+> ### * GraphIndicatorsICM
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: GraphIndicatorsICM
+> ### Title: Graph Indicators of vertices by document (tidy data)
+> ### Aliases: GraphIndicatorsICM
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> GraphIndicatorsICM(my.project)
+       indicator    n doc_id
+1      dimension 3.00      1
+2  n_transmitter 1.00      1
+3     n_receiver 1.00      1
+4     n_ordinary 1.00      1
+5    connections 3.00      1
+6        density 0.50      1
+7   complexity_a 1.00      1
+8   complexity_b 1.00      1
+9      hierarchy 0.78      1
+10     dimension 4.00      2
+11 n_transmitter 1.00      2
+12    n_receiver 3.00      2
+13    n_ordinary 0.00      2
+14   connections 3.00      2
+15       density 0.25      2
+16  complexity_a 3.00      2
+17  complexity_b 3.00      2
+18     hierarchy 0.34      2
+19     dimension 4.00      3
+20 n_transmitter 1.00      3
+21    n_receiver 3.00      3
+22    n_ordinary 0.00      3
+23   connections 3.00      3
+24       density 0.25      3
+25  complexity_a 3.00      3
+26  complexity_b 3.00      3
+27     hierarchy 0.34      3
+28     dimension 4.00      4
+29 n_transmitter 2.00      4
+30    n_receiver 1.00      4
+31    n_ordinary 1.00      4
+32   connections 3.00      4
+33       density 0.25      4
+34  complexity_a 0.50      4
+35  complexity_b 0.50      4
+36     hierarchy 0.26      4
+> GraphIndicatorsICM(my.project, 2)
+      indicator    n doc_id
+1     dimension 4.00      2
+2 n_transmitter 1.00      2
+3    n_receiver 3.00      2
+4    n_ordinary 0.00      2
+5   connections 3.00      2
+6       density 0.25      2
+7  complexity_a 3.00      2
+8  complexity_b 3.00      2
+9     hierarchy 0.34      2
+> 
+> 
+> 
+> cleanEx()
+> nameEx("GraphIndicatorsTable")
+> ### * GraphIndicatorsTable
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: GraphIndicatorsTable
+> ### Title: Table of graph indicators of a social cognitive map
+> ### Aliases: GraphIndicatorsTable
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> df.graph.indic <- GraphIndicators(my.project)
+> GraphIndicatorsTable(df.graph.indic)
+                          indicator value
+1                         Dimension   4.0
+2 Number of transmitter variable(s)   1.0
+3    Number of receiver variable(s)   1.0
+4    Number of ordinary variable(s)   2.0
+5           Number of connection(s)   6.0
+6                           Density   0.5
+7                      Complexity a   1.0
+8                      Complexity b   3.0
+9                         Hierarchy   4.7
+> 
+> 
+> 
+> cleanEx()
+> nameEx("IndCMap")
+> ### * IndCMap
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: IndCMap
+> ### Title: Individual Cognitive Mapping
+> ### Aliases: IndCMap
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> IndCMap(my.project, 1)
+$agent
+name 
+   1 
+
+$vertex
+$vertex$num
+[1] 1 2 3
+
+$vertex$numname
+[1] "1  -  Concept A" "2  -  Concept B" "3  -  Concept C"
+
+$vertex$name
+[1] "Concept A" "Concept B" "Concept C"
+
+$vertex$label
+  Concept A   Concept B   Concept C 
+"Concept A" "Concept B" "Concept C" 
+
+
+$graph
+A graphNEL graph with directed edges
+Number of Nodes = 3 
+Number of Edges = 3 
+
+$edg
+$edg$name
+[1] "Concept A~Concept B" "Concept A~Concept C" "Concept C~Concept B"
+
+
+$eAttrs
+$eAttrs$arrowhead
+[1] "open"
+
+$eAttrs$arrowtail
+[1] "none"
+
+
+$nAttrs
+$nAttrs$label
+  Concept A   Concept B   Concept C 
+"Concept A" "Concept B" "Concept C" 
+
+
+$gAttrs
+$gAttrs$graph
+$gAttrs$graph$overlap
+[1] FALSE
+
+$gAttrs$graph$splines
+[1] TRUE
+
+$gAttrs$graph$rankdir
+[1] "TB"
+
+$gAttrs$graph$sep
+[1] 0.2
+
+$gAttrs$graph$ratio
+[1] "fill"
+
+
+$gAttrs$node
+$gAttrs$node$fixedsize
+[1] FALSE
+
+$gAttrs$node$shape
+[1] "box"
+
+
+$gAttrs$edge
+$gAttrs$edge$minlen
+[1] 1
+
+$gAttrs$edge$lwd
+[1] 1
+
+
+
+attr(,"class")
+[1] "IndCMap"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ProjectCMap")
+> ### * ProjectCMap
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ProjectCMap
+> ### Title: Import a Qualitatve Data Analysis project
+> ### Aliases: ProjectCMap
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("QuotesCMap")
+> ### * QuotesCMap
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: QuotesCMap
+> ### Title: Extract all quotes of a QDA project
+> ### Aliases: QuotesCMap
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> QuotesCMap(my.project)
+   coding_id doc_id concept_from concept_to coding_sign coding_weight
+1          1      1            1          2           +             1
+2          8      2            1          2           +             4
+3         12      3            1          2           -             3
+4         13      3            1          2           +             3
+5         15      3            1          2           +             3
+6         16      4            1          2           +             3
+7          4      1            1          3           +             2
+8          5      1            1          3           +             2
+9          6      1            1          3           +             2
+10         7      2            1          3           +             6
+11        14      3            1          3           +             5
+12         9      2            1          4           -             2
+13        10      2            1          4           -             7
+14        11      3            1          4           +             3
+15        17      4            2          4           +             3
+16         2      1            3          2           -             3
+17         3      1            3          2           +             2
+18        18      4            3          4           -             6
+     coding_class document_part
+1  Coding_class_I    Doc_Part_A
+2  Coding_class_I    Doc_Part_A
+3  Coding_class_I    Doc_Part_A
+4  Coding_class_I    Doc_Part_B
+5  Coding_class_K    Doc_Part_B
+6  Coding_class_K    Doc_Part_A
+7  Coding_class_J    Doc_Part_B
+8  Coding_class_K    Doc_Part_B
+9  Coding_class_K    Doc_Part_B
+10 Coding_class_I    Doc_Part_A
+11 Coding_class_K    Doc_Part_B
+12 Coding_class_J    Doc_Part_A
+13 Coding_class_J    Doc_Part_B
+14 Coding_class_I    Doc_Part_A
+15 Coding_class_K    Doc_Part_A
+16 Coding_class_I    Doc_Part_A
+17 Coding_class_J    Doc_Part_A
+18 Coding_class_J    Doc_Part_A
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    selected_text
+1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis condimentum leo. Vestibulum non ante erat. Morbi malesuada velit nec leo luctus congue. Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus.
+2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            cilisis, libero nunc molestie risus, sed aliquet velit nisi a purus. Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget libero vitae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cur(/QCODE){#1>3}sus ut massa a aliquam. Aenean id placerat nisl. Praesent faucibus malesuada aliquam. Suspendisse purus ex, pharetra hendrerit viverra sed, convallis mollis dolor. Etiam pulvinar, nulla eget pellentesque sodales, elit felis consectetur arcu, at laoreet velit risus et sem. Praesent neque lorem, tristique non odio eget, rutrum elementum lectus. Fusce sed libero eget enim pulvinar semper eu vel libero. Quisque eu magna vel arcu iaculis suscipit. Ut porta, tortor in auctor faucibus, felis purus mollis velit, non dictum leo odi
+3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus. Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. 
+4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Praesent neque lorem, tristique non odio eget, rutrum elementum lectus. Fusce sed libero eget enim pulvinar semper eu vel libero. Quisque eu magna vel arcu iaculis suscipit. Ut porta, tortor in auctor faucibus, felis purus mollis velit, non dictum leo odio a nisl. Mauris quis ipsum nulla. In id sem at augue gravida gravida. Maecenas suscipit magna a fringilla dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ass aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+6                                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis condimentum leo. Vestibulum non ante erat. Morbi malesuada velit nec leo luctus congue. Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus. Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget libero vitae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cursus ut massa a aliquam. Aenean id placerat nisl. Praesent faucibus malesuada aliquam. Suspendisse purus ex, pharetra hendrerit viverra sed, convallis mollis dolor. Etiam pulvinar, nulla eget pellentesque sodales, elit felis consectetur arcu, at laoreet velit risus et sem. Praesent neque lorem, tristique non odio eget, rutrum elementum lectus. Fusce sed libero eget enim pulvinar semper eu vel libero. Quisque eu magna vel arcu iaculis suscipit. Ut porta, tortor in auctor faucibus, felis purus mollis velit, non dictum leo odio a nisl. Mauris quis ipsum nulla. In id sem at augue gravida gravida. Maecenas suscipit magna a fringilla dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras vestibulum lorem quam, at lobortis ante sodales at. Aenean euismod turpis vel tempor condimentum. Etiam neque augue, ultricies non scelerisque non, feugiat sed ex. Fusce ut risus nec purus sollicitudin vulputate. Su
+7                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         auctor faucibus, felis purus mollis velit, non dictum leo odio a nisl. Mauris quis ipsum nulla. In id sem at augue gravida gravida. Maecenas suscipit magna a fringilla dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras vestibulum lorem quam, at lobortis ante sodales at. Aenean euismod turpis vel tempor condimentum. Etiam neque augue, ultricies non scelerisque non, feugiat sed ex. Fusce ut risus nec purus sollicitudin vulputate. Suspendisse tempus consectetur nulla pulvinar dictum. Duis lacinia eleifend euismod. Maecenas et risus vel mauris ornare condimentum. Mauris sodales a leo sed malesuada. Etiam non quam ex. Integer scelerisque nisi faucibus, posuere ligula vel, dignissim turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt nisi eget blandit ornare. Pellentesque tempus at nisi id placerat. Donec blandit dignissim sem nec consequat. Sed vel pellentesque ipsum, et vulputate lorem. Morbi sed fringilla metus. Vivamus volutpat lacus nec risus placerat mattis. Ut te
+8                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                sodales at. Aenean euismod turpis vel tempor condimentum. Etiam neque augue, ultricies non scelerisque non, feugiat sed ex. Fusce ut risus nec purus sollicitudin vulputate. Suspendisse tempus consectetur nulla pulvinar dictum. Duis lacinia eleifend euismod. Maecenas et risus vel mauris ornare condimentum. Mauris sodales a leo sed malesuada. Etiam non quam ex. Integer scelerisque nisi faucibus, posuere ligula vel,
+9                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    a, tempor a ligula. Pellentesque a risus nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque tincidunt est id tempus sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis condimentum leo. Vestibulum non ante erat. Morbi malesuada velit nec leo luctus congue. Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus. Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget libero vitae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cur
+11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      quam ex. Integer scelerisque nisi faucibus, posuere ligula vel, dignissim turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt nisi eget blandit ornare. Pellentesque tempus at nisi id placerat. Donec blandit dignissim sem nec consequat. Sed vel pellentesque ipsum, et vulputate lorem. Morbi sed fringilla metus. Vivamus volutpat lacus nec risus placerat mattis. Ut tellus libero, sagittis id tempus a, tempor a ligula. Pellentesque a risus nibh. Vestibulum ante ipsum primis in
+12                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     as vestibulum lorem quam, at lobortis ante sodales at. Aenean euismod turpis vel tempor condimentum. Etiam neque augue, ultricies non scelerisque non, feugiat sed ex. Fusce ut risus nec purus sollicitudin vulputate. Suspendisse tempus consectetur nulla pulvinar dictum. Duis lacinia eleifend euismod. Maecenas et risus vel mauris ornare condimentum. Mauris sodales a leo sed malesuada. Etiam non quam ex. Integer scelerisque nisi faucibus, posuere ligula vel, dignissim turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt nisi eget blandit ornare. Pellentesque tempus at nisi id placerat. Donec blandit dignissim sem nec consequat. Sed vel pellentesque 
+13                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 tellus libero, sagittis id tempus a, tempor a ligula. Pellentesque a risus nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque tincidunt est id tempus sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+14                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis condimentum leo. Vestibulum non ante erat. Morbi malesuada velit nec leo luctus congue. Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus. Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget libero vitae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cur
+15 itae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cursus ut massa a aliquam. Aenean id placerat nisl. Praesent faucibus malesuada aliquam. Suspendisse purus ex, pharetra hendrerit viverra sed, convallis mollis dolor. Etiam pulvinar, nulla eget pellentesque sodales, elit felis consectetur arcu, at laoreet velit risus et sem. Praesent neque lorem, tristique non odio eget, rutrum elementum lectus. Fusce sed libero eget enim pulvinar semper eu vel libero. Quisque eu magna vel arcu iaculis suscipit. Ut porta, tortor in auctor faucibus, felis purus mollis velit, non dictum leo odio a nisl. Mauris quis ipsum nulla. In id sem at augue gravida gravida. Maecenas suscipit magna a fringilla dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras vestibulum lorem quam, at lobortis ante sodales at. Aenean euismod turpis vel tempor condimentum. Etiam neque augue, ultricies non scelerisque non, feugiat sed ex. Fusce ut risus nec purus sollicitudin vulputate. Su(/QCODE){#1>2}spendisse tempus consectetur nulla pulvinar dictum. Duis lacinia eleifend euismod. Maecenas et risus vel mauris ornare condimentum. Mauris sodales a leo sed malesuada. Etiam non quam ex. Integer scelerisque nisi faucibus, posuere ligula vel, dignissim turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt nisi eget blandit ornare. Pellentesque tempus at nisi id placerat. Donec blandit dignissim sem nec consequat. Sed vel pellentesque ipsum, et vulputate lorem. Morbi sed fringilla metus. Vivamus volutpat lacus nec risus placerat mattis. Ut tellus libero, sagittis id tempus a, tempor a ligula. Pellentesque a risus nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque tincidunt est id tempus sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+16                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ongue. Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus.(/QCODE){#1>2} Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget liber
+17                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus.(/QCODE){#1>2} Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget liber(/QCODE){#3>2}o vitae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cursus ut massa a aliquam. Aenean id placerat nisl. Praesent faucibus malesuada aliquam. Suspendisse purus ex, pharetra hendrerit viverra sed, convallis mollis dolor. Etiam pulvinar, nulla eget
+18                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           Pellentesque tempus at nisi id placerat. Donec blandit dignissim sem nec consequat. Sed vel pellentesque ipsum, et vulputate lorem. Morbi sed fringilla metus. Vivamus volutpat lacus nec risus placerat mattis. Ut tellus libero, sagittis id tempus a, tempor a ligula. Pellentesque a risus nibh. Vestibulum ante ipsum primis in
+   edge concept_from_name concept_to_name
+1   1~2         Concept A       Concept B
+2   1~2         Concept A       Concept B
+3   1~2         Concept A       Concept B
+4   1~2         Concept A       Concept B
+5   1~2         Concept A       Concept B
+6   1~2         Concept A       Concept B
+7   1~3         Concept A       Concept C
+8   1~3         Concept A       Concept C
+9   1~3         Concept A       Concept C
+10  1~3         Concept A       Concept C
+11  1~3         Concept A       Concept C
+12  1~4         Concept A       Concept D
+13  1~4         Concept A       Concept D
+14  1~4         Concept A       Concept D
+15  2~4         Concept B       Concept D
+16  3~2         Concept C       Concept B
+17  3~2         Concept C       Concept B
+18  3~4         Concept C       Concept D
+> 
+> 
+> 
+> cleanEx()
+> nameEx("QuotesIndCMap")
+> ### * QuotesIndCMap
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: QuotesIndCMap
+> ### Title: Extract all quotes of a document (or an Individual Cognitivce
+> ###   Map)
+> ### Aliases: QuotesIndCMap
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> QuotesIndCMap(my.project, 2)
+  coding_id doc_id concept_from concept_to coding_sign coding_weight
+1         8      2            1          2           +             4
+2         7      2            1          3           +             6
+3         9      2            1          4           -             2
+4        10      2            1          4           -             7
+    coding_class document_part
+1 Coding_class_I    Doc_Part_A
+2 Coding_class_I    Doc_Part_A
+3 Coding_class_J    Doc_Part_A
+4 Coding_class_J    Doc_Part_B
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         selected_text
+1 cilisis, libero nunc molestie risus, sed aliquet velit nisi a purus. Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget libero vitae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cur(/QCODE){#1>3}sus ut massa a aliquam. Aenean id placerat nisl. Praesent faucibus malesuada aliquam. Suspendisse purus ex, pharetra hendrerit viverra sed, convallis mollis dolor. Etiam pulvinar, nulla eget pellentesque sodales, elit felis consectetur arcu, at laoreet velit risus et sem. Praesent neque lorem, tristique non odio eget, rutrum elementum lectus. Fusce sed libero eget enim pulvinar semper eu vel libero. Quisque eu magna vel arcu iaculis suscipit. Ut porta, tortor in auctor faucibus, felis purus mollis velit, non dictum leo odi
+2                                                                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis condimentum leo. Vestibulum non ante erat. Morbi malesuada velit nec leo luctus congue. Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus. Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget libero vitae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cur
+3                                                                                                                                                                                                                                                                                                                                                                                                           as vestibulum lorem quam, at lobortis ante sodales at. Aenean euismod turpis vel tempor condimentum. Etiam neque augue, ultricies non scelerisque non, feugiat sed ex. Fusce ut risus nec purus sollicitudin vulputate. Suspendisse tempus consectetur nulla pulvinar dictum. Duis lacinia eleifend euismod. Maecenas et risus vel mauris ornare condimentum. Mauris sodales a leo sed malesuada. Etiam non quam ex. Integer scelerisque nisi faucibus, posuere ligula vel, dignissim turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt nisi eget blandit ornare. Pellentesque tempus at nisi id placerat. Donec blandit dignissim sem nec consequat. Sed vel pellentesque 
+4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       tellus libero, sagittis id tempus a, tempor a ligula. Pellentesque a risus nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque tincidunt est id tempus sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+  edge concept_from_name concept_to_name
+1  1~2         Concept A       Concept B
+2  1~3         Concept A       Concept C
+3  1~4         Concept A       Concept D
+4  1~4         Concept A       Concept D
+> 
+> 
+> 
+> cleanEx()
+> nameEx("QuotesSocCMap")
+> ### * QuotesSocCMap
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: QuotesSocCMap
+> ### Title: Extract all quotes of documents (or a Social Cognitivce Map)
+> ### Aliases: QuotesSocCMap
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> QuotesSocCMap(my.project)
+   coding_id doc_id concept_from concept_to coding_sign coding_weight.x
+1          1      1            1          2           +               1
+2          8      2            1          2           +               4
+3         12      3            1          2           -               3
+4         13      3            1          2           +               3
+5         15      3            1          2           +               3
+6         16      4            1          2           +               3
+7          4      1            1          3           +               2
+8          5      1            1          3           +               2
+9          6      1            1          3           +               2
+10         7      2            1          3           +               6
+11        14      3            1          3           +               5
+12         9      2            1          4           -               2
+13        10      2            1          4           -               7
+14        11      3            1          4           +               3
+15        17      4            2          4           +               3
+16         2      1            3          2           -               3
+17         3      1            3          2           +               2
+18        18      4            3          4           -               6
+     coding_class document_part
+1  Coding_class_I    Doc_Part_A
+2  Coding_class_I    Doc_Part_A
+3  Coding_class_I    Doc_Part_A
+4  Coding_class_I    Doc_Part_B
+5  Coding_class_K    Doc_Part_B
+6  Coding_class_K    Doc_Part_A
+7  Coding_class_J    Doc_Part_B
+8  Coding_class_K    Doc_Part_B
+9  Coding_class_K    Doc_Part_B
+10 Coding_class_I    Doc_Part_A
+11 Coding_class_K    Doc_Part_B
+12 Coding_class_J    Doc_Part_A
+13 Coding_class_J    Doc_Part_B
+14 Coding_class_I    Doc_Part_A
+15 Coding_class_K    Doc_Part_A
+16 Coding_class_I    Doc_Part_A
+17 Coding_class_J    Doc_Part_A
+18 Coding_class_J    Doc_Part_A
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    selected_text
+1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis condimentum leo. Vestibulum non ante erat. Morbi malesuada velit nec leo luctus congue. Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus.
+2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            cilisis, libero nunc molestie risus, sed aliquet velit nisi a purus. Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget libero vitae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cur(/QCODE){#1>3}sus ut massa a aliquam. Aenean id placerat nisl. Praesent faucibus malesuada aliquam. Suspendisse purus ex, pharetra hendrerit viverra sed, convallis mollis dolor. Etiam pulvinar, nulla eget pellentesque sodales, elit felis consectetur arcu, at laoreet velit risus et sem. Praesent neque lorem, tristique non odio eget, rutrum elementum lectus. Fusce sed libero eget enim pulvinar semper eu vel libero. Quisque eu magna vel arcu iaculis suscipit. Ut porta, tortor in auctor faucibus, felis purus mollis velit, non dictum leo odi
+3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus. Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. 
+4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Praesent neque lorem, tristique non odio eget, rutrum elementum lectus. Fusce sed libero eget enim pulvinar semper eu vel libero. Quisque eu magna vel arcu iaculis suscipit. Ut porta, tortor in auctor faucibus, felis purus mollis velit, non dictum leo odio a nisl. Mauris quis ipsum nulla. In id sem at augue gravida gravida. Maecenas suscipit magna a fringilla dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ass aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+6                                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis condimentum leo. Vestibulum non ante erat. Morbi malesuada velit nec leo luctus congue. Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus. Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget libero vitae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cursus ut massa a aliquam. Aenean id placerat nisl. Praesent faucibus malesuada aliquam. Suspendisse purus ex, pharetra hendrerit viverra sed, convallis mollis dolor. Etiam pulvinar, nulla eget pellentesque sodales, elit felis consectetur arcu, at laoreet velit risus et sem. Praesent neque lorem, tristique non odio eget, rutrum elementum lectus. Fusce sed libero eget enim pulvinar semper eu vel libero. Quisque eu magna vel arcu iaculis suscipit. Ut porta, tortor in auctor faucibus, felis purus mollis velit, non dictum leo odio a nisl. Mauris quis ipsum nulla. In id sem at augue gravida gravida. Maecenas suscipit magna a fringilla dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras vestibulum lorem quam, at lobortis ante sodales at. Aenean euismod turpis vel tempor condimentum. Etiam neque augue, ultricies non scelerisque non, feugiat sed ex. Fusce ut risus nec purus sollicitudin vulputate. Su
+7                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         auctor faucibus, felis purus mollis velit, non dictum leo odio a nisl. Mauris quis ipsum nulla. In id sem at augue gravida gravida. Maecenas suscipit magna a fringilla dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras vestibulum lorem quam, at lobortis ante sodales at. Aenean euismod turpis vel tempor condimentum. Etiam neque augue, ultricies non scelerisque non, feugiat sed ex. Fusce ut risus nec purus sollicitudin vulputate. Suspendisse tempus consectetur nulla pulvinar dictum. Duis lacinia eleifend euismod. Maecenas et risus vel mauris ornare condimentum. Mauris sodales a leo sed malesuada. Etiam non quam ex. Integer scelerisque nisi faucibus, posuere ligula vel, dignissim turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt nisi eget blandit ornare. Pellentesque tempus at nisi id placerat. Donec blandit dignissim sem nec consequat. Sed vel pellentesque ipsum, et vulputate lorem. Morbi sed fringilla metus. Vivamus volutpat lacus nec risus placerat mattis. Ut te
+8                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                sodales at. Aenean euismod turpis vel tempor condimentum. Etiam neque augue, ultricies non scelerisque non, feugiat sed ex. Fusce ut risus nec purus sollicitudin vulputate. Suspendisse tempus consectetur nulla pulvinar dictum. Duis lacinia eleifend euismod. Maecenas et risus vel mauris ornare condimentum. Mauris sodales a leo sed malesuada. Etiam non quam ex. Integer scelerisque nisi faucibus, posuere ligula vel,
+9                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    a, tempor a ligula. Pellentesque a risus nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque tincidunt est id tempus sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis condimentum leo. Vestibulum non ante erat. Morbi malesuada velit nec leo luctus congue. Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus. Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget libero vitae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cur
+11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      quam ex. Integer scelerisque nisi faucibus, posuere ligula vel, dignissim turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt nisi eget blandit ornare. Pellentesque tempus at nisi id placerat. Donec blandit dignissim sem nec consequat. Sed vel pellentesque ipsum, et vulputate lorem. Morbi sed fringilla metus. Vivamus volutpat lacus nec risus placerat mattis. Ut tellus libero, sagittis id tempus a, tempor a ligula. Pellentesque a risus nibh. Vestibulum ante ipsum primis in
+12                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     as vestibulum lorem quam, at lobortis ante sodales at. Aenean euismod turpis vel tempor condimentum. Etiam neque augue, ultricies non scelerisque non, feugiat sed ex. Fusce ut risus nec purus sollicitudin vulputate. Suspendisse tempus consectetur nulla pulvinar dictum. Duis lacinia eleifend euismod. Maecenas et risus vel mauris ornare condimentum. Mauris sodales a leo sed malesuada. Etiam non quam ex. Integer scelerisque nisi faucibus, posuere ligula vel, dignissim turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt nisi eget blandit ornare. Pellentesque tempus at nisi id placerat. Donec blandit dignissim sem nec consequat. Sed vel pellentesque 
+13                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 tellus libero, sagittis id tempus a, tempor a ligula. Pellentesque a risus nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque tincidunt est id tempus sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+14                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis condimentum leo. Vestibulum non ante erat. Morbi malesuada velit nec leo luctus congue. Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus. Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget libero vitae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cur
+15 itae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cursus ut massa a aliquam. Aenean id placerat nisl. Praesent faucibus malesuada aliquam. Suspendisse purus ex, pharetra hendrerit viverra sed, convallis mollis dolor. Etiam pulvinar, nulla eget pellentesque sodales, elit felis consectetur arcu, at laoreet velit risus et sem. Praesent neque lorem, tristique non odio eget, rutrum elementum lectus. Fusce sed libero eget enim pulvinar semper eu vel libero. Quisque eu magna vel arcu iaculis suscipit. Ut porta, tortor in auctor faucibus, felis purus mollis velit, non dictum leo odio a nisl. Mauris quis ipsum nulla. In id sem at augue gravida gravida. Maecenas suscipit magna a fringilla dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras vestibulum lorem quam, at lobortis ante sodales at. Aenean euismod turpis vel tempor condimentum. Etiam neque augue, ultricies non scelerisque non, feugiat sed ex. Fusce ut risus nec purus sollicitudin vulputate. Su(/QCODE){#1>2}spendisse tempus consectetur nulla pulvinar dictum. Duis lacinia eleifend euismod. Maecenas et risus vel mauris ornare condimentum. Mauris sodales a leo sed malesuada. Etiam non quam ex. Integer scelerisque nisi faucibus, posuere ligula vel, dignissim turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt nisi eget blandit ornare. Pellentesque tempus at nisi id placerat. Donec blandit dignissim sem nec consequat. Sed vel pellentesque ipsum, et vulputate lorem. Morbi sed fringilla metus. Vivamus volutpat lacus nec risus placerat mattis. Ut tellus libero, sagittis id tempus a, tempor a ligula. Pellentesque a risus nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque tincidunt est id tempus sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+16                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ongue. Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus.(/QCODE){#1>2} Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget liber
+17                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus.(/QCODE){#1>2} Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget liber(/QCODE){#3>2}o vitae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cursus ut massa a aliquam. Aenean id placerat nisl. Praesent faucibus malesuada aliquam. Suspendisse purus ex, pharetra hendrerit viverra sed, convallis mollis dolor. Etiam pulvinar, nulla eget
+18                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           Pellentesque tempus at nisi id placerat. Donec blandit dignissim sem nec consequat. Sed vel pellentesque ipsum, et vulputate lorem. Morbi sed fringilla metus. Vivamus volutpat lacus nec risus placerat mattis. Ut tellus libero, sagittis id tempus a, tempor a ligula. Pellentesque a risus nibh. Vestibulum ante ipsum primis in
+   edge concept_from_name concept_to_name coding_weight.y from to
+1   1~2         Concept A       Concept B               4    1  2
+2   1~2         Concept A       Concept B               4    1  2
+3   1~2         Concept A       Concept B               4    1  2
+4   1~2         Concept A       Concept B               4    1  2
+5   1~2         Concept A       Concept B               4    1  2
+6   1~2         Concept A       Concept B               4    1  2
+7   1~3         Concept A       Concept C               3    1  3
+8   1~3         Concept A       Concept C               3    1  3
+9   1~3         Concept A       Concept C               3    1  3
+10  1~3         Concept A       Concept C               3    1  3
+11  1~3         Concept A       Concept C               3    1  3
+12  1~4         Concept A       Concept D               2    1  4
+13  1~4         Concept A       Concept D               2    1  4
+14  1~4         Concept A       Concept D               2    1  4
+15  2~4         Concept B       Concept D               1    2  4
+16  3~2         Concept C       Concept B               1    3  2
+17  3~2         Concept C       Concept B               1    3  2
+18  3~4         Concept C       Concept D               1    3  4
+> QuotesSocCMap(my.project, units = 'Québec')
+  coding_id doc_id concept_from concept_to coding_sign coding_weight.x
+1         8      2            1          2           +               4
+2        16      4            1          2           +               3
+3         7      2            1          3           +               6
+4         9      2            1          4           -               2
+5        10      2            1          4           -               7
+6        17      4            2          4           +               3
+7        18      4            3          4           -               6
+    coding_class document_part
+1 Coding_class_I    Doc_Part_A
+2 Coding_class_K    Doc_Part_A
+3 Coding_class_I    Doc_Part_A
+4 Coding_class_J    Doc_Part_A
+5 Coding_class_J    Doc_Part_B
+6 Coding_class_K    Doc_Part_A
+7 Coding_class_J    Doc_Part_A
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   selected_text
+1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           cilisis, libero nunc molestie risus, sed aliquet velit nisi a purus. Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget libero vitae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cur(/QCODE){#1>3}sus ut massa a aliquam. Aenean id placerat nisl. Praesent faucibus malesuada aliquam. Suspendisse purus ex, pharetra hendrerit viverra sed, convallis mollis dolor. Etiam pulvinar, nulla eget pellentesque sodales, elit felis consectetur arcu, at laoreet velit risus et sem. Praesent neque lorem, tristique non odio eget, rutrum elementum lectus. Fusce sed libero eget enim pulvinar semper eu vel libero. Quisque eu magna vel arcu iaculis suscipit. Ut porta, tortor in auctor faucibus, felis purus mollis velit, non dictum leo odi
+2                                                                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis condimentum leo. Vestibulum non ante erat. Morbi malesuada velit nec leo luctus congue. Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus. Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget libero vitae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cursus ut massa a aliquam. Aenean id placerat nisl. Praesent faucibus malesuada aliquam. Suspendisse purus ex, pharetra hendrerit viverra sed, convallis mollis dolor. Etiam pulvinar, nulla eget pellentesque sodales, elit felis consectetur arcu, at laoreet velit risus et sem. Praesent neque lorem, tristique non odio eget, rutrum elementum lectus. Fusce sed libero eget enim pulvinar semper eu vel libero. Quisque eu magna vel arcu iaculis suscipit. Ut porta, tortor in auctor faucibus, felis purus mollis velit, non dictum leo odio a nisl. Mauris quis ipsum nulla. In id sem at augue gravida gravida. Maecenas suscipit magna a fringilla dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras vestibulum lorem quam, at lobortis ante sodales at. Aenean euismod turpis vel tempor condimentum. Etiam neque augue, ultricies non scelerisque non, feugiat sed ex. Fusce ut risus nec purus sollicitudin vulputate. Su
+3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis condimentum leo. Vestibulum non ante erat. Morbi malesuada velit nec leo luctus congue. Aenean at sodales augue. Praesent ut tempor lacus, id dapibus eros. Vestibulum vehicula finibus dui in viverra. Donec ac nibh et ante cursus rhoncus. Nulla risus purus, volutpat et volutpat ac, interdum nec turpis. Praesent eleifend aliquam iaculis. Morbi vitae nulla ligula. Aenean egestas, tellus sit amet mattis facilisis, libero nunc molestie risus, sed aliquet velit nisi a purus. Etiam quis laoreet massa. Proin accumsan posuere arcu, vitae pretium leo. Etiam sit amet justo nibh. In volutpat sed nunc quis rhoncus. Nunc vel egestas magna. Praesent eros risus, ultricies nec felis sollicitudin, vulputate pellentesque ligula. Sed eget libero vitae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cur
+4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     as vestibulum lorem quam, at lobortis ante sodales at. Aenean euismod turpis vel tempor condimentum. Etiam neque augue, ultricies non scelerisque non, feugiat sed ex. Fusce ut risus nec purus sollicitudin vulputate. Suspendisse tempus consectetur nulla pulvinar dictum. Duis lacinia eleifend euismod. Maecenas et risus vel mauris ornare condimentum. Mauris sodales a leo sed malesuada. Etiam non quam ex. Integer scelerisque nisi faucibus, posuere ligula vel, dignissim turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt nisi eget blandit ornare. Pellentesque tempus at nisi id placerat. Donec blandit dignissim sem nec consequat. Sed vel pellentesque 
+5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 tellus libero, sagittis id tempus a, tempor a ligula. Pellentesque a risus nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque tincidunt est id tempus sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+6 itae leo pulvinar viverra. Sed diam lorem, sagittis vel facilisis nec, venenatis et elit. Vivamus hendrerit tellus non vehicula fermentum. Integer condimentum nisi sed nisl fringilla interdum. Etiam cursus ut massa a aliquam. Aenean id placerat nisl. Praesent faucibus malesuada aliquam. Suspendisse purus ex, pharetra hendrerit viverra sed, convallis mollis dolor. Etiam pulvinar, nulla eget pellentesque sodales, elit felis consectetur arcu, at laoreet velit risus et sem. Praesent neque lorem, tristique non odio eget, rutrum elementum lectus. Fusce sed libero eget enim pulvinar semper eu vel libero. Quisque eu magna vel arcu iaculis suscipit. Ut porta, tortor in auctor faucibus, felis purus mollis velit, non dictum leo odio a nisl. Mauris quis ipsum nulla. In id sem at augue gravida gravida. Maecenas suscipit magna a fringilla dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras vestibulum lorem quam, at lobortis ante sodales at. Aenean euismod turpis vel tempor condimentum. Etiam neque augue, ultricies non scelerisque non, feugiat sed ex. Fusce ut risus nec purus sollicitudin vulputate. Su(/QCODE){#1>2}spendisse tempus consectetur nulla pulvinar dictum. Duis lacinia eleifend euismod. Maecenas et risus vel mauris ornare condimentum. Mauris sodales a leo sed malesuada. Etiam non quam ex. Integer scelerisque nisi faucibus, posuere ligula vel, dignissim turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt nisi eget blandit ornare. Pellentesque tempus at nisi id placerat. Donec blandit dignissim sem nec consequat. Sed vel pellentesque ipsum, et vulputate lorem. Morbi sed fringilla metus. Vivamus volutpat lacus nec risus placerat mattis. Ut tellus libero, sagittis id tempus a, tempor a ligula. Pellentesque a risus nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque tincidunt est id tempus sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+7                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           Pellentesque tempus at nisi id placerat. Donec blandit dignissim sem nec consequat. Sed vel pellentesque ipsum, et vulputate lorem. Morbi sed fringilla metus. Vivamus volutpat lacus nec risus placerat mattis. Ut tellus libero, sagittis id tempus a, tempor a ligula. Pellentesque a risus nibh. Vestibulum ante ipsum primis in
+  edge concept_from_name concept_to_name coding_weight.y from to
+1  1~2         Concept A       Concept B               4    1  2
+2  1~2         Concept A       Concept B               4    1  2
+3  1~3         Concept A       Concept C               3    1  3
+4  1~4         Concept A       Concept D               2    1  4
+5  1~4         Concept A       Concept D               2    1  4
+6  2~4         Concept B       Concept D               1    2  4
+7  3~4         Concept C       Concept D               1    3  4
+> 
+> 
+> 
+> cleanEx()
+> nameEx("RelationshipTest")
+> ### * RelationshipTest
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: RelationshipTest
+> ### Title: Compare relationships weight between maps
+> ### Aliases: RelationshipTest
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> ## need more documents
+> RelationshipTest(my.project, units = c("Belgium", "Québec"))
+# A tibble: 6 x 2
+  edge  p.value 
+  <chr> <chr>   
+1 1~2   NR      
+2 1~3   1       
+3 1~4   1       
+4 2~4   1       
+5 3~2   0.466667
+6 3~4   1       
+> 
+> 
+> 
+> cleanEx()
+> nameEx("RelationshipTestSummary")
+> ### * RelationshipTestSummary
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: RelationshipTestSummary
+> ### Title: Summary table on relationship comparisons
+> ### Aliases: RelationshipTestSummary
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> ## Here 0.6 is used only for producing an output. No signif. diff. is reported.
+> RelationshipTestSummary(my.project, units = c("Belgium", "Québec"), 0.6)
+Joining, by = "edge"
+Joining, by = "edge"
+  edge               edge_name  p.value Belgium Québec
+1  3~2 Concept C --> Concept B 0.466667       1      0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("RemoveCodings")
+> ### * RemoveCodings
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: RemoveCodings
+> ### Title: Remove codings of a QDA project
+> ### Aliases: RemoveCodings
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> my.cleansed.project <- RemoveCodings(my.project, 1)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ReportICM")
+> ### * ReportICM
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ReportICM
+> ### Title: Create a serie of reports on Individual Cognitive Maps and
+> ###   quotes
+> ### Aliases: ReportICM
+> 
+> ### ** Examples
+> 
+> project_name <- "a_new_project"
+> main_path <- paste0(system.file("testdata", package = "cogmapr"), '/')
+> my.project <- ProjectCMap(main_path, project_name)
+> 
+> ReportICM(my.project)
+  |                                                                              |                                                                      |   0%Warning in file.create(to[okay]) :
+  cannot create file 'report_icm.spin.R', reason 'Read-only file system'
+Warning in file(con, "r") :
+  cannot open file 'report_icm.spin.R': No such file or directory
+Error in file(con, "r") : cannot open the connection
+Calls: ReportICM ... <Anonymous> -> <Anonymous> -> read_utf8 -> readLines -> file
+Execution halted
