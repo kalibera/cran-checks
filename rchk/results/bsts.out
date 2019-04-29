@@ -1,0 +1,30 @@
+Package bsts version 0.8.0
+Package built using 76435/R 3.7.0; x86_64-pc-linux-gnu; 2019-04-29 13:55:41 UTC; unix   
+Checked with rchk version 8de4e6e0566199e4662b2716e5acf000dd84f60b
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+Function BOOM::RMemoryProtector::protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Boom/include/r_interface/boom_r_tools.hpp:330
+
+Function BOOM::RVectorFunction::evaluate(BOOM::Vector const&)
+  [UP] calling allocating function R_ParseVector(V,?,?,?) with argument allocated using BOOM::ToRString(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) Boom/src/boom_r_tools.cpp:625
+  [UP] calling allocating function Rf_asReal with argument allocated using Rf_eval Boom/src/boom_r_tools.cpp:627
+
+Function BOOM::SetColnames(SEXPREC*, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&)
+  [UP] unprotected variable r_dimnames while calling allocating function BOOM::CharacterVector(std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&) Boom/src/boom_r_tools.cpp:223
+
+Function BOOM::ToRArray(BOOM::ConstArrayView const&)
+  [UP] calling allocating function Rf_allocArray(?,V) with a fresh pointer (r_dims <arg 2>) Boom/src/boom_r_tools.cpp:490
+  [UP] unprotected variable ans while calling allocating function BOOM::ConstArrayIterator::operator*() const Boom/src/boom_r_tools.cpp:493
+
+Function BOOM::ToRString(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] unprotected variable ans while calling allocating function Rf_mkChar Boom/src/boom_r_tools.cpp:514
+
+Function BOOM::ToRStringVector(std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&)
+  [UP] unprotected variable ans while calling allocating function Rf_mkChar Boom/src/boom_r_tools.cpp:523
+
+Function BOOM::VectorListElement::prepare_to_write(int)
+  [UP] calling allocating function BOOM::SetColnames(SEXPREC*, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&) with argument allocated using Rf_allocMatrix Boom/src/list_io.cpp:254
+
+Function BOOM::appendListElement(SEXPREC*, SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] unprotected variable old_list_names while calling allocating function Rf_allocVector Boom/src/boom_r_tools.cpp:133

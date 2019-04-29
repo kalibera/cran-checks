@@ -1,0 +1,39 @@
+Package hit version 0.4.0
+Package built using 76435/R 3.7.0; x86_64-pc-linux-gnu; 2019-04-29 13:25:15 UTC; unix   
+Checked with rchk version 8de4e6e0566199e4662b2716e5acf000dd84f60b
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::AttributeProxyPolicy<Rcpp::RObject_Impl<Rcpp::PreserveStorage> >::AttributeProxy::operator bool<bool>() const
+  [UP] calling allocating function bool Rcpp::as<bool>(SEXPREC*) with argument allocated using Rcpp::AttributeProxyPolicy<Rcpp::RObject_Impl<Rcpp::PreserveStorage> >::AttributeProxy::get() const Rcpp/include/Rcpp/api/meat/proxy.h:40
+
+Function Rcpp::AttributeProxyPolicy<Rcpp::RObject_Impl<Rcpp::PreserveStorage> >::AttributeProxy::operator double<double>() const
+  [UP] calling allocating function double Rcpp::as<double>(SEXPREC*) with argument allocated using Rcpp::AttributeProxyPolicy<Rcpp::RObject_Impl<Rcpp::PreserveStorage> >::AttributeProxy::get() const Rcpp/include/Rcpp/api/meat/proxy.h:40
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function Rcpp::Rcpp_fast_eval(SEXPREC*, SEXPREC*) with argument allocated using Rf_lang2 Rcpp/include/Rcpp/r_cast.h:34
+
+Function findNames(std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > >&, Rcpp::Vector<19, Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::AttributeProxyPolicy<Rcpp::RObject_Impl<Rcpp::PreserveStorage> >::AttributeProxy::operator SEXPREC*() const hit/src/hierarchy.cpp:202
+
+Function hit_dend2hier
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function runDend(std::__1::map<int, Rcpp::Vector<13, Rcpp::PreserveStorage>, std::__1::less<int>, std::__1::allocator<std::__1::pair<int const, Rcpp::Vector<13, Rcpp::PreserveStorage> > > >&, std::__1::map<int, std::__1::vector<int, std::__1::allocator<int> >, std::__1::less<int>, std::__1::allocator<std::__1::pair<int const, std::__1::vector<int, std::__1::allocator<int> > > > >&, Rcpp::Vector<19, Rcpp::PreserveStorage>, int&, int, Rcpp::Vector<14, Rcpp::PreserveStorage>&, int, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, int, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, int> > >&)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::AttributeProxyPolicy<Rcpp::RObject_Impl<Rcpp::PreserveStorage> >::AttributeProxy::operator SEXPREC*() const hit/src/hierarchy.cpp:98
