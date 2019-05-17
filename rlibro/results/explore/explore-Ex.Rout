@@ -1,0 +1,839 @@
+
+R Under development (unstable) (2019-05-16 r76519) -- "Unsuffered Consequences"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "explore"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('explore')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("clean_var")
+> ### * clean_var
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: clean_var
+> ### Title: Clean variable
+> ### Aliases: clean_var
+> 
+> ### ** Examples
+> 
+> clean_var(iris, Sepal.Width, max_val = 3.5, name = "sepal_width")
+    Sepal.Length sepal_width Petal.Length Petal.Width    Species
+1            5.1         3.5          1.4         0.2     setosa
+2            4.9         3.0          1.4         0.2     setosa
+3            4.7         3.2          1.3         0.2     setosa
+4            4.6         3.1          1.5         0.2     setosa
+5            5.0         3.5          1.4         0.2     setosa
+6            5.4         3.5          1.7         0.4     setosa
+7            4.6         3.4          1.4         0.3     setosa
+8            5.0         3.4          1.5         0.2     setosa
+9            4.4         2.9          1.4         0.2     setosa
+10           4.9         3.1          1.5         0.1     setosa
+11           5.4         3.5          1.5         0.2     setosa
+12           4.8         3.4          1.6         0.2     setosa
+13           4.8         3.0          1.4         0.1     setosa
+14           4.3         3.0          1.1         0.1     setosa
+15           5.8         3.5          1.2         0.2     setosa
+16           5.7         3.5          1.5         0.4     setosa
+17           5.4         3.5          1.3         0.4     setosa
+18           5.1         3.5          1.4         0.3     setosa
+19           5.7         3.5          1.7         0.3     setosa
+20           5.1         3.5          1.5         0.3     setosa
+21           5.4         3.4          1.7         0.2     setosa
+22           5.1         3.5          1.5         0.4     setosa
+23           4.6         3.5          1.0         0.2     setosa
+24           5.1         3.3          1.7         0.5     setosa
+25           4.8         3.4          1.9         0.2     setosa
+26           5.0         3.0          1.6         0.2     setosa
+27           5.0         3.4          1.6         0.4     setosa
+28           5.2         3.5          1.5         0.2     setosa
+29           5.2         3.4          1.4         0.2     setosa
+30           4.7         3.2          1.6         0.2     setosa
+31           4.8         3.1          1.6         0.2     setosa
+32           5.4         3.4          1.5         0.4     setosa
+33           5.2         3.5          1.5         0.1     setosa
+34           5.5         3.5          1.4         0.2     setosa
+35           4.9         3.1          1.5         0.2     setosa
+36           5.0         3.2          1.2         0.2     setosa
+37           5.5         3.5          1.3         0.2     setosa
+38           4.9         3.5          1.4         0.1     setosa
+39           4.4         3.0          1.3         0.2     setosa
+40           5.1         3.4          1.5         0.2     setosa
+41           5.0         3.5          1.3         0.3     setosa
+42           4.5         2.3          1.3         0.3     setosa
+43           4.4         3.2          1.3         0.2     setosa
+44           5.0         3.5          1.6         0.6     setosa
+45           5.1         3.5          1.9         0.4     setosa
+46           4.8         3.0          1.4         0.3     setosa
+47           5.1         3.5          1.6         0.2     setosa
+48           4.6         3.2          1.4         0.2     setosa
+49           5.3         3.5          1.5         0.2     setosa
+50           5.0         3.3          1.4         0.2     setosa
+51           7.0         3.2          4.7         1.4 versicolor
+52           6.4         3.2          4.5         1.5 versicolor
+53           6.9         3.1          4.9         1.5 versicolor
+54           5.5         2.3          4.0         1.3 versicolor
+55           6.5         2.8          4.6         1.5 versicolor
+56           5.7         2.8          4.5         1.3 versicolor
+57           6.3         3.3          4.7         1.6 versicolor
+58           4.9         2.4          3.3         1.0 versicolor
+59           6.6         2.9          4.6         1.3 versicolor
+60           5.2         2.7          3.9         1.4 versicolor
+61           5.0         2.0          3.5         1.0 versicolor
+62           5.9         3.0          4.2         1.5 versicolor
+63           6.0         2.2          4.0         1.0 versicolor
+64           6.1         2.9          4.7         1.4 versicolor
+65           5.6         2.9          3.6         1.3 versicolor
+66           6.7         3.1          4.4         1.4 versicolor
+67           5.6         3.0          4.5         1.5 versicolor
+68           5.8         2.7          4.1         1.0 versicolor
+69           6.2         2.2          4.5         1.5 versicolor
+70           5.6         2.5          3.9         1.1 versicolor
+71           5.9         3.2          4.8         1.8 versicolor
+72           6.1         2.8          4.0         1.3 versicolor
+73           6.3         2.5          4.9         1.5 versicolor
+74           6.1         2.8          4.7         1.2 versicolor
+75           6.4         2.9          4.3         1.3 versicolor
+76           6.6         3.0          4.4         1.4 versicolor
+77           6.8         2.8          4.8         1.4 versicolor
+78           6.7         3.0          5.0         1.7 versicolor
+79           6.0         2.9          4.5         1.5 versicolor
+80           5.7         2.6          3.5         1.0 versicolor
+81           5.5         2.4          3.8         1.1 versicolor
+82           5.5         2.4          3.7         1.0 versicolor
+83           5.8         2.7          3.9         1.2 versicolor
+84           6.0         2.7          5.1         1.6 versicolor
+85           5.4         3.0          4.5         1.5 versicolor
+86           6.0         3.4          4.5         1.6 versicolor
+87           6.7         3.1          4.7         1.5 versicolor
+88           6.3         2.3          4.4         1.3 versicolor
+89           5.6         3.0          4.1         1.3 versicolor
+90           5.5         2.5          4.0         1.3 versicolor
+91           5.5         2.6          4.4         1.2 versicolor
+92           6.1         3.0          4.6         1.4 versicolor
+93           5.8         2.6          4.0         1.2 versicolor
+94           5.0         2.3          3.3         1.0 versicolor
+95           5.6         2.7          4.2         1.3 versicolor
+96           5.7         3.0          4.2         1.2 versicolor
+97           5.7         2.9          4.2         1.3 versicolor
+98           6.2         2.9          4.3         1.3 versicolor
+99           5.1         2.5          3.0         1.1 versicolor
+100          5.7         2.8          4.1         1.3 versicolor
+101          6.3         3.3          6.0         2.5  virginica
+102          5.8         2.7          5.1         1.9  virginica
+103          7.1         3.0          5.9         2.1  virginica
+104          6.3         2.9          5.6         1.8  virginica
+105          6.5         3.0          5.8         2.2  virginica
+106          7.6         3.0          6.6         2.1  virginica
+107          4.9         2.5          4.5         1.7  virginica
+108          7.3         2.9          6.3         1.8  virginica
+109          6.7         2.5          5.8         1.8  virginica
+110          7.2         3.5          6.1         2.5  virginica
+111          6.5         3.2          5.1         2.0  virginica
+112          6.4         2.7          5.3         1.9  virginica
+113          6.8         3.0          5.5         2.1  virginica
+114          5.7         2.5          5.0         2.0  virginica
+115          5.8         2.8          5.1         2.4  virginica
+116          6.4         3.2          5.3         2.3  virginica
+117          6.5         3.0          5.5         1.8  virginica
+118          7.7         3.5          6.7         2.2  virginica
+119          7.7         2.6          6.9         2.3  virginica
+120          6.0         2.2          5.0         1.5  virginica
+121          6.9         3.2          5.7         2.3  virginica
+122          5.6         2.8          4.9         2.0  virginica
+123          7.7         2.8          6.7         2.0  virginica
+124          6.3         2.7          4.9         1.8  virginica
+125          6.7         3.3          5.7         2.1  virginica
+126          7.2         3.2          6.0         1.8  virginica
+127          6.2         2.8          4.8         1.8  virginica
+128          6.1         3.0          4.9         1.8  virginica
+129          6.4         2.8          5.6         2.1  virginica
+130          7.2         3.0          5.8         1.6  virginica
+131          7.4         2.8          6.1         1.9  virginica
+132          7.9         3.5          6.4         2.0  virginica
+133          6.4         2.8          5.6         2.2  virginica
+134          6.3         2.8          5.1         1.5  virginica
+135          6.1         2.6          5.6         1.4  virginica
+136          7.7         3.0          6.1         2.3  virginica
+137          6.3         3.4          5.6         2.4  virginica
+138          6.4         3.1          5.5         1.8  virginica
+139          6.0         3.0          4.8         1.8  virginica
+140          6.9         3.1          5.4         2.1  virginica
+141          6.7         3.1          5.6         2.4  virginica
+142          6.9         3.1          5.1         2.3  virginica
+143          5.8         2.7          5.1         1.9  virginica
+144          6.8         3.2          5.9         2.3  virginica
+145          6.7         3.3          5.7         2.5  virginica
+146          6.7         3.0          5.2         2.3  virginica
+147          6.3         2.5          5.0         1.9  virginica
+148          6.5         3.0          5.2         2.0  virginica
+149          6.2         3.4          5.4         2.3  virginica
+150          5.9         3.0          5.1         1.8  virginica
+> 
+> 
+> 
+> cleanEx()
+> nameEx("data_dict_md")
+> ### * data_dict_md
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: data_dict_md
+> ### Title: Create a data dictionary Markdown file
+> ### Aliases: data_dict_md
+> 
+> ### ** Examples
+> 
+> # Data dictionary of a dataframe
+> data_dict_md(iris,
++              title = "iris flower data set",
++              output_dir = tempdir())
+> 
+> # Data dictionary of a dataframe with additional description of variables
+> description <- data.frame(
++                  variable = c("Species"),
++                  description = c("Species of Iris flower"))
+> data_dict_md(iris,
++              title = "iris flower data set",
++              description = description,
++              output_dir = tempdir())
+> 
+> 
+> 
+> cleanEx()
+> nameEx("decrypt")
+> ### * decrypt
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: decrypt
+> ### Title: decrypt text
+> ### Aliases: decrypt
+> 
+> ### ** Examples
+> 
+> decrypt("zw336 E693v")
+[1] "hello world"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("describe")
+> ### * describe
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: describe
+> ### Title: Describe a dataset or variable
+> ### Aliases: describe
+> 
+> ### ** Examples
+> 
+> # Load package
+> library(magrittr)
+> 
+> # Describe a dataset
+> iris %>% describe()
+      variable type na na_pct unique min mean max
+1 Sepal.Length  dou  0      0     35 4.3 5.84 7.9
+2  Sepal.Width  dou  0      0     23 2.0 3.06 4.4
+3 Petal.Length  dou  0      0     43 1.0 3.76 6.9
+4  Petal.Width  dou  0      0     22 0.1 1.20 2.5
+5      Species  fct  0      0      3  NA   NA  NA
+> 
+> # Describe a variable
+> iris %>% describe(Species)
+variable = Species 
+type     = factor
+na       = 0 of 150 (0%)
+unique   = 3
+ setosa     = 50 (33.3%)
+ versicolor = 50 (33.3%)
+ virginica  = 50 (33.3%)
+> iris %>% describe(Sepal.Length)
+variable = Sepal.Length 
+type     = double 
+na       = 0 of 150 (0%)
+unique   = 35
+min|max  = 4.3 | 7.9
+q05|q95  = 4.6 | 7.3
+q25|q75  = 5.1 | 6.4
+median   = 5.8 
+mean     = 5.8 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:magrittr’
+
+> nameEx("describe_all")
+> ### * describe_all
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: describe_all
+> ### Title: Describe all variables of a dataset
+> ### Aliases: describe_all
+> 
+> ### ** Examples
+> 
+> describe_all(iris)
+      variable type na na_pct unique min mean max
+1 Sepal.Length  dou  0      0     35 4.3 5.84 7.9
+2  Sepal.Width  dou  0      0     23 2.0 3.06 4.4
+3 Petal.Length  dou  0      0     43 1.0 3.76 6.9
+4  Petal.Width  dou  0      0     22 0.1 1.20 2.5
+5      Species  fct  0      0      3  NA   NA  NA
+> 
+> 
+> 
+> cleanEx()
+> nameEx("describe_cat")
+> ### * describe_cat
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: describe_cat
+> ### Title: Describe categorial variable
+> ### Aliases: describe_cat
+> 
+> ### ** Examples
+> 
+> describe_cat(iris, Species)
+variable = Species 
+type     = factor
+na       = 0 of 150 (0%)
+unique   = 3
+ setosa     = 50 (33.3%)
+ versicolor = 50 (33.3%)
+ virginica  = 50 (33.3%)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("describe_num")
+> ### * describe_num
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: describe_num
+> ### Title: Describe numerical variable
+> ### Aliases: describe_num
+> 
+> ### ** Examples
+> 
+> describe_num(iris, Sepal.Length)
+variable = Sepal.Length 
+type     = double 
+na       = 0 of 150 (0%)
+unique   = 35
+min|max  = 4.3 | 7.9
+q05|q95  = 4.6 | 7.3
+q25|q75  = 5.1 | 6.4
+median   = 5.8 
+mean     = 5.8 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("describe_tbl")
+> ### * describe_tbl
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: describe_tbl
+> ### Title: Describe table
+> ### Aliases: describe_tbl
+> 
+> ### ** Examples
+> 
+> describe_tbl(iris)
+150 observations with 5 attributes> 
+> iris$is_virginica <- ifelse(iris$Species == "virginica", 1, 0)
+> describe_tbl(iris, is_virginica)
+150 observations with 6 attributes; 50 targets (33.3%)> 
+> 
+> 
+> cleanEx()
+> nameEx("dwh_connect")
+> ### * dwh_connect
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dwh_connect
+> ### Title: connect to DWH
+> ### Aliases: dwh_connect
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D con <- dwh_connect(dsn = "DWH1", user = "u12345")
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("dwh_disconnect")
+> ### * dwh_disconnect
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dwh_disconnect
+> ### Title: disconnect from DWH
+> ### Aliases: dwh_disconnect
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D dwh_disconnect(con)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("dwh_fastload")
+> ### * dwh_fastload
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dwh_fastload
+> ### Title: write data to a DWH table
+> ### Aliases: dwh_fastload
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D dwh_fastload(data, "DWH", "database.table_test")
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("dwh_read_data")
+> ### * dwh_read_data
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dwh_read_data
+> ### Title: read data from DWH
+> ### Aliases: dwh_read_data
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D dwh_read_data(con, "select * from database.table_test")
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("dwh_read_table")
+> ### * dwh_read_table
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dwh_read_table
+> ### Title: read a table from DWH
+> ### Aliases: dwh_read_table
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D dwh_read_table(con, "database.table_test")
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("encrypt")
+> ### * encrypt
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: encrypt
+> ### Title: encrypt text
+> ### Aliases: encrypt
+> 
+> ### ** Examples
+> 
+> encrypt("hello world")
+[1] "zw336 E693v"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("explain_logreg")
+> ### * explain_logreg
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: explain_logreg
+> ### Title: Explain a binary target using logistic regression
+> ### Aliases: explain_logreg
+> 
+> ### ** Examples
+> 
+> data <- iris
+> data$is_versicolor <- ifelse(iris$Species == "versicolor", 1, 0)
+> data$Species <- NULL
+> explain_logreg(data, target = is_versicolor)
+# A tibble: 4 x 5
+  term         estimate std.error statistic    p.value
+  <chr>           <dbl>     <dbl>     <dbl>      <dbl>
+1 (Intercept)      6.95     2.23       3.12 0.00179   
+2 Sepal.Width     -2.96     0.667     -4.43 0.00000926
+3 Petal.Length     1.13     0.462      2.44 0.0148    
+4 Petal.Width     -2.61     1.08      -2.42 0.0156    
+> 
+> 
+> 
+> cleanEx()
+> nameEx("explain_tree")
+> ### * explain_tree
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: explain_tree
+> ### Title: Explain a target using a simple decision tree (classification or
+> ###   regression)
+> ### Aliases: explain_tree
+> 
+> ### ** Examples
+> 
+> data <- iris
+> data$is_versicolor <- ifelse(iris$Species == "versicolor", 1, 0)
+> data$Species <- NULL
+> explain_tree(data, target = is_versicolor)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("explore")
+> ### * explore
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: explore
+> ### Title: Explore a dataset or variable
+> ### Aliases: explore
+> 
+> ### ** Examples
+> 
+> ## Launch Shiny app (in interactive R sessions)
+> if (interactive())  {
++    explore(iris)
++ }
+> 
+> ## Explore grafically
+> 
+> # Load library
+> library(magrittr)
+> 
+> # Explore a variable
+> iris %>% explore(Species)
+> iris %>% explore(Sepal.Length)
+> iris %>% explore(Sepal.Length, min_val = 4, max_val = 7)
+> iris %>% explore(Sepal.Length, density = FALSE)
+> 
+> # Explore a variable with a target
+> iris$is_virginica <- ifelse(iris$Species == "virginica", 1, 0)
+> iris %>% explore(Species, target = is_virginica)
+> iris %>% explore(Sepal.Length, target = is_virginica)
+> 
+> # Explore correlation between two variables
+> iris %>% explore(Species, Petal.Length)
+> iris %>% explore(Sepal.Length, Petal.Length)
+> 
+> # Explore correlation between two variables and split by target
+> iris %>% explore(Sepal.Length, Petal.Length, target = is_virginica)
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:magrittr’
+
+> nameEx("explore_all")
+> ### * explore_all
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: explore_all
+> ### Title: Explore all variables
+> ### Aliases: explore_all
+> 
+> ### ** Examples
+> 
+> explore_all(iris)
+> 
+> iris$is_virginica <- ifelse(iris$Species == "virginica", 1, 0)
+> explore_all(iris, target = is_virginica)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("explore_cor")
+> ### * explore_cor
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: explore_cor
+> ### Title: Explore the correlation between two attributes
+> ### Aliases: explore_cor
+> 
+> ### ** Examples
+> 
+> explore_cor(iris, x = Sepal.Length, y = Sepal.Width)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("explore_density")
+> ### * explore_density
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: explore_density
+> ### Title: Explore density of variable
+> ### Aliases: explore_density
+> 
+> ### ** Examples
+> 
+> explore_density(iris, "Sepal.Length")
+> iris$is_virginica <- ifelse(iris$Species == "virginica", 1, 0)
+> explore_density(iris, Sepal.Length, target = is_virginica)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("explore_shiny")
+> ### * explore_shiny
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: explore_shiny
+> ### Title: Explore dataset interactive
+> ### Aliases: explore_shiny
+> 
+> ### ** Examples
+> 
+> # Only run examples in interactive R sessions
+> if (interactive())  {
++    explore_shiny(iris)
++ }
+> 
+> 
+> 
+> cleanEx()
+> nameEx("format_num")
+> ### * format_num
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: format_num
+> ### Title: Format number
+> ### Aliases: format_num
+> 
+> ### ** Examples
+> 
+> format_num(5500, digits = 2)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("format_target")
+> ### * format_target
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: format_target
+> ### Title: Format target
+> ### Aliases: format_target
+> 
+> ### ** Examples
+> 
+> iris$is_virginica <- ifelse(iris$Species == "virginica", "yes", "no")
+> iris$target <- format_target(iris$is_virginica)
+> table(iris$target)
+
+  0   1 
+100  50 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("format_type")
+> ### * format_type
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: format_type
+> ### Title: Format type description
+> ### Aliases: format_type
+> 
+> ### ** Examples
+> 
+> format_type(typeof(iris$Species))
+[1] "int"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_nrow")
+> ### * get_nrow
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_nrow
+> ### Title: Get number of rows for a grid plot
+> ### Aliases: get_nrow
+> 
+> ### ** Examples
+> 
+> get_nrow(names(iris), ncol = 2)
+[1] 3
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_type")
+> ### * get_type
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_type
+> ### Title: Return type of variable
+> ### Aliases: get_type
+> 
+> ### ** Examples
+> 
+> get_type(iris$Species)
+[1] "factor"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("guess_cat_num")
+> ### * guess_cat_num
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: guess_cat_num
+> ### Title: Return if variable is categorial or nomerical
+> ### Aliases: guess_cat_num
+> 
+> ### ** Examples
+> 
+> guess_cat_num(iris$Species)
+[1] "cat"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plot_text")
+> ### * plot_text
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plot_text
+> ### Title: Plot a text
+> ### Aliases: plot_text
+> 
+> ### ** Examples
+> 
+> plot_text("hello", size = 2, color = "red")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("replace_na_with")
+> ### * replace_na_with
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: replace_na_with
+> ### Title: Replace NA
+> ### Aliases: replace_na_with
+> 
+> ### ** Examples
+> 
+> data <- data.frame(nr = c(1,2,3,NA,NA))
+> replace_na_with(data, "nr", 0)
+replace NA in variable nr with 0
+  nr
+1  1
+2  2
+3  3
+4  0
+5  0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("report")
+> ### * report
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: report
+> ### Title: Generate a report of all attributes
+> ### Aliases: report
+> 
+> ### ** Examples
+> 
+> report(iris, output_dir = tempdir())
+
+
+processing file: template_report_attribute.Rmd
+  ordinary text without R code
+
+label: unnamed-chunk-1 (with options) 
+List of 3
+ $ echo   : logi FALSE
+ $ message: logi FALSE
+ $ warning: logi FALSE
+
+  ordinary text without R code
+
+label: unnamed-chunk-2 (with options) 
+List of 3
+ $ message: logi FALSE
+ $ warning: logi FALSE
+ $ include: logi FALSE
+
+  ordinary text without R code
+
+label: unnamed-chunk-3 (with options) 
+List of 5
+ $ echo      : logi FALSE
+ $ fig.height: symbol total_y
+ $ fig.width : symbol total_x
+ $ message   : logi FALSE
+ $ warning   : logi FALSE
+
+Warning in file(con, "w") :
+  cannot open file 'template_report_attribute.knit.md': Read-only file system
+Error in file(con, "w") : cannot open the connection
+Calls: report -> <Anonymous> -> <Anonymous> -> writeLines -> file
+Execution halted
