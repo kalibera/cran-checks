@@ -1,8 +1,14 @@
-Package minerva version 1.5
-Package built using 76403/R 3.7.0; x86_64-pc-linux-gnu; 2019-04-17 13:10:17 UTC; unix   
+Package minerva version 1.5.8
+Package built using 76610/R 3.7.0; x86_64-pc-linux-gnu; 2019-05-27 11:44:21 UTC; unix   
 Checked with rchk version 8de4e6e0566199e4662b2716e5acf000dd84f60b
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::as_environment(SEXPREC*)
+  [UP] calling allocating function Rcpp::Rcpp_fast_eval(SEXPREC*, SEXPREC*) with argument allocated using Rf_lang2(S:as.environment,?) Rcpp/include/Rcpp/Environment.h:36
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::get(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
+  [UP] calling allocating function Rcpp::internal::Rcpp_eval_impl(SEXPREC*, SEXPREC*) with a fresh pointer (res <arg 1>) Rcpp/include/Rcpp/Environment.h:112
 
 Function Rcpp::Rcpp_protect(SEXPREC*)
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
@@ -11,11 +17,14 @@ Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
-Function _minerva_mine_compute
-  [UP] ignoring variable <unnamed var:   %42 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _minerva_mine_compute_cstats
+Function _minerva_cstats
   [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _minerva_mine_compute_pstats
+Function _minerva_mictools_null
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _minerva_mine_stat
+  [UP] ignoring variable <unnamed var:   %42 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _minerva_pstats
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
