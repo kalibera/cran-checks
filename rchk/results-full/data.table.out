@@ -1,6 +1,42 @@
 Package data.table version 1.12.2
-Package built using 76403/R 3.7.0; x86_64-pc-linux-gnu; 2019-04-17 12:49:14 UTC; unix   
-Checked with rchk version 8de4e6e0566199e4662b2716e5acf000dd84f60b
+Package built using 76619/R 3.7.0; x86_64-pc-linux-gnu; 2019-05-30 20:51:48 UTC; unix   
+Checked with rchk version e904af503d348d9704682081216d92ba35f57e07
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
 Suspicious call (two or more unprotected arguments) to R_compute_identical at rbindlist data.table/src/rbindlist.c:310
+
+
+Function assign
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] unprotected variable names while calling allocating function Rf_any_duplicated data.table/src/assign.c:381
+  [UP] unprotected variable names while calling allocating function Rf_coerceVector data.table/src/assign.c:589
+  [UP] unprotected variable names while calling allocating function Rf_type2char data.table/src/assign.c:591
+  [UP] unprotected variable names while calling allocating function Rf_type2char data.table/src/assign.c:592
+  [UP] unprotected variable names while calling allocating function Rf_warning data.table/src/assign.c:611
+  [UP] unprotected variable names while calling allocating function memrecycle data.table/src/assign.c:619
+  [UP] unprotected variable names while calling allocating function Rf_allocVector data.table/src/assign.c:621
+  [UP] calling allocating function chin(V,V) with argument allocated using Rf_mkString data.table/src/assign.c:718
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete data.table/src/assign.c:783
+
+Function dogroups
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] unprotected variable xknames while calling allocating function R_alloc data.table/src/dogroups.c:83
+  [UP] unprotected variable xknames while calling allocating function Rf_install data.table/src/dogroups.c:87
+  [UP] unprotected variable names while calling allocating function Rprintf data.table/src/dogroups.c:362
+  [UP] unprotected variable names while calling allocating function Rf_allocVector data.table/src/dogroups.c:364
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete data.table/src/dogroups.c:460
+
+Function measurelist
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete data.table/src/fmelt.c:143
+
+Function rbindlist
+  [UP] unprotected variable listNames while calling allocating function Rf_allocVector data.table/src/rbindlist.c:253
+
+Function shift
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete data.table/src/shift.c:141

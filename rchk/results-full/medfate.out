@@ -1,6 +1,6 @@
-Package medfate version 0.7.4
-Package built using 76435/R 3.7.0; x86_64-pc-linux-gnu; 2019-04-29 13:56:36 UTC; unix   
-Checked with rchk version 8de4e6e0566199e4662b2716e5acf000dd84f60b
+Package medfate version 0.8.2
+Package built using 76619/R 3.7.0; x86_64-pc-linux-gnu; 2019-05-30 23:40:55 UTC; unix   
+Checked with rchk version e904af503d348d9704682081216d92ba35f57e07
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
 
@@ -107,11 +107,26 @@ Function _medfate_KmTemp
 Function _medfate_LAIdistribution
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _medfate_LAIdistributionVectors
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _medfate_LAIprofile
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _medfate_LAIprofileVectors
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_Psi2K
   [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _medfate_USDAType
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:2810
+  [PB] has negative depth medfate/src/RcppExports.cpp:2822
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:2822
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:2823
+
+Function _medfate_USDAType_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_VmaxTemp
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -203,32 +218,20 @@ Function _medfate_criticalFirelineIntensity
 Function _medfate_defoliationFraction
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _medfate_doubleEllipseROS
-  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
 Function _medfate_electronLimitedPhotosynthesis
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _medfate_ellipseROS
-  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _medfate_erFactor
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:1761
+  [PB] has negative depth medfate/src/RcppExports.cpp:1773
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:1773
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:1774
 
-Function _medfate_er
-  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _medfate_findFireBrandLoftedHeight
-  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _medfate_erFactor_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_findRhizosphereMaximumConductance
   [UP] ignoring variable <unnamed var:   %51 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _medfate_fireBrandBurningTimeFromCanopyStructure
-  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _medfate_fireBrandFallingHeight
-  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _medfate_fireBrandFlameHeightFromCanopyStructure
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_forest2aboveground
   [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -260,9 +263,6 @@ Function _medfate_gammds
 Function _medfate_gdd
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _medfate_genros
-  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
 Function _medfate_growth
   [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -272,17 +272,35 @@ Function _medfate_growthInput
 Function _medfate_incgam
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _medfate_infiltrationDay
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _medfate_infiltrationAmount
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:1870
+  [PB] has negative depth medfate/src/RcppExports.cpp:1882
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:1882
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:1883
+
+Function _medfate_infiltrationAmount_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_infiltrationRepartition
-  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:1908
+  [PB] has negative depth medfate/src/RcppExports.cpp:1920
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:1920
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:1921
+
+Function _medfate_infiltrationRepartition_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_instantaneousLightExtinctionAbsortion
   [UP] ignoring variable <unnamed var:   %45 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_interceptionGashDay
-  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:1945
+  [PB] has negative depth medfate/src/RcppExports.cpp:1957
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:1957
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:1958
+
+Function _medfate_interceptionGashDay_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_invincgam
   [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -316,6 +334,9 @@ Function _medfate_layerSunlitFraction
 
 Function _medfate_ldrDistribution
   [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _medfate_leafDevelopmentStatus
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_leafPhotosynthesisFunction
   [UP] ignoring variable <unnamed var:   %60 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -354,19 +375,46 @@ Function _medfate_profitMaximization
   [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_psi
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:3345
+  [PB] has negative depth medfate/src/RcppExports.cpp:3357
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:3357
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:3358
 
 Function _medfate_psi2Weibull
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_psi2thetaSaxton
-  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:2699
+  [PB] has negative depth medfate/src/RcppExports.cpp:2711
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:2711
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:2712
+
+Function _medfate_psi2thetaSaxton_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_psi2thetaVanGenuchten
-  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:2737
+  [PB] has negative depth medfate/src/RcppExports.cpp:2749
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:2749
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:2750
+
+Function _medfate_psi2thetaVanGenuchten_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_psiCrit
   [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _medfate_psi_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _medfate_pwb
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:3618
+  [PB] has negative depth medfate/src/RcppExports.cpp:3630
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:3630
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:3631
+
+Function _medfate_pwb_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_radiationDiurnalPattern
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -379,6 +427,12 @@ Function _medfate_regulatedPsiTwoElements
 
 Function _medfate_regulatedPsiXylem
   [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _medfate_resetInputs
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:3534
+  [PB] has negative depth medfate/src/RcppExports.cpp:3546
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:3546
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:3547
 
 Function _medfate_rootDistribution
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -413,56 +467,89 @@ Function _medfate_shrubFuel
 Function _medfate_shrubLAI
   [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _medfate_snowMelt
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:1982
+  [PB] has negative depth medfate/src/RcppExports.cpp:1994
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:1994
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:1995
+
+Function _medfate_snowMelt_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _medfate_soil
-  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:2994
+  [PB] has negative depth medfate/src/RcppExports.cpp:3006
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:3006
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:3007
+
+Function _medfate_soilEvaporation
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:1835
+  [PB] has negative depth medfate/src/RcppExports.cpp:1847
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:1847
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:1848
+
+Function _medfate_soilEvaporationAmount
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:1797
+  [PB] has negative depth medfate/src/RcppExports.cpp:1809
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:1809
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:1810
+
+Function _medfate_soilEvaporationAmount_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _medfate_soilEvaporation_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_soilPlantResistances
   [UP] ignoring variable <unnamed var:   %66 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _medfate_soilTemperatureChange
-  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _medfate_soilTemperatureGradient
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _medfate_soilUSDAType
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _medfate_soilevaporation
-  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _medfate_soilthermalcapacity
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _medfate_soilthermalconductivity
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _medfate_soil_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_speciesBasalArea
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _medfate_speciesCover
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _medfate_speciesDensity
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _medfate_speciesFoliarBiomass
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _medfate_speciesFuel
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _medfate_speciesLAI
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _medfate_speciesPhytovolume
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _medfate_spwb
-  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:3574
+  [PB] has negative depth medfate/src/RcppExports.cpp:3586
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:3586
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:3587
 
 Function _medfate_spwbDay
-  [UP] ignoring variable <unnamed var:   %60 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:3498
+  [PB] has negative depth medfate/src/RcppExports.cpp:3510
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:3510
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:3511
 
-Function _medfate_spwbDay1
-  [UP] ignoring variable <unnamed var:   %45 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _medfate_spwbDay2
-  [UP] ignoring variable <unnamed var:   %63 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _medfate_spwbDay_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %59 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_spwbInput
   [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _medfate_spwbgridDay
-  [UP] ignoring variable <unnamed var:   %57 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _medfate_spwb_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %35 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_stemWaterCapacity
   [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _medfate_stomatalRegulation
-  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_sunshadePhotosynthesisFunction
   [UP] ignoring variable <unnamed var:   %75 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -506,32 +593,110 @@ Function _medfate_symplasticWaterPotential
 Function _medfate_taperFactorSavage
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _medfate_temperatureChange
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:2957
+  [PB] has negative depth medfate/src/RcppExports.cpp:2969
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:2969
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:2970
+
+Function _medfate_temperatureChange_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %35 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _medfate_temperatureDiurnalPattern
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _medfate_temperatureGradient
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:2917
+  [PB] has negative depth medfate/src/RcppExports.cpp:2929
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:2929
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:2930
+
+Function _medfate_temperatureGradient_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_terminalConduitRadius
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _medfate_thermalCapacity
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:3415
+  [PB] has negative depth medfate/src/RcppExports.cpp:3427
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:3427
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:3428
+
+Function _medfate_thermalCapacity_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _medfate_thermalConductivity
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:3450
+  [PB] has negative depth medfate/src/RcppExports.cpp:3462
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:3462
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:3463
+
+Function _medfate_thermalConductivity_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _medfate_theta
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:3275
+  [PB] has negative depth medfate/src/RcppExports.cpp:3287
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:3287
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:3288
 
 Function _medfate_theta2psiSaxton
-  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:2662
+  [PB] has negative depth medfate/src/RcppExports.cpp:2674
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:2674
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:2675
+
+Function _medfate_theta2psiSaxton_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_theta2psiVanGenuchten
-  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:2775
+  [PB] has negative depth medfate/src/RcppExports.cpp:2787
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:2787
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:2788
+
+Function _medfate_theta2psiVanGenuchten_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_thetaFC
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:3029
+  [PB] has negative depth medfate/src/RcppExports.cpp:3041
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:3041
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:3042
+
+Function _medfate_thetaFC_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_thetaSAT
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:3099
+  [PB] has negative depth medfate/src/RcppExports.cpp:3111
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:3111
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:3112
 
 Function _medfate_thetaSATSaxton
-  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:2625
+  [PB] has negative depth medfate/src/RcppExports.cpp:2637
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:2637
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:2638
+
+Function _medfate_thetaSATSaxton_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _medfate_thetaSAT_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_thetaWP
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:3064
+  [PB] has negative depth medfate/src/RcppExports.cpp:3076
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:3076
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:3077
+
+Function _medfate_thetaWP_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _medfate_theta_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_tissueFMC
   [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -539,11 +704,11 @@ Function _medfate_tissueFMC
 Function _medfate_tissueRelativeWaterContent
   [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _medfate_totalFirebrandLoftingTime
-  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _medfate_transpirationGranier
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _medfate_totalGasFlowPersistenceTime
-  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _medfate_transpirationSperry
+  [UP] ignoring variable <unnamed var:   %54 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_treeBasalArea
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -564,25 +729,85 @@ Function _medfate_vanGenuchtenConductance
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_vanGenuchtenParamsCarsel
-  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:2844
+  [PB] has negative depth medfate/src/RcppExports.cpp:2856
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:2856
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:2857
+
+Function _medfate_vanGenuchtenParamsCarsel_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_vanGenuchtenParamsToth
-  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:2882
+  [PB] has negative depth medfate/src/RcppExports.cpp:2894
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:2894
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:2895
+
+Function _medfate_vanGenuchtenParamsToth_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _medfate_verticalInputs
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:2029
+  [PB] has negative depth medfate/src/RcppExports.cpp:2041
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:2041
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:2042
+
+Function _medfate_verticalInputs_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %56 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _medfate_water
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:3310
+  [PB] has negative depth medfate/src/RcppExports.cpp:3322
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:3322
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:3323
+
+Function _medfate_waterExtractable
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:3240
+  [PB] has negative depth medfate/src/RcppExports.cpp:3252
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:3252
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:3253
+
+Function _medfate_waterExtractable_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_waterFC
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:3134
+  [PB] has negative depth medfate/src/RcppExports.cpp:3146
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:3146
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:3147
+
+Function _medfate_waterFC_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_waterSAT
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:3169
+  [PB] has negative depth medfate/src/RcppExports.cpp:3181
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:3181
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:3182
+
+Function _medfate_waterSAT_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_waterTableDepth
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:3380
+  [PB] has negative depth medfate/src/RcppExports.cpp:3392
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:3392
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:3393
+
+Function _medfate_waterTableDepth_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_waterWP
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr medfate/src/RcppExports.cpp:3204
+  [PB] has negative depth medfate/src/RcppExports.cpp:3216
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete medfate/src/RcppExports.cpp:3216
+  [PB] has possible protection stack imbalance medfate/src/RcppExports.cpp:3217
 
-Function _medfate_willBurnWhenHitFloor
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _medfate_waterWP_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _medfate_water_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _medfate_windAdjustmentFactor
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -611,14 +836,11 @@ Function _medfate_xylemPsi
 Function meteoland::penman(double, double, double, double, int, double, double, double, double, double, double, double, double, double, Rcpp::String)
   [UP] ignoring variable <unnamed var:   %49 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function meteoland::penmanmonteith(double, double, double, double, double, double, double, double)
-  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
 Function meteoland::radiation_daylengthseconds(double, double, double, double)
   [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function meteoland::radiation_directDiffuseDay(double, double, double, double, bool, int)
-  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function meteoland::radiation_directDiffuseDay(double, double, double, double, double, double, bool, int)
+  [UP] ignoring variable <unnamed var:   %37 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function meteoland::radiation_julianDay(int, int, int)
   [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
