@@ -1,8 +1,16 @@
-Package bWGR version 1.6.4
-Package built using 76619/R 3.7.0; x86_64-pc-linux-gnu; 2019-05-30 21:06:24 UTC; unix   
+Package bWGR version 1.6.5
+Package built using 76674/R 3.7.0; x86_64-pc-linux-gnu; 2019-06-06 02:01:34 UTC; unix   
 Checked with rchk version e904af503d348d9704682081216d92ba35f57e07
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
 
 Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::as_environment(SEXPREC*)
   [UP] calling allocating function Rcpp::Rcpp_fast_eval(SEXPREC*, SEXPREC*) with argument allocated using Rf_lang2(S:as.environment,?) Rcpp/include/Rcpp/Environment.h:36
@@ -16,6 +24,10 @@ Function Rcpp::Rcpp_protect(SEXPREC*)
 Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function Rcpp::Rcpp_fast_eval(SEXPREC*, SEXPREC*) with argument allocated using Rf_lang2 Rcpp/include/Rcpp/r_cast.h:34
 
 Function _bWGR_BayesA
   [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -123,6 +135,14 @@ Function _bWGR_emRR
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _bWGR_mkr
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bWGR_mkr2X
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _bWGR_mrr
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -131,11 +151,7 @@ Function _bWGR_mrr2X
   [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _bWGR_mrrV2
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _bWGR_mrrV3
+Function _bWGR_mrrR
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -143,17 +159,21 @@ Function _bWGR_mtgsru
   [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %37 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function mkr(Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::Matrix<14, Rcpp::PreserveStorage>)
+  [UP] ignoring variable <unnamed var:   %201 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function mkr2X(Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::Matrix<14, Rcpp::PreserveStorage>)
+  [UP] ignoring variable <unnamed var:   %268 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %312 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function mrr(Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::Matrix<14, Rcpp::PreserveStorage>)
-  [UP] ignoring variable <unnamed var:   %199 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %198 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function mrr2X(Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::Matrix<14, Rcpp::PreserveStorage>)
   [UP] ignoring variable <unnamed var:   %272 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %314 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function mrrV2(Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::Matrix<14, Rcpp::PreserveStorage>)
-  [UP] ignoring variable <unnamed var:   %198 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function mrrV3(Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::Matrix<14, Rcpp::PreserveStorage>)
+Function mrrR(Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::Matrix<14, Rcpp::PreserveStorage>)
   [UP] ignoring variable <unnamed var:   %215 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function mtgsru(Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::Vector<14, Rcpp::PreserveStorage>, Rcpp::Matrix<14, Rcpp::PreserveStorage>, int)
