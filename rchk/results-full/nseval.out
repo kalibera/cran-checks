@@ -1,0 +1,47 @@
+Package nseval version 0.4
+Package built using 76734/R 3.7.0; x86_64-pc-linux-gnu; 2019-06-24 12:28:43 UTC; unix   
+Checked with rchk version 6400f4a0aa14a4379fcc72d8dbf07a49b4725e07
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+
+Function _arg_dots
+  [UP] unprotected variable promise while calling allocating function Rf_allocSExp nseval/src/getpromise.c:605
+  [UP] unprotected variable promise while calling allocating function Rf_allocSExp nseval/src/getpromise.c:609
+  [UP] unprotected variable promise while calling allocating function Rf_allocSExp nseval/src/getpromise.c:611
+  [PB] has negative depth nseval/src/getpromise.c:617
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete nseval/src/getpromise.c:617
+  [PB] has possible protection stack imbalance nseval/src/getpromise.c:619
+
+Function _dots_unpack
+  [UP] unprotected variable input_names while calling allocating function _quotation_to_promsxp nseval/src/dots.c:76
+
+Function _env_to_dots
+  [UP] unprotected variable found while calling allocating function append_item nseval/src/dots.c:386
+  [UP] calling allocating function append_item with argument allocated using make_into_promsxp nseval/src/dots.c:391
+  [UP] calling allocating function make_into_promsxp with a fresh pointer (found <arg 1>) nseval/src/dots.c:391
+  [PB] has negative depth nseval/src/dots.c:399
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete nseval/src/dots.c:399
+  [PB] has possible protection stack imbalance nseval/src/dots.c:401
+
+Function _flist_to_dotsxp
+  [UP] unprotected variable names while calling allocating function Rf_allocList nseval/src/dots.c:196
+  [UP] unprotected variable names while calling allocating function Rf_install nseval/src/dots.c:201
+  [UP] unprotected variable names while calling allocating function _quotation_to_promsxp nseval/src/dots.c:206
+
+Function _locate
+  [UP] unprotected variable x while calling allocating function Rf_findVarInFrame3(?,S:force,?) nseval/src/getpromise.c:40
+  [UP] unprotected variable x while calling allocating function Rf_install nseval/src/getpromise.c:40
+  [UP] unprotected variable x while calling allocating function Rf_list2 nseval/src/getpromise.c:41
+  [UP] unprotected variable x while calling allocating function R_forceAndCall nseval/src/getpromise.c:42
+
+Function append_item
+  [PB] has possible protection stack imbalance nseval/src/dots.c:344
+
+Function arg_get
+  [UP] calling allocating function unwrap_promise with a fresh pointer (binding <arg 1>) nseval/src/getpromise.c:471
+  [UP] calling allocating function arg_get_from_nonpromise with a fresh pointer (binding <arg 2>) nseval/src/getpromise.c:486
+
+Function unwrap_promise
+  [UP] unprotected variable tortoise while calling allocating function unwrap_step nseval/src/getpromise.c:151
+  [UP] unprotected variable tortoise while calling allocating function unwrap_step nseval/src/getpromise.c:162
+  [UP] calling allocating function unwrap_step with a fresh pointer (tortoise <arg 1>) nseval/src/getpromise.c:171
