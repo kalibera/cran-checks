@@ -1,0 +1,100 @@
+* installing *source* package ‘RxODE’ ...
+** package ‘RxODE’ successfully unpacked and MD5 sums checked
+** using staged installation
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for gcc option to support OpenMP... -fopenmp
+checking whether OpenMP will work in a package... yes
+configure: creating ./config.status
+config.status: creating src/Makevars
+--------[begin src/Makevars]--------
+# -*- mode: makefile-gmake -*-
+CXX_STD     = CXX11
+
+################################################################################
+## Package library flags.
+PKG_LIBS    = $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) -fopenmp
+
+# Release options
+PKG_CFLAGS  = -fopenmp -D_isRxODE_
+PKG_CPPFLAGS = -fopenmp -D_isRxODE_
+
+SOURCES_C = call_dvode.c dop853.c tran.c omegaChol.c init.c par_solve.c cfode.c common.c corfailure.c correction.c daxpy.c ddot.c dgefa.c dgesl.c dscal.c fnorm.c idamax.c intdy.c lsoda.c methodswitch.c orderswitch.c prja.c scaleh.c solsy.c stoda.c vmnorm.c strdup_printf.c rprintf.c lincmt.c box.c 
+SOURCES_CPP = RcppExports.cpp WinDrive.cpp rxInv.cpp rxData.cpp etTran.cpp et.cpp rxStack.cpp
+SOURCES_FORTAN = dlsoda.f opkda1_abbr.f opkda2.f
+
+OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_FORTAN:.f=.o) $(SOURCES_CPP:.cpp=.o)
+
+.PHONY: all 
+all: $(SHLIB)
+#$(SHLIB): mylibs
+# mylibs:  
+# 	$(CC) -I"$(R_INCLUDE_DIR)" $(CFLAGS) $(CPPFLAGS) $(SHLIB_CFLAGS) $(CPICFLAGS) -I../inst/include/ ../inst/include/RxODE_model.h || $(CC) --version
+
+
+--------[end src/Makevars]--------
+** libs
+make[1]: Entering directory '/tmp/RtmpzM70Rb/R.INSTALL1ff677fbffb4/RxODE/src'
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c call_dvode.c -o call_dvode.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c dop853.c -o dop853.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c tran.c -o tran.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c omegaChol.c -o omegaChol.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c init.c -o init.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c par_solve.c -o par_solve.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c cfode.c -o cfode.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c common.c -o common.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c corfailure.c -o corfailure.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c correction.c -o correction.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c daxpy.c -o daxpy.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c ddot.c -o ddot.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c dgefa.c -o dgefa.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c dgesl.c -o dgesl.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c dscal.c -o dscal.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c fnorm.c -o fnorm.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c idamax.c -o idamax.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c intdy.c -o intdy.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c lsoda.c -o lsoda.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c methodswitch.c -o methodswitch.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c orderswitch.c -o orderswitch.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c prja.c -o prja.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c scaleh.c -o scaleh.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c solsy.c -o solsy.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c stoda.c -o stoda.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c vmnorm.c -o vmnorm.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c strdup_printf.c -o strdup_printf.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c rprintf.c -o rprintf.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c lincmt.c -o lincmt.o
+gcc -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include  -fopenmp -D_isRxODE_ -fpic  -g -O2  -c box.c -o box.o
+gfortran -fno-optimize-sibling-calls  -fpic  -g -O2  -c dlsoda.f -o dlsoda.o
+gfortran -fno-optimize-sibling-calls  -fpic  -g -O2  -c opkda1_abbr.f -o opkda1_abbr.o
+gfortran -fno-optimize-sibling-calls  -fpic  -g -O2  -c opkda2.f -o opkda2.o
+g++ -std=gnu++11 -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include   -fpic  -g -O2  -c RcppExports.cpp -o RcppExports.o
+g++ -std=gnu++11 -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include   -fpic  -g -O2  -c WinDrive.cpp -o WinDrive.o
+g++ -std=gnu++11 -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include   -fpic  -g -O2  -c rxInv.cpp -o rxInv.o
+g++ -std=gnu++11 -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include   -fpic  -g -O2  -c rxData.cpp -o rxData.o
+g++ -std=gnu++11 -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include   -fpic  -g -O2  -c etTran.cpp -o etTran.o
+g++ -std=gnu++11 -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include   -fpic  -g -O2  -c et.cpp -o et.o
+g++ -std=gnu++11 -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG -fopenmp -D_isRxODE_ -I"/var/scratch2/tomas/cran/rcnst/lib/dparser/include" -I"/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include" -I"/var/scratch2/tomas/cran/rcnst/lib/RcppArmadillo/include" -I"/var/scratch2/tomas/cran/rcnst/lib/PreciseSums/include" -I/usr/local/include   -fpic  -g -O2  -c rxStack.cpp -o rxStack.o
+g++ -std=gnu++11 -shared -L/usr/local/lib64 -o RxODE.so call_dvode.o dop853.o tran.o omegaChol.o init.o par_solve.o cfode.o common.o corfailure.o correction.o daxpy.o ddot.o dgefa.o dgesl.o dscal.o fnorm.o idamax.o intdy.o lsoda.o methodswitch.o orderswitch.o prja.o scaleh.o solsy.o stoda.o vmnorm.o strdup_printf.o rprintf.o lincmt.o box.o dlsoda.o opkda1_abbr.o opkda2.o RcppExports.o WinDrive.o rxInv.o rxData.o etTran.o et.o rxStack.o -L/var/scratch2/tomas/cran/rcnst/build/lib -lRlapack -L/var/scratch2/tomas/cran/rcnst/build/lib -lRblas -lgfortran -lm -lquadmath -fopenmp -lgfortran -lm -lquadmath
+make[1]: Leaving directory '/tmp/RtmpzM70Rb/R.INSTALL1ff677fbffb4/RxODE/src'
+installing via 'install.libs.R' to /var/scratch2/tomas/cran/rcnst/lib/00LOCK-RxODE/00new/RxODE
+** R
+** demo
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (RxODE)

@@ -1,0 +1,331 @@
+
+R Under development (unstable) (2019-06-25 r76738) -- "Unsuffered Consequences"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "rsparse"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('rsparse')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("FTRL")
+> ### * FTRL
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: FTRL
+> ### Title: Creates FTRL proximal logistic regression model.
+> ### Aliases: FTRL
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> library(rsparse)
+> library(Matrix)
+> i = sample(1000, 1000 * 100, TRUE)
+> j = sample(1000, 1000 * 100, TRUE)
+> y = sample(c(0, 1), 1000, TRUE)
+> x = sample(c(-1, 1), 1000 * 100, TRUE)
+> odd = seq(1, 99, 2)
+> x[i %in% which(y == 1) & j %in% odd] = 1
+> m = sparseMatrix(i = i, j = j, x = x, dims = c(1000, 1000), giveCsparse = FALSE)
+> x = as(m, "RsparseMatrix")
+> 
+> ftrl = FTRL$new(learning_rate = 0.01, learning_rate_decay = 0.1,
++ lambda = 10, l1_ratio = 1, dropout = 0)
+> ftrl$partial_fit(x, y)
+> 
+> w = ftrl$coef()
+> head(w)
+[1] 0.04120295 0.00000000 0.02203628 0.00000000 0.03788795 0.00000000
+> sum(w != 0)
+[1] 88
+> p = ftrl$predict(m)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:Matrix’
+
+> nameEx("FactorizationMachine")
+> ### * FactorizationMachine
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: FactorizationMachine
+> ### Title: Creates FactorizationMachine model.
+> ### Aliases: FactorizationMachine
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("GloVe")
+> ### * GloVe
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: GloVe
+> ### Title: Creates Global Vectors matrix factorization model.
+> ### Aliases: GloVe
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("LinearFlow")
+> ### * LinearFlow
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: LinearFlow
+> ### Title: Creates Linear-FLow model for one-class collaborative filtering
+> ### Aliases: LinearFlow
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data('movielens100k')
+> train = movielens100k[1:900, ]
+> cv = movielens100k[901:nrow(movielens100k), ]
+> model = LinearFlow$new(rank = 10, lambda = 0, init = NULL,
++                        solve_right_singular_vectors = "svd")
+> user_emb = model$fit_transform(train)
+INFO  [12:18:07.741] soft_als: iter 001, frobenious norm change 40723.765 loss NA  
+INFO  [12:18:07.923] soft_als: iter 002, frobenious norm change 0.453 loss NA  
+INFO  [12:18:07.978] soft_als: iter 003, frobenious norm change 0.036 loss NA  
+INFO  [12:18:08.035] soft_als: iter 004, frobenious norm change 0.006 loss NA  
+INFO  [12:18:08.091] soft_als: iter 005, frobenious norm change 0.001 loss NA  
+INFO  [12:18:08.449] soft_als: iter 006, frobenious norm change 0.000 loss NA  
+INFO  [12:18:08.483] soft_impute: converged with tol 0.001000 after 6 iter 
+> preds = model$predict(cv, k = 10)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("PureSVD")
+> ### * PureSVD
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: PureSVD
+> ### Title: Soft-SVD decompomposition
+> ### Aliases: PureSVD
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data('movielens100k')
+> i_train = sample(nrow(movielens100k), 900)
+> i_test = setdiff(seq_len(nrow(movielens100k)), i_train)
+> train = movielens100k[i_train, ]
+> test = movielens100k[i_test, ]
+> rank = 32
+> lambda = 0
+> model = PureSVD$new(rank = rank,  lambda = lambda)
+> user_emb = model$fit_transform(sign(test), n_iter = 100, convergence_tol = 0.00001)
+INFO  [12:18:10.178] soft_als: iter 001, frobenious norm change 117.343 loss NA  
+INFO  [12:18:10.260] soft_als: iter 002, frobenious norm change 0.062 loss NA  
+INFO  [12:18:10.341] soft_als: iter 003, frobenious norm change 0.010 loss NA  
+INFO  [12:18:10.737] soft_als: iter 004, frobenious norm change 0.003 loss NA  
+INFO  [12:18:10.815] soft_als: iter 005, frobenious norm change 0.002 loss NA  
+INFO  [12:18:10.888] soft_als: iter 006, frobenious norm change 0.001 loss NA  
+INFO  [12:18:11.215] soft_als: iter 007, frobenious norm change 0.000 loss NA  
+INFO  [12:18:11.291] soft_als: iter 008, frobenious norm change 0.000 loss NA  
+INFO  [12:18:11.361] soft_als: iter 009, frobenious norm change 0.000 loss NA  
+INFO  [12:18:11.687] soft_als: iter 010, frobenious norm change 0.000 loss NA  
+INFO  [12:18:11.758] soft_als: iter 011, frobenious norm change 0.000 loss NA  
+INFO  [12:18:12.149] soft_als: iter 012, frobenious norm change 0.000 loss NA  
+INFO  [12:18:12.225] soft_als: iter 013, frobenious norm change 0.000 loss NA  
+INFO  [12:18:12.298] soft_als: iter 014, frobenious norm change 0.000 loss NA  
+INFO  [12:18:12.368] soft_als: iter 015, frobenious norm change 0.000 loss NA  
+INFO  [12:18:12.726] soft_als: iter 016, frobenious norm change 0.000 loss NA  
+INFO  [12:18:12.802] soft_als: iter 017, frobenious norm change 0.000 loss NA  
+INFO  [12:18:12.883] soft_als: iter 018, frobenious norm change 0.000 loss NA  
+INFO  [12:18:13.268] soft_als: iter 019, frobenious norm change 0.000 loss NA  
+INFO  [12:18:13.343] soft_als: iter 020, frobenious norm change 0.000 loss NA  
+INFO  [12:18:13.424] soft_als: iter 021, frobenious norm change 0.000 loss NA  
+INFO  [12:18:13.854] soft_als: iter 022, frobenious norm change 0.000 loss NA  
+INFO  [12:18:13.896] soft_impute: converged with tol 0.000010 after 22 iter 
+> item_emb = model$components
+> preds = model$predict(sign(test), k = 1500, not_recommend = NULL)
+> mean(ap_k(preds, actual = test))
+[1] 0.9268457
+> 
+> 
+> 
+> cleanEx()
+> nameEx("WRMF")
+> ### * WRMF
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: WRMF
+> ### Title: Weighted Regularized Matrix Facrtorization for collaborative
+> ###   filtering
+> ### Aliases: WRMF
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data('movielens100k')
+> train = movielens100k[1:900, ]
+> cv = movielens100k[901:nrow(movielens100k), ]
+> model = WRMF$new(rank = 5,  lambda = 0, feedback = 'implicit')
+> user_emb = model$fit_transform(train, n_iter = 5, convergence_tol = -1)
+INFO  [12:18:16.362] starting factorization with 4 threads 
+INFO  [12:18:16.983] iter 1 loss = 0.6178  
+INFO  [12:18:17.570] iter 2 loss = 0.2233  
+INFO  [12:18:18.082] iter 3 loss = 0.2115  
+INFO  [12:18:18.618] iter 4 loss = 0.2099  
+INFO  [12:18:19.240] iter 5 loss = 0.2096  
+> item_emb = model$components
+> preds = model$predict(cv, k = 10, not_recommend = cv)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("matmult")
+> ### * matmult
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: matmult
+> ### Title: Multithreaded Sparse-Dense Matrix Multiplication
+> ### Aliases: matmult %*%,dgRMatrix,matrix-method
+> ###   tcrossprod,dgRMatrix,matrix-method %*%,matrix,dgCMatrix-method
+> ###   crossprod,matrix,dgCMatrix-method
+> 
+> ### ** Examples
+> 
+> library(Matrix)
+> data("movielens100k")
+> k = 10
+> nc = ncol(movielens100k)
+> nr = nrow(movielens100k)
+> x_nc = matrix(rep(1:k, nc), nrow = nc)
+> x_nr = t(matrix(rep(1:k, nr), nrow = nr))
+> csc = movielens100k
+> csr = as(movielens100k, "RsparseMatrix")
+> dense = as.matrix(movielens100k)
+> identical(csr %*% x_nc, dense %*% x_nc)
+[1] TRUE
+> identical(x_nr %*% csc, x_nr %*% dense)
+[1] TRUE
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:Matrix’
+
+> nameEx("metrics")
+> ### * metrics
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: metrics
+> ### Title: Ranking Metrics for Top-K Items
+> ### Aliases: metrics ap_k ndcg_k
+> 
+> ### ** Examples
+> 
+> predictions = matrix(
++   c(5L, 7L, 9L, 2L),
++   nrow = 1
++ )
+> actual = matrix(
++   c(0, 0, 0, 0, 1, 0, 1, 0, 1, 0),
++   nrow = 1
++ )
+> actual = as(actual, "RsparseMatrix")
+> identical(rsparse::ap_k(predictions, actual), 1)
+[1] TRUE
+> 
+> 
+> 
+> cleanEx()
+> nameEx("slice")
+> ### * slice
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: slice
+> ### Title: CSR Matrices Slicing
+> ### Aliases: slice [,RsparseMatrix,index,index,logical-method
+> ###   [,RsparseMatrix,missing,index,logical-method
+> ###   [,RsparseMatrix,index,missing,logical-method
+> ###   [,RsparseMatrix,missing,missing,logical-method
+> 
+> ### ** Examples
+> 
+> library(Matrix)
+> library(rsparse)
+> # dgCMatrix - CSC
+> m = rsparsematrix(20, 20, 0.1)
+> # make CSR
+> m = as(m, "RsparseMatrix")
+> inherits(m[1:2, ], "RsparseMatrix")
+[1] TRUE
+> inherits(m[1:2, 3:4], "RsparseMatrix")
+[1] TRUE
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:Matrix’
+
+> nameEx("soft_impute")
+> ### * soft_impute
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: soft_impute
+> ### Title: SoftImpute/SoftSVD matrix factorization
+> ### Aliases: soft_impute soft_svd
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  28.82 0.83 30.305 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

@@ -1,0 +1,900 @@
+
+R Under development (unstable) (2019-06-25 r76738) -- "Unsuffered Consequences"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> Sys.setenv("R_TESTS" = "")
+> library(testthat)
+> library(rsparse)
+> library(data.table)
+> library(Matrix)
+> options(rsparse_omp_threads = 1L)
+> logger = lgr::get_logger('rsparse')
+> logger$set_threshold('warn')
+> data("movielens100k")
+> test_check("rsparse")
+ERROR: modification of compiler constant of type language, length 12
+ERROR: the modified constant is function body:
+{
+    if (!inherits(class(x), private$internal_matrix_format)) {
+        x = as(x, private$internal_matrix_format)
+    }
+    x_ncol = ncol(x)
+    if (!private$is_initialized) {
+        private$n_features = x_ncol
+        private$w0 = -1064052110L
+        fill_float_vector(private$w0, 0)
+        private$w = integer(private$n_features)
+        fill_float_vector_randn(private$w, 0.001)
+        private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix_randn(private$v, 0.001)
+        private$grad_w2 = integer(private$n_features)
+        fill_float_vector(private$grad_w2, 1)
+        private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix(private$grad_v2, 1)
+        private$ptr_param = fm_create_param(private$learning_rate_w, 
+            private$learning_rate_v, private$rank, private$lambda_w, 
+            private$lambda_v, private$w0, private$w, private$v, 
+            private$grad_w2, private$grad_v2, private$family, 
+            private$intercept)
+        private$ptr_model = fm_create_model(private$ptr_param)
+        private$is_initialized = TRUE
+    }
+    stopifnot(x_ncol == private$n_features)
+    stopifnot(nrow(x) == length(y))
+    stopifnot(is.numeric(weights) && length(weights) == length(y))
+    stopifnot(!anyNA(y))
+    if (private$family == "binomial") 
+        y = ifelse(y == 1, 1, -1)
+    if (anyNA(x@x)) 
+        stop("NA's in input matrix are not allowed")
+    p = fm_partial_fit(private$ptr_model, x, y, weights, do_update = TRUE, 
+        n_threads = getOption("rsparse_omp_threads", 1L))
+    invisible(p)
+}
+ERROR: the body was originally:
+{
+    if (!inherits(class(x), private$internal_matrix_format)) {
+        x = as(x, private$internal_matrix_format)
+    }
+    x_ncol = ncol(x)
+    if (!private$is_initialized) {
+        private$n_features = x_ncol
+        private$w0 = 0L
+        fill_float_vector(private$w0, 0)
+        private$w = integer(private$n_features)
+        fill_float_vector_randn(private$w, 0.001)
+        private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix_randn(private$v, 0.001)
+        private$grad_w2 = integer(private$n_features)
+        fill_float_vector(private$grad_w2, 1)
+        private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix(private$grad_v2, 1)
+        private$ptr_param = fm_create_param(private$learning_rate_w, 
+            private$learning_rate_v, private$rank, private$lambda_w, 
+            private$lambda_v, private$w0, private$w, private$v, 
+            private$grad_w2, private$grad_v2, private$family, 
+            private$intercept)
+        private$ptr_model = fm_create_model(private$ptr_param)
+        private$is_initialized = TRUE
+    }
+    stopifnot(x_ncol == private$n_features)
+    stopifnot(nrow(x) == length(y))
+    stopifnot(is.numeric(weights) && length(weights) == length(y))
+    stopifnot(!anyNA(y))
+    if (private$family == "binomial") 
+        y = ifelse(y == 1, 1, -1)
+    if (anyNA(x@x)) 
+        stop("NA's in input matrix are not allowed")
+    p = fm_partial_fit(private$ptr_model, x, y, weights, do_update = TRUE, 
+        n_threads = getOption("rsparse_omp_threads", 1L))
+    invisible(p)
+}
+ERROR: modification of compiler constant of type language, length 3
+ERROR: the modified value of the constant is:
+if (!private$is_initialized) {
+    private$n_features = x_ncol
+    private$w0 = -1064052110L
+    fill_float_vector(private$w0, 0)
+    private$w = integer(private$n_features)
+    fill_float_vector_randn(private$w, 0.001)
+    private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+    fill_float_matrix_randn(private$v, 0.001)
+    private$grad_w2 = integer(private$n_features)
+    fill_float_vector(private$grad_w2, 1)
+    private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+    fill_float_matrix(private$grad_v2, 1)
+    private$ptr_param = fm_create_param(private$learning_rate_w, 
+        private$learning_rate_v, private$rank, private$lambda_w, 
+        private$lambda_v, private$w0, private$w, private$v, private$grad_w2, 
+        private$grad_v2, private$family, private$intercept)
+    private$ptr_model = fm_create_model(private$ptr_param)
+    private$is_initialized = TRUE
+}
+ERROR: the original value of the constant is:
+if (!private$is_initialized) {
+    private$n_features = x_ncol
+    private$w0 = 0L
+    fill_float_vector(private$w0, 0)
+    private$w = integer(private$n_features)
+    fill_float_vector_randn(private$w, 0.001)
+    private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+    fill_float_matrix_randn(private$v, 0.001)
+    private$grad_w2 = integer(private$n_features)
+    fill_float_vector(private$grad_w2, 1)
+    private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+    fill_float_matrix(private$grad_v2, 1)
+    private$ptr_param = fm_create_param(private$learning_rate_w, 
+        private$learning_rate_v, private$rank, private$lambda_w, 
+        private$lambda_v, private$w0, private$w, private$v, private$grad_w2, 
+        private$grad_v2, private$family, private$intercept)
+    private$ptr_model = fm_create_model(private$ptr_param)
+    private$is_initialized = TRUE
+}
+ERROR: the modified constant is at index 25
+ERROR: the modified constant is in this function body:
+{
+    if (!inherits(class(x), private$internal_matrix_format)) {
+        x = as(x, private$internal_matrix_format)
+    }
+    x_ncol = ncol(x)
+    if (!private$is_initialized) {
+        private$n_features = x_ncol
+        private$w0 = -1064052110L
+        fill_float_vector(private$w0, 0)
+        private$w = integer(private$n_features)
+        fill_float_vector_randn(private$w, 0.001)
+        private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix_randn(private$v, 0.001)
+        private$grad_w2 = integer(private$n_features)
+        fill_float_vector(private$grad_w2, 1)
+        private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix(private$grad_v2, 1)
+        private$ptr_param = fm_create_param(private$learning_rate_w, 
+            private$learning_rate_v, private$rank, private$lambda_w, 
+            private$lambda_v, private$w0, private$w, private$v, 
+            private$grad_w2, private$grad_v2, private$family, 
+            private$intercept)
+        private$ptr_model = fm_create_model(private$ptr_param)
+        private$is_initialized = TRUE
+    }
+    stopifnot(x_ncol == private$n_features)
+    stopifnot(nrow(x) == length(y))
+    stopifnot(is.numeric(weights) && length(weights) == length(y))
+    stopifnot(!anyNA(y))
+    if (private$family == "binomial") 
+        y = ifelse(y == 1, 1, -1)
+    if (anyNA(x@x)) 
+        stop("NA's in input matrix are not allowed")
+    p = fm_partial_fit(private$ptr_model, x, y, weights, do_update = TRUE, 
+        n_threads = getOption("rsparse_omp_threads", 1L))
+    invisible(p)
+}
+ERROR: modification of compiler constant of type integer, length 1
+ERROR: the modified value of the constant is:
+[1] -1064052110
+ERROR: the original value of the constant is:
+[1] 0
+ERROR: the modified constant is at index 30
+ERROR: the modified constant is in this function body:
+{
+    if (!inherits(class(x), private$internal_matrix_format)) {
+        x = as(x, private$internal_matrix_format)
+    }
+    x_ncol = ncol(x)
+    if (!private$is_initialized) {
+        private$n_features = x_ncol
+        private$w0 = -1064052110L
+        fill_float_vector(private$w0, 0)
+        private$w = integer(private$n_features)
+        fill_float_vector_randn(private$w, 0.001)
+        private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix_randn(private$v, 0.001)
+        private$grad_w2 = integer(private$n_features)
+        fill_float_vector(private$grad_w2, 1)
+        private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix(private$grad_v2, 1)
+        private$ptr_param = fm_create_param(private$learning_rate_w, 
+            private$learning_rate_v, private$rank, private$lambda_w, 
+            private$lambda_v, private$w0, private$w, private$v, 
+            private$grad_w2, private$grad_v2, private$family, 
+            private$intercept)
+        private$ptr_model = fm_create_model(private$ptr_param)
+        private$is_initialized = TRUE
+    }
+    stopifnot(x_ncol == private$n_features)
+    stopifnot(nrow(x) == length(y))
+    stopifnot(is.numeric(weights) && length(weights) == length(y))
+    stopifnot(!anyNA(y))
+    if (private$family == "binomial") 
+        y = ifelse(y == 1, 1, -1)
+    if (anyNA(x@x)) 
+        stop("NA's in input matrix are not allowed")
+    p = fm_partial_fit(private$ptr_model, x, y, weights, do_update = TRUE, 
+        n_threads = getOption("rsparse_omp_threads", 1L))
+    invisible(p)
+}
+ERROR: modification of compiler constant of type language, length 3
+ERROR: the modified value of the constant is:
+private$w0 = -1064052110L
+ERROR: the original value of the constant is:
+private$w0 = 0L
+ERROR: the modified constant is at index 31
+ERROR: the modified constant is in this function body:
+{
+    if (!inherits(class(x), private$internal_matrix_format)) {
+        x = as(x, private$internal_matrix_format)
+    }
+    x_ncol = ncol(x)
+    if (!private$is_initialized) {
+        private$n_features = x_ncol
+        private$w0 = -1064052110L
+        fill_float_vector(private$w0, 0)
+        private$w = integer(private$n_features)
+        fill_float_vector_randn(private$w, 0.001)
+        private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix_randn(private$v, 0.001)
+        private$grad_w2 = integer(private$n_features)
+        fill_float_vector(private$grad_w2, 1)
+        private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix(private$grad_v2, 1)
+        private$ptr_param = fm_create_param(private$learning_rate_w, 
+            private$learning_rate_v, private$rank, private$lambda_w, 
+            private$lambda_v, private$w0, private$w, private$v, 
+            private$grad_w2, private$grad_v2, private$family, 
+            private$intercept)
+        private$ptr_model = fm_create_model(private$ptr_param)
+        private$is_initialized = TRUE
+    }
+    stopifnot(x_ncol == private$n_features)
+    stopifnot(nrow(x) == length(y))
+    stopifnot(is.numeric(weights) && length(weights) == length(y))
+    stopifnot(!anyNA(y))
+    if (private$family == "binomial") 
+        y = ifelse(y == 1, 1, -1)
+    if (anyNA(x@x)) 
+        stop("NA's in input matrix are not allowed")
+    p = fm_partial_fit(private$ptr_model, x, y, weights, do_update = TRUE, 
+        n_threads = getOption("rsparse_omp_threads", 1L))
+    invisible(p)
+}
+ERROR: modification of compiler constant of type language, length 4
+ERROR: the modified value of the constant is:
+`$<-`(`*tmp*`, w0, value = -1064052110L)
+ERROR: the original value of the constant is:
+`$<-`(`*tmp*`, w0, value = 0L)
+ERROR: the modified constant is at index 32
+ERROR: the modified constant is in this function body:
+{
+    if (!inherits(class(x), private$internal_matrix_format)) {
+        x = as(x, private$internal_matrix_format)
+    }
+    x_ncol = ncol(x)
+    if (!private$is_initialized) {
+        private$n_features = x_ncol
+        private$w0 = -1064052110L
+        fill_float_vector(private$w0, 0)
+        private$w = integer(private$n_features)
+        fill_float_vector_randn(private$w, 0.001)
+        private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix_randn(private$v, 0.001)
+        private$grad_w2 = integer(private$n_features)
+        fill_float_vector(private$grad_w2, 1)
+        private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix(private$grad_v2, 1)
+        private$ptr_param = fm_create_param(private$learning_rate_w, 
+            private$learning_rate_v, private$rank, private$lambda_w, 
+            private$lambda_v, private$w0, private$w, private$v, 
+            private$grad_w2, private$grad_v2, private$family, 
+            private$intercept)
+        private$ptr_model = fm_create_model(private$ptr_param)
+        private$is_initialized = TRUE
+    }
+    stopifnot(x_ncol == private$n_features)
+    stopifnot(nrow(x) == length(y))
+    stopifnot(is.numeric(weights) && length(weights) == length(y))
+    stopifnot(!anyNA(y))
+    if (private$family == "binomial") 
+        y = ifelse(y == 1, 1, -1)
+    if (anyNA(x@x)) 
+        stop("NA's in input matrix are not allowed")
+    p = fm_partial_fit(private$ptr_model, x, y, weights, do_update = TRUE, 
+        n_threads = getOption("rsparse_omp_threads", 1L))
+    invisible(p)
+}
+ERROR: modification of compiler constant of type language, length 4
+ERROR: the modified value of the constant is:
+`$<-`(private, w0, value = -1064052110L)
+ERROR: the original value of the constant is:
+`$<-`(private, w0, value = 0L)
+ERROR: the modified constant is at index 34
+ERROR: the modified constant is in this function body:
+{
+    if (!inherits(class(x), private$internal_matrix_format)) {
+        x = as(x, private$internal_matrix_format)
+    }
+    x_ncol = ncol(x)
+    if (!private$is_initialized) {
+        private$n_features = x_ncol
+        private$w0 = -1064052110L
+        fill_float_vector(private$w0, 0)
+        private$w = integer(private$n_features)
+        fill_float_vector_randn(private$w, 0.001)
+        private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix_randn(private$v, 0.001)
+        private$grad_w2 = integer(private$n_features)
+        fill_float_vector(private$grad_w2, 1)
+        private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix(private$grad_v2, 1)
+        private$ptr_param = fm_create_param(private$learning_rate_w, 
+            private$learning_rate_v, private$rank, private$lambda_w, 
+            private$lambda_v, private$w0, private$w, private$v, 
+            private$grad_w2, private$grad_v2, private$family, 
+            private$intercept)
+        private$ptr_model = fm_create_model(private$ptr_param)
+        private$is_initialized = TRUE
+    }
+    stopifnot(x_ncol == private$n_features)
+    stopifnot(nrow(x) == length(y))
+    stopifnot(is.numeric(weights) && length(weights) == length(y))
+    stopifnot(!anyNA(y))
+    if (private$family == "binomial") 
+        y = ifelse(y == 1, 1, -1)
+    if (anyNA(x@x)) 
+        stop("NA's in input matrix are not allowed")
+    p = fm_partial_fit(private$ptr_model, x, y, weights, do_update = TRUE, 
+        n_threads = getOption("rsparse_omp_threads", 1L))
+    invisible(p)
+}
+ERROR: modification of compiler constant of type language, length 12
+ERROR: the modified constant is function body:
+{
+    if (!inherits(class(x), private$internal_matrix_format)) {
+        x = as(x, private$internal_matrix_format)
+    }
+    x_ncol = ncol(x)
+    if (!private$is_initialized) {
+        private$n_features = x_ncol
+        private$w0 = -1064052110L
+        fill_float_vector(private$w0, 0)
+        private$w = integer(private$n_features)
+        fill_float_vector_randn(private$w, 0.001)
+        private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix_randn(private$v, 0.001)
+        private$grad_w2 = integer(private$n_features)
+        fill_float_vector(private$grad_w2, 1)
+        private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix(private$grad_v2, 1)
+        private$ptr_param = fm_create_param(private$learning_rate_w, 
+            private$learning_rate_v, private$rank, private$lambda_w, 
+            private$lambda_v, private$w0, private$w, private$v, 
+            private$grad_w2, private$grad_v2, private$family, 
+            private$intercept)
+        private$ptr_model = fm_create_model(private$ptr_param)
+        private$is_initialized = TRUE
+    }
+    stopifnot(x_ncol == private$n_features)
+    stopifnot(nrow(x) == length(y))
+    stopifnot(is.numeric(weights) && length(weights) == length(y))
+    stopifnot(!anyNA(y))
+    if (private$family == "binomial") 
+        y = ifelse(y == 1, 1, -1)
+    if (anyNA(x@x)) 
+        stop("NA's in input matrix are not allowed")
+    p = fm_partial_fit(private$ptr_model, x, y, weights, do_update = TRUE, 
+        n_threads = getOption("rsparse_omp_threads", 1L))
+    invisible(p)
+}
+ERROR: the body was originally:
+{
+    if (!inherits(class(x), private$internal_matrix_format)) {
+        x = as(x, private$internal_matrix_format)
+    }
+    x_ncol = ncol(x)
+    if (!private$is_initialized) {
+        private$n_features = x_ncol
+        private$w0 = 0L
+        fill_float_vector(private$w0, 0)
+        private$w = integer(private$n_features)
+        fill_float_vector_randn(private$w, 0.001)
+        private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix_randn(private$v, 0.001)
+        private$grad_w2 = integer(private$n_features)
+        fill_float_vector(private$grad_w2, 1)
+        private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix(private$grad_v2, 1)
+        private$ptr_param = fm_create_param(private$learning_rate_w, 
+            private$learning_rate_v, private$rank, private$lambda_w, 
+            private$lambda_v, private$w0, private$w, private$v, 
+            private$grad_w2, private$grad_v2, private$family, 
+            private$intercept)
+        private$ptr_model = fm_create_model(private$ptr_param)
+        private$is_initialized = TRUE
+    }
+    stopifnot(x_ncol == private$n_features)
+    stopifnot(nrow(x) == length(y))
+    stopifnot(is.numeric(weights) && length(weights) == length(y))
+    stopifnot(!anyNA(y))
+    if (private$family == "binomial") 
+        y = ifelse(y == 1, 1, -1)
+    if (anyNA(x@x)) 
+        stop("NA's in input matrix are not allowed")
+    p = fm_partial_fit(private$ptr_model, x, y, weights, do_update = TRUE, 
+        n_threads = getOption("rsparse_omp_threads", 1L))
+    invisible(p)
+}
+ERROR: modification of compiler constant of type language, length 3
+ERROR: the modified value of the constant is:
+if (!private$is_initialized) {
+    private$n_features = x_ncol
+    private$w0 = -1064052110L
+    fill_float_vector(private$w0, 0)
+    private$w = integer(private$n_features)
+    fill_float_vector_randn(private$w, 0.001)
+    private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+    fill_float_matrix_randn(private$v, 0.001)
+    private$grad_w2 = integer(private$n_features)
+    fill_float_vector(private$grad_w2, 1)
+    private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+    fill_float_matrix(private$grad_v2, 1)
+    private$ptr_param = fm_create_param(private$learning_rate_w, 
+        private$learning_rate_v, private$rank, private$lambda_w, 
+        private$lambda_v, private$w0, private$w, private$v, private$grad_w2, 
+        private$grad_v2, private$family, private$intercept)
+    private$ptr_model = fm_create_model(private$ptr_param)
+    private$is_initialized = TRUE
+}
+ERROR: the original value of the constant is:
+if (!private$is_initialized) {
+    private$n_features = x_ncol
+    private$w0 = 0L
+    fill_float_vector(private$w0, 0)
+    private$w = integer(private$n_features)
+    fill_float_vector_randn(private$w, 0.001)
+    private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+    fill_float_matrix_randn(private$v, 0.001)
+    private$grad_w2 = integer(private$n_features)
+    fill_float_vector(private$grad_w2, 1)
+    private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+    fill_float_matrix(private$grad_v2, 1)
+    private$ptr_param = fm_create_param(private$learning_rate_w, 
+        private$learning_rate_v, private$rank, private$lambda_w, 
+        private$lambda_v, private$w0, private$w, private$v, private$grad_w2, 
+        private$grad_v2, private$family, private$intercept)
+    private$ptr_model = fm_create_model(private$ptr_param)
+    private$is_initialized = TRUE
+}
+ERROR: the modified constant is at index 25
+ERROR: the modified constant is in this function body:
+{
+    if (!inherits(class(x), private$internal_matrix_format)) {
+        x = as(x, private$internal_matrix_format)
+    }
+    x_ncol = ncol(x)
+    if (!private$is_initialized) {
+        private$n_features = x_ncol
+        private$w0 = -1064052110L
+        fill_float_vector(private$w0, 0)
+        private$w = integer(private$n_features)
+        fill_float_vector_randn(private$w, 0.001)
+        private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix_randn(private$v, 0.001)
+        private$grad_w2 = integer(private$n_features)
+        fill_float_vector(private$grad_w2, 1)
+        private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix(private$grad_v2, 1)
+        private$ptr_param = fm_create_param(private$learning_rate_w, 
+            private$learning_rate_v, private$rank, private$lambda_w, 
+            private$lambda_v, private$w0, private$w, private$v, 
+            private$grad_w2, private$grad_v2, private$family, 
+            private$intercept)
+        private$ptr_model = fm_create_model(private$ptr_param)
+        private$is_initialized = TRUE
+    }
+    stopifnot(x_ncol == private$n_features)
+    stopifnot(nrow(x) == length(y))
+    stopifnot(is.numeric(weights) && length(weights) == length(y))
+    stopifnot(!anyNA(y))
+    if (private$family == "binomial") 
+        y = ifelse(y == 1, 1, -1)
+    if (anyNA(x@x)) 
+        stop("NA's in input matrix are not allowed")
+    p = fm_partial_fit(private$ptr_model, x, y, weights, do_update = TRUE, 
+        n_threads = getOption("rsparse_omp_threads", 1L))
+    invisible(p)
+}
+ERROR: modification of compiler constant of type language, length 3
+ERROR: the modified value of the constant is:
+private$w0 = -1064052110L
+ERROR: the original value of the constant is:
+private$w0 = 0L
+ERROR: the modified constant is at index 31
+ERROR: the modified constant is in this function body:
+{
+    if (!inherits(class(x), private$internal_matrix_format)) {
+        x = as(x, private$internal_matrix_format)
+    }
+    x_ncol = ncol(x)
+    if (!private$is_initialized) {
+        private$n_features = x_ncol
+        private$w0 = -1064052110L
+        fill_float_vector(private$w0, 0)
+        private$w = integer(private$n_features)
+        fill_float_vector_randn(private$w, 0.001)
+        private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix_randn(private$v, 0.001)
+        private$grad_w2 = integer(private$n_features)
+        fill_float_vector(private$grad_w2, 1)
+        private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix(private$grad_v2, 1)
+        private$ptr_param = fm_create_param(private$learning_rate_w, 
+            private$learning_rate_v, private$rank, private$lambda_w, 
+            private$lambda_v, private$w0, private$w, private$v, 
+            private$grad_w2, private$grad_v2, private$family, 
+            private$intercept)
+        private$ptr_model = fm_create_model(private$ptr_param)
+        private$is_initialized = TRUE
+    }
+    stopifnot(x_ncol == private$n_features)
+    stopifnot(nrow(x) == length(y))
+    stopifnot(is.numeric(weights) && length(weights) == length(y))
+    stopifnot(!anyNA(y))
+    if (private$family == "binomial") 
+        y = ifelse(y == 1, 1, -1)
+    if (anyNA(x@x)) 
+        stop("NA's in input matrix are not allowed")
+    p = fm_partial_fit(private$ptr_model, x, y, weights, do_update = TRUE, 
+        n_threads = getOption("rsparse_omp_threads", 1L))
+    invisible(p)
+}
+ERROR: detected compiler constant(s) modification after .Call invocation of function _rsparse_ftrl_partial_fit from library rsparse (/var/scratch2/tomas/cran/rcnst/lib/rsparse/libs/rsparse.so).
+NOTE: .Call function _rsparse_ftrl_partial_fit modified its argument (number 3, type list, length 10)
+Fatal error: compiler constants were modified (in .Call?)!
+
+ERROR: modification of compiler constant of type language, length 12
+ERROR: the modified constant is function body:
+{
+    if (!inherits(class(x), private$internal_matrix_format)) {
+        x = as(x, private$internal_matrix_format)
+    }
+    x_ncol = ncol(x)
+    if (!private$is_initialized) {
+        private$n_features = x_ncol
+        private$w0 = -1064052110L
+        fill_float_vector(private$w0, 0)
+        private$w = integer(private$n_features)
+        fill_float_vector_randn(private$w, 0.001)
+        private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix_randn(private$v, 0.001)
+        private$grad_w2 = integer(private$n_features)
+        fill_float_vector(private$grad_w2, 1)
+        private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix(private$grad_v2, 1)
+        private$ptr_param = fm_create_param(private$learning_rate_w, 
+            private$learning_rate_v, private$rank, private$lambda_w, 
+            private$lambda_v, private$w0, private$w, private$v, 
+            private$grad_w2, private$grad_v2, private$family, 
+            private$intercept)
+        private$ptr_model = fm_create_model(private$ptr_param)
+        private$is_initialized = TRUE
+    }
+    stopifnot(x_ncol == private$n_features)
+    stopifnot(nrow(x) == length(y))
+    stopifnot(is.numeric(weights) && length(weights) == length(y))
+    stopifnot(!anyNA(y))
+    if (private$family == "binomial") 
+        y = ifelse(y == 1, 1, -1)
+    if (anyNA(x@x)) 
+        stop("NA's in input matrix are not allowed")
+    p = fm_partial_fit(private$ptr_model, x, y, weights, do_update = TRUE, 
+        n_threads = getOption("rsparse_omp_threads", 1L))
+    invisible(p)
+}
+ERROR: the body was originally:
+{
+    if (!inherits(class(x), private$internal_matrix_format)) {
+        x = as(x, private$internal_matrix_format)
+    }
+    x_ncol = ncol(x)
+    if (!private$is_initialized) {
+        private$n_features = x_ncol
+        private$w0 = 0L
+        fill_float_vector(private$w0, 0)
+        private$w = integer(private$n_features)
+        fill_float_vector_randn(private$w, 0.001)
+        private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix_randn(private$v, 0.001)
+        private$grad_w2 = integer(private$n_features)
+        fill_float_vector(private$grad_w2, 1)
+        private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix(private$grad_v2, 1)
+        private$ptr_param = fm_create_param(private$learning_rate_w, 
+            private$learning_rate_v, private$rank, private$lambda_w, 
+            private$lambda_v, private$w0, private$w, private$v, 
+            private$grad_w2, private$grad_v2, private$family, 
+            private$intercept)
+        private$ptr_model = fm_create_model(private$ptr_param)
+        private$is_initialized = TRUE
+    }
+    stopifnot(x_ncol == private$n_features)
+    stopifnot(nrow(x) == length(y))
+    stopifnot(is.numeric(weights) && length(weights) == length(y))
+    stopifnot(!anyNA(y))
+    if (private$family == "binomial") 
+        y = ifelse(y == 1, 1, -1)
+    if (anyNA(x@x)) 
+        stop("NA's in input matrix are not allowed")
+    p = fm_partial_fit(private$ptr_model, x, y, weights, do_update = TRUE, 
+        n_threads = getOption("rsparse_omp_threads", 1L))
+    invisible(p)
+}
+ERROR: modification of compiler constant of type language, length 3
+ERROR: the modified value of the constant is:
+if (!private$is_initialized) {
+    private$n_features = x_ncol
+    private$w0 = -1064052110L
+    fill_float_vector(private$w0, 0)
+    private$w = integer(private$n_features)
+    fill_float_vector_randn(private$w, 0.001)
+    private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+    fill_float_matrix_randn(private$v, 0.001)
+    private$grad_w2 = integer(private$n_features)
+    fill_float_vector(private$grad_w2, 1)
+    private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+    fill_float_matrix(private$grad_v2, 1)
+    private$ptr_param = fm_create_param(private$learning_rate_w, 
+        private$learning_rate_v, private$rank, private$lambda_w, 
+        private$lambda_v, private$w0, private$w, private$v, private$grad_w2, 
+        private$grad_v2, private$family, private$intercept)
+    private$ptr_model = fm_create_model(private$ptr_param)
+    private$is_initialized = TRUE
+}
+ERROR: the original value of the constant is:
+if (!private$is_initialized) {
+    private$n_features = x_ncol
+    private$w0 = 0L
+    fill_float_vector(private$w0, 0)
+    private$w = integer(private$n_features)
+    fill_float_vector_randn(private$w, 0.001)
+    private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+    fill_float_matrix_randn(private$v, 0.001)
+    private$grad_w2 = integer(private$n_features)
+    fill_float_vector(private$grad_w2, 1)
+    private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+    fill_float_matrix(private$grad_v2, 1)
+    private$ptr_param = fm_create_param(private$learning_rate_w, 
+        private$learning_rate_v, private$rank, private$lambda_w, 
+        private$lambda_v, private$w0, private$w, private$v, private$grad_w2, 
+        private$grad_v2, private$family, private$intercept)
+    private$ptr_model = fm_create_model(private$ptr_param)
+    private$is_initialized = TRUE
+}
+ERROR: the modified constant is at index 25
+ERROR: the modified constant is in this function body:
+{
+    if (!inherits(class(x), private$internal_matrix_format)) {
+        x = as(x, private$internal_matrix_format)
+    }
+    x_ncol = ncol(x)
+    if (!private$is_initialized) {
+        private$n_features = x_ncol
+        private$w0 = -1064052110L
+        fill_float_vector(private$w0, 0)
+        private$w = integer(private$n_features)
+        fill_float_vector_randn(private$w, 0.001)
+        private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix_randn(private$v, 0.001)
+        private$grad_w2 = integer(private$n_features)
+        fill_float_vector(private$grad_w2, 1)
+        private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix(private$grad_v2, 1)
+        private$ptr_param = fm_create_param(private$learning_rate_w, 
+            private$learning_rate_v, private$rank, private$lambda_w, 
+            private$lambda_v, private$w0, private$w, private$v, 
+            private$grad_w2, private$grad_v2, private$family, 
+            private$intercept)
+        private$ptr_model = fm_create_model(private$ptr_param)
+        private$is_initialized = TRUE
+    }
+    stopifnot(x_ncol == private$n_features)
+    stopifnot(nrow(x) == length(y))
+    stopifnot(is.numeric(weights) && length(weights) == length(y))
+    stopifnot(!anyNA(y))
+    if (private$family == "binomial") 
+        y = ifelse(y == 1, 1, -1)
+    if (anyNA(x@x)) 
+        stop("NA's in input matrix are not allowed")
+    p = fm_partial_fit(private$ptr_model, x, y, weights, do_update = TRUE, 
+        n_threads = getOption("rsparse_omp_threads", 1L))
+    invisible(p)
+}
+ERROR: modification of compiler constant of type integer, length 1
+ERROR: the modified value of the constant is:
+[1] -1064052110
+ERROR: the original value of the constant is:
+[1] 0
+ERROR: the modified constant is at index 30
+ERROR: the modified constant is in this function body:
+{
+    if (!inherits(class(x), private$internal_matrix_format)) {
+        x = as(x, private$internal_matrix_format)
+    }
+    x_ncol = ncol(x)
+    if (!private$is_initialized) {
+        private$n_features = x_ncol
+        private$w0 = -1064052110L
+        fill_float_vector(private$w0, 0)
+        private$w = integer(private$n_features)
+        fill_float_vector_randn(private$w, 0.001)
+        private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix_randn(private$v, 0.001)
+        private$grad_w2 = integer(private$n_features)
+        fill_float_vector(private$grad_w2, 1)
+        private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix(private$grad_v2, 1)
+        private$ptr_param = fm_create_param(private$learning_rate_w, 
+            private$learning_rate_v, private$rank, private$lambda_w, 
+            private$lambda_v, private$w0, private$w, private$v, 
+            private$grad_w2, private$grad_v2, private$family, 
+            private$intercept)
+        private$ptr_model = fm_create_model(private$ptr_param)
+        private$is_initialized = TRUE
+    }
+    stopifnot(x_ncol == private$n_features)
+    stopifnot(nrow(x) == length(y))
+    stopifnot(is.numeric(weights) && length(weights) == length(y))
+    stopifnot(!anyNA(y))
+    if (private$family == "binomial") 
+        y = ifelse(y == 1, 1, -1)
+    if (anyNA(x@x)) 
+        stop("NA's in input matrix are not allowed")
+    p = fm_partial_fit(private$ptr_model, x, y, weights, do_update = TRUE, 
+        n_threads = getOption("rsparse_omp_threads", 1L))
+    invisible(p)
+}
+ERROR: modification of compiler constant of type language, length 3
+ERROR: the modified value of the constant is:
+private$w0 = -1064052110L
+ERROR: the original value of the constant is:
+private$w0 = 0L
+ERROR: the modified constant is at index 31
+ERROR: the modified constant is in this function body:
+{
+    if (!inherits(class(x), private$internal_matrix_format)) {
+        x = as(x, private$internal_matrix_format)
+    }
+    x_ncol = ncol(x)
+    if (!private$is_initialized) {
+        private$n_features = x_ncol
+        private$w0 = -1064052110L
+        fill_float_vector(private$w0, 0)
+        private$w = integer(private$n_features)
+        fill_float_vector_randn(private$w, 0.001)
+        private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix_randn(private$v, 0.001)
+        private$grad_w2 = integer(private$n_features)
+        fill_float_vector(private$grad_w2, 1)
+        private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix(private$grad_v2, 1)
+        private$ptr_param = fm_create_param(private$learning_rate_w, 
+            private$learning_rate_v, private$rank, private$lambda_w, 
+            private$lambda_v, private$w0, private$w, private$v, 
+            private$grad_w2, private$grad_v2, private$family, 
+            private$intercept)
+        private$ptr_model = fm_create_model(private$ptr_param)
+        private$is_initialized = TRUE
+    }
+    stopifnot(x_ncol == private$n_features)
+    stopifnot(nrow(x) == length(y))
+    stopifnot(is.numeric(weights) && length(weights) == length(y))
+    stopifnot(!anyNA(y))
+    if (private$family == "binomial") 
+        y = ifelse(y == 1, 1, -1)
+    if (anyNA(x@x)) 
+        stop("NA's in input matrix are not allowed")
+    p = fm_partial_fit(private$ptr_model, x, y, weights, do_update = TRUE, 
+        n_threads = getOption("rsparse_omp_threads", 1L))
+    invisible(p)
+}
+ERROR: modification of compiler constant of type language, length 4
+ERROR: the modified value of the constant is:
+`$<-`(`*tmp*`, w0, value = -1064052110L)
+ERROR: the original value of the constant is:
+`$<-`(`*tmp*`, w0, value = 0L)
+ERROR: the modified constant is at index 32
+ERROR: the modified constant is in this function body:
+{
+    if (!inherits(class(x), private$internal_matrix_format)) {
+        x = as(x, private$internal_matrix_format)
+    }
+    x_ncol = ncol(x)
+    if (!private$is_initialized) {
+        private$n_features = x_ncol
+        private$w0 = -1064052110L
+        fill_float_vector(private$w0, 0)
+        private$w = integer(private$n_features)
+        fill_float_vector_randn(private$w, 0.001)
+        private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix_randn(private$v, 0.001)
+        private$grad_w2 = integer(private$n_features)
+        fill_float_vector(private$grad_w2, 1)
+        private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix(private$grad_v2, 1)
+        private$ptr_param = fm_create_param(private$learning_rate_w, 
+            private$learning_rate_v, private$rank, private$lambda_w, 
+            private$lambda_v, private$w0, private$w, private$v, 
+            private$grad_w2, private$grad_v2, private$family, 
+            private$intercept)
+        private$ptr_model = fm_create_model(private$ptr_param)
+        private$is_initialized = TRUE
+    }
+    stopifnot(x_ncol == private$n_features)
+    stopifnot(nrow(x) == length(y))
+    stopifnot(is.numeric(weights) && length(weights) == length(y))
+    stopifnot(!anyNA(y))
+    if (private$family == "binomial") 
+        y = ifelse(y == 1, 1, -1)
+    if (anyNA(x@x)) 
+        stop("NA's in input matrix are not allowed")
+    p = fm_partial_fit(private$ptr_model, x, y, weights, do_update = TRUE, 
+        n_threads = getOption("rsparse_omp_threads", 1L))
+    invisible(p)
+}
+ERROR: modification of compiler constant of type language, length 4
+ERROR: the modified value of the constant is:
+`$<-`(private, w0, value = -1064052110L)
+ERROR: the original value of the constant is:
+`$<-`(private, w0, value = 0L)
+ERROR: the modified constant is at index 34
+ERROR: the modified constant is in this function body:
+{
+    if (!inherits(class(x), private$internal_matrix_format)) {
+        x = as(x, private$internal_matrix_format)
+    }
+    x_ncol = ncol(x)
+    if (!private$is_initialized) {
+        private$n_features = x_ncol
+        private$w0 = -1064052110L
+        fill_float_vector(private$w0, 0)
+        private$w = integer(private$n_features)
+        fill_float_vector_randn(private$w, 0.001)
+        private$v = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix_randn(private$v, 0.001)
+        private$grad_w2 = integer(private$n_features)
+        fill_float_vector(private$grad_w2, 1)
+        private$grad_v2 = matrix(0L, nrow = private$rank, ncol = private$n_features)
+        fill_float_matrix(private$grad_v2, 1)
+        private$ptr_param = fm_create_param(private$learning_rate_w, 
+            private$learning_rate_v, private$rank, private$lambda_w, 
+            private$lambda_v, private$w0, private$w, private$v, 
+            private$grad_w2, private$grad_v2, private$family, 
+            private$intercept)
+        private$ptr_model = fm_create_model(private$ptr_param)
+        private$is_initialized = TRUE
+    }
+    stopifnot(x_ncol == private$n_features)
+    stopifnot(nrow(x) == length(y))
+    stopifnot(is.numeric(weights) && length(weights) == length(y))
+    stopifnot(!anyNA(y))
+    if (private$family == "binomial") 
+        y = ifelse(y == 1, 1, -1)
+    if (anyNA(x@x)) 
+        stop("NA's in input matrix are not allowed")
+    p = fm_partial_fit(private$ptr_model, x, y, weights, do_update = TRUE, 
+        n_threads = getOption("rsparse_omp_threads", 1L))
+    invisible(p)
+}
+Fatal error: compiler constants were modified!
+

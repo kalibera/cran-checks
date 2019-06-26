@@ -1,0 +1,284 @@
+Package bzinb version 1.0.1
+Package built using /R 3.7.0; x86_64-pc-linux-gnu; 2019-06-25 09:26:48 UTC; unix
+Excerpts from error reports follow. Please refer to the included outputs for details.
+
+--------------------
+ERROR: modification of compiler constant of type integer, length 1
+ERROR: modification of compiler constant of type integer, length 1
+ERROR: the modified value of the constant is:
+[1] 154
+ERROR: the original value of the constant is:
+[1] 0
+ERROR: the modified constant is at index 208
+ERROR: the modified constant is in this function body:
+{
+    se = TRUE
+    xy.reduced <- as.data.frame(table(xvec, yvec))
+    names(xy.reduced) <- c("x", "y", "freq")
+    xy.reduced <- xy.reduced[xy.reduced$freq != 0, ]
+    xy.reduced$x <- as.numeric(as.character(xy.reduced$x))
+    xy.reduced$y <- as.numeric(as.character(xy.reduced$y))
+    xy.reduced$freq <- as.numeric(as.character(xy.reduced$freq))
+    n <- sum(xy.reduced$freq)
+    n.reduced <- as.integer(length(xy.reduced$freq))
+    if (max(xvec) == 0 & max(yvec) == 0) {
+        return(c(rep(1e-10, 5), 1, 0, 0, 0, 0, 1, 0, if (se) {
+            rep(NA, 11)
+        }))
+    }
+    info <- if (se) {
+        matrix(0, ncol = 8, nrow = 8, dimnames = list(abp.names[-9], 
+            abp.names[-9]))
+    }
+    else {
+        0
+    }
+    if (is.null(initial)) {
+        xbar <- mean(xvec)
+        ybar <- mean(yvec)
+        xybar <- mean(c(xbar, ybar))
+        s2.x <- var(xvec)
+        s2.y <- var(yvec)
+        if (is.na(s2.x) | is.na(s2.y)) {
+            s2.x <- s2.y <- 1
+        }
+        cor.xy <- cor(xvec, yvec)
+        if (is.na(cor.xy)) {
+            cor.xy <- 0
+        }
+        zero <- sum(xvec == 0 & yvec == 0)/n
+        initial <- rep(NA, 9)
+        names(initial) <- c("a0", "a1", "a2", "b1", "b2", "p1", 
+            "p2", "p3", "p4")
+        initial[4] <- s2.x/ifelse(xbar == 0, 1e-04, xbar)
+        initial[5] <- s2.y/ifelse(ybar == 0, 1e-04, ybar)
+        initial[2:3] <- c(xbar, ybar)/pmax(initial[4:5], c(0.1, 
+            0.1))
+        initial[1] <- min(initial[2:3]) * abs(cor.xy)
+        initial[2:3] <- initial[2:3] - initial[1]
+        initial[6:9] <- bin.profile(xvec, yvec)
+        initial[6:9] <- initial[6:9]/sum(initial[6:9])
+        initial <- pmax(initial, 1e-05)
+        if (is.na(sum(initial))) {
+            initial[is.na(initial)] <- 1
+        }
+    }
+    else {
+        names(initial) <- abp.names
+    }
+    iter = 0L
+    param = initial
+    lik = -Inf
+    expt = setNames(as.double(rep(0, 12)), expt.names)
+    lik.vec = rep(0, maxiter + 1)
+    nonconv = 0L
+    em(param2 = param, xvec = xy.reduced$x, yvec = xy.reduced$y, 
+        freq = xy.reduced$freq, n = n.reduced, expt = expt, info = info, 
+        se = as.integer(se), iter = as.integer(iter), maxiter = as.integer(maxiter), 
+        tol = as.double(tol), showFlag = as.integer(showFlag), 
+        nonconv = nonconv, trajectory = lik.vec)
+    if (nonconv == 1) 
+        warning("The iteration exited before reaching convergence.")
+    rho <- param[1]/sqrt((param[1] + param[2]) * (param[1] + 
+        param[3])) * sqrt(param[4] * param[5]/(param[4] + 1)/(param[5] + 
+        1))
+    logit.rho <- qlogis(rho)
+    if (se) {
+        qr.info <- try(qr(info))
+        if (class(qr.info) == "try-error") {
+            warning("The information matrix has NA/NaN/Inf and thus the standard error is not properly estimatd.")
+            std.param = setNames(rep(NA, 11), c(abp.names, "rho", 
+                "logit.rho"))
+            cov.mat <- NA
+        }
+        else if (qr(info)$rank < 8) {
+            warning("The information matrix is (essentially) not full rank, and thus the standard error is not reliable.")
+            std.param = setNames(rep(NA, 11), c(abp.names, "rho", 
+                "logit.rho"))
+            cov.mat <- NA
+        }
+        else {
+            cov.mat <- try(solve(info))
+            if (class(cov.mat) == "try-error") {
+                std.param = setNames(rep(NA, 11), c(abp.names, 
+                  "rho", "logit.rho"))
+                cov.mat <- NA
+            }
+            else {
+                var.p4 <- sum(cov.mat[6:8, 6:8])
+                d.g <- rho * c(1/param[1] - 1/{
+                  2 * (param[1] + param[2])
+                } - 1/{
+                  2 * (param[1] + param[3])
+                }, -1/{
+                  2 * (param[1] + param[2])
+                }, -1/{
+                  2 * (param[1] + param[3])
+                }, 1/{
+                  2 * param[4] * (param[4] + 1)
+                }, 1/{
+                  2 * param[5] * (param[5] + 1)
+                })
+                var.rho <- t(d.g) %*% cov.mat[1:5, 1:5] %*% d.g
+                var.logit.rho <- var.rho/rho^2/(1 - rho)^2
+                std.param = sqrt(c(diag(cov.mat), p4 = var.p4, 
+                  rho = var.rho, logit.rho = var.logit.rho))
+            }
+        }
+    }
+    result <- list(rho = matrix(c(rho, logit.rho, if (se) std.param[c("rho", 
+        "logit.rho")] else rep(NA, 2)), ncol = 2, dimnames = list(c("rho", 
+        "logit.rho"), c("Estimate", "Std.err"))), coefficients = matrix(c(param, 
+        if (se) std.param[1:9] else rep(NA, 9)), ncol = 2, dimnames = list(abp.names, 
+        c("Estimate", "Std.err"))), lik = expt[1], iter = iter)
+    if (se & vcov) {
+        result$info = info
+        result$vcov = cov.mat
+    }
+    return(result)
+}
+Function bzinb.base in namespace bzinb has this body.
+ERROR: detected compiler constant(s) modification after .Call invocation of function _bzinb_em from library bzinb (/var/scratch2/tomas/cran/rcnst/lib/bzinb/libs/bzinb.so).
+NOTE: .Call function _bzinb_em modified its argument (number 1, type double, length 9)
+NOTE: .Call function _bzinb_em modified its argument (number 6, type double, length 12)
+NOTE: .Call function _bzinb_em modified its argument (number 7, type double, length 64)
+NOTE: .Call function _bzinb_em modified its argument (number 9, type integer, length 1)
+NOTE: .Call function _bzinb_em modified its argument (number 13, type integer, length 1)
+NOTE: .Call function _bzinb_em modified its argument (number 14, type double, length 50001)
+Fatal error: compiler constants were modified (in .Call?)!
+ERROR: modification of compiler constant of type integer, length 1
+ERROR: modification of compiler constant of type integer, length 1
+ERROR: the modified value of the constant is:
+[1] 154
+ERROR: the original value of the constant is:
+[1] 0
+ERROR: the modified constant is at index 208
+ERROR: the modified constant is in this function body:
+{
+    se = TRUE
+    xy.reduced <- as.data.frame(table(xvec, yvec))
+    names(xy.reduced) <- c("x", "y", "freq")
+    xy.reduced <- xy.reduced[xy.reduced$freq != 0, ]
+    xy.reduced$x <- as.numeric(as.character(xy.reduced$x))
+    xy.reduced$y <- as.numeric(as.character(xy.reduced$y))
+    xy.reduced$freq <- as.numeric(as.character(xy.reduced$freq))
+    n <- sum(xy.reduced$freq)
+    n.reduced <- as.integer(length(xy.reduced$freq))
+    if (max(xvec) == 0 & max(yvec) == 0) {
+        return(c(rep(1e-10, 5), 1, 0, 0, 0, 0, 1, 0, if (se) {
+            rep(NA, 11)
+        }))
+    }
+    info <- if (se) {
+        matrix(0, ncol = 8, nrow = 8, dimnames = list(abp.names[-9], 
+            abp.names[-9]))
+    }
+    else {
+        0
+    }
+    if (is.null(initial)) {
+        xbar <- mean(xvec)
+        ybar <- mean(yvec)
+        xybar <- mean(c(xbar, ybar))
+        s2.x <- var(xvec)
+        s2.y <- var(yvec)
+        if (is.na(s2.x) | is.na(s2.y)) {
+            s2.x <- s2.y <- 1
+        }
+        cor.xy <- cor(xvec, yvec)
+        if (is.na(cor.xy)) {
+            cor.xy <- 0
+        }
+        zero <- sum(xvec == 0 & yvec == 0)/n
+        initial <- rep(NA, 9)
+        names(initial) <- c("a0", "a1", "a2", "b1", "b2", "p1", 
+            "p2", "p3", "p4")
+        initial[4] <- s2.x/ifelse(xbar == 0, 1e-04, xbar)
+        initial[5] <- s2.y/ifelse(ybar == 0, 1e-04, ybar)
+        initial[2:3] <- c(xbar, ybar)/pmax(initial[4:5], c(0.1, 
+            0.1))
+        initial[1] <- min(initial[2:3]) * abs(cor.xy)
+        initial[2:3] <- initial[2:3] - initial[1]
+        initial[6:9] <- bin.profile(xvec, yvec)
+        initial[6:9] <- initial[6:9]/sum(initial[6:9])
+        initial <- pmax(initial, 1e-05)
+        if (is.na(sum(initial))) {
+            initial[is.na(initial)] <- 1
+        }
+    }
+    else {
+        names(initial) <- abp.names
+    }
+    iter = 0L
+    param = initial
+    lik = -Inf
+    expt = setNames(as.double(rep(0, 12)), expt.names)
+    lik.vec = rep(0, maxiter + 1)
+    nonconv = 0L
+    em(param2 = param, xvec = xy.reduced$x, yvec = xy.reduced$y, 
+        freq = xy.reduced$freq, n = n.reduced, expt = expt, info = info, 
+        se = as.integer(se), iter = as.integer(iter), maxiter = as.integer(maxiter), 
+        tol = as.double(tol), showFlag = as.integer(showFlag), 
+        nonconv = nonconv, trajectory = lik.vec)
+    if (nonconv == 1) 
+        warning("The iteration exited before reaching convergence.")
+    rho <- param[1]/sqrt((param[1] + param[2]) * (param[1] + 
+        param[3])) * sqrt(param[4] * param[5]/(param[4] + 1)/(param[5] + 
+        1))
+    logit.rho <- qlogis(rho)
+    if (se) {
+        qr.info <- try(qr(info))
+        if (class(qr.info) == "try-error") {
+            warning("The information matrix has NA/NaN/Inf and thus the standard error is not properly estimatd.")
+            std.param = setNames(rep(NA, 11), c(abp.names, "rho", 
+                "logit.rho"))
+            cov.mat <- NA
+        }
+        else if (qr(info)$rank < 8) {
+            warning("The information matrix is (essentially) not full rank, and thus the standard error is not reliable.")
+            std.param = setNames(rep(NA, 11), c(abp.names, "rho", 
+                "logit.rho"))
+            cov.mat <- NA
+        }
+        else {
+            cov.mat <- try(solve(info))
+            if (class(cov.mat) == "try-error") {
+                std.param = setNames(rep(NA, 11), c(abp.names, 
+                  "rho", "logit.rho"))
+                cov.mat <- NA
+            }
+            else {
+                var.p4 <- sum(cov.mat[6:8, 6:8])
+                d.g <- rho * c(1/param[1] - 1/{
+                  2 * (param[1] + param[2])
+                } - 1/{
+                  2 * (param[1] + param[3])
+                }, -1/{
+                  2 * (param[1] + param[2])
+                }, -1/{
+                  2 * (param[1] + param[3])
+                }, 1/{
+                  2 * param[4] * (param[4] + 1)
+                }, 1/{
+                  2 * param[5] * (param[5] + 1)
+                })
+                var.rho <- t(d.g) %*% cov.mat[1:5, 1:5] %*% d.g
+                var.logit.rho <- var.rho/rho^2/(1 - rho)^2
+                std.param = sqrt(c(diag(cov.mat), p4 = var.p4, 
+                  rho = var.rho, logit.rho = var.logit.rho))
+            }
+        }
+    }
+    result <- list(rho = matrix(c(rho, logit.rho, if (se) std.param[c("rho", 
+        "logit.rho")] else rep(NA, 2)), ncol = 2, dimnames = list(c("rho", 
+        "logit.rho"), c("Estimate", "Std.err"))), coefficients = matrix(c(param, 
+        if (se) std.param[1:9] else rep(NA, 9)), ncol = 2, dimnames = list(abp.names, 
+        c("Estimate", "Std.err"))), lik = expt[1], iter = iter)
+    if (se & vcov) {
+        result$info = info
+        result$vcov = cov.mat
+    }
+    return(result)
+}
+Function bzinb.base in namespace bzinb has this body.
+Fatal error: compiler constants were modified!
