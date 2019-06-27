@@ -1,0 +1,60 @@
+Package mirt version 1.30
+Package built using 76738/R 3.7.0; x86_64-pc-linux-gnu; 2019-06-27 01:10:21 UTC; unix   
+Checked with rchk version 6400f4a0aa14a4379fcc72d8dbf07a49b4725e07
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:684
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function Rcpp::Rcpp_fast_eval(SEXPREC*, SEXPREC*) with argument allocated using Rf_lang2 Rcpp/include/Rcpp/r_cast.h:34
+
+Function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::set(SEXPREC*)
+  [UP] ignoring variable rhs as it has address taken, results will be incomplete 
+
+Function _computeDpars(std::__1::vector<double, std::__1::allocator<double> >&, Rcpp::Matrix<14, Rcpp::PreserveStorage>&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, Rcpp::Matrix<14, Rcpp::PreserveStorage> const&, Rcpp::Matrix<14, Rcpp::PreserveStorage> const&, Rcpp::Matrix<14, Rcpp::PreserveStorage> const&, std::__1::vector<double, std::__1::allocator<double> > const&, int const&, int const&, int const&, int const&, int const&, bool const&)
+  [UP] calling allocating function int Rcpp::as<int>(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const mirt/src/dpars.cpp:1659
+  [UP] calling allocating function int Rcpp::as<int>(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const mirt/src/dpars.cpp:1662
+  [UP] calling allocating function int Rcpp::as<int>(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const mirt/src/dpars.cpp:1664
+  [UP] calling allocating function int Rcpp::as<int>(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const mirt/src/dpars.cpp:1691
+
+Function _computeItemTrace(std::__1::vector<double, std::__1::allocator<double> >&, Rcpp::Matrix<14, Rcpp::PreserveStorage> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, Rcpp::Vector<14, Rcpp::PreserveStorage> const&, std::__1::vector<int, std::__1::allocator<int> > const&, int const&, int const&, int const&, int const&)
+  [UP] calling allocating function int Rcpp::as<int>(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const mirt/src/traceLinePts.cpp:778
+  [UP] calling allocating function int Rcpp::as<int>(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const mirt/src/traceLinePts.cpp:781
+  [UP] calling allocating function int Rcpp::as<int>(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const mirt/src/traceLinePts.cpp:786
+  [UP] calling allocating function int Rcpp::as<int>(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const mirt/src/traceLinePts.cpp:788
+  [UP] calling allocating function int Rcpp::as<int>(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const mirt/src/traceLinePts.cpp:826
+
+Function _dgroupEMCD(std::__1::vector<double, std::__1::allocator<double> >&, Rcpp::Matrix<14, Rcpp::PreserveStorage>&, Rcpp::S4_Impl<Rcpp::PreserveStorage>&, Rcpp::Matrix<14, Rcpp::PreserveStorage> const&, bool const&)
+  [UP] calling allocating function bool Rcpp::as<bool>(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const mirt/src/dpars.cpp:426
+
+Function computeGradient
+  [UP] ignoring variable <unnamed var:   %106 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function computeInfo
+  [UP] ignoring variable <unnamed var:   %115 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %151 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function dparsNominal
+  [UP] calling allocating function int Rcpp::as<int>(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const mirt/src/dpars.cpp:1140
+  [UP] calling allocating function int Rcpp::as<int>(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const mirt/src/dpars.cpp:1147
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

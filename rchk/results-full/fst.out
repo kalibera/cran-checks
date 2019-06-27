@@ -1,0 +1,73 @@
+Package fst version 0.9.0
+Package built using 76738/R 3.7.0; x86_64-pc-linux-gnu; 2019-06-26 23:06:20 UTC; unix   
+Checked with rchk version 6400f4a0aa14a4379fcc72d8dbf07a49b4725e07
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function _fst_fstcomp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _fst_fstdecomp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _fst_fsthasher
+  [UP] ignoring variable <unnamed var:   %19 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _fst_fstlib_version
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _fst_fstmetadata
+  [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _fst_fstretrieve
+  [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _fst_fststore
+  [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _fst_getnrofthreads
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _fst_hasopenmp
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _fst_setnrofthreads
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function fstcomp(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function FstCompressor::~FstCompressor() fst/src/fst_compress.cpp:134
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function std::__1::unique_ptr<IBlobContainer, std::__1::default_delete<IBlobContainer> >::~unique_ptr() fst/src/fst_compress.cpp:134
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function std::__1::unique_ptr<TypeFactory, std::__1::default_delete<TypeFactory> >::~unique_ptr() fst/src/fst_compress.cpp:134
+
+Function fstdecomp(SEXPREC*)
+  [UP] unprotected variable <unnamed var:   %2 = alloca %struct.SEXPREC*, align 8> while calling allocating function FstCompressor::~FstCompressor() fst/src/fst_compress.cpp:164
+  [UP] unprotected variable <unnamed var:   %2 = alloca %struct.SEXPREC*, align 8> while calling allocating function std::__1::unique_ptr<BlobContainer, std::__1::default_delete<BlobContainer> >::~unique_ptr() fst/src/fst_compress.cpp:164
+  [UP] unprotected variable <unnamed var:   %2 = alloca %struct.SEXPREC*, align 8> while calling allocating function std::__1::unique_ptr<ITypeFactory, std::__1::default_delete<ITypeFactory> >::~unique_ptr() fst/src/fst_compress.cpp:164
+
+Function fstmetadata(Rcpp::String)
+  [UP] ignoring variable colNames as it has address taken, results will be incomplete 
+  [UP] ignoring variable keyNames as it has address taken, results will be incomplete 
+  [UP] unprotected variable <unnamed var:   %2 = alloca %struct.SEXPREC*, align 8> while calling allocating function std::__1::unique_ptr<IColumnFactory, std::__1::default_delete<IColumnFactory> >::~unique_ptr() fst/src/flex_store.cpp:213
+  [UP] unprotected variable <unnamed var:   %2 = alloca %struct.SEXPREC*, align 8> while calling allocating function std::__1::unique_ptr<IStringColumn, std::__1::default_delete<IStringColumn> >::~unique_ptr() fst/src/flex_store.cpp:213
+
+Function fstretrieve(Rcpp::String, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable keyNames as it has address taken, results will be incomplete 
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function std::__1::unique_ptr<IColumnFactory, std::__1::default_delete<IColumnFactory> >::~unique_ptr() fst/src/flex_store.cpp:304
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function std::__1::unique_ptr<IStringColumn, std::__1::default_delete<IStringColumn> >::~unique_ptr() fst/src/flex_store.cpp:304
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function std::__1::unique_ptr<StringArray, std::__1::default_delete<StringArray> >::~unique_ptr() fst/src/flex_store.cpp:304

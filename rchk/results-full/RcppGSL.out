@@ -1,0 +1,24 @@
+Package RcppGSL version 0.3.6
+Package built using 76738/R 3.7.0; x86_64-pc-linux-gnu; 2019-06-26 23:20:15 UTC; unix   
+Checked with rchk version 6400f4a0aa14a4379fcc72d8dbf07a49b4725e07
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function RcppGSL::vector<double>::vector(SEXPREC*)
+  [UP] calling allocating function void Rcpp::internal::export_range<double*>(SEXPREC*, double*) with a fresh pointer (y <arg 1>) RcppGSL/src/../inst/include/RcppGSLForward.h:106
+
+Function RcppGSL_fastLm
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function RcppGSL_gslResetErrorHandler
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function RcppGSL_gslSetErrorHandlerOff
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

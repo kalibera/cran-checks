@@ -1,0 +1,142 @@
+Package qs version 0.17.1
+Package built using 76738/R 3.7.0; x86_64-pc-linux-gnu; 2019-06-26 23:18:33 UTC; unix   
+Checked with rchk version 6400f4a0aa14a4379fcc72d8dbf07a49b4725e07
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+
+Function CompressBuffer<lz4_compress_env>::pushObj(SEXPREC*&, bool)
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable xi as it has address taken, results will be incomplete 
+
+Function CompressBuffer<lz4hc_compress_env>::pushObj(SEXPREC*&, bool)
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable xi as it has address taken, results will be incomplete 
+
+Function CompressBuffer<zstd_compress_env>::pushObj(SEXPREC*&, bool)
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable xi as it has address taken, results will be incomplete 
+  [UP] unprotected variable xserialized while calling allocating function CompressBuffer<zstd_compress_env>::push(char*, unsigned long, bool) qs/src/./qs_serialization.h:170
+  [UP] unprotected variable xserialized while calling allocating function void CompressBuffer<zstd_compress_env>::push_pod<unsigned int>(unsigned int, bool) qs/src/./qs_serialization.h:171
+  [UP] unprotected variable xserialized while calling allocating function CompressBuffer<zstd_compress_env>::push(char*, unsigned long, bool) qs/src/./qs_serialization.h:173
+  [UP] unprotected variable xserialized while calling allocating function void CompressBuffer<zstd_compress_env>::push_pod<unsigned long>(unsigned long, bool) qs/src/./qs_serialization.h:174
+
+Function CompressBufferStream<ZSTD_streamWrite>::pushObj(SEXPREC*&, bool)
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable xi as it has address taken, results will be incomplete 
+  [UP] unprotected variable xserialized while calling allocating function ZSTD_streamWrite::push(char*, unsigned long) qs/src/./qs_serialization_stream.h:157
+  [UP] unprotected variable xserialized while calling allocating function void ZSTD_streamWrite::push_pod<unsigned int>(unsigned int) qs/src/./qs_serialization_stream.h:158
+  [UP] unprotected variable xserialized while calling allocating function ZSTD_streamWrite::push(char*, unsigned long) qs/src/./qs_serialization_stream.h:160
+  [UP] unprotected variable xserialized while calling allocating function void ZSTD_streamWrite::push_pod<unsigned long>(unsigned long) qs/src/./qs_serialization_stream.h:161
+
+Function CompressBuffer_MT<lz4_compress_env>::pushObj(SEXPREC*&, bool)
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable xi as it has address taken, results will be incomplete 
+
+Function CompressBuffer_MT<lz4hc_compress_env>::pushObj(SEXPREC*&, bool)
+  [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable xi as it has address taken, results will be incomplete 
+
+Function CompressBuffer_MT<zstd_compress_env>::pushObj(SEXPREC*&, bool)
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable xi as it has address taken, results will be incomplete 
+
+Function Data_Context<lz4_decompress_env>::processBlock()
+  [UP] ignoring variable obj as it has address taken, results will be incomplete 
+  [PB] has possible protection stack imbalance qs/src/./qs_deserialization.h:251
+
+Function Data_Context<zstd_decompress_env>::processBlock()
+  [UP] ignoring variable obj as it has address taken, results will be incomplete 
+  [PB] has possible protection stack imbalance qs/src/./qs_deserialization.h:251
+
+Function Data_Context_MT<lz4_decompress_env>::processBlock()
+  [UP] ignoring variable obj as it has address taken, results will be incomplete 
+  [PB] has possible protection stack imbalance qs/src/./qs_mt_deserialization.h:392
+
+Function Data_Context_MT<zstd_decompress_env>::processBlock()
+  [UP] ignoring variable obj as it has address taken, results will be incomplete 
+  [PB] has possible protection stack imbalance qs/src/./qs_mt_deserialization.h:392
+
+Function Data_Context_Stream<ZSTD_streamRead>::processBlock()
+  [UP] ignoring variable obj as it has address taken, results will be incomplete 
+  [PB] has possible protection stack imbalance qs/src/./qs_deserialization_stream.h:332
+
+Function Protect_Tracker::~Protect_Tracker()
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete qs/src/./qs_common.h:868
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete qs/src/./qs_common.h:868
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:684
+
+Function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::set(SEXPREC*)
+  [UP] ignoring variable rhs as it has address taken, results will be incomplete 
+
+Function Rcpp::sample(int, int, bool, Rcpp::Nullable<Rcpp::Vector<14, Rcpp::PreserveStorage> >, bool)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _qs_blosc_shuffle_raw
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _qs_blosc_unshuffle_raw
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _qs_c_qdump
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _qs_c_qread
+  [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _qs_convertToAlt
+  [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _qs_is_big_endian
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _qs_lz4_compress_bound
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _qs_lz4_compress_raw
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _qs_lz4_decompress_raw
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _qs_randomStrings
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _qs_zstd_compress_bound
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _qs_zstd_compress_raw
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _qs_zstd_decompress_raw
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function c_qread(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool, bool, int)
+  [UP] unprotected variable ret while calling allocating function validate_hash(QsMetadata, std::__1::basic_ifstream<char, std::__1::char_traits<char> >&, unsigned int, bool) qs/src/qs_functions.cpp:165
+  [UP] unprotected variable ret while calling allocating function validate_hash(QsMetadata, std::__1::basic_ifstream<char, std::__1::char_traits<char> >&, unsigned int, bool) qs/src/qs_functions.cpp:173
+  [UP] unprotected variable ret while calling allocating function validate_hash(QsMetadata, std::__1::basic_ifstream<char, std::__1::char_traits<char> >&, unsigned int, bool) qs/src/qs_functions.cpp:178
+  [UP] unprotected variable ret while calling allocating function validate_hash(QsMetadata, std::__1::basic_ifstream<char, std::__1::char_traits<char> >&, unsigned int, bool) qs/src/qs_functions.cpp:188
+  [UP] unprotected variable ret while calling allocating function validate_hash(QsMetadata, std::__1::basic_ifstream<char, std::__1::char_traits<char> >&, unsigned int, bool) qs/src/qs_functions.cpp:194
+
+Function c_qsave(SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, int, int, bool, int)
+  [UP] ignoring variable x as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
