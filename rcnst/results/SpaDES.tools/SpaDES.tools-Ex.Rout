@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2019-06-29 r76753) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-06-29 r76756) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -24,73 +24,155 @@ Type 'q()' to quit R.
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 > base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
-> cleanEx()
-> nameEx("adj")
 > ### * adj
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: adj
-> ### Title: Fast 'adjacent' function, and Just In Time compiled version
-> ### Aliases: adj
+> ### * cir
+> 
+> flush(stderr()); flush(stdout())
+> 
+> cleanEx()
+> nameEx("directions")
+> ### * directions
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: directionFromEachPoint
+> ### Title: Calculate distances and directions between many points and many
+> ###   grid cells
+> ### Aliases: directionFromEachPoint .pointDirection
+> ### Keywords: internal
 > 
 > ### ** Examples
 > 
 > library(raster)
 Loading required package: sp
-> a <- raster(extent(0, 1000, 0, 1000), res = 1)
-> sam <- sample(1:length(a), 1e4)
-> numCol <- ncol(a)
-> numCell <- ncell(a)
-> adj.new <- adj(numCol = numCol, numCell = numCell, cells = sam, directions = 8)
-> adj.new <- adj(numCol = numCol, numCell = numCell, cells = sam, directions = 8,
-+                include = TRUE)
+> library(quickPlot)
 > 
+> N <- 2
+> dirRas <- raster(extent(0,40,0,40), res = 1)
+> coords <- cbind(x = round(runif(N, xmin(dirRas), xmax(dirRas))) + 0.5,
++                 y = round(runif(N, xmin(dirRas), xmax(dirRas))) + 0.5,
++                 id = 1:N)
+> 
+> dirs1 <- directionFromEachPoint(from = coords, landscape = dirRas)
+> library(CircStats)
+Loading required package: MASS
+
+Attaching package: ‘MASS’
+
+The following objects are masked from ‘package:raster’:
+
+    area, select
+
+Loading required package: boot
+> dirs1[, "angles"] <- deg(dirs1[,"angles"] %% (2*pi))
+> indices <- cellFromXY(dirRas,dirs1[, c("x", "y")])
+> minDir <- tapply(dirs1[, "angles"], indices, function(x) min(x)) # minimum angle
+> dirRas[] <- as.vector(minDir)
+> if (interactive()) {
++   clearPlot()
++   Plot(dirRas)
++   library(sp)
++   start <- SpatialPoints(coords[, c("x", "y"), drop = FALSE])
++   Plot(start, addTo = "dirRas")
++ }
 > 
 > 
 > 
 > cleanEx()
 
-detaching ‘package:raster’, ‘package:sp’
+detaching ‘package:CircStats’, ‘package:boot’, ‘package:MASS’,
+  ‘package:quickPlot’, ‘package:raster’, ‘package:sp’
 
-> nameEx("cir")
-> ### * cir
+> nameEx("distanceFromEachPoint")
+> ### * distanceFromEachPoint
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: cir
-> ### Title: Identify pixels in a circle or ring (donut) around an object.
-> ### Aliases: cir
+> ### Name: distanceFromEachPoint
+> ### Title: Calculate distances and directions between many points and many
+> ###   grid cells
+> ### Aliases: distanceFromEachPoint
 > 
 > ### ** Examples
 > 
-> library(data.table)
-> library(sp)
 > library(raster)
-
-Attaching package: ‘raster’
-
-The following object is masked from ‘package:data.table’:
-
-    shift
-
+Loading required package: sp
 > library(quickPlot)
 > 
-> set.seed(1642)
+> n <- 2
+> distRas <- raster(extent(0, 40, 0, 40), res = 1)
+> coords <- cbind(x = round(runif(n, xmin(distRas), xmax(distRas))) + 0.5,
++                 y = round(runif(n, xmin(distRas), xmax(distRas))) + 0.5)
 > 
-> # circle centred
-> ras <- raster(extent(0, 15, 0, 15), res = 1, val = 0)
-> middleCircle <- cir(ras)
-> ras[middleCircle[, "indices"]] <- 1
-> circlePoints <- SpatialPoints(middleCircle[, c("x", "y")])
+> # inverse distance weights
+> dists1 <- distanceFromEachPoint(coords, landscape = distRas)
+> indices <- cellFromXY(distRas, dists1[, c("x", "y")])
+> invDist <- tapply(dists1[, "dists"], indices, function(x) sum(1 / (1 + x))) # idw function
+> distRas[] <- as.vector(invDist)
 > if (interactive()) {
 +   clearPlot()
-+   Plot(ras)
-+   Plot(circlePoints, addTo = "ras")
++   Plot(distRas)
 + }
 > 
-> # circles non centred
-> ras <- randomPolygons(ras, numTypes = 4)
+> # With iterative summing via cumulativeFn to keep memory use low, with same result
+> dists1 <- distanceFromEachPoint(coords[, c("x", "y"), drop = FALSE],
++                                 landscape = distRas, cumulativeFn = `+`)
+> idwRaster <- raster(distRas)
+> idwRaster[] <- dists1[, "val"]
+> if (interactive()) Plot(idwRaster)
+> 
+> all(idwRaster[] == distRas[]) # TRUE
+[1] TRUE
+> 
+> # A more complex example of cumulative inverse distance sums, weighted by the value
+> #  of the origin cell
+> ras <- raster(extent(0, 34, 0, 34), res = 1, val = 0)
+> rp <- randomPolygons(ras, numTypes = 10) ^ 2
+> n <- 15
+> cells <- sample(ncell(ras), n)
+> coords <- xyFromCell(ras, cells)
+> distFn <- function(landscape, fromCell, dist) landscape[fromCell] / (1 + dist)
+> 
+> #beginCluster(3) # can do parallel
+> dists1 <- distanceFromEachPoint(coords[, c("x", "y"), drop = FALSE],
++                                 landscape = rp, distFn = distFn, cumulativeFn = `+`)
+> #endCluster() # if beginCluster was run
+> 
+> idwRaster <- raster(ras)
+> idwRaster[] <- dists1[, "val"]
+> if (interactive()) {
++   clearPlot()
++   Plot(rp, idwRaster)
++   sp1 <- SpatialPoints(coords)
++   Plot(sp1, addTo = "rp")
++   Plot(sp1, addTo = "idwRaster")
++ }
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:quickPlot’, ‘package:raster’, ‘package:sp’
+
+> nameEx("dwrpnorm2")
+> ### * dwrpnorm2
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dwrpnorm2
+> ### Title: Vectorized wrapped normal density function
+> ### Aliases: dwrpnorm2
+> 
+> ### ** Examples
+> 
+> # Values for which to evaluate density
+> theta <- c(1:500) * 2 * pi / 500
+> # Compute wrapped normal density function
+> density <- c(1:500)
+> for(i in 1:500) density[i] <- dwrpnorm2(theta[i], pi, .75)
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "includePixel" "excludePixel" "includeRing"  "excludeRing" 
