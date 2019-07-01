@@ -1,0 +1,3408 @@
+
+R Under development (unstable) (2019-07-01 r76761) -- "Unsuffered Consequences"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "reproducible"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('reproducible')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("CacheDigest")
+> ### * CacheDigest
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: CacheDigest
+> ### Title: The exact digest function that 'Cache' uses
+> ### Aliases: CacheDigest
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D   a <- Cache(rnorm, 1)
+> ##D   CacheDigest(list(rnorm, 1))
+> ##D 
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Checksums")
+> ### * Checksums
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Checksums
+> ### Title: Calculate checksum
+> ### Aliases: Checksums Checksums,character,logical-method
+> ###   Checksums,character,missing-method
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D moduleName <- "my_module"
+> ##D modulePath <- file.path("path", "to", "modules")
+> ##D 
+> ##D ## verify checksums of all data files
+> ##D Checksums(moduleName, modulePath)
+> ##D 
+> ##D ## write new CHECKSUMS.txt file
+> ##D 
+> ##D # 1. verify that all data files are present (and no extra files are present)
+> ##D list.files(file.path(modulePath, moduleName, "data"))
+> ##D 
+> ##D # 2. calculate file checksums and write to file (this will overwrite CHECKSUMS.txt)
+> ##D Checksums(moduleName, modulePath, write = TRUE)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Copy")
+> ### * Copy
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Copy
+> ### Title: Recursive copying of nested environments, and other "hard to
+> ###   copy" objects
+> ### Aliases: Copy Copy,ANY-method Copy,data.table-method
+> ###   Copy,environment-method Copy,list-method Copy,data.frame-method
+> ###   Copy,Raster-method
+> 
+> ### ** Examples
+> 
+> e <- new.env()
+> e$abc <- letters
+> e$one <- 1L
+> e$lst <- list(W = 1:10, X = runif(10), Y = rnorm(10), Z = LETTERS[1:10])
+> ls(e)
+[1] "abc" "lst" "one"
+> 
+> # 'normal' copy
+> f <- e
+> ls(f)
+[1] "abc" "lst" "one"
+> f$one
+[1] 1
+> f$one <- 2L
+> f$one
+[1] 2
+> e$one ## uh oh, e has changed!
+[1] 2
+> 
+> # deep copy
+> e$one <- 1L
+> g <- Copy(e)
+> ls(g)
+[1] "abc" "lst" "one"
+> g$one
+[1] 1
+> g$one <- 3L
+> g$one
+[1] 3
+> f$one
+[1] 1
+> e$one
+[1] 1
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Path-class")
+> ### * Path-class
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Path-class
+> ### Title: Coerce a character string to a class "Path"
+> ### Aliases: Path-class asPath asPath.character
+> 
+> ### ** Examples
+> 
+> tmpf <- tempfile(fileext = ".csv")
+> file.exists(tmpf)    ## FALSE
+[1] FALSE
+> tmpfPath <- asPath(tmpf)
+> is(tmpf, "Path")     ## FALSE
+[1] FALSE
+> is(tmpfPath, "Path") ## TRUE
+[1] TRUE
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Require")
+> ### * Require
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Require
+> ### Title: Repeatability-safe install and load packages, optionally with
+> ###   specific versions
+> ### Aliases: Require
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # simple usage, like conditional install.packages then library
+> ##D Require("stats") # analogous to require(stats), but slower because it checks for
+> ##D                  #   pkg dependencies, and installs them, if missing
+> ##D tempPkgFolder <- file.path(tempdir(), "Packages")
+> ##D 
+> ##D # use standAlone, means it will put it in libPath, even if it already exists
+> ##D #   in another local library (e.g., personal library)
+> ##D Require("crayon", libPath = tempPkgFolder, standAlone = TRUE)
+> ##D 
+> ##D # make a package version snapshot
+> ##D packageVersionFile <- file.path(tempPkgFolder, ".packageVersion.txt")
+> ##D pkgSnapshot(libPath=tempPkgFolder, packageVersionFile)
+> ##D 
+> ##D # confirms that correct version is installed
+> ##D Require("crayon", packageVersionFile = packageVersionFile)
+> ##D 
+> ##D # Create mismatching versions -- desired version is older than current installed
+> ##D # This will try to install the older version, overwriting the newer version
+> ##D desiredVersion <- data.frame(instPkgs="crayon", instVers = "1.3.2", stringsAsFactors = FALSE)
+> ##D write.table(file = packageVersionFile, desiredVersion, row.names = FALSE)
+> ##D # won't work because newer crayon is loaded
+> ##D Require("crayon", packageVersionFile = packageVersionFile)
+> ##D 
+> ##D # unload it first
+> ##D detach("package:crayon", unload = TRUE)
+> ##D 
+> ##D # run again, this time, correct "older" version installs in place of newer one
+> ##D Require("crayon", packageVersionFile = packageVersionFile)
+> ##D 
+> ##D # Mutual dependencies, only installs once -- e.g., httr
+> ##D Require(c("cranlogs", "covr"), libPath = tempPkgFolder)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("addChangedAttr")
+> ### * addChangedAttr
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: .addChangedAttr
+> ### Title: Add an attribute to an object indicating which named elements
+> ###   change
+> ### Aliases: .addChangedAttr .addChangedAttr,ANY-method
+> 
+> ### ** Examples
+> 
+> a <- 1
+> .addChangedAttr(a) # does nothing because default method is just a pass through
+[1] 1
+> 
+> 
+> 
+> cleanEx()
+> nameEx("assessDataType")
+> ### * assessDataType
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: assessDataType
+> ### Title: Assess the appropriate raster layer data type
+> ### Aliases: assessDataType assessDataType.Raster
+> ###   assessDataType.RasterStack assessDataType.default
+> 
+> ### ** Examples
+> 
+> ## LOG1S
+> library(raster)
+Loading required package: sp
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- rep(c(0,1),50)
+> assessDataType(ras)
+[1] "LOG1S"
+> 
+> ras[] <- rep(c(TRUE,FALSE),50)
+> assessDataType(ras)
+[1] "LOG1S"
+> 
+> ras[] <- c(NA, NA, rep(c(0,1),49))
+> assessDataType(ras)
+[1] "LOG1S"
+> 
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- c(0, NaN, rep(c(0,1),49))
+> assessDataType(ras)
+[1] "LOG1S"
+> 
+> 
+> ## INT1S
+> ras[] <- -1:98
+> assessDataType(ras)
+[1] "INT1S"
+> 
+> ras[] <- c(NA, -1:97)
+> assessDataType(ras)
+[1] "INT1S"
+> 
+> ## INT1U
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- 1:100
+> assessDataType(ras)
+[1] "INT1U"
+> 
+> ras[] <- c(NA, 2:100)
+> assessDataType(ras)
+[1] "INT1U"
+> 
+> ## INT2U
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- round(runif(100, min = 64000, max = 65000))
+> assessDataType(ras)
+[1] "INT2U"
+> 
+> ## INT2S
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- round(runif(100, min = -32767, max = 32767))
+> assessDataType(ras)
+[1] "INT2S"
+> 
+> ras[54] <- NA
+> assessDataType(ras)
+[1] "INT2S"
+> 
+> ## INT4U
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- round(runif(100, min = 0, max = 500000000))
+> assessDataType(ras)
+[1] "INT4U"
+> 
+> ras[14] <- NA
+> assessDataType(ras)
+[1] "INT4U"
+> 
+> ## INT4S
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- round(runif(100, min = -200000000, max = 200000000))
+> assessDataType(ras)
+[1] "INT4S"
+> 
+> ras[14] <- NA
+> assessDataType(ras)
+[1] "INT4S"
+> 
+> ## FLT4S
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- runif(100, min = -10, max = 87)
+> assessDataType(ras)
+[1] "FLT4S"
+> 
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- round(runif(100, min = -3.4e+26, max = 3.4e+28))
+> assessDataType(ras)
+[1] "FLT4S"
+> 
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- round(runif(100, min = 3.4e+26, max = 3.4e+28))
+> assessDataType(ras)
+[1] "FLT4S"
+> 
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- round(runif(100, min = -3.4e+26, max = -1))
+> assessDataType(ras)
+[1] "FLT4S"
+> 
+> ## FLT8S
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- c(-Inf, 1, rep(c(0,1),49))
+> assessDataType(ras)
+[1] "FLT8S"
+> 
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- c(Inf, 1, rep(c(0,1),49))
+> assessDataType(ras)
+[1] "FLT8S"
+> 
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- round(runif(100, min = -1.7e+30, max = 1.7e+308))
+> assessDataType(ras)
+[1] "FLT8S"
+> 
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- round(runif(100, min = 1.7e+30, max = 1.7e+308))
+> assessDataType(ras)
+[1] "FLT8S"
+> 
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- round(runif(100, min = -1.7e+308, max = -1))
+> assessDataType(ras)
+[1] "FLT8S"
+> 
+> # stack
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- rep(c(0,1),50)
+> ras1 <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras1[] <- round(runif(100, min = -1.7e+308, max = -1))
+> sta <- stack(ras, ras1)
+> assessDataType(sta)
+[1] "LOG1S" "FLT8S"
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’
+
+> nameEx("assessDataTypeGDAL")
+> ### * assessDataTypeGDAL
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: assessDataTypeGDAL
+> ### Title: Assess the appropriate raster layer data type for GDAL
+> ### Aliases: assessDataTypeGDAL
+> 
+> ### ** Examples
+> 
+> library(raster)
+Loading required package: sp
+> 
+> ## Byte
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> 
+> ras[] <- 1:100
+> assessDataTypeGDAL(ras)
+[1] "Byte"
+> 
+> ras[] <- c(NA, 2:100)
+> assessDataTypeGDAL(ras)
+[1] "Byte"
+> 
+> ##Int16
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> 
+> ras <- setValues(ras, -1:98)
+> assessDataTypeGDAL(ras)
+[1] "Int16"
+> 
+> ras[] <- c(NA, -1:97)
+> assessDataTypeGDAL(ras)
+[1] "Int16"
+> 
+> ras[] <- round(runif(100, min = -32767, max = 32767))
+> assessDataTypeGDAL(ras)
+[1] "Int16"
+> 
+> ## UInt16
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- round(runif(100, min = 64000, max = 65000))
+> assessDataTypeGDAL(ras)
+[1] "UInt16"
+> 
+> 
+> ## UInt32
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- round(runif(100, min = 0, max = 500000000))
+> assessDataTypeGDAL(ras)
+[1] "UInt32"
+> 
+> ras[14] <- NA
+> assessDataTypeGDAL(ras)
+[1] "UInt32"
+> 
+> ## Int32
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- round(runif(100, min = -200000000, max = 200000000))
+> assessDataTypeGDAL(ras)
+[1] "Int32"
+> 
+> ras[14] <- NA
+> assessDataTypeGDAL(ras)
+[1] "Int32"
+> 
+> ## Float32
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- runif(100, min = -10, max = 87)
+> assessDataTypeGDAL(ras)
+[1] "Float32"
+> 
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- round(runif(100, min = -3.4e+26, max = 3.4e+28))
+> assessDataTypeGDAL(ras)
+[1] "Float32"
+> 
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- round(runif(100, min = 3.4e+26, max = 3.4e+28))
+> assessDataTypeGDAL(ras)
+[1] "Float32"
+> 
+> ras <- raster(ncol = 10, nrow = 10)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> ras[] <- round(runif(100, min = -3.4e+26, max = -1))
+> assessDataTypeGDAL(ras)
+[1] "Float32"
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’
+
+> nameEx("cache")
+> ### * cache
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Cache
+> ### Title: Cache method that accommodates environments, S4 methods,
+> ###   Rasters, & nested caching
+> ### Aliases: Cache Cache,ANY-method %<%
+> 
+> ### ** Examples
+> 
+> tmpDir <- file.path(tempdir())
+> 
+> # Basic use
+> ranNumsA <- Cache(rnorm, 10, 16, cacheRepo = tmpDir)
+> 
+> # All same
+> ranNumsB <- Cache(rnorm, 10, 16, cacheRepo = tmpDir) # recovers cached copy
+  loading cached result from previous rnorm call, adding to memoised copy
+> ranNumsC <- Cache(cacheRepo = tmpDir) %C% rnorm(10, 16)  # recovers cached copy
+  loading memoised result from previous 'rnorm' pipe sequence call.
+> ranNumsD <- Cache(quote(rnorm(n = 10, 16)), cacheRepo = tmpDir) # recovers cached copy
+  loading memoised result from previous rnorm call.
+> 
+> ###############################################
+> # experimental devMode
+> ###############################################
+> opt <- options("reproducible.useCache" = "devMode")
+> clearCache(tmpDir, ask = FALSE)
+> centralTendency <- function(x)
++   mean(x)
+> funnyData <- c(1,1,1,1,10)
+> uniqueUserTags <- c("thisIsUnique", "reallyUnique")
+> ranNumsB <- Cache(centralTendency, funnyData, cacheRepo = tmpDir,
++                   userTags = uniqueUserTags) # sets new value to Cache
+> showCache(tmpDir) # 1 unique artifact -- cacheId is 8be9cf2a072bdbb0515c5f0b3578f474
+Cache size: 
+  Total (including Rasters): 246 bytes
+  Selected objects (not including Rasters): 246 bytes
+                            artifact         tagKey
+ 1: 49cde26ceb1f40fa2a552450f35281ee         format
+ 2: 49cde26ceb1f40fa2a552450f35281ee           name
+ 3: 49cde26ceb1f40fa2a552450f35281ee          class
+ 4: 49cde26ceb1f40fa2a552450f35281ee           date
+ 5: 49cde26ceb1f40fa2a552450f35281ee        cacheId
+ 6: 49cde26ceb1f40fa2a552450f35281ee   thisIsUnique
+ 7: 49cde26ceb1f40fa2a552450f35281ee   reallyUnique
+ 8: 49cde26ceb1f40fa2a552450f35281ee       function
+ 9: 49cde26ceb1f40fa2a552450f35281ee    object.size
+10: 49cde26ceb1f40fa2a552450f35281ee       accessed
+11: 49cde26ceb1f40fa2a552450f35281ee otherFunctions
+12: 49cde26ceb1f40fa2a552450f35281ee      preDigest
+13: 49cde26ceb1f40fa2a552450f35281ee      preDigest
+                            tagValue         createdDate
+ 1:                              rda 2019-07-01 17:34:24
+ 2: 49cde26ceb1f40fa2a552450f35281ee 2019-07-01 17:34:24
+ 3:                          numeric 2019-07-01 17:34:24
+ 4:              2019-07-01 17:34:24 2019-07-01 17:34:24
+ 5:                 71cd24ec3b0d0cac 2019-07-01 17:34:24
+ 6:                     thisIsUnique 2019-07-01 17:34:24
+ 7:                     reallyUnique 2019-07-01 17:34:24
+ 8:                  centralTendency 2019-07-01 17:34:24
+ 9:                              984 2019-07-01 17:34:24
+10:              2019-07-01 17:34:24 2019-07-01 17:34:24
+11:                                  2019-07-01 17:34:24
+12:               x:e4aa8de28dc6c1bb 2019-07-01 17:34:24
+13:            .FUN:d5f5f91cbb662db9 2019-07-01 17:34:24
+> 
+> # During development, we often redefine function internals
+> centralTendency <- function(x)
++   median(x)
+> # When we rerun, we don't want to keep the "old" cache because the function will
+> #   never again be defined that way. Here, because of userTags being the same,
+> #   it will replace the entry in the Cache, effetively overwriting it, even though
+> #   it has a different cacheId
+> ranNumsD <- Cache(centralTendency, funnyData, cacheRepo = tmpDir, userTags = uniqueUserTags)
+This call to cache differs from the next closest due to:
+... different .FUN
+Overwriting Cache entry with userTags: 'thisIsUnique, reallyUnique, function:centralTendency'
+> showCache(tmpDir) # 1 unique artifact -- cacheId is bb1195b40c8d37a60fd6004e5d526e6b
+Cache size: 
+  Total (including Rasters): 246 bytes
+  Selected objects (not including Rasters): 246 bytes
+                            artifact         tagKey
+ 1: ba72850f0c54ec67f8a00614cd17f365         format
+ 2: ba72850f0c54ec67f8a00614cd17f365           name
+ 3: ba72850f0c54ec67f8a00614cd17f365          class
+ 4: ba72850f0c54ec67f8a00614cd17f365           date
+ 5: ba72850f0c54ec67f8a00614cd17f365        cacheId
+ 6: ba72850f0c54ec67f8a00614cd17f365   thisIsUnique
+ 7: ba72850f0c54ec67f8a00614cd17f365   reallyUnique
+ 8: ba72850f0c54ec67f8a00614cd17f365       function
+ 9: ba72850f0c54ec67f8a00614cd17f365    object.size
+10: ba72850f0c54ec67f8a00614cd17f365       accessed
+11: ba72850f0c54ec67f8a00614cd17f365 otherFunctions
+12: ba72850f0c54ec67f8a00614cd17f365      preDigest
+13: ba72850f0c54ec67f8a00614cd17f365      preDigest
+                            tagValue         createdDate
+ 1:                              rda 2019-07-01 17:34:25
+ 2: ba72850f0c54ec67f8a00614cd17f365 2019-07-01 17:34:25
+ 3:                          numeric 2019-07-01 17:34:25
+ 4:              2019-07-01 17:34:25 2019-07-01 17:34:25
+ 5:                 632cd06f30e111be 2019-07-01 17:34:25
+ 6:                     thisIsUnique 2019-07-01 17:34:25
+ 7:                     reallyUnique 2019-07-01 17:34:25
+ 8:                  centralTendency 2019-07-01 17:34:25
+ 9:                              984 2019-07-01 17:34:25
+10:              2019-07-01 17:34:25 2019-07-01 17:34:25
+11:                                  2019-07-01 17:34:25
+12:               x:e4aa8de28dc6c1bb 2019-07-01 17:34:25
+13:            .FUN:af11d20d957667d9 2019-07-01 17:34:25
+> 
+> # If it finds it by cacheID, doesn't matter what the userTags are
+> ranNumsD <- Cache(centralTendency, funnyData, cacheRepo = tmpDir, userTags = "thisIsUnique")
+  loading cached result from previous centralTendency call, adding to memoised copy
+> 
+> options(opt)
+> 
+> # For more in depth uses, see vignette
+> ## Not run: 
+> ##D   browseVignettes(package = "reproducible")
+> ## End(Not run)
+> # Equivalent
+> a <- Cache(rnorm, 1)
+  loading cached result from previous rnorm call, adding to memoised copy
+> b %<% rnorm(1)
+  loading memoised result from previous rnorm call.
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("cacheMessage")
+> ### * cacheMessage
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: .cacheMessage
+> ### Title: Create a custom cache message by class
+> ### Aliases: .cacheMessage .cacheMessage,ANY-method
+> 
+> ### ** Examples
+> 
+> a <- 1
+> .cacheMessage(a, "mean")
+  loading memoised result from previous mean call.
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("checkCacheRepo")
+> ### * checkCacheRepo
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: .checkCacheRepo
+> ### Title: Check for cache repository info in ...
+> ### Aliases: .checkCacheRepo .checkCacheRepo,ANY-method
+> 
+> ### ** Examples
+> 
+> a <- "test"
+> .checkCacheRepo(a) # no cache repository supplied
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("checkGDALVersion")
+> ### * checkGDALVersion
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: checkGDALVersion
+> ### Title: Check whether the system has a minimum version of GDAL available
+> ### Aliases: checkGDALVersion
+> 
+> ### ** Examples
+> 
+> 
+> ## Not run: 
+> ##D   checkGDALVersion(2.0)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("checkPath")
+> ### * checkPath
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: checkPath
+> ### Title: Check directory path
+> ### Aliases: checkPath checkPath,character,logical-method
+> ###   checkPath,character,missing-method checkPath,NULL,ANY-method
+> ###   checkPath,missing,ANY-method
+> 
+> ### ** Examples
+> 
+> ## normalize file paths
+> paths <- list("./aaa/zzz",
++               "./aaa/zzz/",
++               ".//aaa//zzz",
++               ".//aaa//zzz/",
++               ".\\aaa\\zzz",
++               ".\\aaa\\zzz\\",
++               file.path(".", "aaa", "zzz"))
+> 
+> checked <- normPath(paths)
+> length(unique(checked)) ## 1; all of the above are equivalent
+[1] 1
+> 
+> ## check to see if a path exists
+> tmpdir <- file.path(tempdir(), "example_checkPath")
+> 
+> dir.exists(tmpdir) ## FALSE
+[1] FALSE
+> tryCatch(checkPath(tmpdir, create = FALSE), error = function(e) FALSE) ## FALSE
+[1] FALSE
+> 
+> checkPath(tmpdir, create = TRUE)
+[1] "/tmp/Rtmpin9blt/example_checkPath"
+> dir.exists(tmpdir) ## TRUE
+[1] TRUE
+> 
+> unlink(tmpdir, recursive = TRUE)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("checkoutVersion")
+> ### * checkoutVersion
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: checkoutVersion
+> ### Title: Clone, fetch, and checkout from GitHub.com repositories
+> ### Aliases: checkoutVersion
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D   tmpDir <- tempfile("")
+> ##D   dir.create(tmpDir)
+> ##D   repo <- "PredictiveEcology/reproducible"
+> ##D 
+> ##D   ## get latest from master branch
+> ##D   localRepo <- checkoutVersion("PredictiveEcology/reproducible",
+> ##D                                localRepoPath = tmpDir)
+> ##D   git2r::summary(localRepo)
+> ##D   unlink(tmpDir, recursive = TRUE)
+> ##D 
+> ##D   ## get latest from development branch
+> ##D   localRepo <- checkoutVersion(paste0(repo, "@", "development"), localRepoPath = tmpDir)
+> ##D   git2r::summary(localRepo)
+> ##D   unlink(tmpDir, recursive = TRUE)
+> ##D 
+> ##D   ## get a particular commit by sha
+> ##D   sha <- "8179e1910e7c617fdeacad0f9d81323e6aad57c3"
+> ##D   localRepo <- checkoutVersion(paste0(repo, "@", sha), localRepoPath = tmpDir)
+> ##D   git2r::summary(localRepo)
+> ##D   unlink(tmpDir, recursive = TRUE)
+> ##D 
+> ##D   rm(localRepo, repo)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("clearStubArtifacts")
+> ### * clearStubArtifacts
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: clearStubArtifacts
+> ### Title: Clear erroneous archivist artifacts
+> ### Aliases: clearStubArtifacts clearStubArtifacts,ANY-method
+> 
+> ### ** Examples
+> 
+> tmpDir <- file.path(tempdir(), "reproducible_examples", "clearStubArtifacts")
+> 
+> lapply(c(runif, rnorm), function(f) {
++   reproducible::Cache(f, 10, cacheRepo = tmpDir)
++ })
+[[1]]
+ [1] 0.26550866 0.37212390 0.57285336 0.90820779 0.20168193 0.89838968
+ [7] 0.94467527 0.66079779 0.62911404 0.06178627
+attr(,".Cache")
+attr(,".Cache")$newCache
+[1] TRUE
+
+attr(,"tags")
+[1] "cacheId:88dabbb6fbb67941"
+attr(,"call")
+[1] ""
+
+[[2]]
+ [1] -0.8204684  0.4874291  0.7383247  0.5757814 -0.3053884  1.5117812
+ [7]  0.3898432 -0.6212406 -2.2146999  1.1249309
+attr(,".Cache")
+attr(,".Cache")$newCache
+[1] TRUE
+
+attr(,"tags")
+[1] "cacheId:87eee6212ba1ae0a"
+attr(,"call")
+[1] ""
+
+> 
+> # clear out any stub artifacts
+> showCache(tmpDir)
+Cache size: 
+  Total (including Rasters): 552 bytes
+  Selected objects (not including Rasters): 552 bytes
+                            artifact         tagKey
+ 1: 3db48fe4e2625136f5414593586949f0         format
+ 2: 3db48fe4e2625136f5414593586949f0           name
+ 3: 3db48fe4e2625136f5414593586949f0          class
+ 4: 3db48fe4e2625136f5414593586949f0           date
+ 5: 3db48fe4e2625136f5414593586949f0        cacheId
+ 6: 3db48fe4e2625136f5414593586949f0       function
+ 7: 3db48fe4e2625136f5414593586949f0    object.size
+ 8: 3db48fe4e2625136f5414593586949f0       accessed
+ 9: 3db48fe4e2625136f5414593586949f0 otherFunctions
+10: 3db48fe4e2625136f5414593586949f0      preDigest
+11: 3db48fe4e2625136f5414593586949f0      preDigest
+12: 7583866429f82e719aa387f65a169cd2         format
+13: 7583866429f82e719aa387f65a169cd2           name
+14: 7583866429f82e719aa387f65a169cd2          class
+15: 7583866429f82e719aa387f65a169cd2           date
+16: 7583866429f82e719aa387f65a169cd2        cacheId
+17: 7583866429f82e719aa387f65a169cd2       function
+18: 7583866429f82e719aa387f65a169cd2    object.size
+19: 7583866429f82e719aa387f65a169cd2       accessed
+20: 7583866429f82e719aa387f65a169cd2 otherFunctions
+21: 7583866429f82e719aa387f65a169cd2      preDigest
+22: 7583866429f82e719aa387f65a169cd2      preDigest
+                            artifact         tagKey
+                            tagValue         createdDate
+ 1:                              rda 2019-07-01 17:34:26
+ 2: 3db48fe4e2625136f5414593586949f0 2019-07-01 17:34:26
+ 3:                          numeric 2019-07-01 17:34:26
+ 4:              2019-07-01 17:34:26 2019-07-01 17:34:26
+ 5:                 87eee6212ba1ae0a 2019-07-01 17:34:26
+ 6:                                f 2019-07-01 17:34:26
+ 7:                             1104 2019-07-01 17:34:26
+ 8:              2019-07-01 17:34:26 2019-07-01 17:34:26
+ 9:                           lapply 2019-07-01 17:34:26
+10:               n:c5775c3b366fb719 2019-07-01 17:34:26
+11:            .FUN:4f604aa46882b368 2019-07-01 17:34:26
+12:                              rda 2019-07-01 17:34:25
+13: 7583866429f82e719aa387f65a169cd2 2019-07-01 17:34:25
+14:                          numeric 2019-07-01 17:34:25
+15:              2019-07-01 17:34:25 2019-07-01 17:34:25
+16:                 88dabbb6fbb67941 2019-07-01 17:34:25
+17:                                f 2019-07-01 17:34:25
+18:                             1104 2019-07-01 17:34:25
+19:              2019-07-01 17:34:25 2019-07-01 17:34:25
+20:                           lapply 2019-07-01 17:34:25
+21:               n:c5775c3b366fb719 2019-07-01 17:34:25
+22:            .FUN:881ec847b7161f3c 2019-07-01 17:34:25
+                            tagValue         createdDate
+> 
+> file2Remove <- dir(file.path(tmpDir, "gallery"), full.name = TRUE)[1]
+> file.remove(file2Remove)
+[1] TRUE
+> showCache(tmpDir) # repository directory still thinks files are there
+Cache size: 
+  Total (including Rasters): 552 bytes
+  Selected objects (not including Rasters): 552 bytes
+                            artifact         tagKey
+ 1: 3db48fe4e2625136f5414593586949f0         format
+ 2: 3db48fe4e2625136f5414593586949f0           name
+ 3: 3db48fe4e2625136f5414593586949f0          class
+ 4: 3db48fe4e2625136f5414593586949f0           date
+ 5: 3db48fe4e2625136f5414593586949f0        cacheId
+ 6: 3db48fe4e2625136f5414593586949f0       function
+ 7: 3db48fe4e2625136f5414593586949f0    object.size
+ 8: 3db48fe4e2625136f5414593586949f0       accessed
+ 9: 3db48fe4e2625136f5414593586949f0 otherFunctions
+10: 3db48fe4e2625136f5414593586949f0      preDigest
+11: 3db48fe4e2625136f5414593586949f0      preDigest
+12: 7583866429f82e719aa387f65a169cd2         format
+13: 7583866429f82e719aa387f65a169cd2           name
+14: 7583866429f82e719aa387f65a169cd2          class
+15: 7583866429f82e719aa387f65a169cd2           date
+16: 7583866429f82e719aa387f65a169cd2        cacheId
+17: 7583866429f82e719aa387f65a169cd2       function
+18: 7583866429f82e719aa387f65a169cd2    object.size
+19: 7583866429f82e719aa387f65a169cd2       accessed
+20: 7583866429f82e719aa387f65a169cd2 otherFunctions
+21: 7583866429f82e719aa387f65a169cd2      preDigest
+22: 7583866429f82e719aa387f65a169cd2      preDigest
+                            artifact         tagKey
+                            tagValue         createdDate
+ 1:                              rda 2019-07-01 17:34:26
+ 2: 3db48fe4e2625136f5414593586949f0 2019-07-01 17:34:26
+ 3:                          numeric 2019-07-01 17:34:26
+ 4:              2019-07-01 17:34:26 2019-07-01 17:34:26
+ 5:                 87eee6212ba1ae0a 2019-07-01 17:34:26
+ 6:                                f 2019-07-01 17:34:26
+ 7:                             1104 2019-07-01 17:34:26
+ 8:              2019-07-01 17:34:26 2019-07-01 17:34:26
+ 9:                           lapply 2019-07-01 17:34:26
+10:               n:c5775c3b366fb719 2019-07-01 17:34:26
+11:            .FUN:4f604aa46882b368 2019-07-01 17:34:26
+12:                              rda 2019-07-01 17:34:25
+13: 7583866429f82e719aa387f65a169cd2 2019-07-01 17:34:25
+14:                          numeric 2019-07-01 17:34:25
+15:              2019-07-01 17:34:25 2019-07-01 17:34:25
+16:                 88dabbb6fbb67941 2019-07-01 17:34:25
+17:                                f 2019-07-01 17:34:25
+18:                             1104 2019-07-01 17:34:25
+19:              2019-07-01 17:34:25 2019-07-01 17:34:25
+20:                           lapply 2019-07-01 17:34:25
+21:               n:c5775c3b366fb719 2019-07-01 17:34:25
+22:            .FUN:881ec847b7161f3c 2019-07-01 17:34:25
+                            tagValue         createdDate
+> 
+> # run clearStubArtifacts
+> suppressWarnings(clearStubArtifacts(tmpDir))
+> showCache(tmpDir) # stubs are removed
+Cache size: 
+  Total (including Rasters): 276 bytes
+  Selected objects (not including Rasters): 276 bytes
+                            artifact         tagKey
+ 1: 7583866429f82e719aa387f65a169cd2         format
+ 2: 7583866429f82e719aa387f65a169cd2           name
+ 3: 7583866429f82e719aa387f65a169cd2          class
+ 4: 7583866429f82e719aa387f65a169cd2           date
+ 5: 7583866429f82e719aa387f65a169cd2        cacheId
+ 6: 7583866429f82e719aa387f65a169cd2       function
+ 7: 7583866429f82e719aa387f65a169cd2    object.size
+ 8: 7583866429f82e719aa387f65a169cd2       accessed
+ 9: 7583866429f82e719aa387f65a169cd2 otherFunctions
+10: 7583866429f82e719aa387f65a169cd2      preDigest
+11: 7583866429f82e719aa387f65a169cd2      preDigest
+                            tagValue         createdDate
+ 1:                              rda 2019-07-01 17:34:25
+ 2: 7583866429f82e719aa387f65a169cd2 2019-07-01 17:34:25
+ 3:                          numeric 2019-07-01 17:34:25
+ 4:              2019-07-01 17:34:25 2019-07-01 17:34:25
+ 5:                 88dabbb6fbb67941 2019-07-01 17:34:25
+ 6:                                f 2019-07-01 17:34:25
+ 7:                             1104 2019-07-01 17:34:25
+ 8:              2019-07-01 17:34:25 2019-07-01 17:34:25
+ 9:                           lapply 2019-07-01 17:34:25
+10:               n:c5775c3b366fb719 2019-07-01 17:34:25
+11:            .FUN:881ec847b7161f3c 2019-07-01 17:34:25
+> 
+> # cleanup
+> clearCache(tmpDir, ask = FALSE)
+> unlink(tmpDir, recursive = TRUE)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("cloudCache")
+> ### * cloudCache
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: cloudCache
+> ### Title: Experimental use of googledrive for Caching
+> ### Aliases: cloudCache
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # Make a folder on googledrive -- share it with yourself and anybody else -- either use
+> ##D #   googledrive package or do this manually on drive.google.com
+> ##D # Grab the share link -- pass it here to cloudFolderID
+> ##D 
+> ##D # first time -- looks in cloudFolderID for checksums -- none there, so it makes it
+> ##D #   then it runs the function, caching locally, and uploading to cloud -- copy exists in
+> ##D #   2 places
+> ##D library(googledrive)
+> ##D newDir <- drive_mkdir("testFolder")
+> ##D a1 <- cloudCache(rnorm, 1, cloudFolderID = newDir$id)
+> ##D # second time -- sees that it is in both places, takes local
+> ##D a2 <- cloudCache(rnorm, 1, cloudFolderID = newDir$id)
+> ##D 
+> ##D # clear local -- get from cloud copy, make a local copy in cacheRepo
+> ##D clearCache(ask = FALSE)
+> ##D a3 <- cloudCache(rnorm, 1, cloudFolderID = newDir$id)
+> ##D 
+> ##D # now both local and cloud exist
+> ##D a4 <- cloudCache(rnorm, 1, cloudFolderID = newDir$id)
+> ##D 
+> ##D #  more than one cacheRepo
+> ##D opts <- options("reproducible.cachePath" = c(tempdir(), file.path(tempdir(), "test"),
+> ##D                                              file.path(tempdir(), "test2")),
+> ##D                 "reproducible.ask" = FALSE)
+> ##D cachePaths <- getOption("reproducible.cachePath")
+> ##D Cache(rnorm, 4, cacheRepo = cachePaths[3]) # put it in 3rd cacheRepo
+> ##D 
+> ##D # gets it locally even though it is in the 3rd cacheRepo, uploads to cloudCache
+> ##D cloudCache(rnorm, 4, cloudFolderID = newDir$id)
+> ##D 
+> ##D # Clean up -- also see cloudSyncCache
+> ##D clearCache(ask = FALSE)
+> ##D # lapply(cachePaths, clearCache, ask = FALSE)
+> ##D cloudSyncCache(cloudFolderID = newDir$id)
+> ##D 
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("cloudSyncCache")
+> ### * cloudSyncCache
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: cloudSyncCache
+> ### Title: Sync cloud with local Cache
+> ### Aliases: cloudSyncCache
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D   #make a google drive folder
+> ##D   #   Can use >1 cacheRepo
+> ##D   opts <- options("reproducible.cachePath" = c(tempdir()),
+> ##D                   "reproducible.ask" = FALSE)
+> ##D   cachePaths <- getOption("reproducible.cachePath")
+> ##D   library(googledrive)
+> ##D   newDir <- drive_mkdir("testFolder")
+> ##D   #a <- Cache(rnorm, 1, cacheRepo = getOption("reproducible.cachePath")[3])
+> ##D   a <- Cache(rnorm, 1)
+> ##D   b <- Cache(rnorm, 2)
+> ##D 
+> ##D   # Will copy the 2 to the cloud
+> ##D   cloudSyncCache(cloudFolderID = newDir$id)
+> ##D 
+> ##D   # remove a local one
+> ##D   clearCache(userTags = CacheDigest(list(rnorm, 2))$outputHash)
+> ##D 
+> ##D   # Now will delete the object in the cloud that was just deleted locally
+> ##D   cloudSyncCache(cloudFolderID = newDir$id)
+> ##D 
+> ##D   # clean up
+> ##D   lapply(cachePaths, clearCache, ask = FALSE)
+> ##D   # clearCache(ask = FALSE) # if there were only 1 cacheRepo
+> ##D   cloudSyncCache(cloudFolderID = newDir$id)
+> ##D 
+> ##D   #######################################################################
+> ##D   # use showCache args to have control ... on upload & delete NOTE difference!
+> ##D   #######################################################################
+> ##D   # a <- Cache(rnorm, 1, cacheRepo = getOption("reproducible.cachePath")[3]) # multiple cacheRepos!
+> ##D   a <- Cache(rnorm, 1)
+> ##D   b <- Cache(rnorm, 2)
+> ##D   # only sync the one with rnorm, 2 as arguments
+> ##D   #   This CacheDigest is the same algorithm used by Cache
+> ##D   tag <- CacheDigest(list(rnorm, 2))$outputHash
+> ##D   cloudSyncCache(cloudFolderID = newDir$id, userTags = tag) # only syncs the one
+> ##D                                                             # that is identified
+> ##D                                                             # with userTags
+> ##D 
+> ##D   cloudSyncCache(cloudFolderID = newDir$id) # sync any other ones
+> ##D 
+> ##D   # Now clear an object locally -- next how to propagate this deletion to cloud
+> ##D   clearCache(userTags = tag)
+> ##D 
+> ##D   # Add one more to local, so now local has 2 (a and d), cloud has 2 (a and b)
+> ##D   d <- Cache(rnorm, 4)
+> ##D 
+> ##D   # DELETING IS DIFFERENT
+> ##D   # Doesn't quite work same way for deleting -- this tag is not in local Cache,
+> ##D   # so can't find it this way.
+> ##D   # This next line DOES THE WRONG THING -- IT DELETES EVERYTHING because there is
+> ##D   #         no entry in the local cache -- use cacheId arg instead -- see below
+> ##D   #    showCache(userTags = tags) shows empty
+> ##D   #    cloudSyncCache(cloudFolderID = newDir$id, userTags = tag)
+> ##D 
+> ##D   # Only delete the one that was removed from local cache, set upload = FALSE,
+> ##D   #    leaving only 1 in cloud: a  -- this is still a sync, so, it will only
+> ##D   #    delete 1 file because local has 1 few files -- see next for just deleting 1 artifact
+> ##D   cloudSyncCache(cloudFolderID = newDir$id, upload = FALSE)
+> ##D   # Upload the d, because it is the only one in the localCache not in the cloudCache
+> ##D   cloudSyncCache(cloudFolderID = newDir$id)
+> ##D 
+> ##D   f <- Cache(rnorm, 5)
+> ##D   g <- Cache(rnorm, 6)
+> ##D   # upload both
+> ##D   cloudSyncCache(cloudFolderID = newDir$id) # only syncs the one
+> ##D   tag5 <- CacheDigest(list(rnorm, 5))$outputHash # this is the same algorithm used by Cache
+> ##D   tag6 <- CacheDigest(list(rnorm, 6))$outputHash
+> ##D   clearCache(userTags = tag5)
+> ##D   clearCache(userTags = tag6)
+> ##D   # delete only one by tag
+> ##D   cloudSyncCache(cloudFolderID = newDir$id, cacheIds = tag5) # will delete only this obj in cloud
+> ##D   # delete another one by tag
+> ##D   cloudSyncCache(cloudFolderID = newDir$id, cacheIds = tag6)
+> ##D 
+> ##D   # clean up
+> ##D   # clearCache(ask = FALSE) # if only one cacheRepo
+> ##D   lapply(cachePaths, clearCache, ask = FALSE)
+> ##D   cloudSyncCache(cloudFolderID = newDir$id)
+> ##D 
+> ##D   # To remove whole folder:
+> ##D   drive_rm(as_id(newDir$id))
+> ##D   options(opts)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("compareNA")
+> ### * compareNA
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: compareNA
+> ### Title: 'NA'-aware comparison of two vectors
+> ### Aliases: compareNA
+> 
+> ### ** Examples
+> 
+> a <- c(NA, 1, 2, NA)
+> b <- c(1, NA, 2, NA)
+> compareNA(a, b)
+[1] FALSE FALSE  TRUE  TRUE
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("convertPaths")
+> ### * convertPaths
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: convertPaths
+> ### Title: Change the absolute path of a file
+> ### Aliases: convertPaths convertRasterPaths
+> 
+> ### ** Examples
+> 
+> filenames <- c("/home/user1/Documents/file.txt", "/Users/user1/Documents/file.txt")
+> oldPaths <- dirname(filenames)
+> newPaths <- c("/home/user2/Desktop", "/Users/user2/Desktop")
+> convertPaths(filenames, oldPaths, newPaths)
+[1] "/home/user2/Desktop/file.txt"  "/Users/user2/Desktop/file.txt"
+> 
+> r1 <- raster::raster(system.file("external/test.grd", package = "raster"))
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> r2 <- raster::raster(system.file("external/rlogo.grd", package = "raster"))
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> rasters <- list(r1, r2)
+> oldPaths <- system.file("external", package = "raster")
+> newPaths <- file.path("~/rasters")
+> rasters <- convertRasterPaths(rasters, oldPaths, newPaths)
+> lapply(rasters, raster::filename)
+[[1]]
+[1] "/space/tkalibera/rasters/test.grd"
+
+[[2]]
+[1] "/space/tkalibera/rasters/rlogo.grd"
+
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("copyFile")
+> ### * copyFile
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: copySingleFile
+> ### Title: Copy a file using 'robocopy' on Windows and 'rsync' on
+> ###   Linux/macOS
+> ### Aliases: copySingleFile copyFile
+> 
+> ### ** Examples
+> 
+> tmpDirFrom <- file.path(tempdir(), "example_fileCopy_from")
+> tmpDirTo <- file.path(tempdir(), "example_fileCopy_to")
+> tmpFile1 <- tempfile("file1", tmpDirFrom, ".csv")
+> tmpFile2 <- tempfile("file2", tmpDirFrom, ".csv")
+> dir.create(tmpDirFrom)
+> f1 <- normalizePath(tmpFile1, mustWork = FALSE)
+> f2 <- normalizePath(tmpFile2, mustWork = FALSE)
+> t1 <- normalizePath(file.path(tmpDirTo, basename(tmpFile1)), mustWork = FALSE)
+> t2 <- normalizePath(file.path(tmpDirTo, basename(tmpFile2)), mustWork = FALSE)
+> 
+> write.csv(data.frame(a = 1:10, b = runif(10), c = letters[1:10]), f1)
+> write.csv(data.frame(c = 11:20, d = runif(10), e = letters[11:20]), f2)
+> copyFile(c(f1, f2), c(t1, t2))
+/tmp/Rtmpin9blt/example_fileCopy_from/file1c2006674ea20.csv 
+"/tmp/Rtmpin9blt/example_fileCopy_to/file1c2006674ea20.csv" 
+/tmp/Rtmpin9blt/example_fileCopy_from/file2c20020d32884.csv 
+"/tmp/Rtmpin9blt/example_fileCopy_to/file2c20020d32884.csv" 
+> file.exists(t1) ## TRUE
+[1] TRUE
+> file.exists(t2) ## TRUE
+[1] TRUE
+> identical(read.csv(f1), read.csv(f2)) ## FALSE
+[1] FALSE
+> identical(read.csv(f1), read.csv(t1)) ## TRUE
+[1] TRUE
+> identical(read.csv(f2), read.csv(t2)) ## TRUE
+[1] TRUE
+> 
+> unlink(tmpDirFrom, recursive = TRUE)
+> unlink(tmpDirTo, recursive = TRUE)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("cropInputs")
+> ### * cropInputs
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: cropInputs
+> ### Title: Crop a 'Spatial*' or 'Raster*' object
+> ### Aliases: cropInputs cropInputs.default cropInputs.spatialObjects
+> ###   cropInputs.sf
+> 
+> ### ** Examples
+> 
+> # Add a study area to Crop and Mask to
+> # Create a "study area"
+> library(sp)
+> library(raster)
+> ow <- setwd(tempdir())
+> 
+> # make a SpatialPolygon
+> coords1 <- structure(c(-123.98, -117.1, -80.2, -100, -123.98, 60.9, 67.73, 65.58, 51.79, 60.9),
++                     .Dim = c(5L, 2L))
+> Sr1 <- Polygon(coords1)
+> Srs1 <- Polygons(list(Sr1), "s1")
+> shpEcozone <- SpatialPolygons(list(Srs1), 1L)
+> crs(shpEcozone) <- "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> 
+> # make a "study area" that is subset of larger dataset
+> coords <- structure(c(-118.98, -116.1, -99.2, -106, -118.98, 59.9, 65.73, 63.58, 54.79, 59.9),
++                     .Dim = c(5L, 2L))
+> Sr1 <- Polygon(coords)
+> Srs1 <- Polygons(list(Sr1), "s1")
+> StudyArea <- SpatialPolygons(list(Srs1), 1L)
+> crs(StudyArea) <- "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> #'
+> #'
+> ##########
+> shpEcozonePostProcessed <- postProcess(shpEcozone, studyArea = StudyArea)
+  loading cached result from previous cropInputs call, adding to memoised copy
+Checking for errors in SpatialPolygon
+  Found no errors.
+  loading cached result from previous projectInputs call, adding to memoised copy
+Checking for errors in SpatialPolygon
+  Found no errors.
+  loading cached result from previous maskInputs call, adding to memoised copy
+Saving output to ./Smallfilec20017ae826e. Specify filename1 or filename2 for more control
+  or set filename2 to NULL to prevent saving to disk
+> #'
+> # Try manually, individual pieces
+> shpEcozoneReprojected <- projectInputs(shpEcozone, StudyArea)
+> shpEcozoneCropped <- cropInputs(shpEcozone, StudyArea)
+    cropping ...
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> shpEcozoneClean <- fixErrors(shpEcozone)
+Checking for errors in SpatialPolygon
+  Found no errors.
+> shpEcozoneMasked <- maskInputs(shpEcozone, StudyArea)
+    intersecting ...
+Checking for errors in studyArea
+  Found no errors.
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> 
+> setwd(ow)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’
+
+> nameEx("determineFilename")
+> ### * determineFilename
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: determineFilename
+> ### Title: Determine filename, either automatically or manually
+> ### Aliases: determineFilename
+> 
+> ### ** Examples
+> 
+> # Add a study area to Crop and Mask to
+> # Create a "study area"
+> library(sp)
+> library(raster)
+> ow <- setwd(tempdir())
+> 
+> # make a SpatialPolygon
+> coords1 <- structure(c(-123.98, -117.1, -80.2, -100, -123.98, 60.9, 67.73, 65.58, 51.79, 60.9),
++                     .Dim = c(5L, 2L))
+> Sr1 <- Polygon(coords1)
+> Srs1 <- Polygons(list(Sr1), "s1")
+> shpEcozone <- SpatialPolygons(list(Srs1), 1L)
+> crs(shpEcozone) <- "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> 
+> # make a "study area" that is subset of larger dataset
+> coords <- structure(c(-118.98, -116.1, -99.2, -106, -118.98, 59.9, 65.73, 63.58, 54.79, 59.9),
++                     .Dim = c(5L, 2L))
+> Sr1 <- Polygon(coords)
+> Srs1 <- Polygons(list(Sr1), "s1")
+> StudyArea <- SpatialPolygons(list(Srs1), 1L)
+> crs(StudyArea) <- "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> #'
+> #'
+> ##########
+> shpEcozonePostProcessed <- postProcess(shpEcozone, studyArea = StudyArea)
+  loading memoised result from previous cropInputs call.
+Checking for errors in SpatialPolygon
+  Found no errors.
+  loading memoised result from previous projectInputs call.
+Checking for errors in SpatialPolygon
+  Found no errors.
+  loading memoised result from previous maskInputs call.
+Saving output to ./Smallfilec20054470333. Specify filename1 or filename2 for more control
+  or set filename2 to NULL to prevent saving to disk
+> #'
+> # Try manually, individual pieces
+> shpEcozoneReprojected <- projectInputs(shpEcozone, StudyArea)
+> shpEcozoneCropped <- cropInputs(shpEcozone, StudyArea)
+    cropping ...
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> shpEcozoneClean <- fixErrors(shpEcozone)
+Checking for errors in SpatialPolygon
+  Found no errors.
+> shpEcozoneMasked <- maskInputs(shpEcozone, StudyArea)
+    intersecting ...
+Checking for errors in studyArea
+  Found no errors.
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> 
+> setwd(ow)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’
+
+> nameEx("fastMask")
+> ### * fastMask
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: fastMask
+> ### Title: Faster operations on rasters
+> ### Aliases: fastMask
+> 
+> ### ** Examples
+> 
+> library(raster)
+Loading required package: sp
+> 
+> Sr1 <- Polygon(cbind(c(2, 4, 4, 0.9, 2), c(2, 3, 5, 4, 2)))
+> Sr2 <- Polygon(cbind(c(5, 4, 2, 5), c(2, 3, 2, 2)))
+> Sr3 <- Polygon(cbind(c(4, 4, 5, 10, 4), c(5, 3, 2, 5, 5)))
+> 
+> Srs1 <- Polygons(list(Sr1), "s1")
+> Srs2 <- Polygons(list(Sr2), "s2")
+> Srs3 <- Polygons(list(Sr3), "s3")
+> shp <- SpatialPolygons(list(Srs1, Srs2, Srs3), 1:3)
+> d <- data.frame(vals = 1:3, other = letters[3:1], stringsAsFactors = FALSE)
+> row.names(d) <- names(shp)
+> shp <- SpatialPolygonsDataFrame(shp, data = d)
+> poly <- list()
+> poly[[1]] <- raster(raster::extent(shp), vals = 0, res = c(1, 1))
+> poly[[2]] <- raster(raster::extent(shp), vals = 1, res = c(1, 1))
+> origStack <- stack(poly)
+> # original mask function in raster
+> newStack1 <- mask(origStack, mask = shp)
+> newStack2 <- fastMask(x = origStack, y = shp)
+This function is using raster::mask
+ because fastMask doesn't have a specific method for these classes yet
+> 
+> # test all equal
+> all.equal(newStack1, newStack2)
+[1] TRUE
+> 
+> newStack1 <- stack(newStack1)
+> newStack2 <- stack(newStack2)
+> 
+> if (interactive()) {
++   plot(newStack2[[1]])
++   plot(shp, add = TRUE)
++ }
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’
+
+> nameEx("fixErrors")
+> ### * fixErrors
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: fixErrors
+> ### Title: Do some minor error fixing
+> ### Aliases: fixErrors fixErrors.default fixErrors.SpatialPolygons
+> ###   fixErrors.sf
+> ### Keywords: internal
+> 
+> ### ** Examples
+> 
+> # Add a study area to Crop and Mask to
+> # Create a "study area"
+> library(sp)
+> library(raster)
+> ow <- setwd(tempdir())
+> 
+> # make a SpatialPolygon
+> coords1 <- structure(c(-123.98, -117.1, -80.2, -100, -123.98, 60.9, 67.73, 65.58, 51.79, 60.9),
++                     .Dim = c(5L, 2L))
+> Sr1 <- Polygon(coords1)
+> Srs1 <- Polygons(list(Sr1), "s1")
+> shpEcozone <- SpatialPolygons(list(Srs1), 1L)
+> crs(shpEcozone) <- "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> 
+> # make a "study area" that is subset of larger dataset
+> coords <- structure(c(-118.98, -116.1, -99.2, -106, -118.98, 59.9, 65.73, 63.58, 54.79, 59.9),
++                     .Dim = c(5L, 2L))
+> Sr1 <- Polygon(coords)
+> Srs1 <- Polygons(list(Sr1), "s1")
+> StudyArea <- SpatialPolygons(list(Srs1), 1L)
+> crs(StudyArea) <- "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> #'
+> #'
+> ##########
+> shpEcozonePostProcessed <- postProcess(shpEcozone, studyArea = StudyArea)
+  loading memoised result from previous cropInputs call.
+Checking for errors in SpatialPolygon
+  Found no errors.
+  loading memoised result from previous projectInputs call.
+Checking for errors in SpatialPolygon
+  Found no errors.
+  loading memoised result from previous maskInputs call.
+Saving output to ./Smallfilec20022f16498. Specify filename1 or filename2 for more control
+  or set filename2 to NULL to prevent saving to disk
+> #'
+> # Try manually, individual pieces
+> shpEcozoneReprojected <- projectInputs(shpEcozone, StudyArea)
+> shpEcozoneCropped <- cropInputs(shpEcozone, StudyArea)
+    cropping ...
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> shpEcozoneClean <- fixErrors(shpEcozone)
+Checking for errors in SpatialPolygon
+  Found no errors.
+> shpEcozoneMasked <- maskInputs(shpEcozone, StudyArea)
+    intersecting ...
+Checking for errors in studyArea
+  Found no errors.
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> 
+> setwd(ow)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’
+
+> nameEx("installPackages")
+> ### * installPackages
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: .installPackages
+> ### Title: Internal function to install packages
+> ### Aliases: .installPackages
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D   .installPackages("crayon")
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("installVersions")
+> ### * installVersions
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: installVersions
+> ### Title: Install exact package versions from a package version text file
+> ###   & GitHub
+> ### Aliases: installVersions
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # requires the packageVersionFile -- this doesn't work -- safer to use Require
+> ##D installVersions("PredictiveEcology/reproducible@development")
+> ##D 
+> ##D # make a package version snapshot -- this will be empty because no packages in directory
+> ##D tempPkgFolder <- file.path(tempdir(), "Packages")
+> ##D dir.create(tempPkgFolder)
+> ##D packageVersionFile <- file.path(tempPkgFolder, ".packageVersion.txt")
+> ##D pkgSnapshot(libPath = tempPkgFolder, packageVersionFile)
+> ##D 
+> ##D Require("crayon", libPath = tempPkgFolder) # install.packages first, then library
+> ##D 
+> ##D # install a specific version
+> ##D # make a package version snapshot
+> ##D packageVersionFile <- file.path(tempPkgFolder, ".packageVersion.txt")
+> ##D pkgSnapshot(libPath=tempPkgFolder, packageVersionFile, standAlone = FALSE)
+> ##D 
+> ##D installVersions("crayon", packageVersionFile = packageVersionFile)
+> ##D 
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("installedVersions")
+> ### * installedVersions
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: installedVersions
+> ### Title: Determine versions all installed packages
+> ### Aliases: installedVersions
+> 
+> ### ** Examples
+> 
+> installedVersions("reproducible", .libPaths()[1])
+[1] "0.2.8"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("linkOrCopy")
+> ### * linkOrCopy
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: linkOrCopy
+> ### Title: Hardlink, symlink, or copy a file
+> ### Aliases: linkOrCopy
+> 
+> ### ** Examples
+> 
+> library(datasets)
+> library(magrittr)
+> library(raster)
+Loading required package: sp
+
+Attaching package: ‘raster’
+
+The following object is masked from ‘package:magrittr’:
+
+    extract
+
+> 
+> tmpDir <- file.path(tempdir(), "symlink-test") %>%
++   normalizePath(winslash = '/', mustWork = FALSE)
+> dir.create(tmpDir)
+> 
+> f0 <- file.path(tmpDir, "file0.csv")
+> write.csv(iris, f0)
+> 
+> d1 <- file.path(tmpDir, "dir1")
+> dir.create(d1)
+> write.csv(iris, file.path(d1, "file1.csv"))
+> 
+> d2 <- file.path(tmpDir, "dir2")
+> dir.create(d2)
+> f2 <- file.path(tmpDir, "file2.csv")
+> 
+> ## create link to a file
+> linkOrCopy(f0, f2)
+Hardlinked version of file created at: /tmp/Rtmpin9blt/symlink-test/file2.csv, which points to /tmp/Rtmpin9blt/symlink-test/file0.csv; no copy was made.
+[1] TRUE
+> file.exists(f2) ## TRUE
+[1] TRUE
+> identical(read.table(f0), read.table(f2)) ## TRUE
+[1] TRUE
+> 
+> ## deleting the link shouldn't delete the original file
+> unlink(f0)
+> file.exists(f0) ## FALSE
+[1] FALSE
+> file.exists(f2) ## TRUE
+[1] TRUE
+> 
+> ## using rasters and other file-backed objects
+> f3a <- system.file("external/test.grd", package = "raster")
+> f3b <- system.file("external/test.gri", package = "raster")
+> r3a <- raster(f3a)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> f4a <- file.path(tmpDir, "raster4.grd")
+> f4b <- file.path(tmpDir, "raster4.gri")
+> linkOrCopy(f3a, f4a) ## hardlink
+Symlinked version of file created at: /tmp/Rtmpin9blt/symlink-test/raster4.grd, which points to /var/scratch2/tomas/cran/rcnst/lib/raster/external/test.grd; no copy was made.
+[1] TRUE
+> linkOrCopy(f3b, f4b) ## hardlink
+Symlinked version of file created at: /tmp/Rtmpin9blt/symlink-test/raster4.gri, which points to /var/scratch2/tomas/cran/rcnst/lib/raster/external/test.gri; no copy was made.
+[1] TRUE
+> r4a <- raster(f4a)
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> 
+> isTRUE(all.equal(r3a, r4a)) # TRUE
+[1] TRUE
+> 
+> ## cleanup
+> unlink(tmpDir, recursive = TRUE)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’, ‘package:magrittr’
+
+> nameEx("maskInputs")
+> ### * maskInputs
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: maskInputs
+> ### Title: Mask module inputs
+> ### Aliases: maskInputs maskInputs.Raster maskInputs.Spatial maskInputs.sf
+> 
+> ### ** Examples
+> 
+> # Add a study area to Crop and Mask to
+> # Create a "study area"
+> library(sp)
+> library(raster)
+> ow <- setwd(tempdir())
+> 
+> # make a SpatialPolygon
+> coords1 <- structure(c(-123.98, -117.1, -80.2, -100, -123.98, 60.9, 67.73, 65.58, 51.79, 60.9),
++                     .Dim = c(5L, 2L))
+> Sr1 <- Polygon(coords1)
+> Srs1 <- Polygons(list(Sr1), "s1")
+> shpEcozone <- SpatialPolygons(list(Srs1), 1L)
+> crs(shpEcozone) <- "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> 
+> # make a "study area" that is subset of larger dataset
+> coords <- structure(c(-118.98, -116.1, -99.2, -106, -118.98, 59.9, 65.73, 63.58, 54.79, 59.9),
++                     .Dim = c(5L, 2L))
+> Sr1 <- Polygon(coords)
+> Srs1 <- Polygons(list(Sr1), "s1")
+> StudyArea <- SpatialPolygons(list(Srs1), 1L)
+> crs(StudyArea) <- "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> #'
+> #'
+> ##########
+> shpEcozonePostProcessed <- postProcess(shpEcozone, studyArea = StudyArea)
+  loading memoised result from previous cropInputs call.
+Checking for errors in SpatialPolygon
+  Found no errors.
+  loading memoised result from previous projectInputs call.
+Checking for errors in SpatialPolygon
+  Found no errors.
+  loading memoised result from previous maskInputs call.
+Saving output to ./Smallfilec2009148a78. Specify filename1 or filename2 for more control
+  or set filename2 to NULL to prevent saving to disk
+> #'
+> # Try manually, individual pieces
+> shpEcozoneReprojected <- projectInputs(shpEcozone, StudyArea)
+> shpEcozoneCropped <- cropInputs(shpEcozone, StudyArea)
+    cropping ...
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> shpEcozoneClean <- fixErrors(shpEcozone)
+Checking for errors in SpatialPolygon
+  Found no errors.
+> shpEcozoneMasked <- maskInputs(shpEcozone, StudyArea)
+    intersecting ...
+Checking for errors in studyArea
+  Found no errors.
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> 
+> setwd(ow)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’
+
+> nameEx("newLibPaths")
+> ### * newLibPaths
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: newLibPaths
+> ### Title: A shortcut to create a '.libPaths()' with only two directories
+> ### Aliases: newLibPaths
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D newLibPaths("testPackages")
+> ##D .libPaths() # new .libPaths
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("normPath")
+> ### * normPath
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: normPath
+> ### Title: Normalize filepath
+> ### Aliases: normPath normPath,character-method normPath,list-method
+> ###   normPath,NULL-method normPath,missing-method
+> 
+> ### ** Examples
+> 
+> ## normalize file paths
+> paths <- list("./aaa/zzz",
++               "./aaa/zzz/",
++               ".//aaa//zzz",
++               ".//aaa//zzz/",
++               ".\\aaa\\zzz",
++               ".\\aaa\\zzz\\",
++               file.path(".", "aaa", "zzz"))
+> 
+> checked <- normPath(paths)
+> length(unique(checked)) ## 1; all of the above are equivalent
+[1] 1
+> 
+> ## check to see if a path exists
+> tmpdir <- file.path(tempdir(), "example_checkPath")
+> 
+> dir.exists(tmpdir) ## FALSE
+[1] FALSE
+> tryCatch(checkPath(tmpdir, create = FALSE), error = function(e) FALSE) ## FALSE
+[1] FALSE
+> 
+> checkPath(tmpdir, create = TRUE)
+[1] "/tmp/Rtmpin9blt/example_checkPath"
+> dir.exists(tmpdir) ## TRUE
+[1] TRUE
+> 
+> unlink(tmpdir, recursive = TRUE)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("objSize")
+> ### * objSize
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: objSize
+> ### Title: Recursive object.size
+> ### Aliases: objSize objSize.list objSize.environment objSize.default
+> ###   objSize.Path
+> ### Keywords: internal
+> 
+> ### ** Examples
+> 
+> a <- new.env()
+> a$b <- 1:10
+> a$d <- 1:10
+> 
+> objSize(a) # all the elements in the environment
+$`a$b`
+96 bytes
+
+$`a$d`
+96 bytes
+
+$a
+56 bytes
+
+> object.size(a) # different - only measuring the environment as an object
+56 bytes
+> 
+> 
+> 
+> cleanEx()
+> nameEx("objSizeInclEnviros")
+> ### * objSizeInclEnviros
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: .objSizeInclEnviros
+> ### Title: Determine object size of all objects inside environments
+> ### Aliases: .objSizeInclEnviros .objSizeInclEnviros,ANY-method
+> ###   .objSizeInclEnviros,environment-method
+> 
+> ### ** Examples
+> 
+> a <- new.env()
+> a$b <- 1:10
+> object.size(a)
+56 bytes
+> .objSizeInclEnviros(a) # much larger
+376 bytes
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("pipe")
+> ### * pipe
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: pipe
+> ### Title: A cache-aware pipe that does not mask with '%>%'
+> ### Aliases: pipe %C%
+> 
+> ### ** Examples
+> 
+> library(magrittr) # standard pipe
+> # dontrun{ # these can't be automatically run due to package conflicts with magrittr
+> tmpdir <- file.path(tempdir(), "testCache")
+> checkPath(tmpdir, create = TRUE)
+[1] "/tmp/Rtmpin9blt/testCache"
+> a <- rnorm(10, 16) %>%
++      mean() %>%
++      prod(., 6)
+> b <- Cache(cacheRepo = tmpdir) %C% # use of the %C% pipe!
++      rnorm(10, 16) %>% # everything after here is NOT cached!
++      mean() %>%
++      prod(., 6)
+> d <- Cache(cacheRepo = tmpdir) %C%
++      rnorm(10, 16) %>%
++      mean() %>%
++      prod(., 6)
+  loading cached result from previous 'rnorm, mean' pipe sequence call, adding to memoised copy
+> e <- Cache(cacheRepo = tmpdir) %C%
++      rnorm(10, 16) %>%
++      mean() %>%
++      prod(., 5) # changed
+  loading memoised result from previous 'rnorm, mean' pipe sequence call.
+> all.equal(b,d) # TRUE
+[1] TRUE
+> all.equal(a,d) # different because 'a' uses a unique rnorm, 'd' uses the Cached rnorm
+[1] "Mean relative difference: 0.007230394"
+>                #   because the arguments to rnorm, i.e., 10 and 16, and
+>                #   the subsequent functions in the chain, are identical
+> all.equal(a,e) # different because the final function, prod, has a changed argument.
+[1] "Mean relative difference: 0.1606413"
+> 
+> ###########
+> # multiple random elements shows Cached sequence up to %C%
+> a1 <- Cache(cacheRepo = tmpdir) %>%
++        seq(1, 10) %>%
++        rnorm(2, mean = .) %>%
++        mean() %C%                # Cache pipe here --
++                                  # means this pipe is the last one that is Cached
++        rnorm(3, mean = .) %>%
++        mean(.) %>%
++        rnorm(4, mean = .)  # Random 4 numbers, the mean is same each time
+> a2 <- Cache(cacheRepo = tmpdir) %>%
++        seq(1, 10) %>%
++        rnorm(2, mean = .) %>%
++        mean() %C%                # Cache pipe here --
++                                  # means this pipe is the last one that is Cached
++        rnorm(3, mean = .) %>%
++        mean(.) %>%
++        rnorm(4, mean = .)  # Random 4 numbers, the mean is same each time
+  loading cached result from previous 'seq, rnorm, mean, rnorm' pipe sequence call, adding to memoised copy
+> sum(a1 - a2) # not 0 # i.e., numbers are different
+[1] -4.222332
+> 
+> # NOW DO WITH CACHE AT END
+> b1 <- Cache(cacheRepo = tmpdir) %>%
++        seq(1, 10) %>%
++        rnorm(2, mean = .) %>%
++        mean() %>%
++                                  # means this pipe is the last one that is Cached
++        rnorm(3, mean = .) %>%
++        mean(.) %C%               # Cache pipe here --
++        rnorm(4, mean = .)        # These are samethe mean is same each time
+> b2 <- Cache(cacheRepo = tmpdir) %>%
++        seq(1, 10) %>%
++        rnorm(2, mean = .) %>%
++        mean() %>%
++                                  # means this pipe is the last one that is Cached
++        rnorm(3, mean = .) %>%
++        mean(.) %C%               # Cache pipe here --
++        rnorm(4, mean = .)        # These are samethe mean is same each time
+  loading cached result from previous 'seq, rnorm, mean, rnorm, mean, rnorm' pipe sequence call, adding to memoised copy
+> sum(b1 - b2) # 0 # i.e., numbers are same
+[1] 0
+> 
+> unlink(tmpdir, recursive = TRUE)
+> #}
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:magrittr’
+
+> nameEx("pkgDep")
+> ### * pkgDep
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: pkgDep
+> ### Title: Determine package dependencies, first looking at local
+> ###   filesystem
+> ### Aliases: pkgDep pkgDep2
+> 
+> ### ** Examples
+> 
+> pkgDep("crayon")
+$crayon
+[1] "grDevices" "methods"   "utils"     "stats"     "graphics" 
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("pkgSnapshot")
+> ### * pkgSnapshot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: pkgSnapshot
+> ### Title: Take a snapshot of all the packages and version numbers
+> ### Aliases: pkgSnapshot
+> 
+> ### ** Examples
+> 
+> pkgSnapFile <- tempfile()
+> pkgSnapshot(pkgSnapFile, .libPaths()[1])
+       instPkgs instVers
+  1:         BH 1.69.0-1
+  2:  CircStats    0.2-6
+  3:        DBI    1.0.0
+  4:    DEoptim    2.2-4
+  5: DiagrammeR    1.0.1
+ ---                    
+127:    splines    3.7.0
+128:      stats    3.7.0
+129:      tcltk    3.7.0
+130:      tools    3.7.0
+131:      utils    3.7.0
+> data.table::fread(pkgSnapFile)
+       instPkgs instVers
+  1:         BH 1.69.0-1
+  2:  CircStats    0.2-6
+  3:        DBI    1.0.0
+  4:    DEoptim    2.2-4
+  5: DiagrammeR    1.0.1
+ ---                    
+127:    splines    3.7.0
+128:      stats    3.7.0
+129:      tcltk    3.7.0
+130:      tools    3.7.0
+131:      utils    3.7.0
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("postProcess")
+> ### * postProcess
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: postProcess
+> ### Title: Generic function to post process objects
+> ### Aliases: postProcess postProcess.default postProcess.list
+> ###   postProcess.spatialObjects postProcess.sf
+> 
+> ### ** Examples
+> 
+> # Add a study area to Crop and Mask to
+> # Create a "study area"
+> library(sp)
+> library(raster)
+> ow <- setwd(tempdir())
+> 
+> # make a SpatialPolygon
+> coords1 <- structure(c(-123.98, -117.1, -80.2, -100, -123.98, 60.9, 67.73, 65.58, 51.79, 60.9),
++                     .Dim = c(5L, 2L))
+> Sr1 <- Polygon(coords1)
+> Srs1 <- Polygons(list(Sr1), "s1")
+> shpEcozone <- SpatialPolygons(list(Srs1), 1L)
+> crs(shpEcozone) <- "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> 
+> # make a "study area" that is subset of larger dataset
+> coords <- structure(c(-118.98, -116.1, -99.2, -106, -118.98, 59.9, 65.73, 63.58, 54.79, 59.9),
++                     .Dim = c(5L, 2L))
+> Sr1 <- Polygon(coords)
+> Srs1 <- Polygons(list(Sr1), "s1")
+> StudyArea <- SpatialPolygons(list(Srs1), 1L)
+> crs(StudyArea) <- "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> #'
+> #'
+> ##########
+> shpEcozonePostProcessed <- postProcess(shpEcozone, studyArea = StudyArea)
+  loading memoised result from previous cropInputs call.
+Checking for errors in SpatialPolygon
+  Found no errors.
+  loading memoised result from previous projectInputs call.
+Checking for errors in SpatialPolygon
+  Found no errors.
+  loading memoised result from previous maskInputs call.
+Saving output to ./Smallfilec20015c3ea9e. Specify filename1 or filename2 for more control
+  or set filename2 to NULL to prevent saving to disk
+> #'
+> # Try manually, individual pieces
+> shpEcozoneReprojected <- projectInputs(shpEcozone, StudyArea)
+> shpEcozoneCropped <- cropInputs(shpEcozone, StudyArea)
+    cropping ...
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> shpEcozoneClean <- fixErrors(shpEcozone)
+Checking for errors in SpatialPolygon
+  Found no errors.
+> shpEcozoneMasked <- maskInputs(shpEcozone, StudyArea)
+    intersecting ...
+Checking for errors in studyArea
+  Found no errors.
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> 
+> setwd(ow)
+> # Add a study area to Crop and Mask to
+> # Create a "study area"
+> library(sp)
+> library(raster)
+> ow <- setwd(tempdir())
+> 
+> # make a SpatialPolygon
+> coords1 <- structure(c(-123.98, -117.1, -80.2, -100, -123.98, 60.9, 67.73, 65.58, 51.79, 60.9),
++                     .Dim = c(5L, 2L))
+> Sr1 <- Polygon(coords1)
+> Srs1 <- Polygons(list(Sr1), "s1")
+> shpEcozone <- SpatialPolygons(list(Srs1), 1L)
+> crs(shpEcozone) <- "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> 
+> # make a "study area" that is subset of larger dataset
+> coords <- structure(c(-118.98, -116.1, -99.2, -106, -118.98, 59.9, 65.73, 63.58, 54.79, 59.9),
++                     .Dim = c(5L, 2L))
+> Sr1 <- Polygon(coords)
+> Srs1 <- Polygons(list(Sr1), "s1")
+> StudyArea <- SpatialPolygons(list(Srs1), 1L)
+> crs(StudyArea) <- "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> #'
+> #'
+> ##########
+> shpEcozonePostProcessed <- postProcess(shpEcozone, studyArea = StudyArea)
+  loading memoised result from previous cropInputs call.
+Checking for errors in SpatialPolygon
+  Found no errors.
+  loading memoised result from previous projectInputs call.
+Checking for errors in SpatialPolygon
+  Found no errors.
+  loading memoised result from previous maskInputs call.
+Saving output to ./Smallfilec20042b36f97. Specify filename1 or filename2 for more control
+  or set filename2 to NULL to prevent saving to disk
+> #'
+> # Try manually, individual pieces
+> shpEcozoneReprojected <- projectInputs(shpEcozone, StudyArea)
+> shpEcozoneCropped <- cropInputs(shpEcozone, StudyArea)
+    cropping ...
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> shpEcozoneClean <- fixErrors(shpEcozone)
+Checking for errors in SpatialPolygon
+  Found no errors.
+> shpEcozoneMasked <- maskInputs(shpEcozone, StudyArea)
+    intersecting ...
+Checking for errors in studyArea
+  Found no errors.
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> 
+> setwd(ow)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’
+
+> nameEx("preDigestByClass")
+> ### * preDigestByClass
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: .preDigestByClass
+> ### Title: Any miscellaneous things to do before '.robustDigest' and after
+> ###   'FUN' call
+> ### Aliases: .preDigestByClass .preDigestByClass,ANY-method
+> 
+> ### ** Examples
+> 
+> a <- 1
+> .preDigestByClass(a) # returns NULL in the simple case here.
+NULL
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("prefix")
+> ### * prefix
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: .prefix
+> ### Title: Add a prefix or suffix to the basename part of a file path
+> ### Aliases: .prefix suffix .suffix
+> 
+> ### ** Examples
+> 
+> # file's full path is specified (i.e., dirname is known)
+> myFile <- file.path("~/data", "file.tif")
+> .prefix(myFile, "small_")    ## "/home/username/data/small_file.tif"
+[1] "/space/tkalibera/data/small_file.tif"
+> .suffix(myFile, "_cropped") ## "/home/username/data/myFile_cropped.shp"
+[1] "/space/tkalibera/data/file_cropped.tif"
+> 
+> # file's full path is not specified
+> .prefix("myFile.shp", "small")    ## "./small_myFile.shp"
+[1] "./smallmyFile.shp"
+> .suffix("myFile.shp", "_cropped") ## "./myFile_cropped.shp"
+[1] "./myFile_cropped.shp"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("prepInputs")
+> ### * prepInputs
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: prepInputs
+> ### Title: Download and optionally post process files
+> ### Aliases: prepInputs
+> 
+> ### ** Examples
+> 
+> # This function works within a module; however, currently,
+> #   \cde{sourceURL} is not yet working as desired. Use \code{url}.
+> ## Not run: 
+> ##D # download a zip file from internet, unzip all files, load as shapefile, Cache the call
+> ##D # First time: don't know all files - prepInputs will guess, if download file is an archive,
+> ##D #   then extract all files, then if there is a .shp, it will load with raster::shapefile
+> ##D dPath <- file.path(tempdir(), "ecozones")
+> ##D shpEcozone <- prepInputs(destinationPath = dPath,
+> ##D                          url = "http://sis.agr.gc.ca/cansis/nsdb/ecostrat/zone/ecozone_shp.zip")
+> ##D 
+> ##D # Robust to partial file deletions:
+> ##D unlink(dir(dPath, full.names = TRUE)[1:3])
+> ##D shpEcozone <- prepInputs(destinationPath = dPath,
+> ##D                      url = "http://sis.agr.gc.ca/cansis/nsdb/ecostrat/zone/ecozone_shp.zip")
+> ##D unlink(dPath, recursive = TRUE)
+> ##D 
+> ##D # Once this is done, can be more precise in operational code:
+> ##D #  specify targetFile, alsoExtract, and fun, wrap with Cache
+> ##D ecozoneFilename <- file.path(dPath, "ecozones.shp")
+> ##D ecozoneFiles <- c("ecozones.dbf", "ecozones.prj",
+> ##D                   "ecozones.sbn", "ecozones.sbx", "ecozones.shp", "ecozones.shx")
+> ##D shpEcozone <- prepInputs(targetFile = ecozoneFilename,
+> ##D                     url = "http://sis.agr.gc.ca/cansis/nsdb/ecostrat/zone/ecozone_shp.zip",
+> ##D                     alsoExtract = ecozoneFiles,
+> ##D                     fun = "shapefile", destinationPath = dPath)
+> ##D unlink(dPath, recursive = TRUE)
+> ##D 
+> ##D #' # Add a study area to Crop and Mask to
+> ##D # Create a "study area"
+> ##D library(sp)
+> ##D library(raster)
+> ##D coords <- structure(c(-122.98, -116.1, -99.2, -106, -122.98, 59.9, 65.73, 63.58, 54.79, 59.9),
+> ##D                     .Dim = c(5L, 2L))
+> ##D Sr1 <- Polygon(coords)
+> ##D Srs1 <- Polygons(list(Sr1), "s1")
+> ##D StudyArea <- SpatialPolygons(list(Srs1), 1L)
+> ##D crs(StudyArea) <- "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+> ##D 
+> ##D #  specify targetFile, alsoExtract, and fun, wrap with Cache
+> ##D ecozoneFilename <- file.path(dPath, "ecozones.shp")
+> ##D # Note, you don't need to "alsoExtract" the archive... if the archive is not there, but the
+> ##D #   targetFile is there, it will not redownload the archive.
+> ##D ecozoneFiles <- c("ecozones.dbf", "ecozones.prj",
+> ##D                   "ecozones.sbn", "ecozones.sbx", "ecozones.shp", "ecozones.shx")
+> ##D shpEcozoneSm <- Cache(prepInputs,
+> ##D                          url = "http://sis.agr.gc.ca/cansis/nsdb/ecostrat/zone/ecozone_shp.zip",
+> ##D                          targetFile = reproducible::asPath(ecozoneFilename),
+> ##D                          alsoExtract = reproducible::asPath(ecozoneFiles),
+> ##D                          studyArea = StudyArea,
+> ##D                          fun = "shapefile", destinationPath = dPath,
+> ##D                          filename2 = "EcozoneFile.shp") # passed to determineFilename
+> ##D 
+> ##D plot(shpEcozone)
+> ##D plot(shpEcozoneSm, add = TRUE, col = "red")
+> ##D unlink(dPath)
+> ##D 
+> ##D # Big Raster, with crop and mask to Study Area - no reprojecting (lossy) of raster,
+> ##D #   but the StudyArea does get reprojected, need to use rasterToMatch
+> ##D dPath <- file.path(tempdir(), "LCC")
+> ##D lcc2005Filename <- file.path(dPath, "LCC2005_V1_4a.tif")
+> ##D url <- file.path("ftp://ftp.ccrs.nrcan.gc.ca/ad/NLCCLandCover",
+> ##D                  "LandcoverCanada2005_250m/LandCoverOfCanada2005_V1_4.zip")
+> ##D 
+> ##D # messages received below may help for filling in more arguments in the subsequent call
+> ##D LCC2005 <- prepInputs(url = url,
+> ##D                      destinationPath = asPath(dPath),
+> ##D                      studyArea = StudyArea)
+> ##D 
+> ##D plot(LCC2005)
+> ##D 
+> ##D # if wrapped with Cache, will be fast second time, very fast 3rd time (via memoised copy)
+> ##D LCC2005 <- Cache(prepInputs, url = url,
+> ##D                      targetFile = lcc2005Filename,
+> ##D                      archive = asPath("LandCoverOfCanada2005_V1_4.zip"),
+> ##D                      destinationPath = asPath(dPath),
+> ##D                      studyArea = StudyArea)
+> ##D # Using dlFun -- a custom download function -- passed to preProcess
+> ##D test1 <- prepInputs(targetFile = "GADM_2.8_LUX_adm0.rds", # must specify currently
+> ##D                     dlFun = "raster::getData", name = "GADM", country = "LUX", level = 0,
+> ##D                     path = dPath)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("prepareFileBackedRaster")
+> ### * prepareFileBackedRaster
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: .prepareFileBackedRaster
+> ### Title: Copy the file-backing of a file-backed Raster* object
+> ### Aliases: .prepareFileBackedRaster
+> 
+> ### ** Examples
+> 
+> library(raster)
+Loading required package: sp
+> archivist::createLocalRepo(tempdir())
+Directory /tmp/Rtmpin9blt does exist and contain the backpack.db file. Use force=TRUE to reinitialize.
+> 
+> r <- raster(extent(0,10,0,10), vals = 1:100)
+> 
+> # write to disk manually -- will be in tempdir()
+> r <- writeRaster(r, file = tempfile())
+> 
+> # copy it to the cache repository
+> r <- .prepareFileBackedRaster(r, tempdir())
+> 
+> r # now in "rasters" subfolder of tempdir()
+class      : RasterLayer 
+dimensions : 10, 10, 100  (nrow, ncol, ncell)
+resolution : 1, 1  (x, y)
+extent     : 0, 10, 0, 10  (xmin, xmax, ymin, ymax)
+crs        : NA 
+source     : /tmp/Rtmpin9blt/rasters/filec2004859ff2b.grd 
+names      : layer 
+values     : 1, 100  (min, max)
+
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’
+
+> nameEx("prepareOutput")
+> ### * prepareOutput
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: .prepareOutput
+> ### Title: Make any modifications to object recovered from cacheRepo
+> ### Aliases: .prepareOutput .prepareOutput,RasterLayer-method
+> ###   .prepareOutput,ANY-method
+> 
+> ### ** Examples
+> 
+> a <- 1
+> .prepareOutput(a) # does nothing
+[1] 1
+> 
+> b <- "Null"
+> .prepareOutput(b) # converts to NULL
+NULL
+> 
+> # For rasters, it is same as .prepareFileBackedRaster
+> try(archivist::createLocalRepo(tempdir()))
+Directory /tmp/Rtmpin9blt does exist and contain the backpack.db file. Use force=TRUE to reinitialize.
+> 
+> library(raster)
+Loading required package: sp
+> r <- raster(extent(0,10,0,10), vals = 1:100)
+> 
+> # write to disk manually -- will be in tempdir()
+> r <- writeRaster(r, file = tempfile())
+> 
+> # copy it to the cache repository
+> r <- .prepareOutput(r, tempdir())
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’
+
+> nameEx("projectInputs")
+> ### * projectInputs
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: projectInputs
+> ### Title: Project 'Raster*' or Spatial* or 'sf' objects
+> ### Aliases: projectInputs projectInputs.default projectInputs.Raster
+> ###   projectInputs.sf projectInputs.Spatial
+> 
+> ### ** Examples
+> 
+> # Add a study area to Crop and Mask to
+> # Create a "study area"
+> library(sp)
+> library(raster)
+> ow <- setwd(tempdir())
+> 
+> # make a SpatialPolygon
+> coords1 <- structure(c(-123.98, -117.1, -80.2, -100, -123.98, 60.9, 67.73, 65.58, 51.79, 60.9),
++                     .Dim = c(5L, 2L))
+> Sr1 <- Polygon(coords1)
+> Srs1 <- Polygons(list(Sr1), "s1")
+> shpEcozone <- SpatialPolygons(list(Srs1), 1L)
+> crs(shpEcozone) <- "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> 
+> # make a "study area" that is subset of larger dataset
+> coords <- structure(c(-118.98, -116.1, -99.2, -106, -118.98, 59.9, 65.73, 63.58, 54.79, 59.9),
++                     .Dim = c(5L, 2L))
+> Sr1 <- Polygon(coords)
+> Srs1 <- Polygons(list(Sr1), "s1")
+> StudyArea <- SpatialPolygons(list(Srs1), 1L)
+> crs(StudyArea) <- "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> #'
+> #'
+> ##########
+> shpEcozonePostProcessed <- postProcess(shpEcozone, studyArea = StudyArea)
+  loading memoised result from previous cropInputs call.
+Checking for errors in SpatialPolygon
+  Found no errors.
+  loading memoised result from previous projectInputs call.
+Checking for errors in SpatialPolygon
+  Found no errors.
+  loading memoised result from previous maskInputs call.
+Saving output to ./Smallfilec2001644d7ce. Specify filename1 or filename2 for more control
+  or set filename2 to NULL to prevent saving to disk
+> #'
+> # Try manually, individual pieces
+> shpEcozoneReprojected <- projectInputs(shpEcozone, StudyArea)
+> shpEcozoneCropped <- cropInputs(shpEcozone, StudyArea)
+    cropping ...
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> shpEcozoneClean <- fixErrors(shpEcozone)
+Checking for errors in SpatialPolygon
+  Found no errors.
+> shpEcozoneMasked <- maskInputs(shpEcozone, StudyArea)
+    intersecting ...
+Checking for errors in studyArea
+  Found no errors.
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> 
+> setwd(ow)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’
+
+> nameEx("readLinesRcpp")
+> ### * readLinesRcpp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: readLinesRcpp
+> ### Title: Alternative to readLines that is faster
+> ### Aliases: readLinesRcpp
+> 
+> ### ** Examples
+> 
+> readLinesRcpp(system.file(package = "reproducible", "DESCRIPTION"))
+ [1] "Package: reproducible"                                                                                               
+ [2] "Type: Package"                                                                                                       
+ [3] "Title: A Set of Tools that Enhance Reproducibility Beyond Package"                                                   
+ [4] "        Management"                                                                                                  
+ [5] "Description: Collection of high-level, robust, machine- and OS-independent tools"                                    
+ [6] "    for making deeply reproducible and reusable content in R."                                                       
+ [7] "    This includes light weight package management (similar to 'packrat' and"                                         
+ [8] "    'checkpoint', but more flexible, lightweight and simpler than both), tools"                                      
+ [9] "    for caching, downloading and verifying or writing checksums, post-processing "                                   
+[10] "    of common spatial datasets, and accessing GitHub repositories. "                                                 
+[11] "    Some features are still under active development."                                                               
+[12] "SystemRequirements: 'unrar' (Linux/macOS) or '7-Zip' (Windows) to work"                                              
+[13] "        with '.rar' files."                                                                                          
+[14] "URL: http://reproducible.predictiveecology.org,"                                                                     
+[15] "        https://github.com/PredictiveEcology/reproducible"                                                           
+[16] "Date: 2019-03-18"                                                                                                    
+[17] "Version: 0.2.8"                                                                                                      
+[18] "Authors@R: c("                                                                                                       
+[19] "    person(\"Eliot J B\", \"McIntire\", email = \"eliot.mcintire@canada.ca\","                                       
+[20] "    role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-6914-8316\")),"                                      
+[21] "    person(\"Alex M\", \"Chubaty\", email = \"alex.chubaty@gmail.com\","                                             
+[22] "    role = c(\"aut\"), comment = c(ORCID = \"0000-0001-7146-8135\")),"                                               
+[23] "    person(\"Tati\", \"Micheletti\", email = \"tati.micheletti@gmail.com\","                                         
+[24] "    role = c(\"ctb\"), comment = c(ORCID = \"0000-0003-4838-8342\")),"                                               
+[25] "    person(\"Ceres\", \"Barros\", email = \"cbarros@mail.ubc.ca\","                                                  
+[26] "    role = c(\"ctb\"), comment = c(ORCID = \"0000-0003-4036-977X\")),"                                               
+[27] "    person(\"Ian\", \"Eddy\", email = \"ian.eddy@canada.com\","                                                      
+[28] "    role = c(\"ctb\"), comment = c(ORCID = \"0000-0001-7397-2116\")),"                                               
+[29] "    person(\"Her Majesty the Queen in Right of Canada, as represented by the Minister of Natural Resources Canada\","
+[30] "    role = \"cph\")"                                                                                                 
+[31] "    )"                                                                                                               
+[32] "Depends: R (>= 3.3)"                                                                                                 
+[33] "Imports: archivist (>= 2.1.2), backports, crayon, data.table (>="                                                    
+[34] "        1.10.4), digest, dplyr, fastdigest, fasterize, fpCompare,"                                                   
+[35] "        gdalUtils, git2r (>= 0.18), googledrive, httr, magrittr,"                                                    
+[36] "        memoise, methods, parallel, quickPlot, R.utils, raster, Rcpp"                                                
+[37] "        (>= 0.12.13), RCurl (>= 1.95-4.8), remotes, rgdal, rgeos,"                                                   
+[38] "        rlang, sf, sp, testthat, tools, utils, versions"                                                             
+[39] "Suggests: covr, future, knitr, rmarkdown, TimeWarp"                                                                  
+[40] "Encoding: UTF-8"                                                                                                     
+[41] "Language: en-CA"                                                                                                     
+[42] "LinkingTo: Rcpp"                                                                                                     
+[43] "License: GPL-3"                                                                                                      
+[44] "VignetteBuilder: knitr, rmarkdown"                                                                                   
+[45] "BugReports: https://github.com/PredictiveEcology/reproducible/issues"                                                
+[46] "ByteCompile: yes"                                                                                                    
+[47] "RoxygenNote: 6.1.1"                                                                                                  
+[48] "Collate: 'RcppExports.R' 'cache-helpers.R' 'cache-internals.R'"                                                      
+[49] "        'cache-tools.R' 'robustDigest.R' 'cache.R' 'checksums.R'"                                                    
+[50] "        'cloud.R' 'consistentPaths.R' 'convertPaths.R' 'download.R'"                                                 
+[51] "        'gis.R' 'git.R' 'helpers.R' 'objectSize.R' 'options.R'"                                                      
+[52] "        'packages.R' 'pipe.R' 'postProcess.R' 'preProcess.R'"                                                        
+[53] "        'prepInputs.R' 'reproducible-package.R' 'search.R' 'zzz.R'"                                                  
+[54] "NeedsCompilation: yes"                                                                                               
+[55] "Packaged: 2019-03-18 16:09:11 UTC; achubaty"                                                                         
+[56] "Author: Eliot J B McIntire [aut, cre] (<https://orcid.org/0000-0002-6914-8316>),"                                    
+[57] "  Alex M Chubaty [aut] (<https://orcid.org/0000-0001-7146-8135>),"                                                   
+[58] "  Tati Micheletti [ctb] (<https://orcid.org/0000-0003-4838-8342>),"                                                  
+[59] "  Ceres Barros [ctb] (<https://orcid.org/0000-0003-4036-977X>),"                                                     
+[60] "  Ian Eddy [ctb] (<https://orcid.org/0000-0001-7397-2116>),"                                                         
+[61] "  Her Majesty the Queen in Right of Canada, as represented by the"                                                   
+[62] "    Minister of Natural Resources Canada [cph]"                                                                      
+[63] "Maintainer: Eliot J B McIntire <eliot.mcintire@canada.ca>"                                                           
+[64] "Repository: CRAN"                                                                                                    
+[65] "Date/Publication: 2019-03-18 18:20:03 UTC"                                                                           
+[66] "Built: R 3.7.0; x86_64-pc-linux-gnu; 2019-06-25 11:41:36 UTC; unix"                                                  
+> 
+> 
+> 
+> cleanEx()
+> nameEx("readLinesRcppInternal")
+> ### * readLinesRcppInternal
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: readLinesRcppInternal
+> ### Title: Alternative to readLines that is faster
+> ### Aliases: readLinesRcppInternal
+> 
+> ### ** Examples
+> 
+> readLinesRcpp(system.file(package = "reproducible", "DESCRIPTION"))
+ [1] "Package: reproducible"                                                                                               
+ [2] "Type: Package"                                                                                                       
+ [3] "Title: A Set of Tools that Enhance Reproducibility Beyond Package"                                                   
+ [4] "        Management"                                                                                                  
+ [5] "Description: Collection of high-level, robust, machine- and OS-independent tools"                                    
+ [6] "    for making deeply reproducible and reusable content in R."                                                       
+ [7] "    This includes light weight package management (similar to 'packrat' and"                                         
+ [8] "    'checkpoint', but more flexible, lightweight and simpler than both), tools"                                      
+ [9] "    for caching, downloading and verifying or writing checksums, post-processing "                                   
+[10] "    of common spatial datasets, and accessing GitHub repositories. "                                                 
+[11] "    Some features are still under active development."                                                               
+[12] "SystemRequirements: 'unrar' (Linux/macOS) or '7-Zip' (Windows) to work"                                              
+[13] "        with '.rar' files."                                                                                          
+[14] "URL: http://reproducible.predictiveecology.org,"                                                                     
+[15] "        https://github.com/PredictiveEcology/reproducible"                                                           
+[16] "Date: 2019-03-18"                                                                                                    
+[17] "Version: 0.2.8"                                                                                                      
+[18] "Authors@R: c("                                                                                                       
+[19] "    person(\"Eliot J B\", \"McIntire\", email = \"eliot.mcintire@canada.ca\","                                       
+[20] "    role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-6914-8316\")),"                                      
+[21] "    person(\"Alex M\", \"Chubaty\", email = \"alex.chubaty@gmail.com\","                                             
+[22] "    role = c(\"aut\"), comment = c(ORCID = \"0000-0001-7146-8135\")),"                                               
+[23] "    person(\"Tati\", \"Micheletti\", email = \"tati.micheletti@gmail.com\","                                         
+[24] "    role = c(\"ctb\"), comment = c(ORCID = \"0000-0003-4838-8342\")),"                                               
+[25] "    person(\"Ceres\", \"Barros\", email = \"cbarros@mail.ubc.ca\","                                                  
+[26] "    role = c(\"ctb\"), comment = c(ORCID = \"0000-0003-4036-977X\")),"                                               
+[27] "    person(\"Ian\", \"Eddy\", email = \"ian.eddy@canada.com\","                                                      
+[28] "    role = c(\"ctb\"), comment = c(ORCID = \"0000-0001-7397-2116\")),"                                               
+[29] "    person(\"Her Majesty the Queen in Right of Canada, as represented by the Minister of Natural Resources Canada\","
+[30] "    role = \"cph\")"                                                                                                 
+[31] "    )"                                                                                                               
+[32] "Depends: R (>= 3.3)"                                                                                                 
+[33] "Imports: archivist (>= 2.1.2), backports, crayon, data.table (>="                                                    
+[34] "        1.10.4), digest, dplyr, fastdigest, fasterize, fpCompare,"                                                   
+[35] "        gdalUtils, git2r (>= 0.18), googledrive, httr, magrittr,"                                                    
+[36] "        memoise, methods, parallel, quickPlot, R.utils, raster, Rcpp"                                                
+[37] "        (>= 0.12.13), RCurl (>= 1.95-4.8), remotes, rgdal, rgeos,"                                                   
+[38] "        rlang, sf, sp, testthat, tools, utils, versions"                                                             
+[39] "Suggests: covr, future, knitr, rmarkdown, TimeWarp"                                                                  
+[40] "Encoding: UTF-8"                                                                                                     
+[41] "Language: en-CA"                                                                                                     
+[42] "LinkingTo: Rcpp"                                                                                                     
+[43] "License: GPL-3"                                                                                                      
+[44] "VignetteBuilder: knitr, rmarkdown"                                                                                   
+[45] "BugReports: https://github.com/PredictiveEcology/reproducible/issues"                                                
+[46] "ByteCompile: yes"                                                                                                    
+[47] "RoxygenNote: 6.1.1"                                                                                                  
+[48] "Collate: 'RcppExports.R' 'cache-helpers.R' 'cache-internals.R'"                                                      
+[49] "        'cache-tools.R' 'robustDigest.R' 'cache.R' 'checksums.R'"                                                    
+[50] "        'cloud.R' 'consistentPaths.R' 'convertPaths.R' 'download.R'"                                                 
+[51] "        'gis.R' 'git.R' 'helpers.R' 'objectSize.R' 'options.R'"                                                      
+[52] "        'packages.R' 'pipe.R' 'postProcess.R' 'preProcess.R'"                                                        
+[53] "        'prepInputs.R' 'reproducible-package.R' 'search.R' 'zzz.R'"                                                  
+[54] "NeedsCompilation: yes"                                                                                               
+[55] "Packaged: 2019-03-18 16:09:11 UTC; achubaty"                                                                         
+[56] "Author: Eliot J B McIntire [aut, cre] (<https://orcid.org/0000-0002-6914-8316>),"                                    
+[57] "  Alex M Chubaty [aut] (<https://orcid.org/0000-0001-7146-8135>),"                                                   
+[58] "  Tati Micheletti [ctb] (<https://orcid.org/0000-0003-4838-8342>),"                                                  
+[59] "  Ceres Barros [ctb] (<https://orcid.org/0000-0003-4036-977X>),"                                                     
+[60] "  Ian Eddy [ctb] (<https://orcid.org/0000-0001-7397-2116>),"                                                         
+[61] "  Her Majesty the Queen in Right of Canada, as represented by the"                                                   
+[62] "    Minister of Natural Resources Canada [cph]"                                                                      
+[63] "Maintainer: Eliot J B McIntire <eliot.mcintire@canada.ca>"                                                           
+[64] "Repository: CRAN"                                                                                                    
+[65] "Date/Publication: 2019-03-18 18:20:03 UTC"                                                                           
+[66] "Built: R 3.7.0; x86_64-pc-linux-gnu; 2019-06-25 11:41:36 UTC; unix"                                                  
+> 
+> 
+> 
+> cleanEx()
+> nameEx("robustDigest")
+> ### * robustDigest
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: .robustDigest
+> ### Title: Create reproducible digests of objects in R
+> ### Aliases: .robustDigest .robustDigest,ANY-method
+> ###   .robustDigest,cluster-method .robustDigest,function-method
+> ###   .robustDigest,expression-method .robustDigest,character-method
+> ###   .robustDigest,Path-method .robustDigest,environment-method
+> ###   .robustDigest,list-method .robustDigest,data.frame-method
+> ###   .robustDigest,Raster-method .robustDigest,Spatial-method
+> ### Keywords: internal
+> 
+> ### ** Examples
+> 
+> 
+> a <- 2
+> tmpfile1 <- tempfile()
+> tmpfile2 <- tempfile()
+> save(a, file = tmpfile1)
+> save(a, file = tmpfile2)
+> 
+> # treats as character string, so 2 filenames are different
+> digest::digest(tmpfile1)
+[1] "944d99bd1b2ca36fc612c4e31d50cc95"
+> digest::digest(tmpfile2)
+[1] "37c7655a44dbbd409fe32bb72a4da05c"
+> 
+> # tests to see whether character string is representing a file
+> .robustDigest(tmpfile1)
+[1] "4eeb30e3ee33af1b"
+> .robustDigest(tmpfile2) # same
+[1] "4eeb30e3ee33af1b"
+> 
+> # if you tell it that it is a path, then you can decide if you want it to be
+> #  treated as a character string or as a file path
+> .robustDigest(asPath(tmpfile1), quick = TRUE)
+[1] "b8c3e5faa6dfa695"
+> .robustDigest(asPath(tmpfile2), quick = TRUE) # different because using file info
+[1] "4aa68c70679974de"
+> 
+> .robustDigest(asPath(tmpfile1), quick = FALSE)
+[[1]]
+[1] "4eeb30e3ee33af1b"
+
+> .robustDigest(asPath(tmpfile2), quick = FALSE) # same because using file content
+[[1]]
+[1] "4eeb30e3ee33af1b"
+
+> 
+> # Rasters are interesting because it is not know a priori if it
+> #   it has a file name associated with it.
+> library(raster)
+Loading required package: sp
+> r <- raster(extent(0,10,0,10), vals = 1:100)
+> 
+> # write to disk
+> r1 <- writeRaster(r, file = tmpfile1)
+> r2 <- writeRaster(r, file = tmpfile2)
+> 
+> digest::digest(r1)
+[1] "99e862a4bbbea99c2493c46eb478c9d0"
+> digest::digest(r2) # different
+[1] "19ee36cdab6f55766c7e6326b3c56fa7"
+> digest::digest(r1)
+[1] "99e862a4bbbea99c2493c46eb478c9d0"
+> digest::digest(r2) # different
+[1] "19ee36cdab6f55766c7e6326b3c56fa7"
+> .robustDigest(r1)
+[1] "e83ff53a773811b5"
+> .robustDigest(r2) # same... data are the same in the file
+[1] "e83ff53a773811b5"
+> 
+> # note, this is not true for comparing memory and file-backed rasters
+> .robustDigest(r)
+[1] "ce0a4c9227d2dc2d"
+> .robustDigest(r1) # different
+[1] "e83ff53a773811b5"
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’
+
+> nameEx("search")
+> ### * search
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: searchFull
+> ### Title: Search up the full scope for functions
+> ### Aliases: searchFull searchFullEx
+> 
+> ### ** Examples
+> 
+> seeScope <- function() {
++   searchFull()
++ }
+> seeScope()
+[[1]]
+<environment: R_GlobalEnv>
+
+[[2]]
+[1] "package:reproducible"
+
+[[3]]
+[1] "CheckExEnv"
+
+[[4]]
+[1] "package:stats"
+
+[[5]]
+[1] "package:graphics"
+
+[[6]]
+[1] "package:grDevices"
+
+[[7]]
+[1] "package:utils"
+
+[[8]]
+[1] "package:datasets"
+
+[[9]]
+[1] "package:methods"
+
+[[10]]
+[1] "Autoloads"
+
+[[11]]
+<environment: base>
+
+> searchFull()
+[[1]]
+[1] "package:reproducible"
+
+[[2]]
+[1] "CheckExEnv"
+
+[[3]]
+[1] "package:stats"
+
+[[4]]
+[1] "package:graphics"
+
+[[5]]
+[1] "package:grDevices"
+
+[[6]]
+[1] "package:utils"
+
+[[7]]
+[1] "package:datasets"
+
+[[8]]
+[1] "package:methods"
+
+[[9]]
+[1] "Autoloads"
+
+[[10]]
+<environment: base>
+
+> searchFullEx()
+[[1]]
+<environment: namespace:reproducible>
+
+[[2]]
+[1] "imports:reproducible"
+
+[[3]]
+<environment: namespace:base>
+
+[[4]]
+<environment: R_GlobalEnv>
+
+[[5]]
+[1] "package:reproducible"
+
+[[6]]
+[1] "CheckExEnv"
+
+[[7]]
+[1] "package:stats"
+
+[[8]]
+[1] "package:graphics"
+
+[[9]]
+[1] "package:grDevices"
+
+[[10]]
+[1] "package:utils"
+
+[[11]]
+[1] "package:datasets"
+
+[[12]]
+[1] "package:methods"
+
+[[13]]
+[1] "Autoloads"
+
+[[14]]
+<environment: base>
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("sortDotsUnderscoreFirst")
+> ### * sortDotsUnderscoreFirst
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: .sortDotsUnderscoreFirst
+> ### Title: Sort or order any named object with dotted names and underscores
+> ###   first
+> ### Aliases: .sortDotsUnderscoreFirst .orderDotsUnderscoreFirst
+> 
+> ### ** Examples
+> 
+> items <- c(A = "a", Z = "z", `.D` = ".d", `_C` = "_C")
+> .sortDotsUnderscoreFirst(items)
+   A    Z   _C   .D 
+ "a"  "z" "_C" ".d" 
+> 
+> # dots & underscore (using 2nd character), then all lower then all upper
+> items <- c(B = "Upper", b = "lower", A = "a", `.D` = ".d", `_C` = "_C")
+> .sortDotsUnderscoreFirst(items)
+      A       B      _C      .D       b 
+    "a" "Upper"    "_C"    ".d" "lower" 
+> 
+> # with a vector
+> .sortDotsUnderscoreFirst(c(".C", "_B", "A")) # _B is first
+[1] "A"  "_B" ".C"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("tagsByClass")
+> ### * tagsByClass
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: .tagsByClass
+> ### Title: Add extra tags to an archive based on class
+> ### Aliases: .tagsByClass .tagsByClass,ANY-method
+> 
+> ### ** Examples
+> 
+> .tagsByClass(character()) # Nothing interesting. Other packages will make methods
+NULL
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("viewCache")
+> ### * viewCache
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: clearCache
+> ### Title: Examining and modifying the cache
+> ### Aliases: clearCache clearCache,ANY-method cc showCache
+> ###   showCache,ANY-method keepCache keepCache,ANY-method
+> 
+> ### ** Examples
+> 
+> library(raster)
+Loading required package: sp
+> 
+> tmpDir <- file.path(tempdir(), "reproducible_examples", "Cache")
+> try(clearCache(tmpDir, ask = FALSE), silent = TRUE) # just to make sure it is clear
+> 
+> # Basic use
+> ranNumsA <- Cache(rnorm, 10, 16, cacheRepo = tmpDir)
+> 
+> # All same
+> ranNumsB <- Cache(rnorm, 10, 16, cacheRepo = tmpDir) # recovers cached copy
+  loading cached result from previous rnorm call, adding to memoised copy
+> ranNumsC <- Cache(cacheRepo = tmpDir) %C% rnorm(10, 16)  # recovers cached copy
+  loading memoised result from previous 'rnorm' pipe sequence call.
+> ranNumsD <- Cache(quote(rnorm(n = 10, 16)), cacheRepo = tmpDir) # recovers cached copy
+  loading memoised result from previous rnorm call.
+> 
+> # Any minor change makes it different
+> ranNumsE <- Cache(cacheRepo = tmpDir) %C% rnorm(10, 6)# different
+> 
+> ## Example 1: basic cache use with tags
+> ranNumsA <- Cache(rnorm, 4, cacheRepo = tmpDir, userTags = "objectName:a")
+> ranNumsB <- Cache(runif, 4, cacheRepo = tmpDir, userTags = "objectName:b")
+> ranNumsC <- Cache(runif, 40, cacheRepo = tmpDir, userTags = "objectName:b")
+> 
+> showCache(tmpDir, userTags = c("objectName"))
+Cache size: 
+  Total (including Rasters): 1.3 Kb
+  Selected objects (not including Rasters): 828 bytes
+                            artifact         tagKey
+ 1: 00e8e9a9bf54643be1720eb735f05f0b         format
+ 2: 00e8e9a9bf54643be1720eb735f05f0b           name
+ 3: 00e8e9a9bf54643be1720eb735f05f0b          class
+ 4: 00e8e9a9bf54643be1720eb735f05f0b           date
+ 5: 00e8e9a9bf54643be1720eb735f05f0b        cacheId
+ 6: 00e8e9a9bf54643be1720eb735f05f0b     objectName
+ 7: 00e8e9a9bf54643be1720eb735f05f0b       function
+ 8: 00e8e9a9bf54643be1720eb735f05f0b    object.size
+ 9: 00e8e9a9bf54643be1720eb735f05f0b       accessed
+10: 00e8e9a9bf54643be1720eb735f05f0b otherFunctions
+11: 00e8e9a9bf54643be1720eb735f05f0b      preDigest
+12: 00e8e9a9bf54643be1720eb735f05f0b      preDigest
+13: 774ea8182349d36795c656b80005f693         format
+14: 774ea8182349d36795c656b80005f693           name
+15: 774ea8182349d36795c656b80005f693          class
+16: 774ea8182349d36795c656b80005f693           date
+17: 774ea8182349d36795c656b80005f693        cacheId
+18: 774ea8182349d36795c656b80005f693     objectName
+19: 774ea8182349d36795c656b80005f693       function
+20: 774ea8182349d36795c656b80005f693    object.size
+21: 774ea8182349d36795c656b80005f693       accessed
+22: 774ea8182349d36795c656b80005f693 otherFunctions
+23: 774ea8182349d36795c656b80005f693      preDigest
+24: 774ea8182349d36795c656b80005f693      preDigest
+25: e89fc5110a941e2dc4497be039faefbc         format
+26: e89fc5110a941e2dc4497be039faefbc           name
+27: e89fc5110a941e2dc4497be039faefbc          class
+28: e89fc5110a941e2dc4497be039faefbc           date
+29: e89fc5110a941e2dc4497be039faefbc        cacheId
+30: e89fc5110a941e2dc4497be039faefbc     objectName
+31: e89fc5110a941e2dc4497be039faefbc       function
+32: e89fc5110a941e2dc4497be039faefbc    object.size
+33: e89fc5110a941e2dc4497be039faefbc       accessed
+34: e89fc5110a941e2dc4497be039faefbc otherFunctions
+35: e89fc5110a941e2dc4497be039faefbc      preDigest
+36: e89fc5110a941e2dc4497be039faefbc      preDigest
+                            artifact         tagKey
+                            tagValue         createdDate
+ 1:                              rda 2019-07-01 17:34:37
+ 2: 00e8e9a9bf54643be1720eb735f05f0b 2019-07-01 17:34:37
+ 3:                          numeric 2019-07-01 17:34:37
+ 4:              2019-07-01 17:34:37 2019-07-01 17:34:37
+ 5:                 7225b47fe5dc51d0 2019-07-01 17:34:37
+ 6:                                b 2019-07-01 17:34:37
+ 7:                            runif 2019-07-01 17:34:37
+ 8:                             1296 2019-07-01 17:34:37
+ 9:              2019-07-01 17:34:37 2019-07-01 17:34:37
+10:                                  2019-07-01 17:34:37
+11:               n:1393aef18608c8be 2019-07-01 17:34:37
+12:            .FUN:881ec847b7161f3c 2019-07-01 17:34:37
+13:                              rda 2019-07-01 17:34:37
+14: 774ea8182349d36795c656b80005f693 2019-07-01 17:34:37
+15:                          numeric 2019-07-01 17:34:37
+16:              2019-07-01 17:34:37 2019-07-01 17:34:37
+17:                 3aef38d1fc02aee5 2019-07-01 17:34:37
+18:                                b 2019-07-01 17:34:37
+19:                            runif 2019-07-01 17:34:37
+20:                             1008 2019-07-01 17:34:37
+21:              2019-07-01 17:34:37 2019-07-01 17:34:37
+22:                                  2019-07-01 17:34:37
+23:               n:7eef4eae85fd9229 2019-07-01 17:34:37
+24:            .FUN:881ec847b7161f3c 2019-07-01 17:34:37
+25:                              rda 2019-07-01 17:34:36
+26: e89fc5110a941e2dc4497be039faefbc 2019-07-01 17:34:36
+27:                          numeric 2019-07-01 17:34:36
+28:              2019-07-01 17:34:36 2019-07-01 17:34:36
+29:                 f7bee22047b8d0c1 2019-07-01 17:34:36
+30:                                a 2019-07-01 17:34:36
+31:                            rnorm 2019-07-01 17:34:36
+32:                             1008 2019-07-01 17:34:36
+33:              2019-07-01 17:34:36 2019-07-01 17:34:37
+34:                                  2019-07-01 17:34:37
+35:               n:7eef4eae85fd9229 2019-07-01 17:34:37
+36:            .FUN:4f604aa46882b368 2019-07-01 17:34:37
+                            tagValue         createdDate
+> showCache(tmpDir, userTags = c("^a$")) # regular expression ... "a" exactly
+Cache size: 
+  Total (including Rasters): 1.3 Kb
+  Selected objects (not including Rasters): 252 bytes
+                            artifact         tagKey
+ 1: e89fc5110a941e2dc4497be039faefbc         format
+ 2: e89fc5110a941e2dc4497be039faefbc           name
+ 3: e89fc5110a941e2dc4497be039faefbc          class
+ 4: e89fc5110a941e2dc4497be039faefbc           date
+ 5: e89fc5110a941e2dc4497be039faefbc        cacheId
+ 6: e89fc5110a941e2dc4497be039faefbc     objectName
+ 7: e89fc5110a941e2dc4497be039faefbc       function
+ 8: e89fc5110a941e2dc4497be039faefbc    object.size
+ 9: e89fc5110a941e2dc4497be039faefbc       accessed
+10: e89fc5110a941e2dc4497be039faefbc otherFunctions
+11: e89fc5110a941e2dc4497be039faefbc      preDigest
+12: e89fc5110a941e2dc4497be039faefbc      preDigest
+                            tagValue         createdDate
+ 1:                              rda 2019-07-01 17:34:36
+ 2: e89fc5110a941e2dc4497be039faefbc 2019-07-01 17:34:36
+ 3:                          numeric 2019-07-01 17:34:36
+ 4:              2019-07-01 17:34:36 2019-07-01 17:34:36
+ 5:                 f7bee22047b8d0c1 2019-07-01 17:34:36
+ 6:                                a 2019-07-01 17:34:36
+ 7:                            rnorm 2019-07-01 17:34:36
+ 8:                             1008 2019-07-01 17:34:36
+ 9:              2019-07-01 17:34:36 2019-07-01 17:34:37
+10:                                  2019-07-01 17:34:37
+11:               n:7eef4eae85fd9229 2019-07-01 17:34:37
+12:            .FUN:4f604aa46882b368 2019-07-01 17:34:37
+> 
+> # Fine control of cache elements -- pick out only the large runif object, and remove it
+> cache1 <- showCache(tmpDir, userTags = c("runif")) # show only cached objects made during runif
+Cache size: 
+  Total (including Rasters): 1.3 Kb
+  Selected objects (not including Rasters): 576 bytes
+> toRemove <- cache1[tagKey=="object.size"][as.numeric(tagValue) > 700]$artifact
+> clearCache(tmpDir, userTags = toRemove, ask = FALSE)
+Cache size: 
+  Total (including Rasters): 1.3 Kb
+  Selected objects (not including Rasters): 0 bytes
+> cacheAfter <- showCache(tmpDir, userTags = c("runif")) # Only the small one is left
+Cache size: 
+  Total (including Rasters): 1.3 Kb
+  Selected objects (not including Rasters): 576 bytes
+> 
+> tmpDir <- file.path(tempdir(), "reproducible_examples", "Cache")
+> try(clearCache(tmpDir, ask = FALSE), silent = TRUE) # just to make sure it is clear
+> 
+> Cache(rnorm, 1, cacheRepo = tmpDir)
+[1] 0.364582
+attr(,".Cache")
+attr(,".Cache")$newCache
+[1] TRUE
+
+attr(,"tags")
+[1] "cacheId:7072c305d8c69df0"
+attr(,"call")
+[1] ""
+> thisTime <- Sys.time()
+> Cache(rnorm, 2, cacheRepo = tmpDir)
+[1]  0.7685329 -0.1123462
+attr(,".Cache")
+attr(,".Cache")$newCache
+[1] TRUE
+
+attr(,"tags")
+[1] "cacheId:3b347dee8f6305c7"
+attr(,"call")
+[1] ""
+> Cache(rnorm, 3, cacheRepo = tmpDir)
+[1]  0.8811077  0.3981059 -0.6120264
+attr(,".Cache")
+attr(,".Cache")$newCache
+[1] TRUE
+
+attr(,"tags")
+[1] "cacheId:f0da91a44b839434"
+attr(,"call")
+[1] ""
+> Cache(rnorm, 4, cacheRepo = tmpDir)
+[1]  0.3411197 -1.1293631  1.4330237  1.9803999
+attr(,".Cache")
+attr(,".Cache")$newCache
+[1] TRUE
+
+attr(,"tags")
+[1] "cacheId:f7bee22047b8d0c1"
+attr(,"call")
+[1] ""
+> showCache(x = tmpDir) # shows all 4 entries
+Cache size: 
+  Total (including Rasters): 998 bytes
+  Selected objects (not including Rasters): 998 bytes
+                            artifact         tagKey
+ 1: 006749aa406fb637a76024dcacc58f70         format
+ 2: 006749aa406fb637a76024dcacc58f70           name
+ 3: 006749aa406fb637a76024dcacc58f70          class
+ 4: 006749aa406fb637a76024dcacc58f70           date
+ 5: 006749aa406fb637a76024dcacc58f70        cacheId
+ 6: 006749aa406fb637a76024dcacc58f70       function
+ 7: 006749aa406fb637a76024dcacc58f70    object.size
+ 8: 006749aa406fb637a76024dcacc58f70       accessed
+ 9: 006749aa406fb637a76024dcacc58f70 otherFunctions
+10: 006749aa406fb637a76024dcacc58f70      preDigest
+11: 006749aa406fb637a76024dcacc58f70      preDigest
+12: 443a9f34f178537c0842bf6a3e881b88         format
+13: 443a9f34f178537c0842bf6a3e881b88           name
+14: 443a9f34f178537c0842bf6a3e881b88          class
+15: 443a9f34f178537c0842bf6a3e881b88           date
+16: 443a9f34f178537c0842bf6a3e881b88        cacheId
+17: 443a9f34f178537c0842bf6a3e881b88       function
+18: 443a9f34f178537c0842bf6a3e881b88    object.size
+19: 443a9f34f178537c0842bf6a3e881b88       accessed
+20: 443a9f34f178537c0842bf6a3e881b88 otherFunctions
+21: 443a9f34f178537c0842bf6a3e881b88      preDigest
+22: 443a9f34f178537c0842bf6a3e881b88      preDigest
+23: 861606871c5c55b18d5d88f6fc61ad4c         format
+24: 861606871c5c55b18d5d88f6fc61ad4c           name
+25: 861606871c5c55b18d5d88f6fc61ad4c          class
+26: 861606871c5c55b18d5d88f6fc61ad4c           date
+27: 861606871c5c55b18d5d88f6fc61ad4c        cacheId
+28: 861606871c5c55b18d5d88f6fc61ad4c       function
+29: 861606871c5c55b18d5d88f6fc61ad4c    object.size
+30: 861606871c5c55b18d5d88f6fc61ad4c       accessed
+31: 861606871c5c55b18d5d88f6fc61ad4c otherFunctions
+32: 861606871c5c55b18d5d88f6fc61ad4c      preDigest
+33: 861606871c5c55b18d5d88f6fc61ad4c      preDigest
+34: d124547fcde0545e741413ad514d8294         format
+35: d124547fcde0545e741413ad514d8294           name
+36: d124547fcde0545e741413ad514d8294          class
+37: d124547fcde0545e741413ad514d8294           date
+38: d124547fcde0545e741413ad514d8294        cacheId
+39: d124547fcde0545e741413ad514d8294       function
+40: d124547fcde0545e741413ad514d8294    object.size
+41: d124547fcde0545e741413ad514d8294       accessed
+42: d124547fcde0545e741413ad514d8294 otherFunctions
+43: d124547fcde0545e741413ad514d8294      preDigest
+44: d124547fcde0545e741413ad514d8294      preDigest
+                            artifact         tagKey
+                            tagValue         createdDate
+ 1:                              rda 2019-07-01 17:34:38
+ 2: 006749aa406fb637a76024dcacc58f70 2019-07-01 17:34:38
+ 3:                          numeric 2019-07-01 17:34:38
+ 4:              2019-07-01 17:34:38 2019-07-01 17:34:38
+ 5:                 3b347dee8f6305c7 2019-07-01 17:34:38
+ 6:                            rnorm 2019-07-01 17:34:38
+ 7:                              992 2019-07-01 17:34:38
+ 8:              2019-07-01 17:34:38 2019-07-01 17:34:38
+ 9:                                  2019-07-01 17:34:38
+10:               n:82dc709f2b91918a 2019-07-01 17:34:38
+11:            .FUN:4f604aa46882b368 2019-07-01 17:34:38
+12:                              rda 2019-07-01 17:34:38
+13: 443a9f34f178537c0842bf6a3e881b88 2019-07-01 17:34:38
+14:                          numeric 2019-07-01 17:34:38
+15:              2019-07-01 17:34:38 2019-07-01 17:34:38
+16:                 f0da91a44b839434 2019-07-01 17:34:38
+17:                            rnorm 2019-07-01 17:34:38
+18:                             1008 2019-07-01 17:34:38
+19:              2019-07-01 17:34:38 2019-07-01 17:34:38
+20:                                  2019-07-01 17:34:38
+21:               n:7f12988bd88a0fb8 2019-07-01 17:34:38
+22:            .FUN:4f604aa46882b368 2019-07-01 17:34:38
+23:                              rda 2019-07-01 17:34:38
+24: 861606871c5c55b18d5d88f6fc61ad4c 2019-07-01 17:34:38
+25:                          numeric 2019-07-01 17:34:38
+26:              2019-07-01 17:34:38 2019-07-01 17:34:38
+27:                 f7bee22047b8d0c1 2019-07-01 17:34:38
+28:                            rnorm 2019-07-01 17:34:38
+29:                             1008 2019-07-01 17:34:38
+30:              2019-07-01 17:34:38 2019-07-01 17:34:38
+31:                                  2019-07-01 17:34:38
+32:               n:7eef4eae85fd9229 2019-07-01 17:34:38
+33:            .FUN:4f604aa46882b368 2019-07-01 17:34:38
+34:                              rda 2019-07-01 17:34:37
+35: d124547fcde0545e741413ad514d8294 2019-07-01 17:34:37
+36:                          numeric 2019-07-01 17:34:37
+37:              2019-07-01 17:34:37 2019-07-01 17:34:37
+38:                 7072c305d8c69df0 2019-07-01 17:34:37
+39:                            rnorm 2019-07-01 17:34:37
+40:                              984 2019-07-01 17:34:37
+41:              2019-07-01 17:34:37 2019-07-01 17:34:37
+42:                                  2019-07-01 17:34:37
+43:               n:853b1797f54b229c 2019-07-01 17:34:37
+44:            .FUN:4f604aa46882b368 2019-07-01 17:34:38
+                            tagValue         createdDate
+> cc(ask = FALSE, x = tmpDir)
+No time provided; removing the most recent entry to the Cache
+Cache size: 
+  Total (including Rasters): 998 bytes
+  Selected objects (not including Rasters): 252 bytes
+> showCache(x = tmpDir) # most recent is gone
+Cache size: 
+  Total (including Rasters): 746 bytes
+  Selected objects (not including Rasters): 746 bytes
+                            artifact         tagKey
+ 1: 006749aa406fb637a76024dcacc58f70         format
+ 2: 006749aa406fb637a76024dcacc58f70           name
+ 3: 006749aa406fb637a76024dcacc58f70          class
+ 4: 006749aa406fb637a76024dcacc58f70           date
+ 5: 006749aa406fb637a76024dcacc58f70        cacheId
+ 6: 006749aa406fb637a76024dcacc58f70       function
+ 7: 006749aa406fb637a76024dcacc58f70    object.size
+ 8: 006749aa406fb637a76024dcacc58f70       accessed
+ 9: 006749aa406fb637a76024dcacc58f70 otherFunctions
+10: 006749aa406fb637a76024dcacc58f70      preDigest
+11: 006749aa406fb637a76024dcacc58f70      preDigest
+12: 443a9f34f178537c0842bf6a3e881b88         format
+13: 443a9f34f178537c0842bf6a3e881b88           name
+14: 443a9f34f178537c0842bf6a3e881b88          class
+15: 443a9f34f178537c0842bf6a3e881b88           date
+16: 443a9f34f178537c0842bf6a3e881b88        cacheId
+17: 443a9f34f178537c0842bf6a3e881b88       function
+18: 443a9f34f178537c0842bf6a3e881b88    object.size
+19: 443a9f34f178537c0842bf6a3e881b88       accessed
+20: 443a9f34f178537c0842bf6a3e881b88 otherFunctions
+21: 443a9f34f178537c0842bf6a3e881b88      preDigest
+22: 443a9f34f178537c0842bf6a3e881b88      preDigest
+23: d124547fcde0545e741413ad514d8294         format
+24: d124547fcde0545e741413ad514d8294           name
+25: d124547fcde0545e741413ad514d8294          class
+26: d124547fcde0545e741413ad514d8294           date
+27: d124547fcde0545e741413ad514d8294        cacheId
+28: d124547fcde0545e741413ad514d8294       function
+29: d124547fcde0545e741413ad514d8294    object.size
+30: d124547fcde0545e741413ad514d8294       accessed
+31: d124547fcde0545e741413ad514d8294 otherFunctions
+32: d124547fcde0545e741413ad514d8294      preDigest
+33: d124547fcde0545e741413ad514d8294      preDigest
+                            artifact         tagKey
+                            tagValue         createdDate
+ 1:                              rda 2019-07-01 17:34:38
+ 2: 006749aa406fb637a76024dcacc58f70 2019-07-01 17:34:38
+ 3:                          numeric 2019-07-01 17:34:38
+ 4:              2019-07-01 17:34:38 2019-07-01 17:34:38
+ 5:                 3b347dee8f6305c7 2019-07-01 17:34:38
+ 6:                            rnorm 2019-07-01 17:34:38
+ 7:                              992 2019-07-01 17:34:38
+ 8:              2019-07-01 17:34:38 2019-07-01 17:34:38
+ 9:                                  2019-07-01 17:34:38
+10:               n:82dc709f2b91918a 2019-07-01 17:34:38
+11:            .FUN:4f604aa46882b368 2019-07-01 17:34:38
+12:                              rda 2019-07-01 17:34:38
+13: 443a9f34f178537c0842bf6a3e881b88 2019-07-01 17:34:38
+14:                          numeric 2019-07-01 17:34:38
+15:              2019-07-01 17:34:38 2019-07-01 17:34:38
+16:                 f0da91a44b839434 2019-07-01 17:34:38
+17:                            rnorm 2019-07-01 17:34:38
+18:                             1008 2019-07-01 17:34:38
+19:              2019-07-01 17:34:38 2019-07-01 17:34:38
+20:                                  2019-07-01 17:34:38
+21:               n:7f12988bd88a0fb8 2019-07-01 17:34:38
+22:            .FUN:4f604aa46882b368 2019-07-01 17:34:38
+23:                              rda 2019-07-01 17:34:37
+24: d124547fcde0545e741413ad514d8294 2019-07-01 17:34:37
+25:                          numeric 2019-07-01 17:34:37
+26:              2019-07-01 17:34:37 2019-07-01 17:34:37
+27:                 7072c305d8c69df0 2019-07-01 17:34:37
+28:                            rnorm 2019-07-01 17:34:37
+29:                              984 2019-07-01 17:34:37
+30:              2019-07-01 17:34:37 2019-07-01 17:34:37
+31:                                  2019-07-01 17:34:37
+32:               n:853b1797f54b229c 2019-07-01 17:34:37
+33:            .FUN:4f604aa46882b368 2019-07-01 17:34:38
+                            tagValue         createdDate
+> cc(thisTime, ask = FALSE, x = tmpDir)
+Cache size: 
+  Total (including Rasters): 746 bytes
+  Selected objects (not including Rasters): 0 bytes
+> showCache(x = tmpDir) # all those after thisTime gone, i.e., only 1 left
+Cache size: 
+  Total (including Rasters): 746 bytes
+  Selected objects (not including Rasters): 746 bytes
+                            artifact         tagKey
+ 1: 006749aa406fb637a76024dcacc58f70         format
+ 2: 006749aa406fb637a76024dcacc58f70           name
+ 3: 006749aa406fb637a76024dcacc58f70          class
+ 4: 006749aa406fb637a76024dcacc58f70           date
+ 5: 006749aa406fb637a76024dcacc58f70        cacheId
+ 6: 006749aa406fb637a76024dcacc58f70       function
+ 7: 006749aa406fb637a76024dcacc58f70    object.size
+ 8: 006749aa406fb637a76024dcacc58f70       accessed
+ 9: 006749aa406fb637a76024dcacc58f70 otherFunctions
+10: 006749aa406fb637a76024dcacc58f70      preDigest
+11: 006749aa406fb637a76024dcacc58f70      preDigest
+12: 443a9f34f178537c0842bf6a3e881b88         format
+13: 443a9f34f178537c0842bf6a3e881b88           name
+14: 443a9f34f178537c0842bf6a3e881b88          class
+15: 443a9f34f178537c0842bf6a3e881b88           date
+16: 443a9f34f178537c0842bf6a3e881b88        cacheId
+17: 443a9f34f178537c0842bf6a3e881b88       function
+18: 443a9f34f178537c0842bf6a3e881b88    object.size
+19: 443a9f34f178537c0842bf6a3e881b88       accessed
+20: 443a9f34f178537c0842bf6a3e881b88 otherFunctions
+21: 443a9f34f178537c0842bf6a3e881b88      preDigest
+22: 443a9f34f178537c0842bf6a3e881b88      preDigest
+23: d124547fcde0545e741413ad514d8294         format
+24: d124547fcde0545e741413ad514d8294           name
+25: d124547fcde0545e741413ad514d8294          class
+26: d124547fcde0545e741413ad514d8294           date
+27: d124547fcde0545e741413ad514d8294        cacheId
+28: d124547fcde0545e741413ad514d8294       function
+29: d124547fcde0545e741413ad514d8294    object.size
+30: d124547fcde0545e741413ad514d8294       accessed
+31: d124547fcde0545e741413ad514d8294 otherFunctions
+32: d124547fcde0545e741413ad514d8294      preDigest
+33: d124547fcde0545e741413ad514d8294      preDigest
+                            artifact         tagKey
+                            tagValue         createdDate
+ 1:                              rda 2019-07-01 17:34:38
+ 2: 006749aa406fb637a76024dcacc58f70 2019-07-01 17:34:38
+ 3:                          numeric 2019-07-01 17:34:38
+ 4:              2019-07-01 17:34:38 2019-07-01 17:34:38
+ 5:                 3b347dee8f6305c7 2019-07-01 17:34:38
+ 6:                            rnorm 2019-07-01 17:34:38
+ 7:                              992 2019-07-01 17:34:38
+ 8:              2019-07-01 17:34:38 2019-07-01 17:34:38
+ 9:                                  2019-07-01 17:34:38
+10:               n:82dc709f2b91918a 2019-07-01 17:34:38
+11:            .FUN:4f604aa46882b368 2019-07-01 17:34:38
+12:                              rda 2019-07-01 17:34:38
+13: 443a9f34f178537c0842bf6a3e881b88 2019-07-01 17:34:38
+14:                          numeric 2019-07-01 17:34:38
+15:              2019-07-01 17:34:38 2019-07-01 17:34:38
+16:                 f0da91a44b839434 2019-07-01 17:34:38
+17:                            rnorm 2019-07-01 17:34:38
+18:                             1008 2019-07-01 17:34:38
+19:              2019-07-01 17:34:38 2019-07-01 17:34:38
+20:                                  2019-07-01 17:34:38
+21:               n:7f12988bd88a0fb8 2019-07-01 17:34:38
+22:            .FUN:4f604aa46882b368 2019-07-01 17:34:38
+23:                              rda 2019-07-01 17:34:37
+24: d124547fcde0545e741413ad514d8294 2019-07-01 17:34:37
+25:                          numeric 2019-07-01 17:34:37
+26:              2019-07-01 17:34:37 2019-07-01 17:34:37
+27:                 7072c305d8c69df0 2019-07-01 17:34:37
+28:                            rnorm 2019-07-01 17:34:37
+29:                              984 2019-07-01 17:34:37
+30:              2019-07-01 17:34:37 2019-07-01 17:34:37
+31:                                  2019-07-01 17:34:37
+32:               n:853b1797f54b229c 2019-07-01 17:34:37
+33:            .FUN:4f604aa46882b368 2019-07-01 17:34:38
+                            tagValue         createdDate
+> cc(ask = FALSE, x = tmpDir) # Cache is
+No time provided; removing the most recent entry to the Cache
+Cache size: 
+  Total (including Rasters): 746 bytes
+  Selected objects (not including Rasters): 252 bytes
+> cc(ask = FALSE, x = tmpDir) # Cache is already empty
+No time provided; removing the most recent entry to the Cache
+Cache size: 
+  Total (including Rasters): 494 bytes
+  Selected objects (not including Rasters): 248 bytes
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’
+
+> nameEx("writeOutputs")
+> ### * writeOutputs
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: writeOutputs
+> ### Title: Write module inputs on disk
+> ### Aliases: writeOutputs writeOutputs.Raster writeOutputs.Spatial
+> ###   writeOutputs.sf writeOutputs.default
+> 
+> ### ** Examples
+> 
+> # Add a study area to Crop and Mask to
+> # Create a "study area"
+> library(sp)
+> library(raster)
+> ow <- setwd(tempdir())
+> 
+> # make a SpatialPolygon
+> coords1 <- structure(c(-123.98, -117.1, -80.2, -100, -123.98, 60.9, 67.73, 65.58, 51.79, 60.9),
++                     .Dim = c(5L, 2L))
+> Sr1 <- Polygon(coords1)
+> Srs1 <- Polygons(list(Sr1), "s1")
+> shpEcozone <- SpatialPolygons(list(Srs1), 1L)
+> crs(shpEcozone) <- "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> 
+> # make a "study area" that is subset of larger dataset
+> coords <- structure(c(-118.98, -116.1, -99.2, -106, -118.98, 59.9, 65.73, 63.58, 54.79, 59.9),
++                     .Dim = c(5L, 2L))
+> Sr1 <- Polygon(coords)
+> Srs1 <- Polygons(list(Sr1), "s1")
+> StudyArea <- SpatialPolygons(list(Srs1), 1L)
+> crs(StudyArea) <- "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> #'
+> #'
+> ##########
+> shpEcozonePostProcessed <- postProcess(shpEcozone, studyArea = StudyArea)
+  loading cached result from previous cropInputs call, adding to memoised copy
+Checking for errors in SpatialPolygon
+  Found no errors.
+  loading cached result from previous projectInputs call, adding to memoised copy
+Checking for errors in SpatialPolygon
+  Found no errors.
+  loading cached result from previous maskInputs call, adding to memoised copy
+Saving output to ./Smallfilec20053b6fd67. Specify filename1 or filename2 for more control
+  or set filename2 to NULL to prevent saving to disk
+> #'
+> # Try manually, individual pieces
+> shpEcozoneReprojected <- projectInputs(shpEcozone, StudyArea)
+> shpEcozoneCropped <- cropInputs(shpEcozone, StudyArea)
+    cropping ...
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> shpEcozoneClean <- fixErrors(shpEcozone)
+Checking for errors in SpatialPolygon
+  Found no errors.
+> shpEcozoneMasked <- maskInputs(shpEcozone, StudyArea)
+    intersecting ...
+Checking for errors in studyArea
+  Found no errors.
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> 
+> setwd(ow)
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’
+
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  38.035 1.983 40.216 0.034 0.083 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
