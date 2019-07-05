@@ -16,7 +16,16 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(testthat)
-> library(BBmisc)
+> test_check("mlr", filter = "lint")
+Loading required package: mlr
+Loading required package: ParamHelpers
+
+Attaching package: 'rex'
+
+The following object is masked from 'package:testthat':
+
+    matches
+
 
 Attaching package: 'BBmisc'
 
@@ -24,18 +33,10 @@ The following object is masked from 'package:base':
 
     isFALSE
 
-> library(ParamHelpers)
+══ testthat results  ═══════════════════════════════════════════════════════════
+OK: 0 SKIPPED: 1 WARNINGS: 0 FAILED: 0
 > 
-> test_check("ParamHelpers")
-ERROR: modification of compiler constant of type character, length 2
-ERROR: the modified value of the constant is:
-[1] "integer"       "integervector"
-attr(,".match.hash")
-<hash table>
-ERROR: the original value of the constant is:
-[1] "integer"       "integervector"
-ERROR: the modified constant is at index 1
-ERROR: the modified constant is in this function body:
-c("integer", "integervector")
-Fatal error: compiler constants were modified!
-
+> 
+> proc.time()
+   user  system elapsed 
+ 19.367   1.844  21.620 

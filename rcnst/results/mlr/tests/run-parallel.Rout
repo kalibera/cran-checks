@@ -16,26 +16,13 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(testthat)
-> library(BBmisc)
-
-Attaching package: 'BBmisc'
-
-The following object is masked from 'package:base':
-
-    isFALSE
-
-> library(ParamHelpers)
+> # FIXME: I am not sure if enabling this leads to travis 'hanging'. we currently must test it locally
+> # if (identical(Sys.getenv("TRAVIS"), "true") || identical(Sys.getenv("R_EXPENSIVE_TEST_OK"), "true")) {
+> if (identical(Sys.getenv("R_EXPENSIVE_TEST_OK"), "true")) {
++   test_check("mlr", "_parallel_")
++ }
 > 
-> test_check("ParamHelpers")
-ERROR: modification of compiler constant of type character, length 2
-ERROR: the modified value of the constant is:
-[1] "integer"       "integervector"
-attr(,".match.hash")
-<hash table>
-ERROR: the original value of the constant is:
-[1] "integer"       "integervector"
-ERROR: the modified constant is at index 1
-ERROR: the modified constant is in this function body:
-c("integer", "integervector")
-Fatal error: compiler constants were modified!
-
+> 
+> proc.time()
+   user  system elapsed 
+  0.689   0.157   0.852 
