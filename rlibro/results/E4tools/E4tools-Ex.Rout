@@ -1,0 +1,49 @@
+
+R Under development (unstable) (2019-07-04 r76780) -- "Unsuffered Consequences"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "E4tools"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('E4tools')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("E4.Acc_Process.Part1.ExtractRawAcc")
+> ### * E4.Acc_Process.Part1.ExtractRawAcc
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: E4.Acc_Process.Part1.ExtractRawAcc
+> ### Title: Acc Processing Part 1: Extract raw acceleromter data
+> ### Aliases: E4.Acc_Process.Part1.ExtractRawAcc
+> ### Keywords: acc
+> 
+> ### ** Examples
+> 
+> E4.Acc_Process.Part1.ExtractRawAcc(
++   participant_list=c(1001),
++   ziplocation=paste(system.file(package="E4tools"),
++   "/extdata/E4_demo_data/",sep=""),
++   rdslocation.acc=paste(tempdir(),"/extdata/output/raw_acc/",sep=""))
+Starting participant 1001
+Error in utils::unzip(CURR_ZIP, unzip = "internal", exdir = zipDIR, files = "ACC.csv") : 
+  cannot open file '/var/scratch2ro/tomas/cran/rlibro/lib/E4tools/extdata/E4_demo_data/1001/ACC.csv': Read-only file system
+Calls: E4.Acc_Process.Part1.ExtractRawAcc -> file.size -> file.info -> <Anonymous>
+Execution halted
