@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rlibro/check/E4tools.Rcheck’
-* using R Under development (unstable) (2019-07-04 r76780)
+* using R Under development (unstable) (2019-07-06 r76792)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘E4tools/DESCRIPTION’ ... OK
@@ -23,8 +23,7 @@
 * checking index information ... OK
 * checking package subdirectories ... OK
 * checking R files for non-ASCII characters ... OK
-* checking R files for syntax errors ... WARNING
-Fatal error: cannot create 'R_TempDir'
+* checking R files for syntax errors ... OK
 * checking whether the package can be loaded ... OK
 * checking whether the package can be loaded with stated dependencies ... OK
 * checking whether the package can be unloaded cleanly ... OK
@@ -32,22 +31,13 @@ Fatal error: cannot create 'R_TempDir'
 * checking whether the namespace can be unloaded cleanly ... OK
 * checking loading without being on the library search path ... OK
 * checking dependencies in R code ... NOTE
-Fatal error: cannot create 'R_TempDir'
+Namespace in Imports field not imported from: ‘hms’
+  All declared Imports should be used.
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... NOTE
-Fatal error: cannot create 'R_TempDir'
-* checking Rd files ... WARNING
-E4.Acc_Process.Part1.ExtractRawAcc.Rd: Sections \title, and \name must exist and be unique in Rd files
-E4.Acc_Process.Part1b_Filter_ConvertAcc.Rd: Sections \title, and \name must exist and be unique in Rd files
-E4.Diagnostics.EDAplot.Rd: Sections \title, and \name must exist and be unique in Rd files
-E4.extras.BinEDA.Rd: Sections \title, and \name must exist and be unique in Rd files
-E4.extras.ButtonPressessPerDay.Rd: Sections \title, and \name must exist and be unique in Rd files
-E4_EDA_Process.part1.ExtractRawEDA.Rd: Sections \title, and \name must exist and be unique in Rd files
-E4_EDA_Process.part4.BinMatchedEDA.Rd: Sections \title, and \name must exist and be unique in Rd files
-E4tools-package.Rd: Sections \title, and \name must exist and be unique in Rd files
-problems found in ‘E4.Acc_Process.Part1.ExtractRawAcc.Rd’, ‘E4.Acc_Process.Part1b_Filter_ConvertAcc.Rd’, ‘E4.Diagnostics.EDAplot.Rd’, ‘E4.extras.BinEDA.Rd’, ‘E4.extras.ButtonPressessPerDay.Rd’, ‘E4_EDA_Process.part1.ExtractRawEDA.Rd’, ‘E4_EDA_Process.part4.BinMatchedEDA.Rd’, ‘E4tools-package.Rd’
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
 * checking Rd metadata ... OK
 * checking Rd cross-references ... OK
 * checking for missing documentation entries ... OK
@@ -80,23 +70,9 @@ Calls: E4.Acc_Process.Part1.ExtractRawAcc -> file.size -> file.info -> <Anonymou
 Execution halted
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
-* checking running R code from vignettes ... ERROR
-Errors in running code in vignettes:
-when running code in ‘my-vignette.Rmd’
-  ...
-Warning in dir.create(td) :
-  cannot create dir '/tmp/RtmpcZG4nI/file966262f660af', reason 'No space left on device'
-Warning in file.copy(docDir, td, recursive = TRUE) :
-  'recursive' will be ignored as 'to' is not a single existing directory
-Error in setwd(file.path(td, basename(docDir))) : 
-  cannot change working directory
-Calls: <Anonymous> -> setwd
-Execution halted
-
-... incomplete output.  Crash?
-
-  ‘my-vignette.Rmd’ using ‘UTF-8’... failed to complete the test
-* checking re-building of vignette outputs ... NOTE
+* checking running R code from vignettes ... NONE
+  ‘my-vignette.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... WARNING
 Error(s) in re-building vignettes:
   ...
 --- re-building ‘my-vignette.Rmd’ using rmarkdown
@@ -111,12 +87,6 @@ SUMMARY: processing the following file failed:
 Error: Vignette re-building failed.
 Execution halted
 
-* checking PDF version of manual ... ERROR
-Rd conversion errors:
-Warning in dir.create(latexdir) :
-  cannot create dir '/tmp/Rtmpjidlv2/ltx98722e3ab5c4', reason 'No space left on device'
-Warning in file(out, "wt") :
-  cannot open file '/tmp/Rtmpjidlv2/ltx98722e3ab5c4/E4.Acc_Process.Part1.ExtractRawAcc.tex': No such file or directory
-Error in file(out, "wt") : cannot open the connection
+* checking PDF version of manual ... OK
 * DONE
-Status: 3 ERRORs, 2 WARNINGs, 3 NOTEs
+Status: 1 ERROR, 1 WARNING, 1 NOTE
