@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/SpaDES.tools.Rcheck’
-* using R Under development (unstable) (2019-07-06 r76796)
+* using R Under development (unstable) (2019-07-09 r76810)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘SpaDES.tools/DESCRIPTION’ ... OK
@@ -82,13 +82,6 @@ The following object is masked from ‘package:data.table’:
 > 
 > # circles non centred
 > ras <- randomPolygons(ras, numTypes = 4)
-> n <- 2
-> agent <- SpatialPoints(coords = cbind(x = stats::runif(n, xmin(ras), xmax(ras)),
-+                                       y = stats::runif(n, xmin(ras), xmax(ras))))
-> 
-> cirs <- cir(ras, agent, maxRadius = 15, simplify = TRUE)
-> cirsSP <- SpatialPoints(coords = cirs[, c("x", "y")])
-> cirsRas <- raster(ras)
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "includePixel" "excludePixel" "includeRing"  "excludeRing" 
@@ -876,25 +869,4 @@ S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature R
 Fatal error: compiler constants were modified!
 
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... ERROR
-  Running ‘test-all.R’
-Running the tests in ‘tests/test-all.R’ failed.
-Last 13 lines of output:
-              landscape[pixVal$indices] <- pixVal$V1
-          }
-      }
-      else {
-          landscape[wh] <- spreads[wh]
-          if (exists("potentials")) 
-              if (NROW(potentials) > 0) 
-                  landscape[potentials[, 1L]] <- spreads[potentials[, 
-                    2L]]
-      }
-      return(landscape)
-  }
-  S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature RasterLayer has this body.
-  Fatal error: compiler constants were modified!
-  
-* checking PDF version of manual ... OK
-* DONE
-Status: 2 ERRORs, 1 NOTE
+* checking tests ...
