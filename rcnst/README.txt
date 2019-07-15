@@ -19,7 +19,9 @@ R_JIT_STRATEGY=4 is set to ensure that all code is byte-compiled by the JIT,
 even when it is expected to harm performance.  Then, package tests are run
 with R_CHECK_CONSTANTS=5, which is the most strict but also slowest level of
 checking of the constant corruption.  These tests can be easily re-run by
-developers as they use an unmodified version of R.
+developers as they use an unmodified version of R (unfortunately there is a
+bug in R 3.6.0 and 3.6.1, which prevents checking with R_CHECK_CONSTANTS=5;
+the CRAN check service uses R-devel).
 
 Only packages that failed due to constants corruption are shown here. 
 Packages that failed for other reasons were excluded (a package may fail
