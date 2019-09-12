@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/mlrMBO.Rcheck’
-* using R Under development (unstable) (2019-09-11 r77170)
+* using R Under development (unstable) (2019-09-12 r77181)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘mlrMBO/DESCRIPTION’ ... OK
@@ -99,21 +99,21 @@ Fatal error: compiler constants were modified!
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-  3: mboTemplate.OptProblem(opt.problem)
-  4: mboTemplate(opt.state)
-  5: mboTemplate.OptState(opt.state)
-  6: evalProposedPoints.OptState(opt.state, prop)
-  7: evalTargetFun.OptState(opt.state, xs = xs, extras = extras)
-  8: lapply(xs, trafoValue, par = par.set)
-  9: FUN(X[[i]], ...)
-  10: assertSetEqual(names(x), pids)
+      isFALSE
   
-  ══ testthat results  ═══════════════════════════════════════════════════════════
-  [ OK: 38 | SKIPPED: 0 | WARNINGS: 1 | FAILED: 1 ]
-  1. Error: mbo works with km (@test_mbo_km.R#11) 
+  Loading required package: checkmate
+  ERROR: modification of compiler constant of type character, length 2
+  ERROR: the modified value of the constant is:
+  [1] "integer"       "integervector"
+  attr(,".match.hash")
+  <hash table>
+  ERROR: the original value of the constant is:
+  [1] "integer"       "integervector"
+  ERROR: the modified constant is at index 1
+  ERROR: the modified constant is in this function body:
+  c("integer", "integervector")
+  Fatal error: compiler constants were modified!
   
-  Error: testthat unit tests failed
-  Execution halted
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
