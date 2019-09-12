@@ -1,0 +1,28 @@
+Package miraculix version 0.9.4
+Package built using 77181/R 3.7.0; x86_64-pc-linux-gnu; 2019-09-12 14:41:30 UTC; unix   
+Checked with rchk version 6400f4a0aa14a4379fcc72d8dbf07a49b4725e07
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+Function allele_freq2(SEXPREC*)
+  [PB] has possible protection stack imbalance miraculix/src/2bit.cc:186
+
+Function allele_freq3(SEXPREC*)
+  [PB] has possible protection stack imbalance miraculix/src/3bit.cc:168
+
+Function copyGeno
+  [PB] has possible protection stack imbalance miraculix/src/haplogeno.cc:984
+
+Function decodeHaplo
+  [PB] has possible protection stack imbalance miraculix/src/Haplo.cc:508
+
+Function matrix_coding_start2(unsigned int, unsigned int, SEXPREC*)
+  [UP] allocating function start_info(SEXPREC*, SEXPREC*, unsigned int, unsigned int)(V,?,?,?) may destroy its unprotected argument (Code <arg 1>), which is later used. miraculix/src/2bit.cc:73
+  [UP] calling allocating function start_info(SEXPREC*, SEXPREC*, unsigned int, unsigned int)(V,?,?,?) with a fresh pointer (Code <arg 1>) miraculix/src/2bit.cc:73
+
+Function matrix_coding_start3(unsigned int, unsigned int, SEXPREC*)
+  [UP] allocating function start_info(SEXPREC*, SEXPREC*, unsigned int, unsigned int)(V,?,?,?) may destroy its unprotected argument (Code <arg 1>), which is later used. miraculix/src/3bit.cc:68
+  [UP] calling allocating function start_info(SEXPREC*, SEXPREC*, unsigned int, unsigned int)(V,?,?,?) with a fresh pointer (Code <arg 1>) miraculix/src/3bit.cc:68
+
+Function matrix_startH(unsigned int, unsigned int, snpcoding, SEXPREC*)
+  [UP] allocating function start_info(SEXPREC*, SEXPREC*, unsigned int, unsigned int)(V,?,?,?) may destroy its unprotected argument (Code <arg 1>), which is later used. miraculix/src/sse.cc:468
+  [UP] calling allocating function start_info(SEXPREC*, SEXPREC*, unsigned int, unsigned int)(V,?,?,?) with a fresh pointer (Code <arg 1>) miraculix/src/sse.cc:468
