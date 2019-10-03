@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/ParamHelpers.Rcheck’
-* using R Under development (unstable) (2019-07-04 r76780)
+* using R Under development (unstable) (2019-10-02 r77250)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘ParamHelpers/DESCRIPTION’ ... OK
@@ -47,14 +47,16 @@ Note: information on .o files is not available
 Running examples in ‘ParamHelpers-Ex.R’ failed
 The error most likely occurred in:
 
-> ### Name: paramValueToString
-> ### Title: Convert a value to a string.
-> ### Aliases: paramValueToString
+> ### Name: getParamIds
+> ### Title: Return ids of parameters in parameter set.
+> ### Aliases: getParamIds
 > 
 > ### ** Examples
 > 
-> p = makeNumericParam("x")
-> paramValueToString(p, 1)
+> ps = makeParamSet(
++   makeNumericParam("u"),
++   makeIntegerVectorParam("v", len = 2)
++ )
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"
@@ -65,8 +67,8 @@ ERROR: the original value of the constant is:
 ERROR: the modified constant is at index 1
 ERROR: the modified constant is in this function body:
 c("integer", "integervector")
-Fatal error: compiler constants were modified!
-
+Error: promise already under evaluation: recursive default argument reference or earlier problems?
+Execution halted
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... ERROR
   Running ‘run-all.R’
