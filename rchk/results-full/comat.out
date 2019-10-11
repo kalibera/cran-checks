@@ -1,8 +1,16 @@
-Package comat version 0.3.0
-Package built using 77063/R 3.7.0; x86_64-pc-linux-gnu; 2019-08-25 11:24:09 UTC; unix   
+Package comat version 0.7.0
+Package built using 77275/R 4.0.0; x86_64-pc-linux-gnu; 2019-10-11 01:05:09 UTC; unix   
 Checked with rchk version 6400f4a0aa14a4379fcc72d8dbf07a49b4725e07
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
 
 Function Rcpp::Rcpp_protect(SEXPREC*)
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
@@ -11,47 +19,90 @@ Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function Rcpp::Rcpp_fast_eval(SEXPREC*, SEXPREC*) with argument allocated using Rf_lang2 Rcpp/include/Rcpp/r_cast.h:34
+
 Function _comat_create_neighborhood
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _comat_get_normalized
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _comat_get_unique_values
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:102
-  [PB] has negative depth comat/src/RcppExports.cpp:114
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:114
-  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:115
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:114
+  [PB] has negative depth comat/src/RcppExports.cpp:126
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:126
+  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:127
 
 Function _comat_get_unique_values_try(SEXPREC*, SEXPREC*)
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _comat_is_cross_mat
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:576
+  [PB] has negative depth comat/src/RcppExports.cpp:588
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:588
+  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:589
+
+Function _comat_is_cross_mat_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _comat_rcpp_cell_from_xy
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _comat_rcpp_get_cocoma
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:138
-  [PB] has negative depth comat/src/RcppExports.cpp:150
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:150
-  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:151
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:150
+  [PB] has negative depth comat/src/RcppExports.cpp:162
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:162
+  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:163
+
+Function _comat_rcpp_get_cocoma_internal
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:188
+  [PB] has negative depth comat/src/RcppExports.cpp:200
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:200
+  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:201
+
+Function _comat_rcpp_get_cocoma_internal_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _comat_rcpp_get_cocoma_try(SEXPREC*, SEXPREC*, SEXPREC*)
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _comat_rcpp_get_cocove
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:542
+  [PB] has negative depth comat/src/RcppExports.cpp:554
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:554
+  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:555
+
+Function _comat_rcpp_get_cocove_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _comat_rcpp_get_coma
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:173
-  [PB] has negative depth comat/src/RcppExports.cpp:185
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:185
-  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:186
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:223
+  [PB] has negative depth comat/src/RcppExports.cpp:235
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:235
+  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:236
+
+Function _comat_rcpp_get_coma_internal
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:259
+  [PB] has negative depth comat/src/RcppExports.cpp:271
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:271
+  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:272
+
+Function _comat_rcpp_get_coma_internal_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _comat_rcpp_get_coma_try(SEXPREC*, SEXPREC*)
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _comat_rcpp_get_cove
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:208
-  [PB] has negative depth comat/src/RcppExports.cpp:220
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:220
-  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:221
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:506
+  [PB] has negative depth comat/src/RcppExports.cpp:518
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:518
+  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:519
 
-Function _comat_rcpp_get_cove_try(SEXPREC*, SEXPREC*)
-  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _comat_rcpp_get_cove_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _comat_rcpp_get_entropy
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:67
@@ -62,26 +113,92 @@ Function _comat_rcpp_get_entropy
 Function _comat_rcpp_get_entropy_try(SEXPREC*, SEXPREC*)
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _comat_rcpp_get_incoma
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:294
+  [PB] has negative depth comat/src/RcppExports.cpp:306
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:306
+  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:307
+
+Function _comat_rcpp_get_incoma_list
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:330
+  [PB] has negative depth comat/src/RcppExports.cpp:342
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:342
+  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:343
+
+Function _comat_rcpp_get_incoma_list_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _comat_rcpp_get_incoma_matrix
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:364
+  [PB] has negative depth comat/src/RcppExports.cpp:376
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:376
+  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:377
+
+Function _comat_rcpp_get_incoma_matrix_to_list
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:398
+  [PB] has negative depth comat/src/RcppExports.cpp:410
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:410
+  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:411
+
+Function _comat_rcpp_get_incoma_matrix_to_list_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _comat_rcpp_get_incoma_matrix_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _comat_rcpp_get_incoma_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _comat_rcpp_get_incove
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:613
+  [PB] has negative depth comat/src/RcppExports.cpp:625
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:625
+  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:626
+
+Function _comat_rcpp_get_incove_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _comat_rcpp_get_vec
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:434
+  [PB] has negative depth comat/src/RcppExports.cpp:446
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:446
+  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:447
+
+Function _comat_rcpp_get_vec_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _comat_rcpp_get_wecoma
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:246
-  [PB] has negative depth comat/src/RcppExports.cpp:258
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:258
-  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:259
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:651
+  [PB] has negative depth comat/src/RcppExports.cpp:663
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:663
+  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:664
+
+Function _comat_rcpp_get_wecoma_internal
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:690
+  [PB] has negative depth comat/src/RcppExports.cpp:702
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:702
+  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:703
+
+Function _comat_rcpp_get_wecoma_internal_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _comat_rcpp_get_wecoma_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _comat_rcpp_get_wecove
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:281
-  [PB] has negative depth comat/src/RcppExports.cpp:293
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:293
-  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:294
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr comat/src/RcppExports.cpp:470
+  [PB] has negative depth comat/src/RcppExports.cpp:482
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete comat/src/RcppExports.cpp:482
+  [PB] has possible protection stack imbalance comat/src/RcppExports.cpp:483
 
-Function _comat_rcpp_get_wecove_try(SEXPREC*, SEXPREC*)
-  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _comat_rcpp_get_wecove_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _comat_rcpp_xy_from_matrix
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _comat_triangular_index
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<16, Rcpp::PreserveStorage>::push_back<Rcpp::internal::string_proxy<16, Rcpp::PreserveStorage> >(Rcpp::internal::string_proxy<16, Rcpp::PreserveStorage> const&)
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
