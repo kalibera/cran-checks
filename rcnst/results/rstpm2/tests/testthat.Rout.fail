@@ -1,0 +1,62 @@
+
+R Under development (unstable) (2019-10-15 r77294) -- "Unsuffered Consequences"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> library(rstpm2)
+Loading required package: survival
+Loading required package: splines
+
+Attaching package: 'rstpm2'
+
+The following object is masked from 'package:survival':
+
+    colon
+
+> 
+> test_check("rstpm2")
+ERROR: modification of compiler constant of type language, length 4
+ERROR: the modified constant is function body:
+ifelse(x == 0, -0.0986659612490242, sin(x)/x)
+ERROR: the body was originally:
+ifelse(x == 0, 1, sin(x)/x)
+ERROR: modification of compiler constant of type double, length 1
+ERROR: the modified value of the constant is:
+[1] -0.09866596
+ERROR: the original value of the constant is:
+[1] 1
+ERROR: the modified constant is at index 4
+ERROR: the modified constant is in this function body:
+ifelse(x == 0, -0.0986659612490242, sin(x)/x)
+ERROR: detected compiler constant(s) modification after .Call invocation of function vunirootRcpp from library rstpm2 (/var/scratch2/tomas/cran/rcnst/lib/rstpm2/libs/rstpm2.so).
+NOTE: .Call function vunirootRcpp modified its argument (number 4, type double, length 1)
+Fatal error: compiler constants were modified (in .Call?)!
+
+ERROR: modification of compiler constant of type language, length 4
+ERROR: the modified constant is function body:
+ifelse(x == 0, -0.0986659612490242, sin(x)/x)
+ERROR: the body was originally:
+ifelse(x == 0, 1, sin(x)/x)
+ERROR: modification of compiler constant of type double, length 1
+ERROR: the modified value of the constant is:
+[1] -0.09866596
+ERROR: the original value of the constant is:
+[1] 1
+ERROR: the modified constant is at index 4
+ERROR: the modified constant is in this function body:
+ifelse(x == 0, -0.0986659612490242, sin(x)/x)
+Fatal error: compiler constants were modified!
+
