@@ -1,0 +1,183 @@
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/rstpm2.Rcheck’
+* using R Under development (unstable) (2019-10-24 r77329)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* checking for file ‘rstpm2/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘rstpm2’ version ‘1.5.0’
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘rstpm2’ can be installed ... OK
+* checking package directory ... OK
+* checking ‘build’ directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... NOTE
+Namespace in Imports field not imported from: ‘utils’
+  All declared Imports should be used.
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking compiled code ... NOTE
+Note: information on .o files is not available
+* checking sizes of PDF files under ‘inst/doc’ ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... ERROR
+Running examples in ‘rstpm2-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: vuniroot
+> ### Title: Vectorised One Dimensional Root (Zero) Finding
+> ### Aliases: vuniroot
+> ### Keywords: optimize
+> 
+> ### ** Examples
+> 
+> ##--- vuniroot() with new interval extension + checking features: --------------
+> 
+> f1 <- function(x) (121 - x^2)/(x^2+1)
+> f2 <- function(x) exp(-x)*(x - 12)
+> 
+> tools::assertCondition(vuniroot(f1, cbind(0,10)),
++                        "error", verbose=TRUE)
+assertCondition: caught “error”
+> tools::assertCondition(vuniroot(f2, cbind(0, 2)),
++                        "error", verbose=TRUE)
+assertCondition: caught “error”
+> ##--> error: f() .. end points not of opposite sign
+> 
+> ## where as  'extendInt="yes"'  simply first enlarges the search interval:
+> u1 <- vuniroot(f1, cbind(0,10),extendInt="yes", trace=1)
+search in [0,10] ... extended to [-1.5e-05, 11.5] in 4 steps
+> u2 <- vuniroot(f2, cbind(0,2), extendInt="yes", trace=2)
+search in [0,2]
+ .. modified lower,upper: (         -1e-06,           2.02)
+ .. modified lower,upper: (         -3e-06,           2.06)
+ .. modified lower,upper: (         -7e-06,           2.14)
+ .. modified lower,upper: (       -1.5e-05,            2.3)
+ .. modified lower,upper: (       -3.1e-05,           2.62)
+ .. modified lower,upper: (       -6.3e-05,           3.26)
+ .. modified lower,upper: (      -0.000127,           4.54)
+ .. modified lower,upper: (      -0.000255,            7.1)
+ .. modified lower,upper: (      -0.000511,          12.22)
+> stopifnot(all.equal(u1$root, 11, tolerance = 1e-5),
++           all.equal(u2$root, 12, tolerance = 6e-6))
+> 
+> ## The *danger* of interval extension:
+> ## No way to find a zero of a positive function, but
+> ## numerically, f(-|M|) becomes zero :
+> tools::assertCondition(u3 <- vuniroot(exp, cbind(0,2), extendInt="yes", trace=TRUE),
++                        "error", verbose=TRUE)
+search in [0,2] ... extended to [-1073.74, 2.14748e+07] in 30 steps
+assertCondition: caught “error”
+> 
+> ## Nonsense example (must give an error):
+> tools::assertCondition( vuniroot(function(x) 1, cbind(0,1), extendInt="yes"),
++                        "error", verbose=TRUE)
+assertCondition: caught “error”
+> 
+> ## Convergence checking :
+> sinc <- function(x) ifelse(x == 0, 1, sin(x)/x)
+> curve(sinc, -6,18); abline(h=0,v=0, lty=3, col=adjustcolor("gray", 0.8))
+> ## Don't show: 
+> tools::assertWarning(
++ ## End(Don't show)
++ vuniroot(sinc, cbind(0,5), extendInt="yes", maxiter=4) #-> "just" a warning
++ ## Don't show: 
++  , verbose=TRUE)
+ERROR: modification of compiler constant of type language, length 4
+ERROR: the modified constant is function body:
+ifelse(x == 0, -0.0986659612490242, sin(x)/x)
+ERROR: the body was originally:
+ifelse(x == 0, 1, sin(x)/x)
+ERROR: modification of compiler constant of type double, length 1
+ERROR: the modified value of the constant is:
+[1] -0.09866596
+ERROR: the original value of the constant is:
+[1] 1
+ERROR: the modified constant is at index 3
+ERROR: the modified constant is in this function body:
+ifelse(x == 0, -0.0986659612490242, sin(x)/x)
+ERROR: detected compiler constant(s) modification after .Call invocation of function vunirootRcpp from library rstpm2 (/var/scratch2/tomas/cran/rcnst/lib/rstpm2/libs/rstpm2.so).
+NOTE: .Call function vunirootRcpp modified its argument (number 4, type double, length 1)
+Fatal error: compiler constants were modified (in .Call?)!
+
+ERROR: modification of compiler constant of type language, length 4
+ERROR: the modified constant is function body:
+ifelse(x == 0, -0.0986659612490242, sin(x)/x)
+ERROR: the body was originally:
+ifelse(x == 0, 1, sin(x)/x)
+ERROR: modification of compiler constant of type double, length 1
+ERROR: the modified value of the constant is:
+[1] -0.09866596
+ERROR: the original value of the constant is:
+[1] 1
+ERROR: the modified constant is at index 3
+ERROR: the modified constant is in this function body:
+ifelse(x == 0, -0.0986659612490242, sin(x)/x)
+Fatal error: compiler constants were modified!
+
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... ERROR
+  Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  ERROR: modification of compiler constant of type language, length 4
+  ERROR: the modified constant is function body:
+  ifelse(x == 0, -0.0986659612490242, sin(x)/x)
+  ERROR: the body was originally:
+  ifelse(x == 0, 1, sin(x)/x)
+  ERROR: modification of compiler constant of type double, length 1
+  ERROR: the modified value of the constant is:
+  [1] -0.09866596
+  ERROR: the original value of the constant is:
+  [1] 1
+  ERROR: the modified constant is at index 4
+  ERROR: the modified constant is in this function body:
+  ifelse(x == 0, -0.0986659612490242, sin(x)/x)
+  Fatal error: compiler constants were modified!
+  
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... OK
+  ‘Introduction.Rnw’ using ‘UTF-8’... OK
+  ‘SimpleGuide.Rnw’ using ‘UTF-8’... OK
+  ‘multistate.Rnw’ using ‘UTF-8’... OK
+  ‘predictnl.Rnw’... OK
+* checking re-building of vignette outputs ...
