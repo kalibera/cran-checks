@@ -1,0 +1,31 @@
+Package collections version 0.2.2
+Package built using 77333/R 4.0.0; x86_64-pc-linux-gnu; 2019-10-26 12:41:08 UTC; unix   
+Checked with rchk version 6400f4a0aa14a4379fcc72d8dbf07a49b4725e07
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+
+Function heapify
+  [PB] has negative depth collections/src/priority_queue.c:95
+  [UP] attempt to unprotect more items (2) than protected (1), results will be incomplete collections/src/priority_queue.c:95
+  [PB] has possible protection stack imbalance collections/src/priority_queue.c:96
+
+Function holes_clear
+  [UP] allocating function get_sexp_value may destroy its unprotected argument (holes <arg 1>), which is later used. collections/src/dict.c:55
+  [UP] calling allocating function get_sexp_value with a fresh pointer (holes <arg 1>) collections/src/dict.c:55
+  [UP] unprotected variable holes while calling allocating function Rf_lang1 collections/src/dict.c:56
+  [UP] calling allocating function Rf_eval with a fresh pointer (holes <arg 2>) collections/src/dict.c:57
+
+Function holes_pop
+  [UP] allocating function get_sexp_value may destroy its unprotected argument (holes <arg 1>), which is later used. collections/src/dict.c:38
+  [UP] calling allocating function get_sexp_value with a fresh pointer (holes <arg 1>) collections/src/dict.c:38
+  [UP] calling allocating function Rf_eval with a fresh pointer (holes <arg 2>) collections/src/dict.c:39
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang1 collections/src/dict.c:39
+  [UP] unprotected variable holes while calling allocating function Rf_lang1 collections/src/dict.c:39
+
+Function holes_push
+  [UP] allocating function get_sexp_value may destroy its unprotected argument (holes <arg 1>), which is later used. collections/src/dict.c:45
+  [UP] calling allocating function get_sexp_value with a fresh pointer (holes <arg 1>) collections/src/dict.c:45
+  [UP] unprotected variable holes while calling allocating function Rf_ScalarInteger collections/src/dict.c:46
+  [UP] unprotected variable push while calling allocating function Rf_ScalarInteger collections/src/dict.c:46
+  [UP] unprotected variable holes while calling allocating function Rf_lang2(?,V) collections/src/dict.c:47
+  [UP] calling allocating function Rf_eval with a fresh pointer (holes <arg 2>) collections/src/dict.c:48
