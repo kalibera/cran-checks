@@ -16,8 +16,14 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(testthat)
-> library(tuneRanger)
-Loading required package: ranger
+> 
+> # the unit tests take pretty long, that can be a problem on WB and cran (and maybe annoying locally)
+> # so we run all tests only on travis and if a certain user env var is set
+> if (identical(Sys.getenv("TRAVIS"), "true") || identical(Sys.getenv("R_EXPENSIVE_TEST_OK"), "true")) {
++   test_check("mlrMBO")
++ } else {
++   test_check("mlrMBO", filter = "((mbo_rf)|(mbo_km))")
++ }
 Loading required package: mlrMBO
 Loading required package: mlr
 Loading required package: ParamHelpers
@@ -31,19 +37,7 @@ The following object is masked from 'package:base':
     isFALSE
 
 Loading required package: checkmate
-Loading required package: parallel
-Loading required package: lubridate
-
-Attaching package: 'lubridate'
-
-The following object is masked from 'package:base':
-
-    date
-
-Loading required package: lhs
-> 
-> test_check("tuneRanger")
-Approximated time for tuning: 1M 16SERROR: modification of compiler constant of type character, length 2
+ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"
 attr(,".match.hash")
