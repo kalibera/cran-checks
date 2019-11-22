@@ -1,0 +1,39 @@
+Package uchardet version 1.0.0
+Package built using 77448/R 4.0.0; x86_64-pc-linux-gnu; 2019-11-22 13:04:30 UTC; unix   
+Checked with rchk version 6400f4a0aa14a4379fcc72d8dbf07a49b4725e07
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function _uchardet_detect_file_enc
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr uchardet/src/RcppExports.cpp:29
+  [PB] has negative depth uchardet/src/RcppExports.cpp:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete uchardet/src/RcppExports.cpp:41
+  [PB] has possible protection stack imbalance uchardet/src/RcppExports.cpp:42
+
+Function _uchardet_detect_file_enc_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _uchardet_detect_raw_enc
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr uchardet/src/RcppExports.cpp:62
+  [PB] has negative depth uchardet/src/RcppExports.cpp:74
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete uchardet/src/RcppExports.cpp:74
+  [PB] has possible protection stack imbalance uchardet/src/RcppExports.cpp:75
+
+Function _uchardet_detect_raw_enc_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _uchardet_detect_str_enc
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr uchardet/src/RcppExports.cpp:95
+  [PB] has negative depth uchardet/src/RcppExports.cpp:107
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete uchardet/src/RcppExports.cpp:107
+  [PB] has possible protection stack imbalance uchardet/src/RcppExports.cpp:108
+
+Function _uchardet_detect_str_enc_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
