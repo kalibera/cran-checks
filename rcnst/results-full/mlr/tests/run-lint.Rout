@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2019-11-23 r77455) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-11-26 r77462) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -15,36 +15,12 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> library(testthat)
-> 
-> if (getRversion() > "3.5.3") {
-+   # set old seed
-+   suppressWarnings(RNGversion("3.5.0"))
-+   # restore standard seed when done (so that we are back to defaults for the next tests)
-+   on.exit(suppressWarnings(RNGversion("3.6.0")))
+> if (Sys.getenv("NOT_CRAN") == "true") {
++   library(testthat)
++   set.seed(getOption("mlr.debug.seed"))
++   test_check("mlr", filter = "lint")
 + }
-> set.seed(getOption("mlr.debug.seed"))
-> 
-> test_check("mlr", filter = "lint")
-Loading required package: mlr
-Loading required package: ParamHelpers
-
-Attaching package: 'rex'
-
-The following object is masked from 'package:testthat':
-
-    matches
-
-
-Attaching package: 'BBmisc'
-
-The following object is masked from 'package:base':
-
-    isFALSE
-
-══ testthat results  ═══════════════════════════════════════════════════════════
-[ OK: 0 | SKIPPED: 1 | WARNINGS: 0 | FAILED: 0 ]
 > 
 > proc.time()
    user  system elapsed 
- 19.041   1.137  20.741 
+  0.501   0.160   0.640 

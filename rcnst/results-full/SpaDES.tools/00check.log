@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/SpaDES.tools.Rcheck’
-* using R Under development (unstable) (2019-11-25 r77460)
+* using R Under development (unstable) (2019-11-26 r77462)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘SpaDES.tools/DESCRIPTION’ ... OK
@@ -82,6 +82,28 @@ The following object is masked from ‘package:data.table’:
 > 
 > # circles non centred
 > ras <- randomPolygons(ras, numTypes = 4)
+> n <- 2
+> agent <- SpatialPoints(coords = cbind(x = stats::runif(n, xmin(ras), xmax(ras)),
++                                       y = stats::runif(n, xmin(ras), xmax(ras))))
+> 
+> cirs <- cir(ras, agent, maxRadius = 15, simplify = TRUE)
+> cirsSP <- SpatialPoints(coords = cirs[, c("x", "y")])
+> cirsRas <- raster(ras)
+> cirsRas[] <- 0
+> cirsRas[cirs[, "indices"]] <- 1
+> 
+> if (interactive()) {
++   clearPlot()
++   Plot(ras)
++   Plot(cirsRas, addTo = "ras", cols = c("transparent", "#00000055"))
++   Plot(agent, addTo = "ras")
++   Plot(cirsSP, addTo = "ras")
++ }
+> 
+> # Example comparing rings and cir
+> a <- raster(extent(0, 30, 0, 30), res = 1)
+> hab <- gaussMap(a, speedup = 1) # if raster is large (>1e6 pixels) use speedup > 1
+Loading required namespace: RandomFields
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "includePixel" "excludePixel" "includeRing"  "excludeRing" 
@@ -870,55 +892,10 @@ ERROR: the modified constant is in this function body:
     return(landscape)
 }
 S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature RasterLayer has this body.
-
- *** caught segfault ***
-address 0x230000001f, cause 'memory not mapped'
-
-Traceback:
- 1: codeBufCode(cb, cntxt)
- 2: genCode(a, pcntxt, loc = cb$savecurloc())
- 3: cb$putconst(genCode(a, pcntxt, loc = cb$savecurloc()))
- 4: cmpCallArgs(args, cb, cntxt, nse)
- 5: cmpCallSymFun(fun, args, call, cb, cntxt)
- 6: cmpCall(e, cb, cntxt)
- 7: cmp(e, cb, cntxt, setloc = FALSE)
- 8: genCode(a, pcntxt, loc = cb$savecurloc())
- 9: cb$putconst(genCode(a, pcntxt, loc = cb$savecurloc()))
-10: cmpCallArgs(args, cb, cntxt, nse)
-11: cmpCallSymFun(fun, args, call, cb, cntxt)
-12: cmpCall(e, cb, cntxt)
-13: cmp(value, cb, ncntxt)
-14: cmpSymbolAssign(symbol, value, superAssign, cb, cntxt)
-15: h(e, cb, cntxt)
-16: tryInline(call, cb, cntxt)
-17: cmpCall(e, cb, cntxt)
-18: cmp(subexp, cb, cntxt, setloc = FALSE)
-19: h(e, cb, cntxt)
-20: tryInline(call, cb, cntxt)
-21: cmpCall(e, cb, cntxt)
-22: cmp(then.expr, cb, cntxt)
-23: h(e, cb, cntxt)
-24: tryInline(call, cb, cntxt)
-25: cmpCall(e, cb, cntxt)
-26: cmp(subexp, cb, ncntxt, setloc = FALSE)
-27: h(e, cb, cntxt)
-28: tryInline(call, cb, cntxt)
-29: cmpCall(e, cb, cntxt)
-30: cmp(e, cb, cntxt, setloc = FALSE)
-31: genCode(body(f), ncntxt, loc = loc)
-32: cmpfun(f)
-33: doTryCatch(return(expr), name, parentenv, handler)
-34: tryCatchOne(expr, names, parentenv, handlers[[1L]])
-35: tryCatchList(expr, classes, parentenv, handlers)
-36: tryCatch(cmpfun(f), error = function(e) {    notifyCompilerError(paste(e$message, "at", deparse(e$call)))    f})
-37: compiler:::tryCmpfun(function (x, i, j, value) {    if (length(value) == ncell(x)) {        x <- try(setValues(x, value))    }    else if (length(value) == 1) {        x <- try(setValues(x, rep(value, times = ncell(x))))    }    else {        v <- try(vector(length = ncell(x)))        if (class(x) != "try-error") {            v[] <- value            x <- try(setValues(x, v))        }    }    if (class(x) == "try-error") {        stop("cannot replace values on this raster (it is too large")    }    return(x)})
-38: .local(x, i = i, j = j, ..., value)
-39: `[<-`(`*tmp*`, , value = 0)
-40: `[<-`(`*tmp*`, , value = 0)
-41: spread(landscape = ras, spreadProb = 1, loci, allowOverlap = FALSE,     id = TRUE, ...)
-42: spread(landscape = ras, spreadProb = 1, loci, allowOverlap = FALSE,     id = TRUE, ...)
-43: randomPolygons(ras, numTypes = 4)
-An irrecoverable exception occurred. R is aborting now ...
+Failed with error:  ‘promise already under evaluation: recursive default argument reference or earlier problems?’
+Error in gaussMap(a, speedup = 1) : 
+  The 'RandomFields' package is required but not installed.
+Execution halted
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... ERROR
   Running ‘test-all.R’

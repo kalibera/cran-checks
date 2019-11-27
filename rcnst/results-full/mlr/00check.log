@@ -1,9 +1,9 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/mlr.Rcheck’
-* using R Under development (unstable) (2019-11-23 r77455)
+* using R Under development (unstable) (2019-11-26 r77462)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘mlr/DESCRIPTION’ ... OK
-* this is package ‘mlr’ version ‘2.15.0’
+* this is package ‘mlr’ version ‘2.16.0’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -29,8 +29,7 @@
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
 * checking loading without being on the library search path ... OK
-* checking dependencies in R code ... NOTE
-Missing or unexported object: ‘fda.usc::predict.classif’
+* checking dependencies in R code ... OK
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
@@ -56,30 +55,59 @@ Note: information on .o files is not available
 Running examples in ‘mlr-Ex.R’ failed
 The error most likely occurred in:
 
-> ### Name: tuneParamsMultiCrit
-> ### Title: Hyperparameter tuning for multiple measures at once.
-> ### Aliases: tuneParamsMultiCrit
+> ### Name: tuneParams
+> ### Title: Hyperparameter tuning.
+> ### Aliases: tuneParams
 > 
 > ### ** Examples
 > 
-> 
-> 
-> 
-> ### * <FOOTER>
-> ###
-> cleanEx()
-> options(digits = 7L)
-> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  67.312 1.931 70.308 0.01 0.534 
-> grDevices::dev.off()
-null device 
-          1 
-> ###
-> ### Local variables: ***
-> ### mode: outline-minor ***
-> ### outline-regexp: "\\(> \\)?### [*]+" ***
-> ### End: ***
-> quit('no')
+> set.seed(123)
+> # a grid search for an SVM (with a tiny number of points...)
+> # note how easily we can optimize on a log-scale
+> ps = makeParamSet(
++   makeNumericParam("C", lower = -12, upper = 12, trafo = function(x) 2^x),
++   makeNumericParam("sigma", lower = -12, upper = 12, trafo = function(x) 2^x)
++ )
+> ctrl = makeTuneControlGrid(resolution = 2L)
+> rdesc = makeResampleDesc("CV", iters = 2L)
+> res = tuneParams("classif.ksvm", iris.task, rdesc, par.set = ps, control = ctrl)
+[Tune] Started tuning learner classif.ksvm for parameter set:
+         Type len Def    Constr Req Tunable Trafo
+C     numeric   -   - -12 to 12   -    TRUE     Y
+sigma numeric   -   - -12 to 12   -    TRUE     Y
+With control class: TuneControlGrid
+Imputation value: 1
+[Tune-x] 1: C=0.000244; sigma=0.000244
+[Tune-y] 1: mmce.test.mean=0.7333333; time: 0.0 min
+[Tune-x] 2: C=4.1e+03; sigma=0.000244
+[Tune-y] 2: mmce.test.mean=0.0533333; time: 0.0 min
+[Tune-x] 3: C=0.000244; sigma=4.1e+03
+[Tune-y] 3: mmce.test.mean=0.7333333; time: 0.0 min
+[Tune-x] 4: C=4.1e+03; sigma=4.1e+03
+[Tune-y] 4: mmce.test.mean=0.7333333; time: 0.0 min
+[Tune] Result: C=4.1e+03; sigma=0.000244 : mmce.test.mean=0.0533333
+> print(res)
+Tune result:
+Op. pars: C=4.1e+03; sigma=0.000244
+mmce.test.mean=0.0533333
+> # access data for all evaluated points
+> df = as.data.frame(res$opt.path)
+> df1 = as.data.frame(res$opt.path, trafo = TRUE)
+> print(head(df[, -ncol(df)]))
+    C sigma mmce.test.mean dob eol error.message
+1 -12   -12     0.73333333   1  NA          <NA>
+2  12   -12     0.05333333   2  NA          <NA>
+3 -12    12     0.73333333   3  NA          <NA>
+4  12    12     0.73333333   4  NA          <NA>
+> print(head(df1[, -ncol(df)]))
+    C sigma mmce.test.mean dob eol error.message
+1 -12   -12     0.73333333   1  NA          <NA>
+2  12   -12     0.05333333   2  NA          <NA>
+3 -12    12     0.73333333   3  NA          <NA>
+4  12    12     0.73333333   4  NA          <NA>
+> # access data for all evaluated points - alternative
+> df2 = generateHyperParsEffectData(res)
+> df3 = generateHyperParsEffectData(res, trafo = TRUE)
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"
@@ -95,7 +123,6 @@ Fatal error: compiler constants were modified!
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... OK
   Running ‘run-base.R’
-  Running ‘run-basenocran.R’
   Running ‘run-classif1.R’
   Running ‘run-classif2.R’
   Running ‘run-cluster.R’
@@ -121,4 +148,4 @@ Fatal error: compiler constants were modified!
 * checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 ERROR, 2 NOTEs
+Status: 1 ERROR, 1 NOTE
