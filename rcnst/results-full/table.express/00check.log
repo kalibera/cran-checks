@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/table.express.Rcheck’
-* using R Under development (unstable) (2019-11-23 r77455)
+* using R Under development (unstable) (2019-12-16 r77577)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘table.express/DESCRIPTION’ ... OK
@@ -51,19 +51,19 @@
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
+  > testthat::test_check("table.express")
+  ERROR: modification of compiler constant of type language, length 4
+  ERROR: the modified value of the constant is:
+  right_join(data.table::setDT(list(x = c("b", "b", "b", "a", "a", 
+  "a", "c", "c", "c"), y = c(1, 3, 6, 1, 3, 6, 1, 3, 6), v = 1:9)), 
+      local_rhs, by = "x")
   ERROR: the original value of the constant is:
   right_join(data.table::setDT(list(x = c("b", "b", "b", "a", "a", 
   "a", "c", "c", "c"), y = c(1, 3, 6, 1, 3, 6, 1, 3, 6), v = 1:9)), 
       local_rhs, by = "x")
-  ERROR: the modified constant is at index 10
+  ERROR: the modified constant is at index 1
   ERROR: the modified constant is in this function body:
-  {
-      local_rhs <- data.table::setDT(list(x = c("c", "b"), v = 8:7, 
-          foo = c(4, 2)))
-      right_join(data.table::setDT(list(x = c("b", "b", "b", "a", 
-      "a", "a", "c", "c", "c"), y = c(1, 3, 6, 1, 3, 6, 1, 3, 6
-      ), v = 1:9)), local_rhs, by = "x")
-  }
+  local_rhs
   Fatal error: compiler constants were modified!
   
 * checking for unstated dependencies in vignettes ... OK
