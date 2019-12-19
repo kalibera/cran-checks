@@ -1,10 +1,10 @@
-* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/reproducible.Rcheck’
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/SpaDES.core.Rcheck’
 * using R Under development (unstable) (2019-12-18 r77602)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* checking for file ‘reproducible/DESCRIPTION’ ... OK
+* checking for file ‘SpaDES.core/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘reproducible’ version ‘0.2.11’
+* this is package ‘SpaDES.core’ version ‘0.2.7’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -14,7 +14,7 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘reproducible’ can be installed ... OK
+* checking whether package ‘SpaDES.core’ can be installed ... OK
 * checking package directory ... OK
 * checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -51,26 +51,26 @@
   Running ‘test-all.R’
 Running the tests in ‘tests/test-all.R’ failed.
 Last 13 lines of output:
+              landscape[pixVal$indices] <- pixVal$V1
           }
-          if (useCloud) {
-              cloudUploadFromCache(isInCloud, outputHash, saved, 
-                  cacheRepo, cloudFolderID, outputToSave, rasters)
-          }
-          verboseDF2(verbose, fnDetails$functionName, startSaveTime)
-          verboseDF3(verbose, fnDetails$functionName, startCacheTime)
-          if (isNullOutput) 
-              return(NULL)
-          else return(output)
       }
+      else {
+          landscape[wh] <- spreads[wh]
+          if (exists("potentials")) 
+              if (NROW(potentials) > 0) 
+                  landscape[potentials[, 1L]] <- spreads[potentials[, 
+                    2L]]
+      }
+      return(landscape)
   }
-  S4 Method Cache:reproducible defined in namespace reproducible with signature ANY has this body.
+  S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature RasterLayer has this body.
   Fatal error: compiler constants were modified!
   
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
-  ‘Intro-to-Cache.Rmd’ using ‘UTF-8’... OK
-* checking re-building of vignette outputs ... OK
-* checking PDF version of manual ... OK
-* DONE
-Status: 1 ERROR
+  ‘i-introduction.Rmd’ using ‘UTF-8’... OK
+  ‘ii-modules.Rmd’ using ‘UTF-8’... OK
+  ‘iii-cache.Rmd’ using ‘UTF-8’... OK
+  ‘iv-advanced.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ...
