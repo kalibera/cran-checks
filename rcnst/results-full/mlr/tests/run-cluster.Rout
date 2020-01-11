@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2020-01-09 r77648) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-01-10 r77650) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -15,12 +15,15 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> if (Sys.getenv("NOT_CRAN") == "true") {
-+   library(testthat)
+> library(testthat)
+> 
+> # no tests on CRAN
+> if (identical(Sys.getenv("NOT_CRAN"), "true")) {
++ 
 +   set.seed(getOption("mlr.debug.seed"))
 +   test_check("mlr", "_cluster_")
 + }
 > 
 > proc.time()
    user  system elapsed 
-  0.487   0.111   0.676 
+  0.578   0.126   0.684 
