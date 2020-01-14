@@ -1,5 +1,5 @@
-Package vroom version 1.0.2
-Package built using 77545/R 4.0.0; x86_64-pc-linux-gnu; 2019-12-09 22:38:11 UTC; unix   
+Package vroom version 1.2.0
+Package built using 77662/R 4.0.0; x86_64-pc-linux-gnu; 2020-01-14 02:05:12 UTC; unix   
 Checked with rchk version 490627e4fb8e93244230dbbd61455730aa43c328
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
@@ -37,14 +37,20 @@ Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:684
+
 Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::set(SEXPREC*)
+  [UP] ignoring variable rhs as it has address taken, results will be incomplete 
 
 Function _vroom_gen_character_
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _vroom_guess_type_
-  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _vroom_has_trailing_newline
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -79,6 +85,12 @@ Function con_description(SEXPREC*)
 Function is_open(SEXPREC*)
   [UP] ignoring variable con as it has address taken, results will be incomplete 
 
+Function make_delimited_index(Rcpp::RObject_Impl<Rcpp::PreserveStorage>, char const*, char, bool, bool, bool, bool, unsigned long, unsigned long, char, unsigned long, bool)
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function make_fixed_width_index(Rcpp::RObject_Impl<Rcpp::PreserveStorage>, std::__1::vector<int, std::__1::allocator<int> > const&, std::__1::vector<int, std::__1::allocator<int> > const&, bool, unsigned long, char, unsigned long, bool)
+  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function read_fct_explicit(vroom_vec_info*, Rcpp::Vector<16, Rcpp::PreserveStorage>, bool)
   [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -89,6 +101,9 @@ Function resolve_collectors(Rcpp::RObject_Impl<Rcpp::PreserveStorage>, Rcpp::ROb
 
 Function void Rcpp::Vector<16, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&)
   [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function vroom::delimited_index_connection::delimited_index_connection(SEXPREC*, char const*, char, bool, bool, bool, bool, unsigned long, unsigned long, char, unsigned long, bool)
   [UP] ignoring variable in as it has address taken, results will be incomplete 
