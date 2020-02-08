@@ -1,0 +1,251 @@
+
+R Under development (unstable) (2020-02-07 r77779) -- "Unsuffered Consequences"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "rabhit"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('rabhit')
+Loading required package: ggplot2
+RAbHIT version: 0.1.4
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("createFullHaplotype")
+> ### * createFullHaplotype
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: createFullHaplotype
+> ### Title: Anchor gene haplotype inference
+> ### Aliases: createFullHaplotype
+> 
+> ### ** Examples
+> 
+> # Load example data and germlines
+> data(samples_db, HVGERM, HDGERM)
+> 
+> # Selecting a single individual
+> clip_db = samples_db[samples_db$SUBJECT=='I5', ]
+> 
+> # Infering haplotype
+> haplo_db = createFullHaplotype(clip_db,toHap_col=c('V_CALL','D_CALL'),
++ hapBy_col='J_CALL',hapBy='IGHJ6',toHap_GERM=c(HVGERM,HDGERM))
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("deletionHeatmap")
+> ### * deletionHeatmap
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: deletionHeatmap
+> ### Title: Graphical output of single chromosome deletions
+> ### Aliases: deletionHeatmap
+> 
+> ### ** Examples
+> 
+> # Plotting single choromosme deletion from haplotype inference
+> deletionHeatmap(samplesHaplotype)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("deletionsByBinom")
+> ### * deletionsByBinom
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: deletionsByBinom
+> ### Title: Double chromosome deletion by relative gene usage
+> ### Aliases: deletionsByBinom
+> 
+> ### ** Examples
+> 
+> # Load example data and germlines
+> data(samples_db)
+> 
+> # Selecting a single individual
+> clip_db = samples_db[samples_db$SUBJECT=='I5', ]
+> # Infering haplotype
+> del_binom_df = deletionsByBinom(clip_db)
+> head(del_binom_df)
+# A tibble: 6 x 6
+  SUBJECT GENE         FRAC  CUTOFF     PVAL DELETION   
+  <chr>   <fct>       <dbl>   <dbl>    <dbl> <fct>      
+1 I5      IGHV3-74  0.00879 0.00471 1.00e+ 0 No Deletion
+2 I5      IGHV3-73  0.00623 0.00198 1.00e+ 0 No Deletion
+3 I5      IGHV3-72  0.00172 0.00101 1.00e+ 0 No Deletion
+4 I5      IGHV2-70  0.00789 0.00106 1.00e+ 0 No Deletion
+5 I5      IGHV2-70D 0       0.00106 3.33e-25 Deletion   
+6 I5      IGHV1-69  0.0601  0.0198  1.00e+ 0 No Deletion
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("deletionsByVpooled")
+> ### * deletionsByVpooled
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: deletionsByVpooled
+> ### Title: Single chromosomal D or J gene deletions inferred by the V
+> ###   pooled method
+> ### Aliases: deletionsByVpooled
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("hapDendo")
+> ### * hapDendo
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: hapDendo
+> ### Title: Hierarchical clustering of haplotypes graphical output
+> ### Aliases: hapDendo
+> 
+> ### ** Examples
+> 
+> # Plotting haplotype hierarchical clustering based on the Jaccard distance
+> hapDendo(samplesHaplotype)
+ [1] 1.00 1.00 1.00 1.00 1.00 0.50 0.50 0.50 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+[16] 1.00 1.00 1.00 1.00 1.00 1.00 0.00 1.00 1.00 0.50 0.50 1.00 1.00  NaN 0.00
+[31] 1.00 0.75 1.00 0.50 1.00 0.50 1.00 1.00 0.50 0.50 1.00 0.50 1.00 1.00 0.25
+[46] 0.00 0.50 1.00 0.50 0.50 0.00 0.50 1.00 0.50 1.00 0.50 1.00 1.00 1.00 0.50
+[61] 1.00 0.50 0.00 0.50 1.00 0.50 1.00 0.50 1.00  NaN 0.50 0.75 1.00 0.50
+ [1] 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+[16] 1.00 1.00 1.00 1.00 1.00 1.00 0.00 1.00 1.00 0.50 0.00 1.00 0.50  NaN 0.50
+[31] 0.50 0.25 0.00 0.00 1.00 0.50 0.50 0.00 0.00 0.00 1.00 0.50 1.00 1.00 0.50
+[46] 0.50 0.50 1.00 0.50 0.00 0.00 0.50 1.00 0.00 0.50 0.00 1.00 0.50 1.00 0.00
+[61] 1.00 0.50 0.50 0.50 1.00 0.50 1.00 0.50 1.00  NaN 0.00 0.00 1.00 0.00
+ [1] 1.00 1.00 1.00 1.00 1.00 0.50 0.50 0.50 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+[16] 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 0.00 1.00 0.50  NaN 0.50
+[31] 1.00 0.25 0.00 0.50 1.00 0.00 0.50 0.00 0.50 0.50 1.00 1.00 1.00 1.00 0.75
+[46] 0.50 1.00 1.00 1.00 0.50 0.50 0.00 1.00 0.50 0.50 0.50 1.00 0.50 1.00 0.00
+[61] 1.00 1.00 0.50 1.00 1.00 1.00 1.00 0.00 1.00 0.50 0.50 0.25 1.00 0.50
+ [1] 1.00 1.00 1.00 0.50 1.00 1.00 0.50 0.75 1.00 1.00 1.00 0.50 1.00 0.50 1.00
+[16] 1.00 1.00 1.00 1.00 1.00 1.00 0.00 0.50 1.00 0.50 0.50 1.00 0.50  NaN 0.00
+[31] 0.75 0.00 0.00 0.50 1.00 0.00 0.00 0.00 0.00 0.00 1.00 1.00 1.00 0.50 0.50
+[46] 1.00 0.50 1.00 0.50 0.50 0.00 0.50 0.50 0.00 0.00 0.00 1.00 0.00 1.00 0.50
+[61] 1.00 0.50 0.50 0.50 1.00 0.50 1.00 1.00 0.75  NaN 0.00 0.75 1.00 0.50
+ [1] 1.00 1.00 1.00 0.50 1.00 0.50 0.00 0.25 1.00 1.00 1.00 0.50 1.00 0.50 1.00
+[16] 1.00 1.00 1.00 1.00 1.00 1.00 1.00 0.50 1.00 1.00 0.50 1.00 0.50  NaN 1.00
+[31] 0.50 0.00 0.00 0.00 1.00 0.50 0.00 0.00 0.00 0.00 1.00 1.00 1.00 0.50 0.75
+[46] 0.00 1.00 1.00 1.00 1.00 1.00 0.50 0.50 0.00 0.00 0.50 1.00 0.00 1.00 0.00
+[61] 1.00 0.00 0.00 1.00 1.00 1.00 1.00 0.50 0.75 1.00 0.00 1.00 1.00 1.00
+ [1] 1.00 1.00 1.00 0.50 1.00 1.00 0.50 0.75 1.00 1.00 1.00 0.50 1.00 0.50 1.00
+[16] 1.00 1.00 1.00 1.00 1.00 1.00 1.00 0.50 1.00 1.00 0.50 1.00 1.00  NaN 0.50
+[31] 0.25 0.00 1.00 0.50 1.00 0.00 0.50 1.00 0.50 0.50 1.00 1.00 1.00 0.50 1.00
+[46] 0.50 1.00 1.00 1.00 0.50 0.50 0.00 0.50 0.00 0.50 1.00 1.00 0.50 1.00 0.50
+[61] 1.00 0.00 0.50 1.00 1.00 1.00 1.00 0.50 0.75 0.00 0.50 0.25 1.00 0.50
+ [1] 1.0000000 1.0000000 1.0000000 0.5000000 1.0000000 0.5000000 1.0000000
+ [8] 0.2500000 1.0000000 1.0000000 1.0000000 0.5000000 1.0000000 1.0000000
+[15] 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000
+[22] 0.0000000 0.5000000 1.0000000 0.5000000 0.5000000 1.0000000 1.0000000
+[29]       NaN 0.5000000 0.5000000 0.2500000 0.0000000 1.0000000 1.0000000
+[36] 0.5000000 0.5000000 0.0000000 0.5000000 0.5000000 1.0000000 0.0000000
+[43] 1.0000000 1.0000000 0.6666667 0.5000000 1.0000000 1.0000000 0.5000000
+[50] 0.5000000 0.0000000 0.5000000 0.0000000 0.0000000 0.5000000 0.5000000
+[57] 1.0000000 0.5000000 1.0000000 1.0000000 1.0000000 1.0000000 0.5000000
+[64] 1.0000000 1.0000000 0.5000000 1.0000000 0.5000000 0.7500000       NaN
+[71] 0.5000000 0.7500000 1.0000000 0.5000000
+ [1] 1.00 1.00 1.00 0.50 1.00 1.00 0.50 0.75 1.00 1.00 1.00 0.50 1.00 1.00 1.00
+[16] 1.00 1.00 1.00 1.00 1.00 1.00 1.00 0.50 1.00 1.00 1.00 1.00 1.00  NaN 0.50
+[31] 0.00 0.25 0.00 0.50 1.00 1.00 0.50 0.00 0.50 0.50 1.00 0.50 1.00 1.00 0.50
+[46] 0.50 0.50 1.00 1.00 1.00 1.00 0.50 0.00 0.00 0.50 0.50 1.00 0.50 1.00 0.50
+[61] 1.00 0.50 0.50 0.50 1.00 1.00 1.00 1.00 0.75 0.50 0.50 1.00 1.00 1.00
+ [1] 1.00 1.00 1.00 0.50 1.00 0.50 1.00 0.25 1.00 1.00 1.00 0.50 1.00 1.00 1.00
+[16] 1.00 1.00 1.00 1.00 1.00 1.00 1.00 0.50 1.00 1.00 0.00 1.00 0.50  NaN 1.00
+[31] 0.00 0.50 1.00 0.00 1.00 0.00 0.50 1.00 0.00 0.00 1.00 0.50 1.00 1.00 0.75
+[46] 1.00 0.50 1.00 1.00 0.50 0.50 0.00 0.00 0.50 1.00 0.00 1.00 1.00 1.00 0.00
+[61] 1.00 0.50 1.00 0.50 1.00 1.00 1.00 0.00 0.75 0.00 0.00 0.25 1.00 0.50
+ [1] 1.00 1.00 1.00 1.00 1.00 0.50 0.50 0.50 1.00 1.00 1.00 1.00 1.00 0.50 1.00
+[16] 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 0.50 1.00 0.50  NaN 0.50
+[31] 0.75 0.25 1.00 0.50 1.00 0.50 0.00 1.00 0.50 0.50 1.00 0.00 1.00 0.50 0.75
+[46] 0.50 0.50 1.00 1.00 1.00 1.00 1.00 0.50 1.00 0.50 0.00 1.00 0.50 1.00 0.50
+[61] 1.00 0.50 0.50 0.50 1.00 1.00 1.00 0.50 1.00 1.00 0.50 1.00 1.00 1.00
+ [1] 1.0000000 1.0000000 1.0000000 0.5000000 1.0000000 0.5000000 1.0000000
+ [8] 0.2500000 1.0000000 1.0000000 1.0000000 0.5000000 1.0000000 1.0000000
+[15] 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000
+[22] 0.0000000 0.5000000 1.0000000 1.0000000 0.5000000 1.0000000 1.0000000
+[29]       NaN 0.5000000 1.0000000 0.2500000 0.0000000 1.0000000 1.0000000
+[36] 0.5000000 0.5000000 0.0000000 0.5000000 0.5000000 1.0000000 0.0000000
+[43] 1.0000000 1.0000000 0.6666667 0.5000000 1.0000000 1.0000000 0.5000000
+[50] 0.5000000 1.0000000 0.5000000 0.0000000       NaN 0.5000000 0.5000000
+[57] 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 0.5000000
+[64] 1.0000000 1.0000000 0.5000000 1.0000000 0.5000000       NaN       NaN
+[71] 1.0000000 1.0000000 1.0000000 0.5000000
+ [1] 1.00 1.00 1.00 0.50 1.00 1.00 0.50 0.75 1.00 1.00 1.00 0.50 1.00 1.00 1.00
+[16] 1.00 1.00 1.00 1.00 1.00 1.00 1.00 0.50 1.00 1.00 1.00 1.00 1.00  NaN 0.50
+[31] 1.00 0.50 0.00 0.50 1.00 1.00 0.50 0.00 0.50 0.50 1.00 0.50 1.00 1.00 0.50
+[46] 0.50 0.50 1.00 1.00 1.00 1.00 0.50 0.00  NaN 0.50 0.75 1.00 1.00 1.00 0.50
+[61] 1.00 0.50 0.50 0.50 1.00 1.00 1.00 1.00  NaN  NaN 0.50 1.50 1.00 1.00
+ [1] 1.00 1.00 1.00 0.50 1.00 0.50 1.00 0.25 1.00 1.00 1.00 0.50 1.00 1.00 1.00
+[16] 1.00 1.00 1.00 1.00 1.00 1.00 1.00 0.50 1.00 1.00 0.00 1.00 0.50  NaN 1.00
+[31] 1.00 1.00 1.00 0.00 1.00 0.00 1.00 1.00 0.00 0.00 1.00 0.50 1.00 1.00 0.75
+[46] 1.00 0.50 1.00 1.00 0.50 1.00 0.50 0.00  NaN 1.00 0.25 1.00 1.00 1.00 0.00
+[61] 1.00 0.50 1.00 0.50 1.00 1.00 1.00 0.00  NaN  NaN 0.00 1.00 1.00 0.50
+ [1] 1.00 1.00 1.00 1.00 1.00 0.50 0.50 0.50 1.00 1.00 1.00 1.00 1.00 0.50 1.00
+[16] 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 0.50 1.00 0.50  NaN 0.50
+[31] 1.50 0.50 1.00 0.50 1.00 0.50 0.50 1.00 0.50 0.50 1.00 0.00 1.00 2.00 0.75
+[46] 0.50 0.50 1.00 1.00 1.00 1.00 1.00 0.50  NaN 0.50 0.25 1.00 1.00 1.00 0.50
+[61] 1.00 0.50 0.50 0.50 1.00 1.00 1.00 0.50  NaN  NaN 0.50 1.50 1.00 1.00
+ [1] 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+[16] 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+[31] 1.00 0.75 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 0.50 1.00 1.00 1.00
+[46] 1.00 1.00 1.00 1.00 1.00 1.00 1.00 0.50  NaN 1.00 0.75 1.00 1.00 1.00 1.00
+[61] 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00  NaN  NaN 1.00 1.50 1.00 1.00
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("hapHeatmap")
+> ### * hapHeatmap
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: hapHeatmap
+> ### Title: Graphical output of alleles division by chromosome
+> ### Aliases: hapHeatmap
+> 
+> ### ** Examples
+> 
+> # Plotting haplotpe heatmap
+> p <- hapHeatmap(samplesHaplotype)
+ERROR: modification of compiler constant of type character, length 3
+ERROR: the modified value of the constant is:
+[1] "Unk" "Del" "NR" 
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "Unk" "Del" "NR" 
+ERROR: the modified constant is at index 1
+ERROR: the modified constant is in this function body:
+c("Unk", "Del", "NR")
+Fatal error: compiler constants were modified!
+
