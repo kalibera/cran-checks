@@ -1,10 +1,10 @@
-* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/TeXCheckR.Rcheck’
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/reproducible.Rcheck’
 * using R Under development (unstable) (2020-02-08 r77782)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* checking for file ‘TeXCheckR/DESCRIPTION’ ... OK
+* checking for file ‘reproducible/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘TeXCheckR’ version ‘0.6.0’
+* this is package ‘reproducible’ version ‘0.2.11’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -14,8 +14,9 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘TeXCheckR’ can be installed ... OK
+* checking whether package ‘reproducible’ can be installed ... OK
 * checking package directory ... OK
+* checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
 * checking for left-over files ... OK
@@ -39,34 +40,45 @@
 * checking Rd cross-references ... OK
 * checking for missing documentation entries ... OK
 * checking for code/documentation mismatches ... OK
-* checking Rd \usage sections ... OK
+* checking Rd \usage sections ... WARNING
+Documented arguments not in \usage in documentation object 'extractFromArchive':
+  ‘...’
+
+Functions with \usage entries need to have the appropriate \alias
+entries, and all their arguments documented.
+The \usage entries must correspond to syntactically valid R code.
+See chapter ‘Writing R documentation files’ in the ‘Writing R
+Extensions’ manual.
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
-* checking contents of ‘data’ directory ... OK
-* checking data for non-ASCII characters ... OK
-* checking data for ASCII and uncompressed saves ... OK
-* checking R/sysdata.rda ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
 * checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
+  Running ‘test-all.R’
+Running the tests in ‘tests/test-all.R’ failed.
 Last 13 lines of output:
-  > library(TeXCheckR)
-  > 
-  > test_check("TeXCheckR")
-  ✖ 4: \chapter{A chapter with wrong prefix}\label{sec:should-be-chap:}✖ 4: \chapter{A chapter without a label}ERROR: modification of compiler constant of type character, length 7
-  ERROR: the modified value of the constant is:
-  [1] "."  ","  ":"  ";"  "'"  "\"" "?" 
-  attr(,".match.hash")
-  <hash table>
-  ERROR: the original value of the constant is:
-  [1] "."  ","  ":"  ";"  "'"  "\"" "?" 
-  ERROR: the modified constant is at index 1
-  ERROR: the modified constant is in this function body:
-  c(".", ",", ":", ";", "'", "\"", "?")
+          }
+          if (useCloud) {
+              cloudUploadFromCache(isInCloud, outputHash, saved, 
+                  cacheRepo, cloudFolderID, outputToSave, rasters)
+          }
+          verboseDF2(verbose, fnDetails$functionName, startSaveTime)
+          verboseDF3(verbose, fnDetails$functionName, startCacheTime)
+          if (isNullOutput) 
+              return(NULL)
+          else return(output)
+      }
+  }
+  S4 Method Cache:reproducible defined in namespace reproducible with signature ANY has this body.
   Fatal error: compiler constants were modified!
   
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘Intro-to-Cache.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 ERROR
+Status: 1 ERROR, 1 WARNING
