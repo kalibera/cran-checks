@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/rabhit.Rcheck’
-* using R Under development (unstable) (2020-02-07 r77779)
+* using R Under development (unstable) (2020-02-08 r77784)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘rabhit/DESCRIPTION’ ... OK
@@ -54,14 +54,18 @@
 Running examples in ‘rabhit-Ex.R’ failed
 The error most likely occurred in:
 
-> ### Name: hapHeatmap
-> ### Title: Graphical output of alleles division by chromosome
-> ### Aliases: hapHeatmap
+> ### Name: plotDeletionsByBinom
+> ### Title: Graphical output of double chromosome deletions
+> ### Aliases: plotDeletionsByBinom
 > 
 > ### ** Examples
 > 
-> # Plotting haplotpe heatmap
-> p <- hapHeatmap(samplesHaplotype)
+> 
+> # Load example data and germlines
+> data(samples_db)
+> 
+> # Infering haplotype
+> deletions_db = deletionsByBinom(samples_db);
 ERROR: modification of compiler constant of type character, length 3
 ERROR: the modified value of the constant is:
 [1] "Unk" "Del" "NR" 
