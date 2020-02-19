@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2020-02-17 r77820) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-02-19 r77830) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -237,6 +237,52 @@ RAbHIT version: 0.1.4
 > 
 > # Plotting haplotpe heatmap
 > p <- hapHeatmap(samplesHaplotype)
+> p$p
+> 
+> 
+> 
+> cleanEx()
+> nameEx("nonReliableVGenes")
+> ### * nonReliableVGenes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: nonReliableVGenes
+> ### Title: Detect non reliable gene assignment
+> ### Aliases: nonReliableVGenes
+> 
+> ### ** Examples
+> 
+> # Example IGHV call data frame
+> clip_db <- data.frame(SUBJECT=rep('S1',6),
++ V_CALL=c('IGHV1-69*01','IGHV1-69*01','IGHV1-69*01,IGHV1-69*02',
++ 'IGHV4-59*01,IGHV4-61*01','IGHV4-59*01,IGHV4-31*02','IGHV4-59*01'))
+> # Detect non reliable genes
+> nonReliableVGenes(clip_db)
+$S1
+[1] "IGHV4-61" "IGHV4-59" "IGHV4-31"
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plotDeletionsByBinom")
+> ### * plotDeletionsByBinom
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plotDeletionsByBinom
+> ### Title: Graphical output of double chromosome deletions
+> ### Aliases: plotDeletionsByBinom
+> 
+> ### ** Examples
+> 
+> 
+> # Load example data and germlines
+> data(samples_db)
+> 
+> # Infering haplotype
+> deletions_db = deletionsByBinom(samples_db);
 ERROR: modification of compiler constant of type character, length 3
 ERROR: the modified value of the constant is:
 [1] "Unk" "Del" "NR" 

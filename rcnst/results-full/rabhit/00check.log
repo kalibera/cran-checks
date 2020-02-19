@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/rabhit.Rcheck’
-* using R Under development (unstable) (2020-02-17 r77820)
+* using R Under development (unstable) (2020-02-19 r77830)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘rabhit/DESCRIPTION’ ... OK
@@ -32,9 +32,16 @@
 * checking loading without being on the library search path ... OK
 * checking dependencies in R code ... OK
 * checking S3 generic/method consistency ... OK
-* checking replacement functions ... OK
-* checking foreign function calls ... OK
-* checking R code for possible problems ... OK
+* checking replacement functions ... WARNING
+Fatal error: cannot create 'R_TempDir'
+The argument of a replacement function which corresponds to the right
+hand side must be named ‘value’.
+* checking foreign function calls ... NOTE
+Fatal error: cannot create 'R_TempDir'
+See chapter ‘System and foreign language interfaces’ in the ‘Writing R
+Extensions’ manual.
+* checking R code for possible problems ... NOTE
+Fatal error: cannot create 'R_TempDir'
 * checking Rd files ... OK
 * checking Rd metadata ... OK
 * checking Rd cross-references ... OK
@@ -54,14 +61,18 @@
 Running examples in ‘rabhit-Ex.R’ failed
 The error most likely occurred in:
 
-> ### Name: hapHeatmap
-> ### Title: Graphical output of alleles division by chromosome
-> ### Aliases: hapHeatmap
+> ### Name: plotDeletionsByBinom
+> ### Title: Graphical output of double chromosome deletions
+> ### Aliases: plotDeletionsByBinom
 > 
 > ### ** Examples
 > 
-> # Plotting haplotpe heatmap
-> p <- hapHeatmap(samplesHaplotype)
+> 
+> # Load example data and germlines
+> data(samples_db)
+> 
+> # Infering haplotype
+> deletions_db = deletionsByBinom(samples_db);
 ERROR: modification of compiler constant of type character, length 3
 ERROR: the modified value of the constant is:
 [1] "Unk" "Del" "NR" 
@@ -106,6 +117,13 @@ SUMMARY: processing the following file failed:
 Error: Vignette re-building failed.
 Execution halted
 
-* checking PDF version of manual ... OK
+* checking PDF version of manual ... WARNING
+LaTeX errors when creating PDF version.
+This typically indicates Rd problems.
+LaTeX errors found:
+!pdfTeX error: pdflatex: fflush() failed (No space left on device)
+ ==> Fatal error occurred, no output PDF file produced!
+* checking PDF version of manual without hyperrefs or index ... ERROR
+Re-running with no redirection of stdout/stderr.
 * DONE
-Status: 1 ERROR, 1 WARNING
+Status: 2 ERRORs, 3 WARNINGs, 2 NOTEs
