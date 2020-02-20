@@ -1,53 +1,114 @@
-Package rpf version 0.62
-Package built using 77519/R 4.0.0; x86_64-pc-linux-gnu; 2019-12-05 07:04:25 UTC; unix   
+Package rpf version 1.0.2
+Package built using 77832/R 4.0.0; x86_64-pc-linux-gnu; 2020-02-20 00:21:47 UTC; unix   
 Checked with rchk version 490627e4fb8e93244230dbbd61455730aa43c328
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
 
-Function MxRList::add(char const*, SEXPREC*)
-  [PB] has possible protection stack imbalance rpf/src/./rpf.h:76
+Function CaiHansen2012_cpp(SEXPREC*, Rcpp::Vector<16, Rcpp::PreserveStorage> const&, bool)
+  [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function MxRList::asR()
-  [PB] has possible protection stack imbalance rpf/src/glue.cpp:18
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
 
-Function ProtectAutoBalanceDoodad::~ProtectAutoBalanceDoodad()
-  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete rpf/src/./rpf.h:64
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete rpf/src/./rpf.h:64
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
 
-Function collapse_wrapper(SEXPREC*, SEXPREC*, SEXPREC*)
-  [PB] has possible protection stack imbalance rpf/src/diagnose.cpp:716
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
 
-Function eap_wrapper(SEXPREC*)
-  [PB] has possible protection stack imbalance rpf/src/eap.cpp:144
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
-Function fast_tableWithWeights(SEXPREC*, SEXPREC*, SEXPREC*)
-  [PB] has possible protection stack imbalance rpf/src/diagnose.cpp:776
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function ifaGroup::import(SEXPREC*, bool)
-  [PB] has too high protection stack depth results will be incomplete
-  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
-  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
-  [PB] has possible protection stack imbalance rpf/src/ba81quad.cpp:499
+Function _rpf_CaiHansen2012_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function ifaGroup::importSpec(SEXPREC*)
-  [PB] has too high protection stack depth results will be incomplete
-  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
-  [PB] has possible protection stack imbalance rpf/src/ba81quad.cpp:260
+Function _rpf_collapse
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function ifaGroup::verifyFactorNames(SEXPREC*, char const*)
-  [PB] has possible protection stack imbalance rpf/src/ba81quad.cpp:286
+Function _rpf_crosstabTest_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function itemOutcomeBySumScore(SEXPREC*, SEXPREC*, SEXPREC*)
-  [PB] has possible protection stack imbalance rpf/src/diagnose.cpp:858
+Function _rpf_dLL
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function observedSumScore(SEXPREC*, SEXPREC*)
-  [PB] has possible protection stack imbalance rpf/src/diagnose.cpp:811
+Function _rpf_dTheta
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function ot2000_wrapper(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
-  [PB] has possible protection stack imbalance rpf/src/diagnose.cpp:412
+Function _rpf_eap_wrapper
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function pairwiseExpected(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
-  [PB] has possible protection stack imbalance rpf/src/diagnose.cpp:599
+Function _rpf_fast_tableWithWeights
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function sumscoreEAP(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
-  [PB] has possible protection stack imbalance rpf/src/diagnose.cpp:488
+Function _rpf_findIdenticalRowsData
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rpf_gamma_cor
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rpf_get_model_id
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rpf_has_openmp
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rpf_itemOutcomeBySumScore_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rpf_logprob
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %19 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rpf_numParam
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rpf_numSpec
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rpf_observedSumScore_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rpf_ot2000
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rpf_pairwiseExpected_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rpf_paramInfo
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rpf_prob
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rpf_rescale
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rpf_setNumberOfCores
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rpf_ssEAP_wrapper
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function collapse(Rcpp::Matrix<14, Rcpp::PreserveStorage> const&, Rcpp::Matrix<14, Rcpp::PreserveStorage> const&, Rcpp::Vector<14, Rcpp::PreserveStorage> const&)
+  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function itemOutcomeBySumScore_cpp(SEXPREC*, Rcpp::Vector<10, Rcpp::PreserveStorage> const&, int)
+  [UP] ignoring variable <unnamed var:   %34 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function observedSumScore_cpp(SEXPREC*, Rcpp::Vector<10, Rcpp::PreserveStorage> const&)
+  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function rescale(Rcpp::Vector<14, Rcpp::PreserveStorage> const&, SEXPREC*, SEXPREC*, Rcpp::Matrix<14, Rcpp::PreserveStorage> const&)
+  [UP] ignoring variable r_param as it has address taken, results will be incomplete 
