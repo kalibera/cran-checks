@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2020-02-21 r77847) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-03-03 r77901) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -49,6 +49,19 @@ Attaching package: 'mosmafs'
 The following objects are masked from 'package:ecr':
 
     getPopulations, getStatistics
+
+── 1. Failure: multiFidelity with 2 columns (@test_customnsga2.R#232)  ─────────
+`slickEcr(...)` threw an error with unexpected message.
+Expected match: "Must be of type 'numeric', not 'factor'"
+Actual message: "Assertion on 'fidelity[[2]]' failed: Must be of type 'numeric', not 'character'."
+Backtrace:
+  1. testthat::expect_error(...)
+  6. mosmafs::slickEcr(...)
+  7. mosmafs::initEcr(...)
+  8. mosmafs:::checkFidelity(fidelity)
+  9. checkmate::assertNumeric(fidelity[[2]], any.missing = FALSE)
+ 10. checkmate::makeAssertion(x, res, .var.name, add)
+ 11. checkmate:::mstop(...)
 
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:

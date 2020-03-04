@@ -16,8 +16,21 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(testthat)
-> test_check("SpaDES.tools")
-Loading required package: SpaDES.tools
+> test_check("SpaDES.core")
+Loading required package: SpaDES.core
+Loading required package: quickPlot
+Loading required package: reproducible
+
+Attaching package: 'SpaDES.core'
+
+The following objects are masked from 'package:stats':
+
+    end, start
+
+The following object is masked from 'package:utils':
+
+    citation
+
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "includePixel" "excludePixel" "includeRing"  "excludeRing" 
@@ -806,5 +819,67 @@ ERROR: the modified constant is in this function body:
     return(landscape)
 }
 S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature RasterLayer has this body.
-Fatal error: compiler constants were modified!
 
+ *** caught segfault ***
+address (nil), cause 'unknown'
+
+Traceback:
+ 1: rgeos::gUnaryUnion(y)
+ 2: crop(sim$caribou, sim[[SpaDES.core::P(sim)$stackName]])
+ 3: crop(sim$caribou, sim[[SpaDES.core::P(sim)$stackName]])
+ 4: Move(sim)
+ 5: get(moduleCall, envir = fnEnv)(sim, cur[["eventTime"]], cur[["eventType"]])
+ 6: eval(fnCallAsExpr)
+ 7: eval(fnCallAsExpr)
+ 8: .runEvent(sim, cacheIt, debug, moduleCall, fnEnv, cur, notOlderThan,     showSimilar = showSimilar)
+ 9: doEvent(sim, debug = debug, notOlderThan = notOlderThan)
+10: withCallingHandlers({    .pkgEnv$.sim <- NULL    oldGetPaths <- getPaths()    do.call(setPaths, append(sim@paths, list(silent = TRUE)))    on.exit({        do.call(setPaths, append(list(silent = TRUE), oldGetPaths))    }, add = TRUE)    if (!is.null(sim@.xData[["._randomSeed"]])) {        message("Resetting .Random.seed of session because sim$._randomSeed is not NULL. ",             "To get a different seed, run: sim$._randomSeed <- NULL to clear it.")        assign(".Random.seed", sim@.xData$._randomSeed[[1]],             envir = .GlobalEnv)        if (!is.null(sim$._rng.kind)) {            do.call("RNGkind", as.list(sim$._rng.kind))        }        sim@.xData[["._randomSeed"]] <- NULL        sim@.xData[["._rng.kind"]] <- NULL    }    if (is.null(sim@.xData[["._startClockTime"]]))         sim@.xData[["._startClockTime"]] <- Sys.time()    if (is.null(sim@.xData[["._simRndString"]]))         sim@.xData[["._simRndString"]] <- rndstr(1, 8, characterFirst = TRUE)    .pkgEnv$searchPath <- search()    .pkgEnv[["spades.browserOnError"]] <- (interactive() & !identical(debug,         FALSE) & getOption("spades.browserOnError"))    .pkgEnv[["spades.nCompleted"]] <- getOption("spades.nCompleted")    .pkgEnv[["skipNamespacing"]] <- !getOption("spades.switchPkgNamespaces")    .pkgEnv[["spades.keepCompleted"]] <- getOption("spades.keepCompleted",         TRUE)    if (getOption("spades.memoryUseInterval", 0) > 0) {        originalPlan <- future::plan()        sim <- memoryUseSetup(sim, originalPlan)        on.exit({            sim <- memoryUseOnExit(sim, originalPlan)        }, add = TRUE)    }    sim@.xData$.timeunits <- timeunits(sim)    on.exit({        if (!.pkgEnv[["skipNamespacing"]]) .modifySearchPath(.pkgEnv$searchPath,             removeOthers = TRUE)        rm(".timeunits", envir = sim@.xData)        if (isTRUE(getOption("spades.saveSimOnExit", FALSE))) {            if (!isTRUE(.pkgEnv$.cleanEnd)) {                if (recoverMode > 0) {                  sim <- recoverModeOnExit(sim, rmo, recoverMode)                }                messageInterrupt1(recoverMode)            } else {                message(crayon::magenta("simList saved in\n",                   crayon::blue("SpaDES.core:::.pkgEnv$.sim"),                   "\nIt will be deleted at next spades() call."))            }            .pkgEnv$.sim <- sim            .pkgEnv$.cleanEnd <- NULL        }        if (!is.null(sim$._restartRList)) {            sim@simtimes[["current"]] <- sim@events[[1]]$eventTime            sim$._restartRList$.spadesCall <- match.call()            restartFormals <- formals(restartR)            end(sim) <- sim$._restartRList$endOrig            restartR(sim = sim, reloadPkgs = getOption("spades.restartR.reloadPkgs",                 restartFormals$reloadPkgs), .First = getOption("spades.restartR..First",                 restartFormals$.First), .RDataFile = getOption("spades.restartR.RDataFilename",                 sim$._restartRList$simFilename), restartDir = getOption("spades.restartR.restartDir",                 restartFormals$restartDir))        }    }, add = TRUE)    if (!is.null(.plotInitialTime)) {        if (!is.numeric(.plotInitialTime))             .plotInitialTime <- as.numeric(.plotInitialTime)        paramsLocal <- sim@params        whNonHiddenModules <- !grepl(names(paramsLocal), pattern = "\\.")        paramsLocal[whNonHiddenModules] <- lapply(paramsLocal[whNonHiddenModules],             function(x) {                x$.plotInitialTime <- .plotInitialTime                x            })        sim@params <- paramsLocal    }    if (!is.null(.saveInitialTime)) {        if (!is.numeric(.saveInitialTime))             .saveInitialTime <- as.numeric(.saveInitialTime)        paramsLocal <- sim@params        whNonHiddenModules <- !grepl(names(paramsLocal), pattern = "\\.")        paramsLocal[whNonHiddenModules] <- lapply(paramsLocal[whNonHiddenModules],             function(x) {                x$.saveInitialTime <- NA_real_                x            })        sim@params <- paramsLocal    }    if (!is.na(progress)) {        tu <- sim@simtimes[["timeunit"]]        if (isTRUE(progress)) {            progress <- "graphical"        }        if (is.numeric(progress)) {            sim@params$.progress$interval <- (end(sim, tu) -                 start(sim, tu))/progress            progress <- "graphical"        }        if (!is.na(pmatch(progress, "graphical"))) {            sim@params$.progress$type <- "graphical"        }        else if (!is.na(pmatch(progress, "text"))) {            sim@params$.progress$type <- "text"        }        if (!is.na(sim@params$.progress$type) && is.na(sim@params$.progress$interval)) {            sim@params$.progress$interval <- NULL        }    }    if (!(all(unlist(lapply(debug, identical, FALSE))))) {        .pkgEnv[[".spadesDebugFirst"]] <- TRUE        .pkgEnv[[".spadesDebugWidth"]] <- c(9, 10, 9, 13)    }    sim@.xData[["._firstEventClockTime"]] <- Sys.time()    if (length(sim@completed)) {        existingCompleted <- sort(as.integer(ls(sim@completed,             sorted = FALSE)))        prevStart <- get(as.character(existingCompleted[1]),             envir = sim@completed)        prevEnd <- get(as.character(existingCompleted[length(existingCompleted)]),             envir = sim@completed)        if (start(sim, unit = attr(prevStart[["eventTime"]],             "unit")) <= prevStart[["eventTime"]] && (time(sim,             unit = attr(prevStart[["eventTime"]], "unit")) ==             start(sim, unit = attr(prevStart[["eventTime"]],                 "unit"))))             sim@completed <- new.env(parent = emptyenv())    }    recoverModeWrong <- getOption("spades.recoverMode")    if (!is.null(recoverModeWrong))         warning("Please set options('recoveryMode') with a 'y', not options('recoverMode')")    recoverMode <- getOption("spades.recoveryMode", FALSE)    if (recoverMode > 0) {        rmo <- NULL        allObjNames <- outputObjectNames(sim)        if (is.null(allObjNames))             recoverMode <- 0    }    while (sim@simtimes[["current"]] <= sim@simtimes[["end"]]) {        if (recoverMode > 0) {            rmo <- recoverModePre(sim, rmo, allObjNames, recoverMode)        }        sim <- doEvent(sim, debug = debug, notOlderThan = notOlderThan)        if (recoverMode > 0) {            rmo <- recoverModePost(sim, rmo, recoverMode)        }        if (exists("._conditionalEvents", envir = sim, inherits = FALSE)) {            condEventsToOmit <- integer()            for (condNum in seq(sim$._conditionalEvents)) {                cond <- sim$._conditionalEvents[[condNum]]                if (isTRUE(eval(cond$condition))) {                  curTime <- time(sim)                  if (curTime >= cond$minEventTime && curTime <=                     cond$maxEventTime) {                    message("  Conditional Event -- ", cond$condition,                       " is true. Scheduling for now")                    sim <- scheduleEvent(sim, eventTime = curTime,                       moduleName = cond$moduleName, eventType = cond$eventType,                       eventPriority = cond$eventPriority)                    condEventsToOmit <- c(condEventsToOmit, condNum)                  }                }            }            if (length(condEventsToOmit)) {                sim$._conditionalEvents <- sim$._conditionalEvents[-condEventsToOmit]                if (length(sim$._conditionalEvents) == 0) {                  rm("._conditionalEvents", envir = sim)                }            }        }    }    sim@simtimes[["current"]] <- sim@simtimes[["end"]]    .pkgEnv$.cleanEnd <- TRUE    return(invisible(sim))}, warning = function(w) {    if (requireNamespace("logging")) {        logging::logwarn(paste0(collapse = " ", c(names(w), w)))    }    else {        warning(w)    }}, error = function(e) {    if (requireNamespace("logging")) {        logging::logerror(e)    }    else {        stop(e)    }}, message = function(m) {    if (newDebugging) {        logging::loginfo(m$message)    }    if (useNormalMessaging) {        message(Sys.time(), " INFO::", gsub("\\n", "", m$message))    }    tryCatch(rlang::cnd_muffle(m), error = function(e) NULL)})
+11: spades(Copy(mySim), notOlderThan = Sys.time(), debug = FALSE)
+12: spades(Copy(mySim), notOlderThan = Sys.time(), debug = FALSE)
+13: withCallingHandlers(code, message = function(condition) {    out$push(condition)    maybe_restart("muffleMessage")})
+14: capture_messages({    sims <- spades(Copy(mySim), notOlderThan = Sys.time(), debug = FALSE)})
+15: "Using cached copy of init event in randomLandscapes module" %in%     capture_messages({        sims <- spades(Copy(mySim), notOlderThan = Sys.time(),             debug = FALSE)    })
+16: eval_bare(expr, quo_get_env(quo))
+17: quasi_label(enquo(object), label, arg = "object")
+18: expect_true(!"Using cached copy of init event in randomLandscapes module" %in%     capture_messages({        sims <- spades(Copy(mySim), notOlderThan = Sys.time(),             debug = FALSE)    }))
+19: eval(code, test_env)
+20: eval(code, test_env)
+21: withCallingHandlers({    eval(code, test_env)    if (!handled && !is.null(test)) {        skip_empty()    }}, expectation = handle_expectation, skip = handle_skip, warning = handle_warning,     message = handle_message, error = handle_error)
+22: doTryCatch(return(expr), name, parentenv, handler)
+23: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+24: tryCatchList(expr, names[-nh], parentenv, handlers[-nh])
+25: doTryCatch(return(expr), name, parentenv, handler)
+26: tryCatchOne(tryCatchList(expr, names[-nh], parentenv, handlers[-nh]),     names[nh], parentenv, handlers[[nh]])
+27: tryCatchList(expr, classes, parentenv, handlers)
+28: tryCatch(withCallingHandlers({    eval(code, test_env)    if (!handled && !is.null(test)) {        skip_empty()    }}, expectation = handle_expectation, skip = handle_skip, warning = handle_warning,     message = handle_message, error = handle_error), error = handle_fatal,     skip = function(e) {    })
+29: test_code(desc, code, env = parent.frame())
+30: test_that("test event-level cache", {    testInitOut <- testInit(smcc = FALSE)    on.exit({        testOnExit(testInitOut)    }, add = TRUE)    mySim <- simInit(times = list(start = 0, end = 1, timeunit = "year"),         params = list(.globals = list(stackName = "landscape",             burnStats = "nPixelsBurned"), fireSpread = list(.plotInitialTime = NA),             caribouMovement = list(.plotInitialTime = NA), randomLandscapes = list(.plotInitialTime = NA,                 .useCache = "init", .showSimilar = TRUE)), modules = list("randomLandscapes",             "fireSpread", "caribouMovement"), paths = list(modulePath = system.file("sampleModules",             package = "SpaDES.core"), outputPath = tmpdir, cachePath = tmpdir),         outputs = data.frame(objectName = c("landscape", "caribou"),             stringsAsFactors = FALSE))    set.seed(1123)    expect_true(!"Using cached copy of init event in randomLandscapes module" %in%         capture_messages({            sims <- spades(Copy(mySim), notOlderThan = Sys.time(),                 debug = FALSE)        }))    landscapeMaps1 <- raster::dropLayer(sims$landscape, "Fires")    fireMap1 <- sims$landscape$Fires    mess1 <- capture_messages({        sims <- spades(Copy(mySim), debug = FALSE)    })    expect_true(any(grepl(pattern = "Using cached copy of init event in randomLandscapes module",         mess1)))    landscapeMaps2 <- raster::dropLayer(sims$landscape, "Fires")    fireMap2 <- sims$landscape$Fires    expect_equal(landscapeMaps1, landscapeMaps2)    expect_false(isTRUE(suppressWarnings(all.equal(fireMap1,         fireMap2))))})
+31: eval(code, test_env)
+32: eval(code, test_env)
+33: withCallingHandlers({    eval(code, test_env)    if (!handled && !is.null(test)) {        skip_empty()    }}, expectation = handle_expectation, skip = handle_skip, warning = handle_warning,     message = handle_message, error = handle_error)
+34: doTryCatch(return(expr), name, parentenv, handler)
+35: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+36: tryCatchList(expr, names[-nh], parentenv, handlers[-nh])
+37: doTryCatch(return(expr), name, parentenv, handler)
+38: tryCatchOne(tryCatchList(expr, names[-nh], parentenv, handlers[-nh]),     names[nh], parentenv, handlers[[nh]])
+39: tryCatchList(expr, classes, parentenv, handlers)
+40: tryCatch(withCallingHandlers({    eval(code, test_env)    if (!handled && !is.null(test)) {        skip_empty()    }}, expectation = handle_expectation, skip = handle_skip, warning = handle_warning,     message = handle_message, error = handle_error), error = handle_fatal,     skip = function(e) {    })
+41: test_code(NULL, exprs, env)
+42: source_file(path, new.env(parent = env), chdir = TRUE, wrap = wrap)
+43: force(code)
+44: doWithOneRestart(return(expr), restart)
+45: withOneRestart(expr, restarts[[1L]])
+46: withRestarts(testthat_abort_reporter = function() NULL, force(code))
+47: with_reporter(reporter = reporter, start_end_reporter = start_end_reporter,     {        reporter$start_file(basename(path))        lister$start_file(basename(path))        source_file(path, new.env(parent = env), chdir = TRUE,             wrap = wrap)        reporter$.end_context()        reporter$end_file()    })
+48: FUN(X[[i]], ...)
+49: lapply(paths, test_file, env = env, reporter = current_reporter,     start_end_reporter = FALSE, load_helpers = FALSE, wrap = wrap)
+50: force(code)
+51: doWithOneRestart(return(expr), restart)
+52: withOneRestart(expr, restarts[[1L]])
+53: withRestarts(testthat_abort_reporter = function() NULL, force(code))
+54: with_reporter(reporter = current_reporter, results <- lapply(paths,     test_file, env = env, reporter = current_reporter, start_end_reporter = FALSE,     load_helpers = FALSE, wrap = wrap))
+55: test_files(paths, reporter = reporter, env = env, stop_on_failure = stop_on_failure,     stop_on_warning = stop_on_warning, wrap = wrap)
+56: test_dir(path = test_path, reporter = reporter, env = env, filter = filter,     ..., stop_on_failure = stop_on_failure, stop_on_warning = stop_on_warning,     wrap = wrap)
+57: test_package_dir(package = package, test_path = test_path, filter = filter,     reporter = reporter, ..., stop_on_failure = stop_on_failure,     stop_on_warning = stop_on_warning, wrap = wrap)
+58: test_check("SpaDES.core")
+An irrecoverable exception occurred. R is aborting now ...
