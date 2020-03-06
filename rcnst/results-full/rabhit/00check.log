@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/rabhit.Rcheck’
-* using R Under development (unstable) (2020-03-04 r77906)
+* using R Under development (unstable) (2020-03-05 r77909)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘rabhit/DESCRIPTION’ ... OK
@@ -54,18 +54,14 @@
 Running examples in ‘rabhit-Ex.R’ failed
 The error most likely occurred in:
 
-> ### Name: plotDeletionsByBinom
-> ### Title: Graphical output of double chromosome deletions
-> ### Aliases: plotDeletionsByBinom
+> ### Name: hapHeatmap
+> ### Title: Graphical output of alleles division by chromosome
+> ### Aliases: hapHeatmap
 > 
 > ### ** Examples
 > 
-> 
-> # Load example data and germlines
-> data(samples_db)
-> 
-> # Infering haplotype
-> deletions_db = deletionsByBinom(samples_db);
+> # Plotting haplotpe heatmap
+> p <- hapHeatmap(samplesHaplotype)
 ERROR: modification of compiler constant of type character, length 3
 ERROR: the modified value of the constant is:
 [1] "Unk" "Del" "NR" 
@@ -76,8 +72,8 @@ ERROR: the original value of the constant is:
 ERROR: the modified constant is at index 1
 ERROR: the modified constant is in this function body:
 c("Unk", "Del", "NR")
-Fatal error: compiler constants were modified!
-
+Error: promise already under evaluation: recursive default argument reference or earlier problems?
+Execution halted
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
@@ -88,7 +84,6 @@ Error(s) in re-building vignettes:
 --- re-building ‘RAbHIT-vignette.Rmd’ using rmarkdown
 Loading required package: ggplot2
 RAbHIT version: 0.1.4
-Warning: Ignoring unknown aesthetics: text
 ERROR: modification of compiler constant of type character, length 3
 ERROR: the modified value of the constant is:
 [1] "Unk" "Del" "NR" 
