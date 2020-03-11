@@ -1,5 +1,5 @@
-Package catnet version 1.15.6
-Package built using 77912/R 4.0.0; x86_64-pc-linux-gnu; 2020-03-06 13:32:35 UTC; unix   
+Package catnet version 1.15.7
+Package built using 77920/R 4.0.0; x86_64-pc-linux-gnu; 2020-03-10 23:54:28 UTC; unix   
 Checked with rchk version 490627e4fb8e93244230dbbd61455730aa43c328
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
@@ -32,6 +32,9 @@ Function RCatnet::genRcatnet(char const*)
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete catnet/src/rcatnet.cpp:314
   [PB] has possible protection stack imbalance catnet/src/rcatnet.cpp:316
 
+Function RCatnet::genSamples(SEXPREC*, SEXPREC*, SEXPREC*)
+  [PB] has possible protection stack imbalance catnet/src/rcatnet.cpp:651
+
 Function RCatnetSearchHist::search(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
   [PB] has negative depth catnet/src/rcatnet_hist.cpp:528
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete catnet/src/rcatnet_hist.cpp:528
@@ -58,9 +61,6 @@ Function catnetLoglik
   [PB] has negative depth catnet/src/catnet_rexport.cpp:573
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete catnet/src/catnet_rexport.cpp:573
   [PB] has possible protection stack imbalance catnet/src/catnet_rexport.cpp:602
-
-Function catnetNodeLoglik
-  [PB] has possible protection stack imbalance catnet/src/catnet_rexport.cpp:697
 
 Function catnetSetProb
   [PB] has negative depth catnet/src/catnet_rexport.cpp:501
