@@ -1,0 +1,18 @@
+Package QCA version 3.7
+Package built using 77925/R 4.0.0; x86_64-pc-linux-gnu; 2020-03-11 12:53:37 UTC; unix   
+Checked with rchk version 490627e4fb8e93244230dbbd61455730aa43c328
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at C_Cubes QCA/src/QCA.c:1311
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at C_solveChart QCA/src/QCA.c:518
+
+
+Function C_Cubes
+  [UP] calling allocating function R_tryEval with argument allocated using Rf_lang2(S:findmin,?) QCA/src/QCA.c:1154
+  [UP] calling allocating function R_tryEval with argument allocated using Rf_lang2(S:findmin,?) QCA/src/QCA.c:1311
+
+Function C_expand
+  [UP] calling allocating function transpose with argument allocated using unique QCA/src/QCA.c:2458
+
+Function C_solveChart
+  [UP] calling allocating function Rf_getAttrib(?,V) with argument allocated using Rf_mkString QCA/src/QCA.c:543
