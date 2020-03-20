@@ -1,0 +1,4248 @@
+
+R Under development (unstable) (2020-03-19 r78011) -- "Unsuffered Consequences"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "ursa"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('ursa')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("Ops.band_group")
+> ### * Ops.band_group
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: band_group
+> ### Title: Extract certain statistics of each band.
+> ### Aliases: band_mean band_sd band_sum band_min band_max band_n band_nNA
+> ### Keywords: spatial
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- ursa_dummy()
+> print(a)
+           name    mean      sd      sum     min     max      n nNA
+[1] Thursday 19 126.092 33.5767 17172668 53.5795 217.310 136192   0
+[2] Friday 20   139.105 40.3158 18945031 49.9191 229.675 136192   0
+[3] Saturday 21 117.019 33.6998 15937043 31.4195 216.272 136192   0
+> print(a<80)
+           name mean sd   sum min max     n    nNA
+[1] Thursday 19    1  0 11835   1   1 11835 124357
+[2] Friday 20      1  0 11695   1   1 11695 124497
+[3] Saturday 21    1  0 18403   1   1 18403 117789
+> print(class(a))
+[1] "ursaRaster"
+> a[a<80]
+           name    mean       sd     sum     min     max     n    nNA
+[1] Thursday 19 68.9865  7.15268  816455 53.5795 79.9984 11835 124357
+[2] Friday 20   69.8020  7.67960  816335 49.9191 79.9980 11695 124497
+[3] Saturday 21 66.7844 10.06311 1229033 31.4195 79.9985 18403 117789
+> a[a<80] <- NA
+> b1 <- band_stat(a)
+> print(b1)
+           name     mean       sd      sum      min      max      n   nNA
+[1] Thursday 19 131.5263 29.83176 16356213 80.00113 217.3105 124357 11835
+[2]   Friday 20 145.6155 35.76229 18128697 80.00694 229.6751 124497 11695
+[3] Saturday 21 124.8674 29.00726 14708009 80.00141 216.2716 117789 18403
+> b2.n <- band_n(a)
+> str(b2.n)
+ Named int [1:3] 124357 124497 117789
+ - attr(*, "names")= chr [1:3] "Thursday 19" "Friday 20" "Saturday 21"
+> b2.mean <- band_mean(a)
+> print(b1$mean)
+[1] 131.5263 145.6155 124.8674
+> print(b2.mean)
+Thursday 19   Friday 20 Saturday 21 
+   131.5263    145.6155    124.8674 
+> print(b1$mean-b2.mean)
+Thursday 19   Friday 20 Saturday 21 
+          0           0           0 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Ops.band_stat")
+> ### * Ops.band_stat
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: band_stat
+> ### Title: Computes statistics for each band of raster.
+> ### Aliases: band_stat
+> ### Keywords: spatial
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> s <- substr(as.character(sessionInfo()),1,48)
+> a <- reclass(ursa_dummy(mul=1/2,bandname=s),ramp=FALSE)
+> band_stat(a,grid=TRUE)
+List of 13
+ $ columns   : int 152
+ $ rows      : int 224
+ $ resx      : num 50000
+ $ resy      : num 50000
+ $ minx      : num -3850000
+ $ maxx      : num 3750000
+ $ miny      : num -5350000
+ $ maxy      : num 5850000
+ $ proj4     : chr "+proj=stere +lat_0=90 +lat_ts=70.0 +lon_0=-45.0 +k=1 +x_0=0.0 +y_0=0.0 +a=6378273.000 +b=6356889.449 +units=m +no_defs"
+ $ nodata    : int 10
+ $ mode      : chr [1:2] "raw" "integer"
+ $ bandname  : chr [1:13] "list(platform = \"x86_64-pc-linux-gnu\", arch = \"x" "x86_64-pc-linux-gnu (64-bit)" "LC_CTYPE=en_US.UTF-8;LC_NUMERIC=C;LC_TIME=en_US." "Fedora 30 (MATE-Compiz)" ...
+ $ colortable: 'ursaColorTable' Named chr [1:10] NA NA NA NA ...
+  ..- attr(*, "names")= chr [1:10] " 24" " 48" " 72" " 96" ...
+ - attr(*, "class")= chr "ursaMetadata"
+> b2 <- band_stat(a)
+> b3 <- band_stat(a,raw=TRUE)
+> str(b2)
+'data.frame':	13 obs. of  8 variables:
+ $ name: chr  "list(platform = \"x86_64-pc-linux-gnu\", arch = \"x" "x86_64-pc-linux-gnu (64-bit)" "LC_CTYPE=en_US.UTF-8;LC_NUMERIC=C;LC_TIME=en_US." "Fedora 30 (MATE-Compiz)" ...
+ $ mean: num  126 139 117 139 131 ...
+ $ sd  : num  34.4 41.2 34 39 41.4 ...
+ $ sum : num  4285056 4735776 3986664 4744872 4448136 ...
+ $ min : num  48 48 24 48 24 24 48 24 24 24 ...
+ $ max : num  216 240 216 216 216 240 240 240 240 216 ...
+ $ n   : int  34048 34048 34048 34048 34048 34048 34048 34048 34048 34048 ...
+ $ nNA : int  0 0 0 0 0 0 0 0 0 0 ...
+> str(b3)
+'data.frame':	13 obs. of  8 variables:
+ $ name: chr  "list(platform = \"x86_64-pc-linux-gnu\", arch = \"x" "x86_64-pc-linux-gnu (64-bit)" "LC_CTYPE=en_US.UTF-8;LC_NUMERIC=C;LC_TIME=en_US." "Fedora 30 (MATE-Compiz)" ...
+ $ mean: num  4.24 4.8 3.88 4.81 4.44 ...
+ $ sd  : num  1.44 1.72 1.42 1.62 1.72 ...
+ $ sum : num  144496 163276 132063 163655 151291 ...
+ $ min : num  1 1 0 1 0 0 1 0 0 0 ...
+ $ max : num  8 9 8 8 8 9 9 9 9 8 ...
+ $ n   : int  34048 34048 34048 34048 34048 34048 34048 34048 34048 34048 ...
+ $ nNA : int  0 0 0 0 0 0 0 0 0 0 ...
+> print(b2)
+                                                 name      mean       sd
+[01] list(platform = "x86_64-pc-linux-gnu", arch = "x 125.85338 34.44351
+[02]                     x86_64-pc-linux-gnu (64-bit) 139.09117 41.16323
+[03] LC_CTYPE=en_US.UTF-8;LC_NUMERIC=C;LC_TIME=en_US. 117.08952 33.97059
+[04]                          Fedora 30 (MATE-Compiz) 139.35832 38.97138
+[05]  c("Mersenne-Twister", "Inversion", "Rejection") 130.64309 41.35217
+[06] c("stats", "graphics", "grDevices", "utils", "da  92.36278 36.43587
+[07] list(ursa = list(Package = "ursa", Type = "Packa 132.37570 45.58330
+[08] list(compiler = list(Package = "compiler", Versi 121.47180 38.39728
+[09]                                          default 139.88134 44.35433
+[10] /var/scratch2/tomas/cran/rlibro/build/lib/libRbl 122.42975 46.35767
+[11] /var/scratch2/tomas/cran/rlibro/build/lib/libRla 131.94220 44.24579
+[12]                                             NULL 131.85691 39.20668
+[13]                                             NULL 134.32754 38.75815
+         sum min max     n nNA
+[01] 4285056  48 216 34048   0
+[02] 4735776  48 240 34048   0
+[03] 3986664  24 216 34048   0
+[04] 4744872  48 216 34048   0
+[05] 4448136  24 216 34048   0
+[06] 3144768  24 240 34048   0
+[07] 4507128  48 240 34048   0
+[08] 4135872  24 240 34048   0
+[09] 4762680  24 240 34048   0
+[10] 4168488  24 216 34048   0
+[11] 4492368  24 216 34048   0
+[12] 4489464  48 240 34048   0
+[13] 4573584  24 216 34048   0
+> print(a) ## 'print.ursaRaster' uses 'band_stat'
+                                         name mean sd     sum min max     n nNA
+[01] list(platform = "x86_64-pc-linux-gnu", …  126 34 4285056  48 216 34048   0
+[02] x86_64-pc-linux-gnu (64-bit)              139 41 4735776  48 240 34048   0
+[03] LC_CTYPE=en_US.UTF-8;LC_NUMERIC=C;LC_TI…  117 34 3986664  24 216 34048   0
+[04] Fedora 30 (MATE-Compiz)                   139 39 4744872  48 216 34048   0
+[05] c("Mersenne-Twister", "Inversion", "Rej…  131 41 4448136  24 216 34048   0
+[06] c("stats", "graphics", "grDevices", "ut…   92 36 3144768  24 240 34048   0
+[07] list(ursa = list(Package = "ursa", Type…  132 46 4507128  48 240 34048   0
+[08] list(compiler = list(Package = "compile…  121 38 4135872  24 240 34048   0
+[09] default                                   140 44 4762680  24 240 34048   0
+[10] /var/scratch2/tomas/cran/rlibro/build/l…  122 46 4168488  24 216 34048   0
+[11] /var/scratch2/tomas/cran/rlibro/build/l…  132 44 4492368  24 216 34048   0
+[12] NULL                                      132 39 4489464  48 240 34048   0
+[13] NULL                                      134 39 4573584  24 216 34048   0
+> print(a,raw=TRUE)
+                                          name mean sd    sum min max     n nNA
+[01] list(platform = "x86_64-pc-linux-gnu", a…    4  1 144496   1   8 34048   0
+[02] x86_64-pc-linux-gnu (64-bit)                 5  2 163276   1   9 34048   0
+[03] LC_CTYPE=en_US.UTF-8;LC_NUMERIC=C;LC_TIM…    4  1 132063   0   8 34048   0
+[04] Fedora 30 (MATE-Compiz)                      5  2 163655   1   8 34048   0
+[05] c("Mersenne-Twister", "Inversion", "Reje…    4  2 151291   0   8 34048   0
+[06] c("stats", "graphics", "grDevices", "uti…    3  2  96984   0   9 34048   0
+[07] list(ursa = list(Package = "ursa", Type …    5  2 153749   1   9 34048   0
+[08] list(compiler = list(Package = "compiler…    4  2 138280   0   9 34048   0
+[09] default                                      5  2 164397   0   9 34048   0
+[10] /var/scratch2/tomas/cran/rlibro/build/li…    4  2 139639   0   8 34048   0
+[11] /var/scratch2/tomas/cran/rlibro/build/li…    4  2 153134   0   8 34048   0
+[12] NULL                                         4  2 153013   1   9 34048   0
+[13] NULL                                         5  2 156518   0   8 34048   0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Ops.focal_extrem")
+> ### * Ops.focal_extrem
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: focal_extrem
+> ### Title: Extremal spatial filter for image
+> ### Aliases: focal_extrem focal_min focal_max
+> ### Keywords: spatial
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- ursa_dummy(nband=2,mul=1/8,elements=32)
+> a[a<80] <- NA
+> b.min <- focal_extrem(a,"min",size=4,cover=0.5,verbose=1L)
+*** : start:focalExtrem: 6.01(6.01) seconds ***
+focalExtrem: r=56 c=38 b=2 size=5 shift=2 fillNA=0 bg=232.6
+*** : finish:focalExtrem: 6.01(0.00) seconds ***
+> b.max <- focal_extrem(a,"max",size=4,cover=0.5,verbose=1L)
+*** : start:focalExtrem: 6.01(0.00) seconds ***
+focalExtrem: r=56 c=38 b=2 size=5 shift=2 fillNA=0 bg=232.6
+*** : finish:focalExtrem: 6.01(0.00) seconds ***
+> print(list(src=a,min=b.min,max=b.max,dif=b.max-b.min))
+$src
+           name    mean      sd    sum     min     max    n nNA
+[1] Thursday 19 137.362 33.7939 256730 80.1804 231.552 1869 259
+[2] Friday 20   136.122 34.3693 238758 80.0203 230.770 1754 374
+
+$min
+           name    mean      sd    sum     min     max    n nNA
+[1] Thursday 19 88.0369 9.73851 183733 80.1804 159.933 2087  41
+[2] Friday 20   87.9616 8.41038 179178 80.0203 162.096 2037  91
+
+$max
+           name    mean      sd    sum     min     max    n nNA
+[1] Thursday 19 190.775 19.0801 398148 118.719 231.552 2087  41
+[2] Friday 20   189.143 21.8129 385285 107.362 230.770 2037  91
+
+$dif
+           name    mean      sd    sum     min     max    n nNA
+[1] Thursday 19 102.738 19.4160 214415 34.9144 150.084 2087  41
+[2] Friday 20   101.182 20.8953 206107 17.8878 148.095 2037  91
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Ops.focal_mean")
+> ### * Ops.focal_mean
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: focal_mean
+> ### Title: Low-pass spatial filter for image.
+> ### Aliases: focal_mean
+> ### Keywords: spatial
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- ursa_dummy(nband=1,mul=1/8,elements=0)
+> a[a<80] <- NA
+> print(a)
+           name    mean      sd    sum     min     max    n nNA
+[1] Thursday 19 166.863 51.8148 241451 80.1129 254.982 1447 681
+> b1 <- focal_mean(a,size=6,cover=0.5,saveMargin=FALSE)
+> b2 <- focal_mean(a,size=6,cover=0.5,saveMargin=TRUE)
+> b3 <- focal_mean(a,size=6,cover=0.5,saveMargin=TRUE,fillNA=TRUE)
+> print(b3-a)
+           name mean sd sum min max    n nNA
+[1] Thursday 19    0  0   0   0   0 1439 689
+> display(c(a,b1,b2,b3),blank.angle=c(-45,45),blank.density=20)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa01_5912.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Ops.focal_median")
+> ### * Ops.focal_median
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: focal_median
+> ### Title: Median spatial filter for image
+> ### Aliases: focal_median
+> ### Keywords: spatial
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- ursa_dummy(1,mul=1/8,elements=0,bandname="src")
+> a[a<80] <- NA
+> bF <- c(fillNA.F=focal_median(a[1],size=5,cover=0.5,fillNA=FALSE))
+> bT <- c(fillNA.T=focal_median(a[1],size=5,cover=0.5,fillNA=TRUE))
+> print(c(diff=bT-bF))
+    name mean sd sum min max    n nNA
+[1] diff    0  0   0   0   0 1413 715
+> d <- c(a,bF,bT)
+> print(d)
+        name    mean      sd    sum     min     max    n nNA
+[1] src      166.863 51.8148 241451 80.1129 254.982 1447 681
+[2] fillNA.F 167.007 20.8334 235981 98.2269 231.009 1413 715
+[3] fillNA.T 167.129 21.5576 344787 97.5686 237.866 2063  65
+> display(d)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa03_98db.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Ops.focal_special")
+> ### * Ops.focal_special
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: focal_special
+> ### Title: Custom spatial filtering for image
+> ### Aliases: focal_special
+> ### Keywords: spatial
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> v <- round(runif(8,min=-1,max=1),3)
+> customFilter <- matrix(c(v[1:4],-sum(v),v[5:8]),ncol=3)
+> a <- ursa_dummy(1,mul=4/8,elements=32)
+> tpList <- eval(formals("focal_special")$type)
+> res <- c(src=a,as.ursa(bandname=tpList))
+> for (tp in tpList) {
++    message(tp)
++    res[tp] <- focal_special(a,tp,fmask=customFilter,size=11,sigma=1,alpha=0.8
++                            ,saveMargin=0,verbose=2L)
++ }
+custom
+focalCommon: r=224 c=152 b=1 size=3 shift=1 fillZ=0 margin=0 cover=1.00 edge=1(1.7e-16) bg=238.4
+ -0.469 -0.256  0.146
+  0.816 -1.648 -0.597
+  0.797  0.889  0.322
+0...10...20...30...40...50...60...70...80...90...100 Done!
+gaussian
+focalCommon: r=224 c=152 b=1 size=11 shift=5 fillZ=0 margin=0 cover=1.00 edge=0(6.3) bg=238.4
+  0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000
+  0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000
+  0.000  0.000  0.000  0.002  0.007  0.011  0.007  0.002  0.000  0.000  0.000
+  0.000  0.000  0.002  0.018  0.082  0.135  0.082  0.018  0.002  0.000  0.000
+  0.000  0.000  0.007  0.082  0.368  0.607  0.368  0.082  0.007  0.000  0.000
+  0.000  0.000  0.011  0.135  0.607  1.000  0.607  0.135  0.011  0.000  0.000
+  0.000  0.000  0.007  0.082  0.368  0.607  0.368  0.082  0.007  0.000  0.000
+  0.000  0.000  0.002  0.018  0.082  0.135  0.082  0.018  0.002  0.000  0.000
+  0.000  0.000  0.000  0.002  0.007  0.011  0.007  0.002  0.000  0.000  0.000
+  0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000
+  0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000
+0...10...20...30...40...50...60...70...80...90...100 Done!
+laplacian
+focalCommon: r=224 c=152 b=1 size=3 shift=1 fillZ=0 margin=0 cover=1.00 edge=1(0) bg=238.4
+  0.200  0.050  0.200
+  0.050 -1.000  0.050
+  0.200  0.050  0.200
+0...10...20...30...40...50...60...70...80...90...100 Done!
+osisaf
+focalCommon: r=224 c=152 b=1 size=5 shift=2 fillZ=0 margin=0 cover=1.00 edge=1(0) bg=238.4
+ -0.062 -0.062 -0.062 -0.062 -0.062
+ -0.062  0.125  0.125  0.125 -0.062
+ -0.062  0.125  0.000  0.125 -0.062
+ -0.062  0.125  0.125  0.125 -0.062
+ -0.062 -0.062 -0.062 -0.062 -0.062
+0...10...20...30...40...50...60...70...80...90...100 Done!
+hires
+focalCommon: r=224 c=152 b=1 size=3 shift=1 fillZ=0 margin=0 cover=1.00 edge=0(1) bg=238.4
+ -0.800 -0.200 -0.800
+ -0.200  5.000 -0.200
+ -0.800 -0.200 -0.800
+0...10...20...30...40...50...60...70...80...90...100 Done!
+correl
+focalCommon: r=224 c=152 b=1 size=3 shift=1 fillZ=0 margin=0 cover=1.00 edge=1(0.0016) bg=238.4
+  0.640 -1.312  0.640
+ -1.312  2.690 -1.312
+  0.640 -1.312  0.640
+0...10...20...30...40...50...60...70...80...90...100 Done!
+LoG
+focalCommon: r=224 c=152 b=1 size=11 shift=5 fillZ=0 margin=0 cover=1.00 edge=1(1.6e-05) bg=238.4
+ -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000
+ -0.000 -0.000 -0.000 -0.000 -0.002 -0.002 -0.002 -0.000 -0.000 -0.000 -0.000
+ -0.000 -0.000 -0.001 -0.008 -0.027 -0.039 -0.027 -0.008 -0.001 -0.000 -0.000
+ -0.000 -0.000 -0.008 -0.055 -0.123 -0.135 -0.123 -0.055 -0.008 -0.000 -0.000
+ -0.000 -0.002 -0.027 -0.123 -0.000  0.303 -0.000 -0.123 -0.027 -0.002 -0.000
+ -0.000 -0.002 -0.039 -0.135  0.303  1.000  0.303 -0.135 -0.039 -0.002 -0.000
+ -0.000 -0.002 -0.027 -0.123 -0.000  0.303 -0.000 -0.123 -0.027 -0.002 -0.000
+ -0.000 -0.000 -0.008 -0.055 -0.123 -0.135 -0.123 -0.055 -0.008 -0.000 -0.000
+ -0.000 -0.000 -0.001 -0.008 -0.027 -0.039 -0.027 -0.008 -0.001 -0.000 -0.000
+ -0.000 -0.000 -0.000 -0.000 -0.002 -0.002 -0.002 -0.000 -0.000 -0.000 -0.000
+ -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000
+0...10...20...30...40...50...60...70...80...90...100 Done!
+sobel
+focalSobel: r=224 c=152 b=1 size=3 shift=1 cover=1.00 margin=0 bg=238.4
+sobelG
+focalSobelGradient: r=224 c=152 b=1 size=3 shift=1 cover=1.00 margin=0 bg=238.4
+> print(res)
+          name        mean       sd        sum         min      max     n  nNA
+[01] src       128.4136884 39.47331 4372229.26  17.3932951 237.4091 34048    0
+[02] custom      0.0634874 21.28972    2114.13 -67.3606790  65.1598 33300  748
+[03] gaussian  129.1455730 37.74211 3924475.67  21.4026531 227.6454 30388 3660
+[04] laplacian  -0.0037070  1.79985    -123.44  -5.3197870   5.3746 33300  748
+[05] osisaf      0.0138705  3.60622     451.62 -10.4841809  10.7440 32560 1488
+[06] hires     128.5987405 44.74718 4282338.06   7.8094807 243.3001 33300  748
+[07] correl      0.2059635  0.25542    6858.59  -0.6488381   1.0215 33300  748
+[08] LoG         0.0678114 11.36636    2060.65 -32.7826507  33.9384 30388 3660
+[09] sobel       1.1576120  0.66847   38548.48   0.0067754   5.7263 33300  748
+[10] sobelG     -0.0071145  0.89076    -236.91  -1.5707460   1.5707 33300  748
+> display(res,decor=FALSE)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa05_5c97.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Ops.global_group")
+> ### * Ops.global_group
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: global operator
+> ### Title: Extract certains statistics for whole image
+> ### Aliases: global_mean global_median global_sd global_sum global_min
+> ###   global_max global_n global_nNA global_range
+> ### Keywords: spatial
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- ursa_dummy(2,min=-40,max=80)
+> a[a<0] <- NA
+> print(a)
+           name    mean      sd     sum         min     max      n   nNA
+[1] Thursday 19 22.7461 13.5637 2727942 0.000378431 62.2638 119930 16262
+[2] Friday 20   29.3872 16.2812 3555411 0.000273548 68.0824 120985 15207
+> a.mean <- global_mean(a)
+> a.sd <- global_sd(a)
+> a.sum <- global_sum(a)
+> a.min <- global_min(a)
+> a.max <- global_max(a)
+> a.median <- global_median(a)
+> print(c(mean=a.mean,sd=a.sd,sum=a.sum,min=a.min,max=a.max,median=a.median))
+        mean           sd          sum          min          max       median 
+2.608120e+01 1.535346e+01 6.283353e+06 2.735481e-04 6.808241e+01 2.544496e+01 
+> v.max <- max(ursa_value(a),na.rm=TRUE)
+> print(c('global_max()'=a.max,'max(ursa_value())'=v.max,dif=a.max-v.max))
+     global_max() max(ursa_value())               dif 
+         68.08241          68.08241           0.00000 
+> r.max <- global_max(a,ursa=TRUE)
+> print(r.max)
+    name    mean sd     sum     min     max      n nNA
+[1]  max 68.0824  0 9272280 68.0824 68.0824 136192   0
+> b <- c(a,'appended scalar value'=a.max)
+> print(b)
+                     name   mean     sd     sum         min    max      n   nNA
+[1] Thursday 19           22.746 13.564 2727942  0.00037843 62.264 119930 16262
+[2] Friday 20             29.387 16.281 3555411  0.00027355 68.082 120985 15207
+[3] appended scalar value 68.082  0.000 9272280 68.08241341 68.082 136192     0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Ops.local_group")
+> ### * Ops.local_group
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: local_group
+> ### Title: Create single-band raster using statistics of multi-bands
+> ###   raster.
+> ### Aliases: local_mean local_sum local_median local_min local_max local_sd
+> ###   local_var local_all local_any local_length mean.ursaRaster
+> ###   median.ursaRaster .average
+> ### Keywords: spatial
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> b <- ursa_dummy(nband=7,min=0,max=100,mul=1/16)
+> b[b<40] <- NA
+> print(b)
+            name    mean       sd     sum     min     max   n nNA
+[1] Thursday 19  55.4953  9.80815 21587.7 40.0643 80.1895 389 143
+[2] Friday 20    60.6936 12.01673 25248.5 40.0269 89.1610 416 116
+[3] Saturday 21  53.9968  9.39656 17980.9 40.1878 82.7233 333 199
+[4] Sunday 22    60.6882 10.65997 25549.7 40.0856 82.0539 421 111
+[5] Monday 23    58.3364 12.49775 22692.8 40.0043 88.8258 389 143
+[6] Tuesday 24   51.4955  9.32447 10041.6 40.0739 87.3340 195 337
+[7] Wednesday 25 60.5342 13.32209 22760.9 40.0232 90.1571 376 156
+> res <- c('mean'=mean(b),'local_mean'=local_mean(b)
++         ,'sum0'=local_sum(b,cover=0),'sum1'=local_sum(b,cover=1))
+> print(res)
+          name     mean       sd       sum      min      max   n nNA
+[1] mean        57.8233  4.51968  26945.67  46.7056  67.6775 466  66
+[2] local_mean  57.8233  4.51968  26945.67  46.7056  67.6775 466  66
+[3] sum0       274.1771 65.52539 145862.20  97.1888 427.4621 532   0
+[4] sum1       399.0661 21.78524   3591.59 370.0756 427.4621   9 523
+> 
+> display(b)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa07_0dcb.png' in external software.
+> display(res)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa09_6c8f.png' in external software.
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Ops.local_stat")
+> ### * Ops.local_stat
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: local_stat
+> ### Title: Bundle of statistics, which is applied to each cell of
+> ###   multi-band image.
+> ### Aliases: local_stat
+> ### Keywords: spatial
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> set.seed(353)
+> session_grid(regrid(mul=1/8))
+> a <- ursa_dummy(nband=15)
+> a[a<60] <- NA
+> cvr <- 12
+> b <- local_stat(a,cover=cvr)
+> print(b)
+       name       mean       sd      sum              min       max    n nNA
+[01] mean     134.5937   10.414   281166  109.50945520693   162.604 2089  39
+[02] sd        36.7391    6.697    76748   17.05040817326    61.464 2089  39
+[03] sum     1914.1705  182.084  3998702 1389.31137401107  2276.177 2089  39
+[04] min       73.9065   10.911   154391   60.00726437899   117.771 2089  39
+[05] max      196.3691   16.650   410215  140.90304445865   241.780 2089  39
+[06] n         14.2212    0.799    29708   12.00000000000    15.000 2089  39
+[07] slope      0.2297    2.239      480   -5.40376193470     7.360 2089  39
+[08] slopeS     0.0516    0.547      108   -0.98782385690     0.995 2089  39
+[09] RSS    18460.5733 6991.673 38564138 4014.02257233285 49390.069 2089  39
+[10] ESS     1325.3076 1884.527  2768568    0.00000000497 13715.146 2089  39
+> c.mean <- c('<bundle> mean'=b["mean"]
++            ,'local_mean'=local_mean(a,cover=cvr)
++            ,'<generic> mean'=mean(a,cover=cvr))
+> c.max <- c('<bundle> max'=b["max"]
++           ,'local_max'=local_max(a,cover=cvr)
++           ,'<generic> max'=max(a,cover=cvr))
+> print(c.mean)
+              name    mean      sd    sum     min     max    n nNA
+[1] <bundle> mean  134.594 10.4139 281166 109.509 162.604 2089  39
+[2] local_mean     134.594 10.4139 281166 109.509 162.604 2089  39
+[3] <generic> mean 134.594 10.4139 281166 109.509 162.604 2089  39
+> print(c.max)
+             name    mean    sd    sum     min    max    n nNA
+[1] <bundle> max  196.369 16.65 410215 140.903 241.78 2089  39
+[2] local_max     196.369 16.65 410215 140.903 241.78 2089  39
+[3] <generic> max 196.369 16.65 410215 140.903 241.78 2089  39
+> cmp <- c(mean=b["mean"]-local_mean(a,cover=cvr)
++         ,sd=b["sd"]-local_sd(a,cover=cvr))
+> print(round(cmp,12))
+    name mean sd sum min max    n nNA
+[1] mean    0  0   0   0   0 2089  39
+[2] sd      0  0   0   0   0 2089  39
+> d <- as.list(b)
+> d[["slopeS"]] <- colorize(d[["slopeS"]],stretch="signif")
+> display(d,blank.density=20,blank.angle=c(-45,45))
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa11_c89f.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Ops.zonal_stat")
+> ### * Ops.zonal_stat
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: zonal_stat
+> ### Title: Zonal statistics for raster maps
+> ### Aliases: zonal_stat aggregate.ursaRaster
+> ### Keywords: spatial
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> session_grid(regrid(mul=1/2))
+> a <- pixelsize()
+> val <- c(normal=a,half=a/2)
+> gr <- c(group=colorize(a,nbreak=1))#+0
+> print(as.table(gr))
+<= 2200  > 2200 
+  15038   19010 
+> ##~ display(gr)
+> ra <- round(aggregate(val,gr,mean),4)
+> print(ra)
+      name    mean      sd      sum      min     max     n nNA
+[1] normal 2221.02 221.798 75621389 1971.651 2418.29 34048   0
+[2] half   1110.51 110.899 37810695  985.825 1209.15 34048   0
+> print(as.table(ra[1]))
+1971.6508 2418.2906 
+    15038     19010 
+> print(as.table(ra[2]))
+ 985.8254 1209.1453 
+    15038     19010 
+> da <- aggregate(val,gr,table=TRUE,mean)
+> n <- aggregate(a,gr,table=TRUE,length)[,2,drop=FALSE]
+> da <- cbind(da,n=unname(n))
+> gr2 <- c(group2=colorize(a,nbreak=6))#+0
+> mgr <- list(gr,gr2)
+> da2 <- aggregate(val[1],mgr,table=TRUE,mean)
+> print(da2)
+    group      group2   normal
+1 <= 2200     <= 1800 1725.128
+2  > 2200 (1800;1980] 1895.598
+3 <= 2200 (1980;2160] 2072.412
+4  > 2200 (2160;2340] 2252.295
+5 <= 2200 (2340;2520] 2428.705
+6  > 2200 (2520;2700] 2587.263
+> da3 <- aggregate(val,mgr,table=TRUE,mean)
+> print(da3)
+    group      group2   normal      half
+1 <= 2200     <= 1800 1725.128  862.5638
+2  > 2200 (1800;1980] 1895.598  947.7989
+3 <= 2200 (1980;2160] 2072.412 1036.2060
+4  > 2200 (2160;2340] 2252.295 1126.1477
+5 <= 2200 (2340;2520] 2428.705 1214.3525
+6  > 2200 (2520;2700] 2587.263 1293.6314
+> ra3 <- aggregate(val,mgr,table=FALSE,mean) ## not implemented for rasters
+> print(ra3)
+      name mean sd sum min max n   nNA
+[1] normal   NA NA  NA  NA  NA 0 34048
+[2] half     NA NA  NA  NA  NA 0 34048
+> 
+> 
+> 
+> cleanEx()
+> nameEx("allocate")
+> ### * allocate
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: allocate
+> ### Title: Rasterization of point data into grid cells
+> ### Aliases: allocate
+> ### Keywords: spatial
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> g1 <- session_grid(regrid(session_grid(),mul=1/10))
+> n <- 1000
+> x <- with(g1,runif(n,min=minx,max=maxx))
+> y <- with(g1,runif(n,min=miny,max=maxy))
+> z <- with(g1,runif(n,min=0,max=10))
+> da <- data.frame(x=x,y=y,value=z)
+> res <- c(mean=allocate(da,fun="mean")
++         ,mean_=NA
++         ,sum=allocate(da,fun="sum")
++         ,count=allocate(da,fun="n"))
+> res["mean_"]=res["sum"]/res["count"]
+> print(res)
+     name    mean       sd     sum        min      max   n nNA
+[1] mean  4.94134 2.658158 3557.77 0.00570522  9.97538 720 706
+[2] mean_ 4.94134 2.658158 3557.77 0.00570522  9.97538 720 706
+[3] sum   6.83583 4.696805 4921.80 0.00570522 36.62569 720 706
+[4] count 1.38889 0.651425 1000.00 1.00000000  5.00000 720 706
+> 
+> 
+> 
+> cleanEx()
+> nameEx("chunk")
+> ### * chunk
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: chunk
+> ### Title: Get indices for partial image reading/writing
+> ### Aliases: chunk_band chunk_line chunk_expand
+> ### Keywords: iteration
+> 
+> ### ** Examples
+> 
+>  ## 1. Prepare data
+>  session_grid(NULL)
+>  fname <- ursa:::.maketmp(2)
+>  a <- create_envi(fname[1],nband=3,ignorevalue=-99)
+>  for (i in seq(nband(a)))
++    a[i] <- pixelsize()^(1/i)
+>  close(a)
+>  rm(a)
+>  
+>  ## 2. Read 
+>  a <- open_envi(fname[1])
+>  chB <- chunk_band(a,2)
+>  print(str(chB))
+List of 2
+ $ band1: int [1:2] 1 2
+ $ band2: int 3
+NULL
+>  for (i in chB)
++     print(a[i])
+      name     mean       sd      sum      min      max      n nNA
+[1] Band 1 555.2542 65.49719 75621174 382.9731 663.9258 136192   0
+[2] Band 2  23.5218  1.40679  3203481  19.5697  25.7668 136192   0
+      name    mean       sd     sum   min     max      n nNA
+[3] Band 3 8.20614 0.328722 1117611 7.262 8.72382 136192   0
+>  chL <- chunk_line(a,2.5)
+>  print(str(chL))
+List of 2
+ $ line1: int [1:343] 1 2 3 4 5 6 7 8 9 10 ...
+ $ line2: int [1:105] 344 345 346 347 348 349 350 351 352 353 ...
+NULL
+>  for (j in chL)
++     print(a[,j])
+ind=0
+seek=0
+ind=544768
+seek=0
+ind=1089536
+seek=0
+      name      mean        sd      sum      min       max      n nNA
+[1] Band 1 568.19780 65.674738 59247121 382.9731 663.92584 104272   0
+[2] Band 2  23.79524  1.408648  2481177  19.5697  25.76676 104272   0
+[3] Band 3   8.26965  0.329022   862293   7.2620   8.72382 104272   0
+ind=417088
+seek=0
+ind=961856
+seek=0
+ind=1506624
+seek=0
+      name      mean        sd      sum       min       max     n nNA
+[1] Band 1 512.97159 43.344640 16374053 404.96933 603.78333 31920   0
+[2] Band 2  22.62856  0.959078   722304  20.12385  24.57200 31920   0
+[3] Band 3   7.99867  0.226256   255318   7.39845   8.45202 31920   0
+>  
+>  ## 3. Filtering with partial reading
+>  b <- create_envi(a,fname[2])
+>  fsize <- 15
+>  for (j in chL) {
++     k <- chunk_expand(j,fsize)
++     b[,j] <- focal_mean(a[,k$src],size=fsize)[,k$dst]
++  }
+ind=0
+seek=0
+ind=544768
+seek=0
+ind=1089536
+seek=0
+ind=408576
+seek=0
+ind=953344
+seek=0
+ind=1498112
+seek=0
+>  d1 <- b[]
+>  
+>  ##  4. Filtering in memory
+>  d2 <- focal_mean(a[],size=fsize)
+>  close(a,b)
+>  envi_remove(fname)
+>  print(d1-d2)
+      name          mean         sd      sum         min        max      n nNA
+[1] Band 1  0.0000002891 0.00001575  0.03937 -0.00003052 0.00003052 136192   0
+[2] Band 2 -0.0000000017 0.00000055 -0.00023 -0.00000095 0.00000095 136192   0
+[3] Band 3  0.0000000029 0.00000025  0.00040 -0.00000048 0.00000048 136192   0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classColorTable")
+> ### * classColorTable
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: colortable
+> ### Title: Color Tables of raster images.
+> ### Aliases: class-ursaColorTable ursa_colortable ursa_colortable<-
+> ###   print.ursaColorTable [.ursaColorTable names.ursaColorTable
+> ###   names<-.ursaColorTable ursa_colorindex
+> ### Keywords: classes print
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> print(methods(class="ursaColorTable"))
+[1] [       names   names<- print  
+see '?methods' for accessing help and source code
+> 
+> a <- pixelsize()
+> print(a)
+                  name    mean      sd      sum     min     max      n nNA
+[1] Pixel Size (sq.km) 555.254 65.4972 75621174 382.973 663.926 136192   0
+> b1 <- colorize(a,value=c(400,500,600,700),interval=FALSE)
+> b2 <- colorize(a,value=c(450,550,650)    ,interval=TRUE)
+> display(list(b1,b2))
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa18_7ec6.png' in external software.
+> print(is.ursa(a,"colortable"))
+[1] FALSE
+> print(is.ursa(b1,"colortable"))
+[1] TRUE
+> print(is.ursa(b2,"colortable"))
+[1] TRUE
+> print(ursa_colortable(a))
+character(0)
+> print(ursa_colortable(b1))
+        400         500         600         700 
+"#D5EFD4FF" "#DFBC9EFF" "#CF86C0FF" "#6685BDFF" 
+> print(ursa_colortable(b2))
+     <= 450   (450;550]   (550;650]       > 650 
+"#FAD7EEFF" "#A1CEE9FF" "#8CB968FF" "#C2627AFF" 
+[1] 450 550 650
+> ursa_colortable(b2) <- c("Low"="darkolivegreen1"
++                         ,"Moderate"="darkolivegreen2"
++                         ,"High"="darkolivegreen3"
++                         ,"errata"="darkolivegreen4")
+> print(ursa_colortable(b2))
+              Low          Moderate              High            errata 
+"darkolivegreen1" "darkolivegreen2" "darkolivegreen3" "darkolivegreen4" 
+> names(ursa_colortable(b2))[4] <- "Polar"
+> print(ursa_colortable(b2))
+              Low          Moderate              High             Polar 
+"darkolivegreen1" "darkolivegreen2" "darkolivegreen3" "darkolivegreen4" 
+> display(b2)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa19_203b.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classConnection")
+> ### * classConnection
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ursaConnection
+> ### Title: Connection of raster objects.
+> ### Aliases: class-ursaConnection print.ursaConnection seek.ursaConnection
+> ### Keywords: classes print
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> print(methods(class="ursaConnection"))
+[1] print seek 
+see '?methods' for accessing help and source code
+> 
+> a <- pixelsize()
+> write_envi(rep(a,5),"tmp1",compress=FALSE)
+> ## change spatial domain for cropping example
+> g <- session_grid(regrid(lim=c(-1200000,-1400000,1600000,1800000)))
+> print(g)
+List of 9
+ $ columns: int 304
+ $ rows   : int 448
+ $ resx   : num 25000
+ $ resy   : num 25000
+ $ minx   : num -3850000
+ $ maxx   : num 3750000
+ $ miny   : num -5350000
+ $ maxy   : num 5850000
+ $ proj4  : chr "+proj=stere +lat_0=90 +lat_ts=70.0 +lon_0=-45.0 +k=1 +x_0=0.0 +y_0=0.0 +a=6378273.000 +b=6356889.449 +units=m +no_defs"
+ - attr(*, "class")= chr ".ursaGrid"
+> b <- open_envi("tmp1")
+> d <- b[,30:70]
+ind=35264
+seek=0
+ind=580032
+seek=0
+ind=1124800
+seek=0
+ind=1669568
+seek=0
+ind=2214336
+seek=0
+> print(ursa(d[2:3],"con"))
+List of 26
+ $ driver    : chr "ENVI"
+ $ samples   : int 304
+ $ lines     : int 448
+ $ bands     : int 5
+ $ datatype  : int 4
+ $ interleave: chr "bsq"
+ $ byteorder : int 0
+ $ endian    : chr "little"
+ $ swap      : int 0
+ $ signed    : logi TRUE
+ $ offset    : int 0
+ $ wkt       : logi FALSE
+ $ nodata    : num -99
+ $ mode      : chr "double"
+ $ sizeof    : int 4
+ $ indexC    : int [1:304] 1 2 3 4 5 6 7 8 9 10 ...
+ $ indexR    : int [1:448] 1 2 3 4 5 6 7 8 9 10 ...
+ $ indexZ    : int [1:5] 1 2 3 4 5
+ $ posC      : int NA
+ $ posR      : int [1:41] 30 31 32 33 34 35 36 37 38 39 ...
+ $ posZ      : int [1:2] 2 3
+ $ fname     : chr "tmp1.envi"
+ $ connection: chr "file"
+ $ compress  : int 0
+ $ seek      : logi TRUE
+ $ handle    : 'file' int 3
+  ..- attr(*, "conn_id")=<externalptr> 
+ - attr(*, "class")= chr "ursaConnection"
+> close(b)
+> envi_remove("tmp1")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classGrid")
+> ### * classGrid
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ursaGrid
+> ### Title: Spatial paramaters of raster images.
+> ### Aliases: class-ursaGrid str.ursaGrid print.ursaGrid dim.ursaGrid
+> ###   as.data.frame.ursaGrid
+> ### Keywords: classes print
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> print(methods(class="ursaGrid"))
+[1] as.data.frame dim           print         seq           str          
+see '?methods' for accessing help and source code
+> 
+> a <- pixelsize()
+> g <- ursa_grid(a)
+> print(is.ursa(a,"grid"))
+[1] FALSE
+> print(is.ursa(g,"grid"))
+[1] TRUE
+> print(g)
+List of 9
+ $ columns: int 304
+ $ rows   : int 448
+ $ resx   : num 25000
+ $ resy   : num 25000
+ $ minx   : num -3850000
+ $ maxx   : num 3750000
+ $ miny   : num -5350000
+ $ maxy   : num 5850000
+ $ proj4  : chr "+proj=stere +lat_0=90 +lat_ts=70.0 +lon_0=-45.0 +k=1 +x_0=0.0 +y_0=0.0 +a=6378273.000 +b=6356889.449 +units=m +no_defs"
+ - attr(*, "class")= chr ".ursaGrid"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster.Extract")
+> ### * classRaster.Extract
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Extract
+> ### Title: Extract portion of raster images
+> ### Aliases: Extract Subset [.ursaRaster
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> ## Prepare
+> session_grid(regrid(mul=1/8))
+> a <- pixelsize()
+> w <- c("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
++       ,"MondayAgain")
+> b <- rep(a/mean(a),length(w))+seq(length(w))-1
+> bandname(b) <- w
+> nr <- ursa_rows(b)
+> bottom <- (as.integer(nr/2)):nr
+> write_envi(b,"tmp1",compress=FALSE,interleave="bil")
+> 
+> ## Extract
+> print(b["Monday",regexp=TRUE])
+           name mean sd   sum min max    n nNA
+[1] Monday         1  0  2128   1   1 2128   0
+[8] MondayAgain    8  0 17024   8   8 2128   0
+> print(b["Monday",regexp=FALSE])
+      name mean sd  sum min max    n nNA
+[1] Monday    1  0 2128   1   1 2128   0
+> print(b["s"])
+         name mean sd   sum min max    n nNA
+[2] Tuesday      2  0  4256   2   2 2128   0
+[3] Wednesday    3  0  6384   3   3 2128   0
+[4] Thursday     4  0  8512   4   4 2128   0
+[6] Saturday     6  0 12768   6   6 2128   0
+[7] Sunday       7  0 14896   7   7 2128   0
+> print(b["^s"])
+        name mean sd   sum min max    n nNA
+[6] Saturday    6  0 12768   6   6 2128   0
+[7] Sunday      7  0 14896   7   7 2128   0
+> d1 <- b[6,bottom]
+> rm(b)
+> 
+> ## Read from file
+> b <- open_envi("tmp1")
+> print(b[])
+           name mean sd   sum min max    n nNA
+[1] Monday         1  0  2128   1   1 2128   0
+[2] Tuesday        2  0  4256   2   2 2128   0
+[3] Wednesday      3  0  6384   3   3 2128   0
+[4] Thursday       4  0  8512   4   4 2128   0
+[5] Friday         5  0 10640   5   5 2128   0
+[6] Saturday       6  0 12768   6   6 2128   0
+[7] Sunday         7  0 14896   7   7 2128   0
+[8] MondayAgain    8  0 17024   8   8 2128   0
+> print(b[-c(6:8)])
+         name mean sd   sum min max    n nNA
+[1] Monday       1  0  2128   1   1 2128   0
+[2] Tuesday      2  0  4256   2   2 2128   0
+[3] Wednesday    3  0  6384   3   3 2128   0
+[4] Thursday     4  0  8512   4   4 2128   0
+[5] Friday       5  0 10640   5   5 2128   0
+> d2 <- b[,bottom][6] ## don't use b[6,bottom]
+> close(b)
+> envi_remove("tmp1")
+> 
+> ## Compare
+> print(d1)
+        name mean sd  sum min max    n nNA
+[6] Saturday    6  0 6612   6   6 1102   0
+> print(d2)
+        name mean sd  sum min max    n nNA
+[6] Saturday    6  0 6612   6   6 1102   0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster")
+> ### * classRaster
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ursaRaster
+> ### Title: Definition of 'ursaRaster' class.
+> ### Aliases: class-ursaRaster is.ursa is_ursa print.ursaRaster
+> ###   str.ursaRaster
+> ### Keywords: classes print
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> print(methods(class="ursaRaster"))
+ [1] Complex       Math          Ops           Summary       [            
+ [6] [<-           [[            aggregate     as.Raster     as.array     
+[11] as.data.frame as.integer    as.list       as.matrix     as.raster    
+[16] as.table      c             close         diff          dim          
+[21] dim<-         duplicated    head          hist          image        
+[26] is.infinite   is.na         is.na<-       is.nan        length       
+[31] mean          median        na.omit       names         names<-      
+[36] plot          print         rep           seq           str          
+[41] summary       tail         
+see '?methods' for accessing help and source code
+> 
+> a <- pixelsize()
+> print(a)
+                  name    mean      sd      sum     min     max      n nNA
+[1] Pixel Size (sq.km) 555.254 65.4972 75621174 382.973 663.926 136192   0
+> print(a,grid=TRUE)
+List of 12
+ $ columns : int 304
+ $ rows    : int 448
+ $ resx    : num 25000
+ $ resy    : num 25000
+ $ minx    : num -3850000
+ $ maxx    : num 3750000
+ $ miny    : num -5350000
+ $ maxy    : num 5850000
+ $ proj4   : chr "+proj=stere +lat_0=90 +lat_ts=70.0 +lon_0=-45.0 +k=1 +x_0=0.0 +y_0=0.0 +a=6378273.000 +b=6356889.449 +units=m +no_defs"
+ $ nodata  : num -99
+ $ mode    : chr [1:2] "raw" "double"
+ $ bandname: chr "Pixel Size (sq.km)"
+ - attr(*, "class")= chr "ursaMetadata"
+[1] "NULL"
+> s <- substr(as.character(sessionInfo()),1,48)
+> b <- rep(a,length(s))
+> bandname(b) <- s
+> print(b)
+                                       name mean sd      sum min max      n nNA
+[01] list(platform = "x86_64-pc-linux-gnu"…  555 65 75621174 383 664 136192   0
+[02] x86_64-pc-linux-gnu (64-bit)            555 65 75621174 383 664 136192   0
+[03] LC_CTYPE=en_US.UTF-8;LC_NUMERIC=C;LC_…  555 65 75621174 383 664 136192   0
+[04] Fedora 30 (MATE-Compiz)                 555 65 75621174 383 664 136192   0
+[05] c("Mersenne-Twister", "Inversion", "R…  555 65 75621174 383 664 136192   0
+[06] c("stats", "graphics", "grDevices", "…  555 65 75621174 383 664 136192   0
+[07] list(ursa = list(Package = "ursa", Ty…  555 65 75621174 383 664 136192   0
+[08] list(compiler = list(Package = "compi…  555 65 75621174 383 664 136192   0
+[09] default                                 555 65 75621174 383 664 136192   0
+[10] /var/scratch2/tomas/cran/rlibro/build…  555 65 75621174 383 664 136192   0
+[11] /var/scratch2/tomas/cran/rlibro/build…  555 65 75621174 383 664 136192   0
+[12] NULL                                    555 65 75621174 383 664 136192   0
+[13] NULL                                    555 65 75621174 383 664 136192   0
+> 
+> require(datasets)
+> data(volcano)
+> print(is.ursa(a))
+[1] TRUE
+> print(is.ursa(volcano))
+[1] FALSE
+> print(is.ursa(as.ursa(volcano)))
+[1] TRUE
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster.Replace")
+> ### * classRaster.Replace
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Replace
+> ### Title: Assing values to the portion of raster images
+> ### Aliases: Replace Assign [<- [<-.ursaRaster
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> ## Prepare
+> session_grid(regrid(mul=1/4))
+> a <- pixelsize()
+> w <- c("first","second","third","fourth","fifth","sixth")
+> b1 <- rep(a/mean(a),length(w))+seq(length(w))-1
+> bandname(b1) <- w
+> nr <- ursa_rows(b1)
+> bottom <- (as.integer(nr/2)):nr
+> write_envi(b1,"tmp1",compress=FALSE,interleave="bil")
+> b2 <- b1
+> print(b1)
+      name mean sd   sum min max    n nNA
+[1] first     1  0  8512   1   1 8512   0
+[2] second    2  0 17024   2   2 8512   0
+[3] third     3  0 25536   3   3 8512   0
+[4] fourth    4  0 34048   4   4 8512   0
+[5] fifth     5  0 42560   5   5 8512   0
+[6] sixth     6  0 51072   6   6 8512   0
+> 
+> ## Replace
+> b2[1] <- 10+b1["second"]
+> b2[2] <- 20
+> try({
++    data(volcano)
++    b2[3] <- 30+volcano
++ }) ## error: unable to coerce
+Error in obj$value[j2, i[m]] <- val : 
+  number of items to replace is not a multiple of replacement length
+> b2["fourth"] <- 40+as.matrix(b1[3])
+> b2[5] <- 50+as.array(b1[4])
+> set.seed(352)
+> b2["six"] <- 60+6+runif(5,min=-1,max=1) ## only first value is used (66.42849)
+ num [1:5] 66.4 66.6 65 65.3 65.3
+Warning in `[<-.ursaRaster`(`*tmp*`, "six", value = c(66.4284939966165,  :
+  #101 Cannot recognize value structure. Assigning is skipped
+> print(b2)
+      name mean sd    sum min max    n nNA
+[1] first    12  0 102144  12  12 8512   0
+[2] second   20  0 170240  20  20 8512   0
+[3] third     3  0  25536   3   3 8512   0
+[4] fourth   43  0 366016  43  43 8512   0
+[5] fifth    54  0 459648  54  54 8512   0
+[6] sixth     6  0  51072   6   6 8512   0
+> print(object.size(b2))
+416624 bytes
+> 
+> ## Write
+> b3 <- create_envi(b2,"tmp2")
+> print(object.size(b3))
+8752 bytes
+> for (i in chunk_line(b3,0.04))
++ {
++    b3[,i] <- b2[,i]+100
++    if (5 %in% i)
++       print(object.size(b3))
++ }
+8752 bytes
+> close(b3)
+> print(object.size(b3))
+8752 bytes
+> b4 <- read_envi("tmp2")
+> print(b4)
+      name mean sd     sum min max    n nNA
+[1] first   112  0  953344 112 112 8512   0
+[2] second  120  0 1021440 120 120 8512   0
+[3] third   103  0  876736 103 103 8512   0
+[4] fourth  143  0 1217216 143 143 8512   0
+[5] fifth   154  0 1310848 154 154 8512   0
+[6] sixth   106  0  902272 106 106 8512   0
+> envi_remove("tmp[12]")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster_GroupGeneric")
+> ### * classRaster_GroupGeneric
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: groupGeneric
+> ### Title: Group Generic Functions for raster image
+> ### Aliases: groupGeneric groupGeneric.ursaRaster Math.ursaRaster
+> ###   Ops.ursaRaster Summary.ursaRaster Complex.ursaRaster
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> session_grid(regrid(mul=1/4))
+> a1 <- ursa_dummy(nband=3,min=-5*pi,max=5*pi)
+> print(a1)
+           name      mean      sd       sum       min     max    n nNA
+[1] Thursday 19 -0.173456 4.13819  -1476.46  -9.05729 10.8022 8512   0
+[2] Friday 20    1.429802 4.96868  12170.48  -9.54990 12.5679 8512   0
+[3] Saturday 21 -1.291356 4.15302 -10992.02 -11.63806 10.8030 8512   0
+> 
+> try(print(complex1 <- Re(a1)))
+Error in Complex.ursaRaster(a1) : Unsupported
+> 
+> print(math1 <- a2 <- round(a1))
+           name     mean      sd    sum min max    n nNA
+[1] Thursday 19 -0.17352 4.15405  -1477  -9  11 8512   0
+[2] Friday 20    1.43186 4.97727  12188 -10  13 8512   0
+[3] Saturday 21 -1.29229 4.16340 -11000 -12  11 8512   0
+> print(math1 <- sin(a1))
+           name      mean       sd     sum min max    n nNA
+[1] Thursday 19 0.0536834 0.700086 456.953  -1   1 8512   0
+[2] Friday 20   0.0409691 0.700831 348.729  -1   1 8512   0
+[3] Saturday 21 0.0780725 0.713066 664.553  -1   1 8512   0
+> print(math2 <- floor(a1))
+           name      mean      sd    sum min max    n nNA
+[1] Thursday 19 -0.671053 4.14496  -5712 -10  10 8512   0
+[2] Friday 20    0.929746 4.98122   7914 -10  12 8512   0
+[3] Saturday 21 -1.786184 4.16317 -15204 -12  10 8512   0
+> print(math3 <- ceiling(a1))
+           name      mean      sd   sum min max    n nNA
+[1] Thursday 19  0.328947 4.14496  2800  -9  11 8512   0
+[2] Friday 20    1.929746 4.98122 16426  -9  13 8512   0
+[3] Saturday 21 -0.786184 4.16317 -6692 -11  11 8512   0
+> print(math4 <- cumsum(a1)) ## does this have a sense for rasters?
+           name     mean      sd       sum       min       max    n nNA
+[1] Thursday 19 -1705.44 1493.79 -14516733 -4614.298   582.449 8512   0
+[2] Friday 20    5357.78 2502.82  45605442 -1464.307 10694.017 8512   0
+[3] Saturday 21  3770.59 1970.15  32095301  -320.621 10693.504 8512   0
+> 
+> print(ops1 <- a1-2*rev(a1)+mean(a1))
+           name      mean      sd       sum      min     max    n nNA
+[1] Thursday 19  2.397586 7.82741  20408.25 -24.8450 27.5947 8512   0
+[2] Friday 20   -1.441472 4.74609 -12269.81 -11.8052 10.3985 8512   0
+[3] Saturday 21 -0.956113 7.64700  -8138.44 -23.9301 21.9366 8512   0
+> print(mean(ops1)) ## vanishing
+    name      mean       sd       sum       min      max    n nNA
+[1] mean -5.53e-18 4.26e-16 -4.71e-14 -2.66e-15 2.66e-15 8512   0
+> a2 <- ursa_new(value=c(1,2,4),bandname=c("single","double","quadruple"))
+> print(a2)
+         name mean sd   sum min max    n nNA
+[1] single       1  0  8512   1   1 8512   0
+[2] double       2  0 17024   2   2 8512   0
+[3] quadruple    4  0 34048   4   4 8512   0
+> print(ops2 <- a2[1]==a2[2])
+      name mean sd sum min max n  nNA
+[1] single   NA NA  NA  NA  NA 0 8512
+> print(ops3 <- a2[1]==a2[2]/2)
+      name mean sd  sum min max    n nNA
+[1] single    1  0 8512   1   1 8512   0
+> print(ops4 <- a1>0)
+           name mean sd  sum min max    n  nNA
+[1] Thursday 19    1  0 4151   1   1 4151 4361
+[2] Friday 20      1  0 5117   1   1 5117 3395
+[3] Saturday 21    1  0 3257   1   1 3257 5255
+> print(a1[a1>0])
+           name    mean      sd      sum         min     max    n  nNA
+[1] Thursday 19 3.38289 2.27470 14042.38 0.000968123 10.8022 4151 4361
+[2] Friday 20   4.83631 2.89959 24747.41 0.000489094 12.5679 5117 3395
+[3] Saturday 21 3.04704 2.26528  9924.21 0.000121454 10.8030 3257 5255
+> 
+> print(sum1 <- sum(a1))
+    name     mean      sd      sum      min     max    n nNA
+[1]  sum -0.03501 6.29724 -298.005 -12.1189 22.4436 8512   0
+> print(sum2 <- range(a1))
+    name     mean      sd      sum       min      max    n nNA
+[1]  min -4.02442 3.08856 -34255.9 -11.63806  4.63589 8512   0
+[2]  max  4.43679 2.94631  37766.0  -2.88816 12.56786 8512   0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster_as.array")
+> ### * classRaster_as.array
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: as.array
+> ### Title: Export raster object to multidimensional array
+> ### Aliases: as.array.ursaRaster .as.array
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- pixelsize()
+> a <- (a-global_min(a))/(global_max(a)-global_min(a))
+> b <- c(entire=a,half=a/2,double=a*2)
+> str(m <- as.matrix(b))
+ num [1:136192, 1:3] 0 0.00257 0.00514 0.00769 0.01023 ...
+> str(d1 <- as.array(b))
+ num [1:304, 1:448, 1:3] 0.0783 0.0811 0.0839 0.0867 0.0894 ...
+> str(d2 <- as.array(b[1],drop=FALSE))
+ num [1:304, 1:448, 1] 0.0783 0.0811 0.0839 0.0867 0.0894 ...
+> str(d3 <- as.array(b[1],drop=TRUE))
+ num [1:304, 1:448] 0.0783 0.0811 0.0839 0.0867 0.0894 ...
+> contour(d3)
+> filled.contour(d3)
+> d4 <- as.array(b,perm=TRUE)/global_max(b)
+> d4[is.na(d4)] <- 0
+> str(d4 <- as.raster(d4))
+ 'raster' chr [1:448, 1:304] "#0A0514" "#0A0515" "#0B0516" "#0B0617" ...
+> plot(d4)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster_as.data.frame")
+> ### * classRaster_as.data.frame
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: as.data.frame
+> ### Title: Convert raster image to a data frame
+> ### Aliases: as.data.frame.ursaRaster .as.data.frame
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> session_grid(regrid(res=50000,lim=c(-1200100,-1400800,1600900,1800200)))
+> a0 <- ursa_dummy(nband=3,min=0,max=100)
+> a0[a0<30 | a0>70] <- NA
+> names(a0) <- c("x","y","z")
+> print(a0)
+    name    mean      sd     sum     min     max     n  nNA
+[1]    x 49.3891 10.5181 1443199 30.0005 69.9969 29221 4827
+[2]    y 50.9914 11.2053 1257600 30.0009 69.9972 24663 9385
+[3]    z 47.0978 10.1419 1351470 30.0032 69.9973 28695 5353
+> b0 <- as.data.frame(a0)
+> session_grid(NULL)
+> a1 <- as.ursa(b0)
+> print(a1-a0)
+    name      mean      sd         sum      min     max     n  nNA
+[1]    x  -16567.5 2153100  -484118199 -3825070 3724970 29221 4827
+[2]    y -127666.2 3120901 -3148632600 -5325070 5824961 24663 9385
+[3]    z       0.0       0           0        0       0 28695 5353
+> session_grid(NULL)
+> session_grid(regrid(res=5800000))
+> set.seed(352)
+> a2 <- as.integer(ursa_dummy(nband=2,min=0,max=100))
+> a2[a2>50] <- NA
+> print(a2)
+           name mean      sd sum min max n nNA
+[1] Thursday 19 16.5 15.8008  66   0  38 4   2
+[2] Friday 20   16.5 21.6102  66   1  48 4   2
+> print(b1 <- as.data.frame(a2,na.rm=FALSE))
+         x        y Thursday 19 Friday 20
+1 -2900000  8700000          15         4
+2  2900000  8700000          38        NA
+3 -2900000  2900000           0        13
+4  2900000  2900000          13        48
+5 -2900000 -2900000          NA        NA
+6  2900000 -2900000          NA         1
+> print(b2 <- as.data.frame(a2,na.rm=TRUE))
+         x        y Thursday 19 Friday 20
+1 -2900000  8700000          15         4
+2  2900000  8700000          38        NA
+3 -2900000  2900000           0        13
+4  2900000  2900000          13        48
+6  2900000 -2900000          NA         1
+> print(b3 <- as.data.frame(a2,all.na=TRUE))
+         x       y Thursday 19 Friday 20
+1 -2900000 8700000          15         4
+3 -2900000 2900000           0        13
+4  2900000 2900000          13        48
+> print(b4 <- as.data.frame(a2,band=TRUE,na.rm=FALSE))
+          x        y  z        band
+1  -2900000  8700000 15 Thursday 19
+2   2900000  8700000 38 Thursday 19
+3  -2900000  2900000  0 Thursday 19
+4   2900000  2900000 13 Thursday 19
+5  -2900000 -2900000 NA Thursday 19
+6   2900000 -2900000 NA Thursday 19
+7  -2900000  8700000  4   Friday 20
+8   2900000  8700000 NA   Friday 20
+9  -2900000  2900000 13   Friday 20
+10  2900000  2900000 48   Friday 20
+11 -2900000 -2900000 NA   Friday 20
+12  2900000 -2900000  1   Friday 20
+> print(b5 <- as.data.frame(a2,band=TRUE,all.na=FALSE))
+          x        y  z        band
+1  -2900000  8700000 15 Thursday 19
+2   2900000  8700000 38 Thursday 19
+3  -2900000  2900000  0 Thursday 19
+4   2900000  2900000 13 Thursday 19
+5   2900000 -2900000 NA Thursday 19
+6  -2900000  8700000  4   Friday 20
+7   2900000  8700000 NA   Friday 20
+8  -2900000  2900000 13   Friday 20
+9   2900000  2900000 48   Friday 20
+10  2900000 -2900000  1   Friday 20
+> print(b6 <- as.data.frame(a2,band=TRUE,all.na=TRUE))
+         x       y  z        band
+1 -2900000 8700000 15 Thursday 19
+2 -2900000 2900000  0 Thursday 19
+3  2900000 2900000 13 Thursday 19
+4 -2900000 8700000  4   Friday 20
+5 -2900000 2900000 13   Friday 20
+6  2900000 2900000 48   Friday 20
+> print(b7 <- as.data.frame(a2,band=TRUE,all.na=TRUE,id=TRUE))
+         x       y  z        band id
+1 -2900000 8700000 15 Thursday 19  1
+2 -2900000 2900000  0 Thursday 19  2
+3  2900000 2900000 13 Thursday 19  3
+4 -2900000 8700000  4   Friday 20  1
+5 -2900000 2900000 13   Friday 20  2
+6  2900000 2900000 48   Friday 20  3
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster_as.integer")
+> ### * classRaster_as.integer
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: as.integer
+> ### Title: Transform values to type integer
+> ### Aliases: as.integer as.integer.ursaRaster
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- pixelsize()
+> a <- a-min(a)+0.5
+> str(ursa_value(a))
+ 'ursaNumeric' num [1:136192, 1] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 ...
+> print(storage.mode(a$value))
+[1] "double"
+> b <- as.integer(a)
+> str(ursa_value(b))
+ 'ursaNumeric' int [1:136192, 1] 0 0 0 0 0 0 0 0 0 0 ...
+> print(storage.mode(b$value))
+[1] "integer"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster_as.matrix")
+> ### * classRaster_as.matrix
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: as.matrix
+> ### Title: Convert raster image to a matrix
+> ### Aliases: as.matrix.ursaRaster [[.ursaRaster
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- ursa_dummy(nband=3,min=0,max=100)
+> a <- a[a>=20 & a<=80]
+> ignorevalue(a) <- 121
+> str(ursa_value(a[2]))
+ 'ursaNumeric' num [1:136192, 1] NA NA NA NA NA NA NA NA NA NA ...
+> str(as.matrix(a[2]))
+ num [1:136192, 1] NA NA NA NA NA NA NA NA NA NA ...
+> b1 <- a[[2]]
+> str(b1)
+List of 3
+ $ x: num [1:304] -3837500 -3812500 -3787500 -3762500 -3737500 ...
+ $ y: num [1:448] -5337500 -5312500 -5287500 -5262500 -5237500 ...
+ $ z: num [1:304, 1:448] 49.1 49.3 49.5 49.7 49.9 ...
+ - attr(*, "proj4")= chr "+proj=stere +lat_0=90 +lat_ts=70.0 +lon_0=-45.0 +k=1 +x_0=0.0 +y_0=0.0 +a=6378273.000 +b=6356889.449 +units=m +no_defs"
+> image(b1,asp=1)
+> b2 <- as.matrix(a[2:3],coords=TRUE)
+> print(c('theSame?'=identical(b1,b2)))
+theSame? 
+    TRUE 
+> a2 <- as.ursa(b2)
+> res <- c(src=a[2],exported_then_imported=a2,diff=a[2]-a2)
+> print(res)
+                      name    mean      sd     sum     min     max      n  nNA
+[1] src                    53.5037 15.0282 7012145 20.0039 79.9994 131059 5133
+[2] exported_then_imported 53.5037 15.0282 7012145 20.0039 79.9994 131059 5133
+[3] diff                    0.0000  0.0000       0  0.0000  0.0000 131059 5133
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster_as.raster")
+> ### * classRaster_as.raster
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: as.raster
+> ### Title: Export raster object to a colored representation.
+> ### Aliases: as.raster.ursaRaster
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> session_grid(regrid(mul=1/2))
+> a <- ursa_dummy(4,min=0,max=255)
+> a[a<70] <- NA
+> compose_open(layout=c(1,4),legend=NULL)
+> for (i in seq(4)) {
++    panel_new()
++    panel_plot(as.raster(a[seq(i)]),interpolate=FALSE)
++    panel_annotation(paste("Number of channels:",i))
++ }
+> compose_close()
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa25_c14a.png' in external software.
+> 
+> op <- par(mfrow=c(2,2),mar=rep(0.5,4))
+> plot(as.raster(a[1:1]),interpolate=FALSE)
+> plot(as.raster(a[1:2]),interpolate=FALSE)
+> plot(as.raster(a[1:3]),interpolate=FALSE)
+> plot(as.raster(a[1:4]),interpolate=FALSE)
+> par(op)
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+> nameEx("classRaster_as.table")
+> ### * classRaster_as.table
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: as.table
+> ### Title: Frequency of unique values
+> ### Aliases: as.table as.table.ursaRaster ursa_table
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- colorize(pixelsize(),nbreak=4)
+> t1 <- as.table(a)
+> print(t1)
+   <= 400 (400;500] (500;600] (600;700]     > 700 
+      350     31572     64054     40216         0 
+> str(t1)
+ 'table' int [1:5(1d)] 350 31572 64054 40216 0
+ - attr(*, "dimnames")=List of 1
+  ..$ : chr [1:5] "<= 400" "(400;500]" "(500;600]" "(600;700]" ...
+> ursa_colortable(a) <- NULL
+> t2 <- as.table(a)
+> print(t2)
+    0     1     2     3 
+  350 31572 64054 40216 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster_c")
+> ### * classRaster_c
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: c
+> ### Title: Combine bands into raster brick.
+> ### Aliases: c.ursaRaster
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> session_grid(regrid(mul=1/16))
+> a1 <- ursa_dummy(nband=2)
+> names(a1) <-  weekdays(Sys.Date()+seq(length(a1))-1)
+> a2 <- ursa_dummy(nband=2)
+> names(a2) <- names(a1)
+> print(a1)
+        name    mean      sd     sum     min     max   n nNA
+[1] Thursday 126.116 33.8819 67093.6 53.9933 204.483 532   0
+[2] Friday   139.113 40.6446 74008.1 49.8671 227.361 532   0
+> print(a2)
+        name    mean      sd     sum     min     max   n nNA
+[1] Thursday 117.004 33.9655 62246.0 38.6557 210.944 532   0
+[2] Friday   139.576 38.7624 74254.5 46.2272 209.237 532   0
+> a3 <- a1[1]
+> print(names(a3))
+[1] "Thursday"
+> a4 <- c(today=a3)
+> print(names(a4))
+[1] "today"
+> print(b1 <- c(a1,a2))
+        name    mean      sd     sum     min     max   n nNA
+[1] Thursday 126.116 33.8819 67093.6 53.9933 204.483 532   0
+[2] Friday   139.113 40.6446 74008.1 49.8671 227.361 532   0
+[3] Thursday 117.004 33.9655 62246.0 38.6557 210.944 532   0
+[4] Friday   139.576 38.7624 74254.5 46.2272 209.237 532   0
+> print(b2 <- c(a1=a1))
+    name    mean      sd     sum     min     max   n nNA
+[1]   a1 126.116 33.8819 67093.6 53.9933 204.483 532   0
+[2]   a1 139.113 40.6446 74008.1 49.8671 227.361 532   0
+> print(b3 <- c(a1=a1,a2=a2))
+    name    mean      sd     sum     min     max   n nNA
+[1]   a1 126.116 33.8819 67093.6 53.9933 204.483 532   0
+[2]   a1 139.113 40.6446 74008.1 49.8671 227.361 532   0
+[3]   a2 117.004 33.9655 62246.0 38.6557 210.944 532   0
+[4]   a2 139.576 38.7624 74254.5 46.2272 209.237 532   0
+> print(b5 <- c(a1=a1,a2=a2[1]))
+    name    mean      sd     sum     min     max   n nNA
+[1]   a1 126.116 33.8819 67093.6 53.9933 204.483 532   0
+[2]   a1 139.113 40.6446 74008.1 49.8671 227.361 532   0
+[3]   a2 117.004 33.9655 62246.0 38.6557 210.944 532   0
+> print(b4 <- c(a1,'(tomorrow)'=a1[2])) ## raster append
+          name    mean      sd     sum     min     max   n nNA
+[1] Thursday   126.116 33.8819 67093.6 53.9933 204.483 532   0
+[2] Friday     139.113 40.6446 74008.1 49.8671 227.361 532   0
+[3] (tomorrow) 139.113 40.6446 74008.1 49.8671 227.361 532   0
+> print(b6 <- c(a1,50))
+        name    mean      sd     sum     min     max   n nNA
+[1] Thursday 126.116 33.8819 67093.6 53.9933 204.483 532   0
+[2] Friday   139.113 40.6446 74008.1 49.8671 227.361 532   0
+[3] Band 1    50.000  0.0000 26600.0 50.0000  50.000 532   0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster_close")
+> ### * classRaster_close
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: close
+> ### Title: Close connections for files with data
+> ### Aliases: close.ursaRaster close_envi
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- create_envi()
+Filename is assigned automatically: /tmp/Rtmpn9IP2V/___ursa26_44f5
+> fname <- a$con$fname
+> message(paste("Created file",dQuote(basename(fname)),"will be deleted."))
+Created file “___ursa26_44f5.envi” will be deleted.
+> print(dir(pattern=basename(envi_list(fname))))
+character(0)
+> close(a)
+> invisible(envi_remove(fname))
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster_commonGeneric")
+> ### * classRaster_commonGeneric
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: commonGeneric
+> ### Title: Some generic functions for 'ursaRaster' class.
+> ### Aliases: commonGeneric duplicated.ursaRaster diff.ursaRaster
+> 
+> ### ** Examples
+> 
+> a <- ursa_dummy(5)
+> a[3] <- a[2]
+> a
+           name    mean      sd      sum     min     max      n nNA
+[1] Thursday 19 132.477 33.7464 18042303 42.9114 210.613 136192   0
+[2] Friday 20   129.087 37.0603 17580574 32.8850 213.980 136192   0
+[3] Saturday 21 129.087 37.0603 17580574 32.8850 213.980 136192   0
+[4] Sunday 22   138.170 38.6958 18817590 55.1900 222.494 136192   0
+[5] Monday 23   127.025 40.2103 17299767 29.6575 225.738 136192   0
+> duplicated(a)
+[1] FALSE FALSE  TRUE FALSE FALSE
+> diff(a)
+      name      mean      sd      sum      min     max      n nNA
+[1] Band 1  -3.39028 58.2476  -461729 -141.776 157.812 136192   0
+[2] Band 2   0.00000  0.0000        0    0.000   0.000 136192   0
+[3] Band 3   9.08288 50.6671  1237015 -100.795 155.585 136192   0
+[4] Band 4 -11.14472 51.3814 -1517822 -156.981 112.874 136192   0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster_dim")
+> ### * classRaster_dim
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dim
+> ### Title: Dimension of multiband raster image
+> ### Aliases: dim.ursaRaster dim<-.ursaRaster
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> session_grid(regrid(mul=1/16))
+> a <- ursa_dummy(nband=3)
+> ursa_info(a)
+List of 11
+ $ columns : int 19
+ $ rows    : int 28
+ $ resx    : num 4e+05
+ $ resy    : num 4e+05
+ $ minx    : num -3850000
+ $ maxx    : num 3750000
+ $ miny    : num -5350000
+ $ maxy    : num 5850000
+ $ proj4   : chr "+proj=stere +lat_0=90 +lat_ts=70.0 +lon_0=-45.0 +k=1 +x_0=0.0 +y_0=0.0 +a=6378273.000 +b=6356889.449 +units=m +no_defs"
+ $ mode    : chr [1:2] "raw" "double"
+ $ bandname: chr [1:3] "Thursday 19" "Friday 20" "Saturday 21"
+ - attr(*, "class")= chr "ursaMetadata"
+> print(dim(a))
+  lines samples   bands 
+     28      19       3 
+> dim(a) <- c(25,00,34)
+> print(dim(a))
+  lines samples   bands 
+     28      19       3 
+> b <- create_envi("tmp1",bandname=letters[1:5],compress=FALSE)
+> print(dim(b))
+  lines samples   bands 
+     28      19       5 
+> close(b)
+> envi_remove("tmp1")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster_head")
+> ### * classRaster_head
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: head
+> ### Title: Extract first and last bands of raster image
+> ### Aliases: head.ursaRaster tail.ursaRaster series
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> session_grid(regrid(mul=1/8))
+> a <- ursa_dummy(nband=101)
+> print(head(a))
+           name    mean      sd    sum     min     max    n nNA
+[1] Thursday 19 126.097 33.6410 268335 53.8385 211.785 2128   0
+[2] Friday 20   139.106 40.3991 296018 50.0275 229.076 2128   0
+[3] Saturday 21 117.017 33.7544 249011 35.7023 213.612 2128   0
+> print(tail(a))
+             name    mean      sd    sum     min     max    n nNA
+[99]  Thursday 25 135.990 38.2425 289386 48.9166 243.366 2128   0
+[100] Friday 26   139.748 40.7083 297383 59.4564 243.264 2128   0
+[101] Saturday 27 119.811 38.7773 254958 32.8524 224.144 2128   0
+> print(series(a,2))
+             name    mean      sd    sum     min     max    n nNA
+[1]   Thursday 19 126.097 33.6410 268335 53.8385 211.785 2128   0
+[2]   Friday 20   139.106 40.3991 296018 50.0275 229.076 2128   0
+[100] Friday 26   139.748 40.7083 297383 59.4564 243.264 2128   0
+[101] Saturday 27 119.811 38.7773 254958 32.8524 224.144 2128   0
+> print(series(a[1:5]))
+           name    mean      sd    sum     min     max    n nNA
+[1] Thursday 19 126.097 33.6410 268335 53.8385 211.785 2128   0
+[2] Friday 20   139.106 40.3991 296018 50.0275 229.076 2128   0
+[3] Saturday 21 117.017 33.7544 249011 35.7023 213.612 2128   0
+[4] Sunday 22   139.550 38.4914 296962 45.9739 209.197 2128   0
+[5] Monday 23   130.789 40.9625 278319 31.0708 225.842 2128   0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster_hist")
+> ### * classRaster_hist
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: hist
+> ### Title: Histogram of raster image
+> ### Aliases: ursa_hist hist.ursaRaster histogram
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- pixelsize()
+> hist(a)
+> histogram(a,breaks=21)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa29_4d01.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster_is.na")
+> ### * classRaster_is.na
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: is.na
+> ### Title: 'No data' values for raster images.
+> ### Aliases: is.na.ursaRaster is.infinite.ursaRaster is.nan.ursaRaster
+> ###   is.na<-.ursaRaster
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> session_grid(regrid(mul=1/4))
+> a <- ursa_dummy(nband=2,min=0,max=100)
+> print(a)
+           name    mean      sd    sum     min     max    n nNA
+[1] Thursday 19 49.4479 13.1723 420900 21.1698 84.3844 8512   0
+[2] Friday 20   54.5512 15.8158 464340 19.6017 90.0047 8512   0
+> print(is.na(a))
+           name mean sd sum min max n  nNA
+[1] Thursday 19   NA NA  NA  NA  NA 0 8512
+[2] Friday 20     NA NA  NA  NA  NA 0 8512
+> a2 <- ursa_new(nband=2)
+> print(a2)
+      name mean sd sum min max n  nNA
+[1] Band 1   NA NA  NA  NA  NA 0 8512
+[2] Band 2   NA NA  NA  NA  NA 0 8512
+> print(is.na(a2))
+      name mean sd  sum min max    n nNA
+[1] Band 1    1  0 8512   1   1 8512   0
+[2] Band 2    1  0 8512   1   1 8512   0
+> a3 <- a
+> a3[a3<30 | a3>70] <- NA
+> print(a3)
+           name    mean      sd    sum     min     max    n  nNA
+[1] Thursday 19 49.4122 10.5091 360709 30.0062 69.9949 7300 1212
+[2] Friday 20   50.9767 11.1891 313813 30.0086 69.9892 6156 2356
+> print(is.na(a3))
+           name mean sd  sum min max    n  nNA
+[1] Thursday 19    1  0 1212   1   1 1212 7300
+[2] Friday 20      1  0 2356   1   1 2356 6156
+> is.na(a3) <- 200
+> print(a3)
+           name    mean      sd    sum     min max    n nNA
+[1] Thursday 19 70.8540 53.5178 603109 30.0062 200 8512   0
+[2] Friday 20   92.2243 67.3539 785013 30.0086 200 8512   0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster_length")
+> ### * classRaster_length
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: nband
+> ### Title: Get number of bands of raster image.
+> ### Aliases: nband length.ursaRaster
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a1 <- pixelsize()
+> print(a1)
+                  name    mean      sd      sum     min     max      n nNA
+[1] Pixel Size (sq.km) 555.254 65.4972 75621174 382.973 663.926 136192   0
+> print(nband(a1))
+[1] 1
+> a2 <- c("Band 1"=a1,Band2=a1/2,sqrt=sqrt(a1),NA)
+> print(a2)
+      name     mean       sd      sum      min      max      n    nNA
+[1] Band 1 555.2542 65.49719 75621174 382.9731 663.9258 136192      0
+[2] Band2  277.6271 32.74860 37810587 191.4865 331.9629 136192      0
+[3] sqrt    23.5218  1.40679  3203481  19.5697  25.7668 136192      0
+[4] Band 1       NA       NA       NA       NA       NA      0 136192
+> print(nband(a2))
+[1] 4
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster_na.omit")
+> ### * classRaster_na.omit
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: na.omit
+> ### Title: Drop bands which don't have data.
+> ### Aliases: na.omit.ursaRaster
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> session_grid(regrid(mul=1/4))
+> a <- ursa_new(value=1:3)
+Warning in ursa_new(value = 1:3) :
+  How many bands do you mean? Please specify argument 'bands='.
+> print(a)
+      name mean sd   sum min max    n nNA
+[1] Band 1    1  0  8512   1   1 8512   0
+[2] Band 2    2  0 17024   2   2 8512   0
+[3] Band 3    3  0 25536   3   3 8512   0
+> a[2] <- NA
+> print(a)
+      name mean sd   sum min max    n  nNA
+[1] Band 1    1  0  8512   1   1 8512    0
+[2] Band 2   NA NA    NA  NA  NA    0 8512
+[3] Band 3    3  0 25536   3   3 8512    0
+> a2 <- na.omit(a)
+> print(a2)
+      name mean sd   sum min max    n nNA
+[1] Band 1    1  0  8512   1   1 8512   0
+[3] Band 3    3  0 25536   3   3 8512   0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster_names")
+> ### * classRaster_names
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bandname
+> ### Title: Band names for raster image.
+> ### Aliases: bandname bandname<- names.ursaRaster names<-.ursaRaster
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a1 <- pixelsize()
+> a2 <- c("Band 1"=a1,Band2=a1/2,sqrt=sqrt(a1),NA)
+> print(a2)
+      name     mean       sd      sum      min      max      n    nNA
+[1] Band 1 555.2542 65.49719 75621174 382.9731 663.9258 136192      0
+[2] Band2  277.6271 32.74860 37810587 191.4865 331.9629 136192      0
+[3] sqrt    23.5218  1.40679  3203481  19.5697  25.7668 136192      0
+[4] Band 1       NA       NA       NA       NA       NA      0 136192
+> print(bandname(a2))
+[1] "Band 1" "Band2"  "sqrt"   "Band 1"
+> bandname(a2)[1:2] <- c("Original","Half")
+> print(a2)
+        name     mean       sd      sum      min      max      n    nNA
+[1] Original 555.2542 65.49719 75621174 382.9731 663.9258 136192      0
+[2] Half     277.6271 32.74860 37810587 191.4865 331.9629 136192      0
+[3] sqrt      23.5218  1.40679  3203481  19.5697  25.7668 136192      0
+[4] Band 1         NA       NA       NA       NA       NA      0 136192
+> print(bandname(a2))
+[1] "Original" "Half"     "sqrt"     "Band 1"  
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster_plot")
+> ### * classRaster_plot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plot
+> ### Title: Simple display of raster images
+> ### Aliases: plot.ursaRaster image.ursaRaster
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- pixelsize()
+> plot(a,asp=1)
+> image(a,asp=1)
+> b <- colorize(a,ncolor=15)
+> plot(b,asp=1)
+> image(b,asp=1)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster_rep")
+> ### * classRaster_rep
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: rep
+> ### Title: Replicate bands of raster image.
+> ### Aliases: rep rep.ursaRaster
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> session_grid(regrid(mul=1/4))
+> a <- ursa_dummy(nband=3)
+> print(a)
+           name    mean      sd     sum     min     max    n nNA
+[1] Thursday 19 126.092 33.5893 1073296 53.9829 215.180 8512   0
+[2] Friday 20   139.106 40.3303 1184067 49.9844 229.512 8512   0
+[3] Saturday 21 117.018 33.7097  996059 33.0350 215.187 8512   0
+> b1 <- rep(a,by=2)
+> print(b1)
+           name    mean      sd     sum     min     max    n nNA
+[1] Thursday 19 126.092 33.5893 1073296 53.9829 215.180 8512   0
+[2] Friday 20   139.106 40.3303 1184067 49.9844 229.512 8512   0
+[3] Saturday 21 117.018 33.7097  996059 33.0350 215.187 8512   0
+> b2 <- rep(a,length=5)
+> print(b2)
+           name    mean      sd     sum     min     max    n nNA
+[1] Thursday 19 126.092 33.5893 1073296 53.9829 215.180 8512   0
+[2] Friday 20   139.106 40.3303 1184067 49.9844 229.512 8512   0
+[3] Saturday 21 117.018 33.7097  996059 33.0350 215.187 8512   0
+[4] Thursday 19 126.092 33.5893 1073296 53.9829 215.180 8512   0
+[5] Friday 20   139.106 40.3303 1184067 49.9844 229.512 8512   0
+> b3 <- rep(a[3],3)
+> print(b3)
+           name    mean      sd    sum    min     max    n nNA
+[1] Saturday 21 117.018 33.7097 996059 33.035 215.187 8512   0
+[2] Saturday 21 117.018 33.7097 996059 33.035 215.187 8512   0
+[3] Saturday 21 117.018 33.7097 996059 33.035 215.187 8512   0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster_seq")
+> ### * classRaster_seq
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: seq
+> ### Title: Sequence Generation for raster image and coordinate grid
+> ### Aliases: seq.ursaRaster seq.ursaGrid ursa_seqx ursa_seqy ursa_seqc
+> ###   ursa_seqr
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> session_grid(regrid(mul=1/16))
+> print(session_grid())
+List of 9
+ $ columns: int 19
+ $ rows   : int 28
+ $ resx   : num 400000
+ $ resy   : num 400000
+ $ minx   : num -3850000
+ $ maxx   : num 3750000
+ $ miny   : num -5350000
+ $ maxy   : num 5850000
+ $ proj4  : chr "+proj=stere +lat_0=90 +lat_ts=70.0 +lon_0=-45.0 +k=1 +x_0=0.0 +y_0=0.0 +a=6378273.000 +b=6356889.449 +units=m +no_defs"
+ - attr(*, "class")= chr ".ursaGrid"
+> a <- ursa_dummy(nband=5)
+> print(a)
+           name    mean      sd     sum     min     max   n nNA
+[1] Thursday 19 126.116 33.8819 67093.6 53.9933 204.483 532   0
+[2] Friday 20   139.113 40.6446 74008.1 49.8671 227.361 532   0
+[3] Saturday 21 117.004 33.9655 62246.0 38.6557 210.944 532   0
+[4] Sunday 22   139.576 38.7624 74254.5 46.2272 209.237 532   0
+[5] Monday 23   130.797 41.1574 69584.0 31.7695 226.506 532   0
+> print(seq(a))
+[1] 1 2 3 4 5
+> print(seq(a,"c"))
+ [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19
+> print(seq(a,"x"))
+ [1] -3650000 -3250000 -2850000 -2450000 -2050000 -1650000 -1250000  -850000
+ [9]  -450000   -50000   350000   750000  1150000  1550000  1950000  2350000
+[17]  2750000  3150000  3550000
+> print(ursa_seqx())
+ [1] -3650000 -3250000 -2850000 -2450000 -2050000 -1650000 -1250000  -850000
+ [9]  -450000   -50000   350000   750000  1150000  1550000  1950000  2350000
+[17]  2750000  3150000  3550000
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classRaster_summary")
+> ### * classRaster_summary
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: summary
+> ### Title: Summary of raster image.
+> ### Aliases: summary.ursaRaster summary.ursaNumeric summary.ursaCategory
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> session_grid(regrid(mul=1/4))
+> a <- ursa_dummy(nband=3)
+> print(summary(a))
+  Thursday 19       Friday 20       Saturday 21    
+ Min.   : 53.98   Min.   : 49.98   Min.   : 33.03  
+ 1st Qu.:100.17   1st Qu.:106.70   1st Qu.: 91.28  
+ Median :126.37   Median :140.15   Median :114.54  
+ Mean   :126.09   Mean   :139.11   Mean   :117.02  
+ 3rd Qu.:150.66   3rd Qu.:173.90   3rd Qu.:142.65  
+ Max.   :215.18   Max.   :229.51   Max.   :215.19  
+> print(summary(ursa_value(a)))
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  33.03   98.65  126.32  127.41  153.63  229.51 
+> print(a)
+           name    mean      sd     sum     min     max    n nNA
+[1] Thursday 19 126.092 33.5893 1073296 53.9829 215.180 8512   0
+[2] Friday 20   139.106 40.3303 1184067 49.9844 229.512 8512   0
+[3] Saturday 21 117.018 33.7097  996059 33.0350 215.187 8512   0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classStack")
+> ### * classStack
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ursaStack
+> ### Title: List of raster images.
+> ### Aliases: class-ursaStack ursa_stack ursa_brick ursa_apply ursaStack
+> ###   as.list.ursaRaster unlist.ursaStack
+> ### Keywords: classes
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- ursa_dummy(3)
+> print(a)
+           name    mean      sd      sum     min     max      n nNA
+[1] Thursday 19 126.092 33.5767 17172668 53.5795 217.310 136192   0
+[2] Friday 20   139.105 40.3158 18945031 49.9191 229.675 136192   0
+[3] Saturday 21 117.019 33.6998 15937043 31.4195 216.272 136192   0
+> b1 <- ursa_stack(a[1:2],colorize(a[3],ramp=FALSE))
+> print(b1)
+[[1]]
+           name    mean      sd      sum     min     max      n nNA
+[1] Thursday 19 126.092 33.5767 17172668 53.5795 217.310 136192   0
+[2] Friday 20   139.105 40.3158 18945031 49.9191 229.675 136192   0
+
+[[2]]
+           name    mean      sd      sum min max      n nNA
+[3] Saturday 21 117.002 33.9059 15934800  45 195 136192   0
+
+attr(,"class")
+[1] "ursaStack"
+> b2 <- as.list(a)
+> print(b2)
+$`Thursday 19`
+           name    mean      sd      sum     min    max      n nNA
+[1] Thursday 19 126.092 33.5767 17172668 53.5795 217.31 136192   0
+
+$`Friday 20`
+         name    mean      sd      sum     min     max      n nNA
+[2] Friday 20 139.105 40.3158 18945031 49.9191 229.675 136192   0
+
+$`Saturday 21`
+           name    mean      sd      sum     min     max      n nNA
+[3] Saturday 21 117.019 33.6998 15937043 31.4195 216.272 136192   0
+
+attr(,"class")
+[1] "ursaStack"
+> b3 <- list(a[1],a[2:3])
+> print(b3)
+[[1]]
+           name    mean      sd      sum     min    max      n nNA
+[1] Thursday 19 126.092 33.5767 17172668 53.5795 217.31 136192   0
+
+[[2]]
+           name    mean      sd      sum     min     max      n nNA
+[2] Friday 20   139.105 40.3158 18945031 49.9191 229.675 136192   0
+[3] Saturday 21 117.019 33.6998 15937043 31.4195 216.272 136192   0
+
+> b31 <- lapply(b3,colorize,ramp=FALSE)
+> print(b31)
+[[1]]
+           name    mean     sd      sum min max      n nNA
+[1] Thursday 19 126.055 33.826 17167640  56 196 136192   0
+
+[[2]]
+           name    mean      sd      sum min max      n nNA
+[2] Friday 20   139.034 40.3507 18935344  48 208 136192   0
+[3] Saturday 21 117.024 33.7785 15937712  48 208 136192   0
+
+> b32 <- ursa_apply(b3,colorize,ramp=FALSE,rev=TRUE)
+> print(b32)
+[[1]]
+           name    mean     sd      sum min max      n nNA
+[1] Thursday 19 126.055 33.826 17167640  56 196 136192   0
+
+[[2]]
+           name    mean      sd      sum min max      n nNA
+[2] Friday 20   139.034 40.3507 18935344  48 208 136192   0
+[3] Saturday 21 117.024 33.7785 15937712  48 208 136192   0
+
+attr(,"class")
+[1] "ursaStack"
+> s311 <- ursa_apply(b31,ursa_colortable)
+> print(s311)
+[[1]]
+         56          70          84          98         112         126 
+"#FBE4F5FF" "#F2D3F4FF" "#E2C4F5FF" "#CCB8F4FF" "#B1B0EFFF" "#94AAE4FF" 
+        140         154         168         182         196 
+"#77A6D3FF" "#5CA1BAFF" "#469B9DFF" "#36927CFF" "#2C875CFF" 
+
+[[2]]
+         48          64          80          96         112         128 
+"#DCF5EEFF" "#C9EED0FF" "#C4E0AEFF" "#CCCA93FF" "#DAAE8AFF" "#E19294FF" 
+        144         160         176         192         208 
+"#D77CABFF" "#B871C0FF" "#8B70C7FF" "#5A75B7FF" "#337991FF" 
+
+> s21 <- lapply(b2,global_mean)
+> print(s21)
+$`Thursday 19`
+[1] 126.0916
+
+$`Friday 20`
+[1] 139.1053
+
+$`Saturday 21`
+[1] 117.0189
+
+> s22 <- sapply(b2,global_mean)
+> print(s22)
+Thursday 19   Friday 20 Saturday 21 
+   126.0916    139.1053    117.0189 
+> s31 <- lapply(b3,global_mean)
+> print(s31)
+[[1]]
+[1] 126.0916
+
+[[2]]
+[1] 128.0621
+
+> s32 <- sapply(b3,global_mean)
+> print(s32)
+[1] 126.0916 128.0621
+> c1 <- unlist(b1)
+> print(c1)
+           name    mean      sd      sum     min     max      n nNA
+[1] Thursday 19 126.092 33.5767 17172668 53.5795 217.310 136192   0
+[2] Friday 20   139.105 40.3158 18945031 49.9191 229.675 136192   0
+[3] Saturday 21 117.002 33.9059 15934800 45.0000 195.000 136192   0
+> c2 <- unlist(b2)
+> print(c2)
+           name    mean      sd      sum     min     max      n nNA
+[1] Thursday 19 126.092 33.5767 17172668 53.5795 217.310 136192   0
+[2] Friday 20   139.105 40.3158 18945031 49.9191 229.675 136192   0
+[3] Saturday 21 117.019 33.6998 15937043 31.4195 216.272 136192   0
+> c3 <- unlist(b3)
+> print(if (is.ursa(c3)) c3 else "broken object")
+[1] "broken object"
+> d3 <- as.ursa(b3)
+> print(if (is.ursa(d3)) d3 else "broken object")
+           name    mean      sd      sum     min     max      n nNA
+[1] Thursday 19 126.092 33.5767 17172668 53.5795 217.310 136192   0
+[2] Friday 20   139.105 40.3158 18945031 49.9191 229.675 136192   0
+[3] Saturday 21 117.019 33.6998 15937043 31.4195 216.272 136192   0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classValue")
+> ### * classValue
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ursaValue
+> ### Title: Values of raster images.
+> ### Aliases: class-ursaValue class-ursaNumeric class-ursaCategory
+> ###   print.ursaCategory print.ursaNumeric ursa_value ursa_value<-
+> ### Keywords: classes print
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> session_grid(regrid(mul=1/4))
+> a1 <- create_envi("exam1.envi",bandname=c("today","tomorrow"))
+> str(ursa_value(a1))
+ 'ursaNumeric' logi NA
+> close(a1)
+> envi_remove("exam1")
+> a2 <- ursa_dummy(nband=4,min=1,max=99)
+> str(ursa_value(a2),digits=3)
+ 'ursaNumeric' num [1:8512, 1:4] 83.7 81.7 79.5 76.9 74.1 ...
+> a3 <- as.integer(a2)
+> str(ursa_value(a3))
+ 'ursaNumeric' int [1:8512, 1:4] 83 81 79 76 74 71 67 64 60 56 ...
+> str(ursa_value(a3,2))
+ 'ursaNumeric' int [1:8512, 1] 87 86 85 84 82 81 79 77 75 73 ...
+> print(ursa_value(a3))
+       V1              V2              V3              V4       
+ Min.   :21.00   Min.   :20.00   Min.   :13.00   Min.   :18.00  
+ 1st Qu.:39.00   1st Qu.:42.00   1st Qu.:36.00   1st Qu.:42.00  
+ Median :49.00   Median :54.00   Median :45.00   Median :56.00  
+ Mean   :48.96   Mean   :53.96   Mean   :45.47   Mean   :54.13  
+ 3rd Qu.:58.00   3rd Qu.:67.00   3rd Qu.:55.00   3rd Qu.:67.00  
+ Max.   :83.00   Max.   :89.00   Max.   :83.00   Max.   :81.00  
+> print(a3)
+           name    mean      sd    sum min max    n nNA
+[1] Thursday 19 48.9555 12.9150 416709  21  83 8512   0
+[2] Friday 20   53.9585 15.5009 459295  20  89 8512   0
+[3] Saturday 21 45.4653 12.9578 387001  13  83 8512   0
+[4] Sunday 22   54.1304 14.7792 460758  18  81 8512   0
+> ursa_value(a3,"Band 2") <- 199
+> ursa_value(a3)[,3] <- 299
+> a3[4] <- 399
+> print(a3)
+           name     mean      sd     sum min max    n nNA
+[1] Thursday 19  48.9555 12.9150  416709  21  83 8512   0
+[2] Friday 20    53.9585 15.5009  459295  20  89 8512   0
+[3] Saturday 21 299.0000  0.0000 2545088 299 299 8512   0
+[4] Sunday 22   399.0000  0.0000 3396288 399 399 8512   0
+> ursa_value(a3[1:3]) <- ursa_value(a3[4])
+> print(a3)
+           name mean sd     sum min max    n nNA
+[1] Thursday 19  399  0 3396288 399 399 8512   0
+[2] Friday 20    399  0 3396288 399 399 8512   0
+[3] Saturday 21  399  0 3396288 399 399 8512   0
+[4] Sunday 22    399  0 3396288 399 399 8512   0
+> ursa_value(a3[1:3]) <- -c(1:3)
+> print(a3)
+           name mean sd     sum min max    n nNA
+[1] Thursday 19   -1  0   -8512  -1  -1 8512   0
+[2] Friday 20     -2  0  -17024  -2  -2 8512   0
+[3] Saturday 21   -3  0  -25536  -3  -3 8512   0
+[4] Sunday 22    399  0 3396288 399 399 8512   0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("codec")
+> ### * codec
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: codec
+> ### Title: Reduce and restore dimenstions for sparse data matrix
+> ### Aliases: compress decompress
+> ### Keywords: misc
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> b <- as.data.frame(pixelsize())
+> b <- subset(b,x>1000000 & x<2000000 & y>3000000 & y<4000000)
+> a1 <- as.ursa(b)
+> print(a1)
+                  name   mean      sd    sum    min     max    n    nNA
+[1] Pixel Size (sq.km) 553.84 14.4252 886144 521.06 584.771 1600 134592
+> print(object.size(a1))
+1097288 bytes
+> a2 <- compress(a1)
+> print(a2)
+                  name   mean      sd    sum    min     max    n    nNA
+[1] Pixel Size (sq.km) 553.84 14.4252 886144 521.06 584.771 1600 134592
+> print(object.size(a2))
+27112 bytes
+> a3 <- decompress(a2)
+> print(a3)
+                  name   mean      sd    sum    min     max    n    nNA
+[1] Pixel Size (sq.km) 553.84 14.4252 886144 521.06 584.771 1600 134592
+> print(object.size(a3))
+1097288 bytes
+> print(identical(a1,a3))
+[1] TRUE
+> 
+> 
+> 
+> cleanEx()
+> nameEx("colorize")
+> ### * colorize
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: colorize
+> ### Title: Create color table
+> ### Aliases: colorize
+> ### Keywords: color
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- pixelsize()-350
+> print(a)
+                  name    mean      sd      sum     min     max      n nNA
+[1] Pixel Size (sq.km) 205.254 65.4972 27953974 32.9731 313.926 136192   0
+> b1 <- colorize(a,ramp=FALSE)
+> print(ursa_colortable(b1))
+         60          90         120         150         180         210 
+"#E2F4E1FF" "#D7E7C2FF" "#D7D3A8FF" "#DDB99AFF" "#E09F9AFF" "#D988A5FF" 
+        240         270         300         330 
+"#C477B4FF" "#A16EBCFF" "#776BB8FF" "#4D6CA2FF" 
+> b2 <- colorize(a,interval=1,stretch="positive",ramp=FALSE)
+> print(ursa_colortable(b2))
+     <=  35   ( 35; 70]   ( 70;105]   (105;140]   (140;175]   (175;210] 
+"#FCE3F4FF" "#EBD2F9FF" "#C8CBFAFF" "#9DCBE7FF" "#7CCBBDFF" "#70C286FF" 
+  (210;245]   (245;280]   (280;315]       > 315 
+"#7DAC57FF" "#968A40FF" "#AA6747FF" "#A74A61FF" 
+[1]  35  70 105 140 175 210 245 280 315
+> b3 <- colorize(a,interval=2,stretch="positive",ramp=FALSE)
+> print(ursa_colortable(b3))
+     <=  16   ( 16; 48]   ( 48; 80]   ( 80;112]   (112;144]   (144;176] 
+"#FDE5EAFF" "#FAD2E2FF" "#F3BFDFFF" "#E7AEE0FF" "#D6A0E1FF" "#BF95E1FF" 
+  (176;208]   (208;240]   (240;272]   (272;304]       > 304 
+"#A48DDDFF" "#8787D3FF" "#6A82C4FF" "#4F7DAEFF" "#377794FF" 
+ [1]  16  48  80 112 144 176 208 240 272 304
+> b4 <- colorize(a,value=c(150,250),interval=1)
+> print(ursa_colortable(b4))
+     <= 150   (150;250]       > 250 
+"#CAEDD9FF" "#CEA3E1FF" "#94954EFF" 
+[1] 150 250
+> names(ursa_colortable(b4)) <- c("x<=150","150<x<=250","x>250")
+> print(ursa_colortable(b4))
+     x<=150  150<x<=250       x>250 
+"#CAEDD9FF" "#CEA3E1FF" "#94954EFF" 
+> display(b4)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa31_3a2e.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("compose_close")
+> ### * compose_close
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: compose_close
+> ### Title: Finish plotting
+> ### Aliases: compose_close .compose_close
+> ### Keywords: hplot
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- ursa_dummy(nband=6,min=0,max=255,mul=1/4)
+> 
+> ## exam 1
+> compose_open()
+> compose_close()
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa32_33b8.png' in external software.
+> 
+> ## exam 2
+> compose_open(a)
+> compose_close()
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa33_8eb6.png' in external software.
+> 
+> ## exam 3
+> compose_open("rgb",fileout="tmp1")
+> compose_plot(a[1:3])
+> compose_close(execute=FALSE)
+Use 'session_pngviewer(TRUE)' 
+to open '/var/scratch2/tomas/cran/rlibro/check/ursa.Rcheck/tmp1.png' in external software.
+> Sys.sleep(1)
+> a <- dir(pattern="tmp1.png")
+> print(a)
+[1] "tmp1.png"
+> file.remove(a)
+[1] TRUE
+> 
+> 
+> 
+> cleanEx()
+> nameEx("compose_design")
+> ### * compose_design
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: compose_design
+> ### Title: Organize multi-panel layout with images and color bars.
+> ### Aliases: compose_design ursaLayout
+> ### Keywords: dplot
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- ursa_dummy(nband=5,min=1,max=200,mul=1/8)
+> b <- list(colorize(a[1:3],pal.rich=240,pal.rotate=0)
++          ,colorize(sqrt(a[4:5]),pal.rich=-15,pal.rotate=0,stretch="equal"))
+> 
+> cl1 <- compose_design(layout=c(2,3),byrow=TRUE,legend=NULL)
+> print(cl1)
+$layout
+     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
+[1,]    0    0    0    0    0    0    0    0    0
+[2,]    0    0    0    0    0    0    0    0    0
+[3,]    0    0    1    0    2    0    3    0    0
+[4,]    0    0    0    0    0    0    0    0    0
+[5,]    0    0    4    0    5    0    6    0    0
+[6,]    0    0    0    0    0    0    0    0    0
+[7,]    0    0    0    0    0    0    0    0    0
+
+$image
+[1] 6
+
+$legend
+[1] 0
+
+attr(,"class")
+[1] "ursaLayout"
+> compose_open(cl1)
+> compose_close()
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa35_5e75.png' in external software.
+> 
+> cl2 <- compose_design(layout=c(2,3),byrow=FALSE,legend="left")
+> print(cl2$layout)
+     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
+[1,]    0    0    0    0    0    0    0    0    0
+[2,]    0    0    0    0    0    0    0    0    0
+[3,]    7    0    1    0    3    0    5    0    0
+[4,]    0    0    0    0    0    0    0    0    0
+[5,]    7    0    2    0    4    0    6    0    0
+[6,]    0    0    0    0    0    0    0    0    0
+[7,]    0    0    0    0    0    0    0    0    0
+> compose_open(cl2)
+> compose_close()
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa36_a2cd.png' in external software.
+> 
+> cl3 <- compose_design(a,side=2)
+> print(cl3)
+$layout
+     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
+[1,]    0    0    0    0    0    0    0    0    0
+[2,]    0    0    0    0    0    0    0    0    0
+[3,]    6    0    1    0    2    0    3    0    0
+[4,]    0    0    0    0    0    0    0    0    0
+[5,]    6    0    4    0    5    0    0    0    0
+[6,]    0    0    0    0    0    0    0    0    0
+[7,]    0    0    0    0    0    0    0    0    0
+
+$image
+[1] 5
+
+$legend
+[1] 1
+
+attr(,"class")
+[1] "ursaLayout"
+> compose_open(cl3)
+> compose_close()
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa37_7bd2.png' in external software.
+> 
+> cl4 <- compose_design(b)
+> print(cl4)
+$layout
+     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
+[1,]    0    0    6    0    7    0    0    0    0
+[2,]    0    0    0    0    0    0    0    0    0
+[3,]    0    0    1    0    2    0    3    0    0
+[4,]    0    0    0    0    0    0    0    0    0
+[5,]    0    0    4    0    5    0    0    0    0
+[6,]    0    0    0    0    0    0    0    0    0
+[7,]    0    0    0    0    0    0    0    0    0
+
+$image
+[1] 5
+
+$legend
+[1] 2
+
+attr(,"class")
+[1] "ursaLayout"
+> 
+> cl5 <- compose_design(b,byrow=FALSE,skip=3
++                      ,legend=list(list("full","left"),list(1:2,"right")))
+> compose_open(cl5)
+> compose_plot(b,decor=FALSE)
+> compose_close("nocrop")
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa38_f12b.png' in external software.
+> 
+> leg <- list(list(1,0),list(2,"left")
++            ,list("full","right"),list("top","full")
++            ,list(99,1:2),list("bottom",3))
+> str(leg)
+List of 6
+ $ :List of 2
+  ..$ : num 1
+  ..$ : num 0
+ $ :List of 2
+  ..$ : num 2
+  ..$ : chr "left"
+ $ :List of 2
+  ..$ : chr "full"
+  ..$ : chr "right"
+ $ :List of 2
+  ..$ : chr "top"
+  ..$ : chr "full"
+ $ :List of 2
+  ..$ : num 99
+  ..$ : int [1:2] 1 2
+ $ :List of 2
+  ..$ : chr "bottom"
+  ..$ : num 3
+> cl6 <- compose_design(layout=c(2,3),skip=NA,legend=leg)
+> print(cl6)
+$layout
+     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
+[1,]    0    0   10    0   10    0   10    0    0
+[2,]    0    0    0    0    0    0    0    0    0
+[3,]    7    0    1    0    2    0    3    0    9
+[4,]    0    0    0    0    0    0    0    0    0
+[5,]    8    0    4    0    5    0    6    0    9
+[6,]    0    0    0    0    0    0    0    0    0
+[7,]    0    0   11    0   11    0   12    0    0
+
+$image
+[1] 6
+
+$legend
+[1] 6
+
+attr(,"class")
+[1] "ursaLayout"
+> compose_open(cl6,scale=3,pointsize=16)
+> compose_close("nocrop")
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa40_1959.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("compose_legend")
+> ### * compose_legend
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: compose_legend
+> ### Title: Plot colorbars or marginal texts.
+> ### Aliases: compose_legend
+> ### Keywords: hplot
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> b <- lapply(as.list(ursa_dummy(2)),colorize)
+> cd <- compose_design(layout=c(1,2),legend=list(list(1,"left"),list(1,"right")
++                                               ,list("top","full"),list("bottom",1)))
+> for (i in 1:4) {
++    compose_open(cd,dev=i==1)
++    ct <- compose_panel(b,decor=FALSE)
++    if (i==2)
++       compose_legend(ct)
++    else if (i==3)
++       compose_legend(ct[[1]],'Tomorrow'=b[[2]]
++                     ,top="This is example of legend composition"
++                     ,format(Sys.Date(),"(c) %Y"))
++    else if (i==4)
++       compose_legend(c(ct,"top","bottom"),units=c("left","right"))
++    compose_close()
++ }
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa41_94a9.png' in external software.
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa42_766c.png' in external software.
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa43_30b1.png' in external software.
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa44_9760.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("compose_open")
+> ### * compose_open
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: compose_open
+> ### Title: Start displaying
+> ### Aliases: compose_open
+> ### Keywords: hplot
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> b <- ursa_dummy(nband=4,min=0,max=50,mul=1/4,elements=16)
+> p <- list(colorize(b[1:2],pal.rich=240,pal.rotate=0)
++          ,colorize(sqrt(b[3:4]),pal.rich=-15,pal.rotate=0,stretch="equal"))
+> p
+[[1]]
+           name    mean      sd    sum min  max    n nNA
+[1] Thursday 19 25.6864 6.95625 218643 7.8 42.8 8512   0
+[2] Friday 20   23.7574 8.08225 202223 5.2 42.8 8512   0
+
+[[2]]
+           name    mean       sd     sum   min   max    n nNA
+[3] Saturday 21 5.01356 0.844536 42675.4 2.588 6.641 8512   0
+[4] Sunday 22   4.96339 0.767577 42248.3 2.588 6.641 8512   0
+
+>  
+> ## exam #01
+> compose_open(width=950,dpi=150,pointsize=16,legend=NULL,dev=TRUE)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa45_60c0.png' in external software.
+> 
+> ## exam #02
+> compose_open(pointsize=8,dpi=150,scale="1:130000000")
+> compose_plot(colorize(b[1]),scalebar=TRUE,coast=FALSE)
+Composer: figure width for 1:130000000 scale is 5.84615384615385 cm
+> compose_close()
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa46_f791.png' in external software.
+> 
+> ## exam #03
+> cl <- compose_design(layout=c(2,4)
++                     ,legend=list(list("top","full"),list("bottom",1:3)))
+> compose_open(cl,dev=TRUE)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa47_dfa7.png' in external software.
+> 
+> ## exam #04
+> cl <- compose_design(p,layout=c(2,3),skip=c(2,4,6))
+> compose_open(cl,dev=TRUE)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa48_dd3a.png' in external software.
+> 
+> ## exam #05
+> cl <- compose_design(p,side=3)
+> compose_open(cl,dev=FALSE,bg="transparent")
+> compose_close()
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa49_c23d.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("compose_panel")
+> ### * compose_panel
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: compose_panel
+> ### Title: Plot raster images and decorations on the multipanel layout.
+> ### Aliases: compose_panel
+> ### Keywords: hplot
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- ursa_dummy(6)
+> b1 <- list(maxi=a[1:4]*1e2,mini=a[5:6]/1e2)
+> print(b1)
+$maxi
+           name    mean      sd        sum     min     max      n nNA
+[1] Thursday 19 12609.2 3357.67 1717266848 5357.95 21731.0 136192   0
+[2] Friday 20   13910.5 4031.58 1894503147 4991.91 22967.5 136192   0
+[3] Saturday 21 11701.9 3369.98 1593704283 3141.95 21627.2 136192   0
+[4] Sunday 22   13954.4 3844.50 1900476992 4561.67 20929.5 136192   0
+
+$mini
+          name     mean       sd    sum      min     max      n nNA
+[5] Monday 23  1.307869 0.409018 178121 0.296589 2.25734 136192   0
+[6] Tuesday 24 0.920531 0.360010 125369 0.327810 2.33204 136192   0
+
+> b2 <- lapply(b1,function(x) colorize(x,nbreak=ifelse(global_mean(x)<100,5,NA)))
+> compose_open(b2,byrow=FALSE
++             ,legend=list(list("bottom",1:2),list("bottom",3),list("left")))
+> ct <- compose_panel(b2,scalebar=2,coastline=3:4,gridline=5:6,gridline.margin=5
++                    ,annotation.text=as.character(seq(6)))
+> compose_legend(ct)
+> legend_mtext(as.expression(substitute(italic("Colorbars are on the bottom"))))
+> compose_close()
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa50_78f1.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("compose_plot")
+> ### * compose_plot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: compose_plot
+> ### Title: Plot layout of images and color bars.
+> ### Aliases: compose_plot
+> ### Keywords: hplot
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- ursa_dummy(nband=6,min=0,max=255,mul=1/4)
+> if (example1 <- TRUE) {
++    b1 <- ursa_brick(a)
++   # b1 <- colorize(b1,stretch="positive",ramp=FALSE)
++    compose_open(b1)
++    compose_plot(b1,grid=FALSE,coast=FALSE,scale=FALSE,trim=1
++                ,stretch="positive",ramp=!FALSE)
++    compose_close()
++ }
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa52_b995.png' in external software.
+> if (example2 <- TRUE) {
++    b2 <- ursa_stack(a)
++    compose_open(b2)
++    compose_plot(b2,grid=FALSE,coast=FALSE,labels=5,trim=2,las=0)
++    compose_close()
++ }
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa54_3567.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("conn.create_any")
+> ### * conn.create_any
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: create_envi
+> ### Title: Create ENVI or GDAL files on disk
+> ### Aliases: create_envi create_gdal
+> ### Keywords: connection
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- create_envi()
+Filename is assigned automatically: /tmp/Rtmpn9IP2V/___ursa56_a594
+> fname <- a$con$fname
+> dir(pattern=basename(envi_list(fname)))
+character(0)
+> close(a)
+> invisible(envi_remove(fname))
+> 
+> a <- create_envi("exam1",layername=paste("Band",1:5)
++                 ,ignorevalue=99,datatype="Int16",interleave="bil")
+> ursa_info(a)
+List of 14
+ $ columns   : int 304
+ $ rows      : int 448
+ $ resx      : num 25000
+ $ resy      : num 25000
+ $ minx      : num -3850000
+ $ maxx      : num 3750000
+ $ miny      : num -5350000
+ $ maxy      : num 5850000
+ $ proj4     : chr "+proj=stere +lat_0=90 +lat_ts=70.0 +lon_0=-45.0 +k=1 +x_0=0.0 +y_0=0.0 +a=6378273.000 +b=6356889.449 +units=m +no_defs"
+ $ nodata    : int 99
+ $ datatype  : int 2
+ $ interleave: chr "bil"
+ $ mode      : chr [1:2] "integer" "logical"
+ $ bandname  : chr [1:5] "Band 1" "Band 2" "Band 3" "Band 4" ...
+ - attr(*, "class")= chr "ursaMetadata"
+> print(a[])
+      name mean sd sum min max      n nNA
+[1] Band 1    0  0   0   0   0 136192   0
+[2] Band 2    0  0   0   0   0 136192   0
+[3] Band 3    0  0   0   0   0 136192   0
+[4] Band 4    0  0   0   0   0 136192   0
+[5] Band 5    0  0   0   0   0 136192   0
+> close(a)
+> invisible(envi_remove("exam1"))
+> 
+> 
+> 
+> cleanEx()
+> nameEx("conn.open_envi")
+> ### * conn.open_envi
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: open_envi
+> ### Title: open_envi file
+> ### Aliases: open_envi
+> ### Keywords: connection
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- pixelsize()
+> write_envi(a,"example")
+> a <- open_envi("example")
+> dir(pattern="^example.*")
+[1] "example.envigz" "example.hdr"   
+> ursa_info(a)
+List of 14
+ $ columns   : int 304
+ $ rows      : int 448
+ $ resx      : num 25000
+ $ resy      : num 25000
+ $ minx      : num -3850000
+ $ maxx      : num 3750000
+ $ miny      : num -5350000
+ $ maxy      : num 5850000
+ $ proj4     : chr "+proj=stere +lat_0=90 +lat_ts=70.0 +lon_0=-45.0 +k=1 +x_0=0.0 +y_0=0.0 +a=6378273.000 +b=6356889.449 +units=m +no_defs"
+ $ nodata    : num -99
+ $ datatype  : int 4
+ $ interleave: chr "bsq"
+ $ mode      : chr [1:2] "double" "logical"
+ $ bandname  : chr "Pixel Size (sq.km)"
+ - attr(*, "class")= chr "ursaMetadata"
+> close(a)
+> rm(a)
+> envi_remove("example")
+> 
+> ## additional arguments are enough to create new ENVI file
+> dir(pattern="^example.*")
+character(0)
+> a <- open_envi("example",layername=paste0("test",1:3))
+Warning in open_envi("example", layername = paste0("test", 1:3)) :
+  ENVI header 'example' not found. Trying to interpret additional arguments for creating new.
+> ursa_info(a)
+List of 14
+ $ columns   : int 304
+ $ rows      : int 448
+ $ resx      : num 25000
+ $ resy      : num 25000
+ $ minx      : num -3850000
+ $ maxx      : num 3750000
+ $ miny      : num -5350000
+ $ maxy      : num 5850000
+ $ proj4     : chr "+proj=stere +lat_0=90 +lat_ts=70.0 +lon_0=-45.0 +k=1 +x_0=0.0 +y_0=0.0 +a=6378273.000 +b=6356889.449 +units=m +no_defs"
+ $ nodata    : num -10000
+ $ datatype  : int 4
+ $ interleave: chr "bsq"
+ $ mode      : chr [1:2] "numeric" "logical"
+ $ bandname  : chr [1:3] "test1" "test2" "test3"
+ - attr(*, "class")= chr "ursaMetadata"
+> dir(pattern="^example.*")
+[1] "example.envi" "example.hdr" 
+> close(a)
+> envi_remove("example")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("conn.open_gdal")
+> ### * conn.open_gdal
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: open_gdal
+> ### Title: Open GDAL file
+> ### Aliases: open_gdal ursa_open
+> ### Keywords: connection
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> fname1 <- system.file("pictures/cea.tif",package="rgdal")
+> message(fname1)
+/var/scratch2ro/tomas/cran/rlibro/lib/rgdal/pictures/cea.tif
+> a1 <- open_gdal(fname1)
+> print(a1)
+List of 11
+ $ columns : int 514
+ $ rows    : int 515
+ $ resx    : num 60
+ $ resy    : num 60
+ $ minx    : num -28493
+ $ maxx    : num 2358
+ $ miny    : num 4224973
+ $ maxy    : num 4255885
+ $ proj4   : chr "+proj=cea +lon_0=-117.333333333333 +lat_ts=33.75 +x_0=0 +y_0=0 +datum=NAD27 +units=m +no_defs "
+ $ mode    : chr [1:2] "raw" "logical"
+ $ bandname: chr "Band 1"
+ - attr(*, "class")= chr "ursaMetadata"
+NULL
+> print(a1[])
+      name    mean      sd      sum min max      n nNA
+[1] Band 1 103.149 58.8975 27304701   0 255 264710   0
+> close(a1)
+> fname2 <- system.file("pictures/test_envi_class.envi",package="rgdal")
+> message(fname2)
+/var/scratch2ro/tomas/cran/rlibro/lib/rgdal/pictures/test_envi_class.envi
+> b1 <- open_gdal(fname2)
+> b2 <- open_envi(fname2)
+Warning in file("/var/scratch2ro/tomas/cran/rlibro/lib/rgdal/pictures/test_envi_class.envi",  :
+  cannot open file '/var/scratch2ro/tomas/cran/rlibro/lib/rgdal/pictures/test_envi_class.envi': Read-only file system
+> print(b1)
+List of 12
+ $ columns   : int 30
+ $ rows      : int 30
+ $ resx      : num 0.5
+ $ resy      : num 0.5
+ $ minx      : num -100
+ $ maxx      : num -85
+ $ miny      : num 48.1
+ $ maxy      : num 63.1
+ $ proj4     : chr "+proj=longlat +datum=WGS84 +no_defs "
+ $ mode      : chr [1:2] "raw" "logical"
+ $ bandname  : chr "Band 1"
+ $ colortable: 'ursaColorTable' Named chr [1:11] "#000000" "#FF0000" "#FF9900" "#CCFF00" ...
+  ..- attr(*, "names")= chr [1:11] "Unclassified" "temperature_min" "temperature_max" "temperature_var" ...
+ - attr(*, "class")= chr "ursaMetadata"
+NULL
+> print(b2)
+List of 14
+ $ columns   : int 30
+ $ rows      : int 30
+ $ resx      : num 0.5
+ $ resy      : num 0.5
+ $ minx      : num -100
+ $ maxx      : num -85
+ $ miny      : num 48.1
+ $ maxy      : num 63.1
+ $ proj4     : chr "+proj=longlat +datum=WGS84 +no_defs "
+ $ datatype  : int 2
+ $ interleave: chr "bsq"
+ $ mode      : chr [1:2] "integer" "logical"
+ $ bandname  : chr "Band 1"
+ $ colortable: 'ursaColorTable' Named chr [1:11] "#000000" "#FF0000" "#FF9900" "#CCFF00" ...
+  ..- attr(*, "names")= chr [1:11] "Unclassified" "temperature_min" "temperature_max" "temperature_var" ...
+ - attr(*, "class")= chr "ursaMetadata"
+NULL
+> print(c('The same grid?'=identical(ursa_grid(b1),ursa_grid(b2))
++        ,'The same data?'=identical(ursa_value(b1[]),ursa_value(b2[]))))
+The same grid? The same data? 
+          TRUE           TRUE 
+> close(b1,b2)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("conn.read_envi")
+> ### * conn.read_envi
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: read_envi
+> ### Title: Read ENVI .hdr Labelled Raster file to memory
+> ### Aliases: read_envi
+> ### Keywords: connection
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> fname <- tempfile()
+> a <- ursa_dummy()
+> bandname(a) <- c("first","second","third")
+> write_envi(a,fname,compress=FALSE)
+> 
+> print(read_envi(fname))
+      name    mean      sd      sum     min     max      n nNA
+[1] first  126.092 33.5767 17172668 53.5795 217.311 136192   0
+[2] second 139.105 40.3158 18945031 49.9191 229.675 136192   0
+[3] third  117.019 33.6998 15937043 31.4195 216.272 136192   0
+> print(read_envi(fname,c(1,3)))
+     name    mean      sd      sum     min     max      n nNA
+[1] first 126.092 33.5767 17172668 53.5795 217.311 136192   0
+[3] third 117.019 33.6998 15937043 31.4195 216.272 136192   0
+> print(read_envi(fname,-c(1,3)))
+      name    mean      sd      sum     min     max      n nNA
+[2] second 139.105 40.3158 18945031 49.9191 229.675 136192   0
+> print(read_envi(fname,c("first","third")))
+     name    mean      sd      sum     min     max      n nNA
+[1] first 126.092 33.5767 17172668 53.5795 217.311 136192   0
+[3] third 117.019 33.6998 15937043 31.4195 216.272 136192   0
+> print(read_envi(fname,"iR"))
+     name    mean      sd      sum     min     max      n nNA
+[1] first 126.092 33.5767 17172668 53.5795 217.311 136192   0
+[3] third 117.019 33.6998 15937043 31.4195 216.272 136192   0
+> 
+> print(session_grid())
+List of 9
+ $ columns: int 304
+ $ rows   : int 448
+ $ resx   : num 25000
+ $ resy   : num 25000
+ $ minx   : num -3850000
+ $ maxx   : num 3750000
+ $ miny   : num -5350000
+ $ maxy   : num 5850000
+ $ proj4  : chr "+proj=stere +lat_0=90 +lat_ts=70.0 +lon_0=-45.0 +k=1 +x_0=0.0 +y_0=0.0 +a=6378273.000 +b=6356889.449 +units=m +no_defs"
+ - attr(*, "class")= chr ".ursaGrid"
+> g <- regrid(session_grid(),mul=1/2.3)
+> b <- read_envi(fname,ref=g)
+> print(session_grid())
+List of 9
+ $ columns: int 304
+ $ rows   : int 448
+ $ resx   : num 25000
+ $ resy   : num 25000
+ $ minx   : num -3850000
+ $ maxx   : num 3750000
+ $ miny   : num -5350000
+ $ maxy   : num 5850000
+ $ proj4  : chr "+proj=stere +lat_0=90 +lat_ts=70.0 +lon_0=-45.0 +k=1 +x_0=0.0 +y_0=0.0 +a=6378273.000 +b=6356889.449 +units=m +no_defs"
+ - attr(*, "class")= chr ".ursaGrid"
+> print(b)
+      name    mean      sd     sum     min     max     n nNA
+[1] first  126.061 33.6445 3286145 53.5795 216.438 26068   0
+[2] second 139.015 40.2939 3623851 49.9479 229.604 26068   0
+[3] third  116.866 33.8325 3046463 31.4282 215.777 26068   0
+> 
+> envi_remove(fname)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("conn.read_gdal")
+> ### * conn.read_gdal
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: read_gdal
+> ### Title: Read GDAL supported raster files.
+> ### Aliases: read_gdal ursa_read
+> ### Keywords: connection
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> 
+> rgdal::gdalDrivers()
+               name                                                   long_name
+1           AAIGrid                                         Arc/Info ASCII Grid
+2              ACE2                                                        ACE2
+3              ADRG                               ARC Digitized Raster Graphics
+4               AIG                                        Arc/Info Binary Grid
+5               ARG                                   Azavea Raster Grid format
+6            AirSAR                                   AirSAR Polarimetric Image
+7               BAG                                  Bathymetry Attributed Grid
+8            BIGGIF                          Graphics Interchange Format (.gif)
+9               BLX                                        Magellan topo (.blx)
+10              BMP                        MS Windows Device Independent Bitmap
+11              BSB                                 Maptech BSB Nautical Charts
+12               BT                         VTP .bt (Binary Terrain) 1.3 Format
+13              CAD                                              AutoCAD Driver
+14             CALS                                               CALS (Type 1)
+15             CEOS                                                  CEOS Image
+16            COASP                             DRDC COASP SAR Processor Raster
+17            COSAR                  COSAR Annotated Binary Matrix (TerraSAR-X)
+18              CPG                                             Convair PolGASP
+19              CTG                              USGS LULC Composite Theme Grid
+20          CTable2                                    CTable2 Datum Grid Shift
+21          DERIVED                  Derived datasets using VRT pixel functions
+22            DIMAP                                                  SPOT DIMAP
+23            DIPEx                                                       DIPEx
+24             DODS                                             DAP 3.x servers
+25             DOQ1                                        USGS DOQ (Old Style)
+26             DOQ2                                        USGS DOQ (New Style)
+27             DTED                                       DTED Elevation Raster
+28          E00GRID                                    Arc/Info Export E00 GRID
+29          ECRGTOC                                             ECRG TOC format
+30             EHdr                                          ESRI .hdr Labelled
+31              EIR                                           Erdas Imagine Raw
+32             ELAS                                                        ELAS
+33             ENVI                                          ENVI .hdr Labelled
+34              ERS                                      ERMapper .ers Labelled
+35             ESAT                                        Envisat Image Format
+36             FAST                                           EOSAT FAST Format
+37              FIT                                                   FIT Image
+38             FITS                             Flexible Image Transport System
+39          FujiBAS                                      Fuji BAS Scanner Image
+40              GFF    Ground-based SAR Applications Testbed File Format (.gff)
+41              GIF                          Graphics Interchange Format (.gif)
+42              GMT                                      GMT NetCDF Grid Format
+43             GPKG                                                  GeoPackage
+44   GRASSASCIIGrid                                            GRASS ASCII Grid
+45             GRIB                                GRIdded Binary (.grb, .grb2)
+46            GS7BG                        Golden Software 7 Binary Grid (.grd)
+47             GSAG                           Golden Software ASCII Grid (.grd)
+48             GSBG                          Golden Software Binary Grid (.grd)
+49              GSC                                                 GSC Geogrid
+50              GTA                                Generic Tagged Arrays (.gta)
+51              GTX                                    NOAA Vertical Datum .GTX
+52            GTiff                                                     GeoTIFF
+53              GXF                                GeoSoft Grid Exchange Format
+54           GenBin                              Generic Binary (.hdr Labelled)
+55             HDF4                          Hierarchical Data Format Release 4
+56        HDF4Image                                                HDF4 Dataset
+57             HDF5                          Hierarchical Data Format Release 5
+58        HDF5Image                                                HDF5 Dataset
+59              HF2                                  HF2/HFZ heightfield raster
+60              HFA                                 Erdas Imagine Images (.img)
+61             HTTP                                       HTTP Fetching Wrapper
+62              IDA                                     Image Data and Analysis
+63            ILWIS                                            ILWIS Raster Map
+64             INGR                                           Intergraph Raster
+65             IRIS                                IRIS data (.PPI, .CAPPi etc)
+66             ISCE                                                 ISCE raster
+67            ISIS2                     USGS Astrogeology ISIS cube (Version 2)
+68            ISIS3                     USGS Astrogeology ISIS cube (Version 3)
+69       JAXAPALSAR                  JAXA PALSAR Product Reader (Level 1.1/1.5)
+70             JDEM                                         Japanese DEM (.mem)
+71      JP2OpenJPEG                  JPEG-2000 driver based on OpenJPEG library
+72             JPEG                                                   JPEG JFIF
+73         JPEG2000 JPEG-2000 part 1 (ISO/IEC 15444-1), based on Jasper library
+74  KMLSUPEROVERLAY                                           Kml Super Overlay
+75              KRO                                                   KOLOR Raw
+76              L1B                        NOAA Polar Orbiter Level 1b Data Set
+77              LAN                                             Erdas .LAN/.GIS
+78              LCP                           FARSITE v.4 Landscape File (.lcp)
+79           LOSLAS                           NADCON .los/.las Datum Grid Shift
+80         Leveller                                        Leveller heightfield
+81              MAP                                            OziExplorer .MAP
+82          MBTiles                                                     MBTiles
+83              MEM                                            In Memory Raster
+84              MFF                                           Vexcel MFF Raster
+85             MFF2                                    Vexcel MFF2 (HKV) Raster
+86              MRF                                          Meta Raster Format
+87             MSGN                              EUMETSAT Archive native (.nat)
+88              NDF                                           NLAPS Data Format
+89         NGSGEOID                                 NOAA NGS Geoid Height Grids
+90             NITF                        National Imagery Transmission Format
+91             NTv2                                       NTv2 Datum Grid Shift
+92          NWT_GRC                  Northwood Classified Grid Format .grc/.tab
+93          NWT_GRD                     Northwood Numeric Grid Format .grd/.tab
+94              OZI                                      OziExplorer Image File
+95             PAux                                           PCI .aux Labelled
+96           PCIDSK                                        PCIDSK Database File
+97         PCRaster                                        PCRaster Raster File
+98              PDF                                              Geospatial PDF
+99              PDS                                  NASA Planetary Data System
+100            PDS4                                NASA Planetary Data System 4
+101        PLMOSAIC                                     Planet Labs Mosaics API
+102        PLSCENES                                      Planet Labs Scenes API
+103             PNG                                   Portable Network Graphics
+104             PNM                             Portable Pixmap Format (netpbm)
+105             PRF                                         Racurs PHOTOMOD PRF
+106   PostGISRaster                                       PostGIS Raster driver
+107               R                                         R Object Data Store
+108             RDA                      DigitalGlobe Raster Data Access driver
+109             RIK                                     Swedish Grid RIK (.rik)
+110             RMF                                        Raster Matrix Format
+111         ROI_PAC                                              ROI_PAC raster
+112          RPFTOC                            Raster Product Format TOC format
+113         RRASTER                                                    R Raster
+114             RS2                                      RadarSat 2 XML Product
+115             RST                                           Idrisi Raster A.1
+116      Rasterlite                                                  Rasterlite
+117            SAFE                                 Sentinel-1 SAR SAFE Product
+118            SAGA                     SAGA GIS Binary Grid (.sdat, .sg-grd-z)
+119        SAR_CEOS                                              CEOS SAR Image
+120            SDTS                                                 SDTS Raster
+121       SENTINEL2                                                  Sentinel 2
+122             SGI                                   SGI Image File Format 1.0
+123          SNODAS                               Snow Data Assimilation System
+124             SRP                         Standard Raster Product (ASRP/USRP)
+125         SRTMHGT                                         SRTMHGT File Format
+126             TIL                                             EarthWatch .TIL
+127             TSX                                          TerraSAR-X Product
+128        Terragen                                        Terragen heightfield
+129         USGSDEM                          USGS Optional ASCII DEM (and CDED)
+130           VICAR                                             MIPL VICAR file
+131             VRT                                              Virtual Raster
+132             WCS                                    OGC Web Coverage Service
+133            WEBP                                                        WEBP
+134             WMS                                         OGC Web Map Service
+135            WMTS                                    OGC Web Map Tile Service
+136             XPM                                           X11 PixMap Format
+137             XYZ                                           ASCII Gridded XYZ
+138            ZMap                                              ZMap Plus Grid
+139          netCDF                                  Network Common Data Format
+    create  copy isRaster
+1    FALSE  TRUE     TRUE
+2    FALSE FALSE     TRUE
+3     TRUE FALSE     TRUE
+4    FALSE FALSE     TRUE
+5    FALSE  TRUE     TRUE
+6    FALSE FALSE     TRUE
+7    FALSE FALSE     TRUE
+8    FALSE FALSE     TRUE
+9    FALSE  TRUE     TRUE
+10    TRUE FALSE     TRUE
+11   FALSE FALSE     TRUE
+12    TRUE FALSE     TRUE
+13   FALSE FALSE     TRUE
+14   FALSE  TRUE     TRUE
+15   FALSE FALSE     TRUE
+16   FALSE FALSE     TRUE
+17   FALSE FALSE     TRUE
+18   FALSE FALSE     TRUE
+19   FALSE FALSE     TRUE
+20    TRUE FALSE     TRUE
+21   FALSE FALSE     TRUE
+22   FALSE FALSE     TRUE
+23   FALSE FALSE     TRUE
+24   FALSE FALSE     TRUE
+25   FALSE FALSE     TRUE
+26   FALSE FALSE     TRUE
+27   FALSE  TRUE     TRUE
+28   FALSE FALSE     TRUE
+29   FALSE FALSE     TRUE
+30    TRUE  TRUE     TRUE
+31   FALSE FALSE     TRUE
+32    TRUE FALSE     TRUE
+33    TRUE FALSE     TRUE
+34    TRUE FALSE     TRUE
+35   FALSE FALSE     TRUE
+36   FALSE FALSE     TRUE
+37   FALSE  TRUE     TRUE
+38    TRUE FALSE     TRUE
+39   FALSE FALSE     TRUE
+40   FALSE FALSE     TRUE
+41   FALSE  TRUE     TRUE
+42   FALSE  TRUE     TRUE
+43    TRUE  TRUE     TRUE
+44   FALSE FALSE     TRUE
+45   FALSE  TRUE     TRUE
+46    TRUE  TRUE     TRUE
+47   FALSE  TRUE     TRUE
+48    TRUE  TRUE     TRUE
+49   FALSE FALSE     TRUE
+50   FALSE  TRUE     TRUE
+51    TRUE FALSE     TRUE
+52    TRUE  TRUE     TRUE
+53   FALSE FALSE     TRUE
+54   FALSE FALSE     TRUE
+55   FALSE FALSE     TRUE
+56    TRUE FALSE     TRUE
+57   FALSE FALSE     TRUE
+58   FALSE FALSE     TRUE
+59   FALSE  TRUE     TRUE
+60    TRUE  TRUE     TRUE
+61   FALSE FALSE     TRUE
+62    TRUE FALSE     TRUE
+63    TRUE  TRUE     TRUE
+64    TRUE  TRUE     TRUE
+65   FALSE FALSE     TRUE
+66    TRUE FALSE     TRUE
+67    TRUE FALSE     TRUE
+68    TRUE  TRUE     TRUE
+69   FALSE FALSE     TRUE
+70   FALSE FALSE     TRUE
+71   FALSE  TRUE     TRUE
+72   FALSE  TRUE     TRUE
+73   FALSE  TRUE     TRUE
+74   FALSE  TRUE     TRUE
+75    TRUE FALSE     TRUE
+76   FALSE FALSE     TRUE
+77    TRUE FALSE     TRUE
+78   FALSE  TRUE     TRUE
+79   FALSE FALSE     TRUE
+80    TRUE FALSE     TRUE
+81   FALSE FALSE     TRUE
+82    TRUE  TRUE     TRUE
+83    TRUE FALSE     TRUE
+84    TRUE  TRUE     TRUE
+85    TRUE  TRUE     TRUE
+86    TRUE  TRUE     TRUE
+87   FALSE FALSE     TRUE
+88   FALSE FALSE     TRUE
+89   FALSE FALSE     TRUE
+90    TRUE  TRUE     TRUE
+91    TRUE FALSE     TRUE
+92   FALSE FALSE     TRUE
+93    TRUE  TRUE     TRUE
+94   FALSE FALSE     TRUE
+95    TRUE FALSE     TRUE
+96    TRUE FALSE     TRUE
+97    TRUE  TRUE     TRUE
+98    TRUE  TRUE     TRUE
+99   FALSE FALSE     TRUE
+100   TRUE  TRUE     TRUE
+101  FALSE FALSE     TRUE
+102  FALSE FALSE     TRUE
+103  FALSE  TRUE     TRUE
+104   TRUE FALSE     TRUE
+105  FALSE FALSE     TRUE
+106  FALSE  TRUE     TRUE
+107  FALSE  TRUE     TRUE
+108  FALSE FALSE     TRUE
+109  FALSE FALSE     TRUE
+110   TRUE FALSE     TRUE
+111   TRUE FALSE     TRUE
+112  FALSE FALSE     TRUE
+113   TRUE  TRUE     TRUE
+114  FALSE FALSE     TRUE
+115   TRUE  TRUE     TRUE
+116  FALSE  TRUE     TRUE
+117  FALSE FALSE     TRUE
+118   TRUE  TRUE     TRUE
+119  FALSE FALSE     TRUE
+120  FALSE FALSE     TRUE
+121  FALSE FALSE     TRUE
+122   TRUE FALSE     TRUE
+123  FALSE FALSE     TRUE
+124  FALSE FALSE     TRUE
+125  FALSE  TRUE     TRUE
+126  FALSE FALSE     TRUE
+127  FALSE FALSE     TRUE
+128   TRUE FALSE     TRUE
+129  FALSE  TRUE     TRUE
+130  FALSE FALSE     TRUE
+131   TRUE  TRUE     TRUE
+132  FALSE FALSE     TRUE
+133  FALSE  TRUE     TRUE
+134  FALSE  TRUE     TRUE
+135  FALSE  TRUE     TRUE
+136  FALSE  TRUE     TRUE
+137  FALSE  TRUE     TRUE
+138  FALSE  TRUE     TRUE
+139   TRUE  TRUE     TRUE
+> Fin1 <- system.file("pictures/Rlogo.jpg",package="rgdal")
+> a1 <- read_gdal(Fin1)
+> print(a1)
+      name    mean      sd     sum min max     n nNA
+[1] Band 1 192.374 86.7069 6733079   8 255 35000   0
+[2] Band 2 206.699 61.9482 7234462  75 255 35000   0
+[3] Band 3 224.597 36.0743 7860887 127 255 35000   0
+> display(a1)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa62_4ce8.png' in external software.
+> 
+> Fin2 <- system.file("pictures/test_envi_class.envi",package="rgdal")
+> b1 <- read_gdal(Fin2)
+> b2 <- read_envi(Fin2,resetGrid=TRUE)
+Warning in file("/var/scratch2ro/tomas/cran/rlibro/lib/rgdal/pictures/test_envi_class.envi",  :
+  cannot open file '/var/scratch2ro/tomas/cran/rlibro/lib/rgdal/pictures/test_envi_class.envi': Read-only file system
+Warning in file("/var/scratch2ro/tomas/cran/rlibro/lib/rgdal/pictures/test_envi_class.envi",  :
+  cannot open file '/var/scratch2ro/tomas/cran/rlibro/lib/rgdal/pictures/test_envi_class.envi': Read-only file system
+> print(identical(ursa_grid(b1),ursa_grid(b2)))
+[1] FALSE
+> print(identical(ursa_value(b1),ursa_value(b2)))
+[1] TRUE
+> print(identical(ursa_colortable(b1),ursa_colortable(b2)))
+[1] TRUE
+> print(ursa_colortable(b1))
+      Unclassified    temperature_min    temperature_max    temperature_var 
+         "#000000"          "#FF0000"          "#FF9900"          "#CCFF00" 
+precipitation_mean  precipitation_var           wnd_mean           rad_mean 
+         "#33FF00"          "#00FF66"          "#00FFFF"          "#0066FF" 
+          eto_mean           aet_mean           def_mean 
+         "#3300FF"          "#CC00FF"          "#FF0099" 
+> print(as.table(b1))
+      Unclassified    temperature_min    temperature_max    temperature_var 
+               289                241                  0                224 
+precipitation_mean  precipitation_var           wnd_mean           rad_mean 
+                 0                  0                  0                 50 
+          eto_mean           aet_mean           def_mean 
+                49                 47                  0 
+> display(b1,detail="l")
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa64_e449.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("conn.write_envi")
+> ### * conn.write_envi
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: write_envi
+> ### Title: Write raster image to ENVI .hdr Labelled Raster file.
+> ### Aliases: write_envi
+> ### Keywords: connection
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> dir.create(tmpWD <- file.path(tempdir(),"certain"))
+> wd <- setwd(tmpWD)
+> print(c('temp dir'=session_tempdir(),'working dir'=getwd()))
+                 temp dir               working dir 
+        "/tmp/Rtmpn9IP2V" "/tmp/Rtmpn9IP2V/certain" 
+> list1a <- envi_list(session_tempdir())
+> list1b <- envi_list()
+> fname <- tempfile(tmpdir=".")
+> a <- ursa_dummy()
+> bandname(a) <- c("first","second","third")
+> write_envi(a)
+Filename is assigned automatically: /tmp/Rtmpn9IP2V/___ursa65_5188
+> write_envi(a,fname)
+> list2a <- envi_list(session_tempdir())
+> list2b <- envi_list()
+> fname1 <- list2a[!(list2a %in% list1a)]
+> fname2 <- list2b[!(list2b %in% list1b)]
+> print(c('in temp dir'=fname1,'in working dir'=fname2))
+                     in temp dir                   in working dir 
+"/tmp/Rtmpn9IP2V/___ursa65_5188"               "file26ef62e62506" 
+> a2 <- open_envi(fname1)
+> print(a2)
+List of 13
+ $ columns   : int 304
+ $ rows      : int 448
+ $ resx      : num 25000
+ $ resy      : num 25000
+ $ minx      : num -3850000
+ $ maxx      : num 3750000
+ $ miny      : num -5350000
+ $ maxy      : num 5850000
+ $ proj4     : chr "+proj=stere +lat_0=90 +lat_ts=70.0 +lon_0=-45.0 +k=1 +x_0=0.0 +y_0=0.0 +a=6378273.000 +b=6356889.449 +units=m +no_defs"
+ $ datatype  : int 4
+ $ interleave: chr "bsq"
+ $ mode      : chr [1:2] "double" "logical"
+ $ bandname  : chr [1:3] "first" "second" "third"
+ - attr(*, "class")= chr "ursaMetadata"
+NULL
+> close(a2)
+> envi_remove(c(fname1,fname2))
+> setwd(wd)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("conn.write_gdal")
+> ### * conn.write_gdal
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: write_gdal
+> ### Title: Write raster image to GDAL file(s)
+> ### Aliases: write_gdal ursa_write
+> ### Keywords: connection
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> ftemp <- tempfile(pattern="",fileext="")
+> fpath <- dirname(ftemp)
+> fname <- basename(ftemp)
+> a <- round(ursa_dummy(1,min=0,max=255,nodata=NA))
+> write_envi(a,file.path(fpath,paste0(fname,"_1",".envi")))
+> write_gdal(a,file.path(fpath,paste0(fname,"_2")))
+> write_gdal(a,file.path(fpath,paste0(fname,"_3",".tif")))
+> write_gdal(a,file.path(fpath,paste0(fname,"_4")),driver="EHdr")
+> flist <- dir(path=fpath,pattern=fname,full.names=TRUE)
+> file.remove(flist)
+ [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+> blist <- basename(flist)
+> res <- NULL
+> for (i in seq(4))
++    res <- c(res,paste(grep(paste0("_",i),blist,value=TRUE),collapse=" "))
+> print(res)
+[1] "26ef7cadf251_1.envi 26ef7cadf251_1.hdr"                                     
+[2] "26ef7cadf251_2 26ef7cadf251_2.aux.xml 26ef7cadf251_2.hdr"                   
+[3] "26ef7cadf251_3.tif 26ef7cadf251_3.tif.aux.xml"                              
+[4] "26ef7cadf251_4 26ef7cadf251_4.aux.xml 26ef7cadf251_4.hdr 26ef7cadf251_4.prj"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("cubehelix")
+> ### * cubehelix
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: cubehelix
+> ### Title: Generate "cubehelix" palette.
+> ### Aliases: cubehelix
+> ### Keywords: color
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> set.seed(352)
+> session_grid(regrid(mul=1/16))
+> a <- ursa_dummy(3,min=0,max=255)
+> b4 <- b3 <- b2 <- b1 <- vector("list",length(a))
+> for (i in seq_along(b1)) {
++    b1[[i]] <- colorize(a[i],pal=cubehelix(11,weak=45*i,rotate=+270),ncolor=11)
++    b2[[i]] <- colorize(a[i],pal=cubehelix(11,weak=45*i,rotate=-270),ncolor=11)
++    b3[[i]] <- colorize(a[i]-127,pal=cubehelix)
++    hue <- sample(seq(2)-1,1)
++    s <- ifelse(hue==0,NA,runif(1,min=91,max=223))
++    b4[[i]] <- colorize(a[i]-127,pal=cubehelix,pal.hue=hue,pal.dark=s,pal.light=s)
++ }
+> display(c(b1,b2),layout=c(2,NA),decor=FALSE)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa67_448f.png' in external software.
+> display(c(b3,b4),layout=c(2,NA),decor=FALSE)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa69_bd80.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("discolor")
+> ### * discolor
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: discolor
+> ### Title: Destroy color table for raster images.
+> ### Aliases: discolor
+> ### Keywords: color
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- colorize(pixelsize(),ncolor=7)
+> print(ursa_colortable(a))
+        400         450         500         550         600         650 
+"#DDF3DDFF" "#D5DDB3FF" "#DDBA9BFF" "#E096A1FF" "#C77CB8FF" "#9372C2FF" 
+        700 
+"#5574ABFF" 
+> print(a)
+                  name    mean      sd      sum min max      n nNA
+[1] Pixel Size (sq.km) 555.201 67.0077 75613900 400 650 136192   0
+> b <- discolor(a)
+> print(ursa_colortable(b))
+character(0)
+> print(b)
+                  name    mean      sd      sum min max      n nNA
+[1] Pixel Size (sq.km) 555.201 67.0077 75613900 400 650 136192   0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("display")
+> ### * display
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: display
+> ### Title: Plot raster image(s) in the PNG format.
+> ### Aliases: display
+> ### Keywords: hplot
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> set.seed(500)
+> a.brick <- a.stack <- ursa_dummy(nband=3,min=0,max=255,mul=1/16)
+> a.stack[2] <- a.stack[2]/10
+> a.stack[3] <- sqrt(a.stack[3])
+> a.rgb <- as.integer(round(a.brick))
+> print(a.brick)
+           name    mean      sd     sum     min     max   n nNA
+[1] Thursday 19 121.159 47.7180 64456.4 34.9031 218.873 532   0
+[2] Friday 20   122.905 46.3997 65385.5 17.9845 217.346 532   0
+[3] Saturday 21 132.469 48.8059 70473.5 27.1337 241.916 532   0
+> print(a.stack)
+           name     mean       sd      sum      min      max   n nNA
+[1] Thursday 19 121.1587 47.71803 64456.41 34.90306 218.8734 532   0
+[2] Friday 20    12.2905  4.63997  6538.55  1.79845  21.7346 532   0
+[3] Saturday 21  11.2853  2.26276  6003.79  5.20900  15.5536 532   0
+> print(a.rgb)
+           name    mean      sd   sum min max   n nNA
+[1] Thursday 19 121.175 47.7211 64465  35 219 532   0
+[2] Friday 20   122.900 46.3985 65383  18 217 532   0
+[3] Saturday 21 132.479 48.8096 70479  27 242 532   0
+> display(a.brick,decor=FALSE)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa71_7715.png' in external software.
+> display(a.stack,decor=FALSE)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa73_ac7c.png' in external software.
+> display(a.rgb)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa75_5210.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("display_brick")
+> ### * display_brick
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: display_brick
+> ### Title: Plot multi-band homogenous raster image in the PNG format.
+> ### Aliases: display_brick display_homo
+> ### Keywords: hplot
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- ursa_dummy(nband=3,min=0,max=250)
+> a[2] <- -a[1]
+> a[3] <- sqrt(a[1])
+> a2 <- ursa_stack(a) 
+> print(a2)
+$`Thursday 19`
+           name    mean      sd      sum     min    max      n nNA
+[1] Thursday 19 123.619 32.9183 16835949 52.5289 213.05 136192   0
+
+$`Friday 20`
+         name     mean      sd       sum     min      max      n nNA
+[2] Friday 20 -123.619 32.9183 -16835949 -213.05 -52.5289 136192   0
+
+$`Saturday 21`
+           name    mean      sd     sum     min     max      n nNA
+[3] Saturday 21 11.0152 1.51159 1500180 7.24768 14.5962 136192   0
+
+attr(,"class")
+[1] "ursaStack"
+> display(a2) # likely 'display_stack' will be called
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa77_291c.png' in external software.
+> display_brick(a2,stretch="eq",labels=c(-150,-100,0,10,12,20,100,150))
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa79_7695.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("display_rgb")
+> ### * display_rgb
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: display_rgb
+> ### Title: Plot RGB (RGBA) color composition in the PNG format.
+> ### Aliases: display_rgb
+> ### Keywords: hplot
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- ursa_dummy(nband=3)
+> display_rgb(a)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa81_3adb.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("display_stack")
+> ### * display_stack
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: display_stack
+> ### Title: Plot multi-band heterogenous raster images in the PNG format.
+> ### Aliases: display_stack display_hetero
+> ### Keywords: hplot
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- ursa_dummy(nband=3)
+> display_stack(a)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa83_5fe1.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("envi_files")
+> ### * envi_files
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: envi_files
+> ### Title: ENVI File Manipulation
+> ### Aliases: envi_exists envi_list envi_copy envi_rename envi_remove
+> ### Keywords: file
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> wd <- setwd(tempdir())
+> a1 <- create_envi("tmp1.envi")
+> a2 <- create_envi("tmp2.")
+> close(a1,a2)
+> envi_list()
+[1] "tmp1" "tmp2"
+> envi_copy("tmp1","tmp3")
+> envi_copy("tmp2","tmp4")
+> envi_list()
+[1] "tmp1" "tmp2" "tmp3" "tmp4"
+> envi_rename("tmp3","tmp5")
+[1] TRUE TRUE
+> envi_list()
+[1] "tmp1" "tmp2" "tmp4" "tmp5"
+> envi_exists("nofilewithsuchname")
+[1] 0
+> envi_exists("tmp[34]")
+[1] 1
+> envi_remove(".+")
+> envi_list()
+character(0)
+> setwd(wd)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_earthdata")
+> ### * get_earthdata
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_earthdata
+> ### Title: Retrive data from Global Imagery Browse Services (GIBS) using
+> ###   API for Developers
+> ### Aliases: get_earthdata
+> ### Keywords: spatial
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> pr <- get_earthdata()
+> print(pr,quote=FALSE)
+                                         1 
+  MODIS_Aqua_CorrectedReflectance_Bands721 
+                                         2 
+ MODIS_Terra_CorrectedReflectance_Bands721 
+                                         3 
+ MODIS_Aqua_CorrectedReflectance_TrueColor 
+                                         4 
+MODIS_Terra_CorrectedReflectance_TrueColor 
+                                         5 
+ VIIRS_SNPP_CorrectedReflectance_TrueColor 
+                                         6 
+                                Coastlines 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("glance")
+> ### * glance
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: glance
+> ### Title: Command line utility for spatial view of raster or vector GIS
+> ###   file.
+> ### Aliases: glance .glance
+> ### Keywords: hplot
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> f <- system.file("vectors","scot_BNG.shp",package="rgdal")
+> glance(f,style="merc",field="(NAME|COUNT)")
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+Error in as.double(y) : 
+  cannot coerce type 'S4' to vector of type 'double'
+Error in as.double(y) : 
+  cannot coerce type 'S4' to vector of type 'double'
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa85_5233.png' in external software.
+> cmd <- paste("Rscript --vanilla -e ursa::glance()",paste0("\"",f,"\"")
++             ,"proj=\"merc\"","field=\"(lon|lat)\"")
+> cat(" --------- Try in command line: -----------\n")
+ --------- Try in command line: -----------
+> message(cmd)
+Rscript --vanilla -e ursa::glance() "/var/scratch2ro/tomas/cran/rlibro/lib/rgdal/vectors/scot_BNG.shp" proj="merc" field="(lon|lat)"
+> cat(" ----------- end of quoting ---------------\n")
+ ----------- end of quoting ---------------
+> 
+> require(sp)
+Loading required package: sp
+> a <- data.frame(lat=c(70.734,71.657),lon=c(178.577,-177.38),place="Wrangel Island")
+> coordinates(a) <- ~lon+lat
+> proj4string(a) <- "+init=epsg:4326"
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:sp’
+
+> nameEx("identify")
+> ### * identify
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: identify
+> ### Title: Get value and coordinates from location
+> ### Aliases: value_xy value_cr value_ll coord_xy coord_cr
+> ### Keywords: attribute
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> set.seed(352)
+> a <- as.integer(ursa_dummy(3,min=0,max=999))
+> ind <- which(ursa_value(a[1])==890)
+> print(ind)
+ [1]   861  1774  3601  4515  8785  9090  9395  9700 10005 10310 10615 10920
+[13] 11225 11530 11835 14274 15798 17017 18236 19455
+> msk <- a[1]==890
+> am <- a[msk]
+> b <- as.data.frame(am)
+> b$jx <- b$x+runif(nrow(b),min=-1000,max=1000)
+> b$jy <- b$y+runif(nrow(b),min=-1000,max=1000)
+> print(b)
+            x       y Thursday 19 Friday 20 Saturday 21      jx      jy
+861   2462500 5787500         890       775         757 2463004 5788241
+1774  2487500 5712500         890       765         759 2487084 5712153
+3601  2562500 5562500         890       735         766 2561764 5562040
+4515  2612500 5487500         890       716         771 2611784 5486727
+8785  2962500 5137500         890       586         809 2962648 5137671
+9090  2987500 5112500         890       578         811 2986633 5111705
+9395  3012500 5087500         890       570         814 3011855 5087223
+9700  3037500 5062500         890       562         817 3037627 5063391
+10005 3062500 5037500         890       556         820 3062743 5038102
+10310 3087500 5012500         890       550         823 3088220 5012647
+10615 3112500 4987500         890       544         825 3113390 4986599
+10920 3137500 4962500         890       539         828 3136692 4963043
+11225 3162500 4937500         890       534         831 3161776 4937550
+11530 3187500 4912500         890       531         833 3187044 4913276
+11835 3212500 4887500         890       528         836 3212128 4888431
+14274 3387500 4687500         890       529         853 3387673 4686995
+15798 3487500 4562500         890       549         863 3488078 4561839
+17017 3562500 4462500         890       574         870 3562367 4462186
+18236 3637500 4362500         890       602         876 3638059 4363329
+19455 3712500 4262500         890       630         881 3712785 4262895
+> cr1 <- coord_xy(a,x=b$jx,y=b$jy)
+> cr2 <- coord_xy(a,y=b$y,x=b$x)
+> cr3 <- coord_xy(a,ind=ind)
+> print(cr1)
+  861 1774 3601 4515 8785 9090 9395 9700 10005 10310 10615 10920 11225 11530
+c 253  254  257  259  273  274  275  276   277   278   279   280   281   282
+r   3    6   12   15   29   30   31   32    33    34    35    36    37    38
+  11835 14274 15798 17017 18236 19455
+c   283   290   294   297   300   303
+r    39    47    52    56    60    64
+> print(all.equal(cr1,cr2,cr3))
+[1] TRUE
+> xy1 <- coord_cr(a,c=cr1["c",],r=cr1["r",])
+> print(xy1)
+      861    1774    3601    4515    8785    9090    9395    9700   10005
+x 2462500 2487500 2562500 2612500 2962500 2987500 3012500 3037500 3062500
+y 5787500 5712500 5562500 5487500 5137500 5112500 5087500 5062500 5037500
+    10310   10615   10920   11225   11530   11835   14274   15798   17017
+x 3087500 3112500 3137500 3162500 3187500 3212500 3387500 3487500 3562500
+y 5012500 4987500 4962500 4937500 4912500 4887500 4687500 4562500 4462500
+    18236   19455
+x 3637500 3712500
+y 4362500 4262500
+> print(c(identical(unname(xy1["x",]),b[,"x",drop=TRUE])
++        ,identical(unname(xy1["y",]),b[,"y",drop=TRUE])))
+[1] TRUE TRUE
+> val1 <- value_xy(a,x=b$jx,y=b$jy)
+> val2 <- value_xy(a,x=b$x,y=b$y)
+> val3 <- value_cr(a,ind=ind)
+> val4 <- value_cr(a,c=cr1["c",],r=cr1["r",])
+> print(val1)
+            861 1774 3601 4515 8785 9090 9395 9700 10005 10310 10615 10920
+Thursday 19 890  890  890  890  890  890  890  890   890   890   890   890
+Friday 20   775  765  735  716  586  578  570  562   556   550   544   539
+Saturday 21 757  759  766  771  809  811  814  817   820   823   825   828
+            11225 11530 11835 14274 15798 17017 18236 19455
+Thursday 19   890   890   890   890   890   890   890   890
+Friday 20     534   531   528   529   549   574   602   630
+Saturday 21   831   833   836   853   863   870   876   881
+> print(all.equal(val1,val2,val3,val4))
+[1] TRUE
+> ps <- pixelsize()
+> ll <- c(lon=180,lat=70)
+> v <- value_ll(ps,lon=180,lat=70)
+> print(c('True scale'=v/with(ursa_grid(ps),1e-6*resx*resy)))
+True scale 
+ 0.9999931 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ignorevalue")
+> ### * ignorevalue
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ignorevalue
+> ### Title: Extract and assign 'nodata' value of raster images.
+> ### Aliases: ignorevalue ignorevalue<- ursa_nodata ursa_nodata<-
+> ### Keywords: attribute
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- round(ursa_dummy(nband=1,min=0.500001,max=4.499999))
+> print(a)
+           name    mean      sd    sum min max      n nNA
+[1] Thursday 19 2.47533 0.56449 337120   1   4 136192   0
+> print(as.table(a))
+    1     2     3     4 
+ 3136 66764 64712  1580 
+> print(ignorevalue(a))
+[1] NA
+> ignorevalue(a) <- NA
+> print(as.table(a))
+    1     2     3     4 
+ 3136 66764 64712  1580 
+> print(ignorevalue(a))
+[1] NA
+> ignorevalue(a) <- 4
+> print(as.table(a))
+    1     2     3 
+ 3136 66764 64712 
+> print(ignorevalue(a))
+[1] 4
+> print(a)
+           name    mean      sd    sum min max      n  nNA
+[1] Thursday 19 2.45743 0.54294 330800   1   3 134612 1580
+> 
+> 
+> 
+> cleanEx()
+> nameEx("legend_align")
+> ### * legend_align
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: legend_align
+> ### Title: Align caption position for legend
+> ### Aliases: legend_align
+> ### Keywords: aplot
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- ursa_dummy(5,mul=1/4,min=-150,max=200)
+> a[1] <- a[1]*100
+> a[2] <- -a[2]*10
+> a[3] <- a[3]/10
+> a[4] <- a[4]/1000
+> b <- lapply(a,colorize)
+> la.top <- legend_align(b[c(1,2)])
+> la.left <- legend_align(c(b[[1]],b[[3]]))
+> la.bottom <- legend_align(b[c(3,4)])
+> la.right <- legend_align(b[c(2,4)])
+> leg <- vector("list",12)
+> leg[[1]] <- list("top",2)
+> leg[[2]] <- list("top",3)
+> leg[[3]] <- list("bottom",1)
+> leg[[4]] <- list("bottom",2)
+> leg[[5]] <- list(2,"left")
+> leg[[6]] <- list(1,"right")
+> leg[[7]] <- list(3,"left")
+> leg[[8]] <- list(2,"right")
+> leg[[9]] <- list("top",1)
+> leg[[10]] <- list("bottom",3)
+> leg[[11]] <- list(1,"left")
+> leg[[12]] <- list(3,"right")
+> cl <- compose_design(layout=c(3,3),legend=leg,byrow=TRUE,skip=5)
+> print(cl)
+$layout
+      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
+ [1,]    0    0   17    0    9    0   10    0    0
+ [2,]    0    0    0    0    0    0    0    0    0
+ [3,]   19    0    1    0    2    0    3    0   14
+ [4,]    0    0    0    0    0    0    0    0    0
+ [5,]   13    0    4    0    0    0    5    0   16
+ [6,]    0    0    0    0    0    0    0    0    0
+ [7,]   15    0    6    0    7    0    8    0   20
+ [8,]    0    0    0    0    0    0    0    0    0
+ [9,]    0    0   11    0   12    0   18    0    0
+
+$image
+[1] 8
+
+$legend
+[1] 12
+
+attr(,"class")
+[1] "ursaLayout"
+> compose_open(cl)
+> ct <- compose_panel(b[c(5,1,2,1,4,3,4,5)],decor=FALSE)
+> L <- 2
+> Tr <- 2
+> legend_colorbar(b[1],trim=Tr,las=L,align=la.top,units="top aligned --->")
+NULL
+> legend_colorbar(b[2],trim=Tr,las=L,align=la.top,units="<--- top aligned")
+NULL
+> legend_colorbar(b[3],trim=Tr,las=L,align=la.bottom,units="bottom aligned --->")
+NULL
+> legend_colorbar(b[4],trim=Tr,las=L,align=la.bottom,units="<--- bottom aligned")
+NULL
+> legend_colorbar(b[1],trim=Tr,las=L,align=la.left,units="<--- left aligned")
+NULL
+> legend_colorbar(b[2],trim=Tr,las=L,align=la.right,units="<--- right aligned")
+NULL
+> legend_colorbar(b[3],trim=Tr,las=L,align=la.left,units="left aligned --->")
+NULL
+> legend_colorbar(b[4],trim=Tr,las=L,align=la.right,units="right aligned --->")
+NULL
+> legend_colorbar(b[5],trim=Tr,las=L,units=" *** not aligned ***")
+NULL
+> legend_colorbar(b[5],trim=Tr,las=L,units=" *** not aligned ***")
+NULL
+> legend_colorbar(b[5],trim=Tr,las=L,units=" *** not aligned ***")
+NULL
+> legend_colorbar(b[5],trim=Tr,las=L,units=" *** not aligned ***")
+NULL
+> compose_close()
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa87_21bf.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("legend_colorbar")
+> ### * legend_colorbar
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: legend_colorbar
+> ### Title: Plot colorbar
+> ### Aliases: legend_colorbar .legend_colorbar
+> ### Keywords: aplot
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> display(ursa_dummy(1),units="Required 99 labels; displayed less"
++         ,colorbar.labels=99,las=3,gridline.trim=FALSE,colorbar.trim=1L)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa89_5d3b.png' in external software.
+> cname <- c("Apple","Orange","Cherry","Blueberry","Strawberry","Currant")
+> a <- ursa_dummy(4)
+> b <- list(colorize(a[1],value=seq(50,200,length=length(cname))
++                   ,name=cname)#,stretch="category")
++          ,colorize(a[2]*10,ramp=FALSE),colorize(a[3]*100),colorize(a[4]/10))
+> la <- legend_align(b[3:4])
+> leg <- vector("list",10)
+> leg[[1]] <- list(1,"left")
+> leg[[2]] <- list(1,"right")
+> for (i in seq(4)) {
++    leg[[i+2]] <- list("top",i)
++    leg[[i+6]] <- list("bottom",i)
++ }
+> compose_open(layout=c(1,4),legend=leg,scale=NA,dev=FALSE) # use 'dev=TRUE' to check layout
+> compose_panel(b)
+> legend_colorbar(b[[1]],lomar=20,himar=0) ## "left"
+> legend_colorbar(b[[4]],labels=c(6,7.5,12,15,20)
++                ,units="Manual set of labels") ## "right"
+> legend_colorbar(b[[1]],las=2,adj=0.5,turn=TRUE,lomar=6,himar=6
++                ,units="Central adjustment; inverse order") ## ("top",1)
+> legend_colorbar(b[[2]],cex=0.9
++                ,units="Horizontal labels can be overlapped") ## ("top",2)
+> legend_colorbar(b[[3]],las=3,align=la
++                ,units="Increased width, but aligned -->") ## ("top",3)
+> legend_colorbar(b[[4]],las=3,align=la,labels=3
++                ,units="<-- Reduced width, but aligned") ## ("top",4)
+> legend_colorbar(b[[1]],las=2,adj=0,shift=0.9,turn=FALSE,lomar=2,himar=10
++                ,units="Left adjustement. Non-optimal; shifted") ## ("bottom",1)
+> legend_colorbar(b[[2]],las=3,adj=0
++                ,units="But right adj. is default for numeric") ## ("bottom",2)
+> legend_colorbar(b[[3]],labels=99,las=3,trim=2L
++                ,units="Required 99 labels, but displayed less") ## ("bottom",3)
+> legend_colorbar('Caption from named item'=b[[4]],labels=99) ## ("bottom",4)
+> compose_close()
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa90_d6a9.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("legend_mtext")
+> ### * legend_mtext
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: legend_mtext
+> ### Title: Write marginal text
+> ### Aliases: legend_mtext .legend_mtext
+> ### Keywords: aplot
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> a <- ursa_dummy(1,min=-10,max=+30)
+> compose_open(legend=list("right","top","bottom","left"))
+> panel_new()
+> ct <- panel_raster(a)
+> legend_colorbar(ct)#,units=as.expression(substitute(bold(degree*C))))
+> legend_mtext("Characters are in bold")
+> legend_mtext(as.expression(substitute(italic(
++             paste("Units can be interpreted as",~degree*C)))),cex=0.7)
+> legend_mtext(text=as.expression(substitute(italic(paste("Omega powered by alpha is"
++                                                        ,~~Omega^alpha)))))
+> compose_close(execute=!FALSE)
+Use 'session_pngviewer(TRUE)' 
+to open '/tmp/Rtmpn9IP2V/___ursa92_8056.png' in external software.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("package_raster")
+> ### * package_raster
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: as.Raster
+> ### Title: Coercion to package 'raster' objects
+> ### Aliases: as.Raster as.Raster.ursaRaster as.Raster.list
+> ###   as.Raster.ursaStack as.Raster.NULL
+> ### Keywords: methods
+> 
+> ### ** Examples
+> 
+> session_grid(NULL)
+> if (requireNamespace("raster")) {
++    require(methods) ## need to 'raster::plot'
++    msk <- ursa_dummy(1,min=0,max=100)>40
++    a1 <- ursa_dummy(1,min=200,max=500)[msk]
++    a2 <- colorize(a1,ramp=FALSE)
++    a3 <- as.integer(ursa_dummy(3,min=0,max=255.99))
++    a4 <- ursa_stack(a3[msk])
++    if (isLayer <- TRUE) {
++       print(a1)
++       r1 <- as.Raster(a1)
++       message(as.character(class(r1)))
++       print(r1)
++       raster::plot(r1)
++       b1 <- as.ursa(r1)
++       print(c(exported=a1,imported=b1,failed=b1-a1))
++       print(c(theSameValue=identical(ursa_value(a1),ursa_value(b1))
++              ,rheSameGrid=identical(ursa_grid(a1),ursa_grid(b1))))
++    }
++    if (isLayerColortable <- TRUE) {
++       r2 <- as.Raster(a2)
++       message(as.character(class(r2)))
++       print(r2)
++       raster::plot(r2)
++       b2 <- as.ursa(r2)
++       print(c(theSameValue=identical(ursa_value(a2),ursa_value(b2))
++              ,rheSameGrid=identical(ursa_grid(a2),ursa_grid(b2))))
++    }
++    if (isBrickOrRGB <- TRUE) {
++       r3 <- as.Raster(a3)
++       message(as.character(class(r3)))
++       print(r3)
++       raster::plot(r3)
++       raster::plotRGB(r3)
++       b3 <- as.ursa(r3)
++       print(c(theSameValue=identical(ursa_value(a3),ursa_value(b3))
++              ,rheSameGrid=identical(ursa_grid(a3),ursa_grid(b3))))
++    }
++    if (isStack <- TRUE) {
++       r4 <- as.Raster(a4)
++       message(as.character(class(r4)))
++       print(r4)
++       raster::plot(r4)
++       b4 <- as.ursa(r4)
++       print(c(theSameValue=identical(ursa_value(a4),ursa_value(b4))
++              ,theSameGrid=identical(ursa_grid(a4),ursa_grid(b4))))
++    }
++ }
+Loading required namespace: raster
+           name    mean      sd      sum     min     max     n   nNA
+[1] Thursday 19 355.626 47.6125 35309381 258.728 470.206 99288 36904
+NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+RasterLayer
+class      : RasterLayer 
+dimensions : 448, 304, 136192  (nrow, ncol, ncell)
+resolution : 25000, 25000  (x, y)
+extent     : -3850000, 3750000, -5350000, 5850000  (xmin, xmax, ymin, ymax)
+crs        : +proj=stere +lat_0=90 +lat_ts=70.0 +lon_0=-45.0 +k=1 +x_0=0.0 +y_0=0.0 +a=6378273.000 +b=6356889.449 +units=m +no_defs 
+source     : memory
+names      : Thursday.19 
+values     : 258.7284, 470.206  (min, max)
+
+Error in as.double(y) : 
+  cannot coerce type 'S4' to vector of type 'double'
+Calls: <Anonymous> -> <Anonymous> -> plot.default -> xy.coords
+Execution halted
