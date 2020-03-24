@@ -1,0 +1,823 @@
+
+R Under development (unstable) (2020-03-24 r78052) -- "Unsuffered Consequences"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> test_check("SpaDES.core")
+Loading required package: SpaDES.core
+Loading required package: quickPlot
+Loading required package: reproducible
+
+Attaching package: 'SpaDES.core'
+
+The following objects are masked from 'package:stats':
+
+    end, start
+
+The following object is masked from 'package:utils':
+
+    citation
+
+ERROR: modification of compiler constant of type character, length 4
+ERROR: the modified value of the constant is:
+[1] "includePixel" "excludePixel" "includeRing"  "excludeRing" 
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "includePixel" "excludePixel" "includeRing"  "excludeRing" 
+ERROR: the modified constant is at index 24
+ERROR: the modified constant is in this function body:
+{
+    if (!is.null(neighProbs)) {
+        if (isTRUE(allowOverlap)) 
+            stop("Can't use neighProbs and allowOverlap = TRUE together")
+    }
+    if (!is.null(mapID)) {
+        warning("mapID is deprecated, use id")
+        id <- mapID
+    }
+    if (!quick) {
+        allowedRules <- c("includePixel", "excludePixel", "includeRing", 
+            "excludeRing")
+        if (!any(stopRuleBehavior %fin% allowedRules)) 
+            stop("stopRuleBehaviour must be one of \"", paste(allowedRules, 
+                collapse = "\", \""), "\".")
+    }
+    spreadStateExists <- is(spreadState, "data.table")
+    spreadProbLaterExists <- TRUE
+    if (!is(spreadProbLater, "Raster")) {
+        if (anyNA(spreadProbLater)) {
+            spreadProbLaterExists <- FALSE
+            spreadProbLater <- spreadProb
+        }
+    }
+    if (any(is.na(loci))) {
+        if (!spreadStateExists) 
+            loci <- (nrow(landscape)/2L + 0.5) * ncol(landscape)
+    }
+    if (length(loci) == 0) 
+        stop("No loci. Nothing to do")
+    if (any(!is.na(maxSize))) {
+        msEqZero <- maxSize < 1
+        if (any(msEqZero)) {
+            loci <- loci[!msEqZero]
+            maxSize <- maxSize[!msEqZero]
+        }
+    }
+    if (spreadStateExists) {
+        keepers <- spreadState$active == TRUE
+        loci <- initialActiveCells <- spreadState[keepers, indices]
+        initialLoci <- unique(spreadState$initialLocus)
+    }
+    else {
+        initialLoci <- loci
+    }
+    if (!quick) {
+        if (is(spreadProbLater, "RasterLayer") | is(spreadProb, 
+            "Rasterlayer")) {
+            if ((minValue(spreadProb) > 1L) || (maxValue(spreadProb) < 
+                0L) || (maxValue(spreadProb) > 1L) || (minValue(spreadProb) < 
+                0L)) {
+                relativeSpreadProb <- TRUE
+            }
+            if (spreadProbLaterExists) 
+                if (((minValue(spreadProbLater) > 1L) || (maxValue(spreadProbLater) < 
+                  0L) || (maxValue(spreadProbLater) > 1L) || 
+                  (minValue(spreadProbLater) < 0L))) {
+                  relativeSpreadProb <- TRUE
+                }
+        }
+        else {
+            if (!all(inRange(na.omit(spreadProb)))) {
+                relativeSpreadProb <- TRUE
+                stop("spreadProb is not a probability")
+            }
+            if (spreadProbLaterExists) {
+                relativeSpreadProb <- TRUE
+                if (!all(inRange(na.omit(spreadProbLater)))) 
+                  stop("spreadProbLater is not a probability")
+            }
+        }
+    }
+    ncells <- ncell(landscape)
+    if (allowOverlap | returnDistances | spreadStateExists) {
+        if (spreadStateExists) {
+            spreads <- as.matrix(spreadState[, list(initialLocus, 
+                indices, id, active)])
+        }
+        else {
+            spreads <- cbind(initialLocus = initialLoci, indices = initialLoci, 
+                id = 1:length(loci), active = 1)
+        }
+    }
+    else {
+        if (lowMemory) {
+            spreads <- ff(vmode = "short", 0, length = ncells)
+        }
+        else {
+            spreads <- vector("integer", ncells)
+        }
+    }
+    n <- 1L
+    if (circle | !is.na(asymmetry)) {
+        if (circle) 
+            directions <- 8L
+        initialLociXY <- cbind(id = seq_along(initialLoci), xyFromCell(landscape, 
+            initialLoci))
+        id <- TRUE
+        if (allowOverlap | returnDistances) {
+            spreads <- cbind(spreads, dists = 0)
+        }
+    }
+    otherVars <- list(...)
+    anyList <- unlist(lapply(otherVars, is.list))
+    if (any(anyList)) {
+        otherVarsLists <- unlist(unname(otherVars), recursive = FALSE)
+        otherVars[anyList] <- NULL
+        otherVars <- append(otherVars, otherVarsLists)
+    }
+    if (is.function(stopRule)) {
+        id <- TRUE
+        stopRuleObjs <- names(formals(stopRule))
+        if (!quick) {
+            if (any(is.na(match(stopRuleObjs, c("id", "landscape", 
+                "cells", names(otherVars)))))) {
+                stop("Arguments in stopRule not valid.\n", "The function definition must be a function of built-in options,", 
+                  " (id, landscape, or cells) or user supplied variables.", 
+                  " If user supplied, the variables", " must be passed as named vectors, or lists or data.frames.", 
+                  " See examples.")
+            }
+        }
+        landRasNeeded <- any(stopRuleObjs == "landscape")
+        colNamesPotentials <- c("id", "landscape"[landRasNeeded], 
+            "cells", "prev")
+        argNames <- c(colNamesPotentials, names(otherVars))
+        whArgs <- match(names(formals(stopRule)), argNames)
+        rasters <- unlist(lapply(otherVars[names(otherVars)], 
+            function(x) is(x, "Raster")))
+        if (any(rasters)) {
+            for (i in 1:which(rasters)) {
+                otherVars[[names(rasters[i])]] <- otherVars[[names(rasters[i])]][]
+            }
+        }
+        landRas <- landscape[]
+    }
+    if (!allowOverlap & !returnDistances) {
+        if (id | returnIndices | relativeSpreadProb) {
+            if (!spreadStateExists) {
+                spreads[loci] <- 1L:length(loci)
+            }
+        }
+        else {
+            spreads[loci] <- n
+        }
+        spreadsIndices <- unname(loci)
+    }
+    if (is(spreadProb, "Raster")) {
+    }
+    else if (is.numeric(spreadProb)) {
+        if (is(mask, "Raster")) {
+            spreadProb <- raster(extent(landscape), res = res(landscape), 
+                vals = spreadProb)
+        }
+    }
+    if (is(spreadProbLater, "Raster")) {
+    }
+    else if (is.numeric(spreadProbLater)) {
+        if (is(mask, "Raster")) {
+            spreadProbLater <- raster(extent(landscape), res = res(landscape), 
+                vals = spreadProbLater)
+        }
+    }
+    if (is(mask, "Raster")) {
+        spreadProbLater[mask[] == 1L] <- 0L
+        spreadProb[mask[] == 1L] <- 0L
+    }
+    if (spreadStateExists) {
+        if (allowOverlap | returnDistances) {
+            stop("Using spreadState with either allowOverlap = TRUE", 
+                " or returnDistances = TRUE is not implemented")
+        }
+        else {
+            if (sum(colnames(spreadState) %fin% c("indices", 
+                "id", "active", "initialLocus")) != 4) {
+                stop("spreadState must have at least columns: ", 
+                  "indices, id, active, and initialLocus.")
+            }
+        }
+    }
+    if (!quick) 
+        if (any(loci > ncells)) 
+            stop("loci indices are not on landscape")
+    if (any(!is.na(maxSize))) {
+        if (!is.integer(maxSize)) 
+            maxSize <- floor(maxSize)
+        if (spreadStateExists) {
+            sizeAll <- spreadState[, list(len = .N), by = id]
+            size <- c(sizeAll[, len])
+        }
+        else {
+            maxSize <- rep_len(maxSize, length(loci))
+            size <- rep_len(1L, length(loci))
+        }
+    }
+    else {
+        maxSize <- ncells
+        size <- length(loci)
+    }
+    noMaxSize <- all(maxSize >= ncells)
+    if (is.null(neighProbs)) {
+        numNeighs <- NULL
+    }
+    if (!exists("numRetries", envir = .pkgEnv)) 
+        assign("numRetries", rep(0, length(initialLoci)), envir = .pkgEnv)
+    toColumn <- c("to", "indices")
+    while (length(loci) & (n <= iterations)) {
+        if (!is.null(neighProbs)) {
+            numNeighs <- if (is.list(neighProbs)) {
+                unlist(lapply(neighProbs, function(x) {
+                  sample.int(length(x), size = 1, replace = TRUE, 
+                    prob = x)
+                }))
+            }
+            else {
+                sample.int(length(neighProbs), size = length(loci), 
+                  replace = TRUE, prob = neighProbs)
+            }
+        }
+        if (allowOverlap | returnDistances | spreadStateExists) {
+            whActive <- spreads[, "active"] == 1
+            potentials <- adj(landscape, loci, directions, pairs = TRUE, 
+                id = spreads[whActive, "id"])
+            spreads[whActive, "active"] <- 0
+            potentials <- cbind(potentials, active = 1)
+        }
+        else {
+            if (id | returnIndices | circle | relativeSpreadProb | 
+                !is.null(neighProbs)) {
+                potentials <- adj(landscape, loci, directions, 
+                  pairs = TRUE)
+            }
+            else {
+                potentials <- cbind(NA, adj(landscape, loci, 
+                  directions, pairs = FALSE))
+            }
+        }
+        if (circle) 
+            potentials <- cbind(potentials, dists = 0)
+        if (allowOverlap | returnDistances | spreadStateExists) {
+            if (TRUE) {
+                spreadsDT <- data.table(spreads)
+                potentialsDT <- data.table(potentials)
+                potentialsDT[, `:=`(initialLocus, initialLoci[potentialsDT$id])]
+                colnamesPDT <- colnames(potentialsDT)
+                whIL <- which(colnamesPDT == "initialLocus")
+                whFrom <- which(colnamesPDT == "from")
+                setcolorder(potentialsDT, c(colnamesPDT[whIL], 
+                  colnamesPDT[-c(whIL, whFrom)], colnamesPDT[whFrom]))
+                setnames(potentialsDT, old = "to", new = "indices")
+                d <- rbindlist(list(spreadsDT, potentialsDT), 
+                  fill = TRUE)
+                d <- data.table(d)
+                setkey(d, "id")
+                d[, `:=`(duplicated, duplicated(indices)), by = id]
+                d <- d[duplicated == 0 & active == 1]
+                set(d, , "duplicated", NULL)
+                potentials <- as.matrix(d)
+            }
+            else {
+                potentialsFrom <- potentials[, "from"]
+                colnames(potentials) <- colnames(spreads)
+                potentials[, "initialLocus"] <- initialLoci[potentials[, 
+                  "id"]]
+                d <- rbind(spreads, potentials)
+                d <- cbind(d, from = c(rep(NA, NROW(spreads)), 
+                  potentialsFrom))
+                ids <- as.integer(unique(d[, "id"]))
+                d <- do.call(rbind, lapply(ids, function(id) {
+                  cbind(d[d[, "id"] == id, , drop = FALSE], duplicated = duplicated(d[d[, 
+                    "id"] == id, "indices"]))
+                }))
+                lastCol <- ncol(d)
+                potentials <- d[d[, "duplicated"] == 0 & d[, 
+                  "active"] == 1, , drop = FALSE][, -lastCol, 
+                  drop = FALSE]
+            }
+        }
+        else {
+            keep <- spreads[potentials[, 2L]] == 0L
+            potentials <- potentials[keep, , drop = FALSE]
+        }
+        if (n == 2) {
+            spreadProb <- spreadProbLater
+        }
+        if (is.numeric(spreadProb)) {
+            if (!(length(spreadProb) == 1 || length(spreadProb) == 
+                ncell(landscape))) 
+                stop("spreadProb must be length 1 or length ncell(landscape), or a raster")
+            if (n == 1 & spreadProbLaterExists) {
+                spreadProbs <- rep(spreadProb, NROW(potentials))
+                spreadProb <- spreadProbLater
+            }
+            else {
+                if (length(spreadProb) > 1) {
+                  spreadProbs <- spreadProb[potentials[, 2L]]
+                }
+                else {
+                  spreadProbs <- rep(spreadProb, NROW(potentials))
+                }
+            }
+        }
+        else {
+            if (n == 1 & spreadProbLaterExists) {
+                spreadProbs <- spreadProb[][potentials[, 2L]]
+                spreadProb <- spreadProbLater
+            }
+            else {
+                spreadProbs <- spreadProb[][potentials[, 2L]]
+            }
+        }
+        if (anyNA(spreadProbs)) 
+            spreadProbs[is.na(spreadProbs)] <- 0
+        if (!is.na(asymmetry)) {
+            if (allowOverlap | returnDistances) {
+                a <- cbind(id = potentials[, 3L], to = potentials[, 
+                  2L], xyFromCell(landscape, potentials[, 2L]))
+            }
+            else {
+                a <- cbind(id = spreads[potentials[, 1L]], to = potentials[, 
+                  2L], xyFromCell(landscape, potentials[, 2L]))
+            }
+            d <- directionFromEachPoint(from = initialLociXY, 
+                to = a)
+            newSpreadProbExtremes <- (spreadProb[] * 2)/(asymmetry + 
+                1) * c(1, asymmetry)
+            angleQuality <- (cos(d[, "angles"] - rad(asymmetryAngle)) + 
+                1)/2
+            spreadProbs <- newSpreadProbExtremes[1] + (angleQuality * 
+                diff(newSpreadProbExtremes))
+            spreadProbs <- spreadProbs - diff(c(spreadProb[], 
+                mean(spreadProbs)))
+        }
+        if (!is.null(neighProbs) | relativeSpreadProb) {
+            aaa <- split(seq_along(potentials[, toColumn[spreadStateExists + 
+                1]]), potentials[, "from"])
+            if (length(aaa) != length(numNeighs)) {
+                activeCellContinue <- loci %in% unique(potentials[, 
+                  "from"])
+                numNeighs <- numNeighs[activeCellContinue]
+            }
+            tmpA <- unlist(lapply(aaa, length))
+            tmpB <- which(tmpA < numNeighs)
+            if (length(tmpB) > 0) 
+                numNeighs[tmpB] <- unname(tmpA[tmpB])
+            if (relativeSpreadProb) {
+                rescaledProbs <- tapply(spreadProbs, potentials[, 
+                  "from"], function(x) {
+                  x/sum(x, na.rm = TRUE)
+                }, simplify = FALSE)
+                neighIndexToKeep <- unlist(lapply(seq_along(aaa), 
+                  function(x) resample(aaa[[x]], size = numNeighs[x], 
+                    prob = rescaledProbs[[x]])))
+            }
+            else {
+                neighIndexToKeep <- unlist(lapply(seq_along(aaa), 
+                  function(x) resample(aaa[[x]], size = numNeighs[x])))
+            }
+            potentials <- potentials[neighIndexToKeep, , drop = FALSE]
+            spreadProbs <- spreadProbs[neighIndexToKeep]
+            spreadProbs[spreadProbs > 0] <- 1
+        }
+        potentials <- potentials[runif(NROW(potentials)) <= spreadProbs, 
+            , drop = FALSE]
+        potentials <- potentials[sample.int(NROW(potentials)), 
+            , drop = FALSE]
+        if (!allowOverlap) {
+            potentials <- potentials[!duplicated(potentials[, 
+                2L]), , drop = FALSE]
+        }
+        n <- n + 1L
+        if (length(potentials) > 0) {
+            if (!missing(circle)) {
+                if (circle) {
+                  if (allowOverlap | returnDistances) {
+                    a <- cbind(potentials, xyFromCell(landscape, 
+                      potentials[, 2L]))
+                  }
+                  else {
+                    a <- cbind(potentials, id = spreads[potentials[, 
+                      "from"]], xyFromCell(landscape, potentials[, 
+                      "to"]))
+                  }
+                  a <- a[, !(colnames(a) %fin% c("dists")), drop = FALSE]
+                  d <- distanceFromEachPoint(initialLociXY, a, 
+                    angles = asymmetry)
+                  cMR <- (n - 1) * res(landscape)[1]
+                  if (!any(is.na(circleMaxRadius))) {
+                    if (any(circleMaxRadius <= ((n - 1) * res(landscape)[1]))) {
+                      if (length(circleMaxRadius) > 1) {
+                        cMR <- circleMaxRadius[d[, "id"]]
+                      }
+                      else {
+                        cMR <- circleMaxRadius
+                      }
+                    }
+                  }
+                  potentials <- d[, !(colnames(d) %fin% c("x", 
+                    "y")), drop = FALSE]
+                  potentials <- potentials[(d[, "dists"] %<=% 
+                    cMR), , drop = FALSE]
+                }
+            }
+            events <- potentials[, 2L]
+            if (!noMaxSize) {
+                if (allowOverlap | returnDistances | spreadStateExists) {
+                  len <- tabulate(potentials[, 3L], length(maxSize))
+                }
+                else {
+                  len <- tabulate(spreads[potentials[, 1L]], 
+                    length(maxSize))
+                }
+                if (any((size + len) > maxSize & size <= maxSize)) {
+                  whichID <- which(size + len > maxSize)
+                  toRm <- (size + len)[whichID] - maxSize[whichID]
+                  for (i in 1:length(whichID)) {
+                    if (allowOverlap | returnDistances | spreadStateExists) {
+                      thisID <- which(potentials[, 3L] == whichID[i])
+                    }
+                    else {
+                      thisID <- which(spreads[potentials[, 1L]] == 
+                        whichID[i])
+                    }
+                    if (length(thisID)) 
+                      potentials <- potentials[-resample(thisID, 
+                        toRm[i]), , drop = FALSE]
+                  }
+                  events <- potentials[, 2L]
+                }
+                size <- pmin(size + len, maxSize)
+            }
+            if (is.function(stopRule) & length(events) > 0) {
+                if (allowOverlap | returnDistances) {
+                  prevCells <- cbind(id = spreads[, "id"], landscape = if (landRasNeeded) 
+                    landRas[spreads[, "indices"]]
+                  else NULL, cells = spreads[, "indices"], prev = 1)
+                  eventCells <- cbind(id = potentials[, "id"], 
+                    landscape = if (landRasNeeded) 
+                      landRas[events]
+                    else NULL, cells = events, prev = 0)
+                }
+                else {
+                  whgtZero <- spreadsIndices
+                  prevCells <- cbind(id = spreads[whgtZero], 
+                    landscape = if (landRasNeeded) 
+                      landRas[whgtZero]
+                    else NULL, cells = whgtZero, prev = 1)
+                  eventCells <- cbind(id = spreads[potentials[, 
+                    1L]], landscape = if (landRasNeeded) 
+                    landRas[potentials[, 2L]]
+                  else NULL, cells = potentials[, 2L], prev = 0)
+                }
+                if (circle) {
+                  prevCells <- cbind(prevCells, dist = NA)
+                  eventCells <- cbind(eventCells, dist = potentials[, 
+                    "dists"])
+                }
+                tmp <- rbind(prevCells[prevCells[, "id"] %fin% 
+                  unique(eventCells[, "id"]), ], eventCells)
+                ids <- unique(tmp[, "id"])
+                shouldStopList <- lapply(ids, function(id) {
+                  shortTmp <- tmp[tmp[, "id"] == id, ]
+                  args <- append(list(id = id), lapply(colNamesPotentials[-1], 
+                    function(j) shortTmp[, j]))
+                  names(args) <- colNamesPotentials
+                  args <- append(args, otherVars)
+                  do.call(stopRule, args[whArgs])
+                })
+                if (any(lapply(shouldStopList, length) > 1)) 
+                  stop("stopRule does not return a length-one logical.", 
+                    " Perhaps stopRule need indexing by cells or id?")
+                shouldStop <- unlist(shouldStopList)
+                names(shouldStop) <- ids
+                if (any(shouldStop)) {
+                  if (stopRuleBehavior != "includeRing") {
+                    if (stopRuleBehavior != "excludeRing") {
+                      whStop <- as.numeric(names(shouldStop)[shouldStop])
+                      whStopAll <- tmp[, "id"] %fin% whStop
+                      tmp2 <- tmp[whStopAll, ]
+                      whStopEvents <- eventCells[, "id"] %fin% 
+                        whStop
+                      out <- lapply(whStop, function(id) {
+                        tmp3 <- tmp2[tmp2[, "id"] == id, ]
+                        newOnes <- tmp3[, "prev"] == 0
+                        ord <- seq_along(newOnes)
+                        if (sum(newOnes) > 1) {
+                          ord[newOnes] <- sample(ord[newOnes])
+                          if (circle) 
+                            ord[newOnes] <- ord[newOnes][order(tmp3[ord[newOnes], 
+                              "dist"])]
+                          tmp3 <- tmp3[ord, ]
+                        }
+                        startLen <- sum(!newOnes)
+                        addIncr <- 1
+                        done <- FALSE
+                        args <- append(list(id = id), lapply(colNamesPotentials[-1], 
+                          function(j) {
+                            tmp3[1:startLen, j]
+                          }))
+                        names(args) <- colNamesPotentials
+                        args <- append(args, otherVars)
+                        argsSeq <- seq_along(colNamesPotentials[-1]) + 
+                          1
+                        while (!done) {
+                          args[argsSeq] <- lapply(colNamesPotentials[-1], 
+                            function(j) {
+                              unname(c(args[[j]], tmp3[(startLen + 
+                                addIncr), j]))
+                            })
+                          done <- do.call(stopRule, args[whArgs])
+                          addIncr <- addIncr + 1
+                        }
+                        if (stopRuleBehavior == "excludePixel") 
+                          addIncr <- addIncr - 1
+                        firstInd <- startLen + addIncr
+                        lastInd <- NROW(tmp3)
+                        sequ <- if (firstInd > lastInd) 
+                          0
+                        else firstInd:lastInd
+                        tmp3[sequ, , drop = FALSE]
+                      })
+                      eventRm <- do.call(rbind, out)[, "cells"]
+                      cellsKeep <- !(potentials[, 2L] %fin% eventRm)
+                    }
+                    else {
+                      cellsKeep <- rep(FALSE, NROW(potentials))
+                    }
+                    potentials <- potentials[cellsKeep, , drop = FALSE]
+                    events <- potentials[, 2L]
+                    eventCells <- eventCells[cellsKeep, , drop = FALSE]
+                  }
+                  toKeepSR <- !(eventCells[, "id"] %fin% as.numeric(names(which((shouldStop)))))
+                }
+            }
+            if (length(events) > 0) {
+                if (allowOverlap | returnDistances | spreadStateExists) {
+                  fromCol <- colnames(potentials) == "from"
+                  spreads <- rbind(spreads, potentials[, !fromCol])
+                  if ((returnDistances | spreadStateExists) & 
+                    !allowOverlap) {
+                    notDups <- !duplicated(spreads[, "indices"])
+                    nrSpreads <- NROW(spreads)
+                    nrPotentials <- NROW(potentials)
+                    notDupsEvents <- notDups[-(1:(nrSpreads - 
+                      nrPotentials))]
+                    spreads <- spreads[notDups, , drop = FALSE]
+                    events <- events[notDupsEvents]
+                  }
+                }
+                else {
+                  if (id | returnIndices | relativeSpreadProb) {
+                    spreads[events] <- spreads[potentials[, 1L]]
+                  }
+                  else {
+                    spreads[events] <- n
+                  }
+                  spreadsIndices <- unname(c(spreadsIndices, 
+                    events))
+                }
+            }
+            if (length(maxSize) > 1L) {
+                if (exists("whichID", inherits = FALSE)) {
+                  if (exists("toKeepSR", inherits = FALSE)) {
+                    if (allowOverlap | returnDistances) {
+                      maxSizeKeep <- !(spreads[spreads[, "active"] == 
+                        1, "id"] %fin% whichID)
+                      spreads <- spreads[c(rep(TRUE, sum(spreads[, 
+                        "active"] == 0)), maxSizeKeep), ]
+                    }
+                    else {
+                      maxSizeKeep <- !spreads[events] %fin% whichID
+                    }
+                    events <- events[maxSizeKeep]
+                    toKeepSR <- toKeepSR[maxSizeKeep]
+                  }
+                  rm(whichID)
+                }
+            }
+            else {
+                if (all(size >= maxSize)) {
+                  potentials <- potentials[0L, ]
+                  events <- NULL
+                }
+            }
+            if (is.function(stopRule)) {
+                if (exists("toKeepSR", inherits = FALSE)) {
+                  events <- events[toKeepSR]
+                  if (allowOverlap | returnDistances) {
+                    spreads[c(rep(TRUE, sum(spreads[, "active"] == 
+                      0)), !toKeepSR), "active"] <- 0
+                  }
+                  rm(toKeepSR)
+                }
+            }
+        }
+        else {
+            events <- NULL
+        }
+        if (exactSizes) {
+            if (all(get("numRetries", inherits = FALSE, envir = .pkgEnv) < 
+                10)) {
+                if (spreadStateExists) {
+                  tooSmall <- tabulate(spreads[, "id"], length(maxSize)) < 
+                    maxSize
+                  inactive <- tabulate(spreads[spreads[, "active"] == 
+                    1, "id"], length(maxSize)) == 0
+                }
+                else {
+                  tooSmall <- tabulate(spreads, length(maxSize)) < 
+                    maxSize
+                  inactive <- tabulate(spreads[events], length(maxSize)) == 
+                    0
+                }
+                needPersist <- tooSmall & inactive
+                needPersistJump <- TRUE
+                if (any(needPersist)) {
+                  assign("numRetries", envir = .pkgEnv, get("numRetries", 
+                    inherits = FALSE, envir = .pkgEnv) + needPersist)
+                  if (spreadStateExists) {
+                    whSmallInactive <- which(tooSmall & inactive)
+                    spreadsSmallInactive <- spreads[spreads[, 
+                      "id"] %in% whSmallInactive, , drop = FALSE]
+                    if (needPersistJump) {
+                      message("Jumping to new active location, up to 1000 m away")
+                      mmm <- rings(landscape, loci = spreadsSmallInactive[, 
+                        "indices"], maxRadius = 1000, minRadius = 1, 
+                        returnIndices = TRUE)
+                      wh <- mmm[, list(whKeepLoci = resample(.I, 
+                        1)), by = id]$whKeepLoci
+                    }
+                    else {
+                      for (whSI in whSmallInactive) {
+                        wh <- which(spreads[, "id"] == whSI)
+                        wh <- tail(wh, 2)
+                        keepLoci <- spreads[wh, "indices"]
+                        events <- c(keepLoci, events)
+                        spreads[wh, "active"] <- 1
+                      }
+                    }
+                  }
+                  else {
+                    keepLoci <- spreads[loci] %fin% which(tooSmall & 
+                      inactive)
+                    events <- c(loci[keepLoci], events)
+                  }
+                }
+            }
+        }
+        if (is.na(persistence) | persistence == 0L) {
+            loci <- NULL
+        }
+        else {
+            if (inRange(persistence)) {
+                loci <- loci[runif(length(loci)) <= persistence]
+            }
+            else {
+                stop("Unsupported type: persistence")
+            }
+        }
+        if (plot.it) {
+            if (n == 2 & !spreadStateExists) 
+                clearPlot()
+            if (allowOverlap | returnDistances) {
+                spreadsDT <- data.table(spreads)
+                hab2 <- landscape
+                hab2[] <- 0
+                pixVal <- spreadsDT[, sum(id), by = indices]
+                hab2[pixVal$indices] <- pixVal$V1
+                Plot(hab2, legendRange = c(0, sum(seq_along(initialLoci))))
+            }
+            else {
+                plotCur <- raster(landscape)
+                plotCur <- setValues(plotCur, spreads)
+                Plot(plotCur)
+            }
+        }
+        loci <- c(loci, events)
+    }
+    if (!allowOverlap & !returnDistances & !spreadStateExists) {
+        if (lowMemory) {
+            wh <- ffwhich(spreads, spreads > 0) %>% as.ram()
+            if (returnIndices) {
+                completed <- data.table(indices = wh, id = spreads[wh], 
+                  active = FALSE)
+                if (NROW(potentials) > 0) {
+                  active <- data.table(indices = potentials[, 
+                    2L], id = spreads[potentials[, 1L]], active = TRUE)
+                }
+                else {
+                  active <- data.table(indices = numeric(0), 
+                    id = numeric(0), active = logical(0))
+                }
+            }
+        }
+        else {
+            wh <- if (spreadStateExists) {
+                c(spreadState[!keepers]$indices, spreadsIndices)
+            }
+            else {
+                spreadsIndices
+            }
+            if (returnIndices) {
+                completed <- wh %>% data.table(indices = ., id = spreads[.], 
+                  active = FALSE)
+                if (NROW(potentials) > 0) {
+                  active <- data.table(indices = potentials[, 
+                    2L], id = spreads[potentials[, 1L]], active = TRUE)
+                }
+                else {
+                  active <- data.table(indices = numeric(0), 
+                    id = numeric(0), active = logical(0))
+                }
+            }
+        }
+    }
+    if (returnIndices) {
+        if (allowOverlap | returnDistances | spreadStateExists) {
+            keepCols <- c(3, 1, 2, 4)
+            if (circle) 
+                keepCols <- c(keepCols, 5)
+            allCells <- data.table(spreads[, keepCols, drop = FALSE])
+            set(allCells, , j = "active", as.logical(allCells$active))
+            setkeyv(allCells, "id")
+        }
+        else {
+            allCells <- rbindlist(list(active, completed))
+            if (spreadStateExists) {
+                initEventID <- unique(spreadState$id)
+            }
+            else {
+                initEventID <- allCells[indices %fin% initialLoci, 
+                  id]
+            }
+            if (!all(is.na(initialLoci))) {
+                dtToJoin <- data.table(id = sort(initEventID), 
+                  initialLocus = initialLoci)
+            }
+            else {
+                dtToJoin <- data.table(id = numeric(0), initialLocus = numeric(0))
+            }
+            setkeyv(dtToJoin, "id")
+            setkeyv(allCells, "id")
+            allCells <- dtToJoin[allCells]
+        }
+        allCells[]
+        if (exists("numRetries", envir = .pkgEnv)) {
+            if (sum(allCells$active) == 0) 
+                rm("numRetries", envir = .pkgEnv)
+        }
+        return(allCells)
+    }
+    landscape[] <- 0
+    landscape@legend@colortable <- logical(0)
+    if (allowOverlap | returnDistances) {
+        if (returnDistances & !allowOverlap) {
+            landscape[spreads[, "indices"]] <- spreads[, "dists"]
+        }
+        else {
+            spreadsDT <- data.table(spreads)
+            if (returnDistances & allowOverlap) {
+                pixVal <- spreadsDT[, min(dists), by = indices]
+                message("returnDistances is TRUE, allowOverlap is TRUE, but returnIndices is FALSE; ", 
+                  "returning minimum distance raster.")
+            }
+            else {
+                pixVal <- spreadsDT[, sum(id), by = indices]
+            }
+            landscape[pixVal$indices] <- pixVal$V1
+        }
+    }
+    else {
+        landscape[wh] <- spreads[wh]
+        if (exists("potentials")) 
+            if (NROW(potentials) > 0) 
+                landscape[potentials[, 1L]] <- spreads[potentials[, 
+                  2L]]
+    }
+    return(landscape)
+}
+S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature RasterLayer has this body.
+Fatal error: compiler constants were modified!
+
