@@ -1,5 +1,5 @@
-Package sf version 0.8-1
-Package built using 77734/R 4.0.0; x86_64-pc-linux-gnu; 2020-01-28 14:07:40 UTC; unix   
+Package sf version 0.9-0
+Package built using 78052/R 4.0.0; x86_64-pc-linux-gnu; 2020-03-25 00:06:22 UTC; unix   
 Checked with rchk version 490627e4fb8e93244230dbbd61455730aa43c328
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
@@ -29,7 +29,7 @@ Function Rcpp::Rcpp_unprotect(int)
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
 Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
-  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:684
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:683
 
 Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -43,6 +43,9 @@ Function SetFields(OGRFeature*, std::__1::vector<OGRFieldType, std::__1::allocat
 Function _sf_CPL_area
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _sf_CPL_axis_order_authority_compliant
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _sf_CPL_circularstring_to_linestring
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -52,13 +55,7 @@ Function _sf_CPL_compoundcurve_to_linear
 Function _sf_CPL_crs_equivalent
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _sf_CPL_crs_from_epsg
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _sf_CPL_crs_from_proj4string
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _sf_CPL_crs_from_wkt
+Function _sf_CPL_crs_from_input
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sf_CPL_crs_parameters
@@ -140,7 +137,7 @@ Function _sf_CPL_geos_normalize
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sf_CPL_geos_op
-  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %42 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sf_CPL_geos_op2
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -162,6 +159,9 @@ Function _sf_CPL_get_bbox
 
 Function _sf_CPL_get_crs
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _sf_CPL_get_data_dir
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sf_CPL_get_layers
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -187,6 +187,9 @@ Function _sf_CPL_hex_to_raw
 Function _sf_CPL_inv_geotransform
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _sf_CPL_is_network_enabled
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _sf_CPL_length
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -203,7 +206,7 @@ Function _sf_CPL_polygonize
   [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sf_CPL_proj_direct
-  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sf_CPL_proj_h
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -230,10 +233,10 @@ Function _sf_CPL_read_ogr
   [UP] ignoring variable <unnamed var:   %48 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sf_CPL_read_wkb
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr sf/src/RcppExports.cpp:1020
-  [PB] has negative depth sf/src/RcppExports.cpp:1032
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete sf/src/RcppExports.cpp:1032
-  [PB] has possible protection stack imbalance sf/src/RcppExports.cpp:1033
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr sf/src/RcppExports.cpp:1047
+  [PB] has negative depth sf/src/RcppExports.cpp:1059
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete sf/src/RcppExports.cpp:1059
+  [PB] has possible protection stack imbalance sf/src/RcppExports.cpp:1060
 
 Function _sf_CPL_read_wkb_try(SEXPREC*, SEXPREC*, SEXPREC*)
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -251,7 +254,7 @@ Function _sf_CPL_signed_area
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sf_CPL_transform
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sf_CPL_transpose_sparse_incidence
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -266,10 +269,10 @@ Function _sf_CPL_write_ogr
   [UP] ignoring variable <unnamed var:   %48 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sf_CPL_write_wkb
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr sf/src/RcppExports.cpp:1055
-  [PB] has negative depth sf/src/RcppExports.cpp:1067
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete sf/src/RcppExports.cpp:1067
-  [PB] has possible protection stack imbalance sf/src/RcppExports.cpp:1068
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr sf/src/RcppExports.cpp:1082
+  [PB] has negative depth sf/src/RcppExports.cpp:1094
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete sf/src/RcppExports.cpp:1094
+  [PB] has possible protection stack imbalance sf/src/RcppExports.cpp:1095
 
 Function _sf_CPL_write_wkb_try(SEXPREC*, SEXPREC*)
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -282,8 +285,8 @@ Function _sf_normalize_sfc
   [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sf_opp_sfc
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sf_points_cpp
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
