@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2020-03-19 r78011) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-03-26 r78068) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -41,40 +41,40 @@ Type 'q()' to quit R.
 > a <- ursa_dummy()
 > print(a)
            name    mean      sd      sum     min     max      n nNA
-[1] Thursday 19 126.092 33.5767 17172668 53.5795 217.310 136192   0
-[2] Friday 20   139.105 40.3158 18945031 49.9191 229.675 136192   0
-[3] Saturday 21 117.019 33.6998 15937043 31.4195 216.272 136192   0
+[1] Thursday 26 126.092 33.5767 17172668 53.5795 217.310 136192   0
+[2] Friday 27   139.105 40.3158 18945031 49.9191 229.675 136192   0
+[3] Saturday 28 117.019 33.6998 15937043 31.4195 216.272 136192   0
 > print(a<80)
            name mean sd   sum min max     n    nNA
-[1] Thursday 19    1  0 11835   1   1 11835 124357
-[2] Friday 20      1  0 11695   1   1 11695 124497
-[3] Saturday 21    1  0 18403   1   1 18403 117789
+[1] Thursday 26    1  0 11835   1   1 11835 124357
+[2] Friday 27      1  0 11695   1   1 11695 124497
+[3] Saturday 28    1  0 18403   1   1 18403 117789
 > print(class(a))
 [1] "ursaRaster"
 > a[a<80]
            name    mean       sd     sum     min     max     n    nNA
-[1] Thursday 19 68.9865  7.15268  816455 53.5795 79.9984 11835 124357
-[2] Friday 20   69.8020  7.67960  816335 49.9191 79.9980 11695 124497
-[3] Saturday 21 66.7844 10.06311 1229033 31.4195 79.9985 18403 117789
+[1] Thursday 26 68.9865  7.15268  816455 53.5795 79.9984 11835 124357
+[2] Friday 27   69.8020  7.67960  816335 49.9191 79.9980 11695 124497
+[3] Saturday 28 66.7844 10.06311 1229033 31.4195 79.9985 18403 117789
 > a[a<80] <- NA
 > b1 <- band_stat(a)
 > print(b1)
            name     mean       sd      sum      min      max      n   nNA
-[1] Thursday 19 131.5263 29.83176 16356213 80.00113 217.3105 124357 11835
-[2]   Friday 20 145.6155 35.76229 18128697 80.00694 229.6751 124497 11695
-[3] Saturday 21 124.8674 29.00726 14708009 80.00141 216.2716 117789 18403
+[1] Thursday 26 131.5263 29.83176 16356213 80.00113 217.3105 124357 11835
+[2]   Friday 27 145.6155 35.76229 18128697 80.00694 229.6751 124497 11695
+[3] Saturday 28 124.8674 29.00726 14708009 80.00141 216.2716 117789 18403
 > b2.n <- band_n(a)
 > str(b2.n)
  Named int [1:3] 124357 124497 117789
- - attr(*, "names")= chr [1:3] "Thursday 19" "Friday 20" "Saturday 21"
+ - attr(*, "names")= chr [1:3] "Thursday 26" "Friday 27" "Saturday 28"
 > b2.mean <- band_mean(a)
 > print(b1$mean)
 [1] 131.5263 145.6155 124.8674
 > print(b2.mean)
-Thursday 19   Friday 20 Saturday 21 
+Thursday 26   Friday 27 Saturday 28 
    131.5263    145.6155    124.8674 
 > print(b1$mean-b2.mean)
-Thursday 19   Friday 20 Saturday 21 
+Thursday 26   Friday 27 Saturday 28 
           0           0           0 
 > 
 > 
@@ -213,33 +213,33 @@ List of 13
 > a <- ursa_dummy(nband=2,mul=1/8,elements=32)
 > a[a<80] <- NA
 > b.min <- focal_extrem(a,"min",size=4,cover=0.5,verbose=1L)
-*** : start:focalExtrem: 6.01(6.01) seconds ***
+*** : start:focalExtrem: 3.97(3.97) seconds ***
 focalExtrem: r=56 c=38 b=2 size=5 shift=2 fillNA=0 bg=232.6
-*** : finish:focalExtrem: 6.01(0.00) seconds ***
+*** : finish:focalExtrem: 3.97(0.00) seconds ***
 > b.max <- focal_extrem(a,"max",size=4,cover=0.5,verbose=1L)
-*** : start:focalExtrem: 6.01(0.00) seconds ***
+*** : start:focalExtrem: 3.98(0.00) seconds ***
 focalExtrem: r=56 c=38 b=2 size=5 shift=2 fillNA=0 bg=232.6
-*** : finish:focalExtrem: 6.01(0.00) seconds ***
+*** : finish:focalExtrem: 3.98(0.00) seconds ***
 > print(list(src=a,min=b.min,max=b.max,dif=b.max-b.min))
 $src
            name    mean      sd    sum     min     max    n nNA
-[1] Thursday 19 137.362 33.7939 256730 80.1804 231.552 1869 259
-[2] Friday 20   136.122 34.3693 238758 80.0203 230.770 1754 374
+[1] Thursday 26 137.362 33.7939 256730 80.1804 231.552 1869 259
+[2] Friday 27   136.122 34.3693 238758 80.0203 230.770 1754 374
 
 $min
            name    mean      sd    sum     min     max    n nNA
-[1] Thursday 19 88.0369 9.73851 183733 80.1804 159.933 2087  41
-[2] Friday 20   87.9616 8.41038 179178 80.0203 162.096 2037  91
+[1] Thursday 26 88.0369 9.73851 183733 80.1804 159.933 2087  41
+[2] Friday 27   87.9616 8.41038 179178 80.0203 162.096 2037  91
 
 $max
            name    mean      sd    sum     min     max    n nNA
-[1] Thursday 19 190.775 19.0801 398148 118.719 231.552 2087  41
-[2] Friday 20   189.143 21.8129 385285 107.362 230.770 2037  91
+[1] Thursday 26 190.775 19.0801 398148 118.719 231.552 2087  41
+[2] Friday 27   189.143 21.8129 385285 107.362 230.770 2037  91
 
 $dif
            name    mean      sd    sum     min     max    n nNA
-[1] Thursday 19 102.738 19.4160 214415 34.9144 150.084 2087  41
-[2] Friday 20   101.182 20.8953 206107 17.8878 148.095 2037  91
+[1] Thursday 26 102.738 19.4160 214415 34.9144 150.084 2087  41
+[2] Friday 27   101.182 20.8953 206107 17.8878 148.095 2037  91
 
 > 
 > 
@@ -262,16 +262,16 @@ $dif
 > a[a<80] <- NA
 > print(a)
            name    mean      sd    sum     min     max    n nNA
-[1] Thursday 19 166.863 51.8148 241451 80.1129 254.982 1447 681
+[1] Thursday 26 166.863 51.8148 241451 80.1129 254.982 1447 681
 > b1 <- focal_mean(a,size=6,cover=0.5,saveMargin=FALSE)
 > b2 <- focal_mean(a,size=6,cover=0.5,saveMargin=TRUE)
 > b3 <- focal_mean(a,size=6,cover=0.5,saveMargin=TRUE,fillNA=TRUE)
 > print(b3-a)
            name mean sd sum min max    n nNA
-[1] Thursday 19    0  0   0   0   0 1439 689
+[1] Thursday 26    0  0   0   0   0 1439 689
 > display(c(a,b1,b2,b3),blank.angle=c(-45,45),blank.density=20)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa01_5912.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa01_e267.png' in external software.
 > 
 > 
 > 
@@ -304,7 +304,7 @@ to open '/tmp/Rtmpn9IP2V/___ursa01_5912.png' in external software.
 [3] fillNA.T 167.129 21.5576 344787 97.5686 237.866 2063  65
 > display(d)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa03_98db.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa03_4e77.png' in external software.
 > 
 > 
 > 
@@ -410,7 +410,7 @@ focalSobelGradient: r=224 c=152 b=1 size=3 shift=1 cover=1.00 margin=0 bg=238.4
 [10] sobelG     -0.0071145  0.89076    -236.91  -1.5707460   1.5707 33300  748
 > display(res,decor=FALSE)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa05_5c97.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa05_e051.png' in external software.
 > 
 > 
 > 
@@ -433,8 +433,8 @@ to open '/tmp/Rtmpn9IP2V/___ursa05_5c97.png' in external software.
 > a[a<0] <- NA
 > print(a)
            name    mean      sd     sum         min     max      n   nNA
-[1] Thursday 19 22.7461 13.5637 2727942 0.000378431 62.2638 119930 16262
-[2] Friday 20   29.3872 16.2812 3555411 0.000273548 68.0824 120985 15207
+[1] Thursday 26 22.7461 13.5637 2727942 0.000378431 62.2638 119930 16262
+[2] Friday 27   29.3872 16.2812 3555411 0.000273548 68.0824 120985 15207
 > a.mean <- global_mean(a)
 > a.sd <- global_sd(a)
 > a.sum <- global_sum(a)
@@ -455,8 +455,8 @@ to open '/tmp/Rtmpn9IP2V/___ursa05_5c97.png' in external software.
 > b <- c(a,'appended scalar value'=a.max)
 > print(b)
                      name   mean     sd     sum         min    max      n   nNA
-[1] Thursday 19           22.746 13.564 2727942  0.00037843 62.264 119930 16262
-[2] Friday 20             29.387 16.281 3555411  0.00027355 68.082 120985 15207
+[1] Thursday 26           22.746 13.564 2727942  0.00037843 62.264 119930 16262
+[2] Friday 27             29.387 16.281 3555411  0.00027355 68.082 120985 15207
 [3] appended scalar value 68.082  0.000 9272280 68.08241341 68.082 136192     0
 > 
 > 
@@ -482,13 +482,13 @@ to open '/tmp/Rtmpn9IP2V/___ursa05_5c97.png' in external software.
 > b[b<40] <- NA
 > print(b)
             name    mean       sd     sum     min     max   n nNA
-[1] Thursday 19  55.4953  9.80815 21587.7 40.0643 80.1895 389 143
-[2] Friday 20    60.6936 12.01673 25248.5 40.0269 89.1610 416 116
-[3] Saturday 21  53.9968  9.39656 17980.9 40.1878 82.7233 333 199
-[4] Sunday 22    60.6882 10.65997 25549.7 40.0856 82.0539 421 111
-[5] Monday 23    58.3364 12.49775 22692.8 40.0043 88.8258 389 143
-[6] Tuesday 24   51.4955  9.32447 10041.6 40.0739 87.3340 195 337
-[7] Wednesday 25 60.5342 13.32209 22760.9 40.0232 90.1571 376 156
+[1] Thursday 26  55.4953  9.80815 21587.7 40.0643 80.1895 389 143
+[2] Friday 27    60.6936 12.01673 25248.5 40.0269 89.1610 416 116
+[3] Saturday 28  53.9968  9.39656 17980.9 40.1878 82.7233 333 199
+[4] Sunday 29    60.6882 10.65997 25549.7 40.0856 82.0539 421 111
+[5] Monday 30    58.3364 12.49775 22692.8 40.0043 88.8258 389 143
+[6] Tuesday 31   51.4955  9.32447 10041.6 40.0739 87.3340 195 337
+[7] Wednesday 01 60.5342 13.32209 22760.9 40.0232 90.1571 376 156
 > res <- c('mean'=mean(b),'local_mean'=local_mean(b)
 +         ,'sum0'=local_sum(b,cover=0),'sum1'=local_sum(b,cover=1))
 > print(res)
@@ -500,10 +500,10 @@ to open '/tmp/Rtmpn9IP2V/___ursa05_5c97.png' in external software.
 > 
 > display(b)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa07_0dcb.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa07_00fb.png' in external software.
 > display(res)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa09_6c8f.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa09_9e49.png' in external software.
 > 
 > 
 > 
@@ -567,7 +567,7 @@ to open '/tmp/Rtmpn9IP2V/___ursa09_6c8f.png' in external software.
 > d[["slopeS"]] <- colorize(d[["slopeS"]],stretch="signif")
 > display(d,blank.density=20,blank.angle=c(-45,45))
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa11_c89f.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa11_d9bc.png' in external software.
 > 
 > 
 > 
@@ -796,7 +796,7 @@ see '?methods' for accessing help and source code
 > b2 <- colorize(a,value=c(450,550,650)    ,interval=TRUE)
 > display(list(b1,b2))
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa18_7ec6.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa18_47bc.png' in external software.
 > print(is.ursa(a,"colortable"))
 [1] FALSE
 > print(is.ursa(b1,"colortable"))
@@ -825,7 +825,7 @@ character(0)
 "darkolivegreen1" "darkolivegreen2" "darkolivegreen3" "darkolivegreen4" 
 > display(b2)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa19_203b.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa19_25c2.png' in external software.
 > 
 > 
 > 
@@ -1213,44 +1213,44 @@ Warning in `[<-.ursaRaster`(`*tmp*`, "six", value = c(66.4284939966165,  :
 > a1 <- ursa_dummy(nband=3,min=-5*pi,max=5*pi)
 > print(a1)
            name      mean      sd       sum       min     max    n nNA
-[1] Thursday 19 -0.173456 4.13819  -1476.46  -9.05729 10.8022 8512   0
-[2] Friday 20    1.429802 4.96868  12170.48  -9.54990 12.5679 8512   0
-[3] Saturday 21 -1.291356 4.15302 -10992.02 -11.63806 10.8030 8512   0
+[1] Thursday 26 -0.173456 4.13819  -1476.46  -9.05729 10.8022 8512   0
+[2] Friday 27    1.429802 4.96868  12170.48  -9.54990 12.5679 8512   0
+[3] Saturday 28 -1.291356 4.15302 -10992.02 -11.63806 10.8030 8512   0
 > 
 > try(print(complex1 <- Re(a1)))
 Error in Complex.ursaRaster(a1) : Unsupported
 > 
 > print(math1 <- a2 <- round(a1))
            name     mean      sd    sum min max    n nNA
-[1] Thursday 19 -0.17352 4.15405  -1477  -9  11 8512   0
-[2] Friday 20    1.43186 4.97727  12188 -10  13 8512   0
-[3] Saturday 21 -1.29229 4.16340 -11000 -12  11 8512   0
+[1] Thursday 26 -0.17352 4.15405  -1477  -9  11 8512   0
+[2] Friday 27    1.43186 4.97727  12188 -10  13 8512   0
+[3] Saturday 28 -1.29229 4.16340 -11000 -12  11 8512   0
 > print(math1 <- sin(a1))
            name      mean       sd     sum min max    n nNA
-[1] Thursday 19 0.0536834 0.700086 456.953  -1   1 8512   0
-[2] Friday 20   0.0409691 0.700831 348.729  -1   1 8512   0
-[3] Saturday 21 0.0780725 0.713066 664.553  -1   1 8512   0
+[1] Thursday 26 0.0536834 0.700086 456.953  -1   1 8512   0
+[2] Friday 27   0.0409691 0.700831 348.729  -1   1 8512   0
+[3] Saturday 28 0.0780725 0.713066 664.553  -1   1 8512   0
 > print(math2 <- floor(a1))
            name      mean      sd    sum min max    n nNA
-[1] Thursday 19 -0.671053 4.14496  -5712 -10  10 8512   0
-[2] Friday 20    0.929746 4.98122   7914 -10  12 8512   0
-[3] Saturday 21 -1.786184 4.16317 -15204 -12  10 8512   0
+[1] Thursday 26 -0.671053 4.14496  -5712 -10  10 8512   0
+[2] Friday 27    0.929746 4.98122   7914 -10  12 8512   0
+[3] Saturday 28 -1.786184 4.16317 -15204 -12  10 8512   0
 > print(math3 <- ceiling(a1))
            name      mean      sd   sum min max    n nNA
-[1] Thursday 19  0.328947 4.14496  2800  -9  11 8512   0
-[2] Friday 20    1.929746 4.98122 16426  -9  13 8512   0
-[3] Saturday 21 -0.786184 4.16317 -6692 -11  11 8512   0
+[1] Thursday 26  0.328947 4.14496  2800  -9  11 8512   0
+[2] Friday 27    1.929746 4.98122 16426  -9  13 8512   0
+[3] Saturday 28 -0.786184 4.16317 -6692 -11  11 8512   0
 > print(math4 <- cumsum(a1)) ## does this have a sense for rasters?
            name     mean      sd       sum       min       max    n nNA
-[1] Thursday 19 -1705.44 1493.79 -14516733 -4614.298   582.449 8512   0
-[2] Friday 20    5357.78 2502.82  45605442 -1464.307 10694.017 8512   0
-[3] Saturday 21  3770.59 1970.15  32095301  -320.621 10693.504 8512   0
+[1] Thursday 26 -1705.44 1493.79 -14516733 -4614.298   582.449 8512   0
+[2] Friday 27    5357.78 2502.82  45605442 -1464.307 10694.017 8512   0
+[3] Saturday 28  3770.59 1970.15  32095301  -320.621 10693.504 8512   0
 > 
 > print(ops1 <- a1-2*rev(a1)+mean(a1))
            name      mean      sd       sum      min     max    n nNA
-[1] Thursday 19  2.397586 7.82741  20408.25 -24.8450 27.5947 8512   0
-[2] Friday 20   -1.441472 4.74609 -12269.81 -11.8052 10.3985 8512   0
-[3] Saturday 21 -0.956113 7.64700  -8138.44 -23.9301 21.9366 8512   0
+[1] Thursday 26  2.397586 7.82741  20408.25 -24.8450 27.5947 8512   0
+[2] Friday 27   -1.441472 4.74609 -12269.81 -11.8052 10.3985 8512   0
+[3] Saturday 28 -0.956113 7.64700  -8138.44 -23.9301 21.9366 8512   0
 > print(mean(ops1)) ## vanishing
     name      mean       sd       sum       min      max    n nNA
 [1] mean -5.53e-18 4.26e-16 -4.71e-14 -2.66e-15 2.66e-15 8512   0
@@ -1268,14 +1268,14 @@ Error in Complex.ursaRaster(a1) : Unsupported
 [1] single    1  0 8512   1   1 8512   0
 > print(ops4 <- a1>0)
            name mean sd  sum min max    n  nNA
-[1] Thursday 19    1  0 4151   1   1 4151 4361
-[2] Friday 20      1  0 5117   1   1 5117 3395
-[3] Saturday 21    1  0 3257   1   1 3257 5255
+[1] Thursday 26    1  0 4151   1   1 4151 4361
+[2] Friday 27      1  0 5117   1   1 5117 3395
+[3] Saturday 28    1  0 3257   1   1 3257 5255
 > print(a1[a1>0])
            name    mean      sd      sum         min     max    n  nNA
-[1] Thursday 19 3.38289 2.27470 14042.38 0.000968123 10.8022 4151 4361
-[2] Friday 20   4.83631 2.89959 24747.41 0.000489094 12.5679 5117 3395
-[3] Saturday 21 3.04704 2.26528  9924.21 0.000121454 10.8030 3257 5255
+[1] Thursday 26 3.38289 2.27470 14042.38 0.000968123 10.8022 4151 4361
+[2] Friday 27   4.83631 2.89959 24747.41 0.000489094 12.5679 5117 3395
+[3] Saturday 28 3.04704 2.26528  9924.21 0.000121454 10.8030 3257 5255
 > 
 > print(sum1 <- sum(a1))
     name     mean      sd      sum      min     max    n nNA
@@ -1360,10 +1360,10 @@ Error in Complex.ursaRaster(a1) : Unsupported
 > a2[a2>50] <- NA
 > print(a2)
            name mean      sd sum min max n nNA
-[1] Thursday 19 16.5 15.8008  66   0  38 4   2
-[2] Friday 20   16.5 21.6102  66   1  48 4   2
+[1] Thursday 26 16.5 15.8008  66   0  38 4   2
+[2] Friday 27   16.5 21.6102  66   1  48 4   2
 > print(b1 <- as.data.frame(a2,na.rm=FALSE))
-         x        y Thursday 19 Friday 20
+         x        y Thursday 26 Friday 27
 1 -2900000  8700000          15         4
 2  2900000  8700000          38        NA
 3 -2900000  2900000           0        13
@@ -1371,59 +1371,59 @@ Error in Complex.ursaRaster(a1) : Unsupported
 5 -2900000 -2900000          NA        NA
 6  2900000 -2900000          NA         1
 > print(b2 <- as.data.frame(a2,na.rm=TRUE))
-         x        y Thursday 19 Friday 20
+         x        y Thursday 26 Friday 27
 1 -2900000  8700000          15         4
 2  2900000  8700000          38        NA
 3 -2900000  2900000           0        13
 4  2900000  2900000          13        48
 6  2900000 -2900000          NA         1
 > print(b3 <- as.data.frame(a2,all.na=TRUE))
-         x       y Thursday 19 Friday 20
+         x       y Thursday 26 Friday 27
 1 -2900000 8700000          15         4
 3 -2900000 2900000           0        13
 4  2900000 2900000          13        48
 > print(b4 <- as.data.frame(a2,band=TRUE,na.rm=FALSE))
           x        y  z        band
-1  -2900000  8700000 15 Thursday 19
-2   2900000  8700000 38 Thursday 19
-3  -2900000  2900000  0 Thursday 19
-4   2900000  2900000 13 Thursday 19
-5  -2900000 -2900000 NA Thursday 19
-6   2900000 -2900000 NA Thursday 19
-7  -2900000  8700000  4   Friday 20
-8   2900000  8700000 NA   Friday 20
-9  -2900000  2900000 13   Friday 20
-10  2900000  2900000 48   Friday 20
-11 -2900000 -2900000 NA   Friday 20
-12  2900000 -2900000  1   Friday 20
+1  -2900000  8700000 15 Thursday 26
+2   2900000  8700000 38 Thursday 26
+3  -2900000  2900000  0 Thursday 26
+4   2900000  2900000 13 Thursday 26
+5  -2900000 -2900000 NA Thursday 26
+6   2900000 -2900000 NA Thursday 26
+7  -2900000  8700000  4   Friday 27
+8   2900000  8700000 NA   Friday 27
+9  -2900000  2900000 13   Friday 27
+10  2900000  2900000 48   Friday 27
+11 -2900000 -2900000 NA   Friday 27
+12  2900000 -2900000  1   Friday 27
 > print(b5 <- as.data.frame(a2,band=TRUE,all.na=FALSE))
           x        y  z        band
-1  -2900000  8700000 15 Thursday 19
-2   2900000  8700000 38 Thursday 19
-3  -2900000  2900000  0 Thursday 19
-4   2900000  2900000 13 Thursday 19
-5   2900000 -2900000 NA Thursday 19
-6  -2900000  8700000  4   Friday 20
-7   2900000  8700000 NA   Friday 20
-8  -2900000  2900000 13   Friday 20
-9   2900000  2900000 48   Friday 20
-10  2900000 -2900000  1   Friday 20
+1  -2900000  8700000 15 Thursday 26
+2   2900000  8700000 38 Thursday 26
+3  -2900000  2900000  0 Thursday 26
+4   2900000  2900000 13 Thursday 26
+5   2900000 -2900000 NA Thursday 26
+6  -2900000  8700000  4   Friday 27
+7   2900000  8700000 NA   Friday 27
+8  -2900000  2900000 13   Friday 27
+9   2900000  2900000 48   Friday 27
+10  2900000 -2900000  1   Friday 27
 > print(b6 <- as.data.frame(a2,band=TRUE,all.na=TRUE))
          x       y  z        band
-1 -2900000 8700000 15 Thursday 19
-2 -2900000 2900000  0 Thursday 19
-3  2900000 2900000 13 Thursday 19
-4 -2900000 8700000  4   Friday 20
-5 -2900000 2900000 13   Friday 20
-6  2900000 2900000 48   Friday 20
+1 -2900000 8700000 15 Thursday 26
+2 -2900000 2900000  0 Thursday 26
+3  2900000 2900000 13 Thursday 26
+4 -2900000 8700000  4   Friday 27
+5 -2900000 2900000 13   Friday 27
+6  2900000 2900000 48   Friday 27
 > print(b7 <- as.data.frame(a2,band=TRUE,all.na=TRUE,id=TRUE))
          x       y  z        band id
-1 -2900000 8700000 15 Thursday 19  1
-2 -2900000 2900000  0 Thursday 19  2
-3  2900000 2900000 13 Thursday 19  3
-4 -2900000 8700000  4   Friday 20  1
-5 -2900000 2900000 13   Friday 20  2
-6  2900000 2900000 48   Friday 20  3
+1 -2900000 8700000 15 Thursday 26  1
+2 -2900000 2900000  0 Thursday 26  2
+3  2900000 2900000 13 Thursday 26  3
+4 -2900000 8700000  4   Friday 27  1
+5 -2900000 2900000 13   Friday 27  2
+6  2900000 2900000 48   Friday 27  3
 > 
 > 
 > 
@@ -1523,7 +1523,7 @@ theSame?
 + }
 > compose_close()
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa25_c14a.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa25_437a.png' in external software.
 > 
 > op <- par(mfrow=c(2,2),mar=rep(0.5,4))
 > plot(as.raster(a[1:1]),interpolate=FALSE)
@@ -1648,10 +1648,10 @@ to open '/tmp/Rtmpn9IP2V/___ursa25_c14a.png' in external software.
 > 
 > session_grid(NULL)
 > a <- create_envi()
-Filename is assigned automatically: /tmp/Rtmpn9IP2V/___ursa26_44f5
+Filename is assigned automatically: /tmp/RtmprRURq0/___ursa26_d542
 > fname <- a$con$fname
 > message(paste("Created file",dQuote(basename(fname)),"will be deleted."))
-Created file “___ursa26_44f5.envi” will be deleted.
+Created file “___ursa26_d542.envi” will be deleted.
 > print(dir(pattern=basename(envi_list(fname))))
 character(0)
 > close(a)
@@ -1675,11 +1675,11 @@ character(0)
 > a[3] <- a[2]
 > a
            name    mean      sd      sum     min     max      n nNA
-[1] Thursday 19 132.477 33.7464 18042303 42.9114 210.613 136192   0
-[2] Friday 20   129.087 37.0603 17580574 32.8850 213.980 136192   0
-[3] Saturday 21 129.087 37.0603 17580574 32.8850 213.980 136192   0
-[4] Sunday 22   138.170 38.6958 18817590 55.1900 222.494 136192   0
-[5] Monday 23   127.025 40.2103 17299767 29.6575 225.738 136192   0
+[1] Thursday 26 132.477 33.7464 18042303 42.9114 210.613 136192   0
+[2] Friday 27   129.087 37.0603 17580574 32.8850 213.980 136192   0
+[3] Saturday 28 129.087 37.0603 17580574 32.8850 213.980 136192   0
+[4] Sunday 29   138.170 38.6958 18817590 55.1900 222.494 136192   0
+[5] Monday 30   127.025 40.2103 17299767 29.6575 225.738 136192   0
 > duplicated(a)
 [1] FALSE FALSE  TRUE FALSE FALSE
 > diff(a)
@@ -1719,7 +1719,7 @@ List of 11
  $ maxy    : num 5850000
  $ proj4   : chr "+proj=stere +lat_0=90 +lat_ts=70.0 +lon_0=-45.0 +k=1 +x_0=0.0 +y_0=0.0 +a=6378273.000 +b=6356889.449 +units=m +no_defs"
  $ mode    : chr [1:2] "raw" "double"
- $ bandname: chr [1:3] "Thursday 19" "Friday 20" "Saturday 21"
+ $ bandname: chr [1:3] "Thursday 26" "Friday 27" "Saturday 28"
  - attr(*, "class")= chr "ursaMetadata"
 > print(dim(a))
   lines samples   bands 
@@ -1755,27 +1755,27 @@ List of 11
 > a <- ursa_dummy(nband=101)
 > print(head(a))
            name    mean      sd    sum     min     max    n nNA
-[1] Thursday 19 126.097 33.6410 268335 53.8385 211.785 2128   0
-[2] Friday 20   139.106 40.3991 296018 50.0275 229.076 2128   0
-[3] Saturday 21 117.017 33.7544 249011 35.7023 213.612 2128   0
+[1] Thursday 26 126.097 33.6410 268335 53.8385 211.785 2128   0
+[2] Friday 27   139.106 40.3991 296018 50.0275 229.076 2128   0
+[3] Saturday 28 117.017 33.7544 249011 35.7023 213.612 2128   0
 > print(tail(a))
              name    mean      sd    sum     min     max    n nNA
-[99]  Thursday 25 135.990 38.2425 289386 48.9166 243.366 2128   0
-[100] Friday 26   139.748 40.7083 297383 59.4564 243.264 2128   0
-[101] Saturday 27 119.811 38.7773 254958 32.8524 224.144 2128   0
+[99]  Thursday 02 135.990 38.2425 289386 48.9166 243.366 2128   0
+[100] Friday 03   139.748 40.7083 297383 59.4564 243.264 2128   0
+[101] Saturday 04 119.811 38.7773 254958 32.8524 224.144 2128   0
 > print(series(a,2))
              name    mean      sd    sum     min     max    n nNA
-[1]   Thursday 19 126.097 33.6410 268335 53.8385 211.785 2128   0
-[2]   Friday 20   139.106 40.3991 296018 50.0275 229.076 2128   0
-[100] Friday 26   139.748 40.7083 297383 59.4564 243.264 2128   0
-[101] Saturday 27 119.811 38.7773 254958 32.8524 224.144 2128   0
+[1]   Thursday 26 126.097 33.6410 268335 53.8385 211.785 2128   0
+[2]   Friday 27   139.106 40.3991 296018 50.0275 229.076 2128   0
+[100] Friday 03   139.748 40.7083 297383 59.4564 243.264 2128   0
+[101] Saturday 04 119.811 38.7773 254958 32.8524 224.144 2128   0
 > print(series(a[1:5]))
            name    mean      sd    sum     min     max    n nNA
-[1] Thursday 19 126.097 33.6410 268335 53.8385 211.785 2128   0
-[2] Friday 20   139.106 40.3991 296018 50.0275 229.076 2128   0
-[3] Saturday 21 117.017 33.7544 249011 35.7023 213.612 2128   0
-[4] Sunday 22   139.550 38.4914 296962 45.9739 209.197 2128   0
-[5] Monday 23   130.789 40.9625 278319 31.0708 225.842 2128   0
+[1] Thursday 26 126.097 33.6410 268335 53.8385 211.785 2128   0
+[2] Friday 27   139.106 40.3991 296018 50.0275 229.076 2128   0
+[3] Saturday 28 117.017 33.7544 249011 35.7023 213.612 2128   0
+[4] Sunday 29   139.550 38.4914 296962 45.9739 209.197 2128   0
+[5] Monday 30   130.789 40.9625 278319 31.0708 225.842 2128   0
 > 
 > 
 > 
@@ -1797,7 +1797,7 @@ List of 11
 > hist(a)
 > histogram(a,breaks=21)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa29_4d01.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa29_c7c2.png' in external software.
 > 
 > 
 > 
@@ -1820,12 +1820,12 @@ to open '/tmp/Rtmpn9IP2V/___ursa29_4d01.png' in external software.
 > a <- ursa_dummy(nband=2,min=0,max=100)
 > print(a)
            name    mean      sd    sum     min     max    n nNA
-[1] Thursday 19 49.4479 13.1723 420900 21.1698 84.3844 8512   0
-[2] Friday 20   54.5512 15.8158 464340 19.6017 90.0047 8512   0
+[1] Thursday 26 49.4479 13.1723 420900 21.1698 84.3844 8512   0
+[2] Friday 27   54.5512 15.8158 464340 19.6017 90.0047 8512   0
 > print(is.na(a))
            name mean sd sum min max n  nNA
-[1] Thursday 19   NA NA  NA  NA  NA 0 8512
-[2] Friday 20     NA NA  NA  NA  NA 0 8512
+[1] Thursday 26   NA NA  NA  NA  NA 0 8512
+[2] Friday 27     NA NA  NA  NA  NA 0 8512
 > a2 <- ursa_new(nband=2)
 > print(a2)
       name mean sd sum min max n  nNA
@@ -1839,17 +1839,17 @@ to open '/tmp/Rtmpn9IP2V/___ursa29_4d01.png' in external software.
 > a3[a3<30 | a3>70] <- NA
 > print(a3)
            name    mean      sd    sum     min     max    n  nNA
-[1] Thursday 19 49.4122 10.5091 360709 30.0062 69.9949 7300 1212
-[2] Friday 20   50.9767 11.1891 313813 30.0086 69.9892 6156 2356
+[1] Thursday 26 49.4122 10.5091 360709 30.0062 69.9949 7300 1212
+[2] Friday 27   50.9767 11.1891 313813 30.0086 69.9892 6156 2356
 > print(is.na(a3))
            name mean sd  sum min max    n  nNA
-[1] Thursday 19    1  0 1212   1   1 1212 7300
-[2] Friday 20      1  0 2356   1   1 2356 6156
+[1] Thursday 26    1  0 1212   1   1 1212 7300
+[2] Friday 27      1  0 2356   1   1 2356 6156
 > is.na(a3) <- 200
 > print(a3)
            name    mean      sd    sum     min max    n nNA
-[1] Thursday 19 70.8540 53.5178 603109 30.0062 200 8512   0
-[2] Friday 20   92.2243 67.3539 785013 30.0086 200 8512   0
+[1] Thursday 26 70.8540 53.5178 603109 30.0062 200 8512   0
+[2] Friday 27   92.2243 67.3539 785013 30.0086 200 8512   0
 > 
 > 
 > 
@@ -1999,29 +1999,29 @@ Warning in ursa_new(value = 1:3) :
 > a <- ursa_dummy(nband=3)
 > print(a)
            name    mean      sd     sum     min     max    n nNA
-[1] Thursday 19 126.092 33.5893 1073296 53.9829 215.180 8512   0
-[2] Friday 20   139.106 40.3303 1184067 49.9844 229.512 8512   0
-[3] Saturday 21 117.018 33.7097  996059 33.0350 215.187 8512   0
+[1] Thursday 26 126.092 33.5893 1073296 53.9829 215.180 8512   0
+[2] Friday 27   139.106 40.3303 1184067 49.9844 229.512 8512   0
+[3] Saturday 28 117.018 33.7097  996059 33.0350 215.187 8512   0
 > b1 <- rep(a,by=2)
 > print(b1)
            name    mean      sd     sum     min     max    n nNA
-[1] Thursday 19 126.092 33.5893 1073296 53.9829 215.180 8512   0
-[2] Friday 20   139.106 40.3303 1184067 49.9844 229.512 8512   0
-[3] Saturday 21 117.018 33.7097  996059 33.0350 215.187 8512   0
+[1] Thursday 26 126.092 33.5893 1073296 53.9829 215.180 8512   0
+[2] Friday 27   139.106 40.3303 1184067 49.9844 229.512 8512   0
+[3] Saturday 28 117.018 33.7097  996059 33.0350 215.187 8512   0
 > b2 <- rep(a,length=5)
 > print(b2)
            name    mean      sd     sum     min     max    n nNA
-[1] Thursday 19 126.092 33.5893 1073296 53.9829 215.180 8512   0
-[2] Friday 20   139.106 40.3303 1184067 49.9844 229.512 8512   0
-[3] Saturday 21 117.018 33.7097  996059 33.0350 215.187 8512   0
-[4] Thursday 19 126.092 33.5893 1073296 53.9829 215.180 8512   0
-[5] Friday 20   139.106 40.3303 1184067 49.9844 229.512 8512   0
+[1] Thursday 26 126.092 33.5893 1073296 53.9829 215.180 8512   0
+[2] Friday 27   139.106 40.3303 1184067 49.9844 229.512 8512   0
+[3] Saturday 28 117.018 33.7097  996059 33.0350 215.187 8512   0
+[4] Thursday 26 126.092 33.5893 1073296 53.9829 215.180 8512   0
+[5] Friday 27   139.106 40.3303 1184067 49.9844 229.512 8512   0
 > b3 <- rep(a[3],3)
 > print(b3)
            name    mean      sd    sum    min     max    n nNA
-[1] Saturday 21 117.018 33.7097 996059 33.035 215.187 8512   0
-[2] Saturday 21 117.018 33.7097 996059 33.035 215.187 8512   0
-[3] Saturday 21 117.018 33.7097 996059 33.035 215.187 8512   0
+[1] Saturday 28 117.018 33.7097 996059 33.035 215.187 8512   0
+[2] Saturday 28 117.018 33.7097 996059 33.035 215.187 8512   0
+[3] Saturday 28 117.018 33.7097 996059 33.035 215.187 8512   0
 > 
 > 
 > 
@@ -2056,11 +2056,11 @@ List of 9
 > a <- ursa_dummy(nband=5)
 > print(a)
            name    mean      sd     sum     min     max   n nNA
-[1] Thursday 19 126.116 33.8819 67093.6 53.9933 204.483 532   0
-[2] Friday 20   139.113 40.6446 74008.1 49.8671 227.361 532   0
-[3] Saturday 21 117.004 33.9655 62246.0 38.6557 210.944 532   0
-[4] Sunday 22   139.576 38.7624 74254.5 46.2272 209.237 532   0
-[5] Monday 23   130.797 41.1574 69584.0 31.7695 226.506 532   0
+[1] Thursday 26 126.116 33.8819 67093.6 53.9933 204.483 532   0
+[2] Friday 27   139.113 40.6446 74008.1 49.8671 227.361 532   0
+[3] Saturday 28 117.004 33.9655 62246.0 38.6557 210.944 532   0
+[4] Sunday 29   139.576 38.7624 74254.5 46.2272 209.237 532   0
+[5] Monday 30   130.797 41.1574 69584.0 31.7695 226.506 532   0
 > print(seq(a))
 [1] 1 2 3 4 5
 > print(seq(a,"c"))
@@ -2093,7 +2093,7 @@ List of 9
 > session_grid(regrid(mul=1/4))
 > a <- ursa_dummy(nband=3)
 > print(summary(a))
-  Thursday 19       Friday 20       Saturday 21    
+  Thursday 26       Friday 27       Saturday 28    
  Min.   : 53.98   Min.   : 49.98   Min.   : 33.03  
  1st Qu.:100.17   1st Qu.:106.70   1st Qu.: 91.28  
  Median :126.37   Median :140.15   Median :114.54  
@@ -2105,9 +2105,9 @@ List of 9
   33.03   98.65  126.32  127.41  153.63  229.51 
 > print(a)
            name    mean      sd     sum     min     max    n nNA
-[1] Thursday 19 126.092 33.5893 1073296 53.9829 215.180 8512   0
-[2] Friday 20   139.106 40.3303 1184067 49.9844 229.512 8512   0
-[3] Saturday 21 117.018 33.7097  996059 33.0350 215.187 8512   0
+[1] Thursday 26 126.092 33.5893 1073296 53.9829 215.180 8512   0
+[2] Friday 27   139.106 40.3303 1184067 49.9844 229.512 8512   0
+[3] Saturday 28 117.018 33.7097  996059 33.0350 215.187 8512   0
 > 
 > 
 > 
@@ -2129,35 +2129,35 @@ List of 9
 > a <- ursa_dummy(3)
 > print(a)
            name    mean      sd      sum     min     max      n nNA
-[1] Thursday 19 126.092 33.5767 17172668 53.5795 217.310 136192   0
-[2] Friday 20   139.105 40.3158 18945031 49.9191 229.675 136192   0
-[3] Saturday 21 117.019 33.6998 15937043 31.4195 216.272 136192   0
+[1] Thursday 26 126.092 33.5767 17172668 53.5795 217.310 136192   0
+[2] Friday 27   139.105 40.3158 18945031 49.9191 229.675 136192   0
+[3] Saturday 28 117.019 33.6998 15937043 31.4195 216.272 136192   0
 > b1 <- ursa_stack(a[1:2],colorize(a[3],ramp=FALSE))
 > print(b1)
 [[1]]
            name    mean      sd      sum     min     max      n nNA
-[1] Thursday 19 126.092 33.5767 17172668 53.5795 217.310 136192   0
-[2] Friday 20   139.105 40.3158 18945031 49.9191 229.675 136192   0
+[1] Thursday 26 126.092 33.5767 17172668 53.5795 217.310 136192   0
+[2] Friday 27   139.105 40.3158 18945031 49.9191 229.675 136192   0
 
 [[2]]
            name    mean      sd      sum min max      n nNA
-[3] Saturday 21 117.002 33.9059 15934800  45 195 136192   0
+[3] Saturday 28 117.002 33.9059 15934800  45 195 136192   0
 
 attr(,"class")
 [1] "ursaStack"
 > b2 <- as.list(a)
 > print(b2)
-$`Thursday 19`
+$`Thursday 26`
            name    mean      sd      sum     min    max      n nNA
-[1] Thursday 19 126.092 33.5767 17172668 53.5795 217.31 136192   0
+[1] Thursday 26 126.092 33.5767 17172668 53.5795 217.31 136192   0
 
-$`Friday 20`
+$`Friday 27`
          name    mean      sd      sum     min     max      n nNA
-[2] Friday 20 139.105 40.3158 18945031 49.9191 229.675 136192   0
+[2] Friday 27 139.105 40.3158 18945031 49.9191 229.675 136192   0
 
-$`Saturday 21`
+$`Saturday 28`
            name    mean      sd      sum     min     max      n nNA
-[3] Saturday 21 117.019 33.6998 15937043 31.4195 216.272 136192   0
+[3] Saturday 28 117.019 33.6998 15937043 31.4195 216.272 136192   0
 
 attr(,"class")
 [1] "ursaStack"
@@ -2165,34 +2165,34 @@ attr(,"class")
 > print(b3)
 [[1]]
            name    mean      sd      sum     min    max      n nNA
-[1] Thursday 19 126.092 33.5767 17172668 53.5795 217.31 136192   0
+[1] Thursday 26 126.092 33.5767 17172668 53.5795 217.31 136192   0
 
 [[2]]
            name    mean      sd      sum     min     max      n nNA
-[2] Friday 20   139.105 40.3158 18945031 49.9191 229.675 136192   0
-[3] Saturday 21 117.019 33.6998 15937043 31.4195 216.272 136192   0
+[2] Friday 27   139.105 40.3158 18945031 49.9191 229.675 136192   0
+[3] Saturday 28 117.019 33.6998 15937043 31.4195 216.272 136192   0
 
 > b31 <- lapply(b3,colorize,ramp=FALSE)
 > print(b31)
 [[1]]
            name    mean     sd      sum min max      n nNA
-[1] Thursday 19 126.055 33.826 17167640  56 196 136192   0
+[1] Thursday 26 126.055 33.826 17167640  56 196 136192   0
 
 [[2]]
            name    mean      sd      sum min max      n nNA
-[2] Friday 20   139.034 40.3507 18935344  48 208 136192   0
-[3] Saturday 21 117.024 33.7785 15937712  48 208 136192   0
+[2] Friday 27   139.034 40.3507 18935344  48 208 136192   0
+[3] Saturday 28 117.024 33.7785 15937712  48 208 136192   0
 
 > b32 <- ursa_apply(b3,colorize,ramp=FALSE,rev=TRUE)
 > print(b32)
 [[1]]
            name    mean     sd      sum min max      n nNA
-[1] Thursday 19 126.055 33.826 17167640  56 196 136192   0
+[1] Thursday 26 126.055 33.826 17167640  56 196 136192   0
 
 [[2]]
            name    mean      sd      sum min max      n nNA
-[2] Friday 20   139.034 40.3507 18935344  48 208 136192   0
-[3] Saturday 21 117.024 33.7785 15937712  48 208 136192   0
+[2] Friday 27   139.034 40.3507 18935344  48 208 136192   0
+[3] Saturday 28 117.024 33.7785 15937712  48 208 136192   0
 
 attr(,"class")
 [1] "ursaStack"
@@ -2212,18 +2212,18 @@ attr(,"class")
 
 > s21 <- lapply(b2,global_mean)
 > print(s21)
-$`Thursday 19`
+$`Thursday 26`
 [1] 126.0916
 
-$`Friday 20`
+$`Friday 27`
 [1] 139.1053
 
-$`Saturday 21`
+$`Saturday 28`
 [1] 117.0189
 
 > s22 <- sapply(b2,global_mean)
 > print(s22)
-Thursday 19   Friday 20 Saturday 21 
+Thursday 26   Friday 27 Saturday 28 
    126.0916    139.1053    117.0189 
 > s31 <- lapply(b3,global_mean)
 > print(s31)
@@ -2239,24 +2239,24 @@ Thursday 19   Friday 20 Saturday 21
 > c1 <- unlist(b1)
 > print(c1)
            name    mean      sd      sum     min     max      n nNA
-[1] Thursday 19 126.092 33.5767 17172668 53.5795 217.310 136192   0
-[2] Friday 20   139.105 40.3158 18945031 49.9191 229.675 136192   0
-[3] Saturday 21 117.002 33.9059 15934800 45.0000 195.000 136192   0
+[1] Thursday 26 126.092 33.5767 17172668 53.5795 217.310 136192   0
+[2] Friday 27   139.105 40.3158 18945031 49.9191 229.675 136192   0
+[3] Saturday 28 117.002 33.9059 15934800 45.0000 195.000 136192   0
 > c2 <- unlist(b2)
 > print(c2)
            name    mean      sd      sum     min     max      n nNA
-[1] Thursday 19 126.092 33.5767 17172668 53.5795 217.310 136192   0
-[2] Friday 20   139.105 40.3158 18945031 49.9191 229.675 136192   0
-[3] Saturday 21 117.019 33.6998 15937043 31.4195 216.272 136192   0
+[1] Thursday 26 126.092 33.5767 17172668 53.5795 217.310 136192   0
+[2] Friday 27   139.105 40.3158 18945031 49.9191 229.675 136192   0
+[3] Saturday 28 117.019 33.6998 15937043 31.4195 216.272 136192   0
 > c3 <- unlist(b3)
 > print(if (is.ursa(c3)) c3 else "broken object")
 [1] "broken object"
 > d3 <- as.ursa(b3)
 > print(if (is.ursa(d3)) d3 else "broken object")
            name    mean      sd      sum     min     max      n nNA
-[1] Thursday 19 126.092 33.5767 17172668 53.5795 217.310 136192   0
-[2] Friday 20   139.105 40.3158 18945031 49.9191 229.675 136192   0
-[3] Saturday 21 117.019 33.6998 15937043 31.4195 216.272 136192   0
+[1] Thursday 26 126.092 33.5767 17172668 53.5795 217.310 136192   0
+[2] Friday 27   139.105 40.3158 18945031 49.9191 229.675 136192   0
+[3] Saturday 28 117.019 33.6998 15937043 31.4195 216.272 136192   0
 > 
 > 
 > 
@@ -2299,33 +2299,33 @@ Thursday 19   Friday 20 Saturday 21
  Max.   :83.00   Max.   :89.00   Max.   :83.00   Max.   :81.00  
 > print(a3)
            name    mean      sd    sum min max    n nNA
-[1] Thursday 19 48.9555 12.9150 416709  21  83 8512   0
-[2] Friday 20   53.9585 15.5009 459295  20  89 8512   0
-[3] Saturday 21 45.4653 12.9578 387001  13  83 8512   0
-[4] Sunday 22   54.1304 14.7792 460758  18  81 8512   0
+[1] Thursday 26 48.9555 12.9150 416709  21  83 8512   0
+[2] Friday 27   53.9585 15.5009 459295  20  89 8512   0
+[3] Saturday 28 45.4653 12.9578 387001  13  83 8512   0
+[4] Sunday 29   54.1304 14.7792 460758  18  81 8512   0
 > ursa_value(a3,"Band 2") <- 199
 > ursa_value(a3)[,3] <- 299
 > a3[4] <- 399
 > print(a3)
            name     mean      sd     sum min max    n nNA
-[1] Thursday 19  48.9555 12.9150  416709  21  83 8512   0
-[2] Friday 20    53.9585 15.5009  459295  20  89 8512   0
-[3] Saturday 21 299.0000  0.0000 2545088 299 299 8512   0
-[4] Sunday 22   399.0000  0.0000 3396288 399 399 8512   0
+[1] Thursday 26  48.9555 12.9150  416709  21  83 8512   0
+[2] Friday 27    53.9585 15.5009  459295  20  89 8512   0
+[3] Saturday 28 299.0000  0.0000 2545088 299 299 8512   0
+[4] Sunday 29   399.0000  0.0000 3396288 399 399 8512   0
 > ursa_value(a3[1:3]) <- ursa_value(a3[4])
 > print(a3)
            name mean sd     sum min max    n nNA
-[1] Thursday 19  399  0 3396288 399 399 8512   0
-[2] Friday 20    399  0 3396288 399 399 8512   0
-[3] Saturday 21  399  0 3396288 399 399 8512   0
-[4] Sunday 22    399  0 3396288 399 399 8512   0
+[1] Thursday 26  399  0 3396288 399 399 8512   0
+[2] Friday 27    399  0 3396288 399 399 8512   0
+[3] Saturday 28  399  0 3396288 399 399 8512   0
+[4] Sunday 29    399  0 3396288 399 399 8512   0
 > ursa_value(a3[1:3]) <- -c(1:3)
 > print(a3)
            name mean sd     sum min max    n nNA
-[1] Thursday 19   -1  0   -8512  -1  -1 8512   0
-[2] Friday 20     -2  0  -17024  -2  -2 8512   0
-[3] Saturday 21   -3  0  -25536  -3  -3 8512   0
-[4] Sunday 22    399  0 3396288 399 399 8512   0
+[1] Thursday 26   -1  0   -8512  -1  -1 8512   0
+[2] Friday 27     -2  0  -17024  -2  -2 8512   0
+[3] Saturday 28   -3  0  -25536  -3  -3 8512   0
+[4] Sunday 29    399  0 3396288 399 399 8512   0
 > 
 > 
 > 
@@ -2417,7 +2417,7 @@ Thursday 19   Friday 20 Saturday 21
 "#CAEDD9FF" "#CEA3E1FF" "#94954EFF" 
 > display(b4)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa31_3a2e.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa31_d155.png' in external software.
 > 
 > 
 > 
@@ -2441,13 +2441,13 @@ to open '/tmp/Rtmpn9IP2V/___ursa31_3a2e.png' in external software.
 > compose_open()
 > compose_close()
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa32_33b8.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa32_68b6.png' in external software.
 > 
 > ## exam 2
 > compose_open(a)
 > compose_close()
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa33_8eb6.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa33_3321.png' in external software.
 > 
 > ## exam 3
 > compose_open("rgb",fileout="tmp1")
@@ -2505,7 +2505,7 @@ attr(,"class")
 > compose_open(cl1)
 > compose_close()
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa35_5e75.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa35_0757.png' in external software.
 > 
 > cl2 <- compose_design(layout=c(2,3),byrow=FALSE,legend="left")
 > print(cl2$layout)
@@ -2520,7 +2520,7 @@ to open '/tmp/Rtmpn9IP2V/___ursa35_5e75.png' in external software.
 > compose_open(cl2)
 > compose_close()
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa36_a2cd.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa36_e331.png' in external software.
 > 
 > cl3 <- compose_design(a,side=2)
 > print(cl3)
@@ -2545,7 +2545,7 @@ attr(,"class")
 > compose_open(cl3)
 > compose_close()
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa37_7bd2.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa37_ceec.png' in external software.
 > 
 > cl4 <- compose_design(b)
 > print(cl4)
@@ -2574,7 +2574,7 @@ attr(,"class")
 > compose_plot(b,decor=FALSE)
 > compose_close("nocrop")
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa38_f12b.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa38_a701.png' in external software.
 > 
 > leg <- list(list(1,0),list(2,"left")
 +            ,list("full","right"),list("top","full")
@@ -2622,7 +2622,7 @@ attr(,"class")
 > compose_open(cl6,scale=3,pointsize=16)
 > compose_close("nocrop")
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa40_1959.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa40_edf1.png' in external software.
 > 
 > 
 > 
@@ -2657,13 +2657,13 @@ to open '/tmp/Rtmpn9IP2V/___ursa40_1959.png' in external software.
 +    compose_close()
 + }
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa41_94a9.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa41_7e2d.png' in external software.
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa42_766c.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa42_a15b.png' in external software.
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa43_30b1.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa43_3d6d.png' in external software.
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa44_9760.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa44_a88b.png' in external software.
 > 
 > 
 > 
@@ -2687,19 +2687,19 @@ to open '/tmp/Rtmpn9IP2V/___ursa44_9760.png' in external software.
 > p
 [[1]]
            name    mean      sd    sum min  max    n nNA
-[1] Thursday 19 25.6864 6.95625 218643 7.8 42.8 8512   0
-[2] Friday 20   23.7574 8.08225 202223 5.2 42.8 8512   0
+[1] Thursday 26 25.6864 6.95625 218643 7.8 42.8 8512   0
+[2] Friday 27   23.7574 8.08225 202223 5.2 42.8 8512   0
 
 [[2]]
            name    mean       sd     sum   min   max    n nNA
-[3] Saturday 21 5.01356 0.844536 42675.4 2.588 6.641 8512   0
-[4] Sunday 22   4.96339 0.767577 42248.3 2.588 6.641 8512   0
+[3] Saturday 28 5.01356 0.844536 42675.4 2.588 6.641 8512   0
+[4] Sunday 29   4.96339 0.767577 42248.3 2.588 6.641 8512   0
 
 >  
 > ## exam #01
 > compose_open(width=950,dpi=150,pointsize=16,legend=NULL,dev=TRUE)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa45_60c0.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa45_440c.png' in external software.
 > 
 > ## exam #02
 > compose_open(pointsize=8,dpi=150,scale="1:130000000")
@@ -2707,27 +2707,27 @@ to open '/tmp/Rtmpn9IP2V/___ursa45_60c0.png' in external software.
 Composer: figure width for 1:130000000 scale is 5.84615384615385 cm
 > compose_close()
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa46_f791.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa46_a433.png' in external software.
 > 
 > ## exam #03
 > cl <- compose_design(layout=c(2,4)
 +                     ,legend=list(list("top","full"),list("bottom",1:3)))
 > compose_open(cl,dev=TRUE)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa47_dfa7.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa47_ccf1.png' in external software.
 > 
 > ## exam #04
 > cl <- compose_design(p,layout=c(2,3),skip=c(2,4,6))
 > compose_open(cl,dev=TRUE)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa48_dd3a.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa48_4fc0.png' in external software.
 > 
 > ## exam #05
 > cl <- compose_design(p,side=3)
 > compose_open(cl,dev=FALSE,bg="transparent")
 > compose_close()
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa49_c23d.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa49_7777.png' in external software.
 > 
 > 
 > 
@@ -2750,15 +2750,15 @@ to open '/tmp/Rtmpn9IP2V/___ursa49_c23d.png' in external software.
 > print(b1)
 $maxi
            name    mean      sd        sum     min     max      n nNA
-[1] Thursday 19 12609.2 3357.67 1717266848 5357.95 21731.0 136192   0
-[2] Friday 20   13910.5 4031.58 1894503147 4991.91 22967.5 136192   0
-[3] Saturday 21 11701.9 3369.98 1593704283 3141.95 21627.2 136192   0
-[4] Sunday 22   13954.4 3844.50 1900476992 4561.67 20929.5 136192   0
+[1] Thursday 26 12609.2 3357.67 1717266848 5357.95 21731.0 136192   0
+[2] Friday 27   13910.5 4031.58 1894503147 4991.91 22967.5 136192   0
+[3] Saturday 28 11701.9 3369.98 1593704283 3141.95 21627.2 136192   0
+[4] Sunday 29   13954.4 3844.50 1900476992 4561.67 20929.5 136192   0
 
 $mini
           name     mean       sd    sum      min     max      n nNA
-[5] Monday 23  1.307869 0.409018 178121 0.296589 2.25734 136192   0
-[6] Tuesday 24 0.920531 0.360010 125369 0.327810 2.33204 136192   0
+[5] Monday 30  1.307869 0.409018 178121 0.296589 2.25734 136192   0
+[6] Tuesday 31 0.920531 0.360010 125369 0.327810 2.33204 136192   0
 
 > b2 <- lapply(b1,function(x) colorize(x,nbreak=ifelse(global_mean(x)<100,5,NA)))
 > compose_open(b2,byrow=FALSE
@@ -2769,7 +2769,7 @@ $mini
 > legend_mtext(as.expression(substitute(italic("Colorbars are on the bottom"))))
 > compose_close()
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa50_78f1.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa50_2355.png' in external software.
 > 
 > 
 > 
@@ -2797,7 +2797,7 @@ to open '/tmp/Rtmpn9IP2V/___ursa50_78f1.png' in external software.
 +    compose_close()
 + }
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa52_b995.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa52_04bc.png' in external software.
 > if (example2 <- TRUE) {
 +    b2 <- ursa_stack(a)
 +    compose_open(b2)
@@ -2805,7 +2805,7 @@ to open '/tmp/Rtmpn9IP2V/___ursa52_b995.png' in external software.
 +    compose_close()
 + }
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa54_3567.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa54_d3a9.png' in external software.
 > 
 > 
 > 
@@ -2824,7 +2824,7 @@ to open '/tmp/Rtmpn9IP2V/___ursa54_3567.png' in external software.
 > 
 > session_grid(NULL)
 > a <- create_envi()
-Filename is assigned automatically: /tmp/Rtmpn9IP2V/___ursa56_a594
+Filename is assigned automatically: /tmp/RtmprRURq0/___ursa56_5c48
 > fname <- a$con$fname
 > dir(pattern=basename(envi_list(fname)))
 character(0)
@@ -3401,7 +3401,7 @@ List of 9
 [3] Band 3 224.597 36.0743 7860887 127 255 35000   0
 > display(a1)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa62_4ce8.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa62_3f62.png' in external software.
 > 
 > Fin2 <- system.file("pictures/test_envi_class.envi",package="rgdal")
 > b1 <- read_gdal(Fin2)
@@ -3432,7 +3432,7 @@ precipitation_mean  precipitation_var           wnd_mean           rad_mean
                 49                 47                  0 
 > display(b1,detail="l")
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa64_e449.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa64_e7ed.png' in external software.
 > 
 > 
 > 
@@ -3454,14 +3454,14 @@ to open '/tmp/Rtmpn9IP2V/___ursa64_e449.png' in external software.
 > wd <- setwd(tmpWD)
 > print(c('temp dir'=session_tempdir(),'working dir'=getwd()))
                  temp dir               working dir 
-        "/tmp/Rtmpn9IP2V" "/tmp/Rtmpn9IP2V/certain" 
+        "/tmp/RtmprRURq0" "/tmp/RtmprRURq0/certain" 
 > list1a <- envi_list(session_tempdir())
 > list1b <- envi_list()
 > fname <- tempfile(tmpdir=".")
 > a <- ursa_dummy()
 > bandname(a) <- c("first","second","third")
 > write_envi(a)
-Filename is assigned automatically: /tmp/Rtmpn9IP2V/___ursa65_5188
+Filename is assigned automatically: /tmp/RtmprRURq0/___ursa65_1d2a
 > write_envi(a,fname)
 > list2a <- envi_list(session_tempdir())
 > list2b <- envi_list()
@@ -3469,7 +3469,7 @@ Filename is assigned automatically: /tmp/Rtmpn9IP2V/___ursa65_5188
 > fname2 <- list2b[!(list2b %in% list1b)]
 > print(c('in temp dir'=fname1,'in working dir'=fname2))
                      in temp dir                   in working dir 
-"/tmp/Rtmpn9IP2V/___ursa65_5188"               "file26ef62e62506" 
+"/tmp/RtmprRURq0/___ursa65_1d2a"                "file9f11d33fb42" 
 > a2 <- open_envi(fname1)
 > print(a2)
 List of 13
@@ -3524,10 +3524,10 @@ NULL
 > for (i in seq(4))
 +    res <- c(res,paste(grep(paste0("_",i),blist,value=TRUE),collapse=" "))
 > print(res)
-[1] "26ef7cadf251_1.envi 26ef7cadf251_1.hdr"                                     
-[2] "26ef7cadf251_2 26ef7cadf251_2.aux.xml 26ef7cadf251_2.hdr"                   
-[3] "26ef7cadf251_3.tif 26ef7cadf251_3.tif.aux.xml"                              
-[4] "26ef7cadf251_4 26ef7cadf251_4.aux.xml 26ef7cadf251_4.hdr 26ef7cadf251_4.prj"
+[1] "9f1133985f9d_1.envi 9f1133985f9d_1.hdr"                                     
+[2] "9f1133985f9d_2 9f1133985f9d_2.aux.xml 9f1133985f9d_2.hdr"                   
+[3] "9f1133985f9d_3.tif 9f1133985f9d_3.tif.aux.xml"                              
+[4] "9f1133985f9d_4 9f1133985f9d_4.aux.xml 9f1133985f9d_4.hdr 9f1133985f9d_4.prj"
 > 
 > 
 > 
@@ -3559,10 +3559,10 @@ NULL
 + }
 > display(c(b1,b2),layout=c(2,NA),decor=FALSE)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa67_448f.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa67_1fc3.png' in external software.
 > display(c(b3,b4),layout=c(2,NA),decor=FALSE)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa69_bd80.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa69_4318.png' in external software.
 > 
 > 
 > 
@@ -3619,28 +3619,28 @@ character(0)
 > a.rgb <- as.integer(round(a.brick))
 > print(a.brick)
            name    mean      sd     sum     min     max   n nNA
-[1] Thursday 19 121.159 47.7180 64456.4 34.9031 218.873 532   0
-[2] Friday 20   122.905 46.3997 65385.5 17.9845 217.346 532   0
-[3] Saturday 21 132.469 48.8059 70473.5 27.1337 241.916 532   0
+[1] Thursday 26 121.159 47.7180 64456.4 34.9031 218.873 532   0
+[2] Friday 27   122.905 46.3997 65385.5 17.9845 217.346 532   0
+[3] Saturday 28 132.469 48.8059 70473.5 27.1337 241.916 532   0
 > print(a.stack)
            name     mean       sd      sum      min      max   n nNA
-[1] Thursday 19 121.1587 47.71803 64456.41 34.90306 218.8734 532   0
-[2] Friday 20    12.2905  4.63997  6538.55  1.79845  21.7346 532   0
-[3] Saturday 21  11.2853  2.26276  6003.79  5.20900  15.5536 532   0
+[1] Thursday 26 121.1587 47.71803 64456.41 34.90306 218.8734 532   0
+[2] Friday 27    12.2905  4.63997  6538.55  1.79845  21.7346 532   0
+[3] Saturday 28  11.2853  2.26276  6003.79  5.20900  15.5536 532   0
 > print(a.rgb)
            name    mean      sd   sum min max   n nNA
-[1] Thursday 19 121.175 47.7211 64465  35 219 532   0
-[2] Friday 20   122.900 46.3985 65383  18 217 532   0
-[3] Saturday 21 132.479 48.8096 70479  27 242 532   0
+[1] Thursday 26 121.175 47.7211 64465  35 219 532   0
+[2] Friday 27   122.900 46.3985 65383  18 217 532   0
+[3] Saturday 28 132.479 48.8096 70479  27 242 532   0
 > display(a.brick,decor=FALSE)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa71_7715.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa71_47d4.png' in external software.
 > display(a.stack,decor=FALSE)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa73_ac7c.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa73_1b7d.png' in external software.
 > display(a.rgb)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa75_5210.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa75_77c5.png' in external software.
 > 
 > 
 > 
@@ -3663,26 +3663,26 @@ to open '/tmp/Rtmpn9IP2V/___ursa75_5210.png' in external software.
 > a[3] <- sqrt(a[1])
 > a2 <- ursa_stack(a) 
 > print(a2)
-$`Thursday 19`
+$`Thursday 26`
            name    mean      sd      sum     min    max      n nNA
-[1] Thursday 19 123.619 32.9183 16835949 52.5289 213.05 136192   0
+[1] Thursday 26 123.619 32.9183 16835949 52.5289 213.05 136192   0
 
-$`Friday 20`
+$`Friday 27`
          name     mean      sd       sum     min      max      n nNA
-[2] Friday 20 -123.619 32.9183 -16835949 -213.05 -52.5289 136192   0
+[2] Friday 27 -123.619 32.9183 -16835949 -213.05 -52.5289 136192   0
 
-$`Saturday 21`
+$`Saturday 28`
            name    mean      sd     sum     min     max      n nNA
-[3] Saturday 21 11.0152 1.51159 1500180 7.24768 14.5962 136192   0
+[3] Saturday 28 11.0152 1.51159 1500180 7.24768 14.5962 136192   0
 
 attr(,"class")
 [1] "ursaStack"
 > display(a2) # likely 'display_stack' will be called
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa77_291c.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa77_a026.png' in external software.
 > display_brick(a2,stretch="eq",labels=c(-150,-100,0,10,12,20,100,150))
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa79_7695.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa79_69e2.png' in external software.
 > 
 > 
 > 
@@ -3703,7 +3703,7 @@ to open '/tmp/Rtmpn9IP2V/___ursa79_7695.png' in external software.
 > a <- ursa_dummy(nband=3)
 > display_rgb(a)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa81_3adb.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa81_2118.png' in external software.
 > 
 > 
 > 
@@ -3724,7 +3724,7 @@ to open '/tmp/Rtmpn9IP2V/___ursa81_3adb.png' in external software.
 > a <- ursa_dummy(nband=3)
 > display_stack(a)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa83_5fe1.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa83_1c5b.png' in external software.
 > 
 > 
 > 
@@ -3825,13 +3825,13 @@ Error in as.double(y) :
 Error in as.double(y) : 
   cannot coerce type 'S4' to vector of type 'double'
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa85_5233.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa85_7bf8.png' in external software.
 > cmd <- paste("Rscript --vanilla -e ursa::glance()",paste0("\"",f,"\"")
-+             ,"proj=\"merc\"","field=\"(lon|lat)\"")
++             ,"style=\"merc\"","field=\"(lon|lat)\"")
 > cat(" --------- Try in command line: -----------\n")
  --------- Try in command line: -----------
 > message(cmd)
-Rscript --vanilla -e ursa::glance() "/var/scratch2ro/tomas/cran/rlibro/lib/rgdal/vectors/scot_BNG.shp" proj="merc" field="(lon|lat)"
+Rscript --vanilla -e ursa::glance() "/var/scratch2ro/tomas/cran/rlibro/lib/rgdal/vectors/scot_BNG.shp" style="merc" field="(lon|lat)"
 > cat(" ----------- end of quoting ---------------\n")
  ----------- end of quoting ---------------
 > 
@@ -3874,7 +3874,7 @@ detaching ‘package:sp’
 > b$jx <- b$x+runif(nrow(b),min=-1000,max=1000)
 > b$jy <- b$y+runif(nrow(b),min=-1000,max=1000)
 > print(b)
-            x       y Thursday 19 Friday 20 Saturday 21      jx      jy
+            x       y Thursday 26 Friday 27 Saturday 28      jx      jy
 861   2462500 5787500         890       775         757 2463004 5788241
 1774  2487500 5712500         890       765         759 2487084 5712153
 3601  2562500 5562500         890       735         766 2561764 5562040
@@ -3927,13 +3927,13 @@ y 4362500 4262500
 > val4 <- value_cr(a,c=cr1["c",],r=cr1["r",])
 > print(val1)
             861 1774 3601 4515 8785 9090 9395 9700 10005 10310 10615 10920
-Thursday 19 890  890  890  890  890  890  890  890   890   890   890   890
-Friday 20   775  765  735  716  586  578  570  562   556   550   544   539
-Saturday 21 757  759  766  771  809  811  814  817   820   823   825   828
+Thursday 26 890  890  890  890  890  890  890  890   890   890   890   890
+Friday 27   775  765  735  716  586  578  570  562   556   550   544   539
+Saturday 28 757  759  766  771  809  811  814  817   820   823   825   828
             11225 11530 11835 14274 15798 17017 18236 19455
-Thursday 19   890   890   890   890   890   890   890   890
-Friday 20     534   531   528   529   549   574   602   630
-Saturday 21   831   833   836   853   863   870   876   881
+Thursday 26   890   890   890   890   890   890   890   890
+Friday 27     534   531   528   529   549   574   602   630
+Saturday 28   831   833   836   853   863   870   876   881
 > print(all.equal(val1,val2,val3,val4))
 [1] TRUE
 > ps <- pixelsize()
@@ -3962,7 +3962,7 @@ True scale
 > a <- round(ursa_dummy(nband=1,min=0.500001,max=4.499999))
 > print(a)
            name    mean      sd    sum min max      n nNA
-[1] Thursday 19 2.47533 0.56449 337120   1   4 136192   0
+[1] Thursday 26 2.47533 0.56449 337120   1   4 136192   0
 > print(as.table(a))
     1     2     3     4 
  3136 66764 64712  1580 
@@ -3982,7 +3982,7 @@ True scale
 [1] 4
 > print(a)
            name    mean      sd    sum min max      n  nNA
-[1] Thursday 19 2.45743 0.54294 330800   1   3 134612 1580
+[1] Thursday 26 2.45743 0.54294 330800   1   3 134612 1580
 > 
 > 
 > 
@@ -4075,7 +4075,7 @@ NULL
 NULL
 > compose_close()
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa87_21bf.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa87_2b56.png' in external software.
 > 
 > 
 > 
@@ -4096,7 +4096,7 @@ to open '/tmp/Rtmpn9IP2V/___ursa87_21bf.png' in external software.
 > display(ursa_dummy(1),units="Required 99 labels; displayed less"
 +         ,colorbar.labels=99,las=3,gridline.trim=FALSE,colorbar.trim=1L)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa89_5d3b.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa89_5d96.png' in external software.
 > cname <- c("Apple","Orange","Cherry","Blueberry","Strawberry","Currant")
 > a <- ursa_dummy(4)
 > b <- list(colorize(a[1],value=seq(50,200,length=length(cname))
@@ -4132,7 +4132,7 @@ to open '/tmp/Rtmpn9IP2V/___ursa89_5d3b.png' in external software.
 > legend_colorbar('Caption from named item'=b[[4]],labels=99) ## ("bottom",4)
 > compose_close()
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa90_d6a9.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa90_dacd.png' in external software.
 > 
 > 
 > 
@@ -4162,7 +4162,7 @@ to open '/tmp/Rtmpn9IP2V/___ursa90_d6a9.png' in external software.
 +                                                        ,~~Omega^alpha)))))
 > compose_close(execute=!FALSE)
 Use 'session_pngviewer(TRUE)' 
-to open '/tmp/Rtmpn9IP2V/___ursa92_8056.png' in external software.
+to open '/tmp/RtmprRURq0/___ursa92_b1c7.png' in external software.
 > 
 > 
 > 
@@ -4230,7 +4230,7 @@ to open '/tmp/Rtmpn9IP2V/___ursa92_8056.png' in external software.
 + }
 Loading required namespace: raster
            name    mean      sd      sum     min     max     n   nNA
-[1] Thursday 19 355.626 47.6125 35309381 258.728 470.206 99288 36904
+[1] Thursday 26 355.626 47.6125 35309381 258.728 470.206 99288 36904
 NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
 RasterLayer
 class      : RasterLayer 
@@ -4239,7 +4239,7 @@ resolution : 25000, 25000  (x, y)
 extent     : -3850000, 3750000, -5350000, 5850000  (xmin, xmax, ymin, ymax)
 crs        : +proj=stere +lat_0=90 +lat_ts=70.0 +lon_0=-45.0 +k=1 +x_0=0.0 +y_0=0.0 +a=6378273.000 +b=6356889.449 +units=m +no_defs 
 source     : memory
-names      : Thursday.19 
+names      : Thursday.26 
 values     : 258.7284, 470.206  (min, max)
 
 Error in as.double(y) : 
