@@ -1,5 +1,5 @@
-Package BAMBI version 2.2.0
-Package built using 77602/R 4.0.0; x86_64-pc-linux-gnu; 2019-12-19 02:04:05 UTC; unix   
+Package BAMBI version 2.3.0
+Package built using 78718/R 4.1.0; x86_64-pc-linux-gnu; 2020-06-19 22:22:50 UTC; unix   
 Checked with rchk version 490627e4fb8e93244230dbbd61455730aa43c328
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
@@ -10,6 +10,15 @@ Function Rcpp::Rcpp_protect(SEXPREC*)
 Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<13>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<14>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
 
 Function _BAMBI_BESSI0_C
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -36,13 +45,13 @@ Function _BAMBI_const_uniwnorm
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _BAMBI_const_vmcos
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _BAMBI_const_vmcos_anltc
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _BAMBI_const_vmcos_mc
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _BAMBI_const_vmsin
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -277,3 +286,9 @@ Function _BAMBI_vmsin_var_corr_anltc
 
 Function _BAMBI_vmsin_var_corr_mc
   [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ZN4Rcpp6VectorILi14ENS_15PreserveStorageEEC2IjEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
+
+Function _ZN4Rcpp6VectorILi16ENS_15PreserveStorageEEC2ImEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
