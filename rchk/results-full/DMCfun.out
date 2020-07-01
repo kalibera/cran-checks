@@ -1,5 +1,5 @@
-Package Rlabkey version 2.5.0
-Package built using 78759/R 4.1.0; x86_64-pc-linux-gnu; 2020-07-01 11:42:00 UTC; unix   
+Package DMCfun version 0.12.0
+Package built using 78759/R 4.1.0; x86_64-pc-linux-gnu; 2020-07-01 11:49:00 UTC; unix   
 Checked with rchk version 490627e4fb8e93244230dbbd61455730aa43c328
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
@@ -19,23 +19,23 @@ Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
-Function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(Rcpp::Dimension const&)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:135
-
-Function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<16>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
-
 Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector()
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:57
 
 Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector(int const&)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
 
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:683
+
 Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function Rlabkey_listToMatrix
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::set(SEXPREC*)
+  [UP] ignoring variable rhs as it has address taken, results will be incomplete 
+
+Function _DMCfun_dmcCppR
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _ZN4Rcpp6VectorILi16ENS_15PreserveStorageEEC2ImEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
@@ -43,8 +43,5 @@ Function _ZN4Rcpp6VectorILi16ENS_15PreserveStorageEEC2ImEET_PNS_6traits9enable_i
 Function _ZN4Rcpp6VectorILi19ENS_15PreserveStorageEEC2IlEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
 
-Function void Rcpp::Vector<16, Rcpp::PreserveStorage>::fill__dispatch<SEXPREC*>(Rcpp::traits::integral_constant<bool, true>, SEXPREC* const&)
-  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<int>(int const&)
-  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
