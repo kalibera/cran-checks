@@ -1,0 +1,267 @@
+
+R Under development (unstable) (2020-08-19 r79050) -- "Unsuffered Consequences"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "TeXCheckR"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('TeXCheckR')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("argument_parsing")
+> ### * argument_parsing
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: argument_parsing
+> ### Title: Replace nth arguments
+> ### Aliases: argument_parsing replace_nth_LaTeX_argument nth_arg_positions
+> 
+> ### ** Examples
+> 
+> nth_arg_positions("This is a \\textbf{strong} statement.", "textbf")
+[[1]]
+   starts stops zero_width
+1:     18    25      FALSE
+
+> replace_nth_LaTeX_argument("This is a \\textbf{strong} statement.", "textbf")
+[1] "This is a \\textbf{correct} statement."
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("check_footnote_typography")
+> ### * check_footnote_typography
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: check_footnote_typography
+> ### Title: Check footnote typography
+> ### Aliases: check_footnote_typography
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D   tex_file <- tempfile(fileext = ".tex")
+> ##D   cat("Footnote not ending with full stop.\\footnote{No sentence}", file = tex_file)
+> ##D   check_footnote_typography(tex_file)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("check_quote_marks")
+> ### * check_quote_marks
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: check_quote_marks
+> ### Title: Check quote marks in TeX
+> ### Aliases: check_quote_marks
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D   tex_file <- tempfile(fileext = ".tex")
+> ##D   cat("This is the wrong 'quote' mark.", file = tex_file)
+> ##D   check_quote_marks(tex_file)
+> ##D   file.remove(tex_file)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("check_spelling")
+> ### * check_spelling
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: check_spelling
+> ### Title: Spell checking
+> ### Aliases: check_spelling
+> 
+> ### ** Examples
+> 
+> 
+> ## Not run: 
+> ##D url_bib <- 
+> ##D paste0("https://raw.githubusercontent.com/HughParsonage/",
+> ##D        "grattex/e6cab97145d38890e44e83d122e995e3b8936fc6/",
+> ##D        "Report.tex")
+> ##D check_spelling(url_bib)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("commands_used")
+> ### * commands_used
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: commands_used
+> ### Title: List all unique commands in a document
+> ### Aliases: commands_used
+> 
+> ### ** Examples
+> 
+> commands_used(c("A \\abc{d}", "\\def{x}"))
+[1] "\\abc" "\\def"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("parse_tex")
+> ### * parse_tex
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: parse_tex
+> ### Title: Parse LaTeX lines
+> ### Aliases: parse_tex
+> 
+> ### ** Examples
+> 
+> parse_tex(c("A{}", "B[a]{b{c}{d}}z"))
+> # The version transposed:
+> #
+> #>          char : A{}B[a]{b{c}{d}}z
+> #>           tg1 : 011111122......22
+> #>           tg2 : 00000000011122222
+> #>           og1 : 00001111111111111
+> #>     GROUP_ID1 : .11....222222222.
+> #>     GROUP_ID2 : .........111222..
+> #> OPT_GROUP_ID1 : ....111..........
+> 
+> 
+> 
+> cleanEx()
+> nameEx("rm_editorial_square_brackets")
+> ### * rm_editorial_square_brackets
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: rm_editorial_square_brackets
+> ### Title: Remove editorial square brackets
+> ### Aliases: rm_editorial_square_brackets
+> 
+> ### ** Examples
+> 
+> x <- "the BCA's call to `urgently phas[e] out all side deals'"
+> rm_editorial_square_brackets(x)
+[1] "the BCA's call to `urgently phase out all side deals'"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("strip_comments")
+> ### * strip_comments
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: strip_comments
+> ### Title: Strip comments from LaTeX lines
+> ### Aliases: strip_comments
+> 
+> ### ** Examples
+> 
+> 
+> some_lines <- c("Text. % A comment", "20% of comments are % useful")
+> strip_comments(some_lines)
+[1] "Text. %" "20%"    
+> strip_comments(some_lines, retain.percent.symbol = FALSE)
+[1] "Text. " "20"    
+> 
+> 
+> 
+> cleanEx()
+> nameEx("tex_group_by_char")
+> ### * tex_group_by_char
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: tex_group_by_char
+> ### Title: TeX group by character position
+> ### Aliases: tex_group_by_char
+> 
+> ### ** Examples
+> 
+> tex_group_by_char("a{bc}{d{e}}")
+[[1]]
+ [1] 0 1 1 1 0 1 1 2 2 1 0
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("validate_bibliography")
+> ### * validate_bibliography
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: validate_bibliography
+> ### Title: Validate bibliography according to Grattan style
+> ### Aliases: validate_bibliography
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D bib_temp <- tempfile(fileext = ".bib")
+> ##D url_bib <- 
+> ##D   paste0("https://raw.githubusercontent.com/HughParsonage/",
+> ##D          "grattex/e6cab97145d38890e44e83d122e995e3b8936fc6",
+> ##D          "/bib/Grattan-Master-Bibliography.bib")
+> ##D 
+> ##D download.file(url_bib, destfile = bib_temp)
+> ##D validate_bibliography(file = bib_temp)
+> ##D 
+> ##D bib_temp <- tempfile(fileext = ".bib")
+> ##D url_bib <- 
+> ##D   paste0("https://raw.githubusercontent.com/HughParsonage/",
+> ##D          "grattex/8f7f52a28789d12a363ceb30cea3b41f590ae58a",
+> ##D          "/bib/Grattan-Master-Bibliography.bib")
+> ##D download.file(url_bib, destfile = bib_temp)
+> ##D validate_bibliography(file = bib_temp)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  1.659 0.202 2.325 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
