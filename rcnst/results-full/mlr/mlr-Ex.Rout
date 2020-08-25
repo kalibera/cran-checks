@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2020-08-23 r79065) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-08-25 r79080) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -1995,7 +1995,7 @@ mmce
 > ms = list("mmce" = mmce, "acc" = acc, "timetrain" = timetrain)
 > performance(pred, measures = ms, task, mod)
      mmce       acc timetrain 
-    0.040     0.960     0.006 
+    0.040     0.960     0.007 
 > 
 > 
 > 
@@ -2141,13 +2141,42 @@ mmce
 > 
 > 
 > 
+> cleanEx()
+> nameEx("plotThreshVsPerf")
 > ### * plotThreshVsPerf
 > 
 > flush(stderr()); flush(stdout())
 > 
+> ### Name: plotThreshVsPerf
+> ### Title: Plot threshold vs. performance(s) for 2-class classification
+> ###   using ggplot2.
+> ### Aliases: plotThreshVsPerf
+> 
+> ### ** Examples
+> 
+> lrn = makeLearner("classif.rpart", predict.type = "prob")
+> mod = train(lrn, sonar.task)
+> pred = predict(mod, sonar.task)
+> pvs = generateThreshVsPerfData(pred, list(acc, setAggregation(acc, train.mean)))
+> plotThreshVsPerf(pvs)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plotTuneMultiCritResult")
 > ### * plotTuneMultiCritResult
 > 
 > flush(stderr()); flush(stdout())
+> 
+> ### Name: plotTuneMultiCritResult
+> ### Title: Plots multi-criteria results after tuning using ggplot2.
+> ### Aliases: plotTuneMultiCritResult
+> 
+> ### ** Examples
+> 
+> # see tuneParamsMultiCrit
+> 
+> 
 > 
 > cleanEx()
 > nameEx("predict.WrappedModel")
@@ -2409,25 +2438,162 @@ Hyperparameters: fit=FALSE,sigma=10,C=2
 > 
 > 
 > 
+> cleanEx()
+> nameEx("setThreshold")
 > ### * setThreshold
 > 
 > flush(stderr()); flush(stdout())
 > 
+> ### Name: setThreshold
+> ### Title: Set threshold of prediction object.
+> ### Aliases: setThreshold
+> 
+> ### ** Examples
+> 
+> # create task and train learner (LDA)
+> task = makeClassifTask(data = iris, target = "Species")
+> lrn = makeLearner("classif.lda", predict.type = "prob")
+> mod = train(lrn, task)
+> 
+> # predict probabilities and compute performance
+> pred = predict(mod, newdata = iris)
+> performance(pred, measures = mmce)
+mmce 
+0.02 
+> head(as.data.frame(pred))
+   truth prob.setosa prob.versicolor prob.virginica response
+1 setosa           1    3.896358e-22   2.611168e-42   setosa
+2 setosa           1    7.217970e-18   5.042143e-37   setosa
+3 setosa           1    1.463849e-19   4.675932e-39   setosa
+4 setosa           1    1.268536e-16   3.566610e-35   setosa
+5 setosa           1    1.637387e-22   1.082605e-42   setosa
+6 setosa           1    3.883282e-21   4.566540e-40   setosa
+> 
+> # adjust threshold and predict probabilities again
+> threshold = c(setosa = 0.4, versicolor = 0.3, virginica = 0.3)
+> pred = setThreshold(pred, threshold = threshold)
+> performance(pred, measures = mmce)
+mmce 
+0.02 
+> head(as.data.frame(pred))
+   truth prob.setosa prob.versicolor prob.virginica response
+1 setosa           1    3.896358e-22   2.611168e-42   setosa
+2 setosa           1    7.217970e-18   5.042143e-37   setosa
+3 setosa           1    1.463849e-19   4.675932e-39   setosa
+4 setosa           1    1.268536e-16   3.566610e-35   setosa
+5 setosa           1    1.637387e-22   1.082605e-42   setosa
+6 setosa           1    3.883282e-21   4.566540e-40   setosa
+> 
+> 
+> 
+> cleanEx()
+> nameEx("subsetTask")
 > ### * subsetTask
 > 
 > flush(stderr()); flush(stdout())
 > 
+> ### Name: subsetTask
+> ### Title: Subset data in task.
+> ### Aliases: subsetTask
+> 
+> ### ** Examples
+> 
+> task = makeClassifTask(data = iris, target = "Species")
+> subsetTask(task, subset = 1:100)
+Supervised task: iris
+Type: classif
+Target: Species
+Observations: 100
+Features:
+   numerics     factors     ordered functionals 
+          4           0           0           0 
+Missings: FALSE
+Has weights: FALSE
+Has blocking: FALSE
+Has coordinates: FALSE
+Classes: 3
+    setosa versicolor  virginica 
+        50         50          0 
+Positive class: NA
+> 
+> 
+> 
+> cleanEx()
+> nameEx("summarizeColumns")
 > ### * summarizeColumns
 > 
 > flush(stderr()); flush(stdout())
 > 
+> ### Name: summarizeColumns
+> ### Title: Summarize columns of data.frame or task.
+> ### Aliases: summarizeColumns
+> 
+> ### ** Examples
+> 
+> summarizeColumns(iris)
+          name    type na     mean      disp median     mad  min  max nlevs
+1 Sepal.Length numeric  0 5.843333 0.8280661   5.80 1.03782  4.3  7.9     0
+2  Sepal.Width numeric  0 3.057333 0.4358663   3.00 0.44478  2.0  4.4     0
+3 Petal.Length numeric  0 3.758000 1.7652982   4.35 1.85325  1.0  6.9     0
+4  Petal.Width numeric  0 1.199333 0.7622377   1.30 1.03782  0.1  2.5     0
+5      Species  factor  0       NA 0.6666667     NA      NA 50.0 50.0     3
+> 
+> 
+> 
+> cleanEx()
+> nameEx("summarizeLevels")
 > ### * summarizeLevels
 > 
 > flush(stderr()); flush(stdout())
 > 
+> ### Name: summarizeLevels
+> ### Title: Summarizes factors of a data.frame by tabling them.
+> ### Aliases: summarizeLevels
+> 
+> ### ** Examples
+> 
+> summarizeLevels(iris)
+$Species
+
+    setosa versicolor  virginica 
+        50         50         50 
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("train")
 > ### * train
 > 
 > flush(stderr()); flush(stdout())
+> 
+> ### Name: train
+> ### Title: Train a learning algorithm.
+> ### Aliases: train
+> 
+> ### ** Examples
+> 
+> training.set = sample(seq_len(nrow(iris)), nrow(iris) / 2)
+> 
+> ## use linear discriminant analysis to classify iris data
+> task = makeClassifTask(data = iris, target = "Species")
+> learner = makeLearner("classif.lda", method = "mle")
+> mod = train(learner, task, subset = training.set)
+> print(mod)
+Model for learner.id=classif.lda; learner.class=classif.lda
+Trained on: task.id = iris; obs = 75; features = 4
+Hyperparameters: method=mle
+> 
+> ## use random forest to classify iris data
+> task = makeClassifTask(data = iris, target = "Species")
+> learner = makeLearner("classif.rpart", minsplit = 7, predict.type = "prob")
+> mod = train(learner, task, subset = training.set)
+> print(mod)
+Model for learner.id=classif.rpart; learner.class=classif.rpart
+Trained on: task.id = iris; obs = 75; features = 4
+Hyperparameters: xval=0,minsplit=7
+> 
+> 
 > 
 > cleanEx()
 > nameEx("tuneParams")
@@ -2530,16 +2696,27 @@ mmce.test.mean=0.0533333
 > 
 > 
 > 
+> cleanEx()
+> nameEx("tuneParamsMultiCrit")
 > ### * tuneParamsMultiCrit
 > 
 > flush(stderr()); flush(stdout())
+> 
+> ### Name: tuneParamsMultiCrit
+> ### Title: Hyperparameter tuning for multiple measures at once.
+> ### Aliases: tuneParamsMultiCrit
+> 
+> ### ** Examples
+> 
+> 
+> 
 > 
 > ### * <FOOTER>
 > ###
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  70.216 1.324 72.881 0.004 0.003 
+Time elapsed:  71.425 4.069 76.595 0.002 0.004 
 > grDevices::dev.off()
 null device 
           1 

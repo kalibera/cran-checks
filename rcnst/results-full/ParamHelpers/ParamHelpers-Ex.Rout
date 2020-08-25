@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2020-08-20 r79057) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-08-25 r79080) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -368,89 +368,6 @@ $b
 +   keys = "p"
 + )
 > getLower(ps, dict = list(p = 7))
-   u    w    y    y 
--Inf    3    0   10 
-> getUpper(ps)
-  u   w   y   y 
-Inf   2   1  11 
-> 
-> ps = makeParamSet(
-+   makeNumericParam("u"),
-+   makeDiscreteParam("w", values = list(a = list(), b = NULL))
-+ )
-> getValues(ps)
-$w
-$w$a
-list()
-
-$w$b
-NULL
-
-
-> 
-> par.vals = list(
-+   u = makeNumericParam("u"),
-+   v = makeIntegerParam("v", lower = 1, upper = 2),
-+   w = makeDiscreteParam("w", values = 1:2),
-+   x = makeNumericVectorParam("x", len = 2, lower = c(3, 1), upper = expression(n))
-+ )
-> getLower(par.vals)
-   u    v    x    x 
--Inf    1    3    1 
-> getUpper(par.vals, dict = list(n = 12))
-  u   v   x   x 
-Inf   2  12  12 
-> 
-> 
-> 
-> cleanEx()
-> nameEx("getOptPathBestIndex")
-> ### * getOptPathBestIndex
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: getOptPathBestIndex
-> ### Title: Get index of the best element from optimization path.
-> ### Aliases: getOptPathBestIndex
-> 
-> ### ** Examples
-> 
-> ps = makeParamSet(makeNumericParam("x"))
-> op = makeOptPathDF(par.set = ps, y.names = "y", minimize = TRUE)
-> addOptPathEl(op, x = list(x = 1), y = 5)
-> addOptPathEl(op, x = list(x = 2), y = 3)
-> addOptPathEl(op, x = list(x = 3), y = 9)
-> addOptPathEl(op, x = list(x = 4), y = 3)
-> as.data.frame(op)
-  x y dob eol
-1 1 5   1  NA
-2 2 3   2  NA
-3 3 9   3  NA
-4 4 3   4  NA
-> getOptPathBestIndex(op)
-[1] 4
-> getOptPathBestIndex(op, ties = "first")
-[1] 2
-> 
-> 
-> 
-> cleanEx()
-> nameEx("getOptPathParetoFront")
-> ### * getOptPathParetoFront
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: getOptPathParetoFront
-> ### Title: Get indices of pareto front of optimization path.
-> ### Aliases: getOptPathParetoFront
-> 
-> ### ** Examples
-> 
-> ps = makeParamSet(makeNumericParam("x"))
-> op = makeOptPathDF(par.set = ps, y.names = c("y1", "y2"), minimize = c(TRUE, TRUE))
-> addOptPathEl(op, x = list(x = 1), y = c(5, 3))
-> addOptPathEl(op, x = list(x = 2), y = c(2, 4))
-> addOptPathEl(op, x = list(x = 3), y = c(9, 4))
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"
