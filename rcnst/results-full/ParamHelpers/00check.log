@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/ParamHelpers.Rcheck’
-* using R Under development (unstable) (2020-08-25 r79080)
+* using R Under development (unstable) (2020-08-28 r79089)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘ParamHelpers/DESCRIPTION’ ... OK
@@ -25,22 +25,40 @@
 * checking whether the package can be loaded ... OK
 * checking whether the package can be loaded with stated dependencies ... OK
 * checking whether the package can be unloaded cleanly ... OK
-* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be loaded with stated dependencies ... WARNING
+Fatal error: cannot create 'R_TempDir'
+
+A namespace must be able to be loaded with just the base namespace
+loaded: otherwise if the namespace gets loaded by a saved object, the
+session will be unable to start.
+
+Probably some imports need to be declared in the NAMESPACE file.
 * checking whether the namespace can be unloaded cleanly ... OK
 * checking loading without being on the library search path ... OK
 * checking dependencies in R code ... OK
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... OK
+* checking R code for possible problems ... NOTE
+Fatal error: cannot create 'R_TempDir'
+
+Fatal error: cannot create 'R_TempDir'
 * checking Rd files ... OK
 * checking Rd metadata ... OK
 * checking Rd cross-references ... OK
 * checking for missing documentation entries ... OK
-* checking for code/documentation mismatches ... OK
-* checking Rd \usage sections ... OK
-* checking Rd contents ... OK
-* checking for unstated dependencies in examples ... OK
+* checking for code/documentation mismatches ... WARNING
+Fatal error: cannot create 'R_TempDir'
+* checking Rd \usage sections ... NOTE
+Fatal error: cannot create 'R_TempDir'
+The \usage entries for S3 methods should use the \method markup and not
+their full name.
+See chapter ‘Writing R documentation files’ in the ‘Writing R
+Extensions’ manual.
+* checking Rd contents ... WARNING
+Fatal error: cannot create 'R_TempDir'
+* checking for unstated dependencies in examples ... WARNING
+Fatal error: cannot create 'R_TempDir'
 * checking line endings in C/C++/Fortran sources/headers ... OK
 * checking compiled code ... NOTE
 Note: information on .o files is not available
@@ -48,22 +66,13 @@ Note: information on .o files is not available
 Running examples in ‘ParamHelpers-Ex.R’ failed
 The error most likely occurred in:
 
-> ### Name: getLower
-> ### Title: Get lower / upper bounds and allowed discrete values for
-> ###   parameters.
-> ### Aliases: getLower getUpper getValues
+> ### Name: getOptPathBestIndex
+> ### Title: Get index of the best element from optimization path.
+> ### Aliases: getOptPathBestIndex
 > 
 > ### ** Examples
 > 
-> ps = makeParamSet(
-+   makeNumericParam("u"),
-+   makeDiscreteParam("v", values = c("a", "b")),
-+   makeIntegerParam("w", lower = expression(ceiling(p / 3)), upper = 2),
-+   makeDiscreteParam("x", values = 1:2),
-+   makeNumericVectorParam("y", len = 2, lower = c(0, 10), upper = c(1, 11)),
-+   keys = "p"
-+ )
-> getLower(ps, dict = list(p = 7))
+> ps = makeParamSet(makeNumericParam("x"))
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"
@@ -81,9 +90,9 @@ Fatal error: compiler constants were modified!
   Running ‘run-all.R’
 Running the tests in ‘tests/run-all.R’ failed.
 Last 13 lines of output:
-  > library(ParamHelpers)
-  > 
-  > test_check("ParamHelpers")
+  ── 1. Failure: print works (@test_ParamSet.R#190)  ─────────────────────────────
+  `print(ps)` produced no output
+  
   ERROR: modification of compiler constant of type character, length 2
   ERROR: the modified value of the constant is:
   [1] "integer"       "integervector"
@@ -96,6 +105,25 @@ Last 13 lines of output:
   c("integer", "integervector")
   Fatal error: compiler constants were modified!
   
-* checking PDF version of manual ... OK
+* checking PDF version of manual ... ERROR
+Rd conversion errors:
+Warning in close.connection(con) :
+  Problem closing connection:  No space left on device
+Warning in close.connection(con) :
+  Problem closing connection:  No space left on device
+Warning in close.connection(con) :
+  Problem closing connection:  No space left on device
+Warning in close.connection(con) :
+  Problem closing connection:  No space left on device
+Warning in close.connection(con) :
+  Problem closing connection:  No space left on device
+Warning in .pkg2tex(files, outfile, encoding = encoding, append = append,  :
+  file ‘/tmp/RtmpIcxy9A/ltx3c9aec6ac73c22/getLower.tex’ lacks a header: skipping
+Warning in .pkg2tex(files, outfile, encoding = encoding, append = append,  :
+  file ‘/tmp/RtmpIcxy9A/ltx3c9aec6ac73c22/hasExpression.tex’ lacks a header: skipping
+Warning in .pkg2tex(files, outfile, encoding = encoding, append = append,  :
+  file ‘/tmp/RtmpIcxy9A/ltx3c9aec6ac73c22/removeMissingValues.tex’ lacks a header: skipping
+Error in writeLines(readLines(f), outcon) : 
+  Error writing to connection:  No space left on device
 * DONE
-Status: 2 ERRORs, 1 NOTE
+Status: 3 ERRORs, 4 WARNINGs, 3 NOTEs

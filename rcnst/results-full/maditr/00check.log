@@ -1,10 +1,10 @@
-* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/table.express.Rcheck’
-* using R Under development (unstable) (2020-08-27 r79086)
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/maditr.Rcheck’
+* using R Under development (unstable) (2020-08-27 r79088)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* checking for file ‘table.express/DESCRIPTION’ ... OK
+* checking for file ‘maditr/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘table.express’ version ‘0.3.1’
+* this is package ‘maditr’ version ‘0.7.4’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -14,7 +14,7 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘table.express’ can be installed ... OK
+* checking whether package ‘maditr’ can be installed ... OK
 * checking package directory ... OK
 * checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -48,29 +48,28 @@
 * checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
+  Running ‘tinytest.R’
+Running the tests in ‘tests/tinytest.R’ failed.
 Last 13 lines of output:
+  ERROR: modification of compiler constant of type language, length 3
+  ERROR: the modified value of the constant is:
+  match(.name, c("Sepal.Length", "Sepal.Width", "Petal.Length", 
+  "Petal.Width", "Species", "Sepal.Length_scaled", "Sepal.Width_scaled", 
+  "Petal.Length_scaled", "Petal.Width_scaled")) %in% 2:3
   ERROR: the original value of the constant is:
-  right_join(data.table::setDT(list(x = c("b", "b", "b", "a", "a", 
-  "a", "c", "c", "c"), y = c(1, 3, 6, 1, 3, 6, 1, 3, 6), v = 1:9)), 
-      local_rhs, by = "x")
-  ERROR: the modified constant is at index 10
+  match(.name, c("Sepal.Length", "Sepal.Width", "Petal.Length", 
+  "Petal.Width", "Species")) %in% 2:3
+  ERROR: the modified constant is at index 2
   ERROR: the modified constant is in this function body:
-  {
-      local_rhs <- data.table::setDT(list(x = c("c", "b"), v = 8:7, 
-          foo = c(4, 2)))
-      right_join(data.table::setDT(list(x = c("b", "b", "b", "a", 
-      "a", "a", "c", "c", "c"), y = c(1, 3, 6, 1, 3, 6, 1, 3, 6
-      ), v = 1:9)), local_rhs, by = "x")
-  }
+  if (match(.name, c("Sepal.Length", "Sepal.Width", "Petal.Length", 
+  "Petal.Width", "Species", "Sepal.Length_scaled", "Sepal.Width_scaled", 
+  "Petal.Length_scaled", "Petal.Width_scaled")) %in% 2:3) c(scale2(.SD[[.name]]))
   Fatal error: compiler constants were modified!
   
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
-  ‘joins.Rmd’ using ‘UTF-8’... OK
-  ‘table.express.Rmd’ using ‘UTF-8’... OK
+  ‘Introduction.Rmd’ using ‘utf8’... OK
 * checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
 * DONE

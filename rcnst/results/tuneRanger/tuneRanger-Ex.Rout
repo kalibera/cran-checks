@@ -1,0 +1,170 @@
+
+R Under development (unstable) (2020-08-27 r79088) -- "Unsuffered Consequences"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "tuneRanger"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('tuneRanger')
+Loading required package: ranger
+Loading required package: mlrMBO
+Loading required package: mlr
+Loading required package: ParamHelpers
+'mlr' is in maintenance mode since July 2019. Future development
+efforts will go into its successor 'mlr3' (<https://mlr3.mlr-org.com>).
+Loading required package: smoof
+Loading required package: checkmate
+Loading required package: parallel
+Loading required package: lubridate
+
+Attaching package: ‘lubridate’
+
+The following objects are masked from ‘package:base’:
+
+    date, intersect, setdiff, union
+
+Loading required package: lhs
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("estimateTimeTuneRanger")
+> ### * estimateTimeTuneRanger
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: estimateTimeTuneRanger
+> ### Title: estimateTimeTuneRanger
+> ### Aliases: estimateTimeTuneRanger
+> 
+> ### ** Examples
+> 
+> estimateTimeTuneRanger(iris.task)
+Approximated time for tuning: 1M 26S> 
+> 
+> 
+> cleanEx()
+> nameEx("restartTuneRanger")
+> ### * restartTuneRanger
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: restartTuneRanger
+> ### Title: restartTuneRanger
+> ### Aliases: restartTuneRanger
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D library(tuneRanger)
+> ##D library(mlr)
+> ##D 
+> ##D # iris is a bit nonsense here
+> ##D # A mlr task has to be created in order to use the package
+> ##D # the already existing iris task is used here
+> ##D estimateTimeTuneRanger(iris.task)
+> ##D # temporarily file name to save results
+> ##D path = tempfile()
+> ##D res = tuneRanger(iris.task, measure = list(multiclass.brier), num.trees = 1000, 
+> ##D   num.threads = 8, iters = 70, save.file.path = path)
+> ##D 
+> ##D # Mean of best 5 % of the results
+> ##D res
+> ##D 
+> ##D # Restart after failing in one of the iterations:
+> ##D res = restartTuneRanger(save.file.path = path, iris.task, 
+> ##D measure = list(multiclass.brier))
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("tuneMtryFast")
+> ### * tuneMtryFast
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: tuneMtryFast
+> ### Title: tuneMtryFast
+> ### Aliases: tuneMtryFast
+> 
+> ### ** Examples
+> 
+> library(tuneRanger)
+> 
+> data(iris)
+> res <- tuneMtryFast(Species ~ ., data = iris, stepFactor = 1.5)
+mtry = 2  OOB error = 0.05333333 
+Searching left ...
+Searching right ...
+mtry = 3 	OOB error = 0.06 
+-0.125 0.05 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("tuneRanger")
+> ### * tuneRanger
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: tuneRanger
+> ### Title: tuneRanger
+> ### Aliases: tuneRanger
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D library(tuneRanger)
+> ##D library(mlr)
+> ##D 
+> ##D # A mlr task has to be created in order to use the package
+> ##D data(iris)
+> ##D iris.task = makeClassifTask(data = iris, target = "Species")
+> ##D  
+> ##D # Estimate runtime
+> ##D estimateTimeTuneRanger(iris.task)
+> ##D # Tuning
+> ##D res = tuneRanger(iris.task, measure = list(multiclass.brier), num.trees = 1000, 
+> ##D   num.threads = 2, iters = 70, save.file.path = NULL)
+> ##D   
+> ##D # Mean of best 5 % of the results
+> ##D res
+> ##D # Model with the new tuned hyperparameters
+> ##D res$model
+> ##D # Prediction
+> ##D predict(res$model, newdata = iris[1:10,])
+> ## End(Not run)
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  25.031 1.237 49.791 0.004 0.004 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
