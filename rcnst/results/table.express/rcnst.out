@@ -1,0 +1,43 @@
+Package table.express version 0.3.1
+Package built using /R 4.1.0; ; 2020-08-29 00:53:27 UTC; unix
+Excerpts from error reports follow. Please refer to the included outputs for details.
+
+--------------------
+ERROR: modification of compiler constant of type language, length 3
+ERROR: modification of compiler constant of type language, length 3
+ERROR: the modified constant is function body:
+{
+    local_rhs <- data.table::setDT(list(x = c("c", "b"), v = 8:7, 
+        foo = c(4, 2)))
+    right_join(data.table::setDT(list(x = c("b", "b", "b", "a", 
+    "a", "a", "c", "c", "c"), y = c(1, 3, 6, 1, 3, 6, 1, 3, 6
+    ), v = 1:9)), local_rhs, by = "x")
+}
+ERROR: the body was originally:
+{
+    local_rhs <- data.table::setDT(list(x = c("c", "b"), v = 8:7, 
+        foo = c(4, 2)))
+    right_join(data.table::setDT(list(x = c("b", "b", "b", "a", 
+    "a", "a", "c", "c", "c"), y = c(1, 3, 6, 1, 3, 6, 1, 3, 6
+    ), v = 1:9)), local_rhs, by = "x")
+}
+ERROR: modification of compiler constant of type language, length 4
+ERROR: modification of compiler constant of type language, length 4
+ERROR: the modified value of the constant is:
+right_join(data.table::setDT(list(x = c("b", "b", "b", "a", "a", 
+"a", "c", "c", "c"), y = c(1, 3, 6, 1, 3, 6, 1, 3, 6), v = 1:9)), 
+    local_rhs, by = "x")
+ERROR: the original value of the constant is:
+right_join(data.table::setDT(list(x = c("b", "b", "b", "a", "a", 
+"a", "c", "c", "c"), y = c(1, 3, 6, 1, 3, 6, 1, 3, 6), v = 1:9)), 
+    local_rhs, by = "x")
+ERROR: the modified constant is at index 10
+ERROR: the modified constant is in this function body:
+{
+    local_rhs <- data.table::setDT(list(x = c("c", "b"), v = 8:7, 
+        foo = c(4, 2)))
+    right_join(data.table::setDT(list(x = c("b", "b", "b", "a", 
+    "a", "a", "c", "c", "c"), y = c(1, 3, 6, 1, 3, 6, 1, 3, 6
+    ), v = 1:9)), local_rhs, by = "x")
+}
+Fatal error: compiler constants were modified!
