@@ -1,0 +1,55 @@
+Package stplanr version 0.7.1
+Package built using 79098/R 4.1.0; x86_64-pc-linux-gnu; 2020-09-01 02:49:22 UTC; unix   
+Checked with rchk version 36c7ad2294619ba0a81109c9acb675eea2c96e6d
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::BindingPolicy<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >::Binding::operator Rcpp::Function_Impl<Rcpp::PreserveStorage><Rcpp::Function_Impl<Rcpp::PreserveStorage> >() const
+  [UP] calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Function_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::BindingPolicy<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >::Binding::get() const Rcpp/include/Rcpp/api/meat/proxy.h:138
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::get(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
+  [UP] calling allocating function Rcpp::internal::Rcpp_eval_impl(SEXPREC*, SEXPREC*) with a fresh pointer (res <arg 1>) Rcpp/include/Rcpp/Environment.h:112
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ZN4Rcpp6VectorILi16ENS_15PreserveStorageEEC2ImEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
+
+Function _stplanr_coord_matches
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _stplanr_coord_matches_sf
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _stplanr_join_spatiallines_coords
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _stplanr_join_spatiallines_coords_sf
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function coord_matches(SEXPREC*, double)
+  [UP] ignoring variable <unnamed var:   %212 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %209 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %261 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function coord_matches_sf(arma::Mat<double>, arma::Mat<double>, unsigned int, double)
+  [UP] ignoring variable <unnamed var:   %166 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
