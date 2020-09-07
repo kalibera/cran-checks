@@ -1,0 +1,561 @@
+Package simts version 0.1.1
+Package built using 79148/R 4.1.0; x86_64-pc-linux-gnu; 2020-09-07 20:27:30 UTC; unix   
+Checked with rchk version 36c7ad2294619ba0a81109c9acb675eea2c96e6d
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::BindingPolicy<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >::Binding::operator Rcpp::Function_Impl<Rcpp::PreserveStorage><Rcpp::Function_Impl<Rcpp::PreserveStorage> >() const
+  [UP] calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Function_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::BindingPolicy<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >::Binding::get() const Rcpp/include/Rcpp/api/meat/proxy.h:138
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Rcpp_namespace()
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using Rcpp::internal::get_Rcpp_namespace() Rcpp/include/Rcpp/Environment.h:361
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::get(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
+  [UP] calling allocating function Rcpp::internal::Rcpp_eval_impl(SEXPREC*, SEXPREC*) with a fresh pointer (res <arg 1>) Rcpp/include/Rcpp/Environment.h:112
+
+Function Rcpp::InternalFunction_Impl<Rcpp::PreserveStorage>::set(SEXPREC*)
+  [UP] ignoring variable xp as it has address taken, results will be incomplete 
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<14>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function Rcpp::Vector<15, Rcpp::PreserveStorage>::Vector(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<15, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<15>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector()
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:57
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function Rcpp::XPtr<Rcpp::CppFunction2<double, double, double>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppFunction2<double, double, double> >(Rcpp::CppFunction2<double, double, double>*)), false>::XPtr(Rcpp::CppFunction2<double, double, double>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppFunction2<double, double, double>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppFunction2<double, double, double> >(Rcpp::CppFunction2<double, double, double>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::CppFunction4<double, double, arma::Col<double>, double, double>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppFunction4<double, double, arma::Col<double>, double, double> >(Rcpp::CppFunction4<double, double, arma::Col<double>, double, double>*)), false>::XPtr(Rcpp::CppFunction4<double, double, arma::Col<double>, double, double>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppFunction4<double, double, arma::Col<double>, double, double>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppFunction4<double, double, arma::Col<double>, double, double> >(Rcpp::CppFunction4<double, double, arma::Col<double>, double, double>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::CppFunction6<double, arma::Col<double> const&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&, arma::field<arma::Col<double> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, arma::Col<double> const&, arma::Col<double> const&>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppFunction6<double, arma::Col<double> const&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&, arma::field<arma::Col<double> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, arma::Col<double> const&, arma::Col<double> const&> >(Rcpp::CppFunction6<double, arma::Col<double> const&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&, arma::field<arma::Col<double> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, arma::Col<double> const&, arma::Col<double> const&>*)), false>::XPtr(Rcpp::CppFunction6<double, arma::Col<double> const&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&, arma::field<arma::Col<double> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, arma::Col<double> const&, arma::Col<double> const&>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppFunction6<double, arma::Col<double> const&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&, arma::field<arma::Col<double> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, arma::Col<double> const&, arma::Col<double> const&>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppFunction6<double, arma::Col<double> const&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&, arma::field<arma::Col<double> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, arma::Col<double> const&, arma::Col<double> const&> >(Rcpp::CppFunction6<double, arma::Col<double> const&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&, arma::field<arma::Col<double> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, arma::Col<double> const&, arma::Col<double> const&>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::CppFunction7<double, arma::Col<double> const&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&, arma::field<arma::Col<double> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, arma::Mat<double> const&, arma::Col<double> const&, arma::Col<double> const&>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppFunction7<double, arma::Col<double> const&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&, arma::field<arma::Col<double> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, arma::Mat<double> const&, arma::Col<double> const&, arma::Col<double> const&> >(Rcpp::CppFunction7<double, arma::Col<double> const&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&, arma::field<arma::Col<double> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, arma::Mat<double> const&, arma::Col<double> const&, arma::Col<double> const&>*)), false>::XPtr(Rcpp::CppFunction7<double, arma::Col<double> const&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&, arma::field<arma::Col<double> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, arma::Mat<double> const&, arma::Col<double> const&, arma::Col<double> const&>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppFunction7<double, arma::Col<double> const&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&, arma::field<arma::Col<double> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, arma::Mat<double> const&, arma::Col<double> const&, arma::Col<double> const&>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppFunction7<double, arma::Col<double> const&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&, arma::field<arma::Col<double> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, arma::Mat<double> const&, arma::Col<double> const&, arma::Col<double> const&> >(Rcpp::CppFunction7<double, arma::Col<double> const&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&, arma::field<arma::Col<double> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, arma::Mat<double> const&, arma::Col<double> const&, arma::Col<double> const&>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp_ARIMA(arma::Col<double> const&, arma::Col<double> const&)
+  [UP] ignoring variable <unnamed var:   %46 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %63 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ZN4Rcpp6VectorILi16ENS_15PreserveStorageEEC2ImEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
+
+Function _simts_ARMAacf_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_ARMAtoMA_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_B_matrix
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_D_matrix
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_Mod_cpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_Rcpp_ARIMA
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_acf
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_acf_sum
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_all_bootstrapper
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_ar1_draw
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_ar1_to_gm
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_ar1_to_wv
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_arma11_to_wv
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_arma_adapter
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_arma_draws
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_arma_to_wv
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_arma_to_wv_app
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_auto_imu_cpp
+  [UP] ignoring variable <unnamed var:   %48 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_batch_modwt_wvar_cpp
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_bl14_filter
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_bl20_filter
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_boot_pval_gof
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_bootstrap_gof_test
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_brick_wall
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_build_model_set
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_calculate_psi_matrix
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_cfilter
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_ci_eta3
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_ci_eta3_robust
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_ci_wave_variance
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_code_zero
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_compute_cov_cpp
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_count_models
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_cov_bootstrapper
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_d16_filter
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_d4_filter
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_d6_filter
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_d8_filter
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_decomp_theoretical_wv
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_decomp_to_theo_wv
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_deriv_2nd_ar1
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_deriv_2nd_arma11
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_deriv_2nd_dr
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_deriv_2nd_ma1
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_deriv_ar1
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_deriv_arma11
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_deriv_dr
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_deriv_ma1
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_deriv_qn
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_deriv_rw
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_deriv_wn
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_derivative_first_matrix
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_dft_acf
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_diff_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_diff_inv
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_diff_inv_values
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_do_polyroot_arma
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_do_polyroot_cpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_dr_to_wv
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_dwt_cpp
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_e_drift
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_fast_cov_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_field_to_matrix
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_find_full_model
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_fk14_filter
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_fk22_filter
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_fk4_filter
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_fk6_filter
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_fk8_filter
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_format_ci
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gen_ar1
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gen_arima
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gen_arma
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gen_arma11
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gen_dr
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gen_generic_sarima
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gen_lts_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gen_ma1
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gen_model
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gen_qn
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gen_rw
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gen_sarima
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gen_sarma
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gen_wn
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_getObjFun
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_getObjFunStarting
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_get_summary
+  [UP] ignoring variable <unnamed var:   %72 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gm_to_ar1
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gmwm_engine
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gmwm_master_cpp
+  [UP] ignoring variable <unnamed var:   %48 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gmwm_param_bootstrapper
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gmwm_sd_bootstrapper
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gmwm_update_cpp
+  [UP] ignoring variable <unnamed var:   %60 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_gof_test
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_guess_initial
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_guess_initial_old
+  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_haar_filter
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_idf_arma
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_idf_arma_total
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_intgr_vec
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_invert_check
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_jacobian_arma
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_la16_filter
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_la20_filter
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_la8_filter
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_lm_arma
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_lm_dr
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_logit
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_logit2
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_logit2_inv
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_logit_inv
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_m2_drift
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_ma1_to_wv
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_mb16_filter
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_mb24_filter
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_mb4_filter
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_mb8_filter
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_mean_diff
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_minroot
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_model_objdesc
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_model_process_desc
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_model_score
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_model_theta
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_modwt_cpp
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_modwt_wvar_cpp
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_num_rep
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_obj_extract
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_opt_n_gof_bootstrapper
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_optimism_bootstrapper
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_order_AR1s
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_pseudo_logit
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_pseudo_logit_inv
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_qmf
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_qn_to_wv
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_quantile_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_rank_models_cpp
+  [UP] ignoring variable <unnamed var:   %48 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_read_imu
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_rev_col_subset
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_rev_row_subset
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_reverse_vec
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_rfilter
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_rtruncated_normal
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_rw_to_wv
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_sarma_calculate_spadding
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_sarma_components
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_sarma_expand
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_sarma_expand_unguided
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_sarma_params_construct
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_scales_cpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_select_filter
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_seq_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_seq_len_cpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_sort_mat
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_sum_field_vec
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_theoretical_wv
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_theta_ci
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_transform_values
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_untransform_values
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_var_drift
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_vector_to_set
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_w4_filter
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_wave_variance
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_wn_to_wv
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _simts_wvar_cpp
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
