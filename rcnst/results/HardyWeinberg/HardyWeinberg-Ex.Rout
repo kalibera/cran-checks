@@ -1986,7 +1986,7 @@ G2 = 0.001699875 DF = 2 p-value = 0.9991504
 > HWNetwork(ma=ma,fe=fe)
 ERROR: modification of compiler constant of type double, length 4
 ERROR: the modified value of the constant is:
-[1] 0.000000000 0.001541413 0.000000000 0.000000000
+[1] 0.0000000000 0.0005859193 0.0000000000 0.0000000000
 ERROR: the original value of the constant is:
 [1] 0 0 0 0
 ERROR: the modified constant is at index 94
@@ -2084,11 +2084,7 @@ ERROR: the modified constant is in this function body:
     }
     out <- list(pval = pval)
 }
-
- *** caught segfault ***
-address 0x1300000019, cause 'memory not mapped'
-
-Traceback:
- 1: xChromosomal(acounts, MaleFemaleCounts, k, observed, Pvalues,     0, 0, 0, 0, 0, 0)
- 2: HWNetwork(ma = ma, fe = fe)
-An irrecoverable exception occurred. R is aborting now ...
+Error in xChromosomal(acounts, MaleFemaleCounts, k, observed, Pvalues,  : 
+  bad binding access
+Calls: HWNetwork -> xChromosomal
+Execution halted

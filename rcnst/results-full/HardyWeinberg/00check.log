@@ -4,7 +4,7 @@
 * using session charset: UTF-8
 * checking for file ‘HardyWeinberg/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘HardyWeinberg’ version ‘1.6.7’
+* this is package ‘HardyWeinberg’ version ‘1.6.8’
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -78,7 +78,7 @@ The error most likely occurred in:
 > HWNetwork(ma=ma,fe=fe)
 ERROR: modification of compiler constant of type double, length 4
 ERROR: the modified value of the constant is:
-[1] 0.000000000 0.001541413 0.000000000 0.000000000
+[1] 0.0000000000 0.0005859193 0.0000000000 0.0000000000
 ERROR: the original value of the constant is:
 [1] 0 0 0 0
 ERROR: the modified constant is at index 94
@@ -176,14 +176,10 @@ ERROR: the modified constant is in this function body:
     }
     out <- list(pval = pval)
 }
-
- *** caught segfault ***
-address 0x1300000019, cause 'memory not mapped'
-
-Traceback:
- 1: xChromosomal(acounts, MaleFemaleCounts, k, observed, Pvalues,     0, 0, 0, 0, 0, 0)
- 2: HWNetwork(ma = ma, fe = fe)
-An irrecoverable exception occurred. R is aborting now ...
+Error in xChromosomal(acounts, MaleFemaleCounts, k, observed, Pvalues,  : 
+  bad binding access
+Calls: HWNetwork -> xChromosomal
+Execution halted
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... ERROR
@@ -218,7 +214,7 @@ Warning: Number of logged events: 1
 Warning: Number of logged events: 1
 ERROR: modification of compiler constant of type double, length 4
 ERROR: the modified value of the constant is:
-[1] 0.00000000 0.08218499 0.00000000 0.00000000
+[1] 0.00000000 0.03370688 0.00000000 0.00000000
 ERROR: the original value of the constant is:
 [1] 0 0 0 0
 ERROR: the modified constant is at index 94
@@ -323,7 +319,7 @@ Fatal error: compiler constants were modified (in .Call?)!
 
 ERROR: modification of compiler constant of type double, length 4
 ERROR: the modified value of the constant is:
-[1] 0.00000000 0.08218499 0.00000000 0.00000000
+[1] 0.00000000 0.03370688 0.00000000 0.00000000
 ERROR: the original value of the constant is:
 [1] 0 0 0 0
 ERROR: the modified constant is at index 94
