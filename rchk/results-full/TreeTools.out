@@ -1,5 +1,5 @@
-Package TreeTools version 1.2.0
-Package built using 79098/R 4.1.0; x86_64-pc-linux-gnu; 2020-09-01 02:50:56 UTC; unix   
+Package TreeTools version 1.3.0
+Package built using 79235/R 4.1.0; x86_64-pc-linux-gnu; 2020-09-23 09:51:31 UTC; unix   
 Checked with rchk version 36c7ad2294619ba0a81109c9acb675eea2c96e6d
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
@@ -11,6 +11,9 @@ Function Rcpp::Armor<SEXPREC*>::~Armor()
   [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::AttributeProxyPolicy<Rcpp::Vector<24, Rcpp::PreserveStorage> >::AttributeProxy::operator long<long>() const
+  [UP] calling allocating function long Rcpp::as<long>(SEXPREC*) with argument allocated using Rcpp::AttributeProxyPolicy<Rcpp::Vector<24, Rcpp::PreserveStorage> >::AttributeProxy::get() const Rcpp/include/Rcpp/api/meat/proxy.h:40
 
 Function Rcpp::Rcpp_protect(SEXPREC*)
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
@@ -37,6 +40,9 @@ Function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(int const&)
 Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector(int const&)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
 
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:683
+
 Function Rcpp::Vector<24, Rcpp::PreserveStorage>::Vector(Rcpp::Dimension const&)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<24, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:135
 
@@ -45,6 +51,9 @@ Function Rcpp::Vector<24, Rcpp::PreserveStorage>::Vector(SEXPREC*)
 
 Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::set(SEXPREC*)
+  [UP] ignoring variable rhs as it has address taken, results will be incomplete 
 
 Function _TreeTools_as_newick
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -61,9 +70,6 @@ Function _TreeTools_edge_to_rooted_shape
 Function _TreeTools_num_to_parent
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _TreeTools_phangorn_bipCPP
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
 Function _TreeTools_postorder_edges
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -73,8 +79,17 @@ Function _TreeTools_preorder_edges_and_nodes
 Function _TreeTools_random_parent
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _TreeTools_root_binary
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _TreeTools_root_on_node
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _TreeTools_rooted_shape_to_edge
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _TreeTools_tips_in_splits
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _ZN4Rcpp6VectorILi13ENS_15PreserveStorageEEC2IlEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
@@ -85,5 +100,11 @@ Function _ZN4Rcpp6VectorILi13ENS_15PreserveStorageEEC2ImEET_PNS_6traits9enable_i
 Function _ZN4Rcpp6VectorILi16ENS_15PreserveStorageEEC2ImEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
 
+Function _ZN4Rcpp6VectorILi19ENS_15PreserveStorageEEC2IlEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
+
 Function void Rcpp::Vector<13, Rcpp::PreserveStorage>::import_sugar_expression<true, Rcpp::MatrixColumn<13> >(Rcpp::VectorBase<13, true, Rcpp::MatrixColumn<13> > const&, Rcpp::traits::integral_constant<bool, false>)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
