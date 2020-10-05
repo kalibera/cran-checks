@@ -1,10 +1,10 @@
-* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/tuneRanger.Rcheck’
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/rabhit.Rcheck’
 * using R Under development (unstable) (2020-10-05 r79294)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* checking for file ‘tuneRanger/DESCRIPTION’ ... OK
+* checking for file ‘rabhit/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘tuneRanger’ version ‘0.5’
+* this is package ‘rabhit’ version ‘0.1.5’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -14,8 +14,9 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘tuneRanger’ can be installed ... OK
+* checking whether package ‘rabhit’ can be installed ... OK
 * checking package directory ... OK
+* checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
 * checking for left-over files ... OK
@@ -42,27 +43,39 @@
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
-* checking examples ... OK
-* checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  Loading required package: lhs
-  > 
-  > test_check("tuneRanger")
-  Approximated time for tuning: 1M 22SERROR: modification of compiler constant of type character, length 2
-  ERROR: the modified value of the constant is:
-  [1] "integer"       "integervector"
-  attr(,".match.hash")
-  <hash table>
-  ERROR: the original value of the constant is:
-  [1] "integer"       "integervector"
-  ERROR: the modified constant is at index 1
-  ERROR: the modified constant is in this function body:
-  c("integer", "integervector")
-  Fatal error: compiler constants were modified!
-  
-* checking PDF version of manual ... OK
-* DONE
-Status: 1 ERROR
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking R/sysdata.rda ... OK
+* checking sizes of PDF files under ‘inst/doc’ ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... ERROR
+Running examples in ‘rabhit-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: hapHeatmap
+> ### Title: Graphical output of alleles division by chromosome
+> ### Aliases: hapHeatmap
+> 
+> ### ** Examples
+> 
+> # Plotting haplotpe heatmap
+> p <- hapHeatmap(samplesHaplotype)
+ERROR: modification of compiler constant of type character, length 3
+ERROR: the modified value of the constant is:
+[1] "Unk" "Del" "NR" 
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "Unk" "Del" "NR" 
+ERROR: the modified constant is at index 1
+ERROR: the modified constant is in this function body:
+c("Unk", "Del", "NR")
+Fatal error: compiler constants were modified!
+
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘RAbHIT-vignette.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ...
