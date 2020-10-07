@@ -1,181 +1,0 @@
-
-R Under development (unstable) (2020-08-30 r79091) -- "Unsuffered Consequences"
-Copyright (C) 2020 The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
-
-R is free software and comes with ABSOLUTELY NO WARRANTY.
-You are welcome to redistribute it under certain conditions.
-Type 'license()' or 'licence()' for distribution details.
-
-R is a collaborative project with many contributors.
-Type 'contributors()' for more information and
-'citation()' on how to cite R or R packages in publications.
-
-Type 'demo()' for some demos, 'help()' for on-line help, or
-'help.start()' for an HTML browser interface to help.
-Type 'q()' to quit R.
-
-> library(testthat)
-> library(ps)
-> 
-> if (ps::ps_is_supported() && Sys.getenv("R_COVR", "") != "true" &&
-+     Sys.getenv("NOT_CRAN") != "" ) {
-+   reporter <- ps::CleanupReporter(testthat::SummaryReporter)$new()
-+ } else {
-+   ## ps does not support this platform
-+   reporter <- "progress"
-+ }
-> 
-> if (ps_is_supported()) test_check("ps", reporter = reporter)
-✔ |  OK F W S | Context
-⠏ |   0       | cleanup testthat reporter⠋ |   1       | cleanup testthat reporter⠼ |   5       | cleanup testthat reporter⠇ |   9       | cleanup testthat reporter⠙ |  12       | cleanup testthat reporter⠼ |  15       | cleanup testthat reporter⠧ |  17 1     | cleanup testthat reporter⠙ |  21 1     | cleanup testthat reporter⠸ |  23 1     | cleanup testthat reporter⠼ |  24 1     | cleanup testthat reporter⠇ |  28 1     | cleanup testthat reporter⠋ |  30 1     | cleanup testthat reporter⠼ |  34 1     | cleanup testthat reporter⠇ |  38 1     | cleanup testthat reporter⠙ |  41 1     | cleanup testthat reporter⠴ |  45 1     | cleanup testthat reporter⠏ |  49 1     | cleanup testthat reporter⠹ |  52 1     | cleanup testthat reporter⠦ |  56 1     | cleanup testthat reporter✖ |  59 1     | cleanup testthat reporter [65.0 s]
-────────────────────────────────────────────────────────────────────────────────
-test-cleanup-reporter.R:119: failure: unit: testsuite
-Expectation did not fail
-────────────────────────────────────────────────────────────────────────────────
-⠏ |   0       | common⠙ |   2       | common⠴ |   6       | common⠇ |   9       | common⠋ |  11       | common⠙ |  12       | common⠹ |  13       | common⠸ |  14       | common⠴ |  16       | common⠦ |  17       | common⠇ |  19       | common⠏ |  20       | common⠹ |  23       | common⠼ |  25       | common⠧ |  28       | common⠇ |  29       | common⠏ |  30       | common⠋ |  31       | common⠹ |  33       | common⠸ |  34       | common⠦ |  37       | common⠏ |  40       | common⠋ |  41       | common⠹ |  43       | common⠼ |  45       | common⠋ |  51       | common⠙ |  52       | common⠼ |  55       | common⠴ |  56       | common⠇ |  59       | common✔ |  61     3 | common [10.1 s]
-────────────────────────────────────────────────────────────────────────────────
-test-common.R:264: skip: num_fds
-Reason: On CRAN
-
-test-common.R:280: skip: open_files
-Reason: On CRAN
-
-test-common.R:297: skip: interrupt
-Reason: On CRAN
-────────────────────────────────────────────────────────────────────────────────
-⠏ |   0       | connections⠋ |   0   1   | connections⠼ |   3   2   | connections⠦ |   4   3   | connections⠏ |   6   4   | connections⠏ |  15   5   | connections⠹ |  16   7   | connections⠼ |  16   9   | connections⠹ |  22   11   | connections⠦ |  24   13   | connections⠇ |  24   15   | connections⠸ |  27   17   | connections⠇ |  31   18   | connections⠋ |  32   19   | connections⠹ |  33   20   | connections⠼ |  34   21   | connections⠇ |  36   22 1 | connections⠏ |  36 1 22 1 | connections⠋ |  36 1 22 2 | connections⠙ |  36 2 22 2 | connections✖ |  36 2 22 2 | connections [12.3 s]
-────────────────────────────────────────────────────────────────────────────────
-test-connections.R:12: warning: empty set
-cannot open file '/proc/net/tcp6': No such file or directory
-
-test-connections.R:12: warning: empty set
-cannot open file '/proc/net/udp6': No such file or directory
-
-test-connections.R:29: warning: UNIX sockets
-cannot open file '/proc/net/tcp6': No such file or directory
-
-test-connections.R:29: warning: UNIX sockets
-cannot open file '/proc/net/udp6': No such file or directory
-
-test-connections.R:62: warning: UNIX sockets with path
-cannot open file '/proc/net/tcp6': No such file or directory
-
-test-connections.R:62: warning: UNIX sockets with path
-cannot open file '/proc/net/udp6': No such file or directory
-
-test-connections.R:69: warning: TCP
-cannot open file '/proc/net/tcp6': No such file or directory
-
-test-connections.R:69: warning: TCP
-cannot open file '/proc/net/udp6': No such file or directory
-
-test-connections.R:72: warning: TCP
-cannot open file '/proc/net/tcp6': No such file or directory
-
-test-connections.R:72: warning: TCP
-cannot open file '/proc/net/udp6': No such file or directory
-
-test-connections.R:94: warning: TCP on loopback
-cannot open file '/proc/net/tcp6': No such file or directory
-
-test-connections.R:94: warning: TCP on loopback
-cannot open file '/proc/net/udp6': No such file or directory
-
-test-connections.R:106: warning: TCP on loopback
-cannot open file '/proc/net/tcp6': No such file or directory
-
-test-connections.R:106: warning: TCP on loopback
-cannot open file '/proc/net/udp6': No such file or directory
-
-test-connections.R:106: warning: TCP on loopback
-cannot open file '/proc/net/tcp6': No such file or directory
-
-test-connections.R:106: warning: TCP on loopback
-cannot open file '/proc/net/udp6': No such file or directory
-
-test-connections.R:126: warning: UDP
-cannot open file '/proc/net/tcp6': No such file or directory
-
-test-connections.R:126: warning: UDP
-cannot open file '/proc/net/udp6': No such file or directory
-
-test-connections.R:152: warning: UDP on loopback
-cannot open file '/proc/net/tcp6': No such file or directory
-
-test-connections.R:152: warning: UDP on loopback
-cannot open file '/proc/net/udp6': No such file or directory
-
-test-connections.R:164: warning: UDP on loopback
-cannot open file '/proc/net/tcp6': No such file or directory
-
-test-connections.R:164: warning: UDP on loopback
-cannot open file '/proc/net/udp6': No such file or directory
-
-test-connections.R:177: skip: TCP6
-Reason: Needs working IPv6 connection
-
-test-connections.R:205: error: TCP6 on loopback
-Cannot start process
-Backtrace:
- 1. ps:::wait_for_string(nc, "listening on", timeout = 2000) test-connections.R:205:2
-
-test-connections.R:234: skip: UDP6
-Reason: Needs working IPv6 connection
-
-test-connections.R:269: error: UDP6 on loopback
-Cannot start process
-Backtrace:
- 1. ps:::wait_for_string(nc, "listening on", timeout = 2000) test-connections.R:269:2
-────────────────────────────────────────────────────────────────────────────────
-⠏ |   0       | process finished⠋ |   1       | process finished⠴ |   6       | process finished⠋ |  21       | process finished⠋ |  31       | process finished⠙ |  42       | process finished⠙ |  52       | process finished⠹ |  63       | process finished⠧ |  68       | process finished✔ |  79       | process finished [4.0 s]
-⠏ |   0       | kill-tree⠴ |   4     2 | kill-tree✔ |   4     7 | kill-tree [0.2 s]
-────────────────────────────────────────────────────────────────────────────────
-test-kill-tree.R:14: skip: kill_tree
-Reason: On CRAN
-
-test-kill-tree.R:44: skip: kill_tree, grandchild
-Reason: On CRAN
-
-test-kill-tree.R:90: skip: kill_tree, orphaned grandchild
-Reason: On CRAN
-
-test-kill-tree.R:118: skip: with_process_cleanup
-Reason: On CRAN
-
-test-kill-tree.R:145: skip: find_tree
-Reason: On CRAN
-
-test-kill-tree.R:170: skip: find_tree, grandchild
-Reason: On CRAN
-
-test-kill-tree.R:218: skip: find_tree, orphaned grandchild
-Reason: On CRAN
-────────────────────────────────────────────────────────────────────────────────
-⠏ |   0       | linux⠙ |   2       | linux⠴ |   6       | linux✔ |   6     1 | linux [0.4 s]
-────────────────────────────────────────────────────────────────────────────────
-test-linux.R:32: skip: memory_info
-Reason: On CRAN
-────────────────────────────────────────────────────────────────────────────────
-⠏ |   0       | pid reuse⠋ |   1       | pid reuse⠇ |  59       | pid reuse✔ |  74       | pid reuse [0.3 s]
-⠏ |   0       | posix-zombie⠋ |   1       | posix-zombie⠋ |  11       | posix-zombie⠸ |  14       | posix-zombie⠙ |  22       | posix-zombie⠙ |  32       | posix-zombie⠹ |  43       | posix-zombie⠸ |  54       | posix-zombie✔ |  54       | posix-zombie [3.5 s]
-⠏ |   0       | posix⠋ |   1       | posix⠹ |   2     1 | posix⠸ |   3     1 | posix⠼ |   4     1 | posix⠴ |   5     1 | posix⠦ |   6     1 | posix⠏ |   9     1 | posix✔ |  11     1 | posix [2.4 s]
-────────────────────────────────────────────────────────────────────────────────
-test-posix.R:16: skip: terminal
-Reason: no terminal
-────────────────────────────────────────────────────────────────────────────────
-⠏ |   0       | system⠋ |   1       | system⠹ |   3       | system⠼ |   5       | system⠴ |   6       | system⠼ |  15       | system⠴ |  16       | system✔ |  18       | system [35.9 s]
-⠏ |   0       | utils⠏ |  10       | utils⠴ |  16       | utils✔ |  16       | utils [0.2 s]
-⠏ |   0       | winver⠴ |   6       | winver✔ |   6       | winver [0.1 s]
-
-══ Results ═════════════════════════════════════════════════════════════════════
-Duration: 136.8 s
-
-OK:       424
-Failed:   3
-Warnings: 22
-Skipped:  14
-
-No one gets it right on their first try
-Error: Test failures
-Execution halted
