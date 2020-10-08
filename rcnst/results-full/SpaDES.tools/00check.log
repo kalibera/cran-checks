@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/SpaDES.tools.Rcheck’
-* using R Under development (unstable) (2020-10-07 r79309)
+* using R Under development (unstable) (2020-10-07 r79311)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘SpaDES.tools/DESCRIPTION’ ... OK
@@ -87,22 +87,6 @@ The following object is masked from ‘package:data.table’:
 +                                       y = stats::runif(n, xmin(ras), xmax(ras))))
 > 
 > cirs <- cir(ras, agent, maxRadius = 15, simplify = TRUE)
-> cirsSP <- SpatialPoints(coords = cirs[, c("x", "y")])
-> cirsRas <- raster(ras)
-> cirsRas[] <- 0
-> cirsRas[cirs[, "indices"]] <- 1
-> 
-> if (interactive()) {
-+   clearPlot()
-+   Plot(ras)
-+   Plot(cirsRas, addTo = "ras", cols = c("transparent", "#00000055"))
-+   Plot(agent, addTo = "ras")
-+   Plot(cirsSP, addTo = "ras")
-+ }
-> 
-> # Example comparing rings and cir
-> a <- raster(extent(0, 30, 0, 30), res = 1)
-> hab <- gaussMap(a, speedup = 1) # if raster is large (>1e6 pixels) use speedup > 1
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "includePixel" "excludePixel" "includeRing"  "excludeRing" 
