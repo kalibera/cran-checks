@@ -1,5 +1,5 @@
-Package volesti version 1.1.1
-Package built using 79148/R 4.1.0; x86_64-pc-linux-gnu; 2020-09-07 20:41:50 UTC; unix   
+Package volesti version 1.1.2
+Package built using 79347/R 4.1.0; x86_64-pc-linux-gnu; 2020-10-19 12:38:14 UTC; unix   
 Checked with rchk version 36c7ad2294619ba0a81109c9acb675eea2c96e6d
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
@@ -19,17 +19,8 @@ Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
-Function Rcpp::Reference_Impl<Rcpp::PreserveStorage>::Reference_Impl(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
-  [UP] calling allocating function Rcpp::Rcpp_fast_eval(SEXPREC*, SEXPREC*) with argument allocated using Rcpp::internal::get_Rcpp_namespace() Rcpp/include/Rcpp/Reference.h:63
-
-Function Rcpp::Vector<10, Rcpp::PreserveStorage>::Vector(int const&)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<10, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
-
-Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector(int const&)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
-
-Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector()
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:57
+Function Rcpp::SlotProxyPolicy<Rcpp::Reference_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator double<double>() const
+  [UP] calling allocating function double Rcpp::as<double>(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::Reference_Impl<Rcpp::PreserveStorage> >::SlotProxy::get() const Rcpp/include/Rcpp/api/meat/proxy.h:92
 
 Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(Rcpp::Dimension const&)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:135
@@ -37,92 +28,11 @@ Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(Rcpp::Dimension const&)
 Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<14>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
 
-Function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(int const&)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
-
 Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector()
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:57
 
 Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector(int const&)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
-
-Function Rcpp::XPtr<Hpolytope, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Hpolytope>(Hpolytope*)), false>::XPtr(Hpolytope*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Hpolytope, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Hpolytope>(Hpolytope*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::XPtr<Rcpp::CppProperty<Hpolytope>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<Hpolytope> >(Rcpp::CppProperty<Hpolytope>*)), false>::XPtr(Rcpp::CppProperty<Hpolytope>*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<Hpolytope>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<Hpolytope> >(Rcpp::CppProperty<Hpolytope>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::XPtr<Rcpp::CppProperty<Spectrahedron>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<Spectrahedron> >(Rcpp::CppProperty<Spectrahedron>*)), false>::XPtr(Rcpp::CppProperty<Spectrahedron>*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<Spectrahedron>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<Spectrahedron> >(Rcpp::CppProperty<Spectrahedron>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::XPtr<Rcpp::CppProperty<VPinterVP>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<VPinterVP> >(Rcpp::CppProperty<VPinterVP>*)), false>::XPtr(Rcpp::CppProperty<VPinterVP>*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<VPinterVP>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<VPinterVP> >(Rcpp::CppProperty<VPinterVP>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::XPtr<Rcpp::CppProperty<Vpolytope>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<Vpolytope> >(Rcpp::CppProperty<Vpolytope>*)), false>::XPtr(Rcpp::CppProperty<Vpolytope>*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<Vpolytope>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<Vpolytope> >(Rcpp::CppProperty<Vpolytope>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::XPtr<Rcpp::CppProperty<Zonotope>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<Zonotope> >(Rcpp::CppProperty<Zonotope>*)), false>::XPtr(Rcpp::CppProperty<Zonotope>*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<Zonotope>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<Zonotope> >(Rcpp::CppProperty<Zonotope>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::XPtr<Rcpp::Module, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::Module>(Rcpp::Module*)), false>::XPtr(Rcpp::Module*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::Module, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::Module>(Rcpp::Module*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::XPtr<Rcpp::SignedConstructor<Hpolytope>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<Hpolytope> >(Rcpp::SignedConstructor<Hpolytope>*)), false>::XPtr(Rcpp::SignedConstructor<Hpolytope>*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<Hpolytope>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<Hpolytope> >(Rcpp::SignedConstructor<Hpolytope>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::XPtr<Rcpp::SignedConstructor<Spectrahedron>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<Spectrahedron> >(Rcpp::SignedConstructor<Spectrahedron>*)), false>::XPtr(Rcpp::SignedConstructor<Spectrahedron>*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<Spectrahedron>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<Spectrahedron> >(Rcpp::SignedConstructor<Spectrahedron>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::XPtr<Rcpp::SignedConstructor<VPinterVP>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<VPinterVP> >(Rcpp::SignedConstructor<VPinterVP>*)), false>::XPtr(Rcpp::SignedConstructor<VPinterVP>*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<VPinterVP>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<VPinterVP> >(Rcpp::SignedConstructor<VPinterVP>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::XPtr<Rcpp::SignedConstructor<Vpolytope>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<Vpolytope> >(Rcpp::SignedConstructor<Vpolytope>*)), false>::XPtr(Rcpp::SignedConstructor<Vpolytope>*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<Vpolytope>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<Vpolytope> >(Rcpp::SignedConstructor<Vpolytope>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::XPtr<Rcpp::SignedConstructor<Zonotope>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<Zonotope> >(Rcpp::SignedConstructor<Zonotope>*)), false>::XPtr(Rcpp::SignedConstructor<Zonotope>*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<Zonotope>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<Zonotope> >(Rcpp::SignedConstructor<Zonotope>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::XPtr<Spectrahedron, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Spectrahedron>(Spectrahedron*)), false>::XPtr(Spectrahedron*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Spectrahedron, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Spectrahedron>(Spectrahedron*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::XPtr<VPinterVP, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<VPinterVP>(VPinterVP*)), false>::XPtr(VPinterVP*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<VPinterVP, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<VPinterVP>(VPinterVP*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::XPtr<Vpolytope, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Vpolytope>(Vpolytope*)), false>::XPtr(Vpolytope*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Vpolytope, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Vpolytope>(Vpolytope*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::XPtr<Zonotope, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Zonotope>(Zonotope*)), false>::XPtr(Zonotope*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Zonotope, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Zonotope>(Zonotope*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<Hpolytope>*, std::__1::allocator<Rcpp::SignedMethod<Hpolytope>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<Hpolytope>*, std::__1::allocator<Rcpp::SignedMethod<Hpolytope>*> > >(std::__1::vector<Rcpp::SignedMethod<Hpolytope>*, std::__1::allocator<Rcpp::SignedMethod<Hpolytope>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<Hpolytope>*, std::__1::allocator<Rcpp::SignedMethod<Hpolytope>*> >*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<Hpolytope>*, std::__1::allocator<Rcpp::SignedMethod<Hpolytope>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<Hpolytope>*, std::__1::allocator<Rcpp::SignedMethod<Hpolytope>*> > >(std::__1::vector<Rcpp::SignedMethod<Hpolytope>*, std::__1::allocator<Rcpp::SignedMethod<Hpolytope>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<Spectrahedron>*, std::__1::allocator<Rcpp::SignedMethod<Spectrahedron>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<Spectrahedron>*, std::__1::allocator<Rcpp::SignedMethod<Spectrahedron>*> > >(std::__1::vector<Rcpp::SignedMethod<Spectrahedron>*, std::__1::allocator<Rcpp::SignedMethod<Spectrahedron>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<Spectrahedron>*, std::__1::allocator<Rcpp::SignedMethod<Spectrahedron>*> >*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<Spectrahedron>*, std::__1::allocator<Rcpp::SignedMethod<Spectrahedron>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<Spectrahedron>*, std::__1::allocator<Rcpp::SignedMethod<Spectrahedron>*> > >(std::__1::vector<Rcpp::SignedMethod<Spectrahedron>*, std::__1::allocator<Rcpp::SignedMethod<Spectrahedron>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<VPinterVP>*, std::__1::allocator<Rcpp::SignedMethod<VPinterVP>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<VPinterVP>*, std::__1::allocator<Rcpp::SignedMethod<VPinterVP>*> > >(std::__1::vector<Rcpp::SignedMethod<VPinterVP>*, std::__1::allocator<Rcpp::SignedMethod<VPinterVP>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<VPinterVP>*, std::__1::allocator<Rcpp::SignedMethod<VPinterVP>*> >*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<VPinterVP>*, std::__1::allocator<Rcpp::SignedMethod<VPinterVP>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<VPinterVP>*, std::__1::allocator<Rcpp::SignedMethod<VPinterVP>*> > >(std::__1::vector<Rcpp::SignedMethod<VPinterVP>*, std::__1::allocator<Rcpp::SignedMethod<VPinterVP>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<Vpolytope>*, std::__1::allocator<Rcpp::SignedMethod<Vpolytope>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<Vpolytope>*, std::__1::allocator<Rcpp::SignedMethod<Vpolytope>*> > >(std::__1::vector<Rcpp::SignedMethod<Vpolytope>*, std::__1::allocator<Rcpp::SignedMethod<Vpolytope>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<Vpolytope>*, std::__1::allocator<Rcpp::SignedMethod<Vpolytope>*> >*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<Vpolytope>*, std::__1::allocator<Rcpp::SignedMethod<Vpolytope>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<Vpolytope>*, std::__1::allocator<Rcpp::SignedMethod<Vpolytope>*> > >(std::__1::vector<Rcpp::SignedMethod<Vpolytope>*, std::__1::allocator<Rcpp::SignedMethod<Vpolytope>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<Zonotope>*, std::__1::allocator<Rcpp::SignedMethod<Zonotope>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<Zonotope>*, std::__1::allocator<Rcpp::SignedMethod<Zonotope>*> > >(std::__1::vector<Rcpp::SignedMethod<Zonotope>*, std::__1::allocator<Rcpp::SignedMethod<Zonotope>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<Zonotope>*, std::__1::allocator<Rcpp::SignedMethod<Zonotope>*> >*, bool, SEXPREC*, SEXPREC*)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<Zonotope>*, std::__1::allocator<Rcpp::SignedMethod<Zonotope>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<Zonotope>*, std::__1::allocator<Rcpp::SignedMethod<Zonotope>*> > >(std::__1::vector<Rcpp::SignedMethod<Zonotope>*, std::__1::allocator<Rcpp::SignedMethod<Zonotope>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
-
-Function Rcpp::class_<Hpolytope>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
-  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function Rcpp::class_<Spectrahedron>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
-  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function Rcpp::class_<VPinterVP>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
-  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function Rcpp::class_<Vpolytope>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
-  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function Rcpp::class_<Zonotope>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
-  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -140,7 +50,7 @@ Function _volesti_copula
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _volesti_direct_sampling
-  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _volesti_exact_vol
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -154,6 +64,9 @@ Function _volesti_inner_ball
 Function _volesti_loadSdpaFormatFile
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _volesti_load_sdpa_format_file
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _volesti_poly_gen
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -161,27 +74,48 @@ Function _volesti_rotating
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _volesti_rounding
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _volesti_sample_points
-  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _volesti_volume
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _volesti_zono_approx
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function exact_vol(Rcpp::Reference_Impl<Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::Reference_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const volesti/src/exact_vol.cpp:68
+
+Function inner_ball(Rcpp::Reference_Impl<Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::Reference_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const volesti/src/inner_ball.cpp:49
 
 Function loadSdpaFormatFile(Rcpp::Nullable<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >)
   [UP] ignoring variable <unnamed var:   %19 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function rounding(Rcpp::Reference_Impl<Rcpp::PreserveStorage>, Rcpp::Nullable<double>)
-  [UP] ignoring variable <unnamed var:   %66 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %70 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function load_sdpa_format_file(Rcpp::Nullable<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >)
+  [UP] ignoring variable <unnamed var:   %19 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function rotating(Rcpp::Reference_Impl<Rcpp::PreserveStorage>, Rcpp::Nullable<Rcpp::Matrix<14, Rcpp::PreserveStorage> >, Rcpp::Nullable<int>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::Reference_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const volesti/src/rotating.cpp:50
+
+Function rounding(Rcpp::Reference_Impl<Rcpp::PreserveStorage>, Rcpp::Nullable<Rcpp::Vector<19, Rcpp::PreserveStorage> >, Rcpp::Nullable<double>)
+  [UP] ignoring variable <unnamed var:   %106 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %110 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::Reference_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const volesti/src/rounding.cpp:50
+
+Function sample_points(Rcpp::Reference_Impl<Rcpp::PreserveStorage>, int, Rcpp::Nullable<Rcpp::Vector<19, Rcpp::PreserveStorage> >, Rcpp::Nullable<Rcpp::Vector<19, Rcpp::PreserveStorage> >)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::Reference_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const volesti/src/sample_points.cpp:142
 
 Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&)
   [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function volume(Rcpp::Reference_Impl<Rcpp::PreserveStorage>, Rcpp::Nullable<Rcpp::Vector<19, Rcpp::PreserveStorage> >, bool)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::Reference_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const volesti/src/volume.cpp:140
+
 Function zono_approx(Rcpp::Reference_Impl<Rcpp::PreserveStorage>, Rcpp::Nullable<bool>, Rcpp::Nullable<Rcpp::Vector<19, Rcpp::PreserveStorage> >, Rcpp::Nullable<double>)
-  [UP] ignoring variable <unnamed var:   %120 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %125 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::Reference_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const volesti/src/zonotope_approximation.cpp:46
