@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2020-10-20 r79350) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-10-23 r79366) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -1454,6 +1454,7 @@ With control class: FeatSelControlRandom
 Imputation value: 1
 [FeatSel-x] 1: 0010 (1 bits)
 [FeatSel-y] 1: mmce.test.mean=0.0800000; time: 0.1 min
+Warning in sprintf(...) : argument not used by format
 [FeatSel] Result: Petal.Length (1 bits)
 [Resample] iter 1:    0.0666667 
 [FeatSel] Started selecting features for learner 'classif.ksvm'
@@ -1461,6 +1462,7 @@ With control class: FeatSelControlRandom
 Imputation value: 1
 [FeatSel-x] 1: 1111 (4 bits)
 [FeatSel-y] 1: mmce.test.mean=0.0800000; time: 0.0 min
+Warning in sprintf(...) : argument not used by format
 [FeatSel] Result: Sepal.Length,Sepal.Width,Pe... (4 bits)
 [Resample] iter 2:    0.0266667 
 
@@ -1995,7 +1997,7 @@ mmce
 > ms = list("mmce" = mmce, "acc" = acc, "timetrain" = timetrain)
 > performance(pred, measures = ms, task, mod)
      mmce       acc timetrain 
-    0.040     0.960     0.005 
+    0.040     0.960     0.006 
 > 
 > 
 > 
@@ -2358,7 +2360,7 @@ Predict: test
 Stratification: FALSE
 predict.type: response
 threshold: 
-time (mean): 0.00
+time (mean): 0.01
   id  truth response iter  set
 1  2 setosa   setosa    1 test
 2  3 setosa   setosa    1 test
@@ -2716,7 +2718,7 @@ mmce.test.mean=0.0533333
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  71.197 2.006 75.299 0.002 0.005 
+Time elapsed:  74.626 4.239 80.28 0 0.005 
 > grDevices::dev.off()
 null device 
           1 
