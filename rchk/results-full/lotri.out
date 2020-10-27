@@ -1,0 +1,40 @@
+Package lotri version 0.2.2
+Package built using 79376/R 4.1.0; x86_64-pc-linux-gnu; 2020-10-27 13:08:57 UTC; unix   
+Checked with rchk version 53e92298ce18bdbb81b74a94866e519bae0691be LLVM version 10.0.1
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+
+
+Function _lotriGetBounds
+  [UP] unprotected variable names while calling allocating function Rf_allocVector lotri/src/matlist.c:344
+  [UP] unprotected variable names while calling allocating function Rf_allocVector lotri/src/matlist.c:345
+
+Function _lotriLstToMat
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete lotri/src/matlist.c:218
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete lotri/src/matlist.c:218
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete lotri/src/matlist.c:281
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete lotri/src/matlist.c:281
+
+Function _lotriLstToMat0
+  [PB] has possible protection stack imbalance lotri/src/matlist.c:195
+
+Function _lotriSep
+  [UP] unprotected variable names while calling allocating function Rf_install lotri/src/matlist.c:661
+  [UP] allocating function blankProp may destroy its unprotected argument (names <arg 1>), which is later used. lotri/src/matlist.c:663
+  [UP] calling allocating function blankProp with a fresh pointer (names <arg 1>) lotri/src/matlist.c:663
+  [UP] allocating function Rf_getAttrib(?,S:names) may destroy its unprotected argument (lotri0 <arg 1>), which is later used. lotri/src/matlist.c:665
+  [UP] calling allocating function Rf_getAttrib(?,S:names) with a fresh pointer (lotri0 <arg 1>) lotri/src/matlist.c:665
+  [UP] unprotected variable names while calling allocating function Rf_getAttrib(?,S:names) lotri/src/matlist.c:665
+  [UP] unprotected variable lotri0 while calling allocating function Rf_getAttrib(?,S:names) lotri/src/matlist.c:671
+  [UP] unprotected variable lotri0names while calling allocating function Rf_getAttrib(?,S:names) lotri/src/matlist.c:671
+  [UP] unprotected variable names while calling allocating function Rf_getAttrib(?,S:names) lotri/src/matlist.c:671
+
+Function blankProp
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete lotri/src/matlist.c:652
+
+Function getNestLotri
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] unprotected variable curPropS while calling allocating function Rf_allocVector lotri/src/matlist.c:608
+  [UP] unprotected variable curPropS while calling allocating function Rf_allocVector lotri/src/matlist.c:609
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete lotri/src/matlist.c:641
