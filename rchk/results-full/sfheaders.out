@@ -1,5 +1,5 @@
-Package sfheaders version 0.2.2
-Package built using 79387/R 4.1.0; x86_64-pc-linux-gnu; 2020-10-31 04:01:50 UTC; unix   
+Package sfheaders version 0.3.0
+Package built using 79390/R 4.1.0; x86_64-pc-linux-gnu; 2020-10-31 22:42:38 UTC; unix   
 Checked with rchk version 1df3a0cc105e4278d3a4b8e1215f64bf6611d1e8 LLVM version 10.0.1
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 
@@ -70,6 +70,9 @@ Function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(char const*)
 Function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(int const&)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
 
+Function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::internal::vector_from_string<16>(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) Rcpp/include/Rcpp/vector/Vector.h:104
+
 Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector()
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:57
 
@@ -91,8 +94,14 @@ Function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::set(SEXP
 Function Rcpp::sugar::IndexHash<16>::add_value(int)
   [UP] ignoring variable val as it has address taken, results will be incomplete 
 
+Function SEXPREC* sfheaders::sfg::sfg_point<14>(Rcpp::Vector<14, Rcpp::PreserveStorage>&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+  [UP] ignoring variable geometry_mat as it has address taken, results will be incomplete 
+
 Function _ZN4Rcpp6VectorILi10ENS_15PreserveStorageEEC2IlEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<10, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
+
+Function _ZN4Rcpp6VectorILi13ENS_15PreserveStorageEEC2IlEERKT_RKiPNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:91
 
 Function _ZN4Rcpp6VectorILi13ENS_15PreserveStorageEEC2IlEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
@@ -116,8 +125,8 @@ Function _ZNSt3__14swapIP7SEXPRECEENS_9enable_ifIXaasr21is_move_constructibleIT_
   [UP] ignoring variable __t as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_calculate_bbox
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_calculate_m_range
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -133,13 +142,6 @@ Function _sfheaders_rcpp_cast_sf
 Function _sfheaders_rcpp_cast_sfc
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _sfheaders_rcpp_column_positions
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _sfheaders_rcpp_concatenate_vectors
-  [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
 Function _sfheaders_rcpp_count_new_objects
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -149,30 +151,8 @@ Function _sfheaders_rcpp_count_new_sfc_objects
 Function _sfheaders_rcpp_fill_list
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _sfheaders_rcpp_get_ids
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _sfheaders_rcpp_get_list_mat
-  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %19 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _sfheaders_rcpp_get_mat
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _sfheaders_rcpp_get_sfc_attributes
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
 Function _sfheaders_rcpp_get_sfg_type
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _sfheaders_rcpp_get_vec
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _sfheaders_rcpp_id_positions
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_list_sizes
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -180,17 +160,13 @@ Function _sfheaders_rcpp_list_sizes
 Function _sfheaders_rcpp_list_type
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _sfheaders_rcpp_other_columns
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
 Function _sfheaders_rcpp_sf_linestring
-  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_sf_multilinestring
-  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_sf_multipoint
   [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -201,28 +177,28 @@ Function _sfheaders_rcpp_sf_multipolygon
   [UP] ignoring variable <unnamed var:   %34 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_sf_point
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_sf_polygon
-  [UP] ignoring variable <unnamed var:   %31 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %31 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_sf_to_df
-  [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_sf_to_df_unlist
-  [UP] ignoring variable <unnamed var:   %19 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %19 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_sfc_boxes
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_sfc_linestring
-  [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_sfc_linestrings
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -233,12 +209,12 @@ Function _sfheaders_rcpp_sfc_multilinestring
   [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_sfc_multilinestrings
-  [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_sfc_multipoint
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_sfc_multipoints
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -257,8 +233,8 @@ Function _sfheaders_rcpp_sfc_point
   [UP] ignoring variable <unnamed var:   %19 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_sfc_points
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_sfc_polygon
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -297,8 +273,8 @@ Function _sfheaders_rcpp_sfg_multilinestrings
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_sfg_multipoint
-  [UP] ignoring variable <unnamed var:   %19 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %19 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_sfg_multipoints
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -329,11 +305,8 @@ Function _sfheaders_rcpp_sfg_remove_holes
   [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_sfg_to_df
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _sfheaders_rcpp_subset_dataframe
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sfheaders_rcpp_to_sf
   [UP] ignoring variable <unnamed var:   %45 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -343,14 +316,46 @@ Function _sfheaders_rcpp_unlist_list
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _sfheaders_rcpp_where_is
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
 Function bool std::__1::__insertion_sort_incomplete<Rcpp::internal::NAComparator<SEXPREC*>&, SEXPREC**>(SEXPREC**, SEXPREC**, Rcpp::internal::NAComparator<SEXPREC*>&)
   [UP] ignoring variable __t as it has address taken, results will be incomplete 
 
 Function bool std::__1::__insertion_sort_incomplete<Rcpp::internal::NAComparatorGreater<SEXPREC*>&, SEXPREC**>(SEXPREC**, SEXPREC**, Rcpp::internal::NAComparatorGreater<SEXPREC*>&)
   [UP] ignoring variable __t as it has address taken, results will be incomplete 
+
+Function geometries::bbox::calculate_bbox(Rcpp::Vector<14, Rcpp::PreserveStorage>&, SEXPREC*&)
+  [UP] ignoring variable s as it has address taken, results will be incomplete 
+
+Function geometries::bbox::calculate_bbox(Rcpp::Vector<14, Rcpp::PreserveStorage>&, SEXPREC*&, Rcpp::Vector<13, Rcpp::PreserveStorage>&)
+  [UP] ignoring variable s as it has address taken, results will be incomplete 
+
+Function geometries::bbox::calculate_bbox(Rcpp::Vector<14, Rcpp::PreserveStorage>&, SEXPREC*&, Rcpp::Vector<16, Rcpp::PreserveStorage>&)
+  [UP] ignoring variable s as it has address taken, results will be incomplete 
+
+Function geometries::coordinates::geometry_dimension(SEXPREC*&, long&, long&, long&, long&, long&, unsigned int&)
+  [UP] ignoring variable tmp_geom as it has address taken, results will be incomplete 
+
+Function geometries::coordinates::geometry_dimensions(Rcpp::Vector<19, Rcpp::PreserveStorage>&)
+  [UP] ignoring variable geom as it has address taken, results will be incomplete 
+
+Function geometries::make_geometries(Rcpp::Vector<19, Rcpp::PreserveStorage>&, Rcpp::Vector<13, Rcpp::PreserveStorage>&, Rcpp::Vector<13, Rcpp::PreserveStorage>&, Rcpp::Vector<19, Rcpp::PreserveStorage>, bool)
+  [UP] ignoring variable coords as it has address taken, results will be incomplete 
+
+Function geometries::utils::column_check(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable cols as it has address taken, results will be incomplete 
+  [UP] ignoring variable x as it has address taken, results will be incomplete 
+
+Function geometries::utils::get_sexp_unique(SEXPREC*)
+  [UP] ignoring variable s as it has address taken, results will be incomplete 
+
+Function geometries::utils::other_columns(SEXPREC*&, SEXPREC*&, SEXPREC*&)
+  [UP] ignoring variable cols as it has address taken, results will be incomplete 
+
+Function geometries::utils::other_columns(SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&)
+  [UP] ignoring variable other_cols as it has address taken, results will be incomplete 
+  [UP] ignoring variable other_cols_1 as it has address taken, results will be incomplete 
+
+Function geometries::utils::rleid_indices(Rcpp::Vector<19, Rcpp::PreserveStorage>&, Rcpp::Vector<13, Rcpp::PreserveStorage>&)
+  [UP] ignoring variable jcol as it has address taken, results will be incomplete 
 
 Function rcpp_calculate_bbox(SEXPREC*, SEXPREC*)
   [UP] ignoring variable geometry_cols as it has address taken, results will be incomplete 
@@ -362,66 +367,8 @@ Function rcpp_calculate_m_range(SEXPREC*, std::__1::basic_string<char, std::__1:
 Function rcpp_calculate_z_range(SEXPREC*)
   [UP] ignoring variable x as it has address taken, results will be incomplete 
 
-Function rcpp_column_positions(SEXPREC*, Rcpp::Vector<16, Rcpp::PreserveStorage>)
-  [UP] ignoring variable m as it has address taken, results will be incomplete 
-
-Function rcpp_concatenate_vectors(SEXPREC*, SEXPREC*)
-  [UP] ignoring variable vec_1 as it has address taken, results will be incomplete 
-  [UP] ignoring variable vec_2 as it has address taken, results will be incomplete 
-
 Function rcpp_count_new_objects(SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
   [UP] ignoring variable sfg as it has address taken, results will be incomplete 
-
-Function rcpp_get_ids(SEXPREC*, SEXPREC*)
-  [UP] ignoring variable id_col as it has address taken, results will be incomplete 
-  [UP] ignoring variable x as it has address taken, results will be incomplete 
-
-Function rcpp_get_list_mat(SEXPREC*, SEXPREC*, SEXPREC*)
-  [UP] ignoring variable cols as it has address taken, results will be incomplete 
-  [UP] ignoring variable id as it has address taken, results will be incomplete 
-  [UP] ignoring variable x as it has address taken, results will be incomplete 
-
-Function rcpp_get_mat(SEXPREC*, SEXPREC*)
-  [UP] ignoring variable cols as it has address taken, results will be incomplete 
-  [UP] ignoring variable x as it has address taken, results will be incomplete 
-
-Function rcpp_get_vec(SEXPREC*, SEXPREC*)
-  [UP] ignoring variable cols as it has address taken, results will be incomplete 
-  [UP] ignoring variable x as it has address taken, results will be incomplete 
-
-Function rcpp_id_positions(SEXPREC*, SEXPREC*)
-  [UP] ignoring variable line_ids as it has address taken, results will be incomplete 
-  [UP] ignoring variable unique_ids as it has address taken, results will be incomplete 
-
-Function rcpp_other_columns(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
-  [UP] ignoring variable id_col2 as it has address taken, results will be incomplete 
-  [UP] ignoring variable id_col3 as it has address taken, results will be incomplete 
-  [UP] ignoring variable id_cols as it has address taken, results will be incomplete 
-  [UP] ignoring variable x as it has address taken, results will be incomplete 
-
-Function rcpp_sf_linestring(SEXPREC*, SEXPREC*, SEXPREC*, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable cols as it has address taken, results will be incomplete 
-  [UP] ignoring variable linestring_id as it has address taken, results will be incomplete 
-  [UP] ignoring variable x as it has address taken, results will be incomplete 
-
-Function rcpp_sf_multilinestring(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable cols as it has address taken, results will be incomplete 
-  [UP] ignoring variable linestring_id as it has address taken, results will be incomplete 
-  [UP] ignoring variable multilinestring_id as it has address taken, results will be incomplete 
-  [UP] ignoring variable x as it has address taken, results will be incomplete 
-
-Function rcpp_sf_multipolygon(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, bool, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable cols as it has address taken, results will be incomplete 
-  [UP] ignoring variable linestring_id as it has address taken, results will be incomplete 
-  [UP] ignoring variable multipolygon_id as it has address taken, results will be incomplete 
-  [UP] ignoring variable polygon_id as it has address taken, results will be incomplete 
-  [UP] ignoring variable x as it has address taken, results will be incomplete 
-
-Function rcpp_sf_polygon(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, bool, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable cols as it has address taken, results will be incomplete 
-  [UP] ignoring variable linestring_id as it has address taken, results will be incomplete 
-  [UP] ignoring variable polygon_id as it has address taken, results will be incomplete 
-  [UP] ignoring variable x as it has address taken, results will be incomplete 
 
 Function rcpp_sfc_boxes(Rcpp::Vector<19, Rcpp::PreserveStorage>)
   [UP] ignoring variable sfg as it has address taken, results will be incomplete 
@@ -442,7 +389,7 @@ Function rcpp_sfc_multipoint(SEXPREC*, SEXPREC*, SEXPREC*, std::__1::basic_strin
   [UP] ignoring variable id_col as it has address taken, results will be incomplete 
   [UP] ignoring variable x as it has address taken, results will be incomplete 
 
-Function rcpp_sfc_multipolygon(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+Function rcpp_sfc_multipolygon(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
   [UP] ignoring variable cols as it has address taken, results will be incomplete 
   [UP] ignoring variable linestring_id as it has address taken, results will be incomplete 
   [UP] ignoring variable multipolygon_id as it has address taken, results will be incomplete 
@@ -453,7 +400,7 @@ Function rcpp_sfc_point(SEXPREC*, SEXPREC*, std::__1::basic_string<char, std::__
   [UP] ignoring variable cols as it has address taken, results will be incomplete 
   [UP] ignoring variable x as it has address taken, results will be incomplete 
 
-Function rcpp_sfc_polygon(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+Function rcpp_sfc_polygon(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
   [UP] ignoring variable cols as it has address taken, results will be incomplete 
   [UP] ignoring variable line_id as it has address taken, results will be incomplete 
   [UP] ignoring variable polygon_id as it has address taken, results will be incomplete 
@@ -465,30 +412,36 @@ Function rcpp_sfg_boxes(SEXPREC*)
 Function rcpp_sfg_linestring(SEXPREC*, SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
   [UP] ignoring variable geometry_columns as it has address taken, results will be incomplete 
   [UP] ignoring variable x as it has address taken, results will be incomplete 
+  [UP] ignoring variable x2 as it has address taken, results will be incomplete 
 
 Function rcpp_sfg_multilinestring(SEXPREC*, SEXPREC*, SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
   [UP] ignoring variable geometry_columns as it has address taken, results will be incomplete 
   [UP] ignoring variable line_id as it has address taken, results will be incomplete 
   [UP] ignoring variable x as it has address taken, results will be incomplete 
+  [UP] ignoring variable x2 as it has address taken, results will be incomplete 
 
 Function rcpp_sfg_multipoint(SEXPREC*, SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
   [UP] ignoring variable geometry_columns as it has address taken, results will be incomplete 
   [UP] ignoring variable x as it has address taken, results will be incomplete 
+  [UP] ignoring variable x2 as it has address taken, results will be incomplete 
 
-Function rcpp_sfg_multipolygon(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+Function rcpp_sfg_multipolygon(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
   [UP] ignoring variable geometry_columns as it has address taken, results will be incomplete 
   [UP] ignoring variable line_id as it has address taken, results will be incomplete 
   [UP] ignoring variable polygon_id as it has address taken, results will be incomplete 
   [UP] ignoring variable x as it has address taken, results will be incomplete 
+  [UP] ignoring variable x2 as it has address taken, results will be incomplete 
 
 Function rcpp_sfg_point(SEXPREC*, SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
   [UP] ignoring variable geometry_columns as it has address taken, results will be incomplete 
   [UP] ignoring variable x as it has address taken, results will be incomplete 
+  [UP] ignoring variable x2 as it has address taken, results will be incomplete 
 
-Function rcpp_sfg_polygon(SEXPREC*, SEXPREC*, SEXPREC*, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+Function rcpp_sfg_polygon(SEXPREC*, SEXPREC*, SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
   [UP] ignoring variable geometry_columns as it has address taken, results will be incomplete 
   [UP] ignoring variable line_id as it has address taken, results will be incomplete 
   [UP] ignoring variable x as it has address taken, results will be incomplete 
+  [UP] ignoring variable x2 as it has address taken, results will be incomplete 
 
 Function rcpp_sfg_to_df(SEXPREC*)
   [UP] ignoring variable sfg as it has address taken, results will be incomplete 
@@ -503,27 +456,46 @@ Function rcpp_to_sf(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, 
   [UP] ignoring variable obj as it has address taken, results will be incomplete 
   [UP] ignoring variable polygon_id as it has address taken, results will be incomplete 
 
-Function sfheaders::api::rcpp_sf_multipoint(SEXPREC*, SEXPREC*, SEXPREC*, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+Function sfheaders::api::sf_linestring(SEXPREC*, SEXPREC*, SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
+  [UP] ignoring variable cols as it has address taken, results will be incomplete 
+  [UP] ignoring variable linestring_id as it has address taken, results will be incomplete 
+  [UP] ignoring variable x as it has address taken, results will be incomplete 
+
+Function sfheaders::api::sf_multilinestring(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
+  [UP] ignoring variable cols as it has address taken, results will be incomplete 
+  [UP] ignoring variable linestring_id as it has address taken, results will be incomplete 
+  [UP] ignoring variable multilinestring_id as it has address taken, results will be incomplete 
+  [UP] ignoring variable x as it has address taken, results will be incomplete 
+
+Function sfheaders::api::sf_multipoint(SEXPREC*, SEXPREC*, SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
   [UP] ignoring variable cols as it has address taken, results will be incomplete 
   [UP] ignoring variable multipoint_id as it has address taken, results will be incomplete 
   [UP] ignoring variable x as it has address taken, results will be incomplete 
 
-Function sfheaders::api::rcpp_sf_point(SEXPREC*, SEXPREC*, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+Function sfheaders::api::sf_multipolygon(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool, bool)
+  [UP] ignoring variable cols as it has address taken, results will be incomplete 
+  [UP] ignoring variable linestring_id as it has address taken, results will be incomplete 
+  [UP] ignoring variable multipolygon_id as it has address taken, results will be incomplete 
+  [UP] ignoring variable polygon_id as it has address taken, results will be incomplete 
+  [UP] ignoring variable x as it has address taken, results will be incomplete 
+
+Function sfheaders::api::sf_point(SEXPREC*, SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
   [UP] ignoring variable cols as it has address taken, results will be incomplete 
   [UP] ignoring variable x as it has address taken, results will be incomplete 
 
-Function sfheaders::api::to_sf(SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, bool, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+Function sfheaders::api::sf_polygon(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool, bool)
+  [UP] ignoring variable cols as it has address taken, results will be incomplete 
+  [UP] ignoring variable linestring_id as it has address taken, results will be incomplete 
+  [UP] ignoring variable polygon_id as it has address taken, results will be incomplete 
+  [UP] ignoring variable x as it has address taken, results will be incomplete 
+
+Function sfheaders::api::to_sf(SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
   [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %31 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %35 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %37 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable property_cols as it has address taken, results will be incomplete 
-  [UP] ignoring variable x as it has address taken, results will be incomplete 
-
-Function sfheaders::bbox::calculate_bbox(Rcpp::Vector<14, Rcpp::PreserveStorage>&, SEXPREC*&)
-  [UP] ignoring variable s as it has address taken, results will be incomplete 
 
 Function sfheaders::cast::cast_sf(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&, bool)
   [UP] ignoring variable v as it has address taken, results will be incomplete 
@@ -537,248 +509,146 @@ Function sfheaders::cast::count_new_sfc_objects(Rcpp::Vector<19, Rcpp::PreserveS
 Function sfheaders::df::get_sfc_geometry_coordinates(Rcpp::Vector<19, Rcpp::PreserveStorage>&, long&)
   [UP] ignoring variable sfci as it has address taken, results will be incomplete 
 
-Function sfheaders::df::sf_to_df(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<19, Rcpp::PreserveStorage>&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&, Rcpp::Matrix<14, Rcpp::PreserveStorage>&, bool)
+Function sfheaders::df::sf_to_df(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<19, Rcpp::PreserveStorage>&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&, Rcpp::Matrix<13, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, bool)
+  [UP] ignoring variable unlisted_col as it has address taken, results will be incomplete 
+
+Function sfheaders::df::sf_to_df(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<19, Rcpp::PreserveStorage>&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&, Rcpp::Matrix<13, Rcpp::PreserveStorage>&, bool)
   [UP] ignoring variable v as it has address taken, results will be incomplete 
 
-Function sfheaders::df::sfc_n_coordinates(Rcpp::Vector<19, Rcpp::PreserveStorage>&)
-  [UP] ignoring variable sfg as it has address taken, results will be incomplete 
-
-Function sfheaders::df::sfg_n_coordinates(SEXPREC*&, long&)
-  [UP] ignoring variable tmp_sfg as it has address taken, results will be incomplete 
-
-Function sfheaders::sf::create_sf(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<19, Rcpp::PreserveStorage>&, Rcpp::String&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::Vector<13, Rcpp::PreserveStorage>&, Rcpp::Vector<13, Rcpp::PreserveStorage>&, Rcpp::Vector<13, Rcpp::PreserveStorage>&, Rcpp::Matrix<13, Rcpp::PreserveStorage>&)
-  [UP] ignoring variable id as it has address taken, results will be incomplete 
+Function sfheaders::sf::create_sf(Rcpp::Vector<19, Rcpp::PreserveStorage>&, Rcpp::Vector<19, Rcpp::PreserveStorage>&, Rcpp::Vector<13, Rcpp::PreserveStorage>&, Rcpp::Vector<13, Rcpp::PreserveStorage>&, Rcpp::Vector<13, Rcpp::PreserveStorage>&, Rcpp::Vector<13, Rcpp::PreserveStorage>&)
+  [UP] ignoring variable unique_ids as it has address taken, results will be incomplete 
   [UP] ignoring variable v as it has address taken, results will be incomplete 
-
-Function sfheaders::sf::create_sf(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<19, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::Vector<13, Rcpp::PreserveStorage>&, Rcpp::Vector<13, Rcpp::PreserveStorage>&, Rcpp::Vector<13, Rcpp::PreserveStorage>&, Rcpp::Matrix<13, Rcpp::PreserveStorage>&)
-  [UP] ignoring variable v as it has address taken, results will be incomplete 
-
-Function sfheaders::sf::sf_linestring(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable line_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::sf::sf_linestring(SEXPREC*&, SEXPREC*&, SEXPREC*&, bool&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable property_columns as it has address taken, results will be incomplete 
 
 Function sfheaders::sf::sf_linestring(SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
   [UP] ignoring variable ids as it has address taken, results will be incomplete 
 
-Function sfheaders::sf::sf_multilinestring(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable multiline_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::sf::sf_multilinestring(Rcpp::Matrix<13, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable multiline_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::sf::sf_multilinestring(Rcpp::Matrix<14, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable multiline_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::sf::sf_multilinestring(SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, bool&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable linestring_id2 as it has address taken, results will be incomplete 
-  [UP] ignoring variable property_columns as it has address taken, results will be incomplete 
+Function sfheaders::sf::sf_linestring(SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool&)
+  [UP] ignoring variable property_cols as it has address taken, results will be incomplete 
 
 Function sfheaders::sf::sf_multilinestring(SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
   [UP] ignoring variable ids as it has address taken, results will be incomplete 
 
-Function sfheaders::sf::sf_multipoint(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable line_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::sf::sf_multipoint(SEXPREC*&, SEXPREC*&, SEXPREC*&, bool&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable property_columns as it has address taken, results will be incomplete 
+Function sfheaders::sf::sf_multilinestring(SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool&)
+  [UP] ignoring variable property_cols as it has address taken, results will be incomplete 
 
 Function sfheaders::sf::sf_multipoint(SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
   [UP] ignoring variable ids as it has address taken, results will be incomplete 
 
-Function sfheaders::sf::sf_multipolygon(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, Rcpp::String&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
-  [UP] ignoring variable multiline_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::sf::sf_multipolygon(Rcpp::Matrix<13, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, Rcpp::String&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
-  [UP] ignoring variable multiline_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::sf::sf_multipolygon(Rcpp::Matrix<14, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, Rcpp::String&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
-  [UP] ignoring variable multiline_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::sf::sf_multipolygon(SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool&, bool&)
-  [UP] ignoring variable linestring_id2 as it has address taken, results will be incomplete 
-  [UP] ignoring variable polygon_id2 as it has address taken, results will be incomplete 
-  [UP] ignoring variable property_columns as it has address taken, results will be incomplete 
+Function sfheaders::sf::sf_multipoint(SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool&)
+  [UP] ignoring variable property_cols as it has address taken, results will be incomplete 
 
 Function sfheaders::sf::sf_multipolygon(SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
   [UP] ignoring variable ids as it has address taken, results will be incomplete 
 
-Function sfheaders::sf::sf_polygon(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
-  [UP] ignoring variable multiline_ids as it has address taken, results will be incomplete 
+Function sfheaders::sf::sf_multipolygon(SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool, bool)
+  [UP] ignoring variable id_cols as it has address taken, results will be incomplete 
+  [UP] ignoring variable property_cols as it has address taken, results will be incomplete 
 
-Function sfheaders::sf::sf_polygon(Rcpp::Matrix<13, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
-  [UP] ignoring variable multiline_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::sf::sf_polygon(Rcpp::Matrix<14, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
-  [UP] ignoring variable multiline_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::sf::sf_polygon(SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool&, bool&)
-  [UP] ignoring variable linestring_id2 as it has address taken, results will be incomplete 
-  [UP] ignoring variable property_columns as it has address taken, results will be incomplete 
+Function sfheaders::sf::sf_point(SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool&)
+  [UP] ignoring variable property_cols as it has address taken, results will be incomplete 
 
 Function sfheaders::sf::sf_polygon(SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
   [UP] ignoring variable ids as it has address taken, results will be incomplete 
 
-Function sfheaders::sfc::sfc_linestring(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<13, Rcpp::PreserveStorage>&, int&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable line_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::sfc::sfc_linestring(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable line_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::sfc::sfc_linestring(Rcpp::Matrix<13, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable line_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::sfc::sfc_linestring(Rcpp::Matrix<14, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable line_ids as it has address taken, results will be incomplete 
+Function sfheaders::sf::sf_polygon(SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool, bool)
+  [UP] ignoring variable property_cols as it has address taken, results will be incomplete 
 
 Function sfheaders::sfc::sfc_linestring(SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable other_cols as it has address taken, results will be incomplete 
+  [UP] ignoring variable geometry_cols2 as it has address taken, results will be incomplete 
 
 Function sfheaders::sfc::sfc_linestrings(Rcpp::Vector<19, Rcpp::PreserveStorage>&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+  [UP] ignoring variable geometry_cols as it has address taken, results will be incomplete 
+  [UP] ignoring variable linestring_id as it has address taken, results will be incomplete 
   [UP] ignoring variable x as it has address taken, results will be incomplete 
-
-Function sfheaders::sfc::sfc_multilinestring(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<13, Rcpp::PreserveStorage>&, int&, int&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable multilinestring_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::sfc::sfc_multilinestring(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable multilinestring_ids as it has address taken, results will be incomplete 
 
 Function sfheaders::sfc::sfc_multilinestring(SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
   [UP] ignoring variable geometry_cols2 as it has address taken, results will be incomplete 
-  [UP] ignoring variable linestring_id2 as it has address taken, results will be incomplete 
 
 Function sfheaders::sfc::sfc_multilinestrings(Rcpp::Vector<19, Rcpp::PreserveStorage>&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+  [UP] ignoring variable geometry_cols as it has address taken, results will be incomplete 
+  [UP] ignoring variable linestring_id as it has address taken, results will be incomplete 
+  [UP] ignoring variable multilinestring_id as it has address taken, results will be incomplete 
   [UP] ignoring variable x as it has address taken, results will be incomplete 
-
-Function sfheaders::sfc::sfc_multipoint(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<13, Rcpp::PreserveStorage>&, int&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable line_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::sfc::sfc_multipoint(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable line_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::sfc::sfc_multipoint(Rcpp::Matrix<13, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable line_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::sfc::sfc_multipoint(Rcpp::Matrix<14, Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable line_ids as it has address taken, results will be incomplete 
 
 Function sfheaders::sfc::sfc_multipoint(SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable other_cols as it has address taken, results will be incomplete 
+  [UP] ignoring variable geometry_cols2 as it has address taken, results will be incomplete 
 
 Function sfheaders::sfc::sfc_multipoints(Rcpp::Vector<19, Rcpp::PreserveStorage>&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+  [UP] ignoring variable geometry_cols as it has address taken, results will be incomplete 
+  [UP] ignoring variable multipoint_id as it has address taken, results will be incomplete 
   [UP] ignoring variable x as it has address taken, results will be incomplete 
-
-Function sfheaders::sfc::sfc_multipolygon(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<13, Rcpp::PreserveStorage>&, int&, int&, int&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
-  [UP] ignoring variable multipolygon_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::sfc::sfc_multipolygon(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, Rcpp::String&, Rcpp::Matrix<13, Rcpp::PreserveStorage>&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
-  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function sfheaders::sfc::sfc_multipolygon(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, Rcpp::String&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
-  [UP] ignoring variable multipolygon_ids as it has address taken, results will be incomplete 
 
 Function sfheaders::sfc::sfc_multipolygon(SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
+  [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable geometry_cols2 as it has address taken, results will be incomplete 
-  [UP] ignoring variable linestring_id2 as it has address taken, results will be incomplete 
-  [UP] ignoring variable polygon_id2 as it has address taken, results will be incomplete 
 
 Function sfheaders::sfc::sfc_multipolygons(Rcpp::Vector<19, Rcpp::PreserveStorage>&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
+  [UP] ignoring variable geometry_cols as it has address taken, results will be incomplete 
+  [UP] ignoring variable linestring_id as it has address taken, results will be incomplete 
+  [UP] ignoring variable multipolygon_id as it has address taken, results will be incomplete 
+  [UP] ignoring variable polygon_id as it has address taken, results will be incomplete 
   [UP] ignoring variable x as it has address taken, results will be incomplete 
+
+Function sfheaders::sfc::sfc_point(SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+  [UP] ignoring variable geometry_cols2 as it has address taken, results will be incomplete 
 
 Function sfheaders::sfc::sfc_points(Rcpp::Vector<19, Rcpp::PreserveStorage>&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+  [UP] ignoring variable geometry_cols as it has address taken, results will be incomplete 
   [UP] ignoring variable x as it has address taken, results will be incomplete 
-
-Function sfheaders::sfc::sfc_polygon(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<13, Rcpp::PreserveStorage>&, int&, int&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
-  [UP] ignoring variable polygon_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::sfc::sfc_polygon(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
-  [UP] ignoring variable polygon_ids as it has address taken, results will be incomplete 
 
 Function sfheaders::sfc::sfc_polygon(SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
   [UP] ignoring variable geometry_cols2 as it has address taken, results will be incomplete 
-  [UP] ignoring variable linestring_id2 as it has address taken, results will be incomplete 
 
 Function sfheaders::sfc::sfc_polygons(Rcpp::Vector<19, Rcpp::PreserveStorage>&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
+  [UP] ignoring variable geometry_cols as it has address taken, results will be incomplete 
+  [UP] ignoring variable linestring_id as it has address taken, results will be incomplete 
+  [UP] ignoring variable polygon_id as it has address taken, results will be incomplete 
   [UP] ignoring variable x as it has address taken, results will be incomplete 
 
-Function sfheaders::sfg::sfg_linestrings(Rcpp::Vector<19, Rcpp::PreserveStorage>&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable x as it has address taken, results will be incomplete 
+Function sfheaders::sfg::remove_polygon_holes(Rcpp::Vector<19, Rcpp::PreserveStorage>&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
+  [UP] ignoring variable res as it has address taken, results will be incomplete 
 
-Function sfheaders::sfg::sfg_multilinestring(SEXPREC*&, SEXPREC*&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable other_cols as it has address taken, results will be incomplete 
+Function sfheaders::sfg::sfg_linestring(SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+  [UP] ignoring variable geometry_mat as it has address taken, results will be incomplete 
 
 Function sfheaders::sfg::sfg_multilinestring(SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable other_cols as it has address taken, results will be incomplete 
-
-Function sfheaders::sfg::sfg_multilinestring(SEXPREC*&, SEXPREC*&, int&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable other_cols as it has address taken, results will be incomplete 
+  [UP] ignoring variable geometry_cols2 as it has address taken, results will be incomplete 
 
 Function sfheaders::sfg::sfg_multilinestrings(Rcpp::Vector<19, Rcpp::PreserveStorage>&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+  [UP] ignoring variable geometry_cols as it has address taken, results will be incomplete 
+  [UP] ignoring variable linestring_id as it has address taken, results will be incomplete 
   [UP] ignoring variable x as it has address taken, results will be incomplete 
 
-Function sfheaders::sfg::sfg_multipoints(Rcpp::Vector<19, Rcpp::PreserveStorage>&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] ignoring variable x as it has address taken, results will be incomplete 
-
-Function sfheaders::sfg::sfg_multipolygon(SEXPREC*&, SEXPREC*&, Rcpp::String&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
-  [UP] ignoring variable other_cols as it has address taken, results will be incomplete 
+Function sfheaders::sfg::sfg_multipoint(SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+  [UP] ignoring variable geometry_mat as it has address taken, results will be incomplete 
 
 Function sfheaders::sfg::sfg_multipolygon(SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
-  [UP] ignoring variable line_id2 as it has address taken, results will be incomplete 
-  [UP] ignoring variable other_cols as it has address taken, results will be incomplete 
-
-Function sfheaders::sfg::sfg_multipolygon(SEXPREC*&, SEXPREC*&, int&, int&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
-  [UP] ignoring variable other_cols as it has address taken, results will be incomplete 
+  [UP] ignoring variable geometry_cols2 as it has address taken, results will be incomplete 
 
 Function sfheaders::sfg::sfg_multipolygons(Rcpp::Vector<19, Rcpp::PreserveStorage>&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
+  [UP] ignoring variable geometry_cols as it has address taken, results will be incomplete 
+  [UP] ignoring variable linestring_id as it has address taken, results will be incomplete 
+  [UP] ignoring variable polygon_id as it has address taken, results will be incomplete 
   [UP] ignoring variable x as it has address taken, results will be incomplete 
+
+Function sfheaders::sfg::sfg_point(SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+  [UP] ignoring variable geometry_mat as it has address taken, results will be incomplete 
 
 Function sfheaders::sfg::sfg_points(Rcpp::Vector<19, Rcpp::PreserveStorage>&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+  [UP] ignoring variable geometry_cols as it has address taken, results will be incomplete 
   [UP] ignoring variable x as it has address taken, results will be incomplete 
 
-Function sfheaders::sfg::sfg_polygon(SEXPREC*&, SEXPREC*&, Rcpp::String&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
-  [UP] ignoring variable other_cols as it has address taken, results will be incomplete 
+Function sfheaders::sfg::sfg_polygon(SEXPREC*&, SEXPREC*&, SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
+  [UP] ignoring variable geometry_cols2 as it has address taken, results will be incomplete 
 
-Function sfheaders::sfg::sfg_polygon(SEXPREC*&, SEXPREC*&, int&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
-  [UP] ignoring variable other_cols as it has address taken, results will be incomplete 
+Function sfheaders::sfg::sfg_polygon(SEXPREC*&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
+  [UP] ignoring variable geometry_cols as it has address taken, results will be incomplete 
+  [UP] ignoring variable id_cols as it has address taken, results will be incomplete 
 
 Function sfheaders::sfg::sfg_polygons(Rcpp::Vector<19, Rcpp::PreserveStorage>&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)
+  [UP] ignoring variable geometry_cols as it has address taken, results will be incomplete 
+  [UP] ignoring variable linestring_id as it has address taken, results will be incomplete 
   [UP] ignoring variable x as it has address taken, results will be incomplete 
-
-Function sfheaders::shapes::get_listListMat(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&, Rcpp::String&)
-  [UP] ignoring variable <unnamed var:   %19 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable group_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::shapes::get_listMat(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<13, Rcpp::PreserveStorage>&, int&)
-  [UP] ignoring variable line_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::shapes::get_listMat(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, Rcpp::String&)
-  [UP] ignoring variable line_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::utils::column_check(SEXPREC*, SEXPREC*)
-  [UP] ignoring variable x as it has address taken, results will be incomplete 
-
-Function sfheaders::utils::column_exists(SEXPREC*, int&)
-  [UP] ignoring variable x as it has address taken, results will be incomplete 
-
-Function sfheaders::utils::get_sexp_unique(SEXPREC*)
-  [UP] ignoring variable s as it has address taken, results will be incomplete 
-
-Function sfheaders::utils::id_positions(SEXPREC*&)
-  [UP] ignoring variable unique_ids as it has address taken, results will be incomplete 
-
-Function sfheaders::utils::other_columns(SEXPREC*&, SEXPREC*&, SEXPREC*&)
-  [UP] ignoring variable cols as it has address taken, results will be incomplete 
-
-Function sfheaders::utils::other_columns(SEXPREC*&, SEXPREC*&, SEXPREC*&, SEXPREC*&)
-  [UP] ignoring variable other_cols as it has address taken, results will be incomplete 
-  [UP] ignoring variable other_cols_1 as it has address taken, results will be incomplete 
-
-Function sfheaders::utils::subset_dataframe(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>&, Rcpp::Vector<16, Rcpp::PreserveStorage>&, int&, int&)
-  [UP] ignoring variable this_vec as it has address taken, results will be incomplete 
-
-Function void Rcpp::Vector<10, Rcpp::PreserveStorage>::import_sugar_expression<true, Rcpp::internal::RangeIndexer<10, true, Rcpp::Vector<10, Rcpp::PreserveStorage> > >(Rcpp::VectorBase<10, true, Rcpp::internal::RangeIndexer<10, true, Rcpp::Vector<10, Rcpp::PreserveStorage> > > const&, Rcpp::traits::integral_constant<bool, false>)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<10, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
 
 Function void Rcpp::Vector<10, Rcpp::PreserveStorage>::import_sugar_expression<true, Rcpp::sugar::Comparator_With_One_Value<13, Rcpp::sugar::greater_or_equal<13>, true, Rcpp::Vector<13, Rcpp::PreserveStorage> > >(Rcpp::VectorBase<10, true, Rcpp::sugar::Comparator_With_One_Value<13, Rcpp::sugar::greater_or_equal<13>, true, Rcpp::Vector<13, Rcpp::PreserveStorage> > > const&, Rcpp::traits::integral_constant<bool, false>)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<10, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
@@ -801,14 +671,11 @@ Function void Rcpp::Vector<14, Rcpp::PreserveStorage>::import_sugar_expression<t
 Function void Rcpp::Vector<14, Rcpp::PreserveStorage>::import_sugar_expression<true, Rcpp::MatrixRow<14> >(Rcpp::VectorBase<14, true, Rcpp::MatrixRow<14> > const&, Rcpp::traits::integral_constant<bool, false>)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
 
-Function void Rcpp::Vector<14, Rcpp::PreserveStorage>::import_sugar_expression<true, Rcpp::internal::RangeIndexer<14, true, Rcpp::Vector<14, Rcpp::PreserveStorage> > >(Rcpp::VectorBase<14, true, Rcpp::internal::RangeIndexer<14, true, Rcpp::Vector<14, Rcpp::PreserveStorage> > > const&, Rcpp::traits::integral_constant<bool, false>)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
-
 Function void Rcpp::Vector<14, Rcpp::PreserveStorage>::import_sugar_expression<true, Rcpp::sugar::Rep_Single<double> >(Rcpp::VectorBase<14, true, Rcpp::sugar::Rep_Single<double> > const&, Rcpp::traits::integral_constant<bool, false>)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
 
-Function void Rcpp::Vector<16, Rcpp::PreserveStorage>::import_sugar_expression<true, Rcpp::internal::RangeIndexer<16, true, Rcpp::Vector<16, Rcpp::PreserveStorage> > >(Rcpp::VectorBase<16, true, Rcpp::internal::RangeIndexer<16, true, Rcpp::Vector<16, Rcpp::PreserveStorage> > > const&, Rcpp::traits::integral_constant<bool, false>)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::import_sugar_expression<true, Rcpp::internal::RangeIndexer<19, true, Rcpp::Vector<19, Rcpp::PreserveStorage> > >(Rcpp::VectorBase<19, true, Rcpp::internal::RangeIndexer<19, true, Rcpp::Vector<19, Rcpp::PreserveStorage> > > const&, Rcpp::traits::integral_constant<bool, false>)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
 
 Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
   [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
