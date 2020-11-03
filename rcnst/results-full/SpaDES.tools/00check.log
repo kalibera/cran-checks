@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/SpaDES.tools.Rcheck’
-* using R Under development (unstable) (2020-10-31 r79390)
+* using R Under development (unstable) (2020-11-02 r79396)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘SpaDES.tools/DESCRIPTION’ ... OK
@@ -883,8 +883,25 @@ ERROR: the modified constant is in this function body:
 Fatal error: compiler constants were modified!
 
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... OK
+* checking tests ... ERROR
   Running ‘test-all.R’
+Running the tests in ‘tests/test-all.R’ failed.
+Last 13 lines of output:
+              }
+              landscape[pixVal$indices] <- pixVal$V1
+          }
+      }
+      else {
+          landscape[wh] <- spreads[wh]
+          if (exists("potentials")) 
+              if (NROW(potentials) > 0) 
+                  landscape[potentials[, 1L]] <- spreads[potentials[, 
+                    2L]]
+      }
+      return(landscape)
+  }
+  Fatal error: compiler constants were modified!
+  
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 ERROR, 1 NOTE
+Status: 2 ERRORs, 1 NOTE
