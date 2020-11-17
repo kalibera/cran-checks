@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2020-11-14 r79432) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-11-17 r79435) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -189,11 +189,11 @@ Type 'q()' to quit R.
 > ### ** Examples
 > 
 > 
-> some_lines <- c("Text. % A comment", "20% of comments are % useful")
+> some_lines <- c("Text. % A comment", "20\\% of comments are % useful")
 > strip_comments(some_lines)
-[1] "Text. %" "20%"    
+[1] "Text. %"                 "20\\% of comments are %"
 > strip_comments(some_lines, retain.percent.symbol = FALSE)
-[1] "Text. " "20"    
+[1] "Text. "                 "20\\% of comments are "
 > 
 > 
 > 
@@ -255,7 +255,7 @@ Type 'q()' to quit R.
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.432 0.091 1.549 0 0 
+Time elapsed:  1.728 0.351 2.129 0 0 
 > grDevices::dev.off()
 null device 
           1 
