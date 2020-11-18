@@ -1,0 +1,155 @@
+
+R Under development (unstable) (2020-11-18 r79444) -- "Unsuffered Consequences"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "RstoxData"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('RstoxData')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("ReadAcoustic")
+> ### * ReadAcoustic
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ReadAcoustic
+> ### Title: Read acoustic XML files
+> ### Aliases: ReadAcoustic
+> 
+> ### ** Examples
+> 
+> x <- 1
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ReadBiotic")
+> ### * ReadBiotic
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ReadBiotic
+> ### Title: Read biotic XML files
+> ### Aliases: ReadBiotic
+> 
+> ### ** Examples
+> 
+> x <- 1
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getRstoxDataDefinitions")
+> ### * getRstoxDataDefinitions
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getRstoxDataDefinitions
+> ### Title: Get RstoxData definitions
+> ### Aliases: getRstoxDataDefinitions
+> 
+> ### ** Examples
+> 
+> getRstoxDataDefinitions()
+$StoxAcousticKeys
+[1] "CruiseKey"           "LogKey"              "BeamKey"            
+[4] "AcousticCategoryKey" "ChannelReferenceKey" "NASCKey"            
+
+$StoxBioticKeys
+[1] "CruiseKey"          "StationKey"         "HaulKey"           
+[4] "SpeciesCategoryKey" "SampleKey"          "IndividualKey"     
+[7] "SubIndividualKey"  
+
+$StoxBioticTranslationRequiredColumns
+[1] "VariableName" "Value"        "NewValue"    
+
+$StoxDateTimeFormat
+[1] "%Y-%m-%d %H:%M:%OS"
+
+$StoxTimeZone
+[1] "UTC"
+
+$digits
+[1] 12
+
+$fpath
+[1] "/var/scratch2ro/tomas/cran/rlibro/lib/RstoxData/extdata"
+
+$nonUniqueFormats
+[1] "nmdbioticv1"   "nmdbioticv1.1" "nmdbioticv1.2" "nmdbioticv1.3"
+[5] "nmdbioticv1.4"
+
+$signifDigits
+[1] 6
+
+$targetAndSourceVariables
+$targetAndSourceVariables$target
+[1] "TargetVariable"
+
+$targetAndSourceVariables$source
+[1] "SourceVariable"
+
+
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("readXmlFile")
+> ### * readXmlFile
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: readXmlFile
+> ### Title: Read fisheries XML data format file
+> ### Aliases: readXmlFile
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # Reading test.xml using XML pull parser
+> ##D one <- readXmlFile("./test.xml")
+> ##D # Reading test.xml using XML DOM parser
+> ##D two <- readXmlFile("./test.xml", stream = FALSE)
+> ##D # Reading test.xml inside test.zip file
+> ##D three <- readXmlFile("./test.zip")
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  1.261 0.041 1.328 0 0.005 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

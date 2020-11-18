@@ -1,0 +1,84 @@
+
+R Under development (unstable) (2020-11-18 r79444) -- "Unsuffered Consequences"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> library(RstoxData)
+> 
+> test_check("RstoxData")
+── Warning (test-StoxAcoustic.R:28:5): (code run outside of `test_that()`) ─────
+StoX: Removing 2 rows of duplicated keys from table Beam. To see the duplicated rows run the following in R: dat <- data.table::fread("/var/scratch2/tomas/tmp/RtmpYvNp2l/file2e44a3f78a128")
+
+── Warning (test-StoxAcoustic.R:32:5): (code run outside of `test_that()`) ─────
+StoX: Removing 2 rows of duplicated keys from table Beam. To see the duplicated rows run the following in R: dat <- data.table::fread("/var/scratch2/tomas/tmp/RtmpYvNp2l/file2e44a79569c3c")
+
+── Warning (test-StoxBiotic.R:10:1): (code run outside of `test_that()`) ───────
+StoX: Removing 1 rows of duplicated keys from table SpeciesCategory. To see the duplicated rows run the following in R: dat <- data.table::fread("/var/scratch2/tomas/tmp/RtmpYvNp2l/file2e44a30f006b8")
+
+── Warning (test-StoxBiotic.R:15:1): (code run outside of `test_that()`) ───────
+StoX: Removing 1 rows of duplicated keys from table SpeciesCategory. To see the duplicated rows run the following in R: dat <- data.table::fread("/var/scratch2/tomas/tmp/RtmpYvNp2l/file2e44a3579e4c")
+
+[1] "Resulting CSV file is saved as:"
+[1] "/var/scratch2/tomas/tmp/RtmpYvNp2l/file2e44a6164b22c.csv"
+[1] "All species that is not listed in https://acoustic.ices.dk/Services/Schema/XML/SpecWoRMS.xml are automatically removed. Set allowRemoveSpecies = FALSE to prevent this."
+[1] "All species that is not listed in https://acoustic.ices.dk/Services/Schema/XML/SpecWoRMS.xml are automatically removed. Set allowRemoveSpecies = FALSE to prevent this."
+[1] "Resulting CSV file is saved as:"
+[1] "/var/scratch2/tomas/tmp/RtmpYvNp2l/file2e44a4b8c1782.csv"
+── Warning (test-StoxExport.R:27:1): (code run outside of `test_that()`) ───────
+StoX: NA not defined in https://acoustic.ices.dk/Services/Schema/XML/AC_SaCategory.xml
+
+── Warning (test-StoxExport.R:28:1): (code run outside of `test_that()`) ───────
+StoX: NA not defined in https://acoustic.ices.dk/Services/Schema/XML/AC_SaCategory.xml
+
+[1] "Resulting CSV file is saved as:"
+[1] "/var/scratch2/tomas/tmp/RtmpYvNp2l/file2e44a33f60da.csv"
+[1] "Resulting CSV file is saved as:"
+[1] "/var/scratch2/tomas/tmp/RtmpYvNp2l/file2e44a47a3e8f2.csv"
+── Warning (test-readXmlFile.R:60:1): (code run outside of `test_that()`) ──────
+cannot create file '/var/scratch2ro/tomas/cran/rlibro/lib/RstoxData/testresources/bio_å_prøve.xml', reason 'Read-only file system'
+
+[1] "File /var/scratch2ro/tomas/cran/rlibro/lib/RstoxData/testresources/bio_å_prøve.xml does not exist."
+── FAILURE (test-readXmlFile.R:62:1): (code run outside of `test_that()`) ──────
+encParse$mission$missiontypename[1] == "Prøvebåt" is not TRUE
+
+`actual`:       
+`expected`: TRUE
+
+[1] "File /var/scratch2ro/tomas/cran/rlibro/lib/RstoxData/testresources/bio_å_prøve.xml does not exist."
+── FAILURE (test-readXmlFile.R:64:1): (code run outside of `test_that()`) ──────
+encParse$mission$missiontypename[1] == "Prøvebåt" is not TRUE
+
+`actual`:       
+`expected`: TRUE
+
+[1] "/var/scratch2ro/tomas/cran/rlibro/lib/RstoxData/testresources//ICES_Acoustic_1.xml"
+[2] "/var/scratch2ro/tomas/cran/rlibro/lib/RstoxData/testresources//ICES_Biotic_1.xml"  
+[3] "/var/scratch2ro/tomas/cran/rlibro/lib/RstoxData/testresources//ICES_Acoustic_2.xml"
+[4] "/var/scratch2ro/tomas/cran/rlibro/lib/RstoxData/testresources//ICES_Biotic_2.xml"  
+══ testthat results  ═══════════════════════════════════════════════════════════
+Warning (test-StoxAcoustic.R:28:5): (code run outside of `test_that()`)
+Warning (test-StoxAcoustic.R:32:5): (code run outside of `test_that()`)
+Warning (test-StoxBiotic.R:10:1): (code run outside of `test_that()`)
+Warning (test-StoxBiotic.R:15:1): (code run outside of `test_that()`)
+Warning (test-StoxExport.R:27:1): (code run outside of `test_that()`)
+Warning (test-StoxExport.R:28:1): (code run outside of `test_that()`)
+Warning (test-readXmlFile.R:60:1): (code run outside of `test_that()`)
+FAILURE (test-readXmlFile.R:62:1): (code run outside of `test_that()`)
+FAILURE (test-readXmlFile.R:64:1): (code run outside of `test_that()`)
+
+[ FAIL 2 | WARN 7 | SKIP 0 | PASS 99 ]
+Error: Test failures
+Execution halted
