@@ -1,5 +1,5 @@
-Package psqn version 0.1.3
-Package built using 79432/R 4.1.0; x86_64-pc-linux-gnu; 2020-11-15 03:01:14 UTC; unix   
+Package psqn version 0.1.4
+Package built using 79520/R 4.1.0; x86_64-pc-linux-gnu; 2020-11-27 13:33:55 UTC; unix   
 Checked with rchk version 1df3a0cc105e4278d3a4b8e1215f64bf6611d1e8 LLVM version 10.0.1
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -48,13 +48,3 @@ Function _psqn_psqn_bfgs
 Function psqn(Rcpp::Vector<14, Rcpp::PreserveStorage>, SEXPREC*, unsigned int, double, unsigned int, unsigned int, double, double, bool, int, double, bool, SEXPREC*, int, int)
   [UP] ignoring variable env as it has address taken, results will be incomplete 
   [UP] ignoring variable fn as it has address taken, results will be incomplete 
-
-Function r_worker::grad(double const*, double*) const
-  [UP] unprotected variable res while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(char const*) psqn/src/r-api.cpp:111
-  [UP] allocating function Rf_getAttrib may destroy its unprotected argument (res <arg 1>), which is later used. psqn/src/r-api.cpp:112
-  [UP] calling allocating function Rf_getAttrib with a fresh pointer (res <arg 1>) psqn/src/r-api.cpp:112
-
-Function r_worker_bfgs::grad(double const*, double*)
-  [UP] unprotected variable res while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(char const*) psqn/src/r-api.cpp:344
-  [UP] allocating function Rf_getAttrib may destroy its unprotected argument (res <arg 1>), which is later used. psqn/src/r-api.cpp:345
-  [UP] calling allocating function Rf_getAttrib with a fresh pointer (res <arg 1>) psqn/src/r-api.cpp:345
