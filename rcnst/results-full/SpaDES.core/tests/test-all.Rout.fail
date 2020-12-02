@@ -1,109 +1,36 @@
-* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/SpaDES.tools.Rcheck’
-* using R Under development (unstable) (2020-12-01 r79534)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* checking for file ‘SpaDES.tools/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘SpaDES.tools’ version ‘0.3.6’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... OK
-* checking if this is a source package ... OK
-* checking if there is a namespace ... OK
-* checking for executable files ... OK
-* checking for hidden files and directories ... OK
-* checking for portable file names ... OK
-* checking for sufficient/correct file permissions ... OK
-* checking whether package ‘SpaDES.tools’ can be installed ... OK
-* checking package directory ... OK
-* checking DESCRIPTION meta-information ... OK
-* checking top-level files ... OK
-* checking for left-over files ... OK
-* checking index information ... OK
-* checking package subdirectories ... OK
-* checking R files for non-ASCII characters ... OK
-* checking R files for syntax errors ... OK
-* checking whether the package can be loaded ... OK
-* checking whether the package can be loaded with stated dependencies ... OK
-* checking whether the package can be unloaded cleanly ... OK
-* checking whether the namespace can be loaded with stated dependencies ... OK
-* checking whether the namespace can be unloaded cleanly ... OK
-* checking loading without being on the library search path ... OK
-* checking dependencies in R code ... OK
-* checking S3 generic/method consistency ... OK
-* checking replacement functions ... OK
-* checking foreign function calls ... OK
-* checking R code for possible problems ... OK
-* checking Rd files ... OK
-* checking Rd metadata ... OK
-* checking Rd cross-references ... OK
-* checking for missing documentation entries ... OK
-* checking for code/documentation mismatches ... OK
-* checking Rd \usage sections ... OK
-* checking Rd contents ... OK
-* checking for unstated dependencies in examples ... OK
-* checking line endings in C/C++/Fortran sources/headers ... OK
-* checking compiled code ... NOTE
-Note: information on .o files is not available
-* checking examples ... ERROR
-Running examples in ‘SpaDES.tools-Ex.R’ failed
-The error most likely occurred in:
 
-> ### Name: cir
-> ### Title: Identify pixels in a circle or ring (donut) around an object.
-> ### Aliases: cir
-> 
-> ### ** Examples
-> 
-> library(data.table)
-> library(sp)
-> library(raster)
+R Under development (unstable) (2020-12-01 r79534) -- "Unsuffered Consequences"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
 
-Attaching package: ‘raster’
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
 
-The following object is masked from ‘package:data.table’:
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
 
-    shift
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
 
-> library(quickPlot)
-> 
-> set.seed(1642)
-> 
-> # circle centred
-> ras <- raster(extent(0, 15, 0, 15), res = 1, val = 0)
-> middleCircle <- cir(ras)
-> ras[middleCircle[, "indices"]] <- 1
-> circlePoints <- SpatialPoints(middleCircle[, c("x", "y")])
-> if (interactive()) {
-+   clearPlot()
-+   Plot(ras)
-+   Plot(circlePoints, addTo = "ras")
-+ }
-> 
-> # circles non centred
-> ras <- randomPolygons(ras, numTypes = 4)
-> n <- 2
-> agent <- SpatialPoints(coords = cbind(x = stats::runif(n, xmin(ras), xmax(ras)),
-+                                       y = stats::runif(n, xmin(ras), xmax(ras))))
-> 
-> cirs <- cir(ras, agent, maxRadius = 15, simplify = TRUE)
-> cirsSP <- SpatialPoints(coords = cirs[, c("x", "y")])
-> cirsRas <- raster(ras)
-> cirsRas[] <- 0
-> cirsRas[cirs[, "indices"]] <- 1
-> 
-> if (interactive()) {
-+   clearPlot()
-+   Plot(ras)
-+   Plot(cirsRas, addTo = "ras", cols = c("transparent", "#00000055"))
-+   Plot(agent, addTo = "ras")
-+   Plot(cirsSP, addTo = "ras")
-+ }
-> 
-> # Example comparing rings and cir
-> a <- raster(extent(0, 30, 0, 30), res = 1)
-> hab <- gaussMap(a, speedup = 1) # if raster is large (>1e6 pixels) use speedup > 1
-Loading required namespace: RandomFields
+> library(testthat)
+> test_check("SpaDES.core")
+Loading required package: SpaDES.core
+Loading required package: quickPlot
+Loading required package: reproducible
+
+Attaching package: 'SpaDES.core'
+
+The following objects are masked from 'package:stats':
+
+    end, start
+
+The following object is masked from 'package:utils':
+
+    citation
+
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "includePixel" "excludePixel" "includeRing"  "excludeRing" 
@@ -902,30 +829,115 @@ ERROR: the modified constant is in this function body:
     }
     return(landscape)
 }
-Failed with error:  ‘promise already under evaluation: recursive default argument reference or earlier problems?’
-Error in gaussMap(a, speedup = 1) : 
-  The 'RandomFields' package is required but not installed.
+2020-12-02 06:34:49 ERROR::e: promise already under evaluation: recursive default argument reference or earlier problems?
+ 2020-12-02 06:34:49 ERROR::e: NULL
+── ERROR (test-cache.R:38:3): test event-level cache ───────────────────────────
+Error: promise already under evaluation: recursive default argument reference or earlier problems?
+Backtrace:
+     █
+  1. ├─testthat::expect_true(...)
+  2. │ └─testthat::quasi_label(enquo(object), label, arg = "object")
+  3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
+  4. ├─`%in%`(...)
+  5. ├─testthat::capture_messages(...)
+  6. │ └─base::withCallingHandlers(...)
+  7. ├─SpaDES.core::spades(Copy(mySim), notOlderThan = Sys.time(), debug = FALSE)
+  8. └─SpaDES.core::spades(Copy(mySim), notOlderThan = Sys.time(), debug = FALSE)
+  9.   ├─base::withCallingHandlers(...)
+ 10.   └─SpaDES.core::doEvent(sim, debug = debug, notOlderThan = notOlderThan)
+ 11.     └─SpaDES.core:::.runEvent(...)
+ 12.       ├─base::eval(fnCallAsExpr)
+ 13.       │ └─base::eval(fnCallAsExpr)
+ 14.       └─get(moduleCall, envir = fnEnv)(sim, cur[["eventTime"]], cur[["eventType"]])
+ 15.         └─SpaDES.core:::Move(sim)
+ 16.           ├─raster::crop(sim$caribou, sim[[SpaDES.core::P(sim)$stackName]])
+ 17.           └─raster::crop(sim$caribou, sim[[SpaDES.core::P(sim)$stackName]])
+ 18.             └─methods::as(y, "SpatialPolygons")
+ 19.               └─raster:::asMethod(object)
+
+2020-12-02 06:35:03 WARNING::message call restarting interrupted promise evaluation asMethod(object)
+── Warning (test-cache.R:91:3): test module-level cache ────────────────────────
+restarting interrupted promise evaluation
+
+── Skip (test-checkpoint.R:2:3): test checkpointing ────────────────────────────
+Reason: On CRAN
+
+── Skip (test-checkpoint.R:49:3): test checkpointing with disk-backed raster ───
+Reason: On CRAN
+
+── Skip (test-downloadData.R:2:3): downloadData downloads and unzips module data
+Reason: On CRAN
+
+── Skip (test-downloadModule.R:2:3): downloadModule downloads and unzips a singl
+Reason: On CRAN
+
+── Skip (test-downloadModule.R:38:3): downloadModule downloads and unzips a pare
+Reason: On CRAN
+
+── Skip (test-downloadModule.R:76:3): downloadModule can overwrite existing modu
+Reason: On CRAN
+
+── Skip (test-downloadModule.R:120:3): downloadModule does not fail when data UR
+Reason: On CRAN
+
+── Skip (test-examples.R:1:1): all exported functions have examples ────────────
+Reason: empty test
+
+── Skip (test-load.R:307:3): test-load.R: more tests ───────────────────────────
+Reason: On CRAN
+
+── Warning (test-load.R:424:3): Filenames for simList ──────────────────────────
+NOT UPDATED FOR PROJ >= 6
+
+── Warning (test-load.R:425:3): Filenames for simList ──────────────────────────
+NOT UPDATED FOR PROJ >= 6
+
+── Skip (test-memory.R:4:3): testing memoryUse ─────────────────────────────────
+Reason: This memoryUse is still very experimental
+
+── Skip (test-module-deps-methods.R:210:7): 3 levels of parent and child modules
+Reason: GLPK not available on Linux
+
+── Skip (test-save.R:224:3): saveSimList does not work correctly ───────────────
+Reason: zipSimList not yet testable
+
+── Skip (test-save.R:231:3): restart does not work correctly ───────────────────
+Reason: restartR not possible in automated tests
+
+── Skip (test-save.R:326:3): restart with logging ──────────────────────────────
+Reason: restartR with logging not possible in automated tests
+
+── Skip (test-simList.R:226:3): simList test all signatures ────────────────────
+Reason: On CRAN
+
+── Skip (test-simList.R:333:3): childModule bug test -- created infinite loop of
+Reason: On CRAN
+
+── Skip (test-simList.R:353:3): test that module directory exists, but not files
+Reason: On CRAN
+
+── Skip (test-simulation.R:154:3): simulation runs with simInit with duplicate m
+Reason: benchmarking DES
+
+── Skip (test-timeunits.R:108:3): timeunits with child and parent modules work c
+Reason: On CRAN
+
+── Skipped tests  ──────────────────────────────────────────────────────────────
+● GLPK not available on Linux (1)
+● On CRAN (12)
+● This memoryUse is still very experimental (1)
+● benchmarking DES (1)
+● empty test (1)
+● restartR not possible in automated tests (1)
+● restartR with logging not possible in automated tests (1)
+● zipSimList not yet testable (1)
+
+══ testthat results  ═══════════════════════════════════════════════════════════
+ERROR (test-cache.R:38:3): test event-level cache
+Warning (test-cache.R:91:3): test module-level cache
+Warning (test-load.R:424:3): Filenames for simList
+Warning (test-load.R:425:3): Filenames for simList
+
+[ FAIL 1 | WARN 3 | SKIP 19 | PASS 504 ]
+Error: Test failures
 Execution halted
-* checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... ERROR
-  Running ‘test-all.R’
-Running the tests in ‘tests/test-all.R’ failed.
-Last 13 lines of output:
-              }
-              landscape[pixVal$indices] <- pixVal$V1
-          }
-      }
-      else {
-          landscape[wh] <- spreads[wh]
-          if (exists("potentials")) 
-              if (NROW(potentials) > 0) 
-                  landscape[potentials[, 1L]] <- spreads[potentials[, 
-                    2L]]
-      }
-      return(landscape)
-  }
-  Fatal error: compiler constants were modified!
-  
-* checking PDF version of manual ... OK
-* DONE
-Status: 2 ERRORs, 1 NOTE
