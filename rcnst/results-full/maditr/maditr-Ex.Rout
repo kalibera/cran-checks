@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2020-11-17 r79439) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-12-08 r79592) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -22,7 +22,7 @@ Type 'q()' to quit R.
 > options(warn = 1)
 > library('maditr')
 
-To get total summary skip 'by' argument: take_all(mtcars, mean)
+To aggregate several columns with one summary: take(mtcars, mpg, hp, fun = mean, by = am)
 
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
@@ -2447,7 +2447,7 @@ Sepal.Length  Sepal.Width
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  3.579 0.587 4.274 0 0 
+Time elapsed:  3.607 0.276 5.071 0 0 
 > grDevices::dev.off()
 null device 
           1 
