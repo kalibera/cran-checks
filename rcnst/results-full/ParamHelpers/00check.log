@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/ParamHelpers.Rcheck’
-* using R Under development (unstable) (2020-11-02 r79396)
+* using R Under development (unstable) (2020-12-09 r79601)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘ParamHelpers/DESCRIPTION’ ... OK
@@ -48,22 +48,13 @@ Note: information on .o files is not available
 Running examples in ‘ParamHelpers-Ex.R’ failed
 The error most likely occurred in:
 
-> ### Name: getLower
-> ### Title: Get lower / upper bounds and allowed discrete values for
-> ###   parameters.
-> ### Aliases: getLower getUpper getValues
+> ### Name: getOptPathBestIndex
+> ### Title: Get index of the best element from optimization path.
+> ### Aliases: getOptPathBestIndex
 > 
 > ### ** Examples
 > 
-> ps = makeParamSet(
-+   makeNumericParam("u"),
-+   makeDiscreteParam("v", values = c("a", "b")),
-+   makeIntegerParam("w", lower = expression(ceiling(p / 3)), upper = 2),
-+   makeDiscreteParam("x", values = 1:2),
-+   makeNumericVectorParam("y", len = 2, lower = c(0, 10), upper = c(1, 11)),
-+   keys = "p"
-+ )
-> getLower(ps, dict = list(p = 7))
+> ps = makeParamSet(makeNumericParam("x"))
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"
