@@ -1,7 +1,8 @@
-Package outliertree version 1.3.0
-Package built using 79387/R 4.1.0; x86_64-pc-linux-gnu; 2020-10-31 03:47:26 UTC; unix   
+Package outliertree version 1.3.1
+Package built using 79618/R 4.1.0; x86_64-pc-linux-gnu; 2020-12-12 00:11:43 UTC; unix   
 Checked with rchk version 1df3a0cc105e4278d3a4b8e1215f64bf6611d1e8 LLVM version 10.0.1
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
 
 Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
@@ -52,11 +53,11 @@ Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector(int const&)
 Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
   [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:683
 
+Function Rcpp::Vector<24, Rcpp::PreserveStorage>::Vector()
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<24, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:57
+
 Function Rcpp::Vector<24, Rcpp::PreserveStorage>::Vector(SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<24, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<24>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
-
-Function Rcpp::Vector<24, Rcpp::PreserveStorage>::Vector(int const&)
-  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<24, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
 
 Function Rcpp::XPtr<ModelOutputs, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<ModelOutputs>(ModelOutputs*)), false>::XPtr(ModelOutputs*, bool, SEXPREC*, SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<ModelOutputs, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<ModelOutputs>(ModelOutputs*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
@@ -102,6 +103,9 @@ Function _ZN4Rcpp6VectorILi19ENS_15PreserveStorageEEC2IlEET_PNS_6traits9enable_i
 
 Function _ZN4Rcpp6VectorILi19ENS_15PreserveStorageEEC2ImEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
+
+Function _ZN4Rcpp6VectorILi24ENS_15PreserveStorageEEC2ImEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<24, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
 
 Function _outliertree_check_few_values
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -168,9 +172,9 @@ Function describe_outliers(ModelOutputs&, double*, int*, int*, Rcpp::ListOf<Rcpp
 Function extract_outl_bounds(ModelOutputs&, Rcpp::ListOf<Rcpp::Vector<16, Rcpp::PreserveStorage> >, Rcpp::ListOf<Rcpp::Vector<16, Rcpp::PreserveStorage> >, Rcpp::Vector<14, Rcpp::PreserveStorage>, Rcpp::Vector<14, Rcpp::PreserveStorage>)
   [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %69 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %58 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %64 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %69 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function void Rcpp::Vector<16, Rcpp::PreserveStorage>::fill__dispatch<Rcpp::internal::string_proxy<16, Rcpp::PreserveStorage> >(Rcpp::traits::integral_constant<bool, true>, Rcpp::internal::string_proxy<16, Rcpp::PreserveStorage> const&)
   [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
