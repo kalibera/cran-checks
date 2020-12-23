@@ -16,15 +16,11 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(testthat)
-> 
-> # no tests on CRAN because the check limit is 10 mins
-> 
 > if (identical(Sys.getenv("NOT_CRAN"), "true")) {
-+ 
-+   set.seed(getOption("mlr.debug.seed"))
-+   test_check("mlr", "_parallel_")
++   test_check("mlrCPO", filter = "^core_")
 + }
+> 
 > 
 > proc.time()
    user  system elapsed 
-  0.508   0.132   0.629 
+  0.537   0.125   0.638 
