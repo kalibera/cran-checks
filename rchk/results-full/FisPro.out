@@ -1,8 +1,26 @@
-Package FisPro version 1.0
-Package built using 79387/R 4.1.0; x86_64-pc-linux-gnu; 2020-10-31 05:08:19 UTC; unix   
-Checked with rchk version 1df3a0cc105e4278d3a4b8e1215f64bf6611d1e8 LLVM version 10.0.1
+Package FisPro version 1.1
+Package built using 80023/R 4.1.0; x86_64-pc-linux-gnu; 2021-02-19 14:18:26 UTC; unix   
+Checked with rchk version 3d653b7c8f92dac912532856b55f44d2986c6553 LLVM version 10.0.1
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::BindingPolicy<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >::Binding::operator Rcpp::Function_Impl<Rcpp::PreserveStorage><Rcpp::Function_Impl<Rcpp::PreserveStorage> >() const
+  [UP] calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Function_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::BindingPolicy<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >::Binding::get() const Rcpp/include/Rcpp/api/meat/proxy.h:138
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Rcpp_namespace()
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using Rcpp::internal::get_Rcpp_namespace() Rcpp/include/Rcpp/Environment.h:361
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::get(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
+  [UP] calling allocating function Rcpp::internal::Rcpp_eval_impl(SEXPREC*, SEXPREC*) with a fresh pointer (res <arg 1>) Rcpp/include/Rcpp/Environment.h:112
 
 Function Rcpp::Rcpp_protect(SEXPREC*)
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
@@ -17,23 +35,89 @@ Function Rcpp::Reference_Impl<Rcpp::PreserveStorage>::Reference_Impl(std::__1::b
 Function Rcpp::Vector<10, Rcpp::PreserveStorage>::Vector(int const&)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<10, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
 
+Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector()
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:57
+
+Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<13>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
+
 Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector(int const&)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector()
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:57
 
 Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<14>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
 
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector<boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<fis_wrapper::infer_output(Rcpp::Matrix<14, Rcpp::PreserveStorage>, int) const::$_5, double>, boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<row_getter, Rcpp::Vector<14, Rcpp::PreserveStorage> >, boost::iterators::counting_iterator<int, boost::use_default, boost::use_default>, boost::use_default, boost::use_default>, boost::use_default, boost::use_default> >(boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<fis_wrapper::infer_output(Rcpp::Matrix<14, Rcpp::PreserveStorage>, int) const::$_5, double>, boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<row_getter, Rcpp::Vector<14, Rcpp::PreserveStorage> >, boost::iterators::counting_iterator<int, boost::use_default, boost::use_default>, boost::use_default, boost::use_default>, boost::use_default, boost::use_default>, boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<fis_wrapper::infer_output(Rcpp::Matrix<14, Rcpp::PreserveStorage>, int) const::$_5, double>, boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<row_getter, Rcpp::Vector<14, Rcpp::PreserveStorage> >, boost::iterators::counting_iterator<int, boost::use_default, boost::use_default>, boost::use_default, boost::use_default>, boost::use_default, boost::use_default>)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:213
+
 Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector<double*>(double*, double*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:213
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector<std::__1::__wrap_iter<double*> >(std::__1::__wrap_iter<double*>, std::__1::__wrap_iter<double*>)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:213
 
 Function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(int const&)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
 
+Function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector<boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<fis_wrapper::infer(Rcpp::Matrix<14, Rcpp::PreserveStorage>) const::$_3, char*>, boost::iterators::counting_iterator<int, boost::use_default, boost::use_default>, boost::use_default, boost::use_default> >(boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<fis_wrapper::infer(Rcpp::Matrix<14, Rcpp::PreserveStorage>) const::$_3, char*>, boost::iterators::counting_iterator<int, boost::use_default, boost::use_default>, boost::use_default, boost::use_default>, boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<fis_wrapper::infer(Rcpp::Matrix<14, Rcpp::PreserveStorage>) const::$_3, char*>, boost::iterators::counting_iterator<int, boost::use_default, boost::use_default>, boost::use_default, boost::use_default>)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:213
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector()
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:57
+
 Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector(int const&)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
 
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector<boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<fis_wrapper::get_inputs() const::$_0, SEXPREC*>, boost::iterators::counting_iterator<int, boost::use_default, boost::use_default>, boost::use_default, boost::use_default> >(boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<fis_wrapper::get_inputs() const::$_0, SEXPREC*>, boost::iterators::counting_iterator<int, boost::use_default, boost::use_default>, boost::use_default, boost::use_default>, boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<fis_wrapper::get_inputs() const::$_0, SEXPREC*>, boost::iterators::counting_iterator<int, boost::use_default, boost::use_default>, boost::use_default, boost::use_default>)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:213
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector<boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<fis_wrapper::get_outputs() const::$_1, SEXPREC*>, boost::iterators::counting_iterator<int, boost::use_default, boost::use_default>, boost::use_default, boost::use_default> >(boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<fis_wrapper::get_outputs() const::$_1, SEXPREC*>, boost::iterators::counting_iterator<int, boost::use_default, boost::use_default>, boost::use_default, boost::use_default>, boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<fis_wrapper::get_outputs() const::$_1, SEXPREC*>, boost::iterators::counting_iterator<int, boost::use_default, boost::use_default>, boost::use_default, boost::use_default>)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:213
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector<boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<fis_wrapper::get_rules() const::$_2, SEXPREC*>, boost::iterators::counting_iterator<int, boost::use_default, boost::use_default>, boost::use_default, boost::use_default> >(boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<fis_wrapper::get_rules() const::$_2, SEXPREC*>, boost::iterators::counting_iterator<int, boost::use_default, boost::use_default>, boost::use_default, boost::use_default>, boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<fis_wrapper::get_rules() const::$_2, SEXPREC*>, boost::iterators::counting_iterator<int, boost::use_default, boost::use_default>, boost::use_default, boost::use_default>)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:213
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector<boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<fuzzy_wrapper::get_mfs() const::$_0, SEXPREC*>, boost::iterators::counting_iterator<int, boost::use_default, boost::use_default>, boost::use_default, boost::use_default> >(boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<fuzzy_wrapper::get_mfs() const::$_0, SEXPREC*>, boost::iterators::counting_iterator<int, boost::use_default, boost::use_default>, boost::use_default, boost::use_default>, boost::iterators::transform_iterator<boost::range_detail::default_constructible_unary_fn_wrapper<fuzzy_wrapper::get_mfs() const::$_0, SEXPREC*>, boost::iterators::counting_iterator<int, boost::use_default, boost::use_default>, boost::use_default, boost::use_default>)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:213
+
+Function Rcpp::XPtr<Rcpp::CppProperty<deprecated_fis_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<deprecated_fis_wrapper> >(Rcpp::CppProperty<deprecated_fis_wrapper>*)), false>::XPtr(Rcpp::CppProperty<deprecated_fis_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<deprecated_fis_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<deprecated_fis_wrapper> >(Rcpp::CppProperty<deprecated_fis_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::CppProperty<deprecated_mf_trapezoidal_inf_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<deprecated_mf_trapezoidal_inf_wrapper> >(Rcpp::CppProperty<deprecated_mf_trapezoidal_inf_wrapper>*)), false>::XPtr(Rcpp::CppProperty<deprecated_mf_trapezoidal_inf_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<deprecated_mf_trapezoidal_inf_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<deprecated_mf_trapezoidal_inf_wrapper> >(Rcpp::CppProperty<deprecated_mf_trapezoidal_inf_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::CppProperty<deprecated_mf_trapezoidal_sup_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<deprecated_mf_trapezoidal_sup_wrapper> >(Rcpp::CppProperty<deprecated_mf_trapezoidal_sup_wrapper>*)), false>::XPtr(Rcpp::CppProperty<deprecated_mf_trapezoidal_sup_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<deprecated_mf_trapezoidal_sup_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<deprecated_mf_trapezoidal_sup_wrapper> >(Rcpp::CppProperty<deprecated_mf_trapezoidal_sup_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::CppProperty<deprecated_mf_trapezoidal_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<deprecated_mf_trapezoidal_wrapper> >(Rcpp::CppProperty<deprecated_mf_trapezoidal_wrapper>*)), false>::XPtr(Rcpp::CppProperty<deprecated_mf_trapezoidal_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<deprecated_mf_trapezoidal_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<deprecated_mf_trapezoidal_wrapper> >(Rcpp::CppProperty<deprecated_mf_trapezoidal_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::CppProperty<deprecated_mf_triangular_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<deprecated_mf_triangular_wrapper> >(Rcpp::CppProperty<deprecated_mf_triangular_wrapper>*)), false>::XPtr(Rcpp::CppProperty<deprecated_mf_triangular_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<deprecated_mf_triangular_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<deprecated_mf_triangular_wrapper> >(Rcpp::CppProperty<deprecated_mf_triangular_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::CppProperty<deprecated_mf_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<deprecated_mf_wrapper> >(Rcpp::CppProperty<deprecated_mf_wrapper>*)), false>::XPtr(Rcpp::CppProperty<deprecated_mf_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<deprecated_mf_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<deprecated_mf_wrapper> >(Rcpp::CppProperty<deprecated_mf_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
 Function Rcpp::XPtr<Rcpp::CppProperty<fis_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<fis_wrapper> >(Rcpp::CppProperty<fis_wrapper>*)), false>::XPtr(Rcpp::CppProperty<fis_wrapper>*, bool, SEXPREC*, SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<fis_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<fis_wrapper> >(Rcpp::CppProperty<fis_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::CppProperty<fisin_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<fisin_wrapper> >(Rcpp::CppProperty<fisin_wrapper>*)), false>::XPtr(Rcpp::CppProperty<fisin_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<fisin_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<fisin_wrapper> >(Rcpp::CppProperty<fisin_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::CppProperty<fisout_crisp_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<fisout_crisp_wrapper> >(Rcpp::CppProperty<fisout_crisp_wrapper>*)), false>::XPtr(Rcpp::CppProperty<fisout_crisp_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<fisout_crisp_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<fisout_crisp_wrapper> >(Rcpp::CppProperty<fisout_crisp_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::CppProperty<fisout_fuzzy_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<fisout_fuzzy_wrapper> >(Rcpp::CppProperty<fisout_fuzzy_wrapper>*)), false>::XPtr(Rcpp::CppProperty<fisout_fuzzy_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<fisout_fuzzy_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<fisout_fuzzy_wrapper> >(Rcpp::CppProperty<fisout_fuzzy_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::CppProperty<fisout_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<fisout_wrapper> >(Rcpp::CppProperty<fisout_wrapper>*)), false>::XPtr(Rcpp::CppProperty<fisout_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<fisout_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<fisout_wrapper> >(Rcpp::CppProperty<fisout_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
 
 Function Rcpp::XPtr<Rcpp::CppProperty<mf_trapezoidal_inf_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<mf_trapezoidal_inf_wrapper> >(Rcpp::CppProperty<mf_trapezoidal_inf_wrapper>*)), false>::XPtr(Rcpp::CppProperty<mf_trapezoidal_inf_wrapper>*, bool, SEXPREC*, SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<mf_trapezoidal_inf_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<mf_trapezoidal_inf_wrapper> >(Rcpp::CppProperty<mf_trapezoidal_inf_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
@@ -50,11 +134,44 @@ Function Rcpp::XPtr<Rcpp::CppProperty<mf_triangular_wrapper>, Rcpp::PreserveStor
 Function Rcpp::XPtr<Rcpp::CppProperty<mf_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<mf_wrapper> >(Rcpp::CppProperty<mf_wrapper>*)), false>::XPtr(Rcpp::CppProperty<mf_wrapper>*, bool, SEXPREC*, SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<mf_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<mf_wrapper> >(Rcpp::CppProperty<mf_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
 
+Function Rcpp::XPtr<Rcpp::CppProperty<rule_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<rule_wrapper> >(Rcpp::CppProperty<rule_wrapper>*)), false>::XPtr(Rcpp::CppProperty<rule_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<rule_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<rule_wrapper> >(Rcpp::CppProperty<rule_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
 Function Rcpp::XPtr<Rcpp::Module, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::Module>(Rcpp::Module*)), false>::XPtr(Rcpp::Module*, bool, SEXPREC*, SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::Module, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::Module>(Rcpp::Module*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
 
+Function Rcpp::XPtr<Rcpp::SignedConstructor<deprecated_fis_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<deprecated_fis_wrapper> >(Rcpp::SignedConstructor<deprecated_fis_wrapper>*)), false>::XPtr(Rcpp::SignedConstructor<deprecated_fis_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<deprecated_fis_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<deprecated_fis_wrapper> >(Rcpp::SignedConstructor<deprecated_fis_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::SignedConstructor<deprecated_mf_trapezoidal_inf_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<deprecated_mf_trapezoidal_inf_wrapper> >(Rcpp::SignedConstructor<deprecated_mf_trapezoidal_inf_wrapper>*)), false>::XPtr(Rcpp::SignedConstructor<deprecated_mf_trapezoidal_inf_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<deprecated_mf_trapezoidal_inf_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<deprecated_mf_trapezoidal_inf_wrapper> >(Rcpp::SignedConstructor<deprecated_mf_trapezoidal_inf_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::SignedConstructor<deprecated_mf_trapezoidal_sup_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<deprecated_mf_trapezoidal_sup_wrapper> >(Rcpp::SignedConstructor<deprecated_mf_trapezoidal_sup_wrapper>*)), false>::XPtr(Rcpp::SignedConstructor<deprecated_mf_trapezoidal_sup_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<deprecated_mf_trapezoidal_sup_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<deprecated_mf_trapezoidal_sup_wrapper> >(Rcpp::SignedConstructor<deprecated_mf_trapezoidal_sup_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::SignedConstructor<deprecated_mf_trapezoidal_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<deprecated_mf_trapezoidal_wrapper> >(Rcpp::SignedConstructor<deprecated_mf_trapezoidal_wrapper>*)), false>::XPtr(Rcpp::SignedConstructor<deprecated_mf_trapezoidal_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<deprecated_mf_trapezoidal_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<deprecated_mf_trapezoidal_wrapper> >(Rcpp::SignedConstructor<deprecated_mf_trapezoidal_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::SignedConstructor<deprecated_mf_triangular_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<deprecated_mf_triangular_wrapper> >(Rcpp::SignedConstructor<deprecated_mf_triangular_wrapper>*)), false>::XPtr(Rcpp::SignedConstructor<deprecated_mf_triangular_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<deprecated_mf_triangular_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<deprecated_mf_triangular_wrapper> >(Rcpp::SignedConstructor<deprecated_mf_triangular_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::SignedConstructor<deprecated_mf_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<deprecated_mf_wrapper> >(Rcpp::SignedConstructor<deprecated_mf_wrapper>*)), false>::XPtr(Rcpp::SignedConstructor<deprecated_mf_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<deprecated_mf_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<deprecated_mf_wrapper> >(Rcpp::SignedConstructor<deprecated_mf_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
 Function Rcpp::XPtr<Rcpp::SignedConstructor<fis_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<fis_wrapper> >(Rcpp::SignedConstructor<fis_wrapper>*)), false>::XPtr(Rcpp::SignedConstructor<fis_wrapper>*, bool, SEXPREC*, SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<fis_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<fis_wrapper> >(Rcpp::SignedConstructor<fis_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::SignedConstructor<fisin_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<fisin_wrapper> >(Rcpp::SignedConstructor<fisin_wrapper>*)), false>::XPtr(Rcpp::SignedConstructor<fisin_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<fisin_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<fisin_wrapper> >(Rcpp::SignedConstructor<fisin_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::SignedConstructor<fisout_crisp_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<fisout_crisp_wrapper> >(Rcpp::SignedConstructor<fisout_crisp_wrapper>*)), false>::XPtr(Rcpp::SignedConstructor<fisout_crisp_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<fisout_crisp_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<fisout_crisp_wrapper> >(Rcpp::SignedConstructor<fisout_crisp_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::SignedConstructor<fisout_fuzzy_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<fisout_fuzzy_wrapper> >(Rcpp::SignedConstructor<fisout_fuzzy_wrapper>*)), false>::XPtr(Rcpp::SignedConstructor<fisout_fuzzy_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<fisout_fuzzy_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<fisout_fuzzy_wrapper> >(Rcpp::SignedConstructor<fisout_fuzzy_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::SignedConstructor<fisout_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<fisout_wrapper> >(Rcpp::SignedConstructor<fisout_wrapper>*)), false>::XPtr(Rcpp::SignedConstructor<fisout_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<fisout_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<fisout_wrapper> >(Rcpp::SignedConstructor<fisout_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
 
 Function Rcpp::XPtr<Rcpp::SignedConstructor<mf_trapezoidal_inf_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<mf_trapezoidal_inf_wrapper> >(Rcpp::SignedConstructor<mf_trapezoidal_inf_wrapper>*)), false>::XPtr(Rcpp::SignedConstructor<mf_trapezoidal_inf_wrapper>*, bool, SEXPREC*, SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<mf_trapezoidal_inf_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<mf_trapezoidal_inf_wrapper> >(Rcpp::SignedConstructor<mf_trapezoidal_inf_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
@@ -71,8 +188,41 @@ Function Rcpp::XPtr<Rcpp::SignedConstructor<mf_triangular_wrapper>, Rcpp::Preser
 Function Rcpp::XPtr<Rcpp::SignedConstructor<mf_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<mf_wrapper> >(Rcpp::SignedConstructor<mf_wrapper>*)), false>::XPtr(Rcpp::SignedConstructor<mf_wrapper>*, bool, SEXPREC*, SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<mf_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<mf_wrapper> >(Rcpp::SignedConstructor<mf_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
 
+Function Rcpp::XPtr<Rcpp::SignedConstructor<rule_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<rule_wrapper> >(Rcpp::SignedConstructor<rule_wrapper>*)), false>::XPtr(Rcpp::SignedConstructor<rule_wrapper>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<rule_wrapper>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<rule_wrapper> >(Rcpp::SignedConstructor<rule_wrapper>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<deprecated_fis_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<deprecated_fis_wrapper>(deprecated_fis_wrapper*)), false>::XPtr(deprecated_fis_wrapper*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<deprecated_fis_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<deprecated_fis_wrapper>(deprecated_fis_wrapper*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<deprecated_mf_trapezoidal_inf_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<deprecated_mf_trapezoidal_inf_wrapper>(deprecated_mf_trapezoidal_inf_wrapper*)), false>::XPtr(deprecated_mf_trapezoidal_inf_wrapper*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<deprecated_mf_trapezoidal_inf_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<deprecated_mf_trapezoidal_inf_wrapper>(deprecated_mf_trapezoidal_inf_wrapper*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<deprecated_mf_trapezoidal_sup_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<deprecated_mf_trapezoidal_sup_wrapper>(deprecated_mf_trapezoidal_sup_wrapper*)), false>::XPtr(deprecated_mf_trapezoidal_sup_wrapper*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<deprecated_mf_trapezoidal_sup_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<deprecated_mf_trapezoidal_sup_wrapper>(deprecated_mf_trapezoidal_sup_wrapper*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<deprecated_mf_trapezoidal_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<deprecated_mf_trapezoidal_wrapper>(deprecated_mf_trapezoidal_wrapper*)), false>::XPtr(deprecated_mf_trapezoidal_wrapper*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<deprecated_mf_trapezoidal_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<deprecated_mf_trapezoidal_wrapper>(deprecated_mf_trapezoidal_wrapper*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<deprecated_mf_triangular_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<deprecated_mf_triangular_wrapper>(deprecated_mf_triangular_wrapper*)), false>::XPtr(deprecated_mf_triangular_wrapper*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<deprecated_mf_triangular_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<deprecated_mf_triangular_wrapper>(deprecated_mf_triangular_wrapper*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<deprecated_mf_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<deprecated_mf_wrapper>(deprecated_mf_wrapper*)), false>::XPtr(deprecated_mf_wrapper*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<deprecated_mf_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<deprecated_mf_wrapper>(deprecated_mf_wrapper*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
 Function Rcpp::XPtr<fis_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<fis_wrapper>(fis_wrapper*)), false>::XPtr(fis_wrapper*, bool, SEXPREC*, SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<fis_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<fis_wrapper>(fis_wrapper*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<fisin_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<fisin_wrapper>(fisin_wrapper*)), false>::XPtr(fisin_wrapper*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<fisin_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<fisin_wrapper>(fisin_wrapper*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<fisout_crisp_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<fisout_crisp_wrapper>(fisout_crisp_wrapper*)), false>::XPtr(fisout_crisp_wrapper*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<fisout_crisp_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<fisout_crisp_wrapper>(fisout_crisp_wrapper*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<fisout_fuzzy_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<fisout_fuzzy_wrapper>(fisout_fuzzy_wrapper*)), false>::XPtr(fisout_fuzzy_wrapper*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<fisout_fuzzy_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<fisout_fuzzy_wrapper>(fisout_fuzzy_wrapper*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<fisout_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<fisout_wrapper>(fisout_wrapper*)), false>::XPtr(fisout_wrapper*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<fisout_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<fisout_wrapper>(fisout_wrapper*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
 
 Function Rcpp::XPtr<mf_trapezoidal_inf_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<mf_trapezoidal_inf_wrapper>(mf_trapezoidal_inf_wrapper*)), false>::XPtr(mf_trapezoidal_inf_wrapper*, bool, SEXPREC*, SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<mf_trapezoidal_inf_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<mf_trapezoidal_inf_wrapper>(mf_trapezoidal_inf_wrapper*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
@@ -89,8 +239,41 @@ Function Rcpp::XPtr<mf_triangular_wrapper, Rcpp::PreserveStorage, &(void Rcpp::s
 Function Rcpp::XPtr<mf_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<mf_wrapper>(mf_wrapper*)), false>::XPtr(mf_wrapper*, bool, SEXPREC*, SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<mf_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<mf_wrapper>(mf_wrapper*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
 
+Function Rcpp::XPtr<rule_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<rule_wrapper>(rule_wrapper*)), false>::XPtr(rule_wrapper*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<rule_wrapper, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<rule_wrapper>(rule_wrapper*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<deprecated_fis_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_fis_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<deprecated_fis_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_fis_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<deprecated_fis_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_fis_wrapper>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<deprecated_fis_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_fis_wrapper>*> >*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<deprecated_fis_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_fis_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<deprecated_fis_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_fis_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<deprecated_fis_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_fis_wrapper>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_inf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_inf_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_inf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_inf_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_inf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_inf_wrapper>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_inf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_inf_wrapper>*> >*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_inf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_inf_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_inf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_inf_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_inf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_inf_wrapper>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_sup_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_sup_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_sup_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_sup_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_sup_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_sup_wrapper>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_sup_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_sup_wrapper>*> >*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_sup_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_sup_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_sup_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_sup_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_sup_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_sup_wrapper>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_wrapper>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_wrapper>*> >*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<deprecated_mf_trapezoidal_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_trapezoidal_wrapper>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<deprecated_mf_triangular_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_triangular_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<deprecated_mf_triangular_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_triangular_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<deprecated_mf_triangular_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_triangular_wrapper>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<deprecated_mf_triangular_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_triangular_wrapper>*> >*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<deprecated_mf_triangular_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_triangular_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<deprecated_mf_triangular_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_triangular_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<deprecated_mf_triangular_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_triangular_wrapper>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<deprecated_mf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<deprecated_mf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<deprecated_mf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_wrapper>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<deprecated_mf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_wrapper>*> >*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<deprecated_mf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<deprecated_mf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<deprecated_mf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<deprecated_mf_wrapper>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
 Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<fis_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fis_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<fis_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fis_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<fis_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fis_wrapper>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<fis_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fis_wrapper>*> >*, bool, SEXPREC*, SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<fis_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fis_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<fis_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fis_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<fis_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fis_wrapper>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<fisin_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisin_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<fisin_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisin_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<fisin_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisin_wrapper>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<fisin_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisin_wrapper>*> >*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<fisin_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisin_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<fisin_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisin_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<fisin_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisin_wrapper>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<fisout_crisp_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_crisp_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<fisout_crisp_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_crisp_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<fisout_crisp_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_crisp_wrapper>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<fisout_crisp_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_crisp_wrapper>*> >*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<fisout_crisp_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_crisp_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<fisout_crisp_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_crisp_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<fisout_crisp_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_crisp_wrapper>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<fisout_fuzzy_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_fuzzy_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<fisout_fuzzy_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_fuzzy_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<fisout_fuzzy_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_fuzzy_wrapper>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<fisout_fuzzy_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_fuzzy_wrapper>*> >*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<fisout_fuzzy_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_fuzzy_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<fisout_fuzzy_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_fuzzy_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<fisout_fuzzy_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_fuzzy_wrapper>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<fisout_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<fisout_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<fisout_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_wrapper>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<fisout_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_wrapper>*> >*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<fisout_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<fisout_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<fisout_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<fisout_wrapper>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
 
 Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<mf_trapezoidal_inf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<mf_trapezoidal_inf_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<mf_trapezoidal_inf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<mf_trapezoidal_inf_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<mf_trapezoidal_inf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<mf_trapezoidal_inf_wrapper>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<mf_trapezoidal_inf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<mf_trapezoidal_inf_wrapper>*> >*, bool, SEXPREC*, SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<mf_trapezoidal_inf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<mf_trapezoidal_inf_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<mf_trapezoidal_inf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<mf_trapezoidal_inf_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<mf_trapezoidal_inf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<mf_trapezoidal_inf_wrapper>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
@@ -107,7 +290,40 @@ Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<mf_triangular_wrapper>*,
 Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<mf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<mf_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<mf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<mf_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<mf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<mf_wrapper>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<mf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<mf_wrapper>*> >*, bool, SEXPREC*, SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<mf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<mf_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<mf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<mf_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<mf_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<mf_wrapper>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
 
+Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<rule_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<rule_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<rule_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<rule_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<rule_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<rule_wrapper>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<rule_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<rule_wrapper>*> >*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<rule_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<rule_wrapper>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<rule_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<rule_wrapper>*> > >(std::__1::vector<Rcpp::SignedMethod<rule_wrapper>*, std::__1::allocator<Rcpp::SignedMethod<rule_wrapper>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::class_<deprecated_fis_wrapper>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::class_<deprecated_mf_trapezoidal_inf_wrapper>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::class_<deprecated_mf_trapezoidal_sup_wrapper>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::class_<deprecated_mf_trapezoidal_wrapper>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::class_<deprecated_mf_triangular_wrapper>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::class_<deprecated_mf_wrapper>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function Rcpp::class_<fis_wrapper>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::class_<fisin_wrapper>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::class_<fisout_crisp_wrapper>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::class_<fisout_fuzzy_wrapper>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::class_<fisout_wrapper>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
   [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function Rcpp::class_<mf_trapezoidal_inf_wrapper>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
@@ -125,5 +341,29 @@ Function Rcpp::class_<mf_triangular_wrapper>::invoke(SEXPREC*, SEXPREC*, SEXPREC
 Function Rcpp::class_<mf_wrapper>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
   [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function Rcpp::class_<rule_wrapper>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::const_CppMethod1<fis_wrapper, SEXPREC*, Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> >::operator()(fis_wrapper*, SEXPREC**)
+  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::const_CppMethod1<fis_wrapper, SEXPREC*, Rcpp::Matrix<14, Rcpp::PreserveStorage> >::operator()(fis_wrapper*, SEXPREC**)
+  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::const_CppMethod1<fis_wrapper, SEXPREC*, int>::operator()(fis_wrapper*, SEXPREC**)
+  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::const_CppMethod1<fisin_wrapper, SEXPREC*, int>::operator()(fisin_wrapper*, SEXPREC**)
+  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::const_CppMethod1<fisout_fuzzy_wrapper, SEXPREC*, int>::operator()(fisout_fuzzy_wrapper*, SEXPREC**)
+  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _ZN4Rcpp6VectorILi16ENS_15PreserveStorageEEC2ImEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
+
+Function void Rcpp::Vector<14, Rcpp::PreserveStorage>::import_sugar_expression<true, Rcpp::ConstMatrixRow<14> >(Rcpp::VectorBase<14, true, Rcpp::ConstMatrixRow<14> > const&, Rcpp::traits::integral_constant<bool, false>)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
