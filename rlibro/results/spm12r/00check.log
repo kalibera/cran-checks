@@ -1,10 +1,10 @@
-* using log directory ‘/var/scratch2/tomas/cran/rlibro/check/ftrCOOL.Rcheck’
-* using R Under development (unstable) (2020-12-16 r79643)
+* using log directory ‘/var/scratch2/tomas/cran/rlibro/check/spm12r.Rcheck’
+* using R Under development (unstable) (2021-02-17 r80023)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* checking for file ‘ftrCOOL/DESCRIPTION’ ... OK
+* checking for file ‘spm12r/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘ftrCOOL’ version ‘1.1.0’
+* this is package ‘spm12r’ version ‘2.8.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -14,8 +14,9 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘ftrCOOL’ can be installed ... OK
+* checking whether package ‘spm12r’ can be installed ... OK
 * checking package directory ... OK
+* checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
 * checking for left-over files ... OK
@@ -42,32 +43,37 @@
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
+* checking line endings in shell scripts ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
 * checking examples ... ERROR
-Running examples in ‘ftrCOOL-Ex.R’ failed
+Running examples in ‘spm12r-Ex.R’ failed
 The error most likely occurred in:
 
-> ### Name: DisorderB
-> ### Title: disorder Binary (DisorderB)
-> ### Aliases: DisorderB
+> ### Name: spm_bwlabel
+> ### Title: SPM BWLabel Clusters of Certain Size
+> ### Aliases: spm_bwlabel
 > 
 > ### ** Examples
 > 
-> 
-> dir = tempdir()
-> PredDisdir<-system.file("testForder",package="ftrCOOL")
-> 
-> PredDisdir<-paste0(PredDisdir,"/Disdir/")
-> ad1<-paste0(dir,"/disorderB.txt")
-> 
-> mat<-DisorderB(PredDisdir,binaryType="strBin",outFormat="txt",outputFileDist=ad1)
-Warning in file(con, "w") :
-  cannot open file '/var/scratch2ro/tomas/cran/rlibro/lib/ftrCOOL/extdata/tempTable.txt': Read-only file system
-Error in file(con, "w") : cannot open the connection
-Calls: DisorderB -> readDisDir -> writeLines -> file
+> if (matlabr::have_matlab()) { 
++ d = rep(25, 3)
++ arr = array(rbinom(prod(d), size = 1, prob = 0.5), dim = d)
++ nim = oro.nifti::nifti(arr)
++ res = spm_bwlabel(nim, k = 1, binary = FALSE)
++ tab = table(c(res))
++ tab
++ out_arr = as(res, "array")
++ }
+cloning into '/var/scratch2ro/tomas/cran/rlibro/lib/spm12r/spm12'...
+Error in git2r::clone("https://github.com/muschellij2/spm12r", branch = "gh-pages",  : 
+  Error in 'git2r_clone': failed to make directory '/var/scratch2ro/tomas/cran/rlibro/lib/spm12r/spm12': Read-only file system
+Calls: spm_bwlabel -> install_spm12 -> <Anonymous>
 Execution halted
-* checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... OK
-  Running ‘testthat.R’
-* checking PDF version of manual ... OK
-* DONE
-Status: 1 ERROR
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘fmri_processing_spm12r.Rmd’ using ‘UTF-8’... OK
+  ‘fmri_task_processing.Rmd’ using ‘UTF-8’... OK
+  ‘fmri_task_processing_acpc.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ...
