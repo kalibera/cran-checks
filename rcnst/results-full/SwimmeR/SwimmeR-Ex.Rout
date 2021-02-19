@@ -1,0 +1,388 @@
+
+R Under development (unstable) (2021-02-17 r80023) -- "Unsuffered Consequences"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "SwimmeR"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('SwimmeR')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("Read_Results")
+> ### * Read_Results
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Read_Results
+> ### Title: Reads swimming and diving results into a list of strings in
+> ###   preparation for parsing with 'swim_parse'
+> ### Aliases: Read_Results read_results
+> 
+> ### ** Examples
+> 
+> ## Not run: read_results("http://www.nyhsswim.com/Results/Boys/2008/NYS/Single.htm", node = "pre")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Swim_Parse")
+> ### * Swim_Parse
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Swim_Parse
+> ### Title: Formats swimming and diving data read with 'read_results' into a
+> ###   dataframe
+> ### Aliases: Swim_Parse swim_parse
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D swim_parse(read_results("http://www.nyhsswim.com/Results/Boys/2008/NYS/Single.htm", node = "pre"),
+> ##D  typo = c("-1NORTH ROCKL"), replacement = c("1-NORTH ROCKL"),
+> ##D  splits = TRUE,
+> ##D  relay_swimmers = TRUE)
+> ##D  
+> ## End(Not run)
+> ## Not run: 
+> ##D swim_parse(read_results("inst/extdata/Texas-Florida-Indiana.pdf"),
+> ##D  typo =  c("Indiana  University", ", University of"), replacement = c("Indiana University", ""),
+> ##D  splits = TRUE,
+> ##D  relay_swimmers = TRUE)
+> ##D  
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("course_convert")
+> ### * course_convert
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: course_convert
+> ### Title: Swimming Course Convertor
+> ### Aliases: course_convert
+> 
+> ### ** Examples
+> 
+> course_convert(time = "1:35.93", event = "200 Free", course = "SCY", course_to = "LCM")
+[1] "1:49.68"
+> course_convert(time = 95.93, event = "200 Free", course = "scy", course_to = "lcm")
+[1] "1:49.68"
+> course_convert(time = 53.89, event = "100 Fly", course = "scm", course_to = "scy")
+[1] "48.55"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("course_convert_DF")
+> ### * course_convert_DF
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: course_convert_DF
+> ### Title: Course converter, returns dataframe
+> ### Aliases: course_convert_DF
+> 
+> ### ** Examples
+> 
+> course_convert_DF(time = "1:35.93", event = "200 Free", course = "SCY", course_to = "LCM")
+     time course course_to    event Time_Converted_sec Time_Converted_mmss
+1 1:35.93    SCY       LCM 200 Free             109.68             1:49.68
+> course_convert_DF(time = 95.93, event = "200 Free", course = "scy", course_to = "lcm")
+     time course course_to    event Time_Converted_sec Time_Converted_mmss
+1 1:35.93    SCY       LCM 200 Free             109.68             1:49.68
+> course_convert_DF(time = 53.89, event = "100 Fly", course = "scm", course_to = "scy")
+   time course course_to   event Time_Converted_sec Time_Converted_mmss
+1 53.89    SCM       SCY 100 Fly              48.55               48.55
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("draw_bracket")
+> ### * draw_bracket
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: draw_bracket
+> ### Title: Creates a bracket for tournaments involving 5 to 64 teams,
+> ###   single elimination
+> ### Aliases: draw_bracket
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D teams <- c("red", "orange", "yellow", "green", "blue", "indigo", "violet")
+> ##D round_two <- c("red", "yellow", "blue", "indigo")
+> ##D round_three <- c("red", "blue")
+> ##D champion <- "red"
+> ##D draw_bracket(teams = teams,
+> ##D              round_two = round_two,
+> ##D              round_three = round_three,
+> ##D              champion = champion)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_mode")
+> ### * get_mode
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_mode
+> ### Title: Find the mode (most commonly occurring) element of a list
+> ### Aliases: get_mode
+> 
+> ### ** Examples
+> 
+> a <- c("a", "a", "b", "c")
+> get_mode(a)
+[1] "a"
+> ab <- c("a", "a", "b", "b", "c") # returns "a", not "b"
+> get_mode(ab)
+[1] "a"
+> #' ab <- c("a", "a", "b", "b", "c") # returns "a" and "b"
+> get_mode(ab, type = "all")
+[1] "a" "b"
+> a_na <- c("a", "a", NA, NA, "c")
+> get_mode(a_na)
+[1] "a"
+> numbs <- c(1, 1, 1, 2, 2, 2, 3, NA)
+> get_mode(numbs, type = "all")
+[1] 1 2
+> 
+> Name <- c(rep("Lilly King", 5))
+> Team <- c(rep("IU", 2), "Indiana", "IUWSD", "Indiana University")
+> df <- data.frame(Name, Team, stringsAsFactors = FALSE)
+> df$Team <- get_mode(df$Team)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("grapes-notin-grapes")
+> ### * grapes-notin-grapes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: %notin%
+> ### Title: "Not in" function
+> ### Aliases: %notin% %!in%
+> 
+> ### ** Examples
+> 
+> "a" %!in% c("a", "b", "c")
+[1] FALSE
+> "a" %notin% c("b", "c")
+[1] TRUE
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("mmss_format")
+> ### * mmss_format
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: mmss_format
+> ### Title: Formatting seconds as mm:ss.hh
+> ### Aliases: mmss_format
+> 
+> ### ** Examples
+> 
+> mmss_format(95.37)
+[1] "1:35.37"
+> mmss_format(200.95)
+[1] "3:20.95"
+> mmss_format(59.47)
+[1] "59.47"
+> mmss_format(c(95.37, 200.95, 59.47, NA))
+[1] "1:35.37" "3:20.95" "59.47"   NA       
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("results_score")
+> ### * results_score
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: results_score
+> ### Title: Scores a swim meet
+> ### Aliases: results_score
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D file <-
+> ##D system.file("extdata", "BigTen_WSWIM_2018.pdf", package = "SwimmeR")
+> ##D BigTenRaw <- read_results(file)
+> ##D 
+> ##D BigTen <- swim_parse(
+> ##D   BigTenRaw,
+> ##D   typo = c(
+> ##D     "^\\s{1,}\\*",
+> ##D     "^\\s{1,}(\\d{1,2})\\s{2,}",
+> ##D     ",\\s{1,}University\\s{1,}of",
+> ##D     "University\\s{1,}of\\s{1,}",
+> ##D     "\\s{1,}University",
+> ##D     "SR\\s{2,}",
+> ##D     "JR\\s{2,}",
+> ##D     "SO\\s{2,}",
+> ##D     "FR\\s{2,}"
+> ##D   ),
+> ##D   replacement = c(" ",
+> ##D                   "  \\1 ",
+> ##D                   "", "", "",
+> ##D                   "SR ",
+> ##D                   "JR ",
+> ##D                   "SO ",
+> ##D                   "FR "),
+> ##D   avoid = c("B1G", "Pool")
+> ##D )
+> ##D 
+> ##D BigTen <- BigTen %>%
+> ##D   dplyr::filter(
+> ##D     stringr::str_detect(Event, "Time Trial") == FALSE,
+> ##D     stringr::str_detect(Event, "Swim-off") == FALSE
+> ##D   ) %>%
+> ##D   dplyr::mutate(Team = dplyr::case_when(Team == "Wisconsin, Madi" ~ "Wisconsin",
+> ##D                                           TRUE ~ Team))
+> ##D 
+> ##D # begin results_score portion
+> ##D df <- BigTen %>%
+> ##D   results_score(
+> ##D     events = unique(BigTen$Event),
+> ##D     meet_type = "prelims_finals",
+> ##D     lanes = 8,
+> ##D     scoring_heats = 3,
+> ##D     point_values = c(
+> ##D       32, 28, 27, 26, 25, 24, 23, 22, 20, 17, 16, 15, 14, 13, 12, 11, 9, 7, 6, 5, 4, 3, 2, 1)
+> ##D   )
+> ##D  
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("sec_format")
+> ### * sec_format
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: sec_format
+> ### Title: Formatting mm:ss.tt times as seconds
+> ### Aliases: sec_format
+> 
+> ### ** Examples
+> 
+> sec_format("1:35.93")
+[1] 95.93
+> sec_format("16:45.19")
+[1] 1005.19
+> sec_format("25.43")
+[1] 25.43
+> sec_format(c("1:35.93", "16:45.19", "25.43"))
+[1]   95.93 1005.19   25.43
+> sec_format(c("1:35.93", "16:45.19", NA, "25.43"))
+[1]   95.93 1005.19      NA   25.43
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("swim_parse_ISL")
+> ### * swim_parse_ISL
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: swim_parse_ISL
+> ### Title: Formats swimming results from the International Swim League
+> ###   ('ISL') read with 'read_results' into a data frame
+> ### Aliases: swim_parse_ISL Swim_Parse_ISL
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D swim_parse_ISL(
+> ##D read_results(
+> ##D "https://isl.global/wp-content/uploads/2019/11/isl_college_park_results_day_2.pdf"),
+> ##D splits = TRUE,
+> ##D relay_swimmers = TRUE)
+> ##D  
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("swim_parse_old")
+> ### * swim_parse_old
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: swim_parse_old
+> ### Title: Formats swimming and diving data read with 'read_results' into a
+> ###   dataframe
+> ### Aliases: swim_parse_old
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D swim_parse_old(
+> ##D  read_results("http://www.nyhsswim.com/Results/Boys/2008/NYS/Single.htm", node = "pre"),
+> ##D   typo = c("-1NORTH ROCKL"), replacement = c("1-NORTH ROCKL"),
+> ##D   splits = TRUE,
+> ##D   relay_swimmers = TRUE)
+> ##D  
+> ## End(Not run)
+> ## Not run: 
+> ##D swim_parse_old(read_results("inst/extdata/Texas-Florida-Indiana.pdf"),
+> ##D  typo =  c("Indiana  University", ", University of"), replacement = c("Indiana University", ""),
+> ##D  splits = TRUE,
+> ##D  relay_swimmers = TRUE)
+> ##D  
+> ## End(Not run)
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  19.551 0.102 19.77 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

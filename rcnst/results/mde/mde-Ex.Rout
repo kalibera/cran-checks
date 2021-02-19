@@ -1,0 +1,708 @@
+
+R Under development (unstable) (2021-02-17 r80023) -- "Unsuffered Consequences"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "mde"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('mde')
+Welcome to mde. This is mde version 0.3.0.
+ Please file issues and feedback at https://www.github.com/Nelson-Gon/mde/issues
+Turn this message off using 'suppressPackageStartupMessages(library(mde))'
+ Happy Exploration :)
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("all_na")
+> ### * all_na
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: all_na
+> ### Title: Checks that all values are NA
+> ### Aliases: all_na
+> 
+> ### ** Examples
+> 
+> test <- data.frame(A=c(NA, 2), B= c(NA, NA))
+> all_na(test)
+    A     B 
+FALSE  TRUE 
+> test_vec <- c("NA",NA,"nope")
+> test_numeric <- c(NA, 2)
+> all_na(test_vec)
+[1] FALSE
+> all_na(test_numeric)
+[1] FALSE
+> 
+> 
+> 
+> cleanEx()
+> nameEx("column_based_recode")
+> ### * column_based_recode
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: column_based_recode
+> ### Title: Conditionally Recode NA values based on other Columns
+> ### Aliases: column_based_recode
+> 
+> ### ** Examples
+> 
+> df <- structure(list(id = 40:43, v1 = c(NA, 1L, 1L, 1L), v2 = c(NA, 1L, 1L, 1L),
++ v3 = c(NA, 2L, NA, 1L),
++ test = c(1L, 2L, 1L, 3L)), class = "data.frame", row.names = c(NA, -4L))
+> # recode test as 0 if all NA, return test otherwise
+> column_based_recode(df,values_from = "test", pattern_type = "starts_with", pattern="v")
+  id v1 v2 v3 test
+1 40 NA NA NA    0
+2 41  1  1  2    2
+3 42  1  1 NA    1
+4 43  1  1  1    3
+> 
+> 
+> 
+> cleanEx()
+> nameEx("drop_all_na")
+> ### * drop_all_na
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: drop_all_na
+> ### Title: Drop columns for which all values are NA
+> ### Aliases: drop_all_na
+> 
+> ### ** Examples
+> 
+> test <- data.frame(ID= c("A","A","B","A","B"), Vals = c(rep(NA,4),2))
+> test2 <- data.frame(ID= c("A","A","B","A","B"), Vals = rep(NA, 5))
+> # drop columns where all values are NA
+> drop_all_na(test2)
+  ID
+1  A
+2  A
+3  B
+4  A
+5  B
+> # drop NAs only if all are NA for a given group, drops group too.
+> drop_all_na(test, "ID")
+# A tibble: 2 x 2
+  ID     Vals
+  <chr> <dbl>
+1 B        NA
+2 B         2
+> 
+> 
+> 
+> cleanEx()
+> nameEx("drop_na_at")
+> ### * drop_na_at
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: drop_na_at
+> ### Title: Drop missing values at columns that match a given pattern
+> ### Aliases: drop_na_at
+> 
+> ### ** Examples
+> 
+> head(drop_na_at(airquality,pattern_type = "starts_with","O"))
+  Ozone
+1    41
+2    36
+3    12
+4    18
+5    28
+6    23
+> 
+> 
+> 
+> cleanEx()
+> nameEx("drop_na_if")
+> ### * drop_na_if
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: drop_na_if
+> ### Title: Condition based dropping of columns with missing values
+> ### Aliases: drop_na_if
+> 
+> ### ** Examples
+> 
+> head(drop_na_if(airquality, percent_na = 24))
+  Solar.R Wind Temp Month Day
+1     190  7.4   67     5   1
+2     118  8.0   72     5   2
+3     149 12.6   74     5   3
+4     313 11.5   62     5   4
+5      NA 14.3   56     5   5
+6      NA 14.9   66     5   6
+> #drop columns that have less tan or equal to 4%
+> head(drop_na_if(airquality,sign="lteq", percent_na = 4))
+  Ozone Solar.R
+1    41     190
+2    36     118
+3    12     149
+4    18     313
+5    NA      NA
+6    28      NA
+> # Drop all except with greater than oe equal to 4% missing but keep Ozone
+> head(drop_na_if(airquality, sign="gteq",percent_na = 4, keep_columns = "Ozone"))
+  Ozone Wind Temp Month Day
+1    41  7.4   67     5   1
+2    36  8.0   72     5   2
+3    12 12.6   74     5   3
+4    18 11.5   62     5   4
+5    NA 14.3   56     5   5
+6    28 14.9   66     5   6
+> 
+> 
+> 
+> cleanEx()
+> nameEx("drop_row_if")
+> ### * drop_row_if
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: drop_row_if
+> ### Title: Conditionally drop rows based on percent missingness
+> ### Aliases: drop_row_if
+> 
+> ### ** Examples
+> 
+> head(drop_row_if(airquality,sign = "gteq",
++ type = "percent",value=16, as_percent = TRUE))
+Dropped 42 rows.
+  Ozone Solar.R Wind Temp Month Day
+1    41     190  7.4   67     5   1
+2    36     118  8.0   72     5   2
+3    12     149 12.6   74     5   3
+4    18     313 11.5   62     5   4
+7    23     299  8.6   65     5   7
+8    19      99 13.8   59     5   8
+> # should give the same output as above.
+> head(drop_row_if(airquality, sign="gteq", type="percent",value = 0.15, as_percent=FALSE))
+Dropped 42 rows.
+  Ozone Solar.R Wind Temp Month Day
+1    41     190  7.4   67     5   1
+2    36     118  8.0   72     5   2
+3    12     149 12.6   74     5   3
+4    18     313 11.5   62     5   4
+7    23     299  8.6   65     5   7
+8    19      99 13.8   59     5   8
+> # Drop based on NA counts
+> df <- data.frame(A=1:5, B=c(1,NA,NA,2, 3), C= c(1,NA,NA,2,3))
+> drop_row_if(df, type="count",value=2,sign="eq")
+Dropped 2 rows.
+  A B C
+1 1 1 1
+4 4 2 2
+5 5 3 3
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_na_counts")
+> ### * get_na_counts
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_na_counts
+> ### Title: Add columnwise/groupwise counts of missing values
+> ### Aliases: get_na_counts
+> 
+> ### ** Examples
+> 
+> get_na_counts(airquality)
+  Ozone Solar.R Wind Temp Month Day
+1    37       7    0    0     0   0
+> # Grouped counts
+> test <- data.frame(Subject = c("A","A","B","B"), res = c(NA,1,2,3),
++ ID = c("1","1","2","2"))
+> get_na_counts(test,grouping_cols = c("ID", "Subject"))
+# A tibble: 2 x 3
+# Groups:   ID [2]
+  ID    Subject   res
+  <chr> <chr>   <int>
+1 1     A           1
+2 2     B           0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("na_summary")
+> ### * na_summary
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: na_summary
+> ### Title: An all-in-one missingness report
+> ### Aliases: na_summary
+> 
+> ### ** Examples
+> 
+> na_summary(airquality)
+  variable missing complete percent_complete percent_missing
+1      Day       0      153        100.00000        0.000000
+2    Month       0      153        100.00000        0.000000
+3    Ozone      37      116         75.81699       24.183007
+4  Solar.R       7      146         95.42484        4.575163
+5     Temp       0      153        100.00000        0.000000
+6     Wind       0      153        100.00000        0.000000
+> # grouping
+> test2 <- data.frame(ID= c("A","A","B","A","B"),Vals = c(rep(NA,4),"No"),
++ ID2 = c("E","E","D","E","D"))
+> na_summary(test2,grouping_cols = c("ID","ID2"))
+# A tibble: 2 x 7
+  ID    ID2   variable missing complete percent_complete percent_missing
+  <chr> <chr> <chr>      <dbl>    <dbl>            <dbl>           <dbl>
+1 B     D     Vals           1        1               50              50
+2 A     E     Vals           3        0                0             100
+> # sort summary
+> na_summary(airquality,sort_by = "percent_missing",descending = TRUE)
+  variable missing complete percent_complete percent_missing
+3    Ozone      37      116         75.81699       24.183007
+4  Solar.R       7      146         95.42484        4.575163
+1      Day       0      153        100.00000        0.000000
+2    Month       0      153        100.00000        0.000000
+5     Temp       0      153        100.00000        0.000000
+6     Wind       0      153        100.00000        0.000000
+> na_summary(airquality,sort_by = "percent_complete")
+  variable missing complete percent_complete percent_missing
+3    Ozone      37      116         75.81699       24.183007
+4  Solar.R       7      146         95.42484        4.575163
+1      Day       0      153        100.00000        0.000000
+2    Month       0      153        100.00000        0.000000
+5     Temp       0      153        100.00000        0.000000
+6     Wind       0      153        100.00000        0.000000
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("percent_missing")
+> ### * percent_missing
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: percent_missing
+> ### Title: Columnwise missingness percentages
+> ### Aliases: percent_missing
+> 
+> ### ** Examples
+> 
+> test <- data.frame(ID= c("A","B","A","B","A","B","A"), Vals = c(NA,25,34,NA,67,NA,45))
+> percent_missing(test,grouping_cols = "ID")
+# A tibble: 2 x 2
+  ID     Vals
+* <chr> <dbl>
+1 A      25  
+2 B      66.7
+> percent_missing(airquality)
+     Ozone  Solar.R Wind Temp Month Day
+1 24.18301 4.575163    0    0     0   0
+> percent_missing(airquality,exclude_cols = c("Day","Temp"))
+     Ozone  Solar.R Wind Month
+1 24.18301 4.575163    0     0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("recode_as_na")
+> ### * recode_as_na
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: recode_as_na
+> ### Title: Recode a value as NA
+> ### Aliases: recode_as_na
+> 
+> ### ** Examples
+> 
+> head(recode_as_na(airquality,value=c(67,118),pattern_type="starts_with",pattern="S|O"))
+  Ozone Solar.R Wind Temp Month Day
+1    41     190  7.4   67     5   1
+2    36      NA  8.0   72     5   2
+3    12     149 12.6   74     5   3
+4    18     313 11.5   62     5   4
+5    NA      NA 14.3   56     5   5
+6    28      NA 14.9   66     5   6
+> head(recode_as_na(airquality,value=c(41),pattern_type="ends_with",pattern="e"))
+  Ozone Solar.R Wind Temp Month Day
+1    NA     190  7.4   67     5   1
+2    36     118  8.0   72     5   2
+3    12     149 12.6   74     5   3
+4    18     313 11.5   62     5   4
+5    NA      NA 14.3   56     5   5
+6    28      NA 14.9   66     5   6
+> head(recode_as_na(airquality, value=41,subset_cols="Ozone"))
+  Ozone Solar.R Wind Temp Month Day
+1    NA     190  7.4   67     5   1
+2    36     118  8.0   72     5   2
+3    12     149 12.6   74     5   3
+4    18     313 11.5   62     5   4
+5    NA      NA 14.3   56     5   5
+6    28      NA 14.9   66     5   6
+> 
+> 
+> 
+> cleanEx()
+> nameEx("recode_as_na_for")
+> ### * recode_as_na_for
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: recode_as_na_for
+> ### Title: Recode Values as NA if they meet defined criteria
+> ### Aliases: recode_as_na_for
+> 
+> ### ** Examples
+> 
+> recode_as_na_for(airquality,value=36, criteria = "gteq",
++ subset_cols = c("Ozone","Solar.R"))
+    Ozone Solar.R Wind Temp Month Day
+1      NA      NA  7.4   67     5   1
+2      NA      NA  8.0   72     5   2
+3      12      NA 12.6   74     5   3
+4      18      NA 11.5   62     5   4
+5      NA      NA 14.3   56     5   5
+6      28      NA 14.9   66     5   6
+7      23      NA  8.6   65     5   7
+8      19      NA 13.8   59     5   8
+9       8      19 20.1   61     5   9
+10     NA      NA  8.6   69     5  10
+11      7      NA  6.9   74     5  11
+12     16      NA  9.7   69     5  12
+13     11      NA  9.2   66     5  13
+14     14      NA 10.9   68     5  14
+15     18      NA 13.2   58     5  15
+16     14      NA 11.5   64     5  16
+17     34      NA 12.0   66     5  17
+18      6      NA 18.4   57     5  18
+19     30      NA 11.5   68     5  19
+20     11      NA  9.7   62     5  20
+21      1       8  9.7   59     5  21
+22     11      NA 16.6   73     5  22
+23      4      25  9.7   61     5  23
+24     32      NA 12.0   61     5  24
+25     NA      NA 16.6   57     5  25
+26     NA      NA 14.9   58     5  26
+27     NA      NA  8.0   57     5  27
+28     23      13 12.0   67     5  28
+29     NA      NA 14.9   81     5  29
+30     NA      NA  5.7   79     5  30
+31     NA      NA  7.4   76     5  31
+32     NA      NA  8.6   78     6   1
+33     NA      NA  9.7   74     6   2
+34     NA      NA 16.1   67     6   3
+35     NA      NA  9.2   84     6   4
+36     NA      NA  8.6   85     6   5
+37     NA      NA 14.3   79     6   6
+38     29      NA  9.7   82     6   7
+39     NA      NA  6.9   87     6   8
+40     NA      NA 13.8   90     6   9
+41     NA      NA 11.5   87     6  10
+42     NA      NA 10.9   93     6  11
+43     NA      NA  9.2   92     6  12
+44     23      NA  8.0   82     6  13
+45     NA      NA 13.8   80     6  14
+46     NA      NA 11.5   79     6  15
+47     21      NA 14.9   77     6  16
+48     NA      NA 20.7   72     6  17
+49     20      NA  9.2   65     6  18
+50     12      NA 11.5   73     6  19
+51     13      NA 10.3   76     6  20
+52     NA      NA  6.3   77     6  21
+53     NA      NA  1.7   76     6  22
+54     NA      NA  4.6   76     6  23
+55     NA      NA  6.3   76     6  24
+56     NA      NA  8.0   75     6  25
+57     NA      NA  8.0   78     6  26
+58     NA      NA 10.3   73     6  27
+59     NA      NA 11.5   80     6  28
+60     NA      31 14.9   77     6  29
+61     NA      NA  8.0   83     6  30
+62     NA      NA  4.1   84     7   1
+63     NA      NA  9.2   85     7   2
+64     32      NA  9.2   81     7   3
+65     NA      NA 10.9   84     7   4
+66     NA      NA  4.6   83     7   5
+67     NA      NA 10.9   83     7   6
+68     NA      NA  5.1   88     7   7
+69     NA      NA  6.3   92     7   8
+70     NA      NA  5.7   92     7   9
+71     NA      NA  7.4   89     7  10
+72     NA      NA  8.6   82     7  11
+73     10      NA 14.3   73     7  12
+74     27      NA 14.9   81     7  13
+75     NA      NA 14.9   91     7  14
+76      7      NA 14.3   80     7  15
+77     NA      NA  6.9   81     7  16
+78     35      NA 10.3   82     7  17
+79     NA      NA  6.3   84     7  18
+80     NA      NA  5.1   87     7  19
+81     NA      NA 11.5   85     7  20
+82     16       7  6.9   74     7  21
+83     NA      NA  9.7   81     7  22
+84     NA      NA 11.5   82     7  23
+85     NA      NA  8.6   86     7  24
+86     NA      NA  8.0   85     7  25
+87     20      NA  8.6   82     7  26
+88     NA      NA 12.0   86     7  27
+89     NA      NA  7.4   88     7  28
+90     NA      NA  7.4   86     7  29
+91     NA      NA  7.4   83     7  30
+92     NA      NA  9.2   81     7  31
+93     NA      NA  6.9   81     8   1
+94      9      24 13.8   81     8   2
+95     16      NA  7.4   82     8   3
+96     NA      NA  6.9   86     8   4
+97     35      NA  7.4   85     8   5
+98     NA      NA  4.6   87     8   6
+99     NA      NA  4.0   89     8   7
+100    NA      NA 10.3   90     8   8
+101    NA      NA  8.0   90     8   9
+102    NA      NA  8.6   92     8  10
+103    NA      NA 11.5   86     8  11
+104    NA      NA 11.5   86     8  12
+105    28      NA 11.5   82     8  13
+106    NA      NA  9.7   80     8  14
+107    NA      NA 11.5   79     8  15
+108    22      NA 10.3   77     8  16
+109    NA      NA  6.3   79     8  17
+110    23      NA  7.4   76     8  18
+111    31      NA 10.9   78     8  19
+112    NA      NA 10.3   78     8  20
+113    21      NA 15.5   77     8  21
+114     9      NA 14.3   72     8  22
+115    NA      NA 12.6   75     8  23
+116    NA      NA  9.7   79     8  24
+117    NA      NA  3.4   81     8  25
+118    NA      NA  8.0   86     8  26
+119    NA      NA  5.7   88     8  27
+120    NA      NA  9.7   97     8  28
+121    NA      NA  2.3   94     8  29
+122    NA      NA  6.3   96     8  30
+123    NA      NA  6.3   94     8  31
+124    NA      NA  6.9   91     9   1
+125    NA      NA  5.1   92     9   2
+126    NA      NA  2.8   93     9   3
+127    NA      NA  4.6   93     9   4
+128    NA      NA  7.4   87     9   5
+129    32      NA 15.5   84     9   6
+130    20      NA 10.9   80     9   7
+131    23      NA 10.3   78     9   8
+132    21      NA 10.9   75     9   9
+133    24      NA  9.7   73     9  10
+134    NA      NA 14.9   81     9  11
+135    21      NA 15.5   76     9  12
+136    28      NA  6.3   77     9  13
+137     9      24 10.9   71     9  14
+138    13      NA 11.5   71     9  15
+139    NA      NA  6.9   78     9  16
+140    18      NA 13.8   67     9  17
+141    13      27 10.3   76     9  18
+142    24      NA 10.3   68     9  19
+143    16      NA  8.0   82     9  20
+144    13      NA 12.6   64     9  21
+145    23      14  9.2   71     9  22
+146    NA      NA 10.3   81     9  23
+147     7      NA 10.3   69     9  24
+148    14      20 16.6   63     9  25
+149    30      NA  6.9   70     9  26
+150    NA      NA 13.2   77     9  27
+151    14      NA 14.3   75     9  28
+152    18      NA  8.0   76     9  29
+153    20      NA 11.5   68     9  30
+> 
+> 
+> 
+> cleanEx()
+> nameEx("recode_as_na_if")
+> ### * recode_as_na_if
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: recode_as_na_if
+> ### Title: Conditionally change all column values to NA
+> ### Aliases: recode_as_na_if
+> 
+> ### ** Examples
+> 
+> head(recode_as_na_if(airquality, sign="gt", percent_na=20))
+  Ozone Solar.R Wind Temp Month Day
+1    NA     190  7.4   67     5   1
+2    NA     118  8.0   72     5   2
+3    NA     149 12.6   74     5   3
+4    NA     313 11.5   62     5   4
+5    NA      NA 14.3   56     5   5
+6    NA      NA 14.9   66     5   6
+> 
+> 
+> 
+> cleanEx()
+> nameEx("recode_as_na_str")
+> ### * recode_as_na_str
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: recode_as_na_str
+> ### Title: Recode as NA based on string match
+> ### Aliases: recode_as_na_str
+> 
+> ### ** Examples
+> 
+> partial_match <- data.frame(A=c("Hi","match_me","nope"), B=c(NA, "not_me","nah"))
+> # Replace all that end with "me" with NA
+> recode_as_na_str(partial_match,"ends_with","me")
+     A    B
+1   Hi <NA>
+2 <NA> <NA>
+3 nope  nah
+> # Do not recode, ie case-sensitive
+> recode_as_na_str(partial_match,"ends_with","ME", case_sensitive=TRUE)
+         A      B
+1       Hi   <NA>
+2 match_me not_me
+3     nope    nah
+> 
+> 
+> 
+> cleanEx()
+> nameEx("recode_na_as")
+> ### * recode_na_as
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: recode_na_as
+> ### Title: Replace missing values with another value
+> ### Aliases: recode_na_as
+> 
+> ### ** Examples
+> 
+> head(recode_na_as(airquality, "n/a"))
+  Ozone Solar.R Wind Temp Month Day
+1    41     190  7.4   67     5   1
+2    36     118  8.0   72     5   2
+3    12     149 12.6   74     5   3
+4    18     313 11.5   62     5   4
+5   n/a     n/a 14.3   56     5   5
+6    28     n/a 14.9   66     5   6
+> head(recode_na_as(airquality, subset_cols = "Ozone", value = "N/A"))
+  Ozone Solar.R Wind Temp Month Day
+1    41     190  7.4   67     5   1
+2    36     118  8.0   72     5   2
+3    12     149 12.6   74     5   3
+4    18     313 11.5   62     5   4
+5   N/A      NA 14.3   56     5   5
+6    28      NA 14.9   66     5   6
+> head(recode_na_as(airquality, value=0, pattern_type="starts_with",pattern="Solar"))
+  Ozone Solar.R Wind Temp Month Day
+1    41     190  7.4   67     5   1
+2    36     118  8.0   72     5   2
+3    12     149 12.6   74     5   3
+4    18     313 11.5   62     5   4
+5    NA       0 14.3   56     5   5
+6    28       0 14.9   66     5   6
+> 
+> 
+> 
+> cleanEx()
+> nameEx("recode_na_if")
+> ### * recode_na_if
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: recode_na_if
+> ### Title: Recode NA as another value with some conditions
+> ### Aliases: recode_na_if
+> 
+> ### ** Examples
+> 
+> some_data <- data.frame(ID=c("A1","A2","A3", "A4"),
++ A=c(5,NA,0,8), B=c(10,0,0,1),C=c(1,NA,NA,25))
+> # Replace NAs with 0s only for IDs in A2 and A3
+> recode_na_if(some_data,"ID",c("A2","A3"),replacement=0)
+ERROR: modification of compiler constant of type integer, length 1
+ERROR: the modified value of the constant is:
+[1] 4
+ERROR: the original value of the constant is:
+[1] 1
+ERROR: the modified constant is at index 12
+ERROR: the modified constant is in this function body:
+{
+    cols <- enquo(cols)
+    if (.top_level) {
+        mask$set_current_group(1L)
+    }
+    else {
+        cols <- quo_set_env(cols, data_mask_top(quo_get_env(cols), 
+            recursive = FALSE, inherit = TRUE))
+    }
+    vars <- tidyselect::eval_select(cols, data = mask$across_cols())
+    vars <- names(vars)
+    if (is.null(fns)) {
+        if (!is.null(names)) {
+            glue_mask <- across_glue_mask(.caller_env, .col = vars, 
+                .fn = "1")
+            names <- vec_as_names(glue(names, .envir = glue_mask), 
+                repair = "check_unique")
+        }
+        value <- list(vars = vars, fns = fns, names = names)
+        return(value)
+    }
+    if (is.function(fns) || is_formula(fns)) {
+        names <- names %||% "{.col}"
+        fns <- list(`1` = fns)
+    }
+    else {
+        names <- names %||% "{.col}_{.fn}"
+    }
+    if (!is.list(fns)) {
+        abort(c("Problem with `across()` input `.fns`.", i = "Input `.fns` must be NULL, a function, a formula, or a list of functions/formulas."))
+    }
+    expr_protect <- function(x) {
+        call2(quote, x)
+    }
+    fns <- map(fns, function(fn) {
+        if (is_formula(fn) && .top_level) {
+            f_rhs(fn) <- call2(quote(rlang::eval_tidy), expr_protect(f_rhs(fn)), 
+                data = mask$get_rlang_mask())
+        }
+        fn <- as_function(fn)
+        fn
+    })
+    if (is.null(names(fns))) {
+        names_fns <- seq_along(fns)
+    }
+    else {
+        names_fns <- names(fns)
+        empties <- which(names_fns == "")
+        if (length(empties)) {
+            names_fns[empties] <- empties
+        }
+    }
+    glue_mask <- glue_mask <- across_glue_mask(.caller_env, .col = rep(vars, 
+        each = length(fns)), .fn = rep(names_fns, length(vars)))
+    names <- vec_as_names(glue(names, .envir = glue_mask), repair = "check_unique")
+    list(vars = vars, fns = fns, names = names)
+}
+Function across_setup_impl in namespace dplyr has this body.
+Fatal error: compiler constants were modified!
+

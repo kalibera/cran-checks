@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/ParamHelpers.Rcheck’
-* using R Under development (unstable) (2020-12-09 r79601)
+* using R Under development (unstable) (2021-02-17 r80023)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘ParamHelpers/DESCRIPTION’ ... OK
@@ -55,6 +55,7 @@ The error most likely occurred in:
 > ### ** Examples
 > 
 > ps = makeParamSet(makeNumericParam("x"))
+> op = makeOptPathDF(par.set = ps, y.names = "y", minimize = TRUE)
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"
@@ -72,9 +73,9 @@ Fatal error: compiler constants were modified!
   Running ‘run-all.R’
 Running the tests in ‘tests/run-all.R’ failed.
 Last 13 lines of output:
-  ── Skip (test_convertParamSetToIrace.R:4:3): convertParamSetToIrace ────────────
-  Reason: On CRAN
-  
+  > library(ParamHelpers)
+  > 
+  > test_check("ParamHelpers")
   ERROR: modification of compiler constant of type character, length 2
   ERROR: the modified value of the constant is:
   [1] "integer"       "integervector"
