@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2021-02-17 r80023) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-02-20 r80030) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -16,8 +16,14 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(testthat)
-> library(tuneRanger)
-Loading required package: ranger
+> 
+> # the unit tests take pretty long, that can be a problem on WB and cran (and maybe annoying locally)
+> # so we run all tests only on travis and if a certain user env var is set
+> if (identical(Sys.getenv("TRAVIS"), "true") || identical(Sys.getenv("R_EXPENSIVE_TEST_OK"), "true") || identical(Sys.getenv("NOT_CRAN"), "true")) {
++   test_check("mlrMBO")
++ } else {
++   test_check("mlrMBO", filter = "((mbo_rf)|(mbo_km))")
++ }
 Loading required package: mlrMBO
 Loading required package: mlr
 Loading required package: ParamHelpers
@@ -25,19 +31,7 @@ Loading required package: ParamHelpers
 efforts will go into its successor 'mlr3' (<https://mlr3.mlr-org.com>).
 Loading required package: smoof
 Loading required package: checkmate
-Loading required package: parallel
-Loading required package: lubridate
-
-Attaching package: 'lubridate'
-
-The following objects are masked from 'package:base':
-
-    date, intersect, setdiff, union
-
-Loading required package: lhs
-> 
-> test_check("tuneRanger")
-Approximated time for tuning: 54SERROR: modification of compiler constant of type character, length 2
+ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"
 attr(,".match.hash")
@@ -47,5 +41,3 @@ ERROR: the original value of the constant is:
 ERROR: the modified constant is at index 1
 ERROR: the modified constant is in this function body:
 c("integer", "integervector")
-Fatal error: compiler constants were modified!
-

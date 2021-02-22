@@ -1,3 +1,4 @@
+sh: line 1: 3929192 Segmentation fault      (core dumped) '/var/scratch2/tomas/cran/rcnst/build/bin/R' --vanilla --no-echo > '/var/scratch2/tomas/tmp/RtmpTJ9x3z/file3bf1ca68f88ee4' 2>&1 < '/var/scratch2/tomas/tmp/RtmpTJ9x3z/file3bf1ca1488d956'
 --- re-building ‘Binary-and-continuous-features.Rmd’ using rmarkdown
 
 Attaching package: 'igraph'
@@ -92,8 +93,53 @@ ERROR: the modified constant is in this function body:
     list(vars = vars, fns = fns, names = names)
 }
 Function across_setup_impl in namespace dplyr has this body.
-Fatal error: compiler constants were modified!
 
+ *** caught segfault ***
+address 0x1a00000010, cause 'memory not mapped'
+
+Traceback:
+ 1: (function () .Primitive(".subset2")(from, .current_group))()
+ 2: paste(from, to, sep = "-")
+ 3: mask$eval_all_mutate(quo)
+ 4: withCallingHandlers({    for (i in seq_along(dots)) {        mask$across_cache_reset()        quosures <- expand_quosure(dots[[i]])        for (k in seq_along(quosures)) {            quo <- quosures[[k]]            quo_data <- attr(quo, "dplyr:::data")            context_poke("column", quo_data$column)            chunks <- NULL            result <- NULL            if (quo_is_symbol(quo)) {                name <- as_string(quo_get_expr(quo))                if (name %in% names(new_columns)) {                  result <- new_columns[[name]]                  chunks <- mask$resolve(name)                }                else if (name %in% names(.data)) {                  result <- .data[[name]]                  chunks <- mask$resolve(name)                }                if (inherits(.data, "rowwise_df") && vec_is_list(result)) {                  sizes <- list_sizes(result)                  wrong <- which(sizes != 1)                  if (length(wrong)) {                    group <- wrong[1L]                    mask$set_current_group(group)                    abort(x_size = sizes[group], class = "dplyr:::mutate_incompatible_size")                  }                }            }            if (is.null(chunks)) {                chunks <- mask$eval_all_mutate(quo)            }            if (is.null(chunks)) {                if (quo_data$is_named) {                  name <- quo_data$name_given                  new_columns[[name]] <- zap()                  mask$remove(name)                }                next            }            if (is.null(result)) {                if (length(rows) == 1) {                  result <- chunks[[1]]                }                else {                  result <- withCallingHandlers(vec_unchop(chunks <- vec_cast_common(!!!chunks),                     rows), vctrs_error_incompatible_type = function(cnd) {                    abort(class = "dplyr:::error_mutate_incompatible_combine",                       parent = cnd)                  })                }            }            if (!quo_data$is_named && is.data.frame(result)) {                new_columns[names(result)] <- result                mask$add_many(result, chunks)            }            else {                name <- quo_data$name_auto                new_columns[[name]] <- result                mask$add_one(name, chunks)            }        }    }}, error = function(e) {    local_call_step(dots = dots, .index = i, .fn = "mutate",         .dot_data = inherits(e, "rlang_error_data_pronoun_not_found"))    call_step_envir <- peek_call_step()    error_name <- call_step_envir$error_name    error_expression <- call_step_envir$error_expression    show_group_details <- TRUE    if (inherits(e, "dplyr:::mutate_incompatible_size")) {        size <- vec_size(rows[[mask$get_current_group()]])        x_size <- e$x_size        bullets <- c(x = glue("Input `{error_name}` can't be recycled to size {size}."),             i = cnd_bullet_input_info(), i = glue("Input `{error_name}` must be size {or_1(size)}, not {x_size}."),             i = cnd_bullet_rowwise_unlist())    }    else if (inherits(e, "dplyr:::mutate_mixed_null")) {        show_group_details <- FALSE        bullets <- c(x = glue("`{error_name}` must return compatible vectors across groups."),             i = cnd_bullet_input_info(), i = "Cannot combine NULL and non NULL results.",             i = cnd_bullet_rowwise_unlist())    }    else if (inherits(e, "dplyr:::mutate_not_vector")) {        bullets <- c(x = glue("Input `{error_name}` must be a vector, not {friendly_type_of(e$result)}."),             i = cnd_bullet_input_info(), i = cnd_bullet_rowwise_unlist())    }    else if (inherits(e, "dplyr:::error_mutate_incompatible_combine")) {        show_group_details <- FALSE        bullets <- c(x = glue("Input `{error_name}` must return compatible vectors across groups"),             i = cnd_bullet_input_info(), i = cnd_bullet_combine_details(e$parent$x,                 e$parent$x_arg), i = cnd_bullet_combine_details(e$parent$y,                 e$parent$y_arg))    }    else {        bullets <- c(x = conditionMessage(e), i = cnd_bullet_input_info())    }    bullets <- c(cnd_bullet_header(), bullets, i = if (show_group_details) cnd_bullet_cur_group_label())    abort(bullets, class = c("dplyr:::mutate_error", "dplyr_error"),         error_name = error_name, error_expression = error_expression,         parent = e, bullets = bullets)}, warning = function(w) {    if (check_muffled_warning(w)) {        maybe_restart("muffleWarning")    }    local_call_step(dots = dots, .index = i, .fn = "mutate")    warn(c(cnd_bullet_header(), i = conditionMessage(w), i = cnd_bullet_input_info(),         i = cnd_bullet_cur_group_label()))    maybe_restart("muffleWarning")})
+ 5: mutate_cols(.data, ...)
+ 6: mutate.data.frame(., distance = distance, edge_name = paste(from,     to, sep = "-"))
+ 7: dplyr::mutate(., distance = distance, edge_name = paste(from,     to, sep = "-"))
+ 8: g_list$edges %>% dplyr::mutate(distance = distance, edge_name = paste(from,     to, sep = "-"))
+ 9: prepare_SETSe_continuous(., node_names = "name", force_var = "force",     k = 500)
+10: "igraph" %in% class(graph)
+11: is_igraph(graph)
+12: i_set_edge_attr(graph = graph, name = name, index = index, value = value)
+13: igraph::set.edge.attribute(g, "distance", value = igraph::get.edge.attribute(g,     distance))
+14: SETSe_data_prep(g = g, force = force, distance = distance, mass = mass,     edge_name = edge_name, k = k, sparse = sparse)
+15: SETSe_auto(., k = "k")
+16: biconnected_network %>% prepare_SETSe_continuous(., node_names = "name",     force_var = "force", k = 500) %>% SETSe_auto(., k = "k")
+17: eval(expr, envir, enclos)
+18: eval(expr, envir, enclos)
+19: withVisible(eval(expr, envir, enclos))
+20: withCallingHandlers(withVisible(eval(expr, envir, enclos)), warning = wHandler,     error = eHandler, message = mHandler)
+21: handle(ev <- withCallingHandlers(withVisible(eval(expr, envir,     enclos)), warning = wHandler, error = eHandler, message = mHandler))
+22: timing_fn(handle(ev <- withCallingHandlers(withVisible(eval(expr,     envir, enclos)), warning = wHandler, error = eHandler, message = mHandler)))
+23: evaluate_call(expr, parsed$src[[i]], envir = envir, enclos = enclos,     debug = debug, last = i == length(out), use_try = stop_on_error !=         2L, keep_warning = keep_warning, keep_message = keep_message,     output_handler = output_handler, include_timing = include_timing)
+24: evaluate::evaluate(...)
+25: evaluate(code, envir = env, new_device = FALSE, keep_warning = !isFALSE(options$warning),     keep_message = !isFALSE(options$message), stop_on_error = if (options$error &&         options$include) 0L else 2L, output_handler = knit_handlers(options$render,         options))
+26: in_dir(input_dir(), evaluate(code, envir = env, new_device = FALSE,     keep_warning = !isFALSE(options$warning), keep_message = !isFALSE(options$message),     stop_on_error = if (options$error && options$include) 0L else 2L,     output_handler = knit_handlers(options$render, options)))
+27: block_exec(params)
+28: call_block(x)
+29: process_group.block(group)
+30: process_group(group)
+31: withCallingHandlers(if (tangle) process_tangle(group) else process_group(group),     error = function(e) {        setwd(wd)        cat(res, sep = "\n", file = output %n% "")        message("Quitting from lines ", paste(current_lines(i),             collapse = "-"), " (", knit_concord$get("infile"),             ") ")    })
+32: process_file(text, output)
+33: knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet)
+34: rmarkdown::render(file, encoding = encoding, quiet = quiet, envir = globalenv(),     output_dir = getwd(), ...)
+35: vweave_rmarkdown(...)
+36: engine$weave(file, quiet = quiet, encoding = enc)
+37: doTryCatch(return(expr), name, parentenv, handler)
+38: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+39: tryCatchList(expr, classes, parentenv, handlers)
+40: tryCatch({    engine$weave(file, quiet = quiet, encoding = enc)    setwd(startdir)    output <- find_vignette_product(name, by = "weave", engine = engine)    if (!have.makefile && vignette_is_tex(output)) {        texi2pdf(file = output, clean = FALSE, quiet = quiet)        output <- find_vignette_product(name, by = "texi2pdf",             engine = engine)    }}, error = function(e) {    OK <<- FALSE    message(gettextf("Error: processing vignette '%s' failed with diagnostics:\n%s",         file, conditionMessage(e)))})
+41: tools:::.buildOneVignette("Binary-and-continuous-features.Rmd",     "/var/scratch2/tomas/cran/rcnst/check/rsetse.Rcheck/vign_test/rsetse",     TRUE, FALSE, "Binary-and-continuous-features", "UTF-8", "/var/scratch2/tomas/tmp/RtmpTJ9x3z/file3bf1ca232c00e1.rds")
+An irrecoverable exception occurred. R is aborting now ...
 --- re-building ‘separate-peels-quintet.Rmd’ using rmarkdown
 
 Attaching package: 'dplyr'

@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2021-02-17 r80023) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-02-20 r80030) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -22,7 +22,7 @@ Type 'q()' to quit R.
 > options(warn = 1)
 > library('maditr')
 
-To select columns from data: take(mtcars, am, vs, mpg)
+To select rows from data: take_if(mtcars, am==0)
 
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
@@ -2447,7 +2447,7 @@ Sepal.Length  Sepal.Width
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  2.137 0.105 2.141 0 0 
+Time elapsed:  3.07 0.209 4.807 0 0 
 > grDevices::dev.off()
 null device 
           1 
