@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2021-02-20 r80030) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-02-22 r80031) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -16,14 +16,6 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(testthat)
+> library(tablet)
 > 
-> # no tests on CRAN because the check limit is 10 mins
-> 
-> if (identical(Sys.getenv("NOT_CRAN"), "true")) {
-+   set.seed(getOption("mlr.debug.seed"))
-+   test_check("mlr", "_surv_")
-+ }
-> 
-> proc.time()
-   user  system elapsed 
-  0.559   0.142   0.711 
+> test_check("tablet")

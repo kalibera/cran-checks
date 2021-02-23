@@ -16,14 +16,6 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(testthat)
+> library(flashlight)
 > 
-> # no tests on CRAN because the check limit is 10 mins
-> 
-> if (identical(Sys.getenv("NOT_CRAN"), "true")) {
-+   set.seed(getOption("mlr.debug.seed"))
-+   test_check("mlr", "_learners_all_regr")
-+ }
-> 
-> proc.time()
-   user  system elapsed 
-  0.581   0.116   0.677 
+> test_check("flashlight")
