@@ -1,0 +1,79 @@
+
+R Under development (unstable) (2021-02-26 r80036) -- "Unsuffered Consequences"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(units)
+udunits database from /usr/share/udunits/udunits2.xml
+> library(testthat)
+> 
+> ref = set_units(1, m)
+> 
+> # character input
+> expect_equal(set_units(1, "m", mode = "standard"), ref)
+> # units input
+> expect_equal(set_units(1, as_units("m"), mode = "standard"), ref)
+> # symbolic_units input
+> expect_equal(set_units(1, units(ref), mode = "standard"), ref)
+> 
+> set_units(1, m/s)
+1 [m/s]
+> 
+> # use object from parent frame, non-ambiguous:
+> foo = ref
+> expect_equal(set_units(1, foo, mode = "standard"), ref)
+> foo = "m"
+> expect_equal(set_units(1, foo, mode = "standard"), ref)
+> foo = as_units("m")
+> expect_equal(set_units(1, foo, mode = "standard"), ref)
+> 
+> # ambiguous, should warn:
+> m = "u"
+> set_units(1, m) # m by NSE
+1 [m]
+> m = as_units("u")
+> set_units(1, m, mode = "standard") # u by units
+1 [u]
+> set_units(1, m) # m by NSE
+1 [m]
+> 
+> degree_C = "m"
+> set_units(1, degree_C)
+1 [°C]
+> 
+> degree_C = as_units("m")
+> 
+> set_units(1, degree_C)
+1 [°C]
+> 
+> # OK:
+> set_units(1, "bar", mode = "standard")
+1 [bar]
+> (tenbar <- set_units(10, bar))
+10 [bar]
+> (set_units(1, units(tenbar), mode = "standard"))
+1 [bar]
+> (set_units(1, tenbar, mode = "standard"))
+1 [bar]
+Warning message:
+In `units<-.numeric`(`*tmp*`, value = as_units(value, ...)) :
+  numeric value 10 is ignored in unit assignment
+> 
+> set_units(10, uu <- degree_C, mode = "standard")
+10 [m]
+> 
+> proc.time()
+   user  system elapsed 
+  2.896   0.223   3.217 

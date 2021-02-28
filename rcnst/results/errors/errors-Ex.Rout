@@ -1,0 +1,541 @@
+
+R Under development (unstable) (2021-02-26 r80036) -- "Unsuffered Consequences"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "errors"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('errors')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("Extract.errors")
+> ### * Extract.errors
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Extract.errors
+> ### Title: Extract or Replace Parts of an Object
+> ### Aliases: Extract.errors [.errors [[.errors [<-.errors [[<-.errors
+> 
+> ### ** Examples
+> 
+> x <- set_errors(1:3, 0.1)
+> y <- set_errors(4:6, 0.2)
+> (z <- rbind(x, y))
+Errors: 0.1 0.2 0.1 0.2 0.1 ...
+  [,1] [,2] [,3]
+x    1    2    3
+y    4    5    6
+> z[2, 2]
+5.0(2)
+> z[2, 2] <- -1
+> errors(z[[1, 2]]) <- 0.8
+> z[, 2]
+Errors: 0.8 0.0
+ x  y 
+ 2 -1 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("as.data.frame.errors")
+> ### * as.data.frame.errors
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: as.data.frame.errors
+> ### Title: Coerce to a Data Frame
+> ### Aliases: as.data.frame.errors
+> 
+> ### ** Examples
+> 
+> x <- set_errors(1:3, 0.1)
+> y <- set_errors(4:6, 0.2)
+> (z <- cbind(x, y))
+Errors: 0.1 0.1 0.1 0.2 0.2 ...
+     x y
+[1,] 1 4
+[2,] 2 5
+[3,] 3 6
+> as.data.frame(z)
+       x      y
+1 1.0(1) 4.0(2)
+2 2.0(1) 5.0(2)
+3 3.0(1) 6.0(2)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("as.list.errors")
+> ### * as.list.errors
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: as.list.errors
+> ### Title: Coerce to a List
+> ### Aliases: as.list.errors
+> 
+> ### ** Examples
+> 
+> x <- set_errors(1:3, 0.1)
+> as.list(x)
+[[1]]
+1.0(1)
+
+[[2]]
+2.0(1)
+
+[[3]]
+3.0(1)
+
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("as.matrix.errors")
+> ### * as.matrix.errors
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: as.matrix.errors
+> ### Title: Coerce to a Matrix
+> ### Aliases: as.matrix.errors
+> 
+> ### ** Examples
+> 
+> as.matrix(set_errors(1:3, 0.1))
+Errors: 0.1 0.1 0.1
+     [,1]
+[1,]    1
+[2,]    2
+[3,]    3
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("c.errors")
+> ### * c.errors
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: c.errors
+> ### Title: Combine Values into a Vector or List
+> ### Aliases: c.errors
+> 
+> ### ** Examples
+> 
+> c(set_errors(1, 0.2), set_errors(7:9, 0.1), 3)
+Errors: 0.2 0.1 0.1 0.1 0.0
+[1] 1 7 8 9 3
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("cbind.errors")
+> ### * cbind.errors
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: cbind.errors
+> ### Title: Combine R Objects by Rows or Columns
+> ### Aliases: cbind.errors rbind.errors
+> 
+> ### ** Examples
+> 
+> x <- set_errors(1, 0.1)
+> y <- set_errors(1:3, 0.2)
+> (m <- cbind(x, y)) # the '1' (= shorter vector) is recycled
+Errors: 0.1 0.1 0.1 0.2 0.2 ...
+     x y
+[1,] 1 1
+[2,] 1 2
+[3,] 1 3
+> (m <- cbind(m, 8:10)[, c(1, 3, 2)]) # insert a column
+Errors: 0.1 0.1 0.1 0.0 0.0 ...
+     x 8:10 y
+[1,] 1    8 1
+[2,] 1    9 2
+[3,] 1   10 3
+> cbind(y, diag(3)) # vector is subset -> warning
+Errors: 0.2 0.2 0.2 0.0 0.0 ...
+     y      
+[1,] 1 1 0 0
+[2,] 2 0 1 0
+[3,] 3 0 0 1
+> cbind(0, rbind(x, y))
+Errors: 0.0 0.0 0.1 0.2 0.1 ...
+  0      
+x 0 1 1 1
+y 0 1 2 3
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("correl")
+> ### * correl
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: correl
+> ### Title: Handle Correlations Between 'errors' Objects
+> ### Aliases: correl correl<- set_correl covar covar<- set_covar
+> 
+> ### ** Examples
+> 
+> x <- set_errors(1:5, 0.1)
+> y <- set_errors(1:5, 0.1)
+> 
+> # Self-correlation is of course 1, and cannot be changed
+> correl(x, x)
+[1] 1 1 1 1 1
+> ## Not run: 
+> ##D correl(x, x) <- 0.5
+> ## End(Not run)
+> 
+> # Cross-correlation can be set, but must be a value between -1 and 1
+> correl(x, y)
+NULL
+> ## Not run: 
+> ##D correl(x, y) <- 1.5
+> ## End(Not run)
+> correl(x, y) <- runif(length(x))
+> correl(x, y)
+[1] 0.2655087 0.3721239 0.5728534 0.9082078 0.2016819
+> covar(x, y)
+[1] 0.002655087 0.003721239 0.005728534 0.009082078 0.002016819
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("diff.errors")
+> ### * diff.errors
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: diff.errors
+> ### Title: Lagged Differences
+> ### Aliases: diff.errors
+> 
+> ### ** Examples
+> 
+> diff(set_errors(1:10, 0.1), 2)
+Errors: 0.1414214 0.1414214 0.1414214 0.1414214 0.1414214 ...
+[1] 2 2 2 2 2 2 2 2
+> diff(set_errors(1:10, 0.1), 2, 2)
+Errors: 0.2 0.2 0.2 0.2 0.2 ...
+[1] 0 0 0 0 0 0
+> x <- cumsum(cumsum(set_errors(1:10, 0.1)))
+> diff(x, lag = 2)
+Errors: 0.2645751 0.3605551 0.4582576 0.5567764 0.6557439 ...
+[1]   9  16  25  36  49  64  81 100
+> diff(x, differences = 2)
+Errors: 0.3605551 0.5000000 0.6403124 0.7810250 0.9219544 ...
+[1]  3  4  5  6  7  8  9 10
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("errors-package")
+> ### * errors-package
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: errors-package
+> ### Title: 'errors': Uncertainty Propagation for R Vectors
+> ### Aliases: errors-package
+> 
+> ### ** Examples
+> 
+> ## Simultaneous resistance and reactance measurements
+> 
+> # Obtain mean values and uncertainty from measured values
+> V   <- mean(set_errors(GUM.H.2$V))
+> I   <- mean(set_errors(GUM.H.2$I))
+> phi <- mean(set_errors(GUM.H.2$phi))
+> 
+> # Set correlations between variables
+> correl(V, I)   <- with(GUM.H.2, cor(V, I))
+> correl(V, phi) <- with(GUM.H.2, cor(V, phi))
+> correl(I, phi) <- with(GUM.H.2, cor(I, phi))
+> 
+> # Computation of resistance, reactance and impedance values
+> (R <- (V / I) * cos(phi))
+127.73(7)
+> (X <- (V / I) * sin(phi))
+219.8(3)
+> (Z <- (V / I))
+254.3(2)
+> 
+> # Correlations between derived quantities
+> correl(R, X)
+[1] -0.5884298
+> correl(R, Z)
+[1] -0.4852592
+> correl(X, Z)
+[1] 0.9925116
+> 
+> ## Calibration of a thermometer
+> 
+> # Least-squares fit for a reference temperature of 20 degC
+> fit <- lm(bk ~ I(tk - 20), data = GUM.H.3)
+> 
+> # Extract coefficients and set correlation using the covariance matrix
+> y1 <- set_errors(coef(fit)[1], sqrt(vcov(fit)[1, 1]))
+> y2 <- set_errors(coef(fit)[2], sqrt(vcov(fit)[2, 2]))
+> covar(y1, y2) <- vcov(fit)[1, 2]
+> 
+> # Predicted correction for 30 degC
+> (b.30 <- y1 + y2 * set_errors(30 - 20))
+-0.149(4)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("errors")
+> ### * errors
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: errors
+> ### Title: Handle Uncertainty on a Numeric Vector
+> ### Aliases: errors errors_max errors_min errors<- set_errors as.errors
+> 
+> ### ** Examples
+> 
+> x = 1:3
+> class(x)
+[1] "integer"
+> x
+[1] 1 2 3
+> errors(x) <- 0.1
+> class(x)
+[1] "errors"
+> x
+Errors: 0.1 0.1 0.1
+[1] 1 2 3
+> 
+> (x <- set_errors(x, seq(0.1, 0.3, 0.1)))
+Errors: 0.1 0.2 0.3
+[1] 1 2 3
+> errors_max(x)
+[1] 1.1 2.2 3.3
+> errors_min(x)
+[1] 0.9 1.8 2.7
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("format.errors")
+> ### * format.errors
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: format.errors
+> ### Title: Encode 'errors'
+> ### Aliases: format.errors
+> 
+> ### ** Examples
+> 
+> x <- set_errors(1:3*100, 1:3*100 * 0.05)
+> format(x)
+[1] "100(5)"  "200(10)" "300(20)"
+> format(x, digits=2)
+[1] "100.0(50)" "200(10)"   "300(15)"  
+> format(x, scientific=TRUE)
+[1] "1.00(5)e2" "2.0(1)e2"  "3.0(2)e2" 
+> format(x, notation="plus-minus")
+[1] "100 ± 5"  "200 ± 10" "300 ± 20"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("groupGeneric.errors")
+> ### * groupGeneric.errors
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: groupGeneric.errors
+> ### Title: S3 Group Generic Functions
+> ### Aliases: groupGeneric.errors Math.errors Ops.errors Summary.errors
+> 
+> ### ** Examples
+> 
+> x <- set_errors(1:3, 0.1)
+> exp(x)
+Errors: 0.2718282 0.7389056 2.0085537
+[1]  2.718282  7.389056 20.085537
+> log(x)
+Errors: 0.10000000 0.05000000 0.03333333
+[1] 0.0000000 0.6931472 1.0986123
+> cumsum(x)
+Errors: 0.1000000 0.1414214 0.1732051
+[1] 1 3 6
+> cumprod(x)
+Errors: 0.1000000 0.2236068 0.7000000
+[1] 1 2 6
+> 
+> y <- set_errors(4:6, 0.2)
+> x / sqrt(y) + y * sin(x)
+Errors: 0.3083702 0.2314527 0.5532258
+[1] 3.865884 5.440914 2.071465
+> 
+> # numeric values are automatically coerced to errors
+> x^2
+Warning: In 'Ops' : non-'errors' operand automatically coerced to an 'errors' object with no uncertainty
+Errors: 0.2 0.4 0.6
+[1] 1 4 9
+> 
+> # boolean operators drop uncertainty
+> y > x
+Warning: In '>' : boolean operators not defined for 'errors' objects, uncertainty dropped
+[1] TRUE TRUE TRUE
+> 
+> c(min(x), max(x))
+[1] 0.9 3.1
+> range(x)
+[1] 0.9 3.1
+> sum(y)
+15.0(3)
+> prod(y)
+120(9)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plot.errors")
+> ### * plot.errors
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plot.errors
+> ### Title: Scatterplot with Error Bars
+> ### Aliases: plot.errors
+> 
+> ### ** Examples
+> 
+> cars <- as.matrix(cars)
+> cars <- as.data.frame(set_errors(cars, cars * 0.05))
+> plot(cars)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("print.errors")
+> ### * print.errors
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: print.errors
+> ### Title: Print Values
+> ### Aliases: print.errors
+> 
+> ### ** Examples
+> 
+> x <- set_errors(1:10, 1:10 * 0.05)
+> print(x)
+Errors: 0.05 0.10 0.15 0.20 0.25 ...
+ [1]  1  2  3  4  5  6  7  8  9 10
+> print(x[1:3])
+Errors: 0.05 0.10 0.15
+[1] 1 2 3
+> print(x[1])
+1.00(5)
+> print(x[1], digits=2)
+1.000(50)
+> print(x[1], notation="plus-minus")
+1.00 ± 0.05
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("rep.errors")
+> ### * rep.errors
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: rep.errors
+> ### Title: Replicate Elements of Vectors and Lists
+> ### Aliases: rep.errors
+> 
+> ### ** Examples
+> 
+> rep(set_errors(1, 0.1), 4)
+Errors: 0.1 0.1 0.1 0.1
+[1] 1 1 1 1
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("t.errors")
+> ### * t.errors
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: t.errors
+> ### Title: Matrix Transpose
+> ### Aliases: t.errors
+> 
+> ### ** Examples
+> 
+> a <- matrix(1:30, 5, 6)
+> errors(a) <- 1:30
+> t(a)
+Errors:  1  6 11 16 21 ...
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    1    2    3    4    5
+[2,]    6    7    8    9   10
+[3,]   11   12   13   14   15
+[4,]   16   17   18   19   20
+[5,]   21   22   23   24   25
+[6,]   26   27   28   29   30
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  1.459 0.147 1.625 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

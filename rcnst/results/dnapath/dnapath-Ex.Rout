@@ -1,0 +1,909 @@
+
+R Under development (unstable) (2021-02-26 r80036) -- "Unsuffered Consequences"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "dnapath"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('dnapath')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("dnapath")
+> ### * dnapath
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dnapath
+> ### Title: Differential Network Analysis Using Gene Pathways
+> ### Aliases: dnapath
+> 
+> ### ** Examples
+> 
+> data(meso)
+> data(p53_pathways)
+> set.seed(0)
+> results <- dnapath(x = meso$gene_expression, pathway_list = p53_pathways,
++                    groups = meso$groups, n_perm = 10)
+> results
+Differential network analysis results between stageii (group 1) and stageiv (group 2) over 13 out of 13 pathways analyzed.
+# A tibble: 13 x 7
+   pathway         dc_score p_value n_genes `n_dc (0.091)` mean_expr1 mean_expr2
+   <chr>              <dbl>   <dbl>   <int>          <int>      <dbl>      <dbl>
+ 1 Regulation of …   0.0658  0.545       37              0      10.1       10.2 
+ 2 Regulation of …   0.0628  0.727       30              0       9.51       9.51
+ 3 Regulation of …   0.0995  0.182       14              3       7.70       7.60
+ 4 TP53 Regulates…   0.0722  0.727       49              2       8.53       8.60
+ 5 TP53 Regulates…   0.149   0.545       14              0       7.76       7.94
+ 6 TP53 Regulates…   0.0680  0.545       44              3       8.28       8.34
+ 7 TP53 regulates…   0.108   0.545       14              0       8.52       8.46
+ 8 Regulation of …   0.0947  0.727       19              0       9.12       9.10
+ 9 TP53 Regulates…   0.117   0.818       18              0       9.37       9.35
+10 TP53 Regulates…   0.112   0.0909      20              4       8.17       8.18
+11 TP53 regulates…   0.0780  0.818       21              1       8.46       8.50
+12 TP53 Regulates…   0.138   0.0909      12              1       8.15       8.16
+13 TP53 Regulates…   0.111   0.455       12              1       7.25       7.25
+> summary(results) # Summary over all pathways in the pathway list.
+# A tibble: 13 x 7
+   pathway         dc_score p_value n_genes `n_dc (0.091)` mean_expr1 mean_expr2
+   <chr>              <dbl>   <dbl>   <int>          <int>      <dbl>      <dbl>
+ 1 Regulation of …   0.0658  0.545       37              0      10.1       10.2 
+ 2 Regulation of …   0.0628  0.727       30              0       9.51       9.51
+ 3 Regulation of …   0.0995  0.182       14              3       7.70       7.60
+ 4 TP53 Regulates…   0.0722  0.727       49              2       8.53       8.60
+ 5 TP53 Regulates…   0.149   0.545       14              0       7.76       7.94
+ 6 TP53 Regulates…   0.0680  0.545       44              3       8.28       8.34
+ 7 TP53 regulates…   0.108   0.545       14              0       8.52       8.46
+ 8 Regulation of …   0.0947  0.727       19              0       9.12       9.10
+ 9 TP53 Regulates…   0.117   0.818       18              0       9.37       9.35
+10 TP53 Regulates…   0.112   0.0909      20              4       8.17       8.18
+11 TP53 regulates…   0.0780  0.818       21              1       8.46       8.50
+12 TP53 Regulates…   0.138   0.0909      12              1       8.15       8.16
+13 TP53 Regulates…   0.111   0.455       12              1       7.25       7.25
+> # Remove results for pathways with p-values above 0.2.
+> top_results <- filter_pathways(results, 0.2)
+> # Sort the top results by the pathway DC score.
+> top_results <- sort(top_results, by = "dc_score")
+> top_results
+Differential network analysis results between stageii (group 1) and stageiv (group 2) over 3 out of 13 pathways analyzed.
+# A tibble: 3 x 7
+  pathway          dc_score p_value n_genes `n_dc (0.091)` mean_expr1 mean_expr2
+  <chr>               <dbl>   <dbl>   <int>          <int>      <dbl>      <dbl>
+1 TP53 Regulates …   0.138   0.0909      12              1       8.15       8.16
+2 TP53 Regulates …   0.112   0.0909      20              4       8.17       8.18
+3 Regulation of T…   0.0995  0.182       14              3       7.70       7.60
+> summary(top_results[[1]])  # Summary of pathway 1.
+# A tibble: 12 x 6
+   pathway                          genes dc_score p_value mean_expr1 mean_expr2
+   <chr>                            <chr>    <dbl>   <dbl>      <dbl>      <dbl>
+ 1 TP53 Regulates Transcription of… 8793   0.0220   0.0909       6.90       7.02
+ 2 TP53 Regulates Transcription of… 7159   0.0238   0.182        9.88       9.78
+ 3 TP53 Regulates Transcription of… 1244…  0.0235   0.182       11.5       11.4 
+ 4 TP53 Regulates Transcription of… 23368  0.0226   0.182        8.82       8.93
+ 5 TP53 Regulates Transcription of… 3486   0.0225   0.182       11.1       11.9 
+ 6 TP53 Regulates Transcription of… 8797   0.0151   0.182        6.43       6.27
+ 7 TP53 Regulates Transcription of… 355    0.0229   0.273        9.51       9.36
+ 8 TP53 Regulates Transcription of… 7157   0.0242   0.455       11.1       10.8 
+ 9 TP53 Regulates Transcription of… 7161   0.0173   0.455        3.88       3.47
+10 TP53 Regulates Transcription of… 8626   0.0139   0.455        3.49       3.14
+11 TP53 Regulates Transcription of… 8795   0.0134   0.636       10.8       11.0 
+12 TP53 Regulates Transcription of… 8794   0.00794  0.909        4.39       4.80
+> plot(results[[1]]) # Plot of the differential network for pathway 1.
+> 
+> # Use ... to adjust arguments in the network inference function.
+> # For example, using run_corr() with method = "spearman":
+> results <- dnapath(x = meso$gene_expression, pathway_list = p53_pathways,
++                    groups = meso$groups, n_perm = 10,
++                    network_inference = run_corr,
++                    method = "spearman")
+> results
+Differential network analysis results between stageii (group 1) and stageiv (group 2) over 13 out of 13 pathways analyzed.
+# A tibble: 13 x 7
+   pathway         dc_score p_value n_genes `n_dc (0.091)` mean_expr1 mean_expr2
+   <chr>              <dbl>   <dbl>   <int>          <int>      <dbl>      <dbl>
+ 1 Regulation of …    0.370  0.273       37              3      10.1       10.2 
+ 2 Regulation of …    0.354  0.727       30              2       9.51       9.51
+ 3 Regulation of …    0.415  0.0909      14              3       7.70       7.60
+ 4 TP53 Regulates…    0.351  0.364       49              4       8.53       8.60
+ 5 TP53 Regulates…    0.382  0.273       14              1       7.76       7.94
+ 6 TP53 Regulates…    0.366  0.273       44              6       8.28       8.34
+ 7 TP53 regulates…    0.397  0.182       14              2       8.52       8.46
+ 8 Regulation of …    0.301  0.909       19              0       9.12       9.10
+ 9 TP53 Regulates…    0.270  1           18              1       9.37       9.35
+10 TP53 Regulates…    0.392  0.182       20              5       8.17       8.18
+11 TP53 regulates…    0.360  0.727       21              1       8.46       8.50
+12 TP53 Regulates…    0.420  0.0909      12              4       8.15       8.16
+13 TP53 Regulates…    0.390  0.273       12              3       7.25       7.25
+> 
+> 
+> 
+> cleanEx()
+> nameEx("dnapath2-package")
+> ### * dnapath2-package
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dnapath2-package
+> ### Title: A short title line describing what the package does
+> ### Aliases: dnapath2-package dnapath2
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+>   ## Not run: 
+> ##D      ## Optional simple examples of the most important functions
+> ##D      ## These can be in \dontrun{} and \donttest{} blocks.   
+> ##D   
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("entrez_to_symbol")
+> ### * entrez_to_symbol
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: entrez_to_symbol
+> ### Title: Obtain gene symbols for entrezgene IDs
+> ### Aliases: entrez_to_symbol
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("filter_pathways")
+> ### * filter_pathways
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: filter_pathways
+> ### Title: Remove pathways with non-significant DC scores.
+> ### Aliases: filter_pathways
+> 
+> ### ** Examples
+> 
+> data(meso)
+> data(p53_pathways)
+> set.seed(0)
+> results <- dnapath(x = meso$gene_expression, pathway_list = p53_pathways,
++                    groups = meso$groups, n_perm = 10)
+> results_sig <- filter_pathways(results)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_genes")
+> ### * get_genes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_genes
+> ### Title: Get the gene names from a differential network analysis
+> ### Aliases: get_genes
+> 
+> ### ** Examples
+> 
+> data(meso)
+> data(p53_pathways)
+> set.seed(0)
+> results <- dnapath(x = meso$gene_expression, pathway_list = p53_pathways,
++                    groups = meso$groups, n_perm = 10)
+> genes <- get_genes(results)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_min_alpha")
+> ### * get_min_alpha
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_min_alpha
+> ### Title: Get the minimum alpha level for the permutation test
+> ### Aliases: get_min_alpha
+> 
+> ### ** Examples
+> 
+> data(meso)
+> data(p53_pathways)
+> results <- dnapath(x = meso$gene_expression, pathway_list = p53_pathways,
++                    groups = meso$groups, n_perm = 5)
+> get_min_alpha(results) # 1 / (5 + 1) = 0.167
+[1] 0.1666667
+> results <- dnapath(x = meso$gene_expression, pathway_list = p53_pathways,
++                    groups = meso$groups, n_perm = 10)
+> get_min_alpha(results) # 1 / (10 + 1) = 0.091
+[1] 0.09090909
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_networks")
+> ### * get_networks
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_networks
+> ### Title: Get the two association networks
+> ### Aliases: get_networks
+> 
+> ### ** Examples
+> 
+> data(meso)
+> data(p53_pathways)
+> set.seed(0)
+> results <- dnapath(x = meso$gene_expression, pathway_list = p53_pathways,
++                    groups = meso$groups, n_perm = 10)
+> # Extract the two estimated association networks for the first pathway
+> nw <- get_networks(results[[1]])
+> # Plot the networks using the SeqNet::plot_network function.
+> # Note that the `compare_graph` argument is used so that the same node layout
+> # is used across all of the plots.
+> # Plot the two networks (in separate plots)
+> g <- SeqNet::plot_network(nw[[1]])
+> SeqNet::plot_network(nw[[1]], compare_graph = g)
+> # Plot of the differential network for pathway 1.
+> # Again, the `compare_graph` argument is used to maintain the same layout.
+> plot(results[[1]], compare_graph = g) 
+> # We see that genes 51230 and 7311 show strong differential connectivity.
+> # The plot_pair() function can be used to investigate these two genes further.
+> plot_pair(results[[1]], "51230", "7311")
+`geom_smooth()` using formula 'y ~ x'
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_reactome_pathways")
+> ### * get_reactome_pathways
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_reactome_pathways
+> ### Title: Obtain Reactome pathways
+> ### Aliases: get_reactome_pathways
+> 
+> ### ** Examples
+> 
+> # Obtaining a pathway list for human (Homo sapiens).
+> # In this example, overlapping pathways are not combined (this is
+> # specified by setting overlap_limit to NULL).
+> pathway_list <- get_reactome_pathways("Homo sapiens", overlap_limit = NULL,
++                                       min_size = 10, max_size = 20)
+Obtaining reactome pathway information for species: Homo sapiens 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("head.dnapath_list")
+> ### * head.dnapath_list
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: head.dnapath_list
+> ### Title: Return the first part of the dnapath results.
+> ### Aliases: head.dnapath_list
+> 
+> ### ** Examples
+> 
+> data(meso)
+> data(p53_pathways)
+> set.seed(0)
+> results <- dnapath(x = meso$gene_expression, pathway_list = p53_pathways,
++                    groups = meso$groups, n_perm = 10)
+> head(results)
+# A tibble: 5 x 7
+  pathway          dc_score p_value n_genes `n_dc (0.091)` mean_expr1 mean_expr2
+  <chr>               <dbl>   <dbl>   <int>          <int>      <dbl>      <dbl>
+1 Regulation of T…   0.0658   0.545      37              0      10.1       10.2 
+2 Regulation of T…   0.0628   0.727      30              0       9.51       9.51
+3 Regulation of T…   0.0995   0.182      14              3       7.70       7.60
+4 TP53 Regulates …   0.0722   0.727      49              2       8.53       8.60
+5 TP53 Regulates …   0.149    0.545      14              0       7.76       7.94
+> 
+> 
+> 
+> cleanEx()
+> nameEx("length.dnapath_list")
+> ### * length.dnapath_list
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: length.dnapath_list
+> ### Title: The number of pathways in a 'dnapath_list' object.
+> ### Aliases: length.dnapath_list
+> 
+> ### ** Examples
+> 
+> data(meso)
+> data(p53_pathways)
+> set.seed(0)
+> results <- dnapath(x = meso$gene_expression, pathway_list = p53_pathways,
++                    groups = meso$groups, n_perm = 10)
+> length(results)
+[1] 13
+> 
+> 
+> 
+> cleanEx()
+> nameEx("names.dnapath")
+> ### * names.dnapath
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: names.dnapath
+> ### Title: The pathway names in a 'dnapath' object.
+> ### Aliases: names.dnapath
+> 
+> ### ** Examples
+> 
+> data(meso)
+> data(p53_pathways)
+> set.seed(0)
+> results <- dnapath(x = meso$gene_expression, pathway_list = p53_pathways,
++                    groups = meso$groups, n_perm = 10)
+> names(results[[1]])
+[1] "Regulation of TP53 Degradation (See also: Regulation of TP53 Expression and Degradation)"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("names.dnapath_list")
+> ### * names.dnapath_list
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: names.dnapath_list
+> ### Title: The pathway names in a 'dnapath_list' object.
+> ### Aliases: names.dnapath_list
+> 
+> ### ** Examples
+> 
+> data(meso)
+> data(p53_pathways)
+> set.seed(0)
+> results <- dnapath(x = meso$gene_expression, pathway_list = p53_pathways,
++                    groups = meso$groups, n_perm = 10)
+> names(results)
+ [1] "Regulation of TP53 Degradation (See also: Regulation of TP53 Expression and Degradation)"                                            
+ [2] "Regulation of TP53 Activity through Acetylation"                                                                                     
+ [3] "Regulation of TP53 Activity through Association with Co-factors"                                                                     
+ [4] "TP53 Regulates Transcription of Cell Cycle Genes"                                                                                    
+ [5] "TP53 Regulates Transcription of Genes Involved in G1 Cell Cycle Arrest"                                                              
+ [6] "TP53 Regulates Transcription of Cell Death Genes"                                                                                    
+ [7] "TP53 regulates transcription of several additional cell death genes whose specific roles in p53-dependent apoptosis remain uncertain"
+ [8] "Regulation of TP53 Activity through Methylation"                                                                                     
+ [9] "TP53 Regulates Transcription of Genes Involved in G2 Cell Cycle Arrest"                                                              
+[10] "TP53 Regulates Transcription of Genes Involved in Cytochrome C Release"                                                              
+[11] "TP53 regulates transcription of additional cell cycle genes whose exact role in the p53 pathway remain uncertain"                    
+[12] "TP53 Regulates Transcription of Death Receptors and Ligands"                                                                         
+[13] "TP53 Regulates Transcription of Caspase Activators and Caspases"                                                                     
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plot.dnapath")
+> ### * plot.dnapath
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plot.dnapath
+> ### Title: Plot function for 'dnapath' object.
+> ### Aliases: plot.dnapath
+> 
+> ### ** Examples
+> 
+> data(meso)
+> data(p53_pathways)
+> set.seed(0)
+> results <- dnapath(x = meso$gene_expression, pathway_list = p53_pathways,
++                    groups = meso$groups, n_perm = 10)
+> # Plot of the differential network for pathway 1.
+> plot(results[[1]]) 
+> # Plot of the differential network for pathway 1; remove any edges from
+> # the plot that have p-values above 0.1.
+> plot(results[[1]], alpha = 0.1) 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plot_pair")
+> ### * plot_pair
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plot_pair
+> ### Title: Plot the expression values of two genes
+> ### Aliases: plot_pair
+> 
+> ### ** Examples
+> 
+> data(meso)
+> data(p53_pathways)
+> set.seed(0)
+> results <- dnapath(x = meso$gene_expression, pathway_list = p53_pathways,
++                    groups = meso$groups, n_perm = 10)
+> # Plot of the marginal association between the first two genes.
+> genes <- get_genes(results)[1:2]
+> g <- plot_pair(results, genes[1], genes[2])
+> # The ggplot object, g, can be further modified.
+> # Here we move the legend and use a log scale for the expression values
+> # (the log scale doesn't help with these data but is shown for demonstration).
+> g <- g +
++   ggplot2::theme(legend.position = "bottom") +
++   ggplot2::scale_x_log10() +
++   ggplot2::scale_y_log10()
+> g
+`geom_smooth()` using formula 'y ~ x'
+> 
+> 
+> 
+> cleanEx()
+> nameEx("rename_genes")
+> ### * rename_genes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: rename_genes
+> ### Title: Rename genes in the differential network analysis
+> ### Aliases: rename_genes
+> 
+> ### ** Examples
+> 
+> data(meso)
+> data(p53_pathways)
+> set.seed(0)
+> results <- dnapath(x = meso$gene_expression, pathway_list = p53_pathways,
++                    groups = meso$groups, n_perm = 10)
+> summary(results[[1]])  # Summary of pathway 1; note that it uses entrezgene IDs.
+# A tibble: 37 x 6
+   pathway                          genes dc_score p_value mean_expr1 mean_expr2
+   <chr>                            <chr>    <dbl>   <dbl>      <dbl>      <dbl>
+ 1 Regulation of TP53 Degradation … 1616   0.00610   0.182      10.9       10.7 
+ 2 Regulation of TP53 Degradation … 6233   0.00531   0.182      13.6       13.3 
+ 3 Regulation of TP53 Degradation … 1175…  0.00528   0.182       9.46       9.39
+ 4 Regulation of TP53 Degradation … 5519   0.00506   0.182       9.14       9.20
+ 5 Regulation of TP53 Degradation … 7874   0.00464   0.182      11.2       11.1 
+ 6 Regulation of TP53 Degradation … 10000  0.00599   0.364       9.30       8.82
+ 7 Regulation of TP53 Degradation … 11200  0.00590   0.364       7.76       7.72
+ 8 Regulation of TP53 Degradation … 4193   0.00580   0.364      11.0       11.1 
+ 9 Regulation of TP53 Degradation … 79109  0.00554   0.364      10.7       10.7 
+10 Regulation of TP53 Degradation … 890    0.00368   0.364       7.85       7.99
+# … with 27 more rows
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("rev.dnapath_list")
+> ### * rev.dnapath_list
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: rev.dnapath_list
+> ### Title: Reverse the order of pathways in a 'dnapath_list' object.
+> ### Aliases: rev.dnapath_list
+> 
+> ### ** Examples
+> 
+> data(meso)
+> data(p53_pathways)
+> set.seed(0)
+> results <- dnapath(x = meso$gene_expression, pathway_list = p53_pathways,
++                    groups = meso$groups, n_perm = 10)
+> # Filter out pathways that have p-values above 0.2.
+> results <- filter_pathways(results, 0.2) 
+> results <- sort(results, by = "dc_score") # Sort by the pathway DC score.
+> results <- rev(results) # Reverse the ordering.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("run_aracne")
+> ### * run_aracne
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: run_aracne
+> ### Title: Wrapper for ARACNE method
+> ### Aliases: run_aracne
+> 
+> ### ** Examples
+> 
+> data(meso)
+> data(p53_pathways)
+> 
+> # To create a short example, we subset on two pathways from the p53 pathway list,
+> # and will only run 5 permutations for significance testing.
+> pathway_list <- p53_pathways[c(8, 13)]
+> n_perm <- 5
+> 
+> # Use this method to perform differential network analysis.
+> # The parameters in run_aracne() can be adjusted using the ... argument.
+> # For example, the 'estimator' parameter can be specified as shown here.
+> results <- dnapath(x = meso$gene_expression,
++                    pathway_list = pathway_list,
++                    groups = meso$groups,
++                    n_perm = n_perm,
++                    network_inference = run_aracne,
++                    estimator = "spearman")
+> summary(results)
+# A tibble: 2 x 7
+  pathway          dc_score p_value n_genes `n_dc (0.167)` mean_expr1 mean_expr2
+  <chr>               <dbl>   <dbl>   <int>          <int>      <dbl>      <dbl>
+1 Regulation of T…    0.114   1          19              0       9.12       9.10
+2 TP53 Regulates …    0.116   0.167      12              3       7.25       7.25
+> 
+> # The group-specific association matrices can be extracted using get_networks().
+> nw_list <- get_networks(results[[1]]) # Get networks for pathway 1.
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("run_bc3net")
+> ### * run_bc3net
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: run_bc3net
+> ### Title: Wrapper for BC3Net method
+> ### Aliases: run_bc3net
+> 
+> ### ** Examples
+> 
+> data(meso)
+> data(p53_pathways)
+> 
+> # To create a short example, we subset on one pathway from the p53 pathway list,
+> # and will only run 1 permutation for significance testing.
+> pathway_list <- p53_pathways[13]
+> n_perm <- 1
+> 
+> # Use this method to perform differential network analysis.
+> # The parameters in run_bc3net() can be adjusted using the ... argument.
+> # For example, the 'estimator' and 'boot' parameter can be specified as shown here.
+> results <- dnapath(x = meso$gene_expression,
++                    pathway_list = pathway_list,
++                    groups = meso$groups,
++                    n_perm = n_perm,
++                    network_inference = run_bc3net,
++                    boot = 10,
++                    estimator = "pearson",
++                    mtc1 = FALSE,
++                    mtc2 = FALSE)
+> summary(results)
+# A tibble: 0 x 6
+# … with 6 variables: pathway <chr>, genes <chr>, dc_score <dbl>,
+#   p_value <dbl>, mean_expr1 <dbl>, mean_expr2 <dbl>
+> 
+> # The group-specific association matrices can be extracted using get_networks().
+> nw_list <- get_networks(results) # Get networks for pathway 1.
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("run_c3net")
+> ### * run_c3net
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: run_c3net
+> ### Title: Wrapper for C3Net method
+> ### Aliases: run_c3net
+> 
+> ### ** Examples
+> 
+> data(meso)
+> data(p53_pathways)
+> 
+> # To create a short example, we subset on one pathway from the p53 pathway list,
+> # and will only run 1 permutation for significance testing.
+> pathway_list <- p53_pathways[13]
+> n_perm <- 1
+> 
+> # Use this method to perform differential network analysis.
+> # The parameters in run_c3net() can be adjusted using the ... argument.
+> # For example, the 'estimator' parameter can be specified as shown here.
+> results <- dnapath(x = meso$gene_expression,
++                    pathway_list = pathway_list,
++                    groups = meso$groups,
++                    n_perm = n_perm,
++                    network_inference = run_c3net,
++                    estimator = "pearson",
++                    mtc = FALSE)
+> summary(results)
+# A tibble: 0 x 6
+# … with 6 variables: pathway <chr>, genes <chr>, dc_score <dbl>,
+#   p_value <dbl>, mean_expr1 <dbl>, mean_expr2 <dbl>
+> 
+> # The group-specific association matrices can be extracted using get_networks().
+> nw_list <- get_networks(results) # Get networks for the pathway.
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("run_clr")
+> ### * run_clr
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: run_clr
+> ### Title: Wrapper for CLR method
+> ### Aliases: run_clr
+> 
+> ### ** Examples
+> 
+> data(meso)
+> data(p53_pathways)
+> 
+> # To create a short example, we subset on two pathways from the p53 pathway list,
+> # and will only run 5 permutations for significance testing.
+> pathway_list <- p53_pathways[c(8, 13)]
+> n_perm <- 5
+> 
+> # Use this method to perform differential network analysis.
+> # The parameters in run_clr() can be adjusted using the ... argument.
+> # For example, the 'estimator' paramter can be specified as shown here.
+> results <- dnapath(x = meso$gene_expression,
++                    pathway_list = pathway_list,
++                    groups = meso$groups,
++                    n_perm = n_perm,
++                    network_inference = run_clr,
++                    estimator = "spearman")
+> summary(results)
+# A tibble: 2 x 7
+  pathway          dc_score p_value n_genes `n_dc (0.167)` mean_expr1 mean_expr2
+  <chr>               <dbl>   <dbl>   <int>          <int>      <dbl>      <dbl>
+1 Regulation of T…     1.38   0.5        19              1       9.12       9.10
+2 TP53 Regulates …     1.31   0.333      12              2       7.25       7.25
+> 
+> # The group-specific association matrices can be extracted using get_networks().
+> nw_list <- get_networks(results[[1]]) # Get networks for pathway 1.
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("run_corr")
+> ### * run_corr
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: run_corr
+> ### Title: Wrapper for correlation co-expression
+> ### Aliases: run_corr
+> 
+> ### ** Examples
+> 
+> data(meso)
+> data(p53_pathways)
+> 
+> # To create a short example, we subset on two pathways from the p53 pathway list,
+> # and will only run 5 permutations for significance testing.
+> pathway_list <- p53_pathways[c(8, 13)]
+> n_perm <- 5
+> 
+> # Use this method to perform differential network analysis.
+> # The parameters in run_corr() can be adjusted using the ... argument.
+> # For example, the 'method' parameter can be specified as shown here.
+> results <- dnapath(x = meso$gene_expression,
++                    pathway_list = pathway_list,
++                    groups = meso$groups,
++                    n_perm = n_perm,
++                    network_inference = run_corr,
++                    method = "spearman")
+> summary(results)
+# A tibble: 2 x 7
+  pathway          dc_score p_value n_genes `n_dc (0.167)` mean_expr1 mean_expr2
+  <chr>               <dbl>   <dbl>   <int>          <int>      <dbl>      <dbl>
+1 Regulation of T…    0.301   0.833      19              0       9.12       9.10
+2 TP53 Regulates …    0.390   0.333      12              3       7.25       7.25
+> 
+> # The group-specific association matrices can be extracted using get_networks().
+> nw_list <- get_networks(results[[1]]) # Get networks for pathway 1.
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("run_dwlasso")
+> ### * run_dwlasso
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: run_dwlasso
+> ### Title: Wrapper for degree-weighted lasso method
+> ### Aliases: run_dwlasso
+> 
+> ### ** Examples
+> 
+> data(meso)
+> data(p53_pathways)
+> 
+> # To create a short example, we subset on two pathways from the p53 pathway list,
+> # and will only run 1 permutation for significance testing.
+> pathway_list <- p53_pathways[c(8, 13)]
+> n_perm <- 1
+> 
+> # Use this method to perform differential network analysis.
+> # The parameters in run_dwlasso() can be adjusted using the ... argument.
+> # For example, the 'lambda1' parameter can be specified as shown here.
+> results <- dnapath(x = meso$gene_expression,
++                    pathway_list = pathway_list,
++                    groups = meso$groups,
++                    n_perm = n_perm,
++                    network_inference = run_dwlasso,
++                    lambda1 = 0.5)
+> summary(results)
+# A tibble: 2 x 7
+  pathway            dc_score p_value n_genes `n_dc (0.5)` mean_expr1 mean_expr2
+  <chr>                 <dbl> <lgl>     <int>        <int>      <dbl>      <dbl>
+1 Regulation of TP5…   0.0300 NA           19            0       9.12       9.10
+2 TP53 Regulates Tr…   0.0542 NA           12            0       7.25       7.25
+> 
+> # The group-specific association matrices can be extracted using get_networks().
+> nw_list <- get_networks(results[[1]]) # Get networks for pathway 1.
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("run_genie3")
+> ### * run_genie3
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: run_genie3
+> ### Title: Wrapper for GENIE3 method
+> ### Aliases: run_genie3
+> 
+> ### ** Examples
+> 
+> if(!requireNamespace("GENIE3", quietly = TRUE)) {
++ data(meso)
++ data(p53_pathways)
++ 
++ # To create a short example, we subset on two pathways from the p53 pathway list,
++ # and will only run 5 permutations for significance testing.
++ pathway_list <- p53_pathways[c(8, 13)]
++ n_perm <- 5
++ 
++ # Use this method to perform differential network analysis.
++ # The parameters in run_genie3() can be adjusted using the ... argument.
++ # For example, the 'nTrees' parameter can be specified as shown here.
++ results <- dnapath(x = meso$gene_expression,
++                    pathway_list = pathway_list,
++                    groups = meso$groups,
++                    n_perm = n_perm,
++                    network_inference = run_genie3,
++                    nTrees = 100)
++ summary(results)
++ 
++ # The group-specific association matrices can be extracted using get_networks().
++ nw_list <- get_networks(results[[1]]) # Get networks for pathway 1.
++ 
++ # nw_list has length 2 and contains the inferred networks for the two groups.
++ # The gene names are the Entrezgene IDs from the original expression dataset.
++ # Renaming the genes in the dnapath results to rename those in the networks.
++ # NOTE: The temporary directory, tempdir(), is used in this example. In practice,
++ #       this argument can be removed or changed to an existing directory
++ results <- rename_genes(results, to = "symbol", species = "human",
++                         dir_save = tempdir())
++ nw_list <- get_networks(results[[1]]) # The genes (columns) will have new names.
++ 
++ # (Optional) Plot the network using SeqNet package (based on igraph plotting).
++ # First rename entrezgene IDs into gene symbols.
++ SeqNet::plot_network(nw_list[[1]])
++ }
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+ERROR: modification of compiler constant of type integer, length 1
+ERROR: the modified value of the constant is:
+[1] 25686
+ERROR: the original value of the constant is:
+[1] 1
+ERROR: the modified constant is at index 12
+ERROR: the modified constant is in this function body:
+{
+    cols <- enquo(cols)
+    if (.top_level) {
+        mask$set_current_group(1L)
+    }
+    else {
+        cols <- quo_set_env(cols, data_mask_top(quo_get_env(cols), 
+            recursive = FALSE, inherit = TRUE))
+    }
+    vars <- tidyselect::eval_select(cols, data = mask$across_cols())
+    vars <- names(vars)
+    if (is.null(fns)) {
+        if (!is.null(names)) {
+            glue_mask <- across_glue_mask(.caller_env, .col = vars, 
+                .fn = "1")
+            names <- vec_as_names(glue(names, .envir = glue_mask), 
+                repair = "check_unique")
+        }
+        value <- list(vars = vars, fns = fns, names = names)
+        return(value)
+    }
+    if (is.function(fns) || is_formula(fns)) {
+        names <- names %||% "{.col}"
+        fns <- list(`1` = fns)
+    }
+    else {
+        names <- names %||% "{.col}_{.fn}"
+    }
+    if (!is.list(fns)) {
+        abort(c("Problem with `across()` input `.fns`.", i = "Input `.fns` must be NULL, a function, a formula, or a list of functions/formulas."))
+    }
+    expr_protect <- function(x) {
+        call2(quote, x)
+    }
+    fns <- map(fns, function(fn) {
+        if (is_formula(fn) && .top_level) {
+            f_rhs(fn) <- call2(quote(rlang::eval_tidy), expr_protect(f_rhs(fn)), 
+                data = mask$get_rlang_mask())
+        }
+        fn <- as_function(fn)
+        fn
+    })
+    if (is.null(names(fns))) {
+        names_fns <- seq_along(fns)
+    }
+    else {
+        names_fns <- names(fns)
+        empties <- which(names_fns == "")
+        if (length(empties)) {
+            names_fns[empties] <- empties
+        }
+    }
+    glue_mask <- glue_mask <- across_glue_mask(.caller_env, .col = rep(vars, 
+        each = length(fns)), .fn = rep(names_fns, length(vars)))
+    names <- vec_as_names(glue(names, .envir = glue_mask), repair = "check_unique")
+    list(vars = vars, fns = fns, names = names)
+}
+Function across_setup_impl in namespace dplyr has this body.
+Fatal error: compiler constants were modified!
+
