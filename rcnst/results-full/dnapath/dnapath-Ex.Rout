@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2021-02-26 r80036) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-02-27 r80042) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -840,6 +840,39 @@ Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_c
 Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
 Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
 Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
+	- saving gene info to /var/scratch2/tomas/tmp/RtmpjsPCeA/entrez_to_hsapiens.rds 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("run_glasso")
+> ### * run_glasso
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: run_glasso
+> ### Title: Wrapper for glasso method
+> ### Aliases: run_glasso
+> 
+> ### ** Examples
+> 
+> data(meso)
+> data(p53_pathways)
+> 
+> # To create a short example, we subset on one pathway from the p53 pathway list,
+> # and will only run 1 permutation for significance testing.
+> pathway_list <- p53_pathways[13]
+> n_perm <- 1
+> 
+> # Use this method to perform differential network analysis.
+> # The parameters in run_glasso() can be adjusted using the ... argument.
+> # For example, the 'criterion' parameter can be specified as shown here.
+> results <- dnapath(x = meso$gene_expression,
++                    pathway_list = pathway_list,
++                    groups = meso$groups,
++                    n_perm = n_perm,
++                    network_inference = run_glasso,
++                    criterion = "ric")
 ERROR: modification of compiler constant of type integer, length 1
 ERROR: the modified value of the constant is:
 [1] 25686

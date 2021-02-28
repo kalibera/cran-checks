@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/dnapath.Rcheck’
-* using R Under development (unstable) (2021-02-26 r80036)
+* using R Under development (unstable) (2021-02-27 r80042)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘dnapath/DESCRIPTION’ ... OK
@@ -62,72 +62,29 @@ Note: information on .o files is not available
 Running examples in ‘dnapath-Ex.R’ failed
 The error most likely occurred in:
 
-> ### Name: run_genie3
-> ### Title: Wrapper for GENIE3 method
-> ### Aliases: run_genie3
+> ### Name: run_glasso
+> ### Title: Wrapper for glasso method
+> ### Aliases: run_glasso
 > 
 > ### ** Examples
 > 
-> if(!requireNamespace("GENIE3", quietly = TRUE)) {
-+ data(meso)
-+ data(p53_pathways)
-+ 
-+ # To create a short example, we subset on two pathways from the p53 pathway list,
-+ # and will only run 5 permutations for significance testing.
-+ pathway_list <- p53_pathways[c(8, 13)]
-+ n_perm <- 5
-+ 
-+ # Use this method to perform differential network analysis.
-+ # The parameters in run_genie3() can be adjusted using the ... argument.
-+ # For example, the 'nTrees' parameter can be specified as shown here.
-+ results <- dnapath(x = meso$gene_expression,
+> data(meso)
+> data(p53_pathways)
+> 
+> # To create a short example, we subset on one pathway from the p53 pathway list,
+> # and will only run 1 permutation for significance testing.
+> pathway_list <- p53_pathways[13]
+> n_perm <- 1
+> 
+> # Use this method to perform differential network analysis.
+> # The parameters in run_glasso() can be adjusted using the ... argument.
+> # For example, the 'criterion' parameter can be specified as shown here.
+> results <- dnapath(x = meso$gene_expression,
 +                    pathway_list = pathway_list,
 +                    groups = meso$groups,
 +                    n_perm = n_perm,
-+                    network_inference = run_genie3,
-+                    nTrees = 100)
-+ summary(results)
-+ 
-+ # The group-specific association matrices can be extracted using get_networks().
-+ nw_list <- get_networks(results[[1]]) # Get networks for pathway 1.
-+ 
-+ # nw_list has length 2 and contains the inferred networks for the two groups.
-+ # The gene names are the Entrezgene IDs from the original expression dataset.
-+ # Renaming the genes in the dnapath results to rename those in the networks.
-+ # NOTE: The temporary directory, tempdir(), is used in this example. In practice,
-+ #       this argument can be removed or changed to an existing directory
-+ results <- rename_genes(results, to = "symbol", species = "human",
-+                         dir_save = tempdir())
-+ nw_list <- get_networks(results[[1]]) # The genes (columns) will have new names.
-+ 
-+ # (Optional) Plot the network using SeqNet package (based on igraph plotting).
-+ # First rename entrezgene IDs into gene symbols.
-+ SeqNet::plot_network(nw_list[[1]])
-+ }
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
-Warning: The `GENIE3` package must be installed to use run_genie3(). Using run_corr() instead.
++                    network_inference = run_glasso,
++                    criterion = "ric")
 ERROR: modification of compiler constant of type integer, length 1
 ERROR: the modified value of the constant is:
 [1] 25686
