@@ -1,0 +1,444 @@
+
+R Under development (unstable) (2021-02-27 r80043) -- "Unsuffered Consequences"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "JuliaConnectoR"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('JuliaConnectoR')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("AccessMutate.JuliaProxy")
+> ### * AccessMutate.JuliaProxy
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: AccessMutate.JuliaProxy
+> ### Title: Access or mutate Julia objects via proxy objects
+> ### Aliases: AccessMutate.JuliaProxy $.JuliaStructProxy
+> ###   $<-.JuliaStructProxy [.JuliaProxy [<-.JuliaProxy
+> ###   [.JuliaSimpleArrayProxy [[.JuliaArrayProxy [[<-.JuliaArrayProxy
+> ###   [[.JuliaStructProxy [[<-.JuliaStructProxy length.JuliaArrayProxy
+> ###   dim.JuliaArrayProxy
+> 
+> ### ** Examples
+> 
+> if (juliaSetupOk()) {
++ 
++    # (Mutable) struct
++    juliaEval("mutable struct MyStruct
++                 x::Int
++              end")
++ 
++    MyStruct <- juliaFun("MyStruct")
++    s <- MyStruct(1L)
++    s$x
++    s$x <- 2
++    s[["x"]]
++ 
++    # Array
++    x <- juliaCall("map", MyStruct, c(1L, 2L, 3L))
++    x
++    length(x)
++    x[[1]]
++    x[[1]]$x
++    x[[1]] <- MyStruct(2L)
++    x[2:3]
++    x[2:3] <- MyStruct(2L)
++    x
++ 
++    # Tuple
++    x <- juliaEval("(1, 2, 3)")
++    x[[1]]
++    x[1:2]
++    length(x)
++ 
++    # NamedTuple
++    x <- juliaEval("(a=1, b=2)")
++    x$a
++ 
++    # Dictionary
++    strDict <- juliaEval('Dict("hi" => 1, "hello" => 2)')
++    strDict
++    strDict$hi
++    strDict$hi <- 0
++    strDict[["hi"]] <- 2
++    strDict["howdy", "greetings"] <- c(2, 3)
++    strDict["hi", "howdy"]
++ 
++ }
+Starting Julia ...
+[[1]]
+[1] 2
+
+[[2]]
+[1] 2
+
+> 
+> ## Don't show: 
+> rm(x, s, strDict)
+> JuliaConnectoR:::stopJulia()
+> ## End(Don't show)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("as.data.frame.JuliaProxy")
+> ### * as.data.frame.JuliaProxy
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: as.data.frame.JuliaProxy
+> ### Title: Coerce a Julia Table to a Data Frame
+> ### Aliases: as.data.frame.JuliaProxy
+> 
+> ### ** Examples
+> 
+> if (juliaSetupOk()) {
++ 
++    # Demonstrate the usage with the Julia package "JuliaDB"
++    juliaEval('import Pkg; Pkg.add("JuliaDB")')
++    JuliaDB <- juliaImport("JuliaDB")
++ 
++    mydf <- data.frame(x = c(1, 2, 3),
++                       y = c("a", "b", "c"),
++                       z = c(TRUE, FALSE, NA),
++                       stringsAsFactors = FALSE)
++ 
++    # create a table in Julia, e. g. via JuliaDB
++    mytbl <- JuliaDB$table(mydf)
++ 
++    # this table can, e g. be queried and
++    # the result can be translated to an R data frame
++    seltbl <- JuliaDB$select(mytbl, juliaExpr("(:x, :y)"))[1:2]
++ 
++    # translate selection of Julia table into R data frame
++    as.data.frame(seltbl)
++ 
++ }
+Starting Julia ...
+   Updating registry at `~/.julia/registries/General`
+   Updating git-repo `https://github.com/JuliaRegistries/General.git`
+  Resolving package versions...
+   Updating `/var/scratch2/tomas/cache/.julia/environments/v1.4/Project.toml`
+ [no changes]
+   Updating `/var/scratch2/tomas/cache/.julia/environments/v1.4/Manifest.toml`
+ [no changes]
+  x y
+1 1 a
+2 2 b
+> 
+> ## Don't show: 
+> rm(mytbl, seltbl)
+> JuliaConnectoR:::stopJulia()
+> ## End(Don't show)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("juliaCall")
+> ### * juliaCall
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: juliaCall
+> ### Title: Call a Julia function by name
+> ### Aliases: juliaCall
+> 
+> ### ** Examples
+> 
+> if (juliaSetupOk()) {
++ 
++    juliaCall("/", 4, 2)
++    juliaCall("Base.div", 4, 2)
++    juliaCall("sin.", c(1,2,3))
++    juliaCall("Base.cos.", c(1,2,3))
++ 
++ }
+Starting Julia ...
+[1]  0.5403023 -0.4161468 -0.9899925
+> ## Don't show: 
+> JuliaConnectoR:::stopJulia()
+> ## End(Don't show)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("juliaEval")
+> ### * juliaEval
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: juliaEval
+> ### Title: Evaluate a Julia expression
+> ### Aliases: juliaEval
+> 
+> ### ** Examples
+> 
+> if (juliaSetupOk()) {
++ 
++    juliaEval("1 + 2")
++    juliaEval('using Pkg; Pkg.add("BoltzmannMachines")')
++    juliaEval('using Random; Random.seed!(5);')
++ 
++ }
+Starting Julia ...
+   Updating registry at `~/.julia/registries/General`
+   Updating git-repo `https://github.com/JuliaRegistries/General.git`
+  Resolving package versions...
+   Updating `/var/scratch2/tomas/cache/.julia/environments/v1.4/Project.toml`
+ [no changes]
+   Updating `/var/scratch2/tomas/cache/.julia/environments/v1.4/Manifest.toml`
+ [no changes]
+> 
+> ## Don't show: 
+> JuliaConnectoR:::stopJulia()
+> ## End(Don't show)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("juliaExpr")
+> ### * juliaExpr
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: juliaExpr
+> ### Title: Mark a string as Julia expression
+> ### Aliases: juliaExpr
+> 
+> ### ** Examples
+> 
+> if (juliaSetupOk()) {
++ 
++    # Create complicated objects like version strings in Julia, and compare them
++    v1 <- juliaExpr('v"1.0.1"')
++    v2 <- juliaExpr('v"1.2.0"')
++    juliaCall("<", v1, v2)
++ 
++ }
+Starting Julia ...
+[1] TRUE
+> 
+> ## Don't show: 
+> JuliaConnectoR:::stopJulia()
+> ## End(Don't show)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("juliaFun")
+> ### * juliaFun
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: juliaFun
+> ### Title: Wrap a Julia function in an R function
+> ### Aliases: juliaFun
+> 
+> ### ** Examples
+> 
+> if (juliaSetupOk()) {
++ 
++    # Wrap a Julia function and use it
++    juliaSqrt <- juliaFun("sqrt")
++    juliaSqrt(2)
++    # In the following call, the sqrt function is called without
++    # a callback to R because the linked function object is used.
++    juliaCall("map", juliaSqrt, c(1,4,9))
++ 
++    # may also be used with arguments
++    plus1 <- juliaFun("+", 1)
++    plus1(2)
++    # Results in an R callback (calling Julia again)
++    # because there is no linked function object in Julia.
++    juliaCall("map", plus1, c(1,2,3))
++ 
++ }
+Starting Julia ...
+[1] 2 3 4
+> 
+> ## Don't show: 
+> JuliaConnectoR:::stopJulia()
+> ## End(Don't show)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("juliaImport")
+> ### * juliaImport
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: juliaImport
+> ### Title: Load and import a Julia package via 'import' statement
+> ### Aliases: juliaImport
+> 
+> ### ** Examples
+> 
+> if (juliaSetupOk()) {
++ 
++    # Importing a package and using one of its exported functions
++    UUIDs <- juliaImport("UUIDs")
++    juliaCall("string", UUIDs$uuid4())
++ 
++ 
++    # Importing a module without a package
++    testModule <- system.file("examples", "TestModule1.jl",
++                              package = "JuliaConnectoR")
++    # take a look at the file
++    writeLines(readLines(testModule))
++    # load in Julia
++    juliaCall("include", testModule)
++    # import in R via relative module path
++    TestModule1 <- juliaImport(".TestModule1")
++    TestModule1$test1()
++    ## Don't show: 
++       JuliaConnectoR:::stopJulia()
++    
++ ## End(Don't show)
++    # Importing a local module is also possible in one line,
++    # by directly using the module object returned by "include".
++    TestModule1 <- juliaImport(juliaCall("include", testModule))
++    TestModule1$test1()
++ }
+Starting Julia ...
+module TestModule1
+
+   export test1
+
+   function test1()
+      return 1
+   end
+
+   module SubModule1
+      export test2
+
+      function test2()
+         return 2
+      end
+   end
+end
+Starting Julia ...
+[1] 1
+> 
+> 
+> if (juliaSetupOk()) {
++ 
++    # Importing a submodule
++    testModule <- system.file("examples", "TestModule1.jl",
++                              package = "JuliaConnectoR")
++    juliaCall("include", testModule)
++    # load sub-module via module path
++    SubModule1 <- juliaImport(".TestModule1.SubModule1")
++    # call function of submodule
++    SubModule1$test2()
++ 
++ }
+WARNING: replacing module TestModule1.
+[1] 2
+> 
+> ## Don't show: 
+> JuliaConnectoR:::stopJulia()
+> ## End(Don't show)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("juliaLet")
+> ### * juliaLet
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: juliaLet
+> ### Title: Evaluate Julia code in a 'let' block using values of R variables
+> ### Aliases: juliaLet
+> 
+> ### ** Examples
+> 
+> if (juliaSetupOk()) {
++ 
++    # Intended use: Create a complex Julia object
++    # using Julia syntax and data from the R workspace
++    juliaLet('[1 => x, 17 => y]', x = rnorm(1), y = rnorm(2))
++ 
++    # Assign a global variable
++    # (although not recommended for a functional style)
++    juliaLet("global x = xval", xval = rnorm(10))
++    juliaEval("x")
++ 
++ }
+Starting Julia ...
+ [1]  1.5952808  0.3295078 -0.8204684  0.4874291  0.7383247  0.5757814
+ [7] -0.3053884  1.5117812  0.3898432 -0.6212406
+> 
+> ## Don't show: 
+> JuliaConnectoR:::stopJulia()
+> ## End(Don't show)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("juliaPut")
+> ### * juliaPut
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: juliaPut
+> ### Title: Create a Julia proxy object from an R object
+> ### Aliases: juliaPut
+> 
+> ### ** Examples
+> 
+> if (juliaSetupOk()) {
++ 
++    # Transfer a large vector to Julia and use it in multiple calls
++    x <- juliaPut(rnorm(100))
++    # x is just a reference to a Julia vector now
++    juliaEval("using Statistics")
++    juliaCall("mean", x)
++    juliaCall("var", x)
++ 
++ }
+Starting Julia ...
+[1] 0.8067621
+> 
+> ## Don't show: 
+> JuliaConnectoR:::stopJulia()
+> ## End(Don't show)
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  1.342 0.076 760.257 0.22 0.264 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

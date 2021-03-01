@@ -1,10 +1,10 @@
-* using log directory ‘/var/scratch2/tomas/cran/rlibro/check/spm12r.Rcheck’
+* using log directory ‘/var/scratch2/tomas/cran/rlibro/check/JuliaConnectoR.Rcheck’
 * using R Under development (unstable) (2021-02-27 r80043)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* checking for file ‘spm12r/DESCRIPTION’ ... OK
+* checking for file ‘JuliaConnectoR/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘spm12r’ version ‘2.8.2’
+* this is package ‘JuliaConnectoR’ version ‘0.6.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -14,9 +14,8 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘spm12r’ can be installed ... OK
+* checking whether package ‘JuliaConnectoR’ can be installed ... OK
 * checking package directory ... OK
-* checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
 * checking for left-over files ... OK
@@ -43,37 +42,27 @@
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
-* checking line endings in shell scripts ... OK
-* checking installed files from ‘inst/doc’ ... OK
-* checking files in ‘vignettes’ ... OK
-* checking examples ... ERROR
-Running examples in ‘spm12r-Ex.R’ failed
-The error most likely occurred in:
-
-> ### Name: spm_bwlabel
-> ### Title: SPM BWLabel Clusters of Certain Size
-> ### Aliases: spm_bwlabel
-> 
-> ### ** Examples
-> 
-> if (matlabr::have_matlab()) { 
-+ d = rep(25, 3)
-+ arr = array(rbinom(prod(d), size = 1, prob = 0.5), dim = d)
-+ nim = oro.nifti::nifti(arr)
-+ res = spm_bwlabel(nim, k = 1, binary = FALSE)
-+ tab = table(c(res))
-+ tab
-+ out_arr = as(res, "array")
-+ }
-cloning into '/var/scratch2ro/tomas/cran/rlibro/lib/spm12r/spm12'...
-Error in git2r::clone("https://github.com/muschellij2/spm12r", branch = "gh-pages",  : 
-  Error in 'git2r_clone': failed to make directory '/var/scratch2ro/tomas/cran/rlibro/lib/spm12r/spm12': Read-only file system
-Calls: spm_bwlabel -> install_spm12 -> <Anonymous>
-Execution halted
-* checking for unstated dependencies in vignettes ... OK
-* checking package vignettes in ‘inst/doc’ ... OK
-* checking running R code from vignettes ... NONE
-  ‘fmri_processing_spm12r.Rmd’ using ‘UTF-8’... OK
-  ‘fmri_task_processing.Rmd’ using ‘UTF-8’... OK
-  ‘fmri_task_processing_acpc.Rmd’ using ‘UTF-8’... OK
-* checking re-building of vignette outputs ...
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... ERROR
+  Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  in expression starting at string:2
+  Backtrace:
+      █
+   1. └─JuliaConnectoR::juliaEval(paste(irisExampleJuliaCode, collapse = "\n")) test.R:1263:3
+   2.   └─JuliaConnectoR::juliaCall("RConnector.mainevalcmd", expr)
+   3.     ├─base::tryCatch(...)
+   4.     │ └─base:::tryCatchList(expr, classes, parentenv, handlers)
+   5.     │   └─base:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
+   6.     │     └─base:::doTryCatch(return(expr), name, parentenv, handler)
+   7.     └─JuliaConnectoR:::doCallJulia(funName, jlargs)
+   8.       └─JuliaConnectoR:::handleCallbacksAndOutput()
+  
+  [ FAIL 1 | WARN 0 | SKIP 2 | PASS 384 ]
+  Error: Test failures
+  Execution halted
+* checking PDF version of manual ... OK
+* DONE
+Status: 1 ERROR
