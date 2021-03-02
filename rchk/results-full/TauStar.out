@@ -1,0 +1,151 @@
+Package TauStar version 1.1.4
+Package built using 80044/R 4.1.0; x86_64-pc-linux-gnu; 2021-03-02 05:10:36 UTC; unix   
+Checked with rchk version 3d653b7c8f92dac912532856b55f44d2986c6553 LLVM version 10.0.1
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector()
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:57
+
+Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<13>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
+
+Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<14>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function _TauStar_HoeffIndCdfRCPP
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr TauStar/src/RcppExports.cpp:32
+  [PB] has negative depth TauStar/src/RcppExports.cpp:44
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete TauStar/src/RcppExports.cpp:44
+  [PB] has possible protection stack imbalance TauStar/src/RcppExports.cpp:45
+
+Function _TauStar_HoeffIndCdfRCPP_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _TauStar_HoeffIndDiscreteCdfRCPP
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr TauStar/src/RcppExports.cpp:138
+  [PB] has negative depth TauStar/src/RcppExports.cpp:150
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete TauStar/src/RcppExports.cpp:150
+  [PB] has possible protection stack imbalance TauStar/src/RcppExports.cpp:151
+
+Function _TauStar_HoeffIndDiscreteCdfRCPP_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _TauStar_HoeffIndDiscretePdfRCPP
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr TauStar/src/RcppExports.cpp:175
+  [PB] has negative depth TauStar/src/RcppExports.cpp:187
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete TauStar/src/RcppExports.cpp:187
+  [PB] has possible protection stack imbalance TauStar/src/RcppExports.cpp:188
+
+Function _TauStar_HoeffIndDiscretePdfRCPP_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _TauStar_HoeffIndMixedCdfRCPP
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr TauStar/src/RcppExports.cpp:211
+  [PB] has negative depth TauStar/src/RcppExports.cpp:223
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete TauStar/src/RcppExports.cpp:223
+  [PB] has possible protection stack imbalance TauStar/src/RcppExports.cpp:224
+
+Function _TauStar_HoeffIndMixedCdfRCPP_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _TauStar_HoeffIndMixedPdfRCPP
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr TauStar/src/RcppExports.cpp:247
+  [PB] has negative depth TauStar/src/RcppExports.cpp:259
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete TauStar/src/RcppExports.cpp:259
+  [PB] has possible protection stack imbalance TauStar/src/RcppExports.cpp:260
+
+Function _TauStar_HoeffIndMixedPdfRCPP_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _TauStar_HoeffIndPdfRCPP
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr TauStar/src/RcppExports.cpp:67
+  [PB] has negative depth TauStar/src/RcppExports.cpp:79
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete TauStar/src/RcppExports.cpp:79
+  [PB] has possible protection stack imbalance TauStar/src/RcppExports.cpp:80
+
+Function _TauStar_HoeffIndPdfRCPP_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _TauStar_TStarFastResampleRCPP
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr TauStar/src/RcppExports.cpp:424
+  [PB] has negative depth TauStar/src/RcppExports.cpp:436
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete TauStar/src/RcppExports.cpp:436
+  [PB] has possible protection stack imbalance TauStar/src/RcppExports.cpp:437
+
+Function _TauStar_TStarFastResampleRCPP_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _TauStar_TStarHellerAndHellerRCPP
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr TauStar/src/RcppExports.cpp:282
+  [PB] has negative depth TauStar/src/RcppExports.cpp:294
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete TauStar/src/RcppExports.cpp:294
+  [PB] has possible protection stack imbalance TauStar/src/RcppExports.cpp:295
+
+Function _TauStar_TStarHellerAndHellerRCPP_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _TauStar_TStarNaiveRCPP
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr TauStar/src/RcppExports.cpp:460
+  [PB] has negative depth TauStar/src/RcppExports.cpp:472
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete TauStar/src/RcppExports.cpp:472
+  [PB] has possible protection stack imbalance TauStar/src/RcppExports.cpp:473
+
+Function _TauStar_TStarNaiveRCPP_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _TauStar_TStarWeihsEtAlRCPP
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr TauStar/src/RcppExports.cpp:352
+  [PB] has negative depth TauStar/src/RcppExports.cpp:364
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete TauStar/src/RcppExports.cpp:364
+  [PB] has possible protection stack imbalance TauStar/src/RcppExports.cpp:365
+
+Function _TauStar_TStarWeihsEtAlRCPP_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _TauStar_VTStarHellerAndHellerRCPP
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr TauStar/src/RcppExports.cpp:317
+  [PB] has negative depth TauStar/src/RcppExports.cpp:329
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete TauStar/src/RcppExports.cpp:329
+  [PB] has possible protection stack imbalance TauStar/src/RcppExports.cpp:330
+
+Function _TauStar_VTStarHellerAndHellerRCPP_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _TauStar_VTStarWeihsEtAlRCPP
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr TauStar/src/RcppExports.cpp:387
+  [PB] has negative depth TauStar/src/RcppExports.cpp:399
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete TauStar/src/RcppExports.cpp:399
+  [PB] has possible protection stack imbalance TauStar/src/RcppExports.cpp:400
+
+Function _TauStar_VTStarWeihsEtAlRCPP_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _TauStar_eigenForDiscreteProbs
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr TauStar/src/RcppExports.cpp:101
+  [PB] has negative depth TauStar/src/RcppExports.cpp:113
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete TauStar/src/RcppExports.cpp:113
+  [PB] has possible protection stack imbalance TauStar/src/RcppExports.cpp:114
+
+Function _TauStar_eigenForDiscreteProbs_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ZN4Rcpp6VectorILi13ENS_15PreserveStorageEEC2IlEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
+
+Function _ZN4Rcpp6VectorILi14ENS_15PreserveStorageEEC2IlEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125

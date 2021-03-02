@@ -1,0 +1,88 @@
+Package xtensor version 0.13.2-0
+Package built using 80044/R 4.1.0; x86_64-pc-linux-gnu; 2021-03-02 02:44:27 UTC; unix   
+Checked with rchk version 3d653b7c8f92dac912532856b55f44d2986c6553 LLVM version 10.0.1
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector<int const*>(int const*, int const*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:213
+
+Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector<unsigned long const*>(unsigned long const*, unsigned long const*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:213
+
+Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector<unsigned long*>(unsigned long*, unsigned long*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:213
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function _ZN4Rcpp6VectorILi16ENS_15PreserveStorageEEC2ImEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
+
+Function _xtensor_test_add_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _xtensor_test_in_place_modify_cpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _xtensor_test_int_cpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _xtensor_test_lgl_cpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _xtensor_test_reshape_cpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _xtensor_test_roundtrip_rarray_optional
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _xtensor_test_roundtrip_rtensor_optional
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _xtensor_test_stdcomplex_cpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _xtensor_xtensor_r_example
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void xt::rarray<double>::init_from_shape<xt::svector<unsigned long, 4ul, std::__1::allocator<unsigned long>, true> >(xt::svector<unsigned long, 4ul, std::__1::allocator<unsigned long>, true> const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<xt::rarray<double> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector xtensor/src/../inst/include/xtensor-r/rarray.hpp:185
+  [UP] calling allocating function Rcpp::PreserveStorage<xt::rarray<double> >::set__(SEXPREC*) with argument allocated using Rf_allocArray xtensor/src/../inst/include/xtensor-r/rarray.hpp:190
+
+Function void xt::rtensor<double, 2ul>::init_from_shape<std::__1::array<int, 2ul> >(std::__1::array<int, 2ul> const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<xt::rtensor<double, 2ul> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector xtensor/src/../inst/include/xtensor-r/rtensor.hpp:185
+  [UP] calling allocating function Rcpp::PreserveStorage<xt::rtensor<double, 2ul> >::set__(SEXPREC*) with argument allocated using Rf_allocArray xtensor/src/../inst/include/xtensor-r/rtensor.hpp:190
+
+Function void xt::rtensor<double, 2ul>::init_from_shape<xt::svector<unsigned long, 4ul, std::__1::allocator<unsigned long>, true> >(xt::svector<unsigned long, 4ul, std::__1::allocator<unsigned long>, true> const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<xt::rtensor<double, 2ul> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector xtensor/src/../inst/include/xtensor-r/rtensor.hpp:185
+  [UP] calling allocating function Rcpp::PreserveStorage<xt::rtensor<double, 2ul> >::set__(SEXPREC*) with argument allocated using Rf_allocArray xtensor/src/../inst/include/xtensor-r/rtensor.hpp:190
+
+Function xt::rarray<double>::rarray(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<xt::rarray<double> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<14>(SEXPREC*) xtensor/src/../inst/include/xtensor-r/rarray.hpp:176
+
+Function xt::rarray<int>::rarray(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<xt::rarray<int> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<13>(SEXPREC*) xtensor/src/../inst/include/xtensor-r/rarray.hpp:176
+
+Function xt::rarray<rlogical>::rarray(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<xt::rarray<rlogical> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<10>(SEXPREC*) xtensor/src/../inst/include/xtensor-r/rarray.hpp:176
+
+Function xt::rarray<std::__1::complex<double> >::rarray(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<xt::rarray<std::__1::complex<double> > >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<15>(SEXPREC*) xtensor/src/../inst/include/xtensor-r/rarray.hpp:176
+
+Function xt::rtensor<double, 2ul>::rtensor(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<xt::rtensor<double, 2ul> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<14>(SEXPREC*) xtensor/src/../inst/include/xtensor-r/rtensor.hpp:172
+
+Function xt::rtensor<int, 1ul>::rtensor(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<xt::rtensor<int, 1ul> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<13>(SEXPREC*) xtensor/src/../inst/include/xtensor-r/rtensor.hpp:172

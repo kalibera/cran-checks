@@ -1,0 +1,52 @@
+Package RSNNS version 0.4-12
+Package built using 80044/R 4.1.0; x86_64-pc-linux-gnu; 2021-03-02 04:00:33 UTC; unix   
+Checked with rchk version 3d653b7c8f92dac912532856b55f44d2986c6553 LLVM version 10.0.1
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(Rcpp::Dimension const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:135
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<14>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function Rcpp::XPtr<SnnsCLib, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<SnnsCLib>(SnnsCLib*)), false>::XPtr(SnnsCLib*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<SnnsCLib, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<SnnsCLib>(SnnsCLib*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function SnnsCLib__getFirstSiteTableEntry
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function SnnsCLib__getFirstSymbolTableEntry
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function SnnsCLib__getFuncInfo
+  [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function SnnsCLib__getNextSiteTableEntry
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function SnnsCLib__getNextSymbolTableEntry
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function SnnsCLib__getUnitDefaults
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %34 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function SnnsCLib__loadNet
+  [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

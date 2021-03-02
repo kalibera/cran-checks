@@ -1,0 +1,195 @@
+Package cccp version 0.2-7
+Package built using 80044/R 4.1.0; x86_64-pc-linux-gnu; 2021-03-02 03:01:27 UTC; unix   
+Checked with rchk version 3d653b7c8f92dac912532856b55f44d2986c6553 LLVM version 10.0.1
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::BindingPolicy<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >::Binding::operator Rcpp::Function_Impl<Rcpp::PreserveStorage><Rcpp::Function_Impl<Rcpp::PreserveStorage> >() const
+  [UP] calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Function_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::BindingPolicy<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >::Binding::get() const Rcpp/include/Rcpp/api/meat/proxy.h:138
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Rcpp_namespace()
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using Rcpp::internal::get_Rcpp_namespace() Rcpp/include/Rcpp/Environment.h:361
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::get(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
+  [UP] calling allocating function Rcpp::internal::Rcpp_eval_impl(SEXPREC*, SEXPREC*) with a fresh pointer (res <arg 1>) Rcpp/include/Rcpp/Environment.h:112
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::Reference_Impl<Rcpp::PreserveStorage>::Reference_Impl(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] calling allocating function Rcpp::Rcpp_fast_eval(SEXPREC*, SEXPREC*) with argument allocated using Rcpp::internal::get_Rcpp_namespace() Rcpp/include/Rcpp/Reference.h:63
+
+Function Rcpp::Vector<10, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<10, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<14>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::push_back_name__impl(double const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, false>)
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:709
+
+Function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function Rcpp::XPtr<CONEC, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<CONEC>(CONEC*)), false>::XPtr(CONEC*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<CONEC, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<CONEC>(CONEC*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<CPS, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<CPS>(CPS*)), false>::XPtr(CPS*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<CPS, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<CPS>(CPS*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<CTRL, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<CTRL>(CTRL*)), false>::XPtr(CTRL*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<CTRL, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<CTRL>(CTRL*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<DCP, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<DCP>(DCP*)), false>::XPtr(DCP*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<DCP, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<DCP>(DCP*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<DLP, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<DLP>(DLP*)), false>::XPtr(DLP*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<DLP, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<DLP>(DLP*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<DNL, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<DNL>(DNL*)), false>::XPtr(DNL*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<DNL, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<DNL>(DNL*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<DQP, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<DQP>(DQP*)), false>::XPtr(DQP*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<DQP, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<DQP>(DQP*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<PDV, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<PDV>(PDV*)), false>::XPtr(PDV*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<PDV, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<PDV>(PDV*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::CppProperty<CONEC>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<CONEC> >(Rcpp::CppProperty<CONEC>*)), false>::XPtr(Rcpp::CppProperty<CONEC>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<CONEC>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<CONEC> >(Rcpp::CppProperty<CONEC>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::CppProperty<CPS>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<CPS> >(Rcpp::CppProperty<CPS>*)), false>::XPtr(Rcpp::CppProperty<CPS>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<CPS>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<CPS> >(Rcpp::CppProperty<CPS>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::CppProperty<CTRL>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<CTRL> >(Rcpp::CppProperty<CTRL>*)), false>::XPtr(Rcpp::CppProperty<CTRL>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<CTRL>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<CTRL> >(Rcpp::CppProperty<CTRL>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::CppProperty<DCP>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<DCP> >(Rcpp::CppProperty<DCP>*)), false>::XPtr(Rcpp::CppProperty<DCP>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<DCP>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<DCP> >(Rcpp::CppProperty<DCP>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::CppProperty<DLP>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<DLP> >(Rcpp::CppProperty<DLP>*)), false>::XPtr(Rcpp::CppProperty<DLP>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<DLP>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<DLP> >(Rcpp::CppProperty<DLP>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::CppProperty<DNL>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<DNL> >(Rcpp::CppProperty<DNL>*)), false>::XPtr(Rcpp::CppProperty<DNL>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<DNL>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<DNL> >(Rcpp::CppProperty<DNL>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::CppProperty<DQP>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<DQP> >(Rcpp::CppProperty<DQP>*)), false>::XPtr(Rcpp::CppProperty<DQP>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<DQP>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<DQP> >(Rcpp::CppProperty<DQP>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::CppProperty<PDV>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<PDV> >(Rcpp::CppProperty<PDV>*)), false>::XPtr(Rcpp::CppProperty<PDV>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::CppProperty<PDV>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::CppProperty<PDV> >(Rcpp::CppProperty<PDV>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::Module, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::Module>(Rcpp::Module*)), false>::XPtr(Rcpp::Module*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::Module, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::Module>(Rcpp::Module*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::SignedConstructor<CONEC>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<CONEC> >(Rcpp::SignedConstructor<CONEC>*)), false>::XPtr(Rcpp::SignedConstructor<CONEC>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<CONEC>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<CONEC> >(Rcpp::SignedConstructor<CONEC>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::SignedConstructor<CPS>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<CPS> >(Rcpp::SignedConstructor<CPS>*)), false>::XPtr(Rcpp::SignedConstructor<CPS>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<CPS>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<CPS> >(Rcpp::SignedConstructor<CPS>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::SignedConstructor<CTRL>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<CTRL> >(Rcpp::SignedConstructor<CTRL>*)), false>::XPtr(Rcpp::SignedConstructor<CTRL>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<CTRL>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<CTRL> >(Rcpp::SignedConstructor<CTRL>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::SignedConstructor<DCP>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<DCP> >(Rcpp::SignedConstructor<DCP>*)), false>::XPtr(Rcpp::SignedConstructor<DCP>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<DCP>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<DCP> >(Rcpp::SignedConstructor<DCP>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::SignedConstructor<DLP>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<DLP> >(Rcpp::SignedConstructor<DLP>*)), false>::XPtr(Rcpp::SignedConstructor<DLP>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<DLP>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<DLP> >(Rcpp::SignedConstructor<DLP>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::SignedConstructor<DNL>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<DNL> >(Rcpp::SignedConstructor<DNL>*)), false>::XPtr(Rcpp::SignedConstructor<DNL>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<DNL>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<DNL> >(Rcpp::SignedConstructor<DNL>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::SignedConstructor<DQP>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<DQP> >(Rcpp::SignedConstructor<DQP>*)), false>::XPtr(Rcpp::SignedConstructor<DQP>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<DQP>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<DQP> >(Rcpp::SignedConstructor<DQP>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<Rcpp::SignedConstructor<PDV>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<PDV> >(Rcpp::SignedConstructor<PDV>*)), false>::XPtr(Rcpp::SignedConstructor<PDV>*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<Rcpp::SignedConstructor<PDV>, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<Rcpp::SignedConstructor<PDV> >(Rcpp::SignedConstructor<PDV>*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<CONEC>*, std::__1::allocator<Rcpp::SignedMethod<CONEC>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<CONEC>*, std::__1::allocator<Rcpp::SignedMethod<CONEC>*> > >(std::__1::vector<Rcpp::SignedMethod<CONEC>*, std::__1::allocator<Rcpp::SignedMethod<CONEC>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<CONEC>*, std::__1::allocator<Rcpp::SignedMethod<CONEC>*> >*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<CONEC>*, std::__1::allocator<Rcpp::SignedMethod<CONEC>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<CONEC>*, std::__1::allocator<Rcpp::SignedMethod<CONEC>*> > >(std::__1::vector<Rcpp::SignedMethod<CONEC>*, std::__1::allocator<Rcpp::SignedMethod<CONEC>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<CPS>*, std::__1::allocator<Rcpp::SignedMethod<CPS>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<CPS>*, std::__1::allocator<Rcpp::SignedMethod<CPS>*> > >(std::__1::vector<Rcpp::SignedMethod<CPS>*, std::__1::allocator<Rcpp::SignedMethod<CPS>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<CPS>*, std::__1::allocator<Rcpp::SignedMethod<CPS>*> >*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<CPS>*, std::__1::allocator<Rcpp::SignedMethod<CPS>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<CPS>*, std::__1::allocator<Rcpp::SignedMethod<CPS>*> > >(std::__1::vector<Rcpp::SignedMethod<CPS>*, std::__1::allocator<Rcpp::SignedMethod<CPS>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<CTRL>*, std::__1::allocator<Rcpp::SignedMethod<CTRL>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<CTRL>*, std::__1::allocator<Rcpp::SignedMethod<CTRL>*> > >(std::__1::vector<Rcpp::SignedMethod<CTRL>*, std::__1::allocator<Rcpp::SignedMethod<CTRL>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<CTRL>*, std::__1::allocator<Rcpp::SignedMethod<CTRL>*> >*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<CTRL>*, std::__1::allocator<Rcpp::SignedMethod<CTRL>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<CTRL>*, std::__1::allocator<Rcpp::SignedMethod<CTRL>*> > >(std::__1::vector<Rcpp::SignedMethod<CTRL>*, std::__1::allocator<Rcpp::SignedMethod<CTRL>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<DCP>*, std::__1::allocator<Rcpp::SignedMethod<DCP>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<DCP>*, std::__1::allocator<Rcpp::SignedMethod<DCP>*> > >(std::__1::vector<Rcpp::SignedMethod<DCP>*, std::__1::allocator<Rcpp::SignedMethod<DCP>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<DCP>*, std::__1::allocator<Rcpp::SignedMethod<DCP>*> >*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<DCP>*, std::__1::allocator<Rcpp::SignedMethod<DCP>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<DCP>*, std::__1::allocator<Rcpp::SignedMethod<DCP>*> > >(std::__1::vector<Rcpp::SignedMethod<DCP>*, std::__1::allocator<Rcpp::SignedMethod<DCP>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<DLP>*, std::__1::allocator<Rcpp::SignedMethod<DLP>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<DLP>*, std::__1::allocator<Rcpp::SignedMethod<DLP>*> > >(std::__1::vector<Rcpp::SignedMethod<DLP>*, std::__1::allocator<Rcpp::SignedMethod<DLP>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<DLP>*, std::__1::allocator<Rcpp::SignedMethod<DLP>*> >*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<DLP>*, std::__1::allocator<Rcpp::SignedMethod<DLP>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<DLP>*, std::__1::allocator<Rcpp::SignedMethod<DLP>*> > >(std::__1::vector<Rcpp::SignedMethod<DLP>*, std::__1::allocator<Rcpp::SignedMethod<DLP>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<DNL>*, std::__1::allocator<Rcpp::SignedMethod<DNL>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<DNL>*, std::__1::allocator<Rcpp::SignedMethod<DNL>*> > >(std::__1::vector<Rcpp::SignedMethod<DNL>*, std::__1::allocator<Rcpp::SignedMethod<DNL>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<DNL>*, std::__1::allocator<Rcpp::SignedMethod<DNL>*> >*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<DNL>*, std::__1::allocator<Rcpp::SignedMethod<DNL>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<DNL>*, std::__1::allocator<Rcpp::SignedMethod<DNL>*> > >(std::__1::vector<Rcpp::SignedMethod<DNL>*, std::__1::allocator<Rcpp::SignedMethod<DNL>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<DQP>*, std::__1::allocator<Rcpp::SignedMethod<DQP>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<DQP>*, std::__1::allocator<Rcpp::SignedMethod<DQP>*> > >(std::__1::vector<Rcpp::SignedMethod<DQP>*, std::__1::allocator<Rcpp::SignedMethod<DQP>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<DQP>*, std::__1::allocator<Rcpp::SignedMethod<DQP>*> >*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<DQP>*, std::__1::allocator<Rcpp::SignedMethod<DQP>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<DQP>*, std::__1::allocator<Rcpp::SignedMethod<DQP>*> > >(std::__1::vector<Rcpp::SignedMethod<DQP>*, std::__1::allocator<Rcpp::SignedMethod<DQP>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<PDV>*, std::__1::allocator<Rcpp::SignedMethod<PDV>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<PDV>*, std::__1::allocator<Rcpp::SignedMethod<PDV>*> > >(std::__1::vector<Rcpp::SignedMethod<PDV>*, std::__1::allocator<Rcpp::SignedMethod<PDV>*> >*)), false>::XPtr(std::__1::vector<Rcpp::SignedMethod<PDV>*, std::__1::allocator<Rcpp::SignedMethod<PDV>*> >*, bool, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::XPtr<std::__1::vector<Rcpp::SignedMethod<PDV>*, std::__1::allocator<Rcpp::SignedMethod<PDV>*> >, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<std::__1::vector<Rcpp::SignedMethod<PDV>*, std::__1::allocator<Rcpp::SignedMethod<PDV>*> > >(std::__1::vector<Rcpp::SignedMethod<PDV>*, std::__1::allocator<Rcpp::SignedMethod<PDV>*> >*)), false> >::set__(SEXPREC*) with argument allocated using R_MakeExternalPtr Rcpp/include/Rcpp/XPtr.h:102
+
+Function Rcpp::class_<CONEC>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::class_<CPS>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::class_<CTRL>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::class_<DCP>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::class_<DLP>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::class_<DNL>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::class_<DQP>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::class_<PDV>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ZN4Rcpp6VectorILi14ENS_15PreserveStorageEEC2IlEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
+
+Function _ZN4Rcpp6VectorILi16ENS_15PreserveStorageEEC2ImEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
+
+Function feval(arma::Mat<double>, Rcpp::Function_Impl<Rcpp::PreserveStorage>)
+  [UP] ignoring variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function geval(arma::Mat<double>, Rcpp::Function_Impl<Rcpp::PreserveStorage>)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function heval(arma::Mat<double>, Rcpp::Function_Impl<Rcpp::PreserveStorage>)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

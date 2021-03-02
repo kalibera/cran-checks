@@ -1,0 +1,85 @@
+Package sequences version 0.5.9
+Package built using 80044/R 4.1.0; x86_64-pc-linux-gnu; 2021-03-02 02:23:33 UTC; unix   
+Checked with rchk version 3d653b7c8f92dac912532856b55f44d2986c6553 LLVM version 10.0.1
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector(Rcpp::Dimension const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:135
+
+Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(Rcpp::Dimension const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:135
+
+Function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<16>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
+
+Function RcppFunction::Rf_setRVector(std::__1::vector<double, std::__1::allocator<double> >&)
+  [PB] has possible protection stack imbalance RcppClassic/src/RcppFunction.cpp:73
+
+Function RcppFunction::appendToRList(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, RcppDate&)
+  [PB] has possible protection stack imbalance RcppClassic/src/RcppFunction.cpp:123
+
+Function RcppFunction::appendToRList(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, RcppDatetime&)
+  [PB] has possible protection stack imbalance RcppClassic/src/RcppFunction.cpp:134
+
+Function RcppFunction::appendToRList(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, double)
+  [PB] has possible protection stack imbalance RcppClassic/src/RcppFunction.cpp:90
+
+Function RcppFunction::appendToRList(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, int)
+  [PB] has possible protection stack imbalance RcppClassic/src/RcppFunction.cpp:101
+
+Function RcppFunction::appendToRList(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+  [PB] has possible protection stack imbalance RcppClassic/src/RcppFunction.cpp:112
+
+Function RcppFunction::clearProtectionStack()
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete RcppClassic/src/RcppFunction.cpp:137
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete RcppClassic/src/RcppFunction.cpp:137
+
+Function RcppFunction::listCall()
+  [PB] has possible protection stack imbalance RcppClassic/src/RcppFunction.cpp:55
+
+Function RcppFunction::setRListSize(int)
+  [PB] has possible protection stack imbalance RcppClassic/src/RcppFunction.cpp:79
+
+Function RcppFunction::vectorCall()
+  [PB] has possible protection stack imbalance RcppClassic/src/RcppFunction.cpp:67
+
+Function RcppFunction::~RcppFunction()
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete RcppClassic/src/RcppFunction.cpp:35
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete RcppClassic/src/RcppFunction.cpp:35
+
+Function RcppList::clearProtectionStack()
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete RcppClassic/src/RcppList.cpp:42
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete RcppClassic/src/RcppList.cpp:42
+
+Function RcppList::setSize(int)
+  [PB] has possible protection stack imbalance RcppClassic/src/RcppList.cpp:39
+
+Function RcppResultSet::add(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, double*, int)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function RcppResultSet::add(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, int*, int)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function RcppResultSet::getReturnList()
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete RcppClassic/src/RcppResultSet.cpp:130
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete RcppClassic/src/RcppResultSet.cpp:130
+
+Function RcppResultSet::getSEXP()
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete RcppClassic/src/RcppResultSet.cpp:141
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete RcppClassic/src/RcppResultSet.cpp:141
+
+Function RcppResultSet::push_back(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [PB] has possible protection stack imbalance RcppClassic/src/../inst/include/classic/RcppResultSet.h:82
