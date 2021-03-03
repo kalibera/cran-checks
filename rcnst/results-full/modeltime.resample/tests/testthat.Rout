@@ -1,0 +1,79 @@
+
+R Under development (unstable) (2021-03-03 r80059) -- "Unsuffered Consequences"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> 
+> # Machine Learning
+> library(tidymodels)
+── Attaching packages ────────────────────────────────────── tidymodels 0.1.2 ──
+✔ broom     0.7.5      ✔ recipes   0.1.15
+✔ dials     0.0.9      ✔ rsample   0.0.9 
+✔ dplyr     1.0.4      ✔ tibble    3.1.0 
+✔ ggplot2   3.3.3      ✔ tidyr     1.1.3 
+✔ infer     0.5.4      ✔ tune      0.1.3 
+✔ modeldata 0.1.0      ✔ workflows 0.2.1 
+✔ parsnip   0.1.5      ✔ yardstick 0.0.7 
+✔ purrr     0.3.4      
+── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──
+✖ purrr::discard() masks scales::discard()
+✖ dplyr::filter()  masks stats::filter()
+✖ purrr::is_null() masks testthat::is_null()
+✖ dplyr::lag()     masks stats::lag()
+✖ tidyr::matches() masks rsample::matches(), dplyr::matches(), testthat::matches()
+✖ recipes::step()  masks stats::step()
+> library(modeltime)
+> library(modeltime.resample)
+> 
+> library(glmnet)
+Loading required package: Matrix
+
+Attaching package: 'Matrix'
+
+The following objects are masked from 'package:tidyr':
+
+    expand, pack, unpack
+
+Loaded glmnet 4.1-1
+> 
+> # Core Packages
+> library(tidyverse)
+── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
+✔ readr   1.4.0     ✔ forcats 0.5.1
+✔ stringr 1.4.0     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ readr::col_factor() masks scales::col_factor()
+✖ purrr::discard()    masks scales::discard()
+✖ Matrix::expand()    masks tidyr::expand()
+✖ dplyr::filter()     masks stats::filter()
+✖ stringr::fixed()    masks recipes::fixed()
+✖ purrr::is_null()    masks testthat::is_null()
+✖ dplyr::lag()        masks stats::lag()
+✖ tidyr::matches()    masks rsample::matches(), dplyr::matches(), testthat::matches()
+✖ Matrix::pack()      masks tidyr::pack()
+✖ readr::spec()       masks yardstick::spec()
+✖ Matrix::unpack()    masks tidyr::unpack()
+> library(timetk)
+> library(lubridate)
+
+Attaching package: 'lubridate'
+
+The following objects are masked from 'package:base':
+
+    date, intersect, setdiff, union
+
+> 
+> test_check("modeltime.resample")
