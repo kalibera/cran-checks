@@ -15,10 +15,10 @@ argument and change only its copy, as detailed in [CONSTANTS.md](CONSTANTS.md).
 
 The checks are based on run-time detection of corruption of constants used
 by the byte-code compiler.  Hence, for these checks, all executing code is
-byte-compiled: packages are pre-compiled via R_COMPILE_PKGS=1 and
-R_JIT_STRATEGY=4 is set to ensure that all code is byte-compiled by the JIT,
+byte-compiled: packages are pre-compiled via `R_COMPILE_PKGS=1` and
+`R_JIT_STRATEGY=4` is set to ensure that all code is byte-compiled by the JIT,
 even when it is expected to harm performance.  Then, package tests are run
-with R_CHECK_CONSTANTS=5, which is the most strict but also slowest level of
+with `R_CHECK_CONSTANTS=5`, which is the most strict but also slowest level of
 checking of the constant corruption.  
 
 Only packages that failed due to constants corruption are shown here. 
@@ -30,7 +30,7 @@ the byte-code compiler).
 
 These tests can be easily re-run by developers as they use an unmodified version 
 of R (unfortunately there is a bug in R 3.6.0 and 3.6.1, which prevents checking
-with R_CHECK_CONSTANTS=5; the CRAN check service uses R-devel).
+with `R_CHECK_CONSTANTS=5`; the CRAN check service uses R-devel).
 
 ```
 env R_COMPILE_PKGS=1 R_JIT_STRATEGY=4 R_CHECK_CONSTANTS=5
