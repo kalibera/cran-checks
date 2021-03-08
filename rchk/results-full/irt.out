@@ -1,0 +1,460 @@
+Package irt version 0.1.3
+Package built using 80081/R 4.1.0; x86_64-pc-linux-gnu; 2021-03-08 14:54:56 UTC; unix   
+Checked with rchk version 3d653b7c8f92dac912532856b55f44d2986c6553 LLVM version 10.0.1
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::S4_Impl<Rcpp::PreserveStorage>::S4_Impl(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS Rcpp/include/Rcpp/S4.h:58
+
+Function Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::set(SEXPREC*)
+  [UP] calling allocating function Rcpp::S4_Impl<Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using R_do_slot_assign Rcpp/include/Rcpp/proxy/SlotProxy.h:55
+
+Function Rcpp::Vector<13, Rcpp::PreserveStorage> Rcpp::sample<13>(Rcpp::Vector<13, Rcpp::PreserveStorage> const&, int, bool, Rcpp::Nullable<Rcpp::Vector<14, Rcpp::PreserveStorage> >)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<13>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
+
+Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector()
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:57
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(Rcpp::Dimension const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:135
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<14>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(int const&, double const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:97
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::push_back_name__impl(double const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, false>)
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:709
+
+Function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector()
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:57
+
+Function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<16>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
+
+Function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector()
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:57
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector(int const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:683
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::set(SEXPREC*)
+  [UP] ignoring variable rhs as it has address taken, results will be incomplete 
+
+Function Rcpp::sample(int, int, bool, Rcpp::Nullable<Rcpp::Vector<14, Rcpp::PreserveStorage> >, bool)
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ZN4Rcpp6VectorILi13ENS_15PreserveStorageEEC2IlEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
+
+Function _ZN4Rcpp6VectorILi14ENS_15PreserveStorageEEC2IdEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
+
+Function _ZN4Rcpp6VectorILi14ENS_15PreserveStorageEEC2IiNS_5stats13UnifGeneratorEEERKT_RKT0_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS6_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:172
+
+Function _ZN4Rcpp6VectorILi14ENS_15PreserveStorageEEC2IjEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
+
+Function _ZN4Rcpp6VectorILi14ENS_15PreserveStorageEEC2IlEERKT_RKdPNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:91
+
+Function _ZN4Rcpp6VectorILi14ENS_15PreserveStorageEEC2IlEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
+
+Function _ZN4Rcpp6VectorILi16ENS_15PreserveStorageEEC2IjEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
+
+Function _ZN4Rcpp6VectorILi16ENS_15PreserveStorageEEC2IlEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
+
+Function _ZN4Rcpp6VectorILi16ENS_15PreserveStorageEEC2ImEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
+
+Function _ZN4Rcpp6VectorILi19ENS_15PreserveStorageEEC2IjEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
+
+Function _ZN4Rcpp6VectorILi19ENS_15PreserveStorageEEC2IlEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
+
+Function _irt_apply_exposure_control_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_avg_rank
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_biserial_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_calculate_epv_cpp
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_calculate_exposure_rates_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_calculate_overlap_rates_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_cat_sim_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_cat_sim_single_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_est_ability_4pm_nr_itempool_cpp
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_est_ability_cat_cpp
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_est_ability_eap_cpp
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_est_ability_eap_single_examinee_cpp
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_est_ability_owen_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_est_ability_owen_item_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_flatten_itempool_cpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_generate_cat_resp_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_get_administered_items_cpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_get_itempool_size
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_get_max_possible_score_item_cpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_get_max_possible_score_itempool_cpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_get_parameters_itempool_cpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_get_remaining_items
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_get_response_categories
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_get_slot_itempool_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_info_4pm_bare_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_info_4pm_matrix_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_info_gpcm_bare_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_info_grm_bare_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_info_item_bare_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_info_item_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_info_itempool_bare_cpp
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_info_itempool_cpp
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_info_testlet_bare_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_integrate
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_loglik_est_history
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_prob_4pm_bare_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_prob_4pm_item_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_prob_4pm_itempool_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_prob_bare_item_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_prob_bare_itempool_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_prob_gpcm_bare_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_prob_grm_bare_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_prob_mirt_bare_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_prob_mirt_item_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_prob_mirt_itempool_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_prob_poly_bare_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_resp_lik_bare_item_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_resp_lik_bare_itempool_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_resp_lik_bare_testlet_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_resp_lik_item_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_resp_lik_itempool_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_resp_lik_testlet_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_resp_loglik_bare_item_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_resp_loglik_bare_itempool_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_resp_loglik_bare_testlet_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_resp_loglik_item_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_resp_loglik_itempool_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_resp_loglik_testlet_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_select_next_item_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_select_next_item_fisher_max_info_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_select_next_item_fmi_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_select_next_item_mepv_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_sim_resp_4pm_bare_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_sim_resp_bare_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_sim_resp_poly_bare_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_subset_itempool_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _irt_terminate_cat_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function calculate_epv_cpp(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, Rcpp::Vector<14, Rcpp::PreserveStorage>, Rcpp::Vector<14, Rcpp::PreserveStorage>, double, Rcpp::S4_Impl<Rcpp::PreserveStorage>, Rcpp::S4_Impl<Rcpp::PreserveStorage>, double, double)
+  [UP] calling allocating function Rcpp::S4_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::S4_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/cat_select_next_item.cpp:643
+
+Function calculate_exposure_rates_cpp(Rcpp::Vector<16, Rcpp::PreserveStorage>, Rcpp::Vector<19, Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/cat_sim_functions.cpp:405
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/cat_sim_functions.cpp:415
+
+Function calculate_overlap_rates_cpp(Rcpp::Vector<16, Rcpp::PreserveStorage>, Rcpp::Vector<19, Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/cat_sim_functions.cpp:485
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/cat_sim_functions.cpp:489
+
+Function flatten_itempool_cpp(Rcpp::S4_Impl<Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/itempool_class_methods.cpp:210
+  [UP] calling allocating function Rcpp::S4_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::S4_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/itempool_class_methods.cpp:213
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/itempool_class_methods.cpp:217
+
+Function get_administered_items_cpp(Rcpp::Vector<19, Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/cat_select_next_item.cpp:371
+
+Function get_itempool_size(Rcpp::S4_Impl<Rcpp::PreserveStorage>)
+  [UP] calling allocating function Rcpp::S4_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::S4_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/itempool_class_methods.cpp:53
+
+Function get_max_possible_score_item_cpp(Rcpp::S4_Impl<Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/itempool_class_methods.cpp:265
+
+Function get_remaining_items(Rcpp::Vector<19, Rcpp::PreserveStorage>, Rcpp::Vector<19, Rcpp::PreserveStorage>, Rcpp::Vector<19, Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/cat_select_next_item.cpp:137
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/cat_select_next_item.cpp:143
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/cat_select_next_item.cpp:176
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/cat_select_next_item.cpp:197
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/cat_select_next_item.cpp:222
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/cat_select_next_item.cpp:230
+
+Function get_response_categories(Rcpp::S4_Impl<Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/cat_select_next_item.cpp:400
+
+Function get_slot_itempool_cpp(Rcpp::S4_Impl<Rcpp::PreserveStorage>, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/itempool_class_methods.cpp:99
+
+Function info_4pm_bare_cpp(double, Rcpp::S4_Impl<Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/info.cpp:24
+
+Function info_gpcm_bare_cpp(double, Rcpp::S4_Impl<Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/info.cpp:166
+
+Function info_item_bare_cpp(double, Rcpp::S4_Impl<Rcpp::PreserveStorage>, bool, double)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/info.cpp:230
+
+Function info_itempool_bare_cpp(double, Rcpp::S4_Impl<Rcpp::PreserveStorage>, bool, bool, Rcpp::Nullable<Rcpp::Vector<14, Rcpp::PreserveStorage> >)
+  [UP] calling allocating function Rcpp::S4_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::S4_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/info.cpp:364
+
+Function prob_4pm_bare_cpp(double, Rcpp::S4_Impl<Rcpp::PreserveStorage>, int)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/prob.cpp:24
+
+Function prob_bare_item_cpp(Rcpp::Vector<14, Rcpp::PreserveStorage>, Rcpp::S4_Impl<Rcpp::PreserveStorage>, int, bool)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/prob.cpp:376
+
+Function prob_gpcm_bare_cpp(double, Rcpp::S4_Impl<Rcpp::PreserveStorage>, int)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/prob.cpp:176
+
+Function prob_mirt_bare_cpp(Rcpp::Vector<14, Rcpp::PreserveStorage>, Rcpp::S4_Impl<Rcpp::PreserveStorage>, int)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/prob.cpp:289
+
+Function prob_poly_bare_cpp(double, Rcpp::S4_Impl<Rcpp::PreserveStorage>, int, bool)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/prob.cpp:262
+
+Function resp_lik_bare_item_cpp(double, double, Rcpp::S4_Impl<Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/resp_lik.cpp:27
+
+Function resp_loglik_bare_item_cpp(double, double, Rcpp::S4_Impl<Rcpp::PreserveStorage>, int)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/resp_loglik.cpp:52
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/resp_loglik.cpp:58
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/resp_loglik.cpp:102
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/resp_loglik.cpp:111
+
+Function resp_loglik_bare_itempool_cpp(Rcpp::Vector<14, Rcpp::PreserveStorage>, double, Rcpp::S4_Impl<Rcpp::PreserveStorage>, int)
+  [UP] calling allocating function Rcpp::S4_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::S4_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/resp_loglik.cpp:270
+
+Function select_next_item_cpp(Rcpp::Vector<19, Rcpp::PreserveStorage>, Rcpp::Vector<19, Rcpp::PreserveStorage>, Rcpp::Vector<19, Rcpp::PreserveStorage>)
+  [UP] calling allocating function Rcpp::S4_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::S4_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/cat_select_next_item.cpp:1132
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/cat_select_next_item.cpp:1142
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/cat_select_next_item.cpp:1148
+  [UP] calling allocating function Rcpp::S4_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::S4_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/cat_select_next_item.cpp:1308
+
+Function select_next_item_mepv_cpp(Rcpp::Vector<19, Rcpp::PreserveStorage>, Rcpp::Vector<19, Rcpp::PreserveStorage>, Rcpp::Vector<19, Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/cat_select_next_item.cpp:851
+  [UP] calling allocating function Rcpp::S4_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::S4_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/cat_select_next_item.cpp:857
+
+Function sim_resp_bare_cpp(double, Rcpp::S4_Impl<Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/sim_resp.cpp:55
+
+Function subset_itempool_cpp(Rcpp::S4_Impl<Rcpp::PreserveStorage>, Rcpp::Vector<19, Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const irt/src/itempool_class_methods.cpp:168
+
+Function void Rcpp::Vector<10, Rcpp::PreserveStorage>::import_sugar_expression<false, Rcpp::sugar::Not_Vector<10, false, Rcpp::sugar::IsNa<14, true, Rcpp::Vector<14, Rcpp::PreserveStorage> > > >(Rcpp::VectorBase<10, false, Rcpp::sugar::Not_Vector<10, false, Rcpp::sugar::IsNa<14, true, Rcpp::Vector<14, Rcpp::PreserveStorage> > > > const&, Rcpp::traits::integral_constant<bool, false>)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<10, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
+
+Function void Rcpp::Vector<10, Rcpp::PreserveStorage>::import_sugar_expression<true, Rcpp::sugar::Comparator_With_One_Value<13, Rcpp::sugar::not_equal<13>, true, Rcpp::sugar::Minus_Vector_Primitive<13, false, Rcpp::sugar::SeqLen> > >(Rcpp::VectorBase<10, true, Rcpp::sugar::Comparator_With_One_Value<13, Rcpp::sugar::not_equal<13>, true, Rcpp::sugar::Minus_Vector_Primitive<13, false, Rcpp::sugar::SeqLen> > > const&, Rcpp::traits::integral_constant<bool, false>)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<10, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
+
+Function void Rcpp::Vector<10, Rcpp::PreserveStorage>::import_sugar_expression<true, Rcpp::sugar::Comparator_With_One_Value<14, Rcpp::sugar::equal<14>, true, Rcpp::Vector<14, Rcpp::PreserveStorage> > >(Rcpp::VectorBase<10, true, Rcpp::sugar::Comparator_With_One_Value<14, Rcpp::sugar::equal<14>, true, Rcpp::Vector<14, Rcpp::PreserveStorage> > > const&, Rcpp::traits::integral_constant<bool, false>)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<10, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
+
+Function void Rcpp::Vector<13, Rcpp::PreserveStorage>::import_sugar_expression<false, Rcpp::Range>(Rcpp::VectorBase<13, false, Rcpp::Range> const&, Rcpp::traits::integral_constant<bool, false>)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
+
+Function void Rcpp::Vector<13, Rcpp::PreserveStorage>::import_sugar_expression<true, Rcpp::sugar::Minus_Vector_Primitive<13, true, Rcpp::Vector<13, Rcpp::PreserveStorage> > >(Rcpp::VectorBase<13, true, Rcpp::sugar::Minus_Vector_Primitive<13, true, Rcpp::Vector<13, Rcpp::PreserveStorage> > > const&, Rcpp::traits::integral_constant<bool, false>)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
+
+Function void Rcpp::Vector<14, Rcpp::PreserveStorage>::import_sugar_expression<true, Rcpp::MatrixRow<14> >(Rcpp::VectorBase<14, true, Rcpp::MatrixRow<14> > const&, Rcpp::traits::integral_constant<bool, false>)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
+
+Function void Rcpp::Vector<14, Rcpp::PreserveStorage>::import_sugar_expression<true, Rcpp::internal::RangeIndexer<14, true, Rcpp::Vector<14, Rcpp::PreserveStorage> > >(Rcpp::VectorBase<14, true, Rcpp::internal::RangeIndexer<14, true, Rcpp::Vector<14, Rcpp::PreserveStorage> > > const&, Rcpp::traits::integral_constant<bool, false>)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
+
+Function void Rcpp::Vector<14, Rcpp::PreserveStorage>::import_sugar_expression<true, Rcpp::stats::D0<14, true, Rcpp::Vector<14, Rcpp::PreserveStorage> > >(Rcpp::VectorBase<14, true, Rcpp::stats::D0<14, true, Rcpp::Vector<14, Rcpp::PreserveStorage> > > const&, Rcpp::traits::integral_constant<bool, false>)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
+
+Function void Rcpp::Vector<14, Rcpp::PreserveStorage>::import_sugar_expression<true, Rcpp::stats::P0<14, true, Rcpp::Vector<14, Rcpp::PreserveStorage> > >(Rcpp::VectorBase<14, true, Rcpp::stats::P0<14, true, Rcpp::Vector<14, Rcpp::PreserveStorage> > > const&, Rcpp::traits::integral_constant<bool, false>)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
+
+Function void Rcpp::Vector<14, Rcpp::PreserveStorage>::import_sugar_expression<true, Rcpp::sugar::Divides_Vector_Primitive<14, true, Rcpp::Vector<14, Rcpp::PreserveStorage> > >(Rcpp::VectorBase<14, true, Rcpp::sugar::Divides_Vector_Primitive<14, true, Rcpp::Vector<14, Rcpp::PreserveStorage> > > const&, Rcpp::traits::integral_constant<bool, false>)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
+
+Function void Rcpp::Vector<14, Rcpp::PreserveStorage>::import_sugar_expression<true, Rcpp::sugar::Minus_Primitive_Vector<14, true, Rcpp::Vector<14, Rcpp::PreserveStorage> > >(Rcpp::VectorBase<14, true, Rcpp::sugar::Minus_Primitive_Vector<14, true, Rcpp::Vector<14, Rcpp::PreserveStorage> > > const&, Rcpp::traits::integral_constant<bool, false>)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
+
+Function void Rcpp::Vector<14, Rcpp::PreserveStorage>::import_sugar_expression<true, Rcpp::sugar::Minus_Vector_Primitive<14, true, Rcpp::Vector<14, Rcpp::PreserveStorage> > >(Rcpp::VectorBase<14, true, Rcpp::sugar::Minus_Vector_Primitive<14, true, Rcpp::Vector<14, Rcpp::PreserveStorage> > > const&, Rcpp::traits::integral_constant<bool, false>)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:1070
+
+Function void Rcpp::Vector<16, Rcpp::PreserveStorage>::push_back<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::S4_Impl<Rcpp::PreserveStorage> >(Rcpp::S4_Impl<Rcpp::PreserveStorage> const&)
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::Vector<19, Rcpp::PreserveStorage> >(Rcpp::Vector<19, Rcpp::PreserveStorage> const&)
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::internal::generic_proxy<19, Rcpp::PreserveStorage> >(Rcpp::internal::generic_proxy<19, Rcpp::PreserveStorage> const&)
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

@@ -1,0 +1,19 @@
+Package gwsem version 2.0.9
+Package built using 80081/R 4.1.0; x86_64-pc-linux-gnu; 2021-03-08 16:52:01 UTC; unix   
+Checked with rchk version 3d653b7c8f92dac912532856b55f44d2986c6553 LLVM version 10.0.1
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function LoadDataBGENProvider2::init(SEXPREC*)
+  [UP] calling allocating function bool Rcpp::as<bool>(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::RObject_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const gwsem/src/loader.cpp:65
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector<Rcpp::SlotProxyPolicy<Rcpp::RObject_Impl<Rcpp::PreserveStorage> >::SlotProxy>(Rcpp::GenericProxy<Rcpp::SlotProxyPolicy<Rcpp::RObject_Impl<Rcpp::PreserveStorage> >::SlotProxy> const&)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<16>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:80
