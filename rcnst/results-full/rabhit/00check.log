@@ -1,10 +1,10 @@
-* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/quantities.Rcheck’
-* using R Under development (unstable) (2021-02-26 r80036)
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/rabhit.Rcheck’
+* using R Under development (unstable) (2021-03-17 r80092)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* checking for file ‘quantities/DESCRIPTION’ ... OK
+* checking for file ‘rabhit/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘quantities’ version ‘0.1.6’
+* this is package ‘rabhit’ version ‘0.1.5’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -14,7 +14,7 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘quantities’ can be installed ... OK
+* checking whether package ‘rabhit’ can be installed ... OK
 * checking package directory ... OK
 * checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -43,38 +43,43 @@
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
-* checking line endings in C/C++/Fortran sources/headers ... OK
-* checking compiled code ... NOTE
-Note: information on .o files is not available
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking R/sysdata.rda ... OK
+* checking sizes of PDF files under ‘inst/doc’ ... OK
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
-* checking examples ... OK
-* checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-      else {
-          names_fns <- names(fns)
-          empties <- which(names_fns == "")
-          if (length(empties)) {
-              names_fns[empties] <- empties
-          }
-      }
-      glue_mask <- glue_mask <- across_glue_mask(.caller_env, .col = rep(vars, 
-          each = length(fns)), .fn = rep(names_fns, length(vars)))
-      names <- vec_as_names(glue(names, .envir = glue_mask), repair = "check_unique")
-      list(vars = vars, fns = fns, names = names)
-  }
-  Function across_setup_impl in namespace dplyr has this body.
-  Fatal error: compiler constants were modified!
-  
+* checking examples ... ERROR
+Running examples in ‘rabhit-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: plotDeletionsByBinom
+> ### Title: Graphical output of double chromosome deletions
+> ### Aliases: plotDeletionsByBinom
+> 
+> ### ** Examples
+> 
+> 
+> # Load example data and germlines
+> data(samples_db)
+> 
+> # Infering haplotype
+> deletions_db = deletionsByBinom(samples_db);
+ERROR: modification of compiler constant of type character, length 3
+ERROR: the modified value of the constant is:
+[1] "Unk" "Del" "NR" 
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "Unk" "Del" "NR" 
+ERROR: the modified constant is at index 1
+ERROR: the modified constant is in this function body:
+c("Unk", "Del", "NR")
+Fatal error: compiler constants were modified!
+
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
-  ‘introduction.Rmd’ using ‘UTF-8’... OK
-  ‘parsing.Rmd’ using ‘UTF-8’... OK
-* checking re-building of vignette outputs ... OK
-* checking PDF version of manual ... OK
-* DONE
-Status: 1 ERROR, 1 NOTE
+  ‘RAbHIT-vignette.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ...
