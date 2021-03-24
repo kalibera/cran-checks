@@ -1,5 +1,5 @@
-Package CLVTools version 0.7.0
-Package built using 80081/R 4.1.0; x86_64-pc-linux-gnu; 2021-03-08 14:35:47 UTC; unix   
+Package CLVTools version 0.8.0
+Package built using 80110/R 4.1.0; x86_64-pc-linux-gnu; 2021-03-24 17:05:40 UTC; unix   
 Checked with rchk version 3d653b7c8f92dac912532856b55f44d2986c6553 LLVM version 10.0.1
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -12,6 +12,9 @@ Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
+Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<13>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
+
 Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<14>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
 
@@ -20,6 +23,9 @@ Function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector(int const&)
 
 Function RcppGSL::vector<double>::vector(SEXPREC*)
   [UP] calling allocating function void Rcpp::internal::export_range<double*>(SEXPREC*, double*) with a fresh pointer (y <arg 1>) RcppGSL/include/RcppGSLForward.h:105
+
+Function _CLVTools_F2_3_vecs_cpp
+  [UP] ignoring variable <unnamed var:   %78 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _CLVTools_bgnbd_nocov_CET
   [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -98,6 +104,18 @@ Function _CLVTools_ggomnbd_staticcov_beta_i
 
 Function _CLVTools_ggomnbd_staticcov_expectation
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _CLVTools_hyp_alpha_ge_beta_cpp
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _CLVTools_hyp_beta_g_alpha_cpp
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _CLVTools_pnbd_dyncov_LL_Bi_cpp
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _CLVTools_pnbd_dyncov_LL_Di_cpp
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _CLVTools_pnbd_nocov_CET
   [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
