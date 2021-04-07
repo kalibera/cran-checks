@@ -1,5 +1,5 @@
-Package RJcluster version 0.1.2
-Package built using 80086/R 4.1.0; x86_64-pc-linux-gnu; 2021-03-11 21:39:53 UTC; unix   
+Package RJcluster version 2.5.0
+Package built using 80146/R 4.1.0; x86_64-pc-linux-gnu; 2021-04-07 14:42:24 UTC; unix   
 Checked with rchk version 3d653b7c8f92dac912532856b55f44d2986c6553 LLVM version 10.0.1
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -20,6 +20,9 @@ Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
+Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<13>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
+
 Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<14>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
 
@@ -30,6 +33,15 @@ Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _RJcluster_assignGroups_c
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _RJcluster_dmvnrm_arma
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _RJcluster_dmvnrm_arma_fast
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _RJcluster_dmvnrm_arma_old
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _RJcluster_getCCmatrix_c
@@ -43,6 +55,21 @@ Function _RJcluster_getIndividualList
 
 Function _RJcluster_getMatrixMeans_c
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _RJcluster_get_gamma_c
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _RJcluster_get_gamma_labels_c
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _RJcluster_get_mean_values_c
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _RJcluster_get_mu_c
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _RJcluster_loglik_G_c
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _RJcluster_rcpparma_bothproducts
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -59,8 +86,26 @@ Function _RJcluster_rcpparma_outerproduct
 Function _RJcluster_scale_c
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _RJcluster_step_five_c
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _RJcluster_step_four_c
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _RJcluster_step_three_c
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _RJcluster_step_two_c
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _RJcluster_tcrossprod_c
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _RJcluster_weights_multi_c
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _RJcluster_weights_multi_matrix_c
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _ZN4Rcpp6VectorILi16ENS_15PreserveStorageEEC2ImEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
