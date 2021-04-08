@@ -1,5 +1,5 @@
-Package readsparse version 0.1.1-2
-Package built using 80146/R 4.1.0; x86_64-pc-linux-gnu; 2021-04-07 07:20:52 UTC; unix   
+Package readsparse version 0.1.2
+Package built using 80146/R 4.1.0; x86_64-pc-linux-gnu; 2021-04-08 13:23:38 UTC; unix   
 Checked with rchk version 3d653b7c8f92dac912532856b55f44d2986c6553 LLVM version 10.0.1
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -15,17 +15,35 @@ Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
+Function Rcpp::String::set_encoding(cetype_t)
+  [UP] calling allocating function Rcpp::Rcpp_ReplaceObject(SEXPREC*, SEXPREC*) with argument allocated using Rf_mkCharCE Rcpp/include/Rcpp/String.h:413
+
+Function Rcpp::Vector<10, Rcpp::PreserveStorage>::Vector(SEXPREC*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<10, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<10>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
+
+Function Rcpp::Vector<10, Rcpp::PreserveStorage>::Vector<int*>(int*, int*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<10, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:213
+
 Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector(SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<13>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
 
 Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector(int const&)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:130
 
+Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector<int*>(int*, int*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:213
+
 Function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector<std::__1::__wrap_iter<int*> >(std::__1::__wrap_iter<int*>, std::__1::__wrap_iter<int*>)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<13, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:213
 
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector()
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:57
+
 Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(SEXPREC*)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*) with argument allocated using SEXPREC* Rcpp::r_cast<14>(SEXPREC*) Rcpp/include/Rcpp/vector/Vector.h:74
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector<double*>(double*, double*)
+  [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:213
 
 Function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector<std::__1::__wrap_iter<double*> >(std::__1::__wrap_iter<double*>, std::__1::__wrap_iter<double*>)
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<14, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:213
@@ -54,6 +72,15 @@ Function _ZN4Rcpp6VectorILi16ENS_15PreserveStorageEEC2ImEET_PNS_6traits9enable_i
 Function _ZN4Rcpp6VectorILi19ENS_15PreserveStorageEEC2IlEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<19, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
 
+Function _readsparse_deepcopy_int
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _readsparse_deepcopy_log
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _readsparse_deepcopy_num
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _readsparse_read_multi_label_R
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -65,6 +92,9 @@ Function _readsparse_read_single_label_R
 
 Function _readsparse_read_single_label_from_str_R
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _readsparse_supports_nonascii_internal
+  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _readsparse_write_multi_label_R
   [UP] ignoring variable <unnamed var:   %53 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -85,55 +115,55 @@ Function _readsparse_write_single_label_numeric_to_str_R
   [UP] ignoring variable <unnamed var:   %44 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function read_multi_label_R(Rcpp::Vector<16, Rcpp::PreserveStorage>, bool, bool, bool, bool)
-  [UP] ignoring variable <unnamed var:   %62 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %67 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %72 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:156
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:159
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:161
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:163
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:165
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:167
+  [UP] ignoring variable <unnamed var:   %63 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %68 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %73 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:247
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:250
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:252
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:254
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:256
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:258
 
 Function read_multi_label_from_str_R(Rcpp::Vector<16, Rcpp::PreserveStorage>, bool, bool, bool, bool)
   [UP] ignoring variable <unnamed var:   %62 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %67 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %72 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:232
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:235
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:237
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:239
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:241
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:243
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:323
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:326
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:328
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:330
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:332
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:334
 
 Function read_single_label_R(Rcpp::Vector<16, Rcpp::PreserveStorage>, bool, bool, bool, bool)
-  [UP] ignoring variable <unnamed var:   %58 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %63 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %68 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:311
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:314
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:316
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:318
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:320
+  [UP] ignoring variable <unnamed var:   %59 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %64 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %69 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:403
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:406
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:408
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:410
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:412
 
 Function read_single_label_from_str_R(Rcpp::Vector<16, Rcpp::PreserveStorage>, bool, bool, bool, bool)
   [UP] ignoring variable <unnamed var:   %58 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %63 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %68 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:383
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:386
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:388
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:390
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:392
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:475
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:478
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:480
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:482
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:484
 
 Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
   [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function write_multi_label_to_str_R(Rcpp::Vector<13, Rcpp::PreserveStorage>, Rcpp::Vector<13, Rcpp::PreserveStorage>, Rcpp::Vector<14, Rcpp::PreserveStorage>, Rcpp::Vector<13, Rcpp::PreserveStorage>, Rcpp::Vector<13, Rcpp::PreserveStorage>, Rcpp::Vector<13, Rcpp::PreserveStorage>, int, int, bool, bool, bool, bool, int)
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:491
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:619
 
 Function write_single_label_integer_to_str_R(Rcpp::Vector<13, Rcpp::PreserveStorage>, Rcpp::Vector<13, Rcpp::PreserveStorage>, Rcpp::Vector<14, Rcpp::PreserveStorage>, Rcpp::Vector<13, Rcpp::PreserveStorage>, Rcpp::Vector<13, Rcpp::PreserveStorage>, int, int, bool, bool, bool, bool, int)
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:683
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:844
 
 Function write_single_label_numeric_to_str_R(Rcpp::Vector<13, Rcpp::PreserveStorage>, Rcpp::Vector<13, Rcpp::PreserveStorage>, Rcpp::Vector<14, Rcpp::PreserveStorage>, Rcpp::Vector<14, Rcpp::PreserveStorage>, Rcpp::Vector<13, Rcpp::PreserveStorage>, int, int, bool, bool, bool, bool, int)
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:635
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using Rcpp::unwindProtect(SEXPREC* (*)(void*), void*) readsparse/src/Rwrapper.cpp:786
