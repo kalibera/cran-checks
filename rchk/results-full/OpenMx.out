@@ -1,5 +1,5 @@
-Package OpenMx version 2.19.1
-Package built using 80083/R 4.1.0; x86_64-pc-linux-gnu; 2021-03-09 17:45:26 UTC; unix   
+Package OpenMx version 2.19.5
+Package built using 80221/R 4.2.0; x86_64-pc-linux-gnu; 2021-04-25 18:38:31 UTC; unix   
 Checked with rchk version 3d653b7c8f92dac912532856b55f44d2986c6553 LLVM version 10.0.1
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -9,10 +9,10 @@ Function BA81Expect::populateAttr(SEXPREC*)
   [PB] has possible protection stack imbalance OpenMx/src/omxExpectationBA81.cpp:416
 
 Function ComputeBootstrap::computeImpl(FitContext*)
-  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:4175
+  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:4158
 
 Function ComputeBootstrap::initFromFrontend(omxState*, SEXPREC*)
-  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:4050
+  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:4033
 
 Function ComputeCI::computeImpl(FitContext*)
   [PB] has possible protection stack imbalance OpenMx/src/ComputeGD.cpp:1396
@@ -24,7 +24,7 @@ Function ComputeCI::reportResults(FitContext*, MxRList*, MxRList*)
   [PB] has possible protection stack imbalance OpenMx/src/ComputeGD.cpp:1447
 
 Function ComputeCheckpoint::reportResults(FitContext*, MxRList*, MxRList*)
-  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:5463
+  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:5446
 
 Function ComputeEM::MengRubinFamily(FitContext*)
   [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:3228
@@ -45,15 +45,15 @@ Function ComputeNR::initFromFrontend(omxState*, SEXPREC*)
   [PB] has possible protection stack imbalance OpenMx/src/ComputeNR.cpp:325
 
 Function ComputeReportDeriv::reportResults(FitContext*, MxRList*, MxRList*)
-  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:3958
+  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:3941
 
 Function ComputeReportExpectation::reportResults(FitContext*, MxRList*, MxRList*)
   [PB] has too high protection stack depth results will be incomplete
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
-  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:3979
+  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:3962
 
 Function ComputeStandardError::reportResults(FitContext*, MxRList*, MxRList*)
-  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:3791
+  [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:3774
 
 Function ComputeTryCatch::initFromFrontend(omxState*, SEXPREC*)
   [PB] has possible protection stack imbalance OpenMx/src/Compute.cpp:2330
@@ -62,26 +62,26 @@ Function ComputeTryH::initFromFrontend(omxState*, SEXPREC*)
   [PB] has possible protection stack imbalance OpenMx/src/ComputeGD.cpp:1505
 
 Function MLFitState::populateAttr(SEXPREC*)
-  [PB] has possible protection stack imbalance OpenMx/src/omxMLFitFunction.cpp:311
+  [PB] has possible protection stack imbalance OpenMx/src/omxMLFitFunction.cpp:315
 
 Function MxRList::add(char const*, SEXPREC*)
   [UP] ignoring variable rkey as it has address taken, results will be incomplete 
-  [PB] has possible protection stack imbalance OpenMx/src/./omxDefines.h:500
+  [PB] has possible protection stack imbalance OpenMx/src/./omxDefines.h:505
 
 Function MxRList::asR()
   [PB] has possible protection stack imbalance OpenMx/src/glue.cpp:339
 
 Function ProtectAutoBalanceDoodad::~ProtectAutoBalanceDoodad()
-  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete OpenMx/src/./omxDefines.h:559
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete OpenMx/src/./omxDefines.h:559
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete OpenMx/src/./omxDefines.h:564
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete OpenMx/src/./omxDefines.h:564
 
 Function ProtectedSEXP::ProtectedSEXP(SEXPREC*)
-  [PB] has possible protection stack imbalance OpenMx/src/./omxDefines.h:530
+  [PB] has possible protection stack imbalance OpenMx/src/./omxDefines.h:535
 
 Function ProtectedSEXP::~ProtectedSEXP()
-  [PB] has negative depth OpenMx/src/./omxDefines.h:536
-  [UP] attempt to unprotect more items (2) than protected (1), results will be incomplete OpenMx/src/./omxDefines.h:536
-  [PB] has possible protection stack imbalance OpenMx/src/./omxDefines.h:537
+  [PB] has negative depth OpenMx/src/./omxDefines.h:541
+  [UP] attempt to unprotect more items (2) than protected (1), results will be incomplete OpenMx/src/./omxDefines.h:541
+  [PB] has possible protection stack imbalance OpenMx/src/./omxDefines.h:542
 
 Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
@@ -157,12 +157,12 @@ Function RelationalRAMExpectation::state::simulate(FitContext*, MxRList&)
   [PB] has possible protection stack imbalance OpenMx/src/omxRAMExpectation.cpp:2216
 
 Function ScopedProtect::ScopedProtect(SEXPREC*&, SEXPREC*)
-  [PB] has possible protection stack imbalance OpenMx/src/./omxDefines.h:511
+  [PB] has possible protection stack imbalance OpenMx/src/./omxDefines.h:516
 
 Function ScopedProtect::~ScopedProtect()
-  [PB] has negative depth OpenMx/src/./omxDefines.h:517
-  [UP] attempt to unprotect more items (2) than protected (1), results will be incomplete OpenMx/src/./omxDefines.h:517
-  [PB] has possible protection stack imbalance OpenMx/src/./omxDefines.h:518
+  [PB] has negative depth OpenMx/src/./omxDefines.h:522
+  [UP] attempt to unprotect more items (2) than protected (1), results will be incomplete OpenMx/src/./omxDefines.h:522
+  [PB] has possible protection stack imbalance OpenMx/src/./omxDefines.h:523
 
 Function _ZN4Rcpp6VectorILi16ENS_15PreserveStorageEEC2IlEET_PNS_6traits9enable_ifIXsr6traits13is_arithmeticIS4_EE5valueEvE4typeE
   [UP] calling allocating function Rcpp::PreserveStorage<Rcpp::Vector<16, Rcpp::PreserveStorage> >::set__(SEXPREC*)(?,V) with argument allocated using Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:125
