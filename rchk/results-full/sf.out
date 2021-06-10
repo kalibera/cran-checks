@@ -1,5 +1,5 @@
-Package sf version 0.9-8
-Package built using 80092/R 4.1.0; x86_64-pc-linux-gnu; 2021-03-18 01:16:35 UTC; unix   
+Package sf version 1.0-0
+Package built using 80476/R 4.2.0; x86_64-pc-linux-gnu; 2021-06-10 12:06:15 UTC; unix   
 Checked with rchk version 3d653b7c8f92dac912532856b55f44d2986c6553 LLVM version 10.0.1
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -12,9 +12,6 @@ Function Rcpp::Armor<SEXPREC*>::~Armor()
   [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
-
-Function Rcpp::AttributeProxyPolicy<Rcpp::Vector<19, Rcpp::PreserveStorage> >::AttributeProxy::operator double<double>() const
-  [UP] calling allocating function double Rcpp::as<double>(SEXPREC*) with argument allocated using Rcpp::AttributeProxyPolicy<Rcpp::Vector<19, Rcpp::PreserveStorage> >::AttributeProxy::get() const Rcpp/include/Rcpp/api/meat/proxy.h:40
 
 Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::namespace_env(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -275,6 +272,9 @@ Function _sf_CPL_get_crs
 Function _sf_CPL_get_data_dir
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _sf_CPL_get_gdal_drivers
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _sf_CPL_get_layers
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -288,9 +288,6 @@ Function _sf_CPL_get_pipelines
   [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sf_CPL_get_proj_search_paths
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _sf_CPL_get_rgdal_drivers
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sf_CPL_get_z_range
@@ -348,13 +345,13 @@ Function _sf_CPL_read_gdal
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sf_CPL_read_ogr
-  [UP] ignoring variable <unnamed var:   %48 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %51 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sf_CPL_read_wkb
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr sf/src/RcppExports.cpp:1154
-  [PB] has negative depth sf/src/RcppExports.cpp:1166
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete sf/src/RcppExports.cpp:1166
-  [PB] has possible protection stack imbalance sf/src/RcppExports.cpp:1167
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr sf/src/RcppExports.cpp:1184
+  [PB] has negative depth sf/src/RcppExports.cpp:1196
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete sf/src/RcppExports.cpp:1196
+  [PB] has possible protection stack imbalance sf/src/RcppExports.cpp:1197
 
 Function _sf_CPL_read_wkb_try(SEXPREC*, SEXPREC*, SEXPREC*)
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -387,13 +384,13 @@ Function _sf_CPL_wrap_dateline
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sf_CPL_write_ogr
-  [UP] ignoring variable <unnamed var:   %51 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %57 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _sf_CPL_write_wkb
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr sf/src/RcppExports.cpp:1189
-  [PB] has negative depth sf/src/RcppExports.cpp:1201
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete sf/src/RcppExports.cpp:1201
-  [PB] has possible protection stack imbalance sf/src/RcppExports.cpp:1202
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr sf/src/RcppExports.cpp:1219
+  [PB] has negative depth sf/src/RcppExports.cpp:1231
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete sf/src/RcppExports.cpp:1231
+  [PB] has possible protection stack imbalance sf/src/RcppExports.cpp:1232
 
 Function _sf_CPL_write_wkb_try(SEXPREC*, SEXPREC*)
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
