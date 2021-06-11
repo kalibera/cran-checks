@@ -1,5 +1,5 @@
-Package torch version 0.3.0
-Package built using 80244/R 4.2.0; x86_64-pc-linux-gnu; 2021-04-29 13:47:23 UTC; unix   
+Package torch version 0.4.0
+Package built using 80480/R 4.2.0; x86_64-pc-linux-gnu; 2021-06-11 11:52:06 UTC; unix   
 Checked with rchk version 3d653b7c8f92dac912532856b55f44d2986c6553 LLVM version 10.0.1
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -132,7 +132,10 @@ Function Rcpp::new_env(SEXPREC*, int)
   [UP] ignoring variable parent as it has address taken, results will be incomplete 
 
 Function XPtrTorchGenerator_from_SEXP(SEXPREC*)
-  [UP] calling allocating function Rcpp::XPtr<XPtrTorchGenerator, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<XPtrTorchGenerator>(XPtrTorchGenerator*)), false> Rcpp::as<Rcpp::XPtr<XPtrTorchGenerator, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<XPtrTorchGenerator>(XPtrTorchGenerator*)), false> >(SEXPREC*) with argument allocated using Rcpp::Environment_Impl<Rcpp::PreserveStorage>::find(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const torch/src/torch_types.cpp:418
+  [UP] calling allocating function Rcpp::XPtr<XPtrTorchGenerator, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<XPtrTorchGenerator>(XPtrTorchGenerator*)), false> Rcpp::as<Rcpp::XPtr<XPtrTorchGenerator, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<XPtrTorchGenerator>(XPtrTorchGenerator*)), false> >(SEXPREC*) with argument allocated using Rcpp::Environment_Impl<Rcpp::PreserveStorage>::find(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const torch/src/torch_types.cpp:493
+
+Function XPtrTorchOptionalTensor::operator SEXPREC*() const
+  [UP] unprotected variable <unnamed var:   %2 = alloca %struct.SEXPREC*, align 8> while calling allocating function XPtrTorchTensor::~XPtrTorchTensor() torch/src/torch_types.cpp:52
 
 Function XPtrTorchOptionalTensorList_from_SEXP(SEXPREC*)
   [UP] ignoring variable x as it has address taken, results will be incomplete 
@@ -381,7 +384,7 @@ Function _torch_cpp_tensor_list_to_r_list
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_tensor_load
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_tensor_names
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -7396,8 +7399,15 @@ Function _torch_set_xptr_protected
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_test_fun
+Function _torch_test_fun_hello
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_xptr_address
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function cpp_tensor_register_hook(Rcpp::XPtr<XPtrTorchTensor, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<XPtrTorchTensor>(XPtrTorchTensor*)), false>, Rcpp::Function_Impl<Rcpp::PreserveStorage>)::$_2::operator()(void*) const::{lambda()#1}::operator()() const
+  [PB] has possible protection stack imbalance torch/src/autograd.cpp:218
 
 Function enquos0(Rcpp::Environment_Impl<Rcpp::PreserveStorage>)
   [UP] ignoring variable c as it has address taken, results will be incomplete 
@@ -7410,9 +7420,6 @@ Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::Vector<19
   [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::XPtr<XPtrTorch, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<XPtrTorch>(XPtrTorch*)), false> >(Rcpp::XPtr<XPtrTorch, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<XPtrTorch>(XPtrTorch*)), false> const&)
-  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::XPtr<XPtrTorchTensor, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<XPtrTorchTensor>(XPtrTorchTensor*)), false> >(Rcpp::XPtr<XPtrTorchTensor, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<XPtrTorchTensor>(XPtrTorchTensor*)), false> const&)
   [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<XPtrTorchTensor>(XPtrTorchTensor const&)
