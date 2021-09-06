@@ -1,0 +1,80 @@
+
+R Under development (unstable) (2021-09-05 r80856) -- "Unsuffered Consequences"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> 
+> library("checkmate")
+> library("testthat")
+> library("ParamHelpers")
+> library("mlr")
+Warning message: 'mlr' is in 'maintenance-only' mode since July 2019.
+Future development will only happen in 'mlr3'
+(<https://mlr3.mlr-org.com>). Due to the focus on 'mlr3' there might be
+uncaught bugs meanwhile in {mlr} - please consider switching.
+> library("mlrCPO")
+> 
+> test_check("mosmafs")
+Loading required package: mosmafs
+Loading required package: ecr
+Loading required package: BBmisc
+
+Attaching package: 'BBmisc'
+
+The following object is masked from 'package:base':
+
+    isFALSE
+
+Loading required package: smoof
+
+Attaching package: 'ecr'
+
+The following object is masked from 'package:testthat':
+
+    setup
+
+
+Attaching package: 'mosmafs'
+
+The following objects are masked from 'package:ecr':
+
+    getPopulations, getStatistics
+
+ERROR: modification of compiler constant of type character, length 2
+ERROR: the modified value of the constant is:
+[1] "integer"       "integervector"
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "integer"       "integervector"
+ERROR: the modified constant is at index 1
+ERROR: the modified constant is in this function body:
+c("integer", "integervector")
+ERROR: detected compiler constant(s) modification after .Call invocation of function c_sms_indicator from library mlrMBO (/var/scratch2/tomas/cran/rcnst/lib/mlrMBO/libs/mlrMBO.so).
+NOTE: .Call function c_sms_indicator modified its argument (number 3, type double, length 6)
+Fatal error: compiler constants were modified (in .Call?)!
+
+ERROR: modification of compiler constant of type character, length 2
+ERROR: the modified value of the constant is:
+[1] "integer"       "integervector"
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "integer"       "integervector"
+ERROR: the modified constant is at index 1
+ERROR: the modified constant is in this function body:
+c("integer", "integervector")
+Fatal error: compiler constants were modified!
+

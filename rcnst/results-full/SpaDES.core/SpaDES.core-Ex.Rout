@@ -1,0 +1,2763 @@
+
+R Under development (unstable) (2021-09-04 r80854) -- "Unsuffered Consequences"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "SpaDES.core"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('SpaDES.core')
+Loading required package: quickPlot
+Loading required package: reproducible
+
+Attaching package: ‘SpaDES.core’
+
+The following objects are masked from ‘package:stats’:
+
+    end, start
+
+The following object is masked from ‘package:utils’:
+
+    citation
+
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("Plots")
+> ### * Plots
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Plots
+> ### Title: 'Plot' wrapper intended for use in a SpaDES module
+> ### Aliases: Plots
+> 
+> ### ** Examples
+> 
+> 
+> ## Not run: 
+> ##D # Note: if this is used inside a SpaDES module, do not define this
+> ##D #  function inside another function. Put it outside in a normal
+> ##D #  module script. It will cause a memory leak, otherwise.
+> ##D if (!require("ggplot2")) stop("please install ggplot2")
+> ##D fn <- function(d)
+> ##D   ggplot(d, aes(a)) +
+> ##D   geom_histogram()
+> ##D sim <- simInit()
+> ##D sim$something <- data.frame(a = sample(1:10, replace = TRUE))
+> ##D 
+> ##D Plots(data = sim$something, fn = fn,
+> ##D       types = c("png"),
+> ##D       path = file.path("figures"),
+> ##D       filename = tempfile(),
+> ##D       .plotInitialTime = 1
+> ##D       )
+> ##D 
+> ##D # plot to active device and to png
+> ##D Plots(data = sim$something, fn = fn,
+> ##D       types = c("png", "screen"),
+> ##D       path = file.path("figures"),
+> ##D       filename = tempfile(),
+> ##D       .plotInitialTime = 1
+> ##D       )
+> ##D 
+> ##D # Can also be used like quickPlot::Plot, but with control over output type
+> ##D r <- raster::raster(extent(0,10,0,10), vals = sample(1:3, size = 100, replace = TRUE))
+> ##D Plots(r, types = c("screen", "png"), deviceArgs = list(width = 700, height = 500))
+> ##D 
+> ## End(Not run) # end of dontrun
+> 
+> 
+> 
+> cleanEx()
+> nameEx("append_attr")
+> ### * append_attr
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: append_attr
+> ### Title: Add a module to a 'moduleList'
+> ### Aliases: append_attr append_attr,list,list-method
+> 
+> ### ** Examples
+> 
+> library(igraph) # igraph exports magrittr's pipe operator
+
+Attaching package: ‘igraph’
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union
+
+> tmp1 <- list("apple", "banana") %>% lapply(., `attributes<-`, list(type = "fruit"))
+> tmp2 <- list("carrot") %>% lapply(., `attributes<-`, list(type = "vegetable"))
+> append_attr(tmp1, tmp2)
+[[1]]
+[1] "apple"
+attr(,"type")
+[1] "fruit"
+
+[[2]]
+[1] "banana"
+attr(,"type")
+[1] "fruit"
+
+[[3]]
+[1] "carrot"
+attr(,"type")
+[1] "vegetable"
+
+> rm(tmp1, tmp2)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:igraph’
+
+> nameEx("classFilter")
+> ### * classFilter
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: classFilter
+> ### Title: Filter objects by class
+> ### Aliases: classFilter
+> ###   classFilter,character,character,character,environment-method
+> ###   classFilter,character,character,character,missing-method
+> ###   classFilter,character,character,missing,environment-method
+> ###   classFilter,character,character,missing,missing-method
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D   ## from global environment
+> ##D   a <- list(1:10)     # class `list`
+> ##D   b <- letters        # class `character`
+> ##D   d <- stats::runif(10)      # class `numeric`
+> ##D   f <- sample(1L:10L) # class `numeric`, `integer`
+> ##D   g <- lm( jitter(d) ~ d ) # class `lm`
+> ##D   h <- glm( jitter(d) ~ d ) # class `lm`, `glm`
+> ##D   classFilter(ls(), include=c("character", "list"))
+> ##D   classFilter(ls(), include = "numeric")
+> ##D   classFilter(ls(), include = "numeric", exclude = "integer")
+> ##D   classFilter(ls(), include = "lm")
+> ##D   classFilter(ls(), include = "lm", exclude = "glm")
+> ##D   rm(a, b, d, f, g, h)
+> ## End(Not run)
+> 
+> ## from local (e.g., function) environment
+> local({
++   e <- environment()
++   a <- list(1:10)     # class `list`
++   b <- letters        # class `character`
++   d <- stats::runif(10)      # class `numeric`
++   f <- sample(1L:10L) # class `numeric`, `integer`
++   g <- lm( jitter(d) ~ d ) # class `lm`
++   h <- glm( jitter(d) ~ d ) # class `lm`, `glm`
++   classFilter(ls(), include=c("character", "list"), envir = e)
++   classFilter(ls(), include = "numeric", envir = e)
++   classFilter(ls(), include = "numeric", exclude = "integer", envir = e)
++   classFilter(ls(), include = "lm", envir = e)
++   classFilter(ls(), include = "lm", exclude = "glm", envir = e)
++   rm(a, b, d, e, f, g, h)
++ })
+> 
+> ## from another environment
+> e = new.env(parent = emptyenv())
+> e$a <- list(1:10)     # class `list`
+> e$b <- letters        # class `character`
+> e$d <- stats::runif(10)      # class `numeric`
+> e$f <- sample(1L:10L) # class `numeric`, `integer`
+> e$g <- lm( jitter(e$d) ~ e$d ) # class `lm`
+> e$h <- glm( jitter(e$d) ~ e$d ) # class `lm`, `glm`
+> classFilter(ls(e), include=c("character", "list"), envir = e)
+[1] "a" "b"
+> classFilter(ls(e), include = "numeric", envir = e)
+[1] "d" "f"
+> classFilter(ls(e), include = "numeric", exclude = "integer", envir = e)
+[1] "d"
+> classFilter(ls(e), include = "lm", envir = e)
+[1] "g" "h"
+> classFilter(ls(e), include = "lm", exclude = "glm", envir = e)
+[1] "g"
+> rm(a, b, d, f, g, h, envir = e)
+> rm(e)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("copyModule")
+> ### * copyModule
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: copyModule
+> ### Title: Create a copy of an existing module
+> ### Aliases: copyModule copyModule,character,character,character-method
+> ###   copyModule,character,character,missing-method
+> 
+> ### ** Examples
+> 
+> ## Not run: copyModule(from, to)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("createsOutput")
+> ### * createsOutput
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: createsOutput
+> ### Title: Define an output object of a module
+> ### Aliases: createsOutput createsOutput,ANY,ANY,ANY-method
+> ###   createsOutput,character,character,character-method
+> 
+> ### ** Examples
+> 
+> outputObjects <- bindrows(
++   createsOutput(objectName = "outputObject1", objectClass = "character",
++                 desc = "this is for example"),
++   createsOutput(objectName = "outputObject2", objectClass = "numeric",
++                 desc = "this is for example",
++                 otherInformation = "I am the second output object")
++ )
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("defineModule")
+> ### * defineModule
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: defineModule
+> ### Title: Define a new module.
+> ### Aliases: defineModule defineModule,simList,list-method
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D   ## a default version of the defineModule is created with a call to newModule
+> ##D   newModule("test", path = tempdir(), open = FALSE)
+> ##D 
+> ##D   ## view the resulting module file
+> ##D   if (interactive()) file.edit(file.path(tempdir(), "test", "test.R"))
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("defineParameter")
+> ### * defineParameter
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: defineParameter
+> ### Title: Define a parameter used in a module
+> ### Aliases: defineParameter
+> ###   defineParameter,character,character,ANY,ANY,ANY,character-method
+> ###   defineParameter,character,character,ANY,missing,missing,character-method
+> ###   defineParameter,missing,missing,missing,missing,missing,missing-method
+> 
+> ### ** Examples
+> 
+> parameters = rbind(
++   defineParameter("lambda", "numeric", 1.23, desc = "intrinsic rate of increase"),
++   defineParameter("P", "numeric", 0.2, 0, 1, "probability of attack")
++ )
+> 
+> ## Not run: 
+> ##D # Create a new module, then access parameters using \code{P}
+> ##D tmpdir <- file.path(tempdir(), "test")
+> ##D checkPath(tmpdir, create = TRUE)
+> ##D 
+> ##D # creates a  new, "empty" module -- it has defaults for everything that is required
+> ##D newModule("testModule", tmpdir, open = FALSE)
+> ##D 
+> ##D # Look at new module code -- see defineParameter
+> ##D if (interactive()) file.edit(file.path(tmpdir, "testModule", "testModule.R"))
+> ##D 
+> ##D # initialize the simList
+> ##D mySim <- simInit(modules = "testModule",
+> ##D                  paths = list(modulePath = tmpdir))
+> ##D 
+> ##D # Access one of the parameters -- because this line is not inside a module
+> ##D #  function, we must specify the module name. If used within a module,
+> ##D #  we can omit the module name
+> ##D P(mySim, "testModule")$.useCache
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("downloadData")
+> ### * downloadData
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: downloadData
+> ### Title: Download module data
+> ### Aliases: downloadData downloadData,character,character,logical-method
+> ###   downloadData,character,missing,missing-method
+> ###   downloadData,character,missing,logical-method
+> ###   downloadData,character,character,missing-method
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # For a Google Drive example
+> ##D # In metadata:
+> ##D expectsInputs("theFilename.zip", "NA", "NA",
+> ##D   sourceURL = "https://drive.google.com/open?id=1Ngb-jIRCSs1G6zcuaaCEFUwldbkI_K8Ez")
+> ##D # create the checksums file
+> ##D checksums("thisModule", "there", write = TRUE)
+> ##D downloadData("thisModule", "there", files = "theFilename.zip")
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("expectsInput")
+> ### * expectsInput
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: expectsInput
+> ### Title: Define an input object that the module expects.
+> ### Aliases: expectsInput expectsInput,ANY,ANY,ANY,ANY-method
+> ###   expectsInput,character,character,character,character-method
+> ###   expectsInput,character,character,character,missing-method
+> 
+> ### ** Examples
+> 
+> inputObjects <- bindrows(
++   expectsInput(objectName = "inputObject1", objectClass = "character",
++                desc = "this is for example", sourceURL = "not available"),
++   expectsInput(objectName = "inputObject2", objectClass = "numeric",
++                desc = "this is for example", sourceURL = "not available",
++                otherInformation = "I am the second input object")
++ )
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("loadFiles")
+> ### * loadFiles
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: .fileExtensions
+> ### Title: File extensions map
+> ### Aliases: .fileExtensions loadFiles loadFiles,simList,missing-method
+> ###   loadFiles,missing,ANY-method loadFiles,missing,missing-method
+> ###   .saveFileExtensions
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D 
+> ##D # Load random maps included with package
+> ##D filelist <- data.frame(
+> ##D     files = dir(system.file("maps", package = "quickPlot"),
+> ##D             full.names = TRUE, pattern = "tif"),
+> ##D     functions = "rasterToMemory", package = "quickPlot"
+> ##D )
+> ##D sim1 <- loadFiles(filelist = filelist)
+> ##D clearPlot()
+> ##D if (interactive()) Plot(sim1$DEM)
+> ##D 
+> ##D # Second, more sophisticated. All maps loaded at time = 0, and the last one is reloaded
+> ##D #  at time = 10 and 20 (via "intervals").
+> ##D # Also, pass the single argument as a list to all functions...
+> ##D #  specifically, when add "native = TRUE" as an argument to the raster function
+> ##D files = dir(system.file("maps", package = "quickPlot"),
+> ##D             full.names = TRUE, pattern = "tif")
+> ##D arguments = I(rep(list(native = TRUE), length(files)))
+> ##D filelist = data.frame(
+> ##D    files = files,
+> ##D    functions = "raster::raster",
+> ##D    objectName = NA,
+> ##D    arguments = arguments,
+> ##D    loadTime = 0,
+> ##D    intervals = c(rep(NA, length(files)-1), 10)
+> ##D )
+> ##D 
+> ##D sim2 <- loadFiles(filelist = filelist)
+> ##D 
+> ##D # if we extend the end time and continue running, it will load an object scheduled
+> ##D #  at time = 10, and it will also schedule a new object loading at 20 because
+> ##D #  interval = 10
+> ##D end(sim2) <- 20
+> ##D sim2 <- spades(sim2) # loads the percentPine map 2 more times, once at 10, once at 20
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("loadPackages")
+> ### * loadPackages
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: loadPackages
+> ### Title: Load packages.
+> ### Aliases: loadPackages loadPackages,character-method
+> ###   loadPackages,list-method loadPackages,NULL-method
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D   pkgs <- list("raster", "lme4")
+> ##D   loadPackages(pkgs) # loads packages if installed
+> ##D   loadPackages(pkgs, install = TRUE) # loads packages after installation (if needed)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("moduleCoverage")
+> ### * moduleCoverage
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: moduleCoverage
+> ### Title: Calculate module coverage of unit tests
+> ### Aliases: moduleCoverage moduleCoverage,character,character-method
+> ###   moduleCoverage,character,missing-method
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D  library(igraph) # for %>%
+> ##D  library(SpaDES.core)
+> ##D  tmpdir <- file.path(tempdir(), "coverage")
+> ##D  modulePath <- file.path(tmpdir, "Modules") %>% checkPath(create = TRUE)
+> ##D  moduleName <- "forestAge" # sample module to test
+> ##D  downloadModule(name = moduleName, path = modulePath) # download sample module
+> ##D  testResults <- moduleCoverage(name = moduleName, path = modulePath)
+> ##D  report(testResults$moduleCoverage)
+> ##D  report(testResults$functionCoverage)
+> ##D  unlink(tmpdir, recursive = TRUE)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("moduleDiagram")
+> ### * moduleDiagram
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: moduleDiagram
+> ### Title: Simulation module dependency diagram
+> ### Aliases: moduleDiagram moduleDiagram,simList,character,logical-method
+> ###   moduleDiagram,simList,missing,ANY-method
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # Will use quickPlot::Plot
+> ##D moduleDiagram(sim)
+> ##D # Can also use default base::plot
+> ##D modDia <- depsGraph(sim, plot = TRUE)
+> ##D # See ?plot.igraph
+> ##D plot(modDia, layout = layout_as_star)
+> ##D 
+> ##D # Or for more control - here, change the label "_INPUT_" to "DATA"
+> ##D edgeList <- depsEdgeList(sim)
+> ##D edgeList <- edgeList[, list(from, to)]
+> ##D edgeList[from == "_INPUT_", from := "Data"]
+> ##D edgeList[to == "_INPUT_", to := "Data"]
+> ##D edgeList <- unique(edgeList)
+> ##D edge
+> ##D ig <- igraph::graph_from_data_frame(edgeList[, list(from, to)])
+> ##D plot(ig)
+> ##D 
+> ##D # Or use qgraph package
+> ##D # library(qgraph)
+> ##D # qgraph(edgeList, shape = "rectangle", vsize = 12, vsize2 = 2
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("moduleMetadata")
+> ### * moduleMetadata
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: moduleMetadata
+> ### Title: Parse and extract module metadata
+> ### Aliases: moduleMetadata
+> ###   moduleMetadata,missing,character,character-method
+> ###   moduleMetadata,missing,character,missing-method
+> ###   moduleMetadata,ANY,ANY,ANY-method
+> 
+> ### ** Examples
+> 
+> path <- system.file("sampleModules", package = "SpaDES.core")
+> sampleModules <- dir(path)
+> # turn off code checking -- don't need it here
+> opts <- options("spades.moduleCodeChecks" = FALSE,
++                 "spades.useRequire" = FALSE)
+> 
+> x <- moduleMetadata(sampleModules[3], path = path)
+Assuming sim is a module name
+> 
+> # using simList
+> mySim <- simInit(
++    times = list(start = 2000.0, end = 2001.0, timeunit = "year"),
++    params = list(
++      .globals = list(stackName = "landscape")
++    ),
++    modules = list("caribouMovement"),
++    paths = list(modulePath = system.file("sampleModules", package = "SpaDES.core"))
++ )
+Setting:
+  options(
+    spades.modulePath = '/var/scratch2/tomas/cran/rcnst/lib/SpaDES.core/sampleModules'
+  )
+Paths set to:
+  options(
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpXtgXrB/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/Require/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpkJeDrg/SpaDES/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpkJeDrg/SpaDES/outputs'
+    spades.modulePath = '/var/scratch2/tomas/cran/rcnst/lib/SpaDES.core/sampleModules'
+  )
+Loading required package: SpaDES.tools
+Loading required package: grid
+
+Attaching package: ‘grid’
+
+The following object is masked from ‘package:quickPlot’:
+
+    gpar
+
+Loading required package: raster
+Loading required package: sp
+> moduleMetadata(sim = mySim)
+$name
+[1] "caribouMovement"
+
+$description
+[1] "Simulate caribou movement via correlated random walk."
+
+$keywords
+[1] "caribou"                         "individual based movement model"
+[3] "correlated random walk"         
+
+$childModules
+character(0)
+
+$authors
+[1] "Eliot J B McIntire <eliot.mcintire@canada.ca> [aut, cre]"
+
+$version
+[1] ‘1.6.0’
+
+$spatialExtent
+class      : Extent 
+xmin       : NA 
+xmax       : NA 
+ymin       : NA 
+ymax       : NA 
+
+$timeframe
+[1] NA NA
+
+$timeunit
+[1] "month"
+
+$citation
+list()
+
+$documentation
+list()
+
+$reqdPkgs
+$reqdPkgs[[1]]
+[1] "grid"
+
+$reqdPkgs[[2]]
+[1] "raster"
+
+$reqdPkgs[[3]]
+[1] "sp"
+
+$reqdPkgs[[4]]
+[1] "stats"
+
+$reqdPkgs[[5]]
+[1] "SpaDES.tools"
+
+
+$parameters
+          paramName paramClass   default   min  max
+1         stackName  character landscape    NA   NA
+2   moveInitialTime    numeric      2001  2001 2001
+3      moveInterval    numeric         1     1    1
+4                 N    numeric       100    10 1000
+5             torus    logical     FALSE FALSE TRUE
+6  .plotInitialTime    numeric      2000  -Inf  Inf
+7     .plotInterval    numeric         1  -Inf  Inf
+8  .saveInitialTime    numeric        NA  -Inf  Inf
+9     .saveInterval    numeric        NA  -Inf  Inf
+10            .seed       list              NA   NA
+                                                                                                                       paramDesc
+1                                                                                                        name of the RasterStack
+2                                                                                          time to schedule first movement event
+3                                                                                          time interval between movoment events
+4                                                                                                      initial number of caribou
+5                                                                                       should the map wrap around like a torus?
+6                                                                                              time to schedule first plot event
+7                                                                                              time interval between plot events
+8                                                                                              time to schedule first save event
+9                                                                                              time interval between save events
+10 Named list of seeds to use for each event (names). E.g., `list('init' = 123)` will `set.seed(123)` for the `init` event only.
+
+$inputObjects
+  objectName            objectClass                             desc sourceURL
+1  landscape            RasterStack     layername = "habitatQuality"      <NA>
+2    caribou SpatialPointsDataFrame Object holding caribou locations      <NA>
+
+$outputObjects
+  objectName            objectClass desc
+1    caribou SpatialPointsDataFrame <NA>
+
+> 
+> # turn code checking back on -- don't need it here
+> options(opts)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’, ‘package:grid’,
+  ‘package:SpaDES.tools’
+
+> nameEx("moduleParamsInputsOuputs")
+> ### * moduleParamsInputsOuputs
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: moduleParams
+> ### Title: Extract a module's parameters, inputs, or outputs
+> ### Aliases: moduleParams moduleParams,character,character-method
+> ###   moduleInputs moduleInputs,character,character-method moduleOutputs
+> ###   moduleOutputs,character,character-method
+> 
+> ### ** Examples
+> 
+> path <- system.file("sampleModules", package = "SpaDES.core")
+> sampleModules <- dir(path)
+> 
+> p <- moduleParams(sampleModules[3], path = path)
+> i <- moduleInputs(sampleModules[3], path = path)
+> o <- moduleOutputs(sampleModules[3], path = path)
+> 
+> #' \dontrun{
+> ## easily include these tables in Rmd files using knitr
+> knitr::kable(p)
+
+
+|paramName        |paramClass |default      |min        |max          |paramDesc                                                                                                                     |
+|:----------------|:----------|:------------|:----------|:------------|:-----------------------------------------------------------------------------------------------------------------------------|
+|stackName        |character  |landscape    |NA         |NA           |name of the RasterStack                                                                                                       |
+|nFires           |numeric    |10           |1          |100          |number of fires to initiate                                                                                                   |
+|its              |numeric    |1e+06        |1e+06      |1e+06        |number of iterations for fire spread                                                                                          |
+|persistprob      |numeric    |0            |0          |1            |probability of fire persisting in a pixel                                                                                     |
+|returnInterval   |numeric    |1            |1          |1            |fire return interval                                                                                                          |
+|spreadprob       |numeric    |0.225        |0.05       |0.5          |probability of fire spreading into a pixel                                                                                    |
+|startTime        |numeric    |start(si.... |0          |end(sim)     |time of initial fire ignition                                                                                                 |
+|.plotInitialTime |numeric    |start(sim)   |start(sim) |end(sim) + 1 |time to schedule first plot event                                                                                             |
+|.plotInterval    |numeric    |1            |1          |1            |time interval between plot events                                                                                             |
+|.saveInitialTime |numeric    |NA           |NA         |NA           |time to schedule first save event                                                                                             |
+|.saveInterval    |numeric    |NA           |NA         |NA           |time interval between save events                                                                                             |
+|.seed            |list       |             |NA         |NA           |Named list of seeds to use for each event (names). E.g., `list('init' = 123)` will `set.seed(123)` for the `init` event only. |
+> knitr::kable(i)
+
+
+|objectName                                  |objectClass |desc |sourceURL |
+|:-------------------------------------------|:-----------|:----|:---------|
+|SpaDES.core::P(sim, "fireSpread")$stackName |RasterStack |NA   |NA        |
+|SpaDES.core::globals(sim)$burnStats         |numeric     |NA   |NA        |
+> knitr::kable(o)
+
+
+|objectName                                  |objectClass |desc |other |
+|:-------------------------------------------|:-----------|:----|:-----|
+|SpaDES.core::P(sim, "fireSpread")$stackName |RasterStack |NA   |NA    |
+|SpaDES.core::globals(sim)$burnStats         |numeric     |NA   |NA    |
+> #' }
+> 
+> 
+> 
+> cleanEx()
+> nameEx("moduleVersion")
+> ### * moduleVersion
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: moduleVersion
+> ### Title: Parse and extract a module's version
+> ### Aliases: moduleVersion moduleVersion,character,character,missing-method
+> ###   moduleVersion,character,missing,missing-method
+> ###   moduleVersion,character,missing,simList-method
+> 
+> ### ** Examples
+> 
+> # using filepath
+> path <- system.file("sampleModules", package = "SpaDES.core")
+> moduleVersion("caribouMovement", path)
+[1] ‘1.6.0’
+> 
+> # using simList
+> options("spades.useRequire" = FALSE)
+> mySim <- simInit(
++    times = list(start = 2000.0, end = 2002.0, timeunit = "year"),
++    params = list(
++      .globals = list(stackName = "landscape", burnStats = "nPixelsBurned")
++    ),
++    modules = list("caribouMovement"),
++    paths = list(modulePath = path)
++ )
+Setting:
+  options(
+    spades.modulePath = '/var/scratch2/tomas/cran/rcnst/lib/SpaDES.core/sampleModules'
+  )
+Paths set to:
+  options(
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpXtgXrB/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/Require/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpkJeDrg/SpaDES/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpkJeDrg/SpaDES/outputs'
+    spades.modulePath = '/var/scratch2/tomas/cran/rcnst/lib/SpaDES.core/sampleModules'
+  )
+Loading required package: SpaDES.tools
+Loading required package: grid
+
+Attaching package: ‘grid’
+
+The following object is masked from ‘package:quickPlot’:
+
+    gpar
+
+Loading required package: raster
+Loading required package: sp
+###### Module Code Checking - Still experimental - please report problems ######## 
+/var/scratch2/tomas/cran/rcnst/lib/SpaDES.core/sampleModules/caribouMovement/caribouMovement.R
+caribouMovement: module code: landscape, caribou are declared in metadata inputObjects, but no default(s) are provided in .inputObjects
+caribouMovement: inputObjects: habitatQuality is used from sim inside Move, but is not declared in metadata inputObjects
+###### Module Code Checking ########
+Sep05 04:15:36 simInit:       Global parameter(s) not used in any module: burnStats.
+> moduleVersion("caribouMovement", sim = mySim)
+[1] ‘1.6.0’
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’, ‘package:grid’,
+  ‘package:SpaDES.tools’
+
+> nameEx("newModule")
+> ### * newModule
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: newModule
+> ### Title: Create new module from template
+> ### Aliases: newModule newModule,character,character-method
+> ###   newModule,character,missing-method
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D   ## create a "myModule" module in the "modules" subdirectory.
+> ##D   newModule("myModule", "modules")
+> ##D 
+> ##D   ## create a new parent module in the "modules" subdirectory.
+> ##D   newModule("myParentModule", "modules", type = "parent", children = c("child1", "child2"))
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("newProject")
+> ### * newProject
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: newProject
+> ### Title: Create new SpaDES project
+> ### Aliases: newProject newProject,character,character,logical-method
+> ###   newProject,character,character,missing-method
+> 
+> ### ** Examples
+> 
+> myProjDir <- newProject("myProject", tempdir())
+Setting:
+  options(
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/outputs'
+    spades.modulePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/modules'
+  )
+Paths set to:
+  options(
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpXtgXrB/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/outputs'
+    spades.modulePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/modules'
+  )
+> 
+> dir.exists(file.path(myProjDir, "cache"))
+[1] TRUE
+> dir.exists(file.path(myProjDir, "inputs"))
+[1] TRUE
+> dir.exists(file.path(myProjDir, "modules"))
+[1] TRUE
+> dir.exists(file.path(myProjDir, "outputs"))
+[1] TRUE
+> unlink(myProjDir, recursive = TRUE) ## cleanup
+> 
+> 
+> 
+> cleanEx()
+> nameEx("objSize.simList")
+> ### * objSize.simList
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: objSize.simList
+> ### Title: Object size for 'simList'
+> ### Aliases: objSize.simList
+> 
+> ### ** Examples
+> 
+> a <- simInit(objects = list(d = 1:10, b = 2:20))
+Setting:
+  options(
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpXtgXrB/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/outputs'
+    spades.modulePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/modules'
+  )
+> objSize(a)
+$`x@.xData$b`
+176 bytes
+
+$`x@.xData$d`
+96 bytes
+
+$`x@.xData$.userSuppliedObjNames`
+176 bytes
+
+$`x@.xData$.mods`
+$`x@.xData$.mods`$y
+56 bytes
+
+
+$`x@.xData`
+280 bytes
+
+$simListWithoutObjects
+$simListWithoutObjects[[1]]
+$simListWithoutObjects[[1]][[1]]
+120 bytes
+
+$simListWithoutObjects[[1]][[2]]
+112 bytes
+
+$simListWithoutObjects[[1]][[3]]
+120 bytes
+
+$simListWithoutObjects[[1]][[4]]
+112 bytes
+
+
+$simListWithoutObjects[[2]]
+$simListWithoutObjects[[2]]$.checkpoint
+$simListWithoutObjects[[2]]$.checkpoint$interval
+56 bytes
+
+$simListWithoutObjects[[2]]$.checkpoint$file
+0 bytes
+
+
+$simListWithoutObjects[[2]]$.progress
+$simListWithoutObjects[[2]]$.progress$type
+56 bytes
+
+$simListWithoutObjects[[2]]$.progress$interval
+56 bytes
+
+
+
+$simListWithoutObjects[[3]]
+$simListWithoutObjects[[3]][[1]]
+$simListWithoutObjects[[3]][[1]]$eventTime
+280 bytes
+
+$simListWithoutObjects[[3]][[1]]$moduleName
+120 bytes
+
+$simListWithoutObjects[[3]][[1]]$eventType
+112 bytes
+
+$simListWithoutObjects[[3]][[1]]$eventPriority
+56 bytes
+
+
+$simListWithoutObjects[[3]][[2]]
+$simListWithoutObjects[[3]][[2]]$eventTime
+280 bytes
+
+$simListWithoutObjects[[3]][[2]]$moduleName
+112 bytes
+
+$simListWithoutObjects[[3]][[2]]$eventType
+112 bytes
+
+$simListWithoutObjects[[3]][[2]]$eventPriority
+56 bytes
+
+
+$simListWithoutObjects[[3]][[3]]
+$simListWithoutObjects[[3]][[3]]$eventTime
+280 bytes
+
+$simListWithoutObjects[[3]][[3]]$moduleName
+120 bytes
+
+$simListWithoutObjects[[3]][[3]]$eventType
+112 bytes
+
+$simListWithoutObjects[[3]][[3]]$eventPriority
+56 bytes
+
+
+$simListWithoutObjects[[3]][[4]]
+$simListWithoutObjects[[3]][[4]]$eventTime
+280 bytes
+
+$simListWithoutObjects[[3]][[4]]$moduleName
+112 bytes
+
+$simListWithoutObjects[[3]][[4]]$eventType
+112 bytes
+
+$simListWithoutObjects[[3]][[4]]$eventPriority
+56 bytes
+
+
+
+$simListWithoutObjects[[4]]
+$simListWithoutObjects[[4]]$y
+56 bytes
+
+
+$simListWithoutObjects[[5]]
+688 bytes
+
+$simListWithoutObjects[[6]]
+$simListWithoutObjects[[6]]$current
+280 bytes
+
+$simListWithoutObjects[[6]]$start
+280 bytes
+
+$simListWithoutObjects[[6]]$end
+280 bytes
+
+$simListWithoutObjects[[6]]$timeunit
+112 bytes
+
+
+$simListWithoutObjects[[7]]
+1792 bytes
+
+$simListWithoutObjects[[8]]
+1704 bytes
+
+$simListWithoutObjects[[9]]
+$simListWithoutObjects[[9]]$cachePath
+168 bytes
+
+$simListWithoutObjects[[9]]$inputPath
+168 bytes
+
+$simListWithoutObjects[[9]]$modulePath
+168 bytes
+
+$simListWithoutObjects[[9]]$outputPath
+168 bytes
+
+$simListWithoutObjects[[9]]$rasterPath
+152 bytes
+
+
+
+> utils::object.size(a)
+16808 bytes
+> 
+> 
+> 
+> cleanEx()
+> nameEx("objectDiagram")
+> ### * objectDiagram
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: objectDiagram
+> ### Title: Simulation object dependency diagram
+> ### Aliases: objectDiagram objectDiagram,simList-method
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D objectDiagram(sim)
+> ##D # if there are lots of objects, may need to increase width and/or height
+> ##D objectDiagram(sim, height = 3000, width = 3000)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("objectSynonyms")
+> ### * objectSynonyms
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: objectSynonyms
+> ### Title: Identify synonyms in a 'simList'
+> ### Aliases: objectSynonyms
+> 
+> ### ** Examples
+> 
+> sim <- simInit()
+Setting:
+  options(
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpXtgXrB/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/outputs'
+    spades.modulePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/modules'
+  )
+> 
+> sim$age <- 1:10;
+> sim <- objectSynonyms(sim, list(c("age", "ageMap")))
+> 
+> identical(sim$ageMap, sim$age)
+[1] TRUE
+> sim$age <- 4
+> identical(sim$ageMap, sim$age)
+[1] TRUE
+> sim$ageMap <- 2:5
+> sim$ageMap[3] <- 11
+> identical(sim$ageMap, sim$age)
+[1] TRUE
+> 
+> # Also works to pass it in as an object
+> objectSynonyms <- list(c("age", "ageMap"))
+> sim <- simInit(objects = list(objectSynonyms = objectSynonyms))
+Setting:
+  options(
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpXtgXrB/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/outputs'
+    spades.modulePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/modules'
+  )
+> identical(sim$ageMap, sim$age) # they are NULL at this point
+[1] TRUE
+> sim$age <- 1:10
+> identical(sim$ageMap, sim$age) # they are not NULL at this point
+[1] TRUE
+> 
+> ## More complicated, with 'updating' i.e., you can add new synonyms to previous
+> sim <- simInit()
+Setting:
+  options(
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpXtgXrB/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/outputs'
+    spades.modulePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/modules'
+  )
+> os <- list(c("age", "ageMap"), c("vegMap", "veg"), c("studyArea", "studyArea2"))
+> os2 <- list(c("ageMap", "timeSinceFire", "tsf"),
++             c("systime", "systime2"),
++             c("vegMap", "veg"))
+> sim <- objectSynonyms(sim, os)
+> sim <- objectSynonyms(sim, os2)
+age, ageMap already exist; using the first one, age
+vegMap, veg already exist; using the first one, vegMap
+> 
+> # check
+> sim$objectSynonyms
+[[1]]
+[1] "studyArea"  "studyArea2"
+
+[[2]]
+[1] "age"           "ageMap"        "timeSinceFire" "tsf"          
+
+[[3]]
+[1] "systime"  "systime2"
+
+[[4]]
+[1] "vegMap" "veg"   
+
+attr(,"bindings")
+attr(,"bindings")[[1]]
+attr(,"bindings")[[1]]$canonicalVersion
+[1] "studyArea"
+
+attr(,"bindings")[[1]]$activeBindingObjects
+[1] "studyArea2"
+
+
+attr(,"bindings")[[2]]
+attr(,"bindings")[[2]]$canonicalVersion
+[1] "age"
+
+attr(,"bindings")[[2]]$activeBindingObjects
+[1] "ageMap"        "timeSinceFire" "tsf"          
+
+
+attr(,"bindings")[[3]]
+attr(,"bindings")[[3]]$canonicalVersion
+[1] "systime"
+
+attr(,"bindings")[[3]]$activeBindingObjects
+[1] "systime2"
+
+
+attr(,"bindings")[[4]]
+attr(,"bindings")[[4]]$canonicalVersion
+[1] "vegMap"
+
+attr(,"bindings")[[4]]$activeBindingObjects
+[1] "veg"
+
+
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("openModules")
+> ### * openModules
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: openModules
+> ### Title: Open all modules nested within a base directory
+> ### Aliases: openModules openModules,character,character-method
+> ###   openModules,missing,missing-method
+> ###   openModules,missing,character-method
+> ###   openModules,character,missing-method
+> ###   openModules,simList,missing-method
+> 
+> ### ** Examples
+> 
+> ## Not run: openModules("~/path/to/my/modules")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("params")
+> ### * params
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: params
+> ### Title: Get and set simulation parameters
+> ### Aliases: params parameters simList-accessors-params
+> ###   params,simList-method params<- params<-,simList-method P
+> ###   parameters,simList-method
+> 
+> ### ** Examples
+> 
+> modules <- list("randomLandscapes")
+> paths <- list(modulePath = system.file("sampleModules", package = "SpaDES.core"))
+> mySim <- simInit(modules = modules, paths = paths,
++                  params = list(.globals = list(stackName = "landscape")))
+Setting:
+  options(
+    spades.modulePath = '/var/scratch2/tomas/cran/rcnst/lib/SpaDES.core/sampleModules'
+  )
+Paths set to:
+  options(
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpXtgXrB/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/outputs'
+    spades.modulePath = '/var/scratch2/tomas/cran/rcnst/lib/SpaDES.core/sampleModules'
+  )
+Loading required package: RColorBrewer
+Loading required package: RandomFields
+Loading required package: sp
+Loading required package: RandomFieldsUtils
+
+Attaching package: ‘RandomFields’
+
+The following object is masked from ‘package:RandomFieldsUtils’:
+
+    RFoptions
+
+Loading required package: SpaDES.tools
+Loading required package: raster
+###### Module Code Checking - Still experimental - please report problems ######## 
+/var/scratch2/tomas/cran/rcnst/lib/SpaDES.core/sampleModules/randomLandscapes/randomLandscapes.R
+randomLandscapes: defineParameter: '.useCache' is not of specified type 'logical'.
+randomLandscapes: inputObjects: stackName is used from sim inside doEvent.randomLandscapes, but is not declared in metadata inputObjects
+###### Module Code Checking ########
+> 
+> # update some parameters using assignment -- currently only params will work
+> params(mySim)$randomLandscapes$nx <- 200
+> params(mySim)$randomLandscapes$ny <- 200
+> 
+> parameters(mySim) # Does not contain these user overridden values
+$randomLandscapes
+$randomLandscapes$inRAM
+  paramClass default  min   max                              paramDesc
+1    logical   FALSE TRUE FALSE should the raster be stored in memory?
+
+$randomLandscapes$nx
+  paramClass default min max                                         paramDesc
+2    numeric     100  10 500 size of map (number of pixels) in the x dimension
+
+$randomLandscapes$ny
+  paramClass default min max                                         paramDesc
+3    numeric     100  10 500 size of map (number of pixels) in the y dimension
+
+$randomLandscapes$stackName
+  paramClass   default min max               paramDesc
+4  character landscape  NA  NA name of the RasterStack
+
+$randomLandscapes$.plotInitialTime
+  paramClass default min max                         paramDesc
+5    numeric       0   0  NA time to schedule first plot event
+
+$randomLandscapes$.plotInterval
+  paramClass default min max                         paramDesc
+6    numeric      NA  NA  NA time interval between plot events
+
+$randomLandscapes$.saveInitialTime
+  paramClass default min max                         paramDesc
+7    numeric      NA  NA  NA time to schedule first save event
+
+$randomLandscapes$.saveInterval
+  paramClass default min max                         paramDesc
+8    numeric      NA  NA  NA time interval between save events
+
+$randomLandscapes$.seed
+  paramClass default min max
+9       list          NA  NA
+                                                                                                                      paramDesc
+9 Named list of seeds to use for each event (names). E.g., `list('init' = 123)` will `set.seed(123)` for the `init` event only.
+
+$randomLandscapes$.useCache
+   paramClass default        min max
+10    logical   FALSE init, plot  NA
+                                           paramDesc
+10 should the module result be cached for future use
+
+
+> 
+> # These next 2 are same here because they are not within a module
+> P(mySim)          # Does contain the user overridden values
+$.checkpoint
+$.checkpoint$interval
+[1] NA
+
+$.checkpoint$file
+NULL
+
+
+$.progress
+$.progress$type
+[1] NA
+
+$.progress$interval
+[1] NA
+
+
+$.globals
+$.globals$stackName
+[1] "landscape"
+
+
+$randomLandscapes
+$randomLandscapes$inRAM
+[1] FALSE
+
+$randomLandscapes$nx
+[1] 200
+
+$randomLandscapes$ny
+[1] 200
+
+$randomLandscapes$stackName
+[1] "landscape"
+
+$randomLandscapes$.plotInitialTime
+[1] 0
+attr(,"unit")
+[1] "year"
+
+$randomLandscapes$.plotInterval
+[1] NA
+
+$randomLandscapes$.saveInitialTime
+[1] NA
+
+$randomLandscapes$.saveInterval
+[1] NA
+
+$randomLandscapes$.seed
+list()
+
+$randomLandscapes$.useCache
+[1] FALSE
+
+
+> params(mySim)     # Does contain the user overridden values
+$.checkpoint
+$.checkpoint$interval
+[1] NA
+
+$.checkpoint$file
+NULL
+
+
+$.progress
+$.progress$type
+[1] NA
+
+$.progress$interval
+[1] NA
+
+
+$.globals
+$.globals$stackName
+[1] "landscape"
+
+
+$randomLandscapes
+$randomLandscapes$inRAM
+[1] FALSE
+
+$randomLandscapes$nx
+[1] 200
+
+$randomLandscapes$ny
+[1] 200
+
+$randomLandscapes$stackName
+[1] "landscape"
+
+$randomLandscapes$.plotInitialTime
+[1] 0
+attr(,"unit")
+[1] "year"
+
+$randomLandscapes$.plotInterval
+[1] NA
+
+$randomLandscapes$.saveInitialTime
+[1] NA
+
+$randomLandscapes$.saveInterval
+[1] NA
+
+$randomLandscapes$.seed
+list()
+
+$randomLandscapes$.useCache
+[1] FALSE
+
+
+> 
+> # NOTE -- deleting a parameter will affect params and P, not parameters
+> params(mySim)$randomLandscapes$nx <- NULL
+> params(mySim)$randomLandscapes$ny <- NULL
+> 
+> parameters(mySim) # Shows nx and ny
+$randomLandscapes
+$randomLandscapes$inRAM
+  paramClass default  min   max                              paramDesc
+1    logical   FALSE TRUE FALSE should the raster be stored in memory?
+
+$randomLandscapes$nx
+  paramClass default min max                                         paramDesc
+2    numeric     100  10 500 size of map (number of pixels) in the x dimension
+
+$randomLandscapes$ny
+  paramClass default min max                                         paramDesc
+3    numeric     100  10 500 size of map (number of pixels) in the y dimension
+
+$randomLandscapes$stackName
+  paramClass   default min max               paramDesc
+4  character landscape  NA  NA name of the RasterStack
+
+$randomLandscapes$.plotInitialTime
+  paramClass default min max                         paramDesc
+5    numeric       0   0  NA time to schedule first plot event
+
+$randomLandscapes$.plotInterval
+  paramClass default min max                         paramDesc
+6    numeric      NA  NA  NA time interval between plot events
+
+$randomLandscapes$.saveInitialTime
+  paramClass default min max                         paramDesc
+7    numeric      NA  NA  NA time to schedule first save event
+
+$randomLandscapes$.saveInterval
+  paramClass default min max                         paramDesc
+8    numeric      NA  NA  NA time interval between save events
+
+$randomLandscapes$.seed
+  paramClass default min max
+9       list          NA  NA
+                                                                                                                      paramDesc
+9 Named list of seeds to use for each event (names). E.g., `list('init' = 123)` will `set.seed(123)` for the `init` event only.
+
+$randomLandscapes$.useCache
+   paramClass default        min max
+10    logical   FALSE init, plot  NA
+                                           paramDesc
+10 should the module result be cached for future use
+
+
+> 
+> # These next 2 are same here because they are not within a module
+> P(mySim)          # nx and ny are Gone
+$.checkpoint
+$.checkpoint$interval
+[1] NA
+
+$.checkpoint$file
+NULL
+
+
+$.progress
+$.progress$type
+[1] NA
+
+$.progress$interval
+[1] NA
+
+
+$.globals
+$.globals$stackName
+[1] "landscape"
+
+
+$randomLandscapes
+$randomLandscapes$inRAM
+[1] FALSE
+
+$randomLandscapes$stackName
+[1] "landscape"
+
+$randomLandscapes$.plotInitialTime
+[1] 0
+attr(,"unit")
+[1] "year"
+
+$randomLandscapes$.plotInterval
+[1] NA
+
+$randomLandscapes$.saveInitialTime
+[1] NA
+
+$randomLandscapes$.saveInterval
+[1] NA
+
+$randomLandscapes$.seed
+list()
+
+$randomLandscapes$.useCache
+[1] FALSE
+
+
+> params(mySim)     # nx and ny are Gone
+$.checkpoint
+$.checkpoint$interval
+[1] NA
+
+$.checkpoint$file
+NULL
+
+
+$.progress
+$.progress$type
+[1] NA
+
+$.progress$interval
+[1] NA
+
+
+$.globals
+$.globals$stackName
+[1] "landscape"
+
+
+$randomLandscapes
+$randomLandscapes$inRAM
+[1] FALSE
+
+$randomLandscapes$stackName
+[1] "landscape"
+
+$randomLandscapes$.plotInitialTime
+[1] 0
+attr(,"unit")
+[1] "year"
+
+$randomLandscapes$.plotInterval
+[1] NA
+
+$randomLandscapes$.saveInitialTime
+[1] NA
+
+$randomLandscapes$.saveInterval
+[1] NA
+
+$randomLandscapes$.seed
+list()
+
+$randomLandscapes$.useCache
+[1] FALSE
+
+
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:raster’, ‘package:SpaDES.tools’,
+  ‘package:RandomFields’, ‘package:RandomFieldsUtils’, ‘package:sp’,
+  ‘package:RColorBrewer’
+
+> nameEx("progress")
+> ### * progress
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: progressInterval
+> ### Title: Get and set simulation progress bar details
+> ### Aliases: progressInterval progressInterval,simList-method
+> ###   progressInterval<- progressInterval<-,simList-method progressType
+> ###   progressType,simList-method progressType<-
+> ###   progressType<-,simList-method
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D mySim <- simInit(
+> ##D   times = list(start=0.0, end=100.0),
+> ##D   params = list(.globals = list(stackName = "landscape"),
+> ##D   .progress = list(type = "text", interval = 10),
+> ##D   .checkpoint = list(interval = 10, file = "chkpnt.RData")),
+> ##D   modules = list("randomLandscapes"),
+> ##D   paths = list(modulePath = system.file("sampleModules", package = "SpaDES.core")))
+> ##D 
+> ##D # progress bar
+> ##D progressType(mySim) # "text"
+> ##D progressInterval(mySim) # 10
+> ##D 
+> ##D # parameters
+> ##D params(mySim) # returns all parameters in all modules
+> ##D               # including .global, .progress, .checkpoint
+> ##D globals(mySim) # returns only global parameters
+> ##D 
+> ##D # checkpoint
+> ##D checkpointFile(mySim) # returns the name of the checkpoint file
+> ##D                       # In this example, "chkpnt.RData"
+> ##D checkpointInterval(mySim) # 10
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("restartSpades")
+> ### * restartSpades
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: restartSpades
+> ### Title: Restart an interrupted simulation
+> ### Aliases: restartSpades
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # options("spades.recoveryMode" = 1) # now the default
+> ##D s <- simInit()
+> ##D s <- spades(s) # if this is interrupted or fails
+> ##D s <- restartSpades() # don't need to put simList
+> ##D                      # will take from SpaDES.core:::.pkgEnv$.sim automatically
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("rndstr")
+> ### * rndstr
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: rndstr
+> ### Title: Generate random strings
+> ### Aliases: rndstr rndstr,numeric,numeric,logical-method
+> ###   rndstr,numeric,numeric,missing-method
+> ###   rndstr,numeric,missing,logical-method
+> ###   rndstr,missing,numeric,logical-method
+> ###   rndstr,numeric,missing,missing-method
+> ###   rndstr,missing,numeric,missing-method
+> ###   rndstr,missing,missing,logical-method
+> ###   rndstr,missing,missing,missing-method
+> 
+> ### ** Examples
+> 
+> set.seed(11)
+> rndstr()
+[1] "HTofMAXR"
+> rndstr(len = 10)
+[1] "lklZtCtkys"
+> rndstr(characterFirst = FALSE)
+[1] "GCIxMuDK"
+> rndstr(n = 5, len = 10)
+[1] "M5J2yGhbsx" "c9fpax8XD6" "hToX6PIg4r" "rAjZqgLlbJ" "CNCwMrqrBZ"
+> rndstr(n = 5)
+[1] "uLB5dkBg" "kuPWfZKO" "c3OG6r2r" "QvkZbMwg" "hhPG2ZnA"
+> rndstr(n = 5, characterFirst = TRUE)
+[1] "gIg7ECJc" "bLdEaxL9" "hib6YIC3" "Ms3nvISn" "fV8i0Lgz"
+> rndstr(len = 10, characterFirst = TRUE)
+[1] "RN3VaqESAL"
+> rndstr(n = 5, len = 10, characterFirst = TRUE)
+[1] "rvomtUDlEQ" "PWN2z2MpUY" "CFariE59hK" "JF4c5WI7f4" "o7RfszlTs9"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("saveFiles")
+> ### * saveFiles
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: saveFiles
+> ### Title: Save objects using '.saveObjects' in 'params' slot of 'simInit'
+> ### Aliases: saveFiles
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D 
+> ##D # This will save the "caribou" object at the save interval of 1 unit of time
+> ##D #  in the outputPath location
+> ##D outputPath <- file.path(tempdir(), "test_save")
+> ##D times <- list(start = 0, end = 6, "month")
+> ##D parameters <- list(
+> ##D   .globals = list(stackName = "landscape"),
+> ##D   caribouMovement = list(
+> ##D     .saveObjects = "caribou",
+> ##D     .saveInitialTime = 1, .saveInterval = 1
+> ##D   ),
+> ##D   randomLandscapes = list(.plotInitialTime = NA, nx = 20, ny = 20))
+> ##D 
+> ##D modules <- list("randomLandscapes", "caribouMovement")
+> ##D paths <- list(
+> ##D   modulePath = system.file("sampleModules", package = "SpaDES.core"),
+> ##D   outputPath = savePath
+> ##D )
+> ##D mySim <- simInit(times = times, params = parameters, modules = modules,
+> ##D                  paths = paths)
+> ##D 
+> ##D # The caribou module has a saveFiles(sim) call, so it will save caribou
+> ##D spades(mySim)
+> ##D dir(outputPath)
+> ##D 
+> ##D # remove the files
+> ##D file.remove(dir(savePath, full.names = TRUE))
+> ##D 
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("scheduleConditionalEvent")
+> ### * scheduleConditionalEvent
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: scheduleConditionalEvent
+> ### Title: Schedule a conditional simulation event
+> ### Aliases: scheduleConditionalEvent
+> 
+> ### ** Examples
+> 
+>   sim <- simInit(times = list(start = 0, end = 2))
+Setting:
+  options(
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpXtgXrB/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/outputs'
+    spades.modulePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/modules'
+  )
+>   condition <- "sim$age > 1" # provide as string
+>   condition <- quote(sim$age > 1) # provide as a call
+>   condition <- expression(sim$age > 1) # provide as an expression
+>   sim <- scheduleConditionalEvent(sim, condition, "firemodule", "burn")
+>   conditionalEvents(sim)
+     condition minEventTime maxEventTime moduleName eventType eventPriority
+1: sim$age > 1            0            2 firemodule      burn             5
+>   sim <- spades(sim) # no changes to sim$age, i.e., it is absent
+Sep05 04:15:40 chckpn total elpsd: 0.0049 secs | 0 checkpoint init 0
+Sep05 04:15:40 save   total elpsd: 0.024 secs | 0 save init 0
+Sep05 04:15:40 prgrss total elpsd: 0.03 secs | 0 progress init 0
+Sep05 04:15:40 load   total elpsd: 0.036 secs | 0 load init 0
+simList saved in
+ SpaDES.core:::.pkgEnv$.sim 
+It will be deleted at next spades() call.
+>   events(sim) # nothing scheduled
+Null data.table (0 rows and 0 cols)
+>   sim$age <- 2 # change the value
+>   sim <- spades(sim) # Run spades, the condition is now true, so event is
+Sep05 04:15:40        Conditional Event -- sim$age > 1 is true. Scheduling for now
+simList saved in
+ SpaDES.core:::.pkgEnv$.sim 
+It will be deleted at next spades() call.
+>                      #  scheduled at current time
+>   events(sim)        # now scheduled in the normal event queue
+   eventTime moduleName eventType eventPriority
+1:         2 firemodule      burn             5
+> 
+> 
+> 
+> cleanEx()
+> nameEx("scheduleEvent")
+> ### * scheduleEvent
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: scheduleEvent
+> ### Title: Schedule a simulation event
+> ### Aliases: scheduleEvent
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D  scheduleEvent(x, time(sim) + 1.0, "firemodule", "burn") # default priority
+> ##D  scheduleEvent(x, time(sim) + 1.0, "firemodule", "burn", .normal()) # default priority
+> ##D 
+> ##D  scheduleEvent(x, time(sim) + 1.0, "firemodule", "burn", .normal()-1) # higher priority
+> ##D  scheduleEvent(x, time(sim) + 1.0, "firemodule", "burn", .normal()+1) # lower priority
+> ##D 
+> ##D  scheduleEvent(x, time(sim) + 1.0, "firemodule", "burn", .highest()) # highest priority
+> ##D  scheduleEvent(x, time(sim) + 1.0, "firemodule", "burn", .lowest()) # lowest priority
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("setPaths")
+> ### * setPaths
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: setPaths
+> ### Title: Get and set default working directories
+> ### Aliases: setPaths .paths getPaths Paths
+> ### Keywords: datasets internal
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D getPaths()                       ## returns the current default working paths
+> ##D setPaths(cachePath = tempdir())  ## sets custom cachePath with other paths default
+> ##D setPaths(inputPath = tempdir())  ## sets custom inputPath with other paths default
+> ##D setPaths(modulePath = tempdir()) ## sets custom modulePath with other paths default
+> ##D setPaths(outputPath = tempdir()) ## sets custom outputPath with other paths default
+> ##D 
+> ##D # NOTE: on loading and attaching SpaDES.core,
+> ##D # an active binding is made to "Paths"
+> ##D 
+> ##D getPaths()
+> ##D Paths # same
+> ##D setPaths(outputPath = tempdir())
+> ##D Paths # shows change
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("simInit")
+> ### * simInit
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: simInit
+> ### Title: Initialize a new simulation
+> ### Aliases: simInit
+> ###   simInit,list,list,list,list,list,data.frame,data.frame,character-method
+> ###   simInit,ANY,ANY,ANY,character,ANY,ANY,ANY,ANY-method
+> ###   simInit,ANY,ANY,character,ANY,ANY,ANY,ANY,ANY-method
+> ###   simInit,ANY,ANY,ANY,ANY,ANY,ANY,ANY,ANY-method
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D mySim <- simInit(
+> ##D  times = list(start = 0.0, end = 2.0, timeunit = "year"),
+> ##D  params = list(
+> ##D    .globals = list(stackName = "landscape", burnStats = "nPixelsBurned")
+> ##D  ),
+> ##D  modules = list("randomLandscapes", "fireSpread", "caribouMovement"),
+> ##D  paths = list(modulePath = system.file("sampleModules", package = "SpaDES.core"))
+> ##D )
+> ##D spades(mySim) # shows plotting
+> ##D 
+> ##D # Change more parameters, removing plotting
+> ##D mySim <- simInit(
+> ##D  times = list(start = 0.0, end = 2.0, timeunit = "year"),
+> ##D  params = list(
+> ##D    .globals = list(stackName = "landscape", burnStats = "nPixelsBurned"),
+> ##D    fireSpread = list(.plotInitialTime = NA)
+> ##D  ),
+> ##D  modules = list("randomLandscapes", "fireSpread", "caribouMovement"),
+> ##D  paths = list(modulePath = system.file("sampleModules", package = "SpaDES.core"))
+> ##D )
+> ##D outSim <- spades(mySim)
+> ##D 
+> ##D # A little more complicated with inputs and outputs
+> ##D if (require(rgdal)) {
+> ##D  mapPath <- system.file("maps", package = "quickPlot")
+> ##D  mySim <- simInit(
+> ##D    times = list(start = 0.0, end = 2.0, timeunit = "year"),
+> ##D    params = list(
+> ##D      .globals = list(stackName = "landscape", burnStats = "nPixelsBurned")
+> ##D    ),
+> ##D    modules = list("randomLandscapes", "fireSpread", "caribouMovement"),
+> ##D    paths = list(modulePath = system.file("sampleModules", package = "SpaDES.core"),
+> ##D                 outputPath = tempdir()),
+> ##D    inputs = data.frame(
+> ##D      files = dir(file.path(mapPath), full.names = TRUE, pattern = "tif")[1:2],
+> ##D      functions = "raster",
+> ##D      package = "raster",
+> ##D      loadTime = 1,
+> ##D      stringsAsFactors = FALSE),
+> ##D    outputs = data.frame(
+> ##D      expand.grid(objectName = c("caribou","landscape"),
+> ##D      saveTime = 1:2,
+> ##D      stringsAsFactors = FALSE))
+> ##D  )
+> ##D 
+> ##D  # Use accessors for inputs, outputs
+> ##D  mySim2 <- simInit(
+> ##D    times = list(current = 0, start = 0.0, end = 2.0, timeunit = "year"),
+> ##D    modules = list("randomLandscapes", "fireSpread", "caribouMovement"),
+> ##D    params = list(.globals = list(stackName = "landscape", burnStats = "nPixelsBurned")),
+> ##D    paths = list(
+> ##D      modulePath = system.file("sampleModules", package = "SpaDES.core"),
+> ##D      outputPath = tempdir()
+> ##D    )
+> ##D  )
+> ##D 
+> ##D  # add by accessor is equivalent
+> ##D  inputs(mySim2) <- data.frame(
+> ##D      files = dir(file.path(mapPath), full.names = TRUE, pattern = "tif")[1:2],
+> ##D      functions = "raster",
+> ##D      package = "raster",
+> ##D      loadTime = 1,
+> ##D      stringsAsFactors = FALSE)
+> ##D  outputs(mySim2) <- data.frame(
+> ##D      expand.grid(objectName = c("caribou", "landscape"),
+> ##D      saveTime = 1:2,
+> ##D      stringsAsFactors = FALSE))
+> ##D  all.equal(mySim, mySim2) # TRUE
+> ##D 
+> ##D  # Use accessors for times -- does not work as desired because times are
+> ##D  #   adjusted to the input timeunit during simInit
+> ##D  mySim2 <- simInit(
+> ##D    params = list(
+> ##D      .globals = list(stackName = "landscape", burnStats = "nPixelsBurned")
+> ##D    ),
+> ##D    modules = list("randomLandscapes", "fireSpread", "caribouMovement"),
+> ##D    paths = list(modulePath = system.file("sampleModules", package = "SpaDES.core"),
+> ##D                 outputPath = tempdir()),
+> ##D    inputs = data.frame(
+> ##D      files = dir(file.path(mapPath), full.names = TRUE, pattern = "tif")[1:2],
+> ##D      functions = "raster",
+> ##D      package = "raster",
+> ##D      loadTime = 1,
+> ##D      stringsAsFactors = FALSE),
+> ##D    outputs = data.frame(
+> ##D      expand.grid(objectName = c("caribou","landscape"),
+> ##D      saveTime = 1:2,
+> ##D      eventPriority = c(0,10), # eventPriority 0 may give "initial" conditions
+> ##D      stringsAsFactors = FALSE))
+> ##D  )
+> ##D 
+> ##D  # add times by accessor fails all.equal test because "year" was not
+> ##D  #   declared during module loading, so month became the default
+> ##D  times(mySim2) <- list(current = 0, start = 0.0, end = 2.0, timeunit = "year")
+> ##D  all.equal(mySim, mySim2) # fails because time units are all different, so
+> ##D                           # several parameters that have time units in
+> ##D                           # "months" because they were loaded that way
+> ##D  params(mySim)$fireSpread$.plotInitialTime
+> ##D  params(mySim2)$fireSpread$.plotInitialTime
+> ##D  events(mySim) # load event is at time 1 year
+> ##D  events(mySim2) # load event is at time 1 month, reported in years because of
+> ##D                 #   update to times above
+> ##D }
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("simList-accessors-inputs")
+> ### * simList-accessors-inputs
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: inputs
+> ### Title: Simulation inputs
+> ### Aliases: inputs simList-accessors-inout inputs,simList-method inputs<-
+> ###   inputs<-,simList-method inputArgs inputArgs,simList-method
+> ###   inputArgs<- inputArgs<-,simList-method
+> 
+> ### ** Examples
+> 
+> #######################
+> # inputs
+> #######################
+> 
+> # Start with a basic empty simList
+> sim <- simInit()
+Setting:
+  options(
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpXtgXrB/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/outputs'
+    spades.modulePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/modules'
+  )
+> 
+> test <- 1:10
+> library(igraph) # for %>%
+
+Attaching package: ‘igraph’
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union
+
+> library(reproducible) # for checkPath
+> tmpdir <- file.path(tempdir(), "inputs") %>% checkPath(create = TRUE)
+> tmpFile <- file.path(tmpdir, "test.rds")
+> saveRDS(test, file = tmpFile)
+> inputs(sim) <- data.frame(file = tmpFile) # using only required column, "file"
+> inputs(sim) # see that it is not yet loaded, but when it is scheduled to be loaded
+                                                file     fun package objectName
+1 /var/scratch2/tomas/tmp/RtmpXtgXrB/inputs/test.rds readRDS    base       test
+  loadTime loaded arguments intervals
+1        0     NA        NA        NA
+> simOut <- spades(sim)
+Sep05 04:15:40 chckpn total elpsd: 0.0012 secs | 0 checkpoint init 0
+Sep05 04:15:40 save   total elpsd: 0.0058 secs | 0 save init 0
+Sep05 04:15:40 prgrss total elpsd: 0.011 secs | 0 progress init 0
+Sep05 04:15:40 load   total elpsd: 0.016 secs | 0 load init 0
+Sep05 04:15:40 load   total elpsd: 0.02 secs | 0 load inputs 0
+Sep05 04:15:40 load   test read from /var/scratch2/tomas/tmp/RtmpXtgXrB/inputs/test.rds using readRDS
+simList saved in
+ SpaDES.core:::.pkgEnv$.sim 
+It will be deleted at next spades() call.
+> inputs(simOut) # confirm it was loaded
+                                                file     fun package objectName
+1 /var/scratch2/tomas/tmp/RtmpXtgXrB/inputs/test.rds readRDS    base       test
+  loadTime loaded arguments intervals
+1        0   TRUE        NA        NA
+> simOut$test
+ [1]  1  2  3  4  5  6  7  8  9 10
+> 
+> # can put data.frame for inputs directly inside simInit call
+> allTifs <- dir(system.file("maps", package = "quickPlot"),
++                full.names = TRUE, pattern = "tif")
+> 
+> # next: .objectNames are taken from the filenames (without the extension)
+> # This will load all 5 tifs in the SpaDES sample directory, using
+> #   the raster fuction in the raster package, all at time = 0
+> if (require("rgdal", quietly = TRUE)) {
++   sim <- simInit(
++     inputs = data.frame(
++       files = allTifs,
++       functions = "raster",
++       package = "raster",
++       loadTime = 0,
++       stringsAsFactors = FALSE)
++     )
++ 
++   ##############################
++   #A fully described inputs object, including arguments:
++   files <- dir(system.file("maps", package = "quickPlot"),
++                full.names = TRUE, pattern = "tif")
++   # arguments must be a list of lists. This may require I() to keep it as a list
++   #   once it gets coerced into the data.frame.
++   arguments = I(rep(list(native = TRUE), length(files)))
++   filelist = data.frame(
++      objectName = paste0("Maps", 1:5),
++      files = files,
++      functions = "raster::raster",
++      arguments = arguments,
++      loadTime = 0,
++      intervals = c(rep(NA, length(files) - 1), 10)
++   )
++   inputs(sim) <- filelist
++   spades(sim)
++ }
+rgdal: version: 1.5-23, (SVN revision 1121)
+Geospatial Data Abstraction Library extensions to R successfully loaded
+Loaded GDAL runtime: GDAL 3.1.4, released 2020/10/20
+Path to GDAL shared files: /usr/share/gdal
+GDAL binary built with GEOS: TRUE 
+Loaded PROJ runtime: Rel. 6.3.2, May 1st, 2020, [PJ_VERSION: 632]
+Path to PROJ shared files: /usr/share/proj
+Linking to sp version:1.4-5
+To mute warnings of possible GDAL/OSR exportToProj4() degradation,
+use options("rgdal_show_exportToProj4_warnings"="none") before loading rgdal.
+Setting:
+  options(
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpXtgXrB/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/outputs'
+    spades.modulePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/modules'
+  )
+Sep05 04:15:41 simInit:       DEM read from /var/scratch2/tomas/cran/rcnst/lib/quickPlot/maps/DEM.tif using raster(inMemory=FALSE)
+Sep05 04:15:41 simInit:       forestAge read from /var/scratch2/tomas/cran/rcnst/lib/quickPlot/maps/forestAge.tif using raster(inMemory=FALSE)
+Sep05 04:15:41 simInit:       forestCover read from /var/scratch2/tomas/cran/rcnst/lib/quickPlot/maps/forestCover.tif using raster(inMemory=FALSE)
+Sep05 04:15:41 simInit:       habitatQuality read from /var/scratch2/tomas/cran/rcnst/lib/quickPlot/maps/habitatQuality.tif using raster(inMemory=FALSE)
+Sep05 04:15:41 simInit:       percentPine read from /var/scratch2/tomas/cran/rcnst/lib/quickPlot/maps/percentPine.tif using raster(inMemory=FALSE)
+Sep05 04:15:41 chckpn total elpsd: 0.0014 secs | 0 checkpoint init 0
+Sep05 04:15:41 save   total elpsd: 0.0066 secs | 0 save init 0
+Sep05 04:15:41 prgrss total elpsd: 0.012 secs | 0 progress init 0
+Sep05 04:15:41 load   total elpsd: 0.017 secs | 0 load init 0
+Sep05 04:15:41 load   total elpsd: 0.022 secs | 0 load inputs 0
+Sep05 04:15:41 load   Maps1 read from /var/scratch2/tomas/cran/rcnst/lib/quickPlot/maps/DEM.tif using raster(inMemory=FALSE)
+Sep05 04:15:41 load   Maps2 read from /var/scratch2/tomas/cran/rcnst/lib/quickPlot/maps/forestAge.tif using raster(inMemory=FALSE)
+Sep05 04:15:41 load   Maps3 read from /var/scratch2/tomas/cran/rcnst/lib/quickPlot/maps/forestCover.tif using raster(inMemory=FALSE)
+Sep05 04:15:41 load   Maps4 read from /var/scratch2/tomas/cran/rcnst/lib/quickPlot/maps/habitatQuality.tif using raster(inMemory=FALSE)
+Sep05 04:15:41 load   Maps5 read from /var/scratch2/tomas/cran/rcnst/lib/quickPlot/maps/percentPine.tif using raster(inMemory=FALSE)
+Sep05 04:15:41 load   total elpsd: 0.16 secs | 10 load inputs 0
+Sep05 04:15:41 load   Maps5 read from /var/scratch2/tomas/cran/rcnst/lib/quickPlot/maps/percentPine.tif using raster(inMemory=FALSE)  at time 10
+simList saved in
+ SpaDES.core:::.pkgEnv$.sim 
+It will be deleted at next spades() call.
+> 
+> # Example showing loading multiple objects from global environment onto the
+> #   same object in the simList, but at different load times
+> a1 <- 1
+> a2 <- 2
+> # Note arguments must be a list of NROW(inputs), with each element itself being a list,
+> #  which is passed to do.call(fun[x], arguments[[x]]), where x is row number, one at a time
+> args <- lapply(1:2, function(x) {
++                list(x = paste0("a", x),
++                     envir = environment()) # may be necessary to specify in which envir a1, a2
++                                            # are located, if not in an interactive sessino
++                })
+> inputs <- data.frame(objectName = "a", loadTime = 1:2, fun = "base::get", arguments = I(args))
+> a <- simInit(inputs = inputs, times = list(start = 0, end = 1))
+Setting:
+  options(
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpXtgXrB/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/outputs'
+    spades.modulePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/modules'
+  )
+> a <- spades(a)
+Sep05 04:15:41 chckpn total elpsd: 0.0012 secs | 0 checkpoint init 0
+Sep05 04:15:41 save   total elpsd: 0.0064 secs | 0 save init 0
+Sep05 04:15:41 prgrss total elpsd: 0.013 secs | 0 progress init 0
+Sep05 04:15:41 load   total elpsd: 0.018 secs | 0 load init 0
+Sep05 04:15:41 load   total elpsd: 0.023 secs | 1 load inputs 0
+Sep05 04:15:41 load   a loaded into simList
+simList saved in
+ SpaDES.core:::.pkgEnv$.sim 
+It will be deleted at next spades() call.
+> identical(a1, a$a)
+[1] TRUE
+> 
+> end(a) <- 3
+> a <- spades(a) # different object (a2) loaded onto a$a
+Sep05 04:15:41 load   total elpsd: 0.069 secs | 2 load inputs 0
+Sep05 04:15:41 load   a loaded into simList
+simList saved in
+ SpaDES.core:::.pkgEnv$.sim 
+It will be deleted at next spades() call.
+> identical(a2, a$a)
+[1] TRUE
+> 
+> # Clean up after
+> unlink(tmpdir, recursive = TRUE)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:rgdal’, ‘package:sp’, ‘package:igraph’
+
+> nameEx("simList-accessors-metadata")
+> ### * simList-accessors-metadata
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: inputObjects
+> ### Title: Metadata accessors
+> ### Aliases: inputObjects simList-accessors-metadata
+> ###   inputObjects,simList-method inputObjects,missing-method outputObjects
+> ###   outputObjects,simList-method outputObjects,missing-method
+> ###   outputObjectNames outputObjectNames,simList-method reqdPkgs
+> ###   reqdPkgs,simList-method reqdPkgs,missing-method documentation
+> ###   documentation,simList-method citation citation,simList-method
+> ###   citation,character-method
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # To pre-install and pre-load all packages prior to \code{simInit}.
+> ##D 
+> ##D # set modulePath
+> ##D setPaths(modulePath = system.file("sampleModules", package = "SpaDES.core"))
+> ##D # use Require and reqdPkgs
+> ##D if (!interactive()) chooseCRANmirror(ind = 1) #
+> ##D pkgs <- reqdPkgs(module = c("caribouMovement", "randomLandscapes", "fireSpread"))
+> ##D pkgs <- unique(unlist(pkgs))
+> ##D Require(pkgs)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("simList-accessors-outputs")
+> ### * simList-accessors-outputs
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: outputs
+> ### Title: Simulation outputs
+> ### Aliases: outputs outputs,simList-method outputs<-
+> ###   outputs<-,simList-method outputArgs outputArgs,simList-method
+> ###   outputArgs<- outputArgs<-,simList-method
+> 
+> ### ** Examples
+> 
+> #######################
+> # outputs
+> #######################
+> 
+> library(igraph) # for %>%
+
+Attaching package: ‘igraph’
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union
+
+> tmpdir <- file.path(tempdir(), "outputs") %>% checkPath(create = TRUE)
+> tmpFile <- file.path(tmpdir, "temp.rds")
+> tempObj <- 1:10
+> 
+> # Can add data.frame of outputs directly into simInit call
+> sim <- simInit(objects = c("tempObj"),
++                outputs = data.frame(objectName = "tempObj"),
++                paths = list(outputPath = tmpdir))
+Setting:
+  options(
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/outputs'
+  )
+Paths set to:
+  options(
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpXtgXrB/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/outputs'
+    spades.modulePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/modules'
+  )
+> outputs(sim) # To see what will be saved, when, what filename
+  objectName                                                          file
+1    tempObj /var/scratch2/tomas/tmp/RtmpXtgXrB/outputs/tempObj_year10.rds
+      fun package saveTime saved arguments
+1 saveRDS    base       10    NA        NA
+> sim <- spades(sim)
+Sep05 04:15:41 chckpn total elpsd: 0.0016 secs | 0 checkpoint init 0
+Sep05 04:15:41 save   total elpsd: 0.0073 secs | 0 save init 0
+Sep05 04:15:41 prgrss total elpsd: 0.014 secs | 0 progress init 0
+Sep05 04:15:41 load   total elpsd: 0.019 secs | 0 load init 0
+Sep05 04:15:41 save   total elpsd: 0.024 secs | 10 save spades 10
+simList saved in
+ SpaDES.core:::.pkgEnv$.sim 
+It will be deleted at next spades() call.
+> outputs(sim) # To see that it was saved, when, what filename
+  objectName                                                          file
+1    tempObj /var/scratch2/tomas/tmp/RtmpXtgXrB/outputs/tempObj_year10.rds
+      fun package saveTime saved arguments
+1 saveRDS    base       10  TRUE        NA
+> 
+> # Also can add using assignment after a simList object has been made
+> sim <- simInit(objects = c("tempObj"), paths = list(outputPath = tmpdir))
+Setting:
+  options(
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/outputs'
+  )
+Paths set to:
+  options(
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpXtgXrB/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/outputs'
+    spades.modulePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/modules'
+  )
+> outputs(sim) <- data.frame(objectName = "tempObj", saveTime = 1:10)
+> sim <- spades(sim)
+Sep05 04:15:41 chckpn total elpsd: 0.00089 secs | 0 checkpoint init 0
+Sep05 04:15:41 save   total elpsd: 0.005 secs | 0 save init 0
+Sep05 04:15:41 prgrss total elpsd: 0.0095 secs | 0 progress init 0
+Sep05 04:15:41 load   total elpsd: 0.014 secs | 0 load init 0
+Sep05 04:15:41 save   total elpsd: 0.017 secs | 1 save spades 10
+Sep05 04:15:41 save   total elpsd: 0.03 secs | 2 save later 10
+Sep05 04:15:41 save   total elpsd: 0.041 secs | 3 save later 10
+Sep05 04:15:41 save   total elpsd: 0.055 secs | 4 save later 10
+Sep05 04:15:41 save   total elpsd: 0.068 secs | 5 save later 10
+Sep05 04:15:41 save   total elpsd: 0.081 secs | 6 save later 10
+Sep05 04:15:41 save   total elpsd: 0.095 secs | 7 save later 10
+Sep05 04:15:41 save   total elpsd: 0.11 secs | 8 save later 10
+Sep05 04:15:41 save   total elpsd: 0.12 secs | 9 save later 10
+Sep05 04:15:41 save   total elpsd: 0.14 secs | 10 save later 10
+simList saved in
+ SpaDES.core:::.pkgEnv$.sim 
+It will be deleted at next spades() call.
+> outputs(sim) # To see that it was saved, when, what filename.
+   objectName saveTime
+1     tempObj        1
+2     tempObj        2
+3     tempObj        3
+4     tempObj        4
+5     tempObj        5
+6     tempObj        6
+7     tempObj        7
+8     tempObj        8
+9     tempObj        9
+10    tempObj       10
+                                                            file     fun
+1  /var/scratch2/tomas/tmp/RtmpXtgXrB/outputs/tempObj_year01.rds saveRDS
+2  /var/scratch2/tomas/tmp/RtmpXtgXrB/outputs/tempObj_year02.rds saveRDS
+3  /var/scratch2/tomas/tmp/RtmpXtgXrB/outputs/tempObj_year03.rds saveRDS
+4  /var/scratch2/tomas/tmp/RtmpXtgXrB/outputs/tempObj_year04.rds saveRDS
+5  /var/scratch2/tomas/tmp/RtmpXtgXrB/outputs/tempObj_year05.rds saveRDS
+6  /var/scratch2/tomas/tmp/RtmpXtgXrB/outputs/tempObj_year06.rds saveRDS
+7  /var/scratch2/tomas/tmp/RtmpXtgXrB/outputs/tempObj_year07.rds saveRDS
+8  /var/scratch2/tomas/tmp/RtmpXtgXrB/outputs/tempObj_year08.rds saveRDS
+9  /var/scratch2/tomas/tmp/RtmpXtgXrB/outputs/tempObj_year09.rds saveRDS
+10 /var/scratch2/tomas/tmp/RtmpXtgXrB/outputs/tempObj_year10.rds saveRDS
+   package saved arguments
+1     base  TRUE        NA
+2     base  TRUE        NA
+3     base  TRUE        NA
+4     base  TRUE        NA
+5     base  TRUE        NA
+6     base  TRUE        NA
+7     base  TRUE        NA
+8     base  TRUE        NA
+9     base  TRUE        NA
+10    base  TRUE        NA
+> 
+> # can do highly variable saving
+> tempObj2 <- paste("val",1:10)
+> df1 <- data.frame(col1 = tempObj, col2 = tempObj2)
+> sim <- simInit(objects = c("tempObj", "tempObj2", "df1"),
++   paths=list(outputPath = tmpdir))
+Setting:
+  options(
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/outputs'
+  )
+Paths set to:
+  options(
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpXtgXrB/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/outputs'
+    spades.modulePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/modules'
+  )
+> outputs(sim) = data.frame(
++      objectName = c(rep("tempObj", 2), rep("tempObj2", 3), "df1"),
++      saveTime = c(c(1,4), c(2,6,7), end(sim)),
++      fun = c(rep("saveRDS", 5), "write.csv"),
++      package = c(rep("base", 5), "utils"),
++      stringsAsFactors = FALSE)
+> # since write.csv has a default of adding a column, x, with rownames, must add additional
+> #   argument for 6th row in data.frame (corresponding to the write.csv function)
+> outputArgs(sim)[[6]] <- list(row.names=FALSE)
+> sim <- spades(sim)
+Sep05 04:15:41 chckpn total elpsd: 0.00094 secs | 0 checkpoint init 0
+Sep05 04:15:41 save   total elpsd: 0.0048 secs | 0 save init 0
+Sep05 04:15:41 prgrss total elpsd: 0.0092 secs | 0 progress init 0
+Sep05 04:15:41 load   total elpsd: 0.013 secs | 0 load init 0
+Sep05 04:15:41 save   total elpsd: 0.017 secs | 1 save spades 10
+Sep05 04:15:41 save   total elpsd: 0.031 secs | 2 save later 10
+Sep05 04:15:41 save   total elpsd: 0.046 secs | 4 save later 10
+Sep05 04:15:42 save   total elpsd: 0.062 secs | 6 save later 10
+Sep05 04:15:42 save   total elpsd: 0.08 secs | 7 save later 10
+Sep05 04:15:42 save   total elpsd: 0.097 secs | 10 save later 10
+simList saved in
+ SpaDES.core:::.pkgEnv$.sim 
+It will be deleted at next spades() call.
+> outputs(sim)
+  objectName saveTime       fun package
+1    tempObj        1   saveRDS    base
+2    tempObj        4   saveRDS    base
+3   tempObj2        2   saveRDS    base
+4   tempObj2        6   saveRDS    base
+5   tempObj2        7   saveRDS    base
+6        df1       10 write.csv   utils
+                                                            file saved
+1  /var/scratch2/tomas/tmp/RtmpXtgXrB/outputs/tempObj_year01.rds  TRUE
+2  /var/scratch2/tomas/tmp/RtmpXtgXrB/outputs/tempObj_year04.rds  TRUE
+3 /var/scratch2/tomas/tmp/RtmpXtgXrB/outputs/tempObj2_year02.rds  TRUE
+4 /var/scratch2/tomas/tmp/RtmpXtgXrB/outputs/tempObj2_year06.rds  TRUE
+5 /var/scratch2/tomas/tmp/RtmpXtgXrB/outputs/tempObj2_year07.rds  TRUE
+6      /var/scratch2/tomas/tmp/RtmpXtgXrB/outputs/df1_year10.csv  TRUE
+  arguments
+1        NA
+2        NA
+3        NA
+4        NA
+5        NA
+6     FALSE
+> 
+> # read one back in just to test it all worked as planned
+> newObj <- read.csv(dir(tmpdir, pattern = "year10.csv", full.name = TRUE))
+> newObj
+   col1   col2
+1     1  val 1
+2     2  val 2
+3     3  val 3
+4     4  val 4
+5     5  val 5
+6     6  val 6
+7     7  val 7
+8     8  val 8
+9     9  val 9
+10   10 val 10
+> 
+> # using saving with SpaDES-aware methods
+> # To see current ones SpaDES can do
+> .saveFileExtensions()
+  exts         fun package
+1  rds     saveRDS    base
+2   qs       qsave      qs
+5  grd writeRaster  raster
+4  csv   write.csv   utils
+3  txt write.table   utils
+> 
+> library(raster)
+Loading required package: sp
+> if (require(rgdal)) {
++   ras <- raster(ncol = 4, nrow = 5)
++   ras[] <- 1:20
++ 
++   sim <- simInit(objects = c("ras"), paths = list(outputPath = tmpdir))
++   outputs(sim) = data.frame(
++     file = "test",
++     fun = "writeRaster",
++     package = "raster",
++     objectName = "ras",
++     stringsAsFactors = FALSE)
++ 
++   outputArgs(sim)[[1]] <- list(format = "GTiff") # see ?raster::writeFormats
++   simOut <- spades(sim)
++   outputs(simOut)
++   newRas <- raster(dir(tmpdir, full.name = TRUE, pattern = ".tif"))
++   all.equal(newRas, ras) # Should be TRUE
++ }
+Loading required package: rgdal
+rgdal: version: 1.5-23, (SVN revision 1121)
+Geospatial Data Abstraction Library extensions to R successfully loaded
+Loaded GDAL runtime: GDAL 3.1.4, released 2020/10/20
+Path to GDAL shared files: /usr/share/gdal
+GDAL binary built with GEOS: TRUE 
+Loaded PROJ runtime: Rel. 6.3.2, May 1st, 2020, [PJ_VERSION: 632]
+Path to PROJ shared files: /usr/share/proj
+Linking to sp version:1.4-5
+To mute warnings of possible GDAL/OSR exportToProj4() degradation,
+use options("rgdal_show_exportToProj4_warnings"="none") before loading rgdal.
+Setting:
+  options(
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/outputs'
+  )
+Paths set to:
+  options(
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpXtgXrB/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/outputs'
+    spades.modulePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/modules'
+  )
+Sep05 04:15:42 chckpn total elpsd: 0.001 secs | 0 checkpoint init 0
+Sep05 04:15:42 save   total elpsd: 0.0052 secs | 0 save init 0
+Sep05 04:15:42 prgrss total elpsd: 0.01 secs | 0 progress init 0
+Sep05 04:15:42 load   total elpsd: 0.014 secs | 0 load init 0
+Sep05 04:15:42 save   total elpsd: 0.018 secs | 10 save spades 10
+simList saved in
+ SpaDES.core:::.pkgEnv$.sim 
+It will be deleted at next spades() call.
+[1] TRUE
+> # Clean up after
+> unlink(tmpdir, recursive = TRUE)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:rgdal’, ‘package:raster’, ‘package:sp’,
+  ‘package:igraph’
+
+> nameEx("simList-accessors-times")
+> ### * simList-accessors-times
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: times
+> ### Title: Time usage in 'SpaDES'
+> ### Aliases: times simList-accessors-times times,simList-method times<-
+> ###   times<-,simList-method time.simList time<- time<-,simList-method end
+> ###   end.simList end<- end<-,simList-method start start.simList start<-
+> ###   start<-,simList-method timeunit timeunit,simList-method timeunit<-
+> ###   timeunit<-,simList-method timeunits timeunits,simList-method
+> ###   elapsedTime elapsedTime.simList
+> 
+> ### ** Examples
+> 
+> 
+> # Elapsed Time
+> s1 <- simInit()
+Setting:
+  options(
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpXtgXrB/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/outputs'
+    spades.modulePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/modules'
+  )
+> s2 <- spades(s1)
+Sep05 04:15:45 chckpn total elpsd: 0.0012 secs | 0 checkpoint init 0
+Sep05 04:15:45 save   total elpsd: 0.0062 secs | 0 save init 0
+Sep05 04:15:45 prgrss total elpsd: 0.011 secs | 0 progress init 0
+Sep05 04:15:45 load   total elpsd: 0.016 secs | 0 load init 0
+simList saved in
+ SpaDES.core:::.pkgEnv$.sim 
+It will be deleted at next spades() call.
+> elapsedTime(s2)
+   moduleName eventType      elapsedTime
+1: checkpoint      init 0.005072594 secs
+2:       save      init 0.005123615 secs
+3:   progress      init 0.005087852 secs
+4:       load      init 0.005352736 secs
+> elapsedTime(s2, units = "mins")
+   moduleName eventType       elapsedTime
+1: checkpoint      init 8.454323e-05 mins
+2:       save      init 8.539359e-05 mins
+3:   progress      init 8.479754e-05 mins
+4:       load      init 8.921226e-05 mins
+> 
+> 
+> 
+> cleanEx()
+> nameEx("spades")
+> ### * spades
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: spades
+> ### Title: Run a spatial discrete event simulation
+> ### Aliases: spades spades,simList,ANY,ANY,missing-method
+> ###   spades,ANY,ANY,ANY,logical-method
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D mySim <- simInit(
+> ##D  times = list(start = 0.0, end = 2.0, timeunit = "year"),
+> ##D  params = list(
+> ##D    .globals = list(stackName = "landscape", burnStats = "nPixelsBurned")
+> ##D  ),
+> ##D  modules = list("randomLandscapes", "fireSpread", "caribouMovement"),
+> ##D  paths = list(modulePath = system.file("sampleModules", package = "SpaDES.core"))
+> ##D )
+> ##D spades(mySim)
+> ##D 
+> ##D # set default debug printing for the current session
+> ##D # setOption(spades.debug = TRUE)
+> ##D 
+> ##D # Different debug options (overrides the package option 'spades.debug')
+> ##D spades(mySim, debug = TRUE) # Fastest
+> ##D spades(mySim, debug = "simList")
+> ##D spades(mySim, debug = "print(table(sim$landscape$Fires[]))")
+> ##D # To get a combination -- use list(debug = list(..., ...))
+> ##D spades(mySim, debug = list(debug = list(1, quote(as.data.frame(table(sim$landscape$Fires[]))))))
+> ##D 
+> ##D # Can turn off plotting, and inspect the output simList instead
+> ##D out <- spades(mySim, .plotInitialTime = NA) # much faster
+> ##D completed(out) # shows completed events
+> ##D 
+> ##D # use cache -- simInit should generally be rerun each time a spades call is made
+> ##D #   to guarantee that it is identical. Here, run spades call twice, first
+> ##D #   time to establish cache, second time to return cached result
+> ##D for (i in 1:2) {
+> ##D  mySim <- simInit(
+> ##D    times = list(start = 0.0, end = 2.0, timeunit = "year"),
+> ##D    params = list(
+> ##D      .globals = list(stackName = "landscape", burnStats = "nPixelsBurned")
+> ##D    ),
+> ##D    modules = list("randomLandscapes", "fireSpread", "caribouMovement"),
+> ##D    paths = list(modulePath = system.file("sampleModules", package = "SpaDES.core"))
+> ##D  )
+> ##D  print(system.time(out <- spades(mySim, cache = TRUE)))
+> ##D }
+> ##D 
+> ##D # E.g., with only the init events
+> ##D outInitsOnly <- spades(mySim, events = "init")
+> ##D 
+> ##D # or more fine grained control
+> ##D outSomeEvents <- spades(mySim,
+> ##D         events = list(randomLandscapes = c("init"),
+> ##D                       fireSpread = c("init", "burn")))
+> ##D 
+> ##D # with outputs, the save module gets invoked and must be explicitly limited to "init"
+> ##D mySim <- simInit(
+> ##D  times = list(start = 0.0, end = 2.0, timeunit = "year"),
+> ##D  params = list(
+> ##D    .globals = list(stackName = "landscape", burnStats = "nPixelsBurned")
+> ##D  ),
+> ##D  modules = list("randomLandscapes", "fireSpread", "caribouMovement"),
+> ##D  outputs = data.frame(objectName = "landscape", saveTime = 0:2),
+> ##D  paths = list(modulePath = system.file("sampleModules", package = "SpaDES.core"))
+> ##D )
+> ##D # This will print a message saying that caribouMovement will run its events
+> ##D outSomeEvents <- spades(mySim,
+> ##D         events = list(randomLandscapes = c("init"),
+> ##D                       fireSpread = c("init", "burn"),
+> ##D                       save = "init"))
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("suppliedElsewhere")
+> ### * suppliedElsewhere
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: suppliedElsewhere
+> ### Title: Assess whether an object has or will be supplied from elsewhere
+> ### Aliases: suppliedElsewhere
+> 
+> ### ** Examples
+> 
+> mySim <- simInit()
+Setting:
+  options(
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpXtgXrB/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/outputs'
+    spades.modulePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/modules'
+  )
+> suppliedElsewhere("test", mySim) # FALSE
+[1] FALSE
+> 
+> # supplied in the simList
+> mySim$test <- 1
+> suppliedElsewhere("test", mySim) # TRUE
+[1] TRUE
+> test <- 1
+> 
+> # supplied from user at simInit time -- note, this object would eventually get into the simList
+> #   but the user supplied values come *after* the module's .inputObjects, so
+> #   a basic is.null(sim$test) would return TRUE even though the user supplied test
+> mySim <- simInit(objects = list("test" = test))
+Setting:
+  options(
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpXtgXrB/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/outputs'
+    spades.modulePath = '/var/scratch2/tomas/tmp/RtmpXtgXrB/myProject/modules'
+  )
+> suppliedElsewhere("test", mySim) # TRUE
+[1] TRUE
+> 
+> ## Not run: 
+> ##D # Example with prepInputs
+> ##D # Put chunks like this in your .inputObjects
+> ##D if (!suppliedElsewhere("test", mySim))
+> ##D   sim$test <- Cache(prepInputs, "raster.tif", "downloadedArchive.zip",
+> ##D                     destinationPath = dataPath(sim), studyArea = sim$studyArea,
+> ##D                     rasterToMatch = sim$otherRasterTemplate, overwrite = TRUE)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("updateList")
+> ### * updateList
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: updateList
+> ### Title: Update elements of a named list with elements of a second named
+> ###   list
+> ### Aliases: updateList
+> 
+> ### ** Examples
+> 
+> L1 <- list(a = "hst", b = NA_character_, c = 43)
+> L2 <- list(a = "gst", c = 42, d = list(letters))
+> updateList(L1, L2)
+$a
+[1] "gst"
+
+$b
+[1] NA
+
+$c
+[1] 42
+
+$d
+$d[[1]]
+ [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
+[20] "t" "u" "v" "w" "x" "y" "z"
+
+
+> 
+> updateList(L1, NULL)
+$a
+[1] "hst"
+
+$b
+[1] NA
+
+$c
+[1] 43
+
+> updateList(L1)
+$a
+[1] "hst"
+
+$b
+[1] NA
+
+$c
+[1] 43
+
+> updateList(y = L2)
+$a
+[1] "gst"
+
+$c
+[1] 42
+
+$d
+$d[[1]]
+ [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
+[20] "t" "u" "v" "w" "x" "y" "z"
+
+
+> updateList(NULL, L2)
+$a
+[1] "gst"
+
+$c
+[1] 42
+
+$d
+$d[[1]]
+ [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
+[20] "t" "u" "v" "w" "x" "y" "z"
+
+
+> updateList(NULL, NULL) # should return empty list
+list()
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  43.352 1.376 45.24 0.012 0.009 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
