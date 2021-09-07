@@ -1,20 +1,22 @@
-* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/ParamHelpers.Rcheck’
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/mlr.Rcheck’
 * using R Under development (unstable) (2021-09-05 r80856)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* checking for file ‘ParamHelpers/DESCRIPTION’ ... OK
-* this is package ‘ParamHelpers’ version ‘1.14’
+* checking for file ‘mlr/DESCRIPTION’ ... OK
+* this is package ‘mlr’ version ‘2.19.0’
 * package encoding: UTF-8
 * checking package namespace information ... OK
-* checking package dependencies ... OK
+* checking package dependencies ... NOTE
+Packages suggested but not available for checking: 'Rmpi', 'rrlda'
 * checking if this is a source package ... OK
 * checking if there is a namespace ... OK
 * checking for executable files ... OK
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘ParamHelpers’ can be installed ... OK
+* checking whether package ‘mlr’ can be installed ... OK
 * checking package directory ... OK
+* checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
 * checking for left-over files ... OK
@@ -41,23 +43,44 @@
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
-* checking LazyData ... NOTE
-  'LazyData' is specified without a 'data' directory
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
 * checking line endings in C/C++/Fortran sources/headers ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
 * checking compiled code ... NOTE
 Note: information on .o files is not available
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
 * checking examples ... ERROR
-Running examples in ‘ParamHelpers-Ex.R’ failed
+Running examples in ‘mlr-Ex.R’ failed
 The error most likely occurred in:
 
-> ### Name: getOptPathBestIndex
-> ### Title: Get index of the best element from optimization path.
-> ### Aliases: getOptPathBestIndex
+> ### Name: tuneParamsMultiCrit
+> ### Title: Hyperparameter tuning for multiple measures at once.
+> ### Aliases: tuneParamsMultiCrit
 > 
 > ### ** Examples
 > 
-> ps = makeParamSet(makeNumericParam("x"))
-> op = makeOptPathDF(par.set = ps, y.names = "y", minimize = TRUE)
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  80.667 2.4 86.766 0.014 0.022 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"
@@ -71,25 +94,13 @@ c("integer", "integervector")
 Fatal error: compiler constants were modified!
 
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... ERROR
-  Running ‘run-all.R’
-Running the tests in ‘tests/run-all.R’ failed.
-Last 13 lines of output:
-  > library(ParamHelpers)
-  > 
-  > test_check("ParamHelpers")
-  ERROR: modification of compiler constant of type character, length 2
-  ERROR: the modified value of the constant is:
-  [1] "integer"       "integervector"
-  attr(,".match.hash")
-  <hash table>
-  ERROR: the original value of the constant is:
-  [1] "integer"       "integervector"
-  ERROR: the modified constant is at index 1
-  ERROR: the modified constant is in this function body:
-  c("integer", "integervector")
-  Fatal error: compiler constants were modified!
-  
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘mlr.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
 * DONE
-Status: 2 ERRORs, 2 NOTEs
+Status: 1 ERROR, 2 NOTEs
