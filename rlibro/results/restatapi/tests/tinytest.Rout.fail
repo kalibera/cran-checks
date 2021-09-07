@@ -1,0 +1,572 @@
+
+R Under development (unstable) (2021-09-05 r80856) -- "Unsuffered Consequences"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> if ( requireNamespace("tinytest", quietly=TRUE) ){
++   home <- length(unclass(packageVersion("restatapi"))[[1]]) == 4
++   tinytest::test_package("restatapi", at_home = home)
++ }
+restatapi: - config file with the API version 1 loaded from GitHub (the 'current' API version number is 1).
+           - 4 from the 64 cores are used for parallel computing, can be changed with 'options(restatapi_cores=...)'
+           - 'auto' method will be used for file download, can be changed with 'options(restatapi_dmethod=...)'
+           - the Table of contents (TOC) was not pre-loaded into the deafult cache ('.restatapi_env').
+test_restatapi.R..............    0 tests    test_restatapi.R..............    0 tests    test_restatapi.R..............    0 tests    test_restatapi.R..............    0 tests    test_restatapi.R..............    0 tests    test_restatapi.R..............    0 tests    clean_restatapi_cache - All objects except from 'cfg', 'rav', 'cc' and 'dmethod' are removed from '.restatapi_env'.
+test_restatapi.R..............    0 tests    test_restatapi.R..............    0 tests    test_restatapi.R..............    0 tests    test_restatapi.R..............    0 tests    test_restatapi.R..............    0 tests    test_restatapi.R..............    0 tests    test_restatapi.R..............    0 tests    test_restatapi.R..............    0 tests    test_restatapi.R..............    0 tests    test_restatapi.R..............    0 tests    test_restatapi.R..............    0 tests    test_restatapi.R..............    0 tests    test_restatapi.R..............    0 tests    get_eurostat_toc - Downloading https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?sort=1&downfile=table_of_contents.xml
+get_eurostat_toc - The TOC was cached in memory ('toc.xml.en' in '.restatapi_env').
+
+test_restatapi.R..............    0 tests    get_eurostat_toc - Downloading https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?sort=1&file=table_of_contents_en.txt
+trying URL 'https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?sort=1&file=table_of_contents_en.txt'
+Content type 'text/plain;charset=UTF-8' length 1354657 bytes (1.3 MB)
+==================================================
+downloaded 1.3 MB
+
+get_eurostat_toc - The TOC was cached in memory ('toc.txt.en' in '.restatapi_env').
+
+test_restatapi.R..............    0 tests    get_eurostat_cache - The 'toc.xml.en' was loaded from 'toc.xml.en' in '.restatapi_env'.
+get_eurostat_toc - The TOC was cached previously in memory ('toc.xml.en' in '.restatapi_env'). It remained unchanged.
+
+test_restatapi.R..............    0 tests    
+ ########--------- 1 test of the get_eurostat_toc function
+
+ ########--------- 2 test of the get_eurostat_toc function
+
+ ########--------- 3 test of the get_eurostat_toc function
+
+ ########--------- 4 test of the get_eurostat_toc function
+
+ ########--------- 5 test of the get_eurostat_toc function
+
+ ########--------- 6 test of the get_eurostat_toc function
+
+ ########--------- 7 test of the get_eurostat_toc function
+test_restatapi.R..............    7 tests [0;32mOK[0m get_eurostat_cache - The 'toc.xml.en' was loaded from 'toc.xml.en' in '.restatapi_env'.
+get_eurostat_toc - The TOC was cached previously in memory ('toc.xml.en' in '.restatapi_env'). It remained unchanged.
+
+test_restatapi.R..............    7 tests [0;32mOK[0m get_eurostat_cache - The 'toc.xml.en' was loaded from 'toc.xml.en' in '.restatapi_env'.
+get_eurostat_toc - The TOC was cached previously in memory ('toc.xml.en' in '.restatapi_env'). It remained unchanged.
+
+test_restatapi.R..............    7 tests [0;32mOK[0m get_eurostat_toc - Downloading https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?sort=1&downfile=table_of_contents.xml
+get_eurostat_toc - The TOC was cached in memory ('toc.xml.de' in '.restatapi_env').
+
+test_restatapi.R..............    7 tests [0;32mOK[0m 
+ ########--------- 8 test of the search_eurostat_toc function
+
+ ########--------- 9 test of the search_eurostat_toc function
+test_restatapi.R..............    9 tests [0;32mOK[0m get_eurostat_dsd - Trying to download the DSD from: http://ec.europa.eu/eurostat/SDMX/diss-web/rest/datastructure/ESTAT/DSD_NAMA_10_GDP
+trying URL 'http://ec.europa.eu/eurostat/SDMX/diss-web/rest/datastructure/ESTAT/DSD_NAMA_10_GDP'
+downloaded 37 KB
+
+Trying to extract the DSD from: /var/scratch2/tomas/tmp/RtmpcuUogH/file13809c3d1422eb
+get_eurostat_dsd - The DSD of the NAMA_10_GDP dataset was cached in memory ('NAMA_10_GDP.dsd' in '.restatapi_env').
+
+
+ ########--------- 10 test of the get_eurostat_dsd function
+
+ ########--------- 11 test of the get_eurostat_dsd function
+get_eurostat_dsd - Trying to download the DSD from: http://ec.europa.eu/eurostat/SDMX/diss-web/rest/datastructure/ESTAT/DSD_text
+trying URL 'http://ec.europa.eu/eurostat/SDMX/diss-web/rest/datastructure/ESTAT/DSD_text'
+get_eurostat_dsd - Warning by the download of the DSD file:
+cannot open URL 'http://ec.europa.eu/eurostat/SDMX/diss-web/rest/datastructure/ESTAT/DSD_text': HTTP status was '404 Not Found'
+utils::download.file(dsd_endpoint, temp, dmethod)
+get_eurostat_dsd - The dsd_xml is NULL. Please check in a browser the url below. If it provides valid reponse you can try again to download the DSD.
+ http://ec.europa.eu/eurostat/SDMX/diss-web/rest/datastructure/ESTAT/DSD_text
+
+ ########--------- 12 test of the get_eurostat_dsd function
+test_restatapi.R..............   12 tests [0;32mOK[0m test_restatapi.R..............   12 tests [0;32mOK[0m test_restatapi.R..............   12 tests [0;32mOK[0m 
+ ########--------- 13 test of the search_eurostat_dsd function
+
+ ########--------- 14 test of the search_eurostat_dsd function
+
+ ########--------- 15 test of the search_eurostat_dsd function
+
+ ########--------- 16 test of the search_eurostat_dsd function
+
+ ########--------- 17 test of the search_eurostat_dsd function
+
+ ########--------- 18 test of the search_eurostat_dsd function
+
+ ########--------- 19 test of the search_eurostat_dsd function
+
+ ########--------- 20 test of the search_eurostat_dsd function
+test_restatapi.R..............   20 tests [0;32mOK[0m get_eurostat_data - id:htec_cis3
+get_eurostat_data - Trying to get from cache: b_htec_cis3-2021.09.07-1-1
+get_eurostat_bulk - charactertxtlogicallogicalNULLlogicallogicallogicallogicalfunctionlogical
+get_eurostat_raw - bulk url: http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/htec_cis3.tsv.gz
+trying URL 'http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/htec_cis3.tsv.gz'
+Content type 'application/octet-stream;charset=UTF-8' length 5116 bytes
+==================================================
+downloaded 5116 bytes
+
+get_eurostat_raw - /var/scratch2/tomas/tmp/RtmpcuUogH/file13809c433dc87f-1-size#isdir#mode#mtime#ctime#atime#uid#gid#uname#grname-5116-TRUE
+get_eurostat_raw - class:data.tabledata.frame
+get_eurostat_raw - caching in raw:FALSE local filter:FALSE called from:get_eurostat_rawidtxtcacheupdate_cachecache_dircompress_filestringsAsFactorskeep_flagscheck_tocTRUEverbose
+get_eurostat_raw - TRUE
+get_eurostat_raw - FALSEFALSEFALSE
+get_eurostat_data - The data was downloaded with bulk download.
+get_eurostat_data - bulk restat - nrow:1006; ncol:7; colnames:indic_in/nace_r1/unit/geo/time/values/flags
+get_eurostat_data - cflags:TRUE
+get_eurostat_data - restat - nrow:1006; ncol:7; colnames:indic_in/nace_r1/unit/geo/time/values/flags
+get_eurostat_data - processed restat - nrow:1006; ncol:7; colnames:indic_in/nace_r1/unit/geo/time/values/flags
+get_eurostat_data - The data was cached in memory ('b_htec_cis3-2021.09.07-1-1' in '.restatapi_env').
+
+test_restatapi.R..............   20 tests [0;32mOK[0m test_restatapi.R..............   20 tests [0;32mOK[0m get_eurostat_data - id:htec_cis3
+get_eurostat_data - Trying to get from cache: b_htec_cis3-2021.09.07-0-0
+get_eurostat_cache - The 'b_htec_cis3-2021.09.07-0-0' was loaded from 'b_htec_cis3-2021.09.07-1-1' in '.restatapi_env'.
+get_eurostat_data - The data was loaded from cache.
+get_eurostat_data - cached restat - nrow:1006; ncol:7; colnames:indic_in/nace_r1/unit/geo/time/values/flags
+get_eurostat_data - restat - nrow:1006; ncol:7; colnames:indic_in/nace_r1/unit/geo/time/values/flags
+get_eurostat_data - processed restat - nrow:1006; ncol:6; colnames:indic_in/nace_r1/unit/geo/time/values
+get_eurostat_data - The data was cached in memory ('b_htec_cis3-2021.09.07-0-0' in '.restatapi_env').
+
+test_restatapi.R..............   20 tests [0;32mOK[0m test_restatapi.R..............   20 tests [0;32mOK[0m 
+ ########--------- 21 test of the get_eurostat_data function
+
+ ########--------- 22 test of the get_eurostat_data function
+
+ ########--------- 23 test of the get_eurostat_data function
+
+ ########--------- 24 test of the get_eurostat_data function
+test_restatapi.R..............   24 tests [0;31m1 fails[0m 
+ ########--------- 25 test of the get_eurostat_raw/bulk/data functions
+trying URL 'http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/ds-066341.tsv.gz'
+downloaded 14 KB
+
+
+ ########--------- 26 test of the get_eurostat_raw/bulk/data functions
+
+ ########--------- 27 test of the get_eurostat_raw/bulk/data functions
+
+ ########--------- 28 test of the get_eurostat_raw/bulk/data functions
+
+ ########--------- 29 test of the get_eurostat_raw/bulk/data functions
+
+ ########--------- 30 test of the get_eurostat_raw/bulk/data functions
+
+ ########--------- 31 test of the get_eurostat_raw/bulk/data functions
+trying URL 'http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/ds-066341.tsv.gz'
+downloaded 14 KB
+
+
+ ########--------- 32 test of the get_eurostat_raw/bulk/data functions
+test_restatapi.R..............   32 tests [0;31m1 fails[0m get_eurostat_raw - bulk url: http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/agr_r_milkpr.sdmx.zip
+trying URL 'http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/agr_r_milkpr.sdmx.zip'
+Content type 'application/octet-stream;charset=UTF-8' length 81311 bytes (79 KB)
+==================================================
+downloaded 79 KB
+
+get_compressed_sdmx - Error during the unzip of the SDMX file:
+cannot open file './agr_r_milkpr.sdmx.xml': Read-only file system
+utils::unzip(temp, paste0(fajl, ".xml"))
+get_eurostat_raw - caching in raw:TRUE local filter:FALSE called from:get_eurostat_rawtestid4xmlTRUETRUE
+get_eurostat_raw - FALSE
+test_restatapi.R..............   32 tests [0;31m1 fails[0m get_eurostat_data - id:agr_r_milkpr
+get_eurostat_data - Trying to get from cache: b_agr_r_milkpr-2021.09.07-1-0
+get_eurostat_bulk - charactertxtlogicallogicalNULLlogicallogicallogicallogicalfunctionlogical
+get_eurostat_raw - bulk url: http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/agr_r_milkpr.tsv.gz
+trying URL 'http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/agr_r_milkpr.tsv.gz'
+Content type 'application/octet-stream;charset=UTF-8' length 30024 bytes (29 KB)
+==================================================
+downloaded 29 KB
+
+get_eurostat_raw - /var/scratch2/tomas/tmp/RtmpcuUogH/file13809c28909400-1-size#isdir#mode#mtime#ctime#atime#uid#gid#uname#grname-30024-TRUE
+get_eurostat_raw - class:data.tabledata.frame
+get_eurostat_raw - caching in raw:FALSE local filter:FALSE called from:get_eurostat_rawidtxtcacheupdate_cachecache_dircompress_filestringsAsFactorskeep_flagscheck_tocTRUEverbose
+get_eurostat_raw - TRUE
+get_eurostat_raw - FALSEFALSEFALSE
+get_eurostat_data - The data was downloaded with bulk download.
+get_eurostat_data - bulk restat - nrow:9866; ncol:6; colnames:milkitem/dairyprod/geo/time/values/flags
+get_eurostat_data - cflags:FALSE
+get_eurostat_data - restat - nrow:9866; ncol:6; colnames:milkitem/dairyprod/geo/time/values/flags
+get_eurostat_data - processed restat - nrow:9866; ncol:6; colnames:milkitem/dairyprod/geo/time/values/flags
+get_eurostat_data - The data was cached in memory ('b_agr_r_milkpr-2021.09.07-1-0' in '.restatapi_env').
+
+test_restatapi.R..............   32 tests [0;31m1 fails[0m get_eurostat_data - id:agr_r_milkpr
+get_eurostat_data - date_filter: 2008
+create_filter_table - filters class: numeric; size: 1; filters:2008
+create_filter_table - filters: 2008; is numeric: TRUE; call parents: 7
+length df: 1 -*- df: 2008
+create_filter_table -  2008 date filter length: 1, nchar date_filter: 4
+get_eurostat_data - date_filter: 2008 nrow dft: 1
+-?startPeriod=2008-01-01&endPeriod=2008-12-31
+http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/?startPeriod=2008-01-01&endPeriod=2008-12-31
+trying URL 'http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/?startPeriod=2008-01-01&endPeriod=2008-12-31'
+downloaded 201 KB
+
+get_eurostat_data - http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/?startPeriod=2008-01-01&endPeriod=2008-12-31
+code:  - severity:
+
+get_eurostat_data - restat - nrow:569; ncol:7; colnames:DAIRYPROD/MILKITEM/GEO/FREQ/obsTime/obsValue/OBS_STATUS
+get_eurostat_data - processed restat - nrow:390; ncol:6; colnames:dairyprod/milkitem/geo/time/values/flags
+test_restatapi.R..............   32 tests [0;31m1 fails[0m 
+ ########--------- 33 test of the get_eurostat_raw/bulk/data functions
+test_restatapi.R..............   33 tests [0;31m1 fails[0m get_eurostat_raw - bulk url: http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/irt_h_eurcoe_d.tsv.gz
+trying URL 'http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/irt_h_eurcoe_d.tsv.gz'
+Content type 'application/octet-stream;charset=UTF-8' length 145791 bytes (142 KB)
+==================================================
+downloaded 142 KB
+
+get_eurostat_raw - /var/scratch2/tomas/tmp/RtmpcuUogH/file13809c32c2fb1e-1-size#isdir#mode#mtime#ctime#atime#uid#gid#uname#grname-145791-TRUE
+get_eurostat_raw - class:data.tabledata.frame
+get_eurostat_raw - caching in raw:TRUE local filter:FALSE called from:get_eurostat_rawtestid5TRUE
+get_eurostat_raw - FALSE
+get_eurostat_raw - The raw data was cached in memory ('r_irt_h_eurcoe_d-2021.09.07-0' in '.restatapi_env').
+
+test_restatapi.R..............   33 tests [0;31m1 fails[0m get_eurostat_bulk - charactertxtlogicallogicalNULLlogicallogicallogicallogicalfunctionlogical
+get_eurostat_raw - bulk url: http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/irt_h_eurcoe_d.tsv.gz
+trying URL 'http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/irt_h_eurcoe_d.tsv.gz'
+Content type 'application/octet-stream;charset=UTF-8' length 145791 bytes (142 KB)
+==================================================
+downloaded 142 KB
+
+get_eurostat_raw - /var/scratch2/tomas/tmp/RtmpcuUogH/file13809c11fc25f3-1-size#isdir#mode#mtime#ctime#atime#uid#gid#uname#grname-145791-TRUE
+get_eurostat_raw - class:data.tabledata.frame
+get_eurostat_raw - caching in raw:FALSE local filter:FALSE called from:get_eurostat_rawidtxtcacheupdate_cachecache_dircompress_filestringsAsFactorskeep_flagscheck_tocTRUEverbose
+get_eurostat_raw - TRUE
+get_eurostat_bulk - The bulk data was cached in memory ('b_irt_h_eurcoe_d-2021.09.07-1-0' in '.restatapi_env').
+
+test_restatapi.R..............   33 tests [0;31m1 fails[0m get_eurostat_cache - The 'toc.xml.en' was loaded from 'toc.xml.en' in '.restatapi_env'.
+get_eurostat_toc - The TOC was cached previously in memory ('toc.xml.en' in '.restatapi_env'). It remained unchanged.
+
+get_eurostat_raw - raw TOC rows: 6767
+bulk url: https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/irt_h_eurcoe_d.sdmx.zip
+data rowcount: NA
+trying URL 'https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/irt_h_eurcoe_d.sdmx.zip'
+Content type 'application/octet-stream;charset=UTF-8' length 297155 bytes (290 KB)
+==================================================
+downloaded 290 KB
+
+get_compressed_sdmx - Error during the unzip of the SDMX file:
+cannot open file './irt_h_eurcoe_d.sdmx.xml': Read-only file system
+utils::unzip(temp, paste0(fajl, ".xml"))
+get_eurostat_raw - caching in raw:TRUE local filter:FALSE called from:get_eurostat_rawtestid5xmlTRUETRUETRUETRUETRUE
+get_eurostat_raw - FALSE
+test_restatapi.R..............   33 tests [0;31m1 fails[0m get_eurostat_cache - The 'b_irt_h_eurcoe_d-2021.09.07-1-0' was loaded from 'b_irt_h_eurcoe_d-2021.09.07-1-0' in '.restatapi_env'.
+get_eurostat_bulk - The bulk data was cached previously in memory ('b_irt_h_eurcoe_d-2021.09.07-1-0' in '.restatapi_env'). It remained unchanged.
+
+test_restatapi.R..............   33 tests [0;31m1 fails[0m 
+ ########--------- 34 test of the get_eurostat_raw/bulk/data functions
+test_restatapi.R..............   34 tests [0;31m1 fails[0m test_restatapi.R..............   34 tests [0;31m1 fails[0m 
+ ########--------- 37 test of filtering in the get_eurostat_data function
+test_restatapi.R..............   34 tests [0;31m1 fails[0m trying URL 'http://ec.europa.eu/eurostat/SDMX/diss-web/rest/datastructure/ESTAT/DSD_agr_r_milkpr'
+downloaded 116 KB
+
+test_restatapi.R..............   35 tests [0;31m1 fails[0m 
+ ########--------- 38 test of filtering in the get_eurostat_data function
+test_restatapi.R..............   35 tests [0;31m1 fails[0m test_restatapi.R..............   36 tests [0;31m1 fails[0m 
+ ########--------- 39 test of filtering in the get_eurostat_data function
+test_restatapi.R..............   36 tests [0;31m1 fails[0m test_restatapi.R..............   37 tests [0;31m1 fails[0m 
+ ########--------- 40 test of filtering in the get_eurostat_data function
+
+ ########--------- 41 test of filtering in the get_eurostat_data function
+
+ ########--------- 42 test of filtering in the get_eurostat_data function
+
+ ########--------- 43 test of filtering in the get_eurostat_data function
+test_restatapi.R..............   41 tests [0;31m1 fails[0m 
+ ########--------- 44 test of filtering in the get_eurostat_data function
+test_restatapi.R..............   41 tests [0;31m1 fails[0m trying URL 'http://ec.europa.eu/eurostat/SDMX/diss-web/rest/datastructure/ESTAT/DSD_avia_par_me'
+downloaded 24 KB
+
+trying URL 'http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/avia_par_me/Q.../?startPeriod=2017-03-01&endPeriod=2017-03-31'
+Content type 'application/vnd.sdmx.generic+xml;version=2.1' length 1054 bytes
+==================================================
+downloaded 1054 bytes
+
+trying URL 'http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/avia_par_me.tsv.gz'
+Content type 'application/octet-stream;charset=UTF-8' length 45749 bytes (44 KB)
+==================================================
+downloaded 44 KB
+
+   concept code
+1:    FREQ    Q
+           sd         ed
+1: 2017-03-01 2017-03-31
+test_restatapi.R..............   42 tests [0;31m1 fails[0m 
+ ########--------- 45 test of filtering in the get_eurostat_data function
+test_restatapi.R..............   43 tests [0;31m1 fails[0m get_eurostat_data - id:agr_r_milkpr
+get_eurostat_cache - The 'agr_r_milkpr.dsd' was loaded from 'agr_r_milkpr.dsd' in '.restatapi_env'.
+create_filter_table - filters class: character; size: 1; filters:2018
+-
+None of the filter could be applied. The whole dataset will be retrieved through bulk download.
+get_eurostat_bulk - charactertxtlogicallogicalNULLlogicallogicallogicallogicalfunctionlogical
+get_eurostat_raw - bulk url: http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/agr_r_milkpr.tsv.gz
+trying URL 'http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/agr_r_milkpr.tsv.gz'
+Content type 'application/octet-stream;charset=UTF-8' length 30024 bytes (29 KB)
+==================================================
+downloaded 29 KB
+
+get_eurostat_raw - /var/scratch2/tomas/tmp/RtmpcuUogH/file13809c18018925-1-size#isdir#mode#mtime#ctime#atime#uid#gid#uname#grname-30024-TRUE
+get_eurostat_raw - class:data.tabledata.frame
+get_eurostat_raw - caching in raw:FALSE local filter:FALSE called from:get_eurostat_rawidtxtcacheupdate_cachecache_dircompress_filestringsAsFactorskeep_flagscheck_tocTRUEverbose
+get_eurostat_raw - TRUE
+get_eurostat_raw - FALSEFALSEFALSE
+get_eurostat_data - bulk restat - nrow:10137;ncol:6;colnames:milkitem/dairyprod/geo/time/values/flags
+cflags:TRUE
+get_eurostat_data - restat - nrow:10137; ncol:6; colnames:milkitem/dairyprod/geo/time/values/flags
+get_eurostat_data - processed restat - nrow:10137; ncol:6; colnames:milkitem/dairyprod/geo/time/values/flags
+get_eurostat_data - The data was cached in memory ('b_agr_r_milkpr-2021.09.07-1-1' in '.restatapi_env').
+
+test_restatapi.R..............   43 tests [0;31m1 fails[0m 
+ ########--------- 46 test of filtering in the get_eurostat_data function
+test_restatapi.R..............   44 tests [0;31m2 fails[0m get_eurostat_cache - The 'agr_r_milkpr.dsd' was loaded from 'agr_r_milkpr.dsd' in '.restatapi_env'.
+test_restatapi.R..............   44 tests [0;31m2 fails[0m get_eurostat_cache - The 'avia_par_me.dsd' was loaded from 'avia_par_me.dsd' in '.restatapi_env'.
+test_restatapi.R..............   44 tests [0;31m2 fails[0m get_eurostat_data - id:agr_r_milkpr
+get_eurostat_cache - The 'agr_r_milkpr.dsd' was loaded from 'agr_r_milkpr.dsd' in '.restatapi_env'.
+create_filter_table - filters class: character; size: 1; filters:AT
+...AT-
+http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/...AT/
+trying URL 'http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/...AT/'
+Content type 'application/vnd.sdmx.genericdata+xml;version=2.1' length 4161 bytes
+==================================================
+downloaded 4161 bytes
+
+get_eurostat_data - http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/...AT/
+code:  - severity:
+
+get_eurostat_data - restat - nrow:26; ncol:6; colnames:DAIRYPROD/MILKITEM/GEO/FREQ/obsTime/obsValue
+get_eurostat_data - processed restat - nrow:24; ncol:5; colnames:dairyprod/milkitem/geo/time/values
+get_eurostat_data - id:agr_r_milkpr
+get_eurostat_cache - The 'agr_r_milkpr.dsd' was loaded from 'agr_r_milkpr.dsd' in '.restatapi_env'.
+create_filter_table - filters class: character; size: 1; filters:AT
+...AT+AT1+AT11+AT12+AT13+AT2+AT21+AT22+AT3+AT31+AT32+AT33+AT34-
+http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/...AT+AT1+AT11+AT12+AT13+AT2+AT21+AT22+AT3+AT31+AT32+AT33+AT34/
+trying URL 'http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/...AT+AT1+AT11+AT12+AT13+AT2+AT21+AT22+AT3+AT31+AT32+AT33+AT34/'
+downloaded 39 KB
+
+get_eurostat_data - http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/...AT+AT1+AT11+AT12+AT13+AT2+AT21+AT22+AT3+AT31+AT32+AT33+AT34/
+code:  - severity:
+
+get_eurostat_data - restat - nrow:338; ncol:7; colnames:DAIRYPROD/MILKITEM/GEO/FREQ/obsTime/obsValue/OBS_STATUS
+get_eurostat_data - processed restat - nrow:312; ncol:6; colnames:dairyprod/milkitem/geo/time/values/flags
+
+ ########--------- 47 test of filtering in the get_eurostat_data function
+
+ ########--------- 48 test of filtering in the get_eurostat_data function
+get_eurostat_data - id:agr_r_milkpr
+get_eurostat_data - date_filter: 2016
+create_filter_table - filters class: numeric; size: 1; filters:2016
+create_filter_table - filters: 2016; is numeric: TRUE; call parents: 8
+length df: 1 -*- df: 2016
+create_filter_table -  2016 date filter length: 1, nchar date_filter: 4
+get_eurostat_data - date_filter: 2016 nrow dft: 1
+-?startPeriod=2016-01-01&endPeriod=2016-12-31
+http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/?startPeriod=2016-01-01&endPeriod=2016-12-31
+trying URL 'http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/?startPeriod=2016-01-01&endPeriod=2016-12-31'
+downloaded 200 KB
+
+get_eurostat_data - http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/?startPeriod=2016-01-01&endPeriod=2016-12-31
+code:  - severity:
+
+get_eurostat_data - restat - nrow:569; ncol:6; colnames:DAIRYPROD/MILKITEM/GEO/FREQ/obsTime/obsValue
+get_eurostat_data - processed restat - nrow:494; ncol:5; colnames:dairyprod/milkitem/geo/time/values
+get_eurostat_data - id:agr_r_milkpr
+get_eurostat_data - date_filter: 2016
+create_filter_table - filters class: character; size: 1; filters:2016
+create_filter_table - filters: 2016; is numeric: FALSE; call parents: 8
+length df: 1 -*- df: 2016
+create_filter_table -  2016 date filter length: 1, nchar date_filter: 4
+get_eurostat_data - date_filter: 2016 nrow dft: 1
+-?startPeriod=2016-01-01&endPeriod=2016-12-31
+http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/?startPeriod=2016-01-01&endPeriod=2016-12-31
+trying URL 'http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/?startPeriod=2016-01-01&endPeriod=2016-12-31'
+downloaded 200 KB
+
+get_eurostat_data - http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/?startPeriod=2016-01-01&endPeriod=2016-12-31
+code:  - severity:
+
+get_eurostat_data - restat - nrow:569; ncol:7; colnames:DAIRYPROD/MILKITEM/GEO/FREQ/obsTime/obsValue/OBS_STATUS
+get_eurostat_data - processed restat - nrow:494; ncol:6; colnames:dairyprod/milkitem/geo/time/values/flags
+
+ ########--------- 49 test of filtering in the get_eurostat_data function
+get_eurostat_data - id:agr_r_milkpr
+get_eurostat_cache - The 'agr_r_milkpr.dsd' was loaded from 'agr_r_milkpr.dsd' in '.restatapi_env'.
+create_filter_table - filters class: character; size: 1; filters:AT
+...AT+AT1+AT11+AT12+AT13+AT2+AT21+AT22+AT3+AT31+AT32+AT33+AT34+EL11+EL3+EL30+EL51+ES51+ES52+HR+HR02+HR03+HR04+HR01+ITF5+LV+LV0+LV00+HU22+RO4+SK01+NO01+NO03+NO04+NO05+UKD3+UKK1+TR2+TR5+TR63+TR72+TR8+TR83+TRB1+TRC3+XK-
+http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/...AT+AT1+AT11+AT12+AT13+AT2+AT21+AT22+AT3+AT31+AT32+AT33+AT34+EL11+EL3+EL30+EL51+ES51+ES52+HR+HR02+HR03+HR04+HR01+ITF5+LV+LV0+LV00+HU22+RO4+SK01+NO01+NO03+NO04+NO05+UKD3+UKK1+TR2+TR5+TR63+TR72+TR8+TR83+TRB1+TRC3+XK/
+trying URL 'http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/...AT+AT1+AT11+AT12+AT13+AT2+AT21+AT22+AT3+AT31+AT32+AT33+AT34+EL11+EL3+EL30+EL51+ES51+ES52+HR+HR02+HR03+HR04+HR01+ITF5+LV+LV0+LV00+HU22+RO4+SK01+NO01+NO03+NO04+NO05+UKD3+UKK1+TR2+TR5+TR63+TR72+TR8+TR83+TRB1+TRC3+XK/'
+downloaded 154 KB
+
+get_eurostat_data - http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/...AT+AT1+AT11+AT12+AT13+AT2+AT21+AT22+AT3+AT31+AT32+AT33+AT34+EL11+EL3+EL30+EL51+ES51+ES52+HR+HR02+HR03+HR04+HR01+ITF5+LV+LV0+LV00+HU22+RO4+SK01+NO01+NO03+NO04+NO05+UKD3+UKK1+TR2+TR5+TR63+TR72+TR8+TR83+TRB1+TRC3+XK/
+code:  - severity:
+
+get_eurostat_data - restat - nrow:1196; ncol:7; colnames:DAIRYPROD/MILKITEM/GEO/FREQ/obsTime/obsValue/OBS_STATUS
+get_eurostat_data - processed restat - nrow:848; ncol:6; colnames:dairyprod/milkitem/geo/time/values/flags
+
+ ########--------- 50 test of filtering in the get_eurostat_data function
+get_eurostat_data - id:agr_r_milkpr
+get_eurostat_cache - The 'agr_r_milkpr.dsd' was loaded from 'agr_r_milkpr.dsd' in '.restatapi_env'.
+create_filter_table - filters class: character; size: 1; filters:BE$
+get_eurostat_data - date_filter: 2006-02:2008-06-05
+create_filter_table - filters class: character; size: 1; filters:2006-02:2008-06-05
+create_filter_table - filters: 2006-02:2008-06-05; is numeric: FALSE; call parents: 8
+length df: 1 -*- df: 2006-02:2008-06-05
+create_filter_table -  2006-02:2008-06-05 date filter length: 1, nchar date_filter: 18
+get_eurostat_data - date_filter: 2006-02:2008-06-05 nrow dft: 1
+...BE-?startPeriod=2006-02-01&endPeriod=2008-06-05
+http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/...BE/?startPeriod=2006-02-01&endPeriod=2008-06-05
+trying URL 'http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/...BE/?startPeriod=2006-02-01&endPeriod=2008-06-05'
+Content type 'application/vnd.sdmx.genericdata+xml;version=2.1' length 1821 bytes
+==================================================
+downloaded 1821 bytes
+
+get_eurostat_data - http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/...BE/?startPeriod=2006-02-01&endPeriod=2008-06-05
+code:  - severity:
+
+get_eurostat_data - restat - nrow:2; ncol:6; colnames:DAIRYPROD/MILKITEM/GEO/FREQ/obsTime/obsValue
+get_eurostat_data - processed restat - nrow:2; ncol:5; colnames:dairyprod/milkitem/geo/time/values
+get_eurostat_data - restat - nrow:2;ncol:5
+get_eurostat_cache - The 'agr_r_milkpr.dsd' was loaded from 'agr_r_milkpr.dsd' in '.restatapi_env'.
+get_eurostat_data - dsd - nrow:593;ncol:3
+get_eurostat_data - restat - nrow:2;ncol:5;colnames:dairyprod/milkitem/geo
+
+ ########--------- 51 test of filtering in the get_eurostat_data function
+get_eurostat_data - id:agr_r_milkpr
+get_eurostat_cache - The 'agr_r_milkpr.dsd' was loaded from 'agr_r_milkpr.dsd' in '.restatapi_env'.
+create_filter_table - filters class: character; size: 1; filters:BE
+get_eurostat_data - date_filter: <2008
+create_filter_table - filters class: character; size: 1; filters:<2008
+create_filter_table - filters: <2008; is numeric: FALSE; call parents: 8
+length df: 1 -*- df: <2008
+create_filter_table -  <2008 date filter length: 1, nchar date_filter: 5
+get_eurostat_data - date_filter: <2008 nrow dft: 1
+...BE-?endPeriod=2008-12-31
+http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/...BE/?endPeriod=2008-12-31
+trying URL 'http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/...BE/?endPeriod=2008-12-31'
+Content type 'application/vnd.sdmx.genericdata+xml;version=2.1' length 3230 bytes
+==================================================
+downloaded 3230 bytes
+
+get_eurostat_data - http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/agr_r_milkpr/...BE/?endPeriod=2008-12-31
+code:  - severity:
+
+get_eurostat_data - restat - nrow:14; ncol:7; colnames:DAIRYPROD/MILKITEM/GEO/FREQ/obsTime/obsValue/OBS_STATUS
+get_eurostat_data - processed restat - nrow:11; ncol:6; colnames:dairyprod/milkitem/geo/time/values/flags
+
+ ########--------- 52 test of filtering in the get_eurostat_data function
+get_eurostat_data - id:avia_par_me
+get_eurostat_cache - The 'avia_par_me.dsd' was loaded from 'avia_par_me.dsd' in '.restatapi_env'.
+get_eurostat_data - date_filter: c2017-07-01
+create_filter_table - filters class: character; size: 1; filters:2017-07-01
+create_filter_table - filters: 2017-07-01; is numeric: FALSE; call parents: 8
+length df: 1 -*- df: 2017-07-01
+create_filter_table -  2017-07-01 date filter length: 1, nchar date_filter: 10
+get_eurostat_data - date_filter: 2017-07-01 nrow dft: 1
+M+Q...ME_LYPG_HU_LHBP+ME_LYTV_UA_UKKK-?startPeriod=2017-07-01&endPeriod=2017-07-01
+http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/avia_par_me/M+Q...ME_LYPG_HU_LHBP+ME_LYTV_UA_UKKK/?startPeriod=2017-07-01&endPeriod=2017-07-01
+trying URL 'http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/avia_par_me/M+Q...ME_LYPG_HU_LHBP+ME_LYTV_UA_UKKK/?startPeriod=2017-07-01&endPeriod=2017-07-01'
+downloaded 57 KB
+
+get_eurostat_data - http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/avia_par_me/M+Q...ME_LYPG_HU_LHBP+ME_LYTV_UA_UKKK/?startPeriod=2017-07-01&endPeriod=2017-07-01
+code:  - severity:
+
+get_eurostat_data - restat - nrow:144; ncol:7; colnames:UNIT/TRA_MEAS/AIRP_PR/FREQ/obsTime/obsValue/OBS_STATUS
+get_eurostat_data - processed restat - nrow:48; ncol:7; colnames:unit/tra_meas/airp_pr/freq/time/values/flags
+
+ ########--------- 53 test of filtering in the get_eurostat_data function
+test_restatapi.R..............   51 tests [0;31m2 fails[0m test_restatapi.R..............   51 tests [0;31m2 fails[0m test_restatapi.R..............   51 tests [0;31m2 fails[0m test_restatapi.R..............   51 tests [0;31m2 fails[0m create_filter_table - filters class: character; size: 14; filters:2017-032001-03:2005<2017-07-012012201320142018<20912<3452<:2018-04>2<034v2008:20132019-04-322019-02-31
+create_filter_table - filters: 2017-032001-03:2005<2017-07-012012201320142018<20912<3452<:2018-04>2<034v2008:20132019-04-322019-02-31; is numeric: FALSE; call parents: 6
+length df: 13 -*- df: c, 2017-03, 2001-03:2005, <2017-07-01, 2012:2014, 2018<, 20912, <3452<, :2018-04>, 2<034v, 2008:2013, 2019-04-32, 2019-02-31
+The date filter had invalid character (not 0-9, '-', '<', '>' or ':'). Those characters removed from the date filter.
+create_filter_table -  2017-03, create_filter_table -  2001-03:2005, create_filter_table -  <2017-07-01, create_filter_table -  2012:2014, create_filter_table -  2018<, create_filter_table -  20912, create_filter_table -  <3452<, create_filter_table -  :2018-04>, create_filter_table -  2<034, create_filter_table -  2008:2013, create_filter_table -  2019-04-32, create_filter_table -  2019-02-31 date filter length: 12, nchar date_filter: 7,12,11,9,5,5,6,9,5,9,10,10
+Could not parse date filter: '20912' not in [<>]yyyy[-mm][-dd][<>] format or incorrect date value. The date filter is ignored.
+Could not parse date filter: '<3452<'. This date filter is ignored.
+Could not parse date filter: ':2018-04>'. This date filter is ignored.
+Could not parse date filter: '2<034' not in [<>]yyyy[-mm][-dd][<>] format or incorrect date value. The date filter is ignored.
+Could not parse date filter: '2019-04-32' not in [<>]yyyy[-mm][-dd][<>] format or incorrect date value. The date filter is ignored.
+test_restatapi.R..............   51 tests [0;31m2 fails[0m create_filter_table - filters class: character; size: 14; filters:2017-032001-03:2005<2017-07-012012201320142016<20912<3452<:2018-04>2<034v2008:20132019-04-322019-02-31
+create_filter_table - filters: 2017-032001-03:2005<2017-07-012012201320142016<20912<3452<:2018-04>2<034v2008:20132019-04-322019-02-31; is numeric: FALSE; call parents: 6
+length df: 13 -*- df: c, 2017-03, 2001-03:2005, <2017-07-01, 2012:2014, 2016<, 20912, <3452<, :2018-04>, 2<034v, 2008:2013, 2019-04-32, 2019-02-31
+The date filter had invalid character (not 0-9, '-', '<', '>' or ':'). Those characters removed from the date filter.
+create_filter_table -  2017-03, create_filter_table -  2001-03:2005, create_filter_table -  <2017-07-01, create_filter_table -  2012:2014, create_filter_table -  2016<, create_filter_table -  20912, create_filter_table -  <3452<, create_filter_table -  :2018-04>, create_filter_table -  2<034, create_filter_table -  2008:2013, create_filter_table -  2019-04-32, create_filter_table -  2019-02-31 date filter length: 12, nchar date_filter: 7,12,11,9,5,5,6,9,5,9,10,10
+Could not parse date filter: '20912' not in [<>]yyyy[-mm][-dd][<>] format or incorrect date value. The date filter is ignored.
+Could not parse date filter: '<3452<'. This date filter is ignored.
+Could not parse date filter: ':2018-04>'. This date filter is ignored.
+Could not parse date filter: '2<034' not in [<>]yyyy[-mm][-dd][<>] format or incorrect date value. The date filter is ignored.
+Could not parse date filter: '2019-04-32' not in [<>]yyyy[-mm][-dd][<>] format or incorrect date value. The date filter is ignored.
+test_restatapi.R..............   51 tests [0;31m2 fails[0m 
+ ########--------- 78 test of the create_filter_table function
+test_restatapi.R..............   51 tests [0;31m2 fails[0m test_restatapi.R..............   52 tests [0;31m2 fails[0m 
+ ########--------- 79 test of the create_filter_table function
+test_restatapi.R..............   52 tests [0;31m2 fails[0m test_restatapi.R..............   53 tests [0;31m2 fails[0m 
+ ########--------- 80 test of the create_filter_table function
+test_restatapi.R..............   53 tests [0;31m2 fails[0m test_restatapi.R..............   54 tests [0;31m2 fails[0m 
+ ########--------- 81 test of the create_filter_table function
+test_restatapi.R..............   54 tests [0;31m2 fails[0m test_restatapi.R..............   55 tests [0;31m2 fails[0m 
+ ########--------- 82 test of the create_filter_table function
+test_restatapi.R..............   55 tests [0;31m2 fails[0m test_restatapi.R..............   56 tests [0;31m2 fails[0m 
+ ########--------- 83 test of the create_filter_table function
+test_restatapi.R..............   56 tests [0;31m2 fails[0m test_restatapi.R..............   57 tests [0;31m2 fails[0m get_eurostat_cache - The 'avia_par_me.dsd' was loaded from 'avia_par_me.dsd' in '.restatapi_env'.
+test_restatapi.R..............   57 tests [0;31m2 fails[0m 
+ ########--------- 84 test of the create_filter_table function
+
+ ########--------- 85 test of the create_filter_table function
+
+ ########--------- 86 test of the create_filter_table function
+
+ ########--------- 87 test of the create_filter_table function
+test_restatapi.R..............   61 tests [0;31m2 fails[0m get_eurostat_raw - bulk url: http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tus_00age.tsv.gz
+trying URL 'http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tus_00age.tsv.gz'
+Content type 'application/octet-stream;charset=UTF-8' length 423310 bytes (413 KB)
+==================================================
+downloaded 413 KB
+
+get_eurostat_raw - /var/scratch2/tomas/tmp/RtmpcuUogH/file13809c6d40feef-1-size#isdir#mode#mtime#ctime#atime#uid#gid#uname#grname-423310-TRUE
+get_eurostat_raw - class:data.tabledata.frame
+get_eurostat_raw - caching in raw:TRUE local filter:FALSE called from:get_eurostat_rawtestid7
+get_eurostat_raw - FALSE
+get_eurostat_raw - The raw data was cached in memory ('r_tus_00age-2021.09.07-0' in '.restatapi_env').
+
+test_restatapi.R..............   61 tests [0;31m2 fails[0m get_eurostat_dsd - Trying to download the DSD from: http://ec.europa.eu/eurostat/SDMX/diss-web/rest/datastructure/ESTAT/DSD_tus_00age
+trying URL 'http://ec.europa.eu/eurostat/SDMX/diss-web/rest/datastructure/ESTAT/DSD_tus_00age'
+downloaded 33 KB
+
+Trying to extract the DSD from: /var/scratch2/tomas/tmp/RtmpcuUogH/file13809c2ce9d6f6
+get_eurostat_dsd - The DSD of the tus_00age dataset was cached in memory ('tus_00age.dsd' in '.restatapi_env').
+
+test_restatapi.R..............   61 tests [0;31m2 fails[0m 
+ ########--------- 88 test of the filter_raw_data function
+
+ ########--------- 89 test of the filter_raw_data function
+
+ ########--------- 90 test of the filter_raw_data function
+test_restatapi.R..............   64 tests [0;31m2 fails[0m get_eurostat_raw - bulk url: http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/avia_par_me.tsv.gz
+get_eurostat_cache - The 'r_avia_par_me-2021.09.07-0' was loaded from 'r_avia_par_me-2021.09.07-0' in '.restatapi_env'.
+get_eurostat_raw - caching in raw:TRUE local filter:FALSE called from:get_eurostat_rawtestid6
+get_eurostat_raw - FALSE
+get_eurostat_raw - The raw data was cached previously in memory ('r_avia_par_me-2021.09.07-0' in '.restatapi_env'). It remained unchanged.
+
+test_restatapi.R..............   64 tests [0;31m2 fails[0m create_filter_table - filters: 2017:2018; is numeric: FALSE; call parents: 6
+length df: 1 -*- df: 2017:2018
+create_filter_table -  2017:2018 date filter length: 1, nchar date_filter: 9
+
+ ########--------- 91 test of the filter_raw_data function
+
+ ########--------- 92 test of the filter_raw_data function
+
+ ########--------- 93 test of the filter_raw_data function
+test_restatapi.R..............   67 tests [0;31m2 fails[0m test_restatapi.R..............   67 tests [0;31m2 fails[0m clean_restatapi_cache - All objects except from 'cfg', 'rav', 'cc' and 'dmethod' are removed from '.restatapi_env'.
+clean_restatapi_cache - Deleted all .rds files from /var/scratch2/tomas/tmp/RtmpcuUogH
+test_restatapi.R..............   67 tests [0;31m2 fails[0m [0;34m2.9s[0m
+----- FAILED[data]: test_restatapi.R<111--120>
+ call| expect_equal(nrow(dt1), as.numeric(xml_toc$values[xml_toc$code == 
+ call| -->    testid2]))
+ diff| 'is.NA' value mismatch: 0 in current 1 in target
+----- FAILED[data]: test_restatapi.R<189--192>
+ call| expect_equal(nrow(dt9), as.numeric(xml_toc$values[xml_toc$code == 
+ call| -->    testid4]))
+ diff| 'is.NA' value mismatch: 0 in current 1 in target
+Error: 2 out of 67 tests failed
+Execution halted
