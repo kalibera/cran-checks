@@ -1,0 +1,31 @@
+Package nseval version 0.4
+Package built using 80923/R 4.2.0; x86_64-pc-linux-gnu; 2021-09-18 18:21:28 UTC; unix   
+Checked with rchk version 35d5d01a98903a5f3e9ec166dcdb2f790ecb784f LLVM version 11.0.0
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Function _dots_unpack
+  [UP] unprotected variable input_names while calling allocating function _quotation_to_promsxp nseval/src/dots.c:76
+
+Function _flist_to_dotsxp
+  [UP] unprotected variable names while calling allocating function Rf_allocList nseval/src/dots.c:196
+  [UP] unprotected variable names while calling allocating function Rf_install nseval/src/dots.c:201
+  [UP] unprotected variable names while calling allocating function _quotation_to_promsxp nseval/src/dots.c:206
+
+Function _locate
+  [UP] unprotected variable x while calling allocating function Rf_findVarInFrame3(?,S:force,?) nseval/src/getpromise.c:40
+  [UP] unprotected variable x while calling allocating function Rf_install nseval/src/getpromise.c:40
+  [UP] unprotected variable x while calling allocating function Rf_list2 nseval/src/getpromise.c:41
+  [UP] unprotected variable x while calling allocating function R_forceAndCall nseval/src/getpromise.c:42
+
+Function append_item
+  [PB] has possible protection stack imbalance nseval/src/dots.c:344
+
+Function arg_get
+  [UP] calling allocating function unwrap_promise with a fresh pointer (binding <arg 1>) nseval/src/getpromise.c:471
+  [UP] calling allocating function arg_get_from_nonpromise with a fresh pointer (binding <arg 2>) nseval/src/getpromise.c:486
+
+Function unwrap_promise
+  [UP] unprotected variable tortoise while calling allocating function unwrap_step nseval/src/getpromise.c:151
+  [UP] unprotected variable tortoise while calling allocating function unwrap_step nseval/src/getpromise.c:162
+  [UP] calling allocating function unwrap_step with a fresh pointer (tortoise <arg 1>) nseval/src/getpromise.c:171

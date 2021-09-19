@@ -1,0 +1,30 @@
+Package nontarget version 1.9
+Package built using 80923/R 4.2.0; x86_64-pc-linux-gnu; 2021-09-18 21:06:26 UTC; unix   
+Checked with rchk version 35d5d01a98903a5f3e9ec166dcdb2f790ecb784f LLVM version 11.0.0
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at kdtree4 nontarget/src/searchTree.cpp:710
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at peak_search nontarget/src/searchTree.cpp:401
+
+
+Function adduct_search
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:getNamespace,V) nontarget/src/searchTree.cpp:310
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang4(S:setTxtProgressBar,?,V,?) nontarget/src/searchTree.cpp:321
+
+Function bucket
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:getNamespace,V) nontarget/src/quantization.cpp:101
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang4(S:setTxtProgressBar,?,V,?) nontarget/src/quantization.cpp:199
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang4(S:setTxtProgressBar,?,V,?) nontarget/src/quantization.cpp:267
+  [PB] has possible protection stack imbalance nontarget/src/quantization.cpp:289
+
+Function kdtree
+  [UP] calling allocating function R_orderVector with argument allocated using Rf_lang1(V) nontarget/src/searchTree.cpp:1197
+
+Function kdtree4
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:getNamespace,V) nontarget/src/searchTree.cpp:710
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang4(S:setTxtProgressBar,?,V,?) nontarget/src/searchTree.cpp:782
+
+Function peak_search
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:getNamespace,V) nontarget/src/searchTree.cpp:401
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang4(S:setTxtProgressBar,?,V,?) nontarget/src/searchTree.cpp:424

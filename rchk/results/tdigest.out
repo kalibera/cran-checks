@@ -1,0 +1,16 @@
+Package tdigest version 0.3.0
+Package built using 80923/R 4.2.0; x86_64-pc-linux-gnu; 2021-09-18 19:16:05 UTC; unix   
+Checked with rchk version 35d5d01a98903a5f3e9ec166dcdb2f790ecb784f LLVM version 11.0.0
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at Rtd_create tdigest/src/tdigest-main.c:39
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at Rtdig tdigest/src/tdigest-main.c:64
+
+Function Rtd_create
+  [UP] unprotected variable ptr while calling allocating function Rf_install tdigest/src/tdigest-main.c:39
+  [UP] unprotected variable ptr while calling allocating function Rf_mkString tdigest/src/tdigest-main.c:39
+
+Function Rtdig
+  [UP] unprotected variable ptr while calling allocating function Rf_install tdigest/src/tdigest-main.c:64
+  [UP] unprotected variable ptr while calling allocating function Rf_mkString tdigest/src/tdigest-main.c:64

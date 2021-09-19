@@ -1,0 +1,91 @@
+Package volesti version 1.1.2-2
+Package built using 80923/R 4.2.0; x86_64-pc-linux-gnu; 2021-09-18 21:42:00 UTC; unix   
+Checked with rchk version 35d5d01a98903a5f3e9ec166dcdb2f790ecb784f LLVM version 11.0.0
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _volesti_copula
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _volesti_direct_sampling
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _volesti_exact_vol
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _volesti_frustum_of_simplex
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _volesti_inner_ball
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _volesti_load_sdpa_format_file
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _volesti_poly_gen
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _volesti_rotating
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _volesti_rounding
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _volesti_sample_points
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _volesti_volume
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _volesti_zono_approx
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function exact_vol(Rcpp::Reference_Impl<Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::Reference_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const volesti/src/exact_vol.cpp:68
+
+Function inner_ball(Rcpp::Reference_Impl<Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::Reference_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const volesti/src/inner_ball.cpp:49
+
+Function load_sdpa_format_file(Rcpp::Nullable<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >)
+  [UP] ignoring variable <unnamed var:   %19 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function rotating(Rcpp::Reference_Impl<Rcpp::PreserveStorage>, Rcpp::Nullable<Rcpp::Matrix<14, Rcpp::PreserveStorage> >, Rcpp::Nullable<int>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::Reference_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const volesti/src/rotating.cpp:50
+
+Function rounding(Rcpp::Reference_Impl<Rcpp::PreserveStorage>, Rcpp::Nullable<Rcpp::Vector<19, Rcpp::PreserveStorage> >, Rcpp::Nullable<double>)
+  [UP] ignoring variable <unnamed var:   %106 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %110 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::Reference_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const volesti/src/rounding.cpp:50
+
+Function sample_points(Rcpp::Reference_Impl<Rcpp::PreserveStorage>, int, Rcpp::Nullable<Rcpp::Vector<19, Rcpp::PreserveStorage> >, Rcpp::Nullable<Rcpp::Vector<19, Rcpp::PreserveStorage> >)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::Reference_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const volesti/src/sample_points.cpp:142
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&)
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function volume(Rcpp::Reference_Impl<Rcpp::PreserveStorage>, Rcpp::Nullable<Rcpp::Vector<19, Rcpp::PreserveStorage> >, bool)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::Reference_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const volesti/src/volume.cpp:140
+
+Function zono_approx(Rcpp::Reference_Impl<Rcpp::PreserveStorage>, Rcpp::Nullable<bool>, Rcpp::Nullable<Rcpp::Vector<19, Rcpp::PreserveStorage> >, Rcpp::Nullable<double>)
+  [UP] ignoring variable <unnamed var:   %125 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::Reference_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const volesti/src/zonotope_approximation.cpp:46

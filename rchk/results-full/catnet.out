@@ -1,0 +1,69 @@
+Package catnet version 1.15.7
+Package built using 80923/R 4.2.0; x86_64-pc-linux-gnu; 2021-09-18 18:14:59 UTC; unix   
+Checked with rchk version 35d5d01a98903a5f3e9ec166dcdb2f790ecb784f LLVM version 11.0.0
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function RCatnet::genProbList(int, int, int*)
+  [UP] unprotected variable problist while calling allocating function RCatnet::genProbList(int, int, int*) catnet/src/rcatnet.cpp:340
+  [PB] has negative depth catnet/src/rcatnet.cpp:341
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete catnet/src/rcatnet.cpp:341
+  [PB] has possible protection stack imbalance catnet/src/rcatnet.cpp:345
+
+Function RCatnet::genRcatnet(char const*)
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS catnet/src/rcatnet.cpp:184
+  [UP] unprotected variable cnet while calling allocating function RCatnet::genProbList(int, int, int*) catnet/src/rcatnet.cpp:274
+  [UP] unprotected variable plist while calling allocating function RCatnet::genProbList(int, int, int*) catnet/src/rcatnet.cpp:274
+  [PB] has negative depth catnet/src/rcatnet.cpp:277
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete catnet/src/rcatnet.cpp:277
+  [UP] unprotected variable cnet while calling allocating function Rf_install catnet/src/rcatnet.cpp:280
+  [UP] unprotected variable plist while calling allocating function Rf_install catnet/src/rcatnet.cpp:280
+  [PB] has negative depth catnet/src/rcatnet.cpp:281
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete catnet/src/rcatnet.cpp:281
+  [UP] unprotected variable cnet while calling allocating function Rf_mkString catnet/src/rcatnet.cpp:286
+  [UP] unprotected variable cnet while calling allocating function Rf_install catnet/src/rcatnet.cpp:287
+  [UP] unprotected variable cnet while calling allocating function Rf_allocVector catnet/src/rcatnet.cpp:290
+  [UP] unprotected variable cnet while calling allocating function Rf_install catnet/src/rcatnet.cpp:292
+  [UP] unprotected variable cnet while calling allocating function Rf_allocVector catnet/src/rcatnet.cpp:295
+  [UP] unprotected variable cnet while calling allocating function Rf_install catnet/src/rcatnet.cpp:302
+  [UP] unprotected variable cnet while calling allocating function Rf_allocVector catnet/src/rcatnet.cpp:305
+  [UP] unprotected variable cnet while calling allocating function Rf_install catnet/src/rcatnet.cpp:311
+  [PB] has negative depth catnet/src/rcatnet.cpp:314
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete catnet/src/rcatnet.cpp:314
+  [PB] has possible protection stack imbalance catnet/src/rcatnet.cpp:316
+
+Function RCatnet::genSamples(SEXPREC*, SEXPREC*, SEXPREC*)
+  [PB] has possible protection stack imbalance catnet/src/rcatnet.cpp:651
+
+Function RCatnetSearchHist::search(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [PB] has negative depth catnet/src/rcatnet_hist.cpp:528
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete catnet/src/rcatnet_hist.cpp:528
+  [PB] has negative depth catnet/src/rcatnet_hist.cpp:530
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete catnet/src/rcatnet_hist.cpp:530
+  [PB] has negative depth catnet/src/rcatnet_hist.cpp:570
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete catnet/src/rcatnet_hist.cpp:570
+  [PB] has possible protection stack imbalance catnet/src/rcatnet_hist.cpp:573
+
+Function RCatnetSearchSA::search(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [PB] has negative depth catnet/src/rcatnet_sa.cpp:825
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete catnet/src/rcatnet_sa.cpp:825
+  [PB] has negative depth catnet/src/rcatnet_sa.cpp:831
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete catnet/src/rcatnet_sa.cpp:831
+  [PB] has negative depth catnet/src/rcatnet_sa.cpp:833
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete catnet/src/rcatnet_sa.cpp:833
+  [PB] has negative depth catnet/src/rcatnet_sa.cpp:835
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete catnet/src/rcatnet_sa.cpp:835
+  [PB] has negative depth catnet/src/rcatnet_sa.cpp:837
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete catnet/src/rcatnet_sa.cpp:837
+  [PB] has possible protection stack imbalance catnet/src/rcatnet_sa.cpp:935
+
+Function catnetLoglik
+  [PB] has negative depth catnet/src/catnet_rexport.cpp:573
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete catnet/src/catnet_rexport.cpp:573
+  [PB] has possible protection stack imbalance catnet/src/catnet_rexport.cpp:602
+
+Function catnetSetProb
+  [PB] has negative depth catnet/src/catnet_rexport.cpp:501
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete catnet/src/catnet_rexport.cpp:501
+  [PB] has possible protection stack imbalance catnet/src/catnet_rexport.cpp:513
