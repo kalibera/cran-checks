@@ -1,0 +1,117 @@
+Package phyr version 1.1.0
+Package built using 80940/R 4.2.0; x86_64-pc-linux-gnu; 2021-09-20 14:32:52 UTC; unix   
+Checked with rchk version 35d5d01a98903a5f3e9ec166dcdb2f790ecb784f LLVM version 11.0.0
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::get(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
+  [UP] calling allocating function Rcpp::internal::Rcpp_eval_impl(SEXPREC*, SEXPREC*) with a fresh pointer (res <arg 1>) Rcpp/include/Rcpp/Environment.h:112
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::namespace_env(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::S4_Impl<Rcpp::PreserveStorage>::S4_Impl(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS Rcpp/include/Rcpp/S4.h:58
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::sample(int, int, bool, Rcpp::Nullable<Rcpp::Vector<14, Rcpp::PreserveStorage> >, bool)
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::traits::Exporter<arma::SpMat<double> >::Exporter(SEXPREC*)
+  [UP] ignoring variable x as it has address taken, results will be incomplete 
+
+Function Rcpp::traits::Exporter<arma::SpMat<double> >::get()
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const RcppArmadillo/include/RcppArmadilloAs.h:114
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const RcppArmadillo/include/RcppArmadilloAs.h:135
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const RcppArmadillo/include/RcppArmadilloAs.h:156
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const RcppArmadillo/include/RcppArmadilloAs.h:188
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const RcppArmadillo/include/RcppArmadilloAs.h:198
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const RcppArmadillo/include/RcppArmadilloAs.h:257
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const RcppArmadillo/include/RcppArmadilloAs.h:315
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const RcppArmadillo/include/RcppArmadilloAs.h:453
+
+Function _phyr_cor_phylo_LL
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _phyr_cor_phylo_cpp
+  [UP] ignoring variable <unnamed var:   %57 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _phyr_pcd2_loop
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _phyr_pglmm_LL_cpp
+  [UP] ignoring variable <unnamed var:   %42 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _phyr_pglmm_V
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _phyr_pglmm_gaussian_LL_calc_cpp
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _phyr_pglmm_gaussian_LL_cpp
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _phyr_pglmm_gaussian_internal_cpp
+  [UP] ignoring variable <unnamed var:   %54 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _phyr_pglmm_gaussian_predict
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _phyr_pglmm_iV_logdetV_cpp
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _phyr_pglmm_internal_cpp
+  [UP] ignoring variable <unnamed var:   %66 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _phyr_predict_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _phyr_pse_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _phyr_psv_cpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _phyr_sexp_type
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _phyr_vcv_loop
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _phyr_which2
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function fit_cor_phylo_R(Rcpp::XPtr<LogLikInfo, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<LogLikInfo>(LogLikInfo*)), false>, double const&, int const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, std::__1::vector<double, std::__1::allocator<double> > const&)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %55 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %61 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %82 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function fit_cor_phylo_nlopt(Rcpp::XPtr<LogLikInfo, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<LogLikInfo>(LogLikInfo*)), false>, double const&, int const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %54 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function pglmm_gaussian_internal_cpp(Rcpp::Vector<14, Rcpp::PreserveStorage>, arma::Mat<double> const&, arma::Col<double> const&, arma::SpMat<double> const&, arma::SpMat<double> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, bool, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, int, double, int, int, int, double)
+  [UP] ignoring variable <unnamed var:   %105 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %64 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function pglmm_internal_cpp(arma::Mat<double> const&, arma::Col<double> const&, arma::SpMat<double> const&, arma::SpMat<double> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, bool, bool, int, int, int, int, double, double, double, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, arma::Mat<double>, arma::Col<double>, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, arma::Col<double>)
+  [UP] ignoring variable <unnamed var:   %1143 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %1282 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
