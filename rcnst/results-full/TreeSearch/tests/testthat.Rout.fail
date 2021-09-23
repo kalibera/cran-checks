@@ -1,0 +1,180 @@
+
+R Under development (unstable) (2021-09-22 r80948) -- "Unsuffered Consequences"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library('testthat')
+> library('TreeSearch')
+> 
+> test_check("TreeSearch")
+ERROR: modification of compiler constant of type character, length 2
+ERROR: the modified value of the constant is:
+[1] "0" "1"
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "0" "1"
+ERROR: the modified constant is at index 285
+ERROR: the modified constant is in this function body:
+{
+    if ("info.amounts" %fin% names(attributes(dataset))) {
+        return(dataset)
+    }
+    at <- attributes(dataset)
+    nLevel <- length(at$level)
+    cont <- attr(dataset, "contrast")
+    nTip <- length(dataset)
+    index <- at$index
+    allLevels <- as.character(at$allLevels)
+    contSums <- rowSums(cont)
+    qmLevel <- which(contSums == ncol(cont))
+    if (length(qmLevel) == 0) {
+        attr(dataset, "contrast") <- rbind(attr(dataset, "contrast"), 
+            1)
+        attr(dataset, "allLevels") <- c(attr(dataset, "allLevels"), 
+            "{?}")
+        qmLevel <- length(allLevels) + 1L
+    }
+    ambigs <- which(contSums > 1L & contSums < ncol(cont))
+    inappLevel <- which(colnames(cont) == "-")
+    if (length(inappLevel) != 0L) {
+        cli_alert("Inapplicable tokens treated as ambiguous for profile parsimony")
+        inappLevel <- which(apply(unname(cont), 1, identical, 
+            as.double(colnames(cont) == "-")))
+        dataset[] <- lapply(dataset, function(i) {
+            i[i %fin% inappLevel] <- qmLevel
+            i
+        })
+    }
+    if (length(ambigs) != 0L) {
+        dataset[] <- lapply(dataset, function(i) {
+            i[i %fin% ambigs] <- qmLevel
+            i
+        })
+    }
+    mataset <- matrix(unlist(dataset, recursive = FALSE, use.names = FALSE), 
+        max(index))
+    .RemoveExtraTokens <- function(char, ambiguousTokens) {
+        unambig <- char[!char %fin% ambiguousTokens]
+        if (length(unambig) == 0) {
+            return(matrix(nrow = length(char), ncol = 0))
+        }
+        split <- table(unambig)
+        ranking <- order(order(split, decreasing = TRUE))
+        ignored <- ranking > 2L
+        if (any(split[ignored] > 1L)) {
+            warningMsg <- "Can handle max. 2 informative tokens. Dropping others."
+            if (interactive()) {
+                cli_alert_warning(warningMsg)
+            }
+            else {
+                warning(warningMsg)
+            }
+        }
+        if (length(ambiguousTokens) == 0) {
+            stop("No ambiguous token available for replacement")
+        }
+        tokens <- names(split)
+        most <- tokens[which.min(ranking)]
+        vapply(setdiff(names(split)[split > 1], most), function(kept) {
+            simplified <- char
+            simplified[!simplified %fin% c(most, kept)] <- ambiguousTokens[1]
+            simplified
+        }, char)
+    }
+    decomposed <- lapply(seq_along(mataset[, 1]), function(i) .RemoveExtraTokens(mataset[i, 
+        ], ambiguousTokens = qmLevel))
+    nChar <- vapply(decomposed, dim, c(0, 0))[2, ]
+    if (sum(nChar) == 0) {
+        cli_alert("No informative characters in `dataset`.")
+        attr(dataset, "info.amounts") <- double(0)
+        return(dataset[0])
+    }
+    newIndex <- seq_len(sum(nChar))
+    oldIndex <- rep.int(seq_along(nChar), nChar)
+    index <- unlist(lapply(index, function(i) {
+        newIndex[oldIndex == i]
+    }))
+    mataset <- unname(do.call(cbind, decomposed))
+    NON_AMBIG <- 1:2
+    AMBIG <- max(NON_AMBIG) + 1L
+    .Recompress <- function(char, ambiguousTokens) {
+        tokens <- unique(char)
+        nonAmbig <- setdiff(tokens, ambiguousTokens)
+        stopifnot(length(nonAmbig) == 2L)
+        cipher <- seq_len(max(tokens))
+        cipher[nonAmbig] <- NON_AMBIG
+        cipher[ambiguousTokens] <- AMBIG
+        cipher[char]
+    }
+    if (length(mataset) == 0) {
+        cli_alert("No informative characters in `dataset`.")
+        attr(dataset, "info.amounts") <- double(0)
+        return(dataset[0])
+    }
+    mataset <- apply(mataset, 2, .Recompress, qmLevel)
+    dupCols <- duplicated(t(mataset))
+    kept <- which(!dupCols)
+    copies <- lapply(kept, function(i) {
+        i + which(apply(mataset[, -seq_len(i), drop = FALSE], 
+            2, identical, mataset[, i]))
+    })
+    firstOccurrence <- seq_len(dim(mataset)[2])
+    for (i in seq_along(copies)) {
+        firstOccurrence[copies[[i]]] <- kept[i]
+    }
+    cipher <- seq_len(max(kept))
+    cipher[kept] <- order(kept)
+    index <- cipher[firstOccurrence][index]
+    mataset <- mataset[, !dupCols, drop = FALSE]
+    dataset[] <- lapply(seq_len(length(dataset)), function(i) mataset[i, 
+        ])
+    info <- lapply(seq_along(mataset[1, ]), function(i) StepInformation(mataset[, 
+        i], ambiguousTokens = AMBIG))
+    maxSteps <- max(vapply(info, function(i) max(as.integer(names(i))), 
+        integer(1)))
+    info <- vapply(info, function(x) {
+        ret <- setNames(double(maxSteps), seq_len(maxSteps))
+        x <- x[setdiff(names(x), "0")]
+        if (length(x)) {
+            ret[names(x)] <- max(x) - x
+        }
+        ret
+    }, double(maxSteps))
+    if (is.null(dim(info))) {
+        dim(info) <- c(1L, length(info))
+    }
+    attr(dataset, "index") <- index
+    weight <- as.integer(table(index))
+    attr(dataset, "weight") <- weight
+    attr(dataset, "nr") <- length(weight)
+    attr(dataset, "info.amounts") <- info
+    attr(dataset, "informative") <- colSums(info) > 0
+    lvls <- c("0", "1")
+    attr(dataset, "levels") <- lvls
+    attr(dataset, "allLevels") <- c(lvls, "?")
+    attr(dataset, "contrast") <- matrix(c(1, 0, 1, 0, 1, 1), 
+        length(lvls) + 1L, length(lvls), dimnames = list(NULL, 
+            lvls))
+    attr(dataset, "nc") <- length(lvls)
+    if (!any(attr(dataset, "bootstrap") == "info.amounts")) {
+        attr(dataset, "bootstrap") <- c(attr(dataset, "bootstrap"), 
+            "info.amounts")
+    }
+    dataset
+}
+Function PrepareDataProfile in namespace TreeSearch has this body.
+Fatal error: compiler constants were modified!
+
