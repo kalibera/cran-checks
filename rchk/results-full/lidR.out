@@ -1,5 +1,5 @@
-Package lidR version 3.1.4
-Package built using 80940/R 4.2.0; x86_64-pc-linux-gnu; 2021-09-20 14:12:39 UTC; unix   
+Package lidR version 3.2.0
+Package built using 80976/R 4.2.0; x86_64-pc-linux-gnu; 2021-09-28 13:55:10 UTC; unix   
 Checked with rchk version 35d5d01a98903a5f3e9ec166dcdb2f790ecb784f LLVM version 11.0.0
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -32,6 +32,9 @@ Function Rcpp::Rcpp_unprotect(int)
 Function Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::hasSlot(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
   [UP] calling allocating function R_has_slot(?,V) with argument allocated using Rf_mkString Rcpp/include/Rcpp/proxy/SlotProxy.h:97
 
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:683
+
 Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -49,6 +52,9 @@ Function _lidR_C_dalponte2016
 
 Function _lidR_C_delaunay
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _lidR_C_eigen_metrics
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _lidR_C_fast_knn_metrics
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -93,7 +99,7 @@ Function _lidR_C_lmf
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _lidR_C_local_maximum
-  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _lidR_C_lowest
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -122,8 +128,14 @@ Function _lidR_C_tsearch
 Function _lidR_R_omp_get_max_threads
   [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _lidR_bitmerge
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _lidR_cmpCPA
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _lidR_cpp_concaveman
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _lidR_fast_countbelow
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -176,3 +188,9 @@ Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::Vector<13
 
 Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::Vector<14, Rcpp::PreserveStorage> >(Rcpp::Vector<14, Rcpp::PreserveStorage> const&)
   [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::Vector<14, Rcpp::PreserveStorage> >(Rcpp::Vector<14, Rcpp::PreserveStorage> const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::sugar::Plus_Vector_Primitive<13, true, Rcpp::Vector<13, Rcpp::PreserveStorage> > >(Rcpp::sugar::Plus_Vector_Primitive<13, true, Rcpp::Vector<13, Rcpp::PreserveStorage> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
