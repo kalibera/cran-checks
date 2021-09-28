@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/SpaDES.core.Rcheck’
-* using R Under development (unstable) (2021-09-24 r80958)
+* using R Under development (unstable) (2021-09-27 r80966)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘SpaDES.core/DESCRIPTION’ ... OK
@@ -34,7 +34,10 @@
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... OK
+* checking R code for possible problems ... NOTE
+isAbsolutePath: no visible global function definition for ‘.isFALSE’
+Undefined global functions or variables:
+  .isFALSE
 * checking Rd files ... OK
 * checking Rd metadata ... OK
 * checking Rd cross-references ... OK
@@ -45,26 +48,47 @@
 * checking for unstated dependencies in examples ... OK
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
-* checking examples ... OK
+* checking examples ... ERROR
+Running examples in ‘SpaDES.core-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: objSize.simList
+> ### Title: Object size for 'simList'
+> ### Aliases: objSize.simList
+> 
+> ### ** Examples
+> 
+> a <- simInit(objects = list(d = 1:10, b = 2:20))
+Setting:
+  options(
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpemPXtZ/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpemPXtZ/myProject/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpemPXtZ/myProject/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpemPXtZ/myProject/outputs'
+    spades.modulePath = '/var/scratch2/tomas/tmp/RtmpemPXtZ/myProject/modules'
+  )
+Error in .isFALSE(keep) : could not find function ".isFALSE"
+Calls: simInit ... objs<- -> objs<- -> inputs<- -> inputs<- -> isAbsolutePath
+Execution halted
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... ERROR
   Running ‘test-all.R’
 Running the tests in ‘tests/test-all.R’ failed.
 Last 13 lines of output:
-          if (exists("potentials")) {
-              if (NROW(potentials) > 0) {
-                  landscape[potentials[, 1L]] <- spreadsDT$spreads[potentials[, 
-                    2L]]
-                  set(spreadsDT, as.integer(potentials[, 1L]), 
-                    "spreads", 0L)
-              }
-          }
-          set(spreadsDT, wh, "spreads", 0L)
-      }
-      return(landscape)
-  }
-  S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature RasterLayer has this body.
-  Fatal error: compiler constants were modified!
+  > test_check("SpaDES.core")
+  Loading required package: SpaDES.core
+  Loading required package: quickPlot
+  Loading required package: reproducible
+  
+  Attaching package: 'SpaDES.core'
+  
+  The following objects are masked from 'package:stats':
+  
+      end, start
+  
+  The following object is masked from 'package:utils':
+  
+      citation
   
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
@@ -93,36 +117,24 @@ Setting:
   )
 Paths set to:
   options(
-    rasterTmpDir = '/var/scratch2/tomas/tmp/Rtmpglit6c/raster'
-    reproducible.cachePath = '/var/scratch2/tomas/tmp/Rtmpglit6c/Require/cache'
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpcRKCU7/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpcRKCU7/Require/cache'
     spades.inputPath = '/var/scratch2/tomas/tmp/RtmpkJeDrg/SpaDES/inputs'
     spades.outputPath = '/var/scratch2/tomas/tmp/RtmpkJeDrg/SpaDES/outputs'
     spades.modulePath = '/var/scratch2/tomas/cran/rcnst/lib/SpaDES.core/sampleModules'
   )
-Sep26 00:14:42 chckpn total elpsd: 0.49 secs | 0 checkpoint init 0
-Sep26 00:14:42 save   total elpsd: 0.51 secs | 0 save init 0
-Sep26 00:14:42 prgrss total elpsd: 0.53 secs | 0 progress init 0
-Sep26 00:14:42 load   total elpsd: 0.54 secs | 0 load init 0
-Sep26 00:14:42 rndmLn total elpsd: 0.55 secs | 0 randomLandscapes init 
-Sep26 00:14:50       ... spades.recoveryMode used 4.87 secs
-Sep26 00:14:50 frSprd total elpsd: 9.4 secs | 0 fireSpread init 1
-Sep26 00:14:52 crbMvm total elpsd: 11 secs | 0 caribouMovement init 1
-Sep26 00:14:52 frSprd total elpsd: 11 secs | 0 fireSpread burn 5
-Sep26 00:14:52 frSprd total elpsd: 11 secs | 0 fireSpread stats 5
-Sep26 00:14:52 rndmLn total elpsd: 11 secs | 0 randomLandscapes plot 10
-Sep26 00:14:53 frSprd total elpsd: 12 secs | 0 fireSpread plot.init 10
-Sep26 00:14:53 crbMvm total elpsd: 12 secs | 0.08333 caribouMovement pl
-Sep26 00:14:53 crbMvm total elpsd: 12 secs | 0.1667 caribouMovement plo
-Sep26 00:14:54 crbMvm total elpsd: 13 secs | 0.25 caribouMovement plot 
-Sep26 00:14:54 crbMvm total elpsd: 13 secs | 0.3333 caribouMovement plo
-Sep26 00:14:54 crbMvm total elpsd: 13 secs | 0.4167 caribouMovement plo
-Sep26 00:14:54 crbMvm total elpsd: 13 secs | 0.5 caribouMovement plot 1
-Sep26 00:14:54 crbMvm total elpsd: 13 secs | 0.5833 caribouMovement plo
-Sep26 00:14:55 crbMvm total elpsd: 14 secs | 0.6667 caribouMovement plo
-Sep26 00:14:55 crbMvm total elpsd: 14 secs | 0.75 caribouMovement plot 
-Sep26 00:14:55 crbMvm total elpsd: 14 secs | 0.8333 caribouMovement plo
-Sep26 00:14:55 crbMvm total elpsd: 14 secs | 0.9167 caribouMovement plo
-Sep26 00:14:55 crbMvm total elpsd: 14 secs | 1 caribouMovement move 5
+Sep27 07:39:38 chckpn total elpsd: 0.013 secs | 0 checkpoint init 0
+Sep27 07:39:38 save   total elpsd: 0.029 secs | 0 save init 0
+Sep27 07:39:38 prgrss total elpsd: 0.038 secs | 0 progress init 0
+Sep27 07:39:38 load   total elpsd: 0.047 secs | 0 load init 0
+Sep27 07:39:38 rndmLn total elpsd: 0.054 secs | 0 randomLandscapes init
+Sep27 07:39:45       ... spades.recoveryMode used 3.12 secs
+Sep27 07:39:45 frSprd total elpsd: 7.7 secs | 0 fireSpread init 1
+Sep27 07:39:46 crbMvm total elpsd: 7.9 secs | 0 caribouMovement init 1
+Sep27 07:39:46 frSprd total elpsd: 8.2 secs | 0 fireSpread burn 5
+Sep27 07:39:46 frSprd total elpsd: 8.4 secs | 0 fireSpread stats 5
+Sep27 07:39:46 rndmLn total elpsd: 8.4 secs | 0 randomLandscapes plot 1
+Sep27 07:39:46 frSprd total elpsd: 8.8 secs | 0 fireSpread plot.init 10
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "includePixel" "excludePixel" "includeRing"  "excludeRing" 
@@ -1022,46 +1034,9 @@ ERROR: the modified constant is in this function body:
     return(landscape)
 }
 S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature RasterLayer has this body.
-2021-09-26 00:15:07 ERROR::e: promise already under evaluation: recursive default argument reference or earlier problems?
- 2021-09-26 00:15:07 ERROR::e: NULL
-Quitting from lines 359-386 (ii-modules.Rmd) 
-Setting options('spades.recoveryMode' = 1) used 4.95 secs and 21.5 Kb
-The initial state of the last 1 events are cached and saved in the simList located at SpaDES.core:::.pkgEnv$.sim, as sim$.recoverableObjs, with the most recent event the first element in the list, 2nd most recent event = the second most recent event, etc.  The objects contained in each of those are only the objects that may have changed, according to the metadata for each module. To recover, use:
- restartSpades()
-Because of an interrupted spades call, the sim object  at the start of the interrupted event  was saved in 
- SpaDES.core:::.pkgEnv$.sim 
-It will be deleted on next call to spades
-Error: processing vignette 'ii-modules.Rmd' failed with diagnostics:
-promise already under evaluation: recursive default argument reference or earlier problems?
---- failed re-building ‘ii-modules.Rmd’
+Fatal error: compiler constants were modified!
 
---- re-building ‘iii-cache.Rmd’ using rmarkdown
-Setting:
-  options(
-    spades.modulePath = '/var/scratch2/tomas/cran/rcnst/lib/SpaDES.core/sampleModules'
-  )
-Paths set to:
-  options(
-    rasterTmpDir = '/var/scratch2/tomas/tmp/Rtmpglit6c/raster'
-    reproducible.cachePath = '/var/scratch2/tomas/tmp/Rtmpglit6c/Require/cache'
-    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpkJeDrg/SpaDES/inputs'
-    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpkJeDrg/SpaDES/outputs'
-    spades.modulePath = '/var/scratch2/tomas/cran/rcnst/lib/SpaDES.core/sampleModules'
-  )
---- finished re-building ‘iii-cache.Rmd’
-
---- re-building ‘iv-advanced.Rmd’ using rmarkdown
---- finished re-building ‘iv-advanced.Rmd’
-
---- re-building ‘v-automated-testing.Rmd’ using rmarkdown
---- finished re-building ‘v-automated-testing.Rmd’
-
-SUMMARY: processing the following file failed:
-  ‘ii-modules.Rmd’
-
-Error: Vignette re-building failed.
-Execution halted
 
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 ERROR, 1 WARNING
+Status: 2 ERRORs, 1 WARNING, 1 NOTE

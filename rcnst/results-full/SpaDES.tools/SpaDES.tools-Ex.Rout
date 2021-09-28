@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2021-09-24 r80958) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-09-27 r80966) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -96,6 +96,23 @@ The following object is masked from ‘package:data.table’:
 +                                       y = stats::runif(n, xmin(ras), xmax(ras))))
 > 
 > cirs <- cir(ras, agent, maxRadius = 15, simplify = TRUE) ## TODO: empty with some seeds! e.g. 1642
+> cirsSP <- SpatialPoints(coords = cirs[, c("x", "y")]) ## TODO: error with some seeds! e.g. 1642
+> cirsRas <- raster(ras)
+> cirsRas[] <- 0
+> cirsRas[cirs[, "indices"]] <- 1
+> 
+> if (interactive()) {
++   clearPlot()
++   Plot(ras)
++   Plot(cirsRas, addTo = "ras", cols = c("transparent", "#00000055"))
++   Plot(agent, addTo = "ras")
++   Plot(cirsSP, addTo = "ras")
++ }
+> 
+> # Example comparing rings and cir
+> a <- raster(extent(0, 30, 0, 30), res = 1)
+> hab <- gaussMap(a, speedup = 1) # if raster is large (>1e6 pixels) use speedup > 1
+Loading required namespace: RandomFields
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "includePixel" "excludePixel" "includeRing"  "excludeRing" 
@@ -995,5 +1012,7 @@ ERROR: the modified constant is in this function body:
     return(landscape)
 }
 S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature RasterLayer has this body.
-Error: promise already under evaluation: recursive default argument reference or earlier problems?
+Failed with error:  ‘promise already under evaluation: recursive default argument reference or earlier problems?’
+Error in gaussMap(a, speedup = 1) : 
+  The 'RandomFields' package is required but not installed.
 Execution halted
