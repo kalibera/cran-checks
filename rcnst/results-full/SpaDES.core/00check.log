@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/SpaDES.core.Rcheck’
-* using R Under development (unstable) (2021-09-27 r80966)
+* using R Under development (unstable) (2021-09-28 r80976)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘SpaDES.core/DESCRIPTION’ ... OK
@@ -61,11 +61,11 @@ The error most likely occurred in:
 > a <- simInit(objects = list(d = 1:10, b = 2:20))
 Setting:
   options(
-    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpemPXtZ/raster'
-    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpemPXtZ/myProject/cache'
-    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpemPXtZ/myProject/inputs'
-    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpemPXtZ/myProject/outputs'
-    spades.modulePath = '/var/scratch2/tomas/tmp/RtmpemPXtZ/myProject/modules'
+    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpO8pILv/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpO8pILv/myProject/cache'
+    spades.inputPath = '/var/scratch2/tomas/tmp/RtmpO8pILv/myProject/inputs'
+    spades.outputPath = '/var/scratch2/tomas/tmp/RtmpO8pILv/myProject/outputs'
+    spades.modulePath = '/var/scratch2/tomas/tmp/RtmpO8pILv/myProject/modules'
   )
 Error in .isFALSE(keep) : could not find function ".isFALSE"
 Calls: simInit ... objs<- -> objs<- -> inputs<- -> inputs<- -> isAbsolutePath
@@ -75,20 +75,20 @@ Execution halted
   Running ‘test-all.R’
 Running the tests in ‘tests/test-all.R’ failed.
 Last 13 lines of output:
-  > test_check("SpaDES.core")
-  Loading required package: SpaDES.core
-  Loading required package: quickPlot
-  Loading required package: reproducible
-  
-  Attaching package: 'SpaDES.core'
-  
-  The following objects are masked from 'package:stats':
-  
-      end, start
-  
-  The following object is masked from 'package:utils':
-  
-      citation
+          if (exists("potentials")) {
+              if (NROW(potentials) > 0) {
+                  landscape[potentials[, 1L]] <- spreadsDT$spreads[potentials[, 
+                    2L]]
+                  set(spreadsDT, as.integer(potentials[, 1L]), 
+                    "spreads", 0L)
+              }
+          }
+          set(spreadsDT, wh, "spreads", 0L)
+      }
+      return(landscape)
+  }
+  S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature RasterLayer has this body.
+  Fatal error: compiler constants were modified!
   
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
@@ -117,24 +117,25 @@ Setting:
   )
 Paths set to:
   options(
-    rasterTmpDir = '/var/scratch2/tomas/tmp/RtmpcRKCU7/raster'
-    reproducible.cachePath = '/var/scratch2/tomas/tmp/RtmpcRKCU7/Require/cache'
+    rasterTmpDir = '/var/scratch2/tomas/tmp/Rtmpxbw29q/raster'
+    reproducible.cachePath = '/var/scratch2/tomas/tmp/Rtmpxbw29q/Require/cache'
     spades.inputPath = '/var/scratch2/tomas/tmp/RtmpkJeDrg/SpaDES/inputs'
     spades.outputPath = '/var/scratch2/tomas/tmp/RtmpkJeDrg/SpaDES/outputs'
     spades.modulePath = '/var/scratch2/tomas/cran/rcnst/lib/SpaDES.core/sampleModules'
   )
-Sep27 07:39:38 chckpn total elpsd: 0.013 secs | 0 checkpoint init 0
-Sep27 07:39:38 save   total elpsd: 0.029 secs | 0 save init 0
-Sep27 07:39:38 prgrss total elpsd: 0.038 secs | 0 progress init 0
-Sep27 07:39:38 load   total elpsd: 0.047 secs | 0 load init 0
-Sep27 07:39:38 rndmLn total elpsd: 0.054 secs | 0 randomLandscapes init
-Sep27 07:39:45       ... spades.recoveryMode used 3.12 secs
-Sep27 07:39:45 frSprd total elpsd: 7.7 secs | 0 fireSpread init 1
-Sep27 07:39:46 crbMvm total elpsd: 7.9 secs | 0 caribouMovement init 1
-Sep27 07:39:46 frSprd total elpsd: 8.2 secs | 0 fireSpread burn 5
-Sep27 07:39:46 frSprd total elpsd: 8.4 secs | 0 fireSpread stats 5
-Sep27 07:39:46 rndmLn total elpsd: 8.4 secs | 0 randomLandscapes plot 1
-Sep27 07:39:46 frSprd total elpsd: 8.8 secs | 0 fireSpread plot.init 10
+Sep28 14:33:49 chckpn total elpsd: 0.011 secs | 0 checkpoint init 0
+Sep28 14:33:49 save   total elpsd: 0.027 secs | 0 save init 0
+Sep28 14:33:49 prgrss total elpsd: 0.036 secs | 0 progress init 0
+Sep28 14:33:49 load   total elpsd: 0.045 secs | 0 load init 0
+Sep28 14:33:49 rndmLn total elpsd: 0.052 secs | 0 randomLandscapes init
+Sep28 14:33:57       ... spades.recoveryMode used 3.37 secs
+Sep28 14:33:57 frSprd total elpsd: 8.1 secs | 0 fireSpread init 1
+Sep28 14:33:57 crbMvm total elpsd: 8.3 secs | 0 caribouMovement init 1
+Sep28 14:33:57 frSprd total elpsd: 8.6 secs | 0 fireSpread burn 5
+Sep28 14:33:58 frSprd total elpsd: 8.7 secs | 0 fireSpread stats 5
+Sep28 14:33:58 rndmLn total elpsd: 8.8 secs | 0 randomLandscapes plot 1
+Sep28 14:33:58 frSprd total elpsd: 9.2 secs | 0 fireSpread plot.init 10
+Sep28 14:33:58 crbMvm total elpsd: 9.6 secs | 0.08333 caribouMovement p
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "includePixel" "excludePixel" "includeRing"  "excludeRing" 
