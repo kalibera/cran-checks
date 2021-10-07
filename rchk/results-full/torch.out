@@ -1,5 +1,5 @@
-Package torch version 0.5.0
-Package built using 80923/R 4.2.0; x86_64-pc-linux-gnu; 2021-09-18 21:38:51 UTC; unix   
+Package torch version 0.6.0
+Package built using 81014/R 4.2.0; x86_64-pc-linux-gnu; 2021-10-07 13:01:14 UTC; unix   
 Checked with rchk version 35d5d01a98903a5f3e9ec166dcdb2f790ecb784f LLVM version 11.0.0
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -37,12 +37,6 @@ Function Rcpp::new_env(SEXPREC*, int)
 
 Function XPtrTorchGenericDict::operator SEXPREC*() const
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function XPtrTorchIValue::operator SEXPREC*() const
-  [UP] unprotected variable <unnamed var:   %2 = alloca %struct.SEXPREC*, align 8> while calling allocating function XPtrTorchTensor::~XPtrTorchTensor() torch/src/torch_types.cpp:359
-
-Function XPtrTorchOptionalTensor::operator SEXPREC*() const
-  [UP] unprotected variable <unnamed var:   %2 = alloca %struct.SEXPREC*, align 8> while calling allocating function XPtrTorchTensor::~XPtrTorchTensor() torch/src/torch_types.cpp:52
 
 Function XPtrTorchOptionalTensorList_from_SEXP(SEXPREC*)
   [UP] ignoring variable x as it has address taken, results will be incomplete 
@@ -7889,9 +7883,6 @@ Function _torch_test_stack
 Function _torch_xptr_address
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function cpp_jit_script_module_find_constant(XPtrTorchScriptModule, XPtrTorchstring)
-  [UP] unprotected variable <unnamed var:   %3 = alloca %struct.SEXPREC*, align 8> while calling allocating function XPtrTorchIValue::~XPtrTorchIValue() torch/src/script_module.cpp:135
 
 Function cpp_tensor_register_hook(Rcpp::XPtr<XPtrTorchTensor, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<XPtrTorchTensor>(XPtrTorchTensor*)), false>, Rcpp::Function_Impl<Rcpp::PreserveStorage>)::$_2::operator()(void*) const::{lambda()#1}::operator()() const
   [PB] has possible protection stack imbalance torch/src/autograd.cpp:230
