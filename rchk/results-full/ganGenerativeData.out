@@ -1,9 +1,17 @@
-Package ganGenerativeData version 1.1.1
-Package built using 80923/R 4.2.0; x86_64-pc-linux-gnu; 2021-09-18 23:04:44 UTC; unix   
+Package ganGenerativeData version 1.2.0
+Package built using 81024/R 4.2.0; x86_64-pc-linux-gnu; 2021-10-10 12:26:26 UTC; unix   
 Checked with rchk version 35d5d01a98903a5f3e9ec166dcdb2f790ecb784f LLVM version 11.0.0
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
 
 Function Rcpp::Rcpp_protect(SEXPREC*)
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
@@ -17,6 +25,9 @@ Function Rcpp::internal::Proxy_Iterator<Rcpp::internal::generic_proxy<19, Rcpp::
 
 Function Rcpp::internal::Proxy_Iterator<Rcpp::internal::generic_proxy<19, Rcpp::PreserveStorage> > Rcpp::Vector<19, Rcpp::PreserveStorage>::insert<std::__1::basic_string<wchar_t, std::__1::char_traits<wchar_t>, std::__1::allocator<wchar_t> > >(Rcpp::internal::Proxy_Iterator<Rcpp::internal::generic_proxy<19, Rcpp::PreserveStorage> >, std::__1::basic_string<wchar_t, std::__1::char_traits<wchar_t>, std::__1::allocator<wchar_t> > const&)
   [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _ganGenerativeData_dsGetActiveColumnNames
   [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -33,6 +44,15 @@ Function _ganGenerativeData_dsGetNumberOfRows
 Function _ganGenerativeData_dsGetRow
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _ganGenerativeData_gdBuildFileName
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ganGenerativeData_gdCalculateDensityValue
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ganGenerativeData_gdCalculateDensityValueQuantile
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _ganGenerativeData_gdDataSourceGetDataRandom
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -40,6 +60,9 @@ Function _ganGenerativeData_gdDataSourceGetNormalizedDataRandom
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _ganGenerativeData_gdGenerativeDataGetDenormalizedDataRandom
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ganGenerativeData_gdGenerativeDataGetDenormalizedDataRandomWithDensities
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _ganGenerativeData_gdGenerativeDataGetNormalizedDataRandom
