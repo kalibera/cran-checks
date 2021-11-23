@@ -1,0 +1,52 @@
+
+R Under development (unstable) (2021-11-23 r81229) -- "Unsuffered Consequences"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "NetExplorer"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('NetExplorer')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("vis.net")
+> ### * vis.net
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: vis.net
+> ### Title: Visualize a network
+> ### Aliases: vis.net
+> 
+> ### ** Examples
+> 
+> vis.net(df,m,col.id = "id", col.size = "strength",
++ color = c('green', 'yellow'), col.color = "age" ,
++ strokeCol = c('red', 'blue'), col.strokeCol = "kinship",
++ col.stroke = "degree",
++ col.shape =  "sex",shapes = c("circle", "triangle"),
++ layers =  "kinship")
+Warning in file.create(to[okay]) :
+  cannot create file '/var/scratch2ro/tomas/cran/rlibro/lib/NetExplorer/www/NetExplorer.html', reason 'Read-only file system'
+Warning in file(file, ifelse(append, "a", "w")) :
+  cannot open file '/var/scratch2ro/tomas/cran/rlibro/lib/NetExplorer/www/NetExplorer.html': Read-only file system
+Error in file(file, ifelse(append, "a", "w")) : 
+  cannot open the connection
+Calls: vis.net -> cat -> file
+Execution halted
