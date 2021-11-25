@@ -1,0 +1,633 @@
+
+R Under development (unstable) (2021-11-25 r81239) -- "Unsuffered Consequences"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "aMNLFA"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('aMNLFA')
+Version:  1.1.0
+aMNLFA is a collaborative project which aims to help researchers implement 
+ moderated nonlinear factor analysis (MNLFA) through a series of automated steps 
+ outlined by Gottfredson et al. (2019). 
+Please note: This package generates TEMPLATES for Mplus inputs, which can and should be 
+ inspected, altered, and run by the user.
+ In addition to being presented without warranty of any kind, 
+ the package is provided under the assumption that everyone who uses it is  
+ reading, interpreting, understanding, and altering every Mplus input and output file. 
+There is no one right way to implement MNLFA, and this package exists solely to 
+ save users time as they generate Mplus syntax according to their own judgment.> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("aMNLFA.DIFplot")
+> ### * aMNLFA.DIFplot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: aMNLFA.DIFplot
+> ### Title: aMNLFA plotting function for aMNLFA.prune() results
+> ### Aliases: aMNLFA.DIFplot
+> ### Keywords: MNLFA
+> 
+> ### ** Examples
+> 
+>  wd <- tempdir()
+>  first<-paste0(system.file(package='aMNLFA'),"/extdata")
+>  the.list <- list.files(first,full.names=TRUE)
+>  file.copy(the.list,wd,overwrite=TRUE)
+ [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+[16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+[31] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+[46] TRUE
+>    
+>  ob <- aMNLFA::aMNLFA.object(dir = wd, 
++  mrdata = xstudy, 
++  indicators = paste0("BIN_", 1:12),
++  catindicators = paste0("BIN_", 1:12), 
++  meanimpact = c("AGE", "GENDER", "STUDY"), 
++  varimpact = c("AGE", "GENDER", "STUDY"), 
++  measinvar = c("AGE", "GENDER", "STUDY"),
++  factors = c("GENDER", "STUDY"),
++  ID = "ID",
++  thresholds = FALSE)
+>  
+>  prune.object <- aMNLFA.prune(ob)
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+>  aMNLFA.DIFplot(prune.object, "loading", log = FALSE)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("aMNLFA.final")
+> ### * aMNLFA.final
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: aMNLFA.final
+> ### Title: aMNLFA simultaneous model fitting function
+> ### Aliases: aMNLFA.final
+> ### Keywords: MNLFA
+> 
+> ### ** Examples
+> 
+>  wd  <-  tempdir()
+>  first <- paste0(system.file(package='aMNLFA'),"/extdata")
+>  the.list  <-  list.files(first,full.names=TRUE)
+>  file.copy(the.list,wd,overwrite=TRUE)
+ [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+[16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+[31] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+[46] TRUE
+>    
+>  ob  <-  aMNLFA::aMNLFA.object(dir = wd, 
++  mrdata = xstudy, 
++  indicators = paste0("BIN_", 1:12),
++  catindicators = paste0("BIN_", 1:12), 
++  meanimpact = c("AGE", "GENDER", "STUDY"), 
++  varimpact = c("AGE", "GENDER", "STUDY"), 
++  measinvar = c("AGE", "GENDER", "STUDY"),
++  factors = c("GENDER", "STUDY"),
++  ID = "ID",
++  thresholds = FALSE)
+>  
+>  aMNLFA.simultaneous(ob)
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+Warning in max(sp_resid) :
+  no non-missing arguments to max; returning -Inf
+Warning in min(sp_resid) :
+  no non-missing arguments to min; returning Inf
+COMPLETE. Check '/var/scratch2/tomas/tmp/RtmpmWLxgq/' for Mplus inp file for round 2 calibration model (run this manually).
+
+
+NOTE: The generated Mplus inputs are templates, which will likely need to be altered by the user. 
+Please read each input, alter it if necessary, and run it manually; similarly, please interpret all outputs manually. 
+
+This message will appear after all subsequent code-generating steps.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("aMNLFA.initial")
+> ### * aMNLFA.initial
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: aMNLFA.initial
+> ### Title: aMNLFA initial model fitting function
+> ### Aliases: aMNLFA.initial
+> ### Keywords: MNLFA
+> 
+> ### ** Examples
+> 
+>  wd <- tempdir()
+>  first<-paste0(system.file(package='aMNLFA'),"/examplefiles")
+>  the.list <- list.files(first,full.names=TRUE)
+>  file.copy(the.list,wd,overwrite=TRUE)
+logical(0)
+>  ob <- aMNLFA::aMNLFA.object(dir = wd, 
++  mrdata = xstudy, 
++  indicators = paste0("BIN_", 1:12),
++  catindicators = paste0("BIN_", 1:12), 
++  meanimpact = c("AGE", "GENDER", "STUDY"), 
++  varimpact = c("AGE", "GENDER", "STUDY"), 
++  measinvar = c("AGE", "GENDER", "STUDY"),
++  factors = c("GENDER", "STUDY"),
++  ID = "ID",
++  thresholds = FALSE)
+>  
+>  aMNLFA.initial(ob)
+Warning in max(sp_resid) :
+  no non-missing arguments to max; returning -Inf
+Warning in min(sp_resid) :
+  no non-missing arguments to min; returning Inf
+Check '/var/scratch2/tomas/tmp/RtmpmWLxgq/' for Mplus inp file for mean impact model (run this manually)
+Warning in max(sp_resid) :
+  no non-missing arguments to max; returning -Inf
+Warning in min(sp_resid) :
+  no non-missing arguments to min; returning Inf
+Check '/var/scratch2/tomas/tmp/RtmpmWLxgq/' for Mplus inp file for variance impact model (run this manually). If you trim the variance model manually, do not change the new parameter labels (e.g., v2 is still v2 if you drop the v1 parameter).
+Warning in max(sp_resid) :
+  no non-missing arguments to max; returning -Inf
+Warning in min(sp_resid) :
+  no non-missing arguments to min; returning Inf
+COMPLETE. Check '/var/scratch2/tomas/tmp/RtmpmWLxgq/' for Mplus inp file for measurement invariance model for BIN_1 (run this manually).
+Warning in max(sp_resid) :
+  no non-missing arguments to max; returning -Inf
+Warning in min(sp_resid) :
+  no non-missing arguments to min; returning Inf
+COMPLETE. Check '/var/scratch2/tomas/tmp/RtmpmWLxgq/' for Mplus inp file for measurement invariance model for BIN_2 (run this manually).
+Warning in max(sp_resid) :
+  no non-missing arguments to max; returning -Inf
+Warning in min(sp_resid) :
+  no non-missing arguments to min; returning Inf
+COMPLETE. Check '/var/scratch2/tomas/tmp/RtmpmWLxgq/' for Mplus inp file for measurement invariance model for BIN_3 (run this manually).
+Warning in max(sp_resid) :
+  no non-missing arguments to max; returning -Inf
+Warning in min(sp_resid) :
+  no non-missing arguments to min; returning Inf
+COMPLETE. Check '/var/scratch2/tomas/tmp/RtmpmWLxgq/' for Mplus inp file for measurement invariance model for BIN_4 (run this manually).
+Warning in max(sp_resid) :
+  no non-missing arguments to max; returning -Inf
+Warning in min(sp_resid) :
+  no non-missing arguments to min; returning Inf
+COMPLETE. Check '/var/scratch2/tomas/tmp/RtmpmWLxgq/' for Mplus inp file for measurement invariance model for BIN_5 (run this manually).
+Warning in max(sp_resid) :
+  no non-missing arguments to max; returning -Inf
+Warning in min(sp_resid) :
+  no non-missing arguments to min; returning Inf
+COMPLETE. Check '/var/scratch2/tomas/tmp/RtmpmWLxgq/' for Mplus inp file for measurement invariance model for BIN_6 (run this manually).
+Warning in max(sp_resid) :
+  no non-missing arguments to max; returning -Inf
+Warning in min(sp_resid) :
+  no non-missing arguments to min; returning Inf
+COMPLETE. Check '/var/scratch2/tomas/tmp/RtmpmWLxgq/' for Mplus inp file for measurement invariance model for BIN_7 (run this manually).
+Warning in max(sp_resid) :
+  no non-missing arguments to max; returning -Inf
+Warning in min(sp_resid) :
+  no non-missing arguments to min; returning Inf
+COMPLETE. Check '/var/scratch2/tomas/tmp/RtmpmWLxgq/' for Mplus inp file for measurement invariance model for BIN_8 (run this manually).
+Warning in max(sp_resid) :
+  no non-missing arguments to max; returning -Inf
+Warning in min(sp_resid) :
+  no non-missing arguments to min; returning Inf
+COMPLETE. Check '/var/scratch2/tomas/tmp/RtmpmWLxgq/' for Mplus inp file for measurement invariance model for BIN_9 (run this manually).
+Warning in max(sp_resid) :
+  no non-missing arguments to max; returning -Inf
+Warning in min(sp_resid) :
+  no non-missing arguments to min; returning Inf
+COMPLETE. Check '/var/scratch2/tomas/tmp/RtmpmWLxgq/' for Mplus inp file for measurement invariance model for BIN_10 (run this manually).
+Warning in max(sp_resid) :
+  no non-missing arguments to max; returning -Inf
+Warning in min(sp_resid) :
+  no non-missing arguments to min; returning Inf
+COMPLETE. Check '/var/scratch2/tomas/tmp/RtmpmWLxgq/' for Mplus inp file for measurement invariance model for BIN_11 (run this manually).
+Warning in max(sp_resid) :
+  no non-missing arguments to max; returning -Inf
+Warning in min(sp_resid) :
+  no non-missing arguments to min; returning Inf
+COMPLETE. Check '/var/scratch2/tomas/tmp/RtmpmWLxgq/' for Mplus inp file for measurement invariance model for BIN_12 (run this manually).
+
+
+NOTE: The generated Mplus inputs are templates, which will likely need to be altered by the user. 
+Please read each inputm, alter it if necessary, and run it manually; similarly, please interpret all outputs manually. 
+
+This message will appear after all subsequent code-generating steps.
+>  
+>  
+> 
+> 
+> 
+> cleanEx()
+> nameEx("aMNLFA.itemplots")
+> ### * aMNLFA.itemplots
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: aMNLFA.itemplots
+> ### Title: aMNLFA item plotting function
+> ### Aliases: aMNLFA.itemplots
+> ### Keywords: MNLFA
+> 
+> ### ** Examples
+> 
+>  wd <- tempdir()
+>  first<-paste0(system.file(package='aMNLFA'),"/examplefiles")
+>  the.list <- list.files(first,full.names=TRUE)
+>  file.copy(the.list,wd,overwrite=TRUE)
+logical(0)
+>  ob <- aMNLFA::aMNLFA.object(dir = wd, 
++  mrdata = xstudy, 
++  indicators = paste0("BIN_", 1:12),
++  catindicators = paste0("BIN_", 1:12), 
++  meanimpact = c("AGE", "GENDER", "STUDY"), 
++  varimpact = c("AGE", "GENDER", "STUDY"), 
++  measinvar = c("AGE", "GENDER", "STUDY"),
++  factors = c("GENDER", "STUDY"),
++  ID = "ID",
++  thresholds = FALSE)
+>  
+>  aMNLFA.itemplots(ob)
+Check '/var/scratch2/tomas/tmp/RtmpmWLxgq/' for png file with item plots
+> 
+> 
+> 
+> cleanEx()
+> nameEx("aMNLFA.object")
+> ### * aMNLFA.object
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: aMNLFA.object
+> ### Title: aMNLFA object function
+> ### Aliases: aMNLFA.object
+> ### Keywords: MNLFA
+> 
+> ### ** Examples
+> 
+>  wd <- tempdir()
+>  first<-paste0(system.file(package='aMNLFA'),"/examplefiles")
+>  the.list <- list.files(first,full.names=TRUE)
+>  file.copy(the.list,wd,overwrite=TRUE)
+logical(0)
+>  
+>  ob <- aMNLFA::aMNLFA.object(dir = wd, 
++  mrdata = xstudy, 
++  indicators = paste0("BIN_", 1:12),
++  catindicators = paste0("BIN_", 1:12), 
++  meanimpact = c("AGE", "GENDER", "STUDY"), 
++  varimpact = c("AGE", "GENDER", "STUDY"), 
++  measinvar = c("AGE", "GENDER", "STUDY"),
++  factors = c("GENDER", "STUDY"),
++  ID = "ID",
++  thresholds = FALSE)
+>  
+> 
+> 
+> 
+> cleanEx()
+> nameEx("aMNLFA.prune")
+> ### * aMNLFA.prune
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: aMNLFA.prune
+> ### Title: aMNLFA simultaneous model fitting function
+> ### Aliases: aMNLFA.prune
+> ### Keywords: MNLFA
+> 
+> ### ** Examples
+> 
+>  wd <- tempdir()
+>  first<-paste0(system.file(package='aMNLFA'),"/extdata")
+>  the.list <- list.files(first,full.names=TRUE)
+>  file.copy(the.list,wd,overwrite=TRUE)
+ [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+[16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+[31] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+[46] TRUE
+>    
+>  ob <- aMNLFA::aMNLFA.object(dir = wd, 
++  mrdata = xstudy, 
++  indicators = paste0("BIN_", 1:12),
++  catindicators = paste0("BIN_", 1:12), 
++  meanimpact = c("AGE", "GENDER", "STUDY"), 
++  varimpact = c("AGE", "GENDER", "STUDY"), 
++  measinvar = c("AGE", "GENDER", "STUDY"),
++  factors = c("GENDER", "STUDY"),
++  ID = "ID",
++  thresholds = FALSE)
+>  
+>  aMNLFA.prune(ob)
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+$summary
+$summary$indicators
+ [1] "BIN_1"  "BIN_2"  "BIN_3"  "BIN_4"  "BIN_5"  "BIN_6"  "BIN_7"  "BIN_8" 
+ [9] "BIN_9"  "BIN_10" "BIN_11" "BIN_12"
+
+$summary$measinvar
+[1] "AGE"    "GENDER" "STUDY" 
+
+$summary$meanimpact
+   paramHeader param   est    se est_se pval       pexact
+13      ETA.ON   AGE 0.418 0.054  7.791    0 6.661338e-15
+14      ETA.ON STUDY 0.617 0.070  8.760    0 0.000000e+00
+
+$summary$varimpact
+                 paramHeader param   est    se est_se  pval     pexact
+42 New.Additional.Parameters    V1 0.143 0.079  1.805 0.071 0.07107468
+   covariate.label covariate.name
+42               1            AGE
+
+$summary$loadingDIF
+                 paramHeader param    est   se est_se  pval      pexact
+44 New.Additional.Parameters  L8_3 -0.533 0.18 -2.971 0.003 0.002968318
+   item.label covariate.label covariate.name BH.actual      BH.ibc bon.actual
+44          8               3          STUDY      0.05 0.001388889       0.05
+       bon.ibc
+44 0.001388889
+
+$summary$interceptDIF
+   paramHeader  param    est    se est_se  pval       pexact item.label
+21    BIN_3.ON  STUDY  1.476 0.174  8.471 0.000 0.000000e+00          3
+24    BIN_5.ON  STUDY  1.429 0.216  6.610 0.000 3.843192e-11          5
+20    BIN_3.ON GENDER  1.034 0.157  6.582 0.000 4.641620e-11          3
+18    BIN_2.ON GENDER -1.010 0.155 -6.522 0.000 6.937606e-11          2
+23    BIN_5.ON GENDER -1.254 0.198 -6.320 0.000 2.615632e-10          5
+19    BIN_2.ON  STUDY  0.929 0.192  4.849 0.000 1.240854e-06          2
+22    BIN_4.ON    AGE  0.199 0.105  1.902 0.057 5.717115e-02          4
+25    BIN_8.ON GENDER  0.235 0.124  1.888 0.059 5.902595e-02          8
+15    BIN_1.ON    AGE  0.168 0.097  1.726 0.084 8.434741e-02          1
+16    BIN_1.ON  STUDY  0.229 0.140  1.636 0.102 1.018396e-01          1
+27   BIN_11.ON    AGE  0.171 0.107  1.606 0.108 1.082739e-01         11
+17    BIN_2.ON    AGE  0.098 0.124  0.789 0.430 4.301120e-01          2
+26    BIN_8.ON  STUDY -0.023 0.141 -0.164 0.869 8.697311e-01          8
+   covariate.label   BH.actual      BH.ibc  bon.actual     bon.ibc
+21               3 0.003846154 0.001388889 0.003846154 0.001388889
+24               3 0.004166667 0.001428571 0.003846154 0.001388889
+20               2 0.004545455 0.001470588 0.003846154 0.001388889
+18               2 0.005000000 0.001515152 0.003846154 0.001388889
+23               2 0.005555556 0.001562500 0.003846154 0.001388889
+19               3 0.006250000 0.001612903 0.003846154 0.001388889
+22               1 0.007142857 0.001666667 0.003846154 0.001388889
+25               2 0.008333333 0.001724138 0.003846154 0.001388889
+15               1 0.010000000 0.001785714 0.003846154 0.001388889
+16               3 0.012500000 0.001851852 0.003846154 0.001388889
+27               1 0.016666667 0.001923077 0.003846154 0.001388889
+17               1 0.025000000 0.002000000 0.003846154 0.001388889
+26               3 0.050000000 0.002083333 0.003846154 0.001388889
+
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("aMNLFA.sample")
+> ### * aMNLFA.sample
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: aMNLFA.sample
+> ### Title: aMNLFA sampling function
+> ### Aliases: aMNLFA.sample
+> ### Keywords: MNLFA
+> 
+> ### ** Examples
+> 
+>  wd <- tempdir()
+>  first<-paste0(system.file(package='aMNLFA'),"/extdata")
+>  the.list <- list.files(first,full.names=TRUE)
+>  file.copy(the.list,wd,overwrite=TRUE)
+ [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+[16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+[31] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+[46] TRUE
+>  
+>  ob <- aMNLFA::aMNLFA.object(dir = wd, 
++  mrdata = xstudy, 
++  indicators = paste0("BIN_", 1:12),
++  catindicators = paste0("BIN_", 1:12), 
++  meanimpact = c("AGE", "GENDER", "STUDY"), 
++  varimpact = c("AGE", "GENDER", "STUDY"), 
++  measinvar = c("AGE", "GENDER", "STUDY"),
++  factors = c("GENDER", "STUDY"),
++  ID = "ID",
++  thresholds = FALSE)
+>  
+>  aMNLFA.sample(ob)
+The file(s)
+ ‘calibration.dat’ 
+currently exist(s) and will be overwritten
+The file(s)
+ ‘full.dat’ 
+currently exist(s) and will be overwritten
+> 
+> 
+> 
+> cleanEx()
+> nameEx("aMNLFA.scores")
+> ### * aMNLFA.scores
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: aMNLFA.scores
+> ### Title: aMNLFA score generating function
+> ### Aliases: aMNLFA.scores
+> ### Keywords: MNLFA
+> 
+> ### ** Examples
+> 
+>  wd <- tempdir()
+>  first<-paste0(system.file(package='aMNLFA'),"/extdata")
+>  the.list <- list.files(first,full.names=TRUE)
+>  file.copy(the.list,wd,overwrite=TRUE)
+ [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+[16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+[31] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+[46] TRUE
+>  
+>  ob <- aMNLFA::aMNLFA.object(dir = wd, 
++  mrdata = xstudy, 
++  indicators = paste0("BIN_", 1:12),
++  catindicators = paste0("BIN_", 1:12), 
++  meanimpact = c("AGE", "GENDER", "STUDY"), 
++  varimpact = c("AGE", "GENDER", "STUDY"), 
++  measinvar = c("AGE", "GENDER", "STUDY"),
++  factors = c("GENDER", "STUDY"),
++  ID = "ID",
++  thresholds = FALSE)
+>  
+>  aMNLFA.scores(ob)
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+Warning in max(sp_resid) :
+  no non-missing arguments to max; returning -Inf
+Warning in min(sp_resid) :
+  no non-missing arguments to min; returning Inf
+Check '/var/scratch2/tomas/tmp/RtmpmWLxgq/' for Mplus inp file for scoring model (run this manually).
+
+
+NOTE: The generated Mplus inputs are templates, which will likely need to be altered by the user. 
+Please read each inputm, alter it if necessary, and run it manually; similarly, please interpret all outputs manually. 
+
+This message will appear after all subsequent code-generating steps.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("aMNLFA.simultaneous")
+> ### * aMNLFA.simultaneous
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: aMNLFA.simultaneous
+> ### Title: aMNLFA simultaneous model fitting function
+> ### Aliases: aMNLFA.simultaneous
+> ### Keywords: MNLFA
+> 
+> ### ** Examples
+> 
+>  wd  <-  tempdir()
+>  first <- paste0(system.file(package='aMNLFA'),"/extdata")
+>  the.list  <-  list.files(first,full.names=TRUE)
+>  file.copy(the.list,wd,overwrite=TRUE)
+ [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+[16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+[31] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+[46] TRUE
+>    
+>  ob  <-  aMNLFA::aMNLFA.object(dir = wd, 
++  mrdata = xstudy, 
++  indicators = paste0("bin_", 1:12),
++  catindicators = paste0("bin_", 1:12), 
++  meanimpact = c("AGE", "GENDER", "STUDY"), 
++  varimpact = c("AGE", "GENDER", "STUDY"), 
++  measinvar = c("AGE", "GENDER", "STUDY"),
++  factors = c("GENDER", "STUDY"),
++  ID = "ID",
++  thresholds = FALSE)
+>  
+>  aMNLFA.simultaneous(ob)
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+No PROPORTION OF DATA PRESENT sections found within COVARIANCE COVERAGE OF DATA output.
+Warning in max(sp_resid) :
+  no non-missing arguments to max; returning -Inf
+Warning in min(sp_resid) :
+  no non-missing arguments to min; returning Inf
+COMPLETE. Check '/var/scratch2/tomas/tmp/RtmpmWLxgq/' for Mplus inp file for round 2 calibration model (run this manually).
+
+
+NOTE: The generated Mplus inputs are templates, which will likely need to be altered by the user. 
+Please read each input, alter it if necessary, and run it manually; similarly, please interpret all outputs manually. 
+
+This message will appear after all subsequent code-generating steps.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("fixPath")
+> ### * fixPath
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: fixPath
+> ### Title: helper function - removes the final slash at the end of a given
+> ###   string
+> ### Aliases: fixPath
+> ### Keywords: MNLFA
+> 
+> ### ** Examples
+> 
+>  wd <- tempdir()
+>  first<-paste0(system.file(package='aMNLFA'),"/examplefiles")
+>  fixPath(first)
+[1] "/var/scratch2ro/tomas/cran/rlibro/lib/aMNLFA/examplefiles"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("write.inp.file")
+> ### * write.inp.file
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: write.inp.file
+> ### Title: helper function for writing out Mplus inputs
+> ### Aliases: write.inp.file
+> ### Keywords: MNLFA
+> 
+> ### ** Examples
+> 
+>  wd <- tempdir()
+>  first<-paste0(system.file(package='aMNLFA'),"/examplefiles")
+>  somestring <- as.data.frame("This is some text which would be written to an Mplus file.")
+>  write.inp.file(somestring, first)
+Warning in file(file, ifelse(append, "a", "w")) :
+  cannot open file '/var/scratch2ro/tomas/cran/rlibro/lib/aMNLFA/examplefiles': Read-only file system
+Error in file(file, ifelse(append, "a", "w")) : 
+  cannot open the connection
+Calls: write.inp.file -> cat -> file
+Execution halted
