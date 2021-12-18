@@ -1,0 +1,74 @@
+* using log directory ‘/var/scratch2/tomas/cran/rlibro/check/aMNLFA.Rcheck’
+* using R Under development (unstable) (2021-11-25 r81239)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* checking for file ‘aMNLFA/DESCRIPTION’ ... OK
+* this is package ‘aMNLFA’ version ‘1.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘aMNLFA’ can be installed ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... NOTE
+Namespaces in Imports field not imported from:
+  ‘devtools’ ‘dplyr’ ‘gridExtra’
+  All declared Imports should be used.
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking examples ... ERROR
+Running examples in ‘aMNLFA-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: write.inp.file
+> ### Title: helper function for writing out Mplus inputs
+> ### Aliases: write.inp.file
+> ### Keywords: MNLFA
+> 
+> ### ** Examples
+> 
+>  wd <- tempdir()
+>  first<-paste0(system.file(package='aMNLFA'),"/examplefiles")
+>  somestring <- as.data.frame("This is some text which would be written to an Mplus file.")
+>  write.inp.file(somestring, first)
+Warning in file(file, ifelse(append, "a", "w")) :
+  cannot open file '/var/scratch2ro/tomas/cran/rlibro/lib/aMNLFA/examplefiles': Read-only file system
+Error in file(file, ifelse(append, "a", "w")) : 
+  cannot open the connection
+Calls: write.inp.file -> cat -> file
+Execution halted
+* checking PDF version of manual ... OK
+* DONE
+Status: 1 ERROR, 1 NOTE
