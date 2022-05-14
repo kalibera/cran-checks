@@ -1,6 +1,6 @@
 
-R Under development (unstable) (2021-10-06 r81014) -- "Unsuffered Consequences"
-Copyright (C) 2021 The R Foundation for Statistical Computing
+R Under development (unstable) (2022-05-10 r82334) -- "Unsuffered Consequences"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -22,13 +22,6 @@ Type 'q()' to quit R.
 > options(warn = 1)
 > library('TreeTools')
 Loading required package: ape
-
-Attaching package: ‘TreeTools’
-
-The following objects are masked from ‘package:base’:
-
-    %in%, match
-
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 > base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
@@ -196,9 +189,9 @@ The following objects are masked from ‘package:base’:
 > summary(splits)
 5 bipartition splits dividing 8 tips, t1 .. t8
      12345678
+ 10  ****....
  11  **......
  12  ..**....
- 13  ....****
  14  ....**..
  15  ......**
 
@@ -216,9 +209,9 @@ The following objects are masked from ‘package:base’:
  Tip 6: t6	 Tip 7: t7	 Tip 8: t8	> 
 > CompatibleSplits(splits, splits2)
      11    12   13    14   15
+10 TRUE  TRUE TRUE  TRUE TRUE
 11 TRUE  TRUE TRUE  TRUE TRUE
 12 TRUE FALSE TRUE  TRUE TRUE
-13 TRUE  TRUE TRUE  TRUE TRUE
 14 TRUE  TRUE TRUE FALSE TRUE
 15 TRUE  TRUE TRUE  TRUE TRUE
 > 
@@ -232,7 +225,7 @@ The following objects are masked from ‘package:base’:
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: Consensus
-> ### Title: Consensus trees
+> ### Title: Construct consensus trees
 > ### Aliases: Consensus
 > 
 > ### ** Examples
@@ -337,16 +330,30 @@ integer64
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: DropTip
-> ### Title: Drop tips from tree
-> ### Aliases: DropTip DropTip.phylo DropTip.multiPhylo KeepTip
+> ### Title: Drop leaves from tree
+> ### Aliases: DropTip DropTip.phylo KeepTipPreorder KeepTipPostorder
+> ###   DropTip.Splits DropTipPhylo DropTip.multiPhylo KeepTip
 > 
 > ### ** Examples
 > 
-> tree <- BalancedTree(8)
+> tree <- BalancedTree(9)
 > plot(tree)
-> plot(DropTip(tree, c('t4', 't5')))
+> plot(DropTip(tree, c('t5', 't6')))
 > 
+> unrooted <- UnrootTree(tree)
+> plot(unrooted)
+> plot(DropTip(unrooted, 4:5))
 > 
+> summary(DropTip(as.Splits(tree), 4:5))
+4 bipartition splits dividing 7 tips, t1 .. t9
+     1234567
+ 12  ***....
+ 13  **.....
+ 16  ...**..
+ 17  .....**
+
+ Tip 1: t1	 Tip 2: t2	 Tip 3: t3	 Tip 4: t6	 Tip 5: t7	
+ Tip 6: t8	 Tip 7: t9	> 
 > 
 > 
 > cleanEx()
@@ -429,7 +436,7 @@ integer64
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: EnforceOutgroup
-> ### Title: Generate a tree with a specific outgroup
+> ### Title: Generate a tree with a specified outgroup
 > ### Aliases: EnforceOutgroup EnforceOutgroup.phylo
 > ###   EnforceOutgroup.character
 > 
@@ -526,6 +533,40 @@ Unrooted; no branch lengths.
 > 
 > 
 > cleanEx()
+> nameEx("Hamming")
+> ### * Hamming
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Hamming
+> ### Title: Hamming distance between taxa in a phylogenetic dataset
+> ### Aliases: Hamming
+> 
+> ### ** Examples
+> 
+> tokens <- matrix(c(0, 0, '0', 0, '?',
++                    0, 0, '1', 0, 1,
++                    0, 0, '1', 0, 1,
++                    0, 0, '2', 0, 1,
++                    1, 1, '-', '?', 0,
++                    1, 1, '2', 1, '{01}'),
++                    nrow = 6, ncol = 5, byrow = TRUE,
++                    dimnames = list(
++                      paste0("Taxon_", LETTERS[1:6]),
++                      paste0("Char_", 1:5)))
+> 
+> dataset <- MatrixToPhyDat(tokens)
+> Hamming(dataset)
+        Taxon_A Taxon_B Taxon_C Taxon_D Taxon_E
+Taxon_B    0.25                                
+Taxon_C    0.25    0.00                        
+Taxon_D    0.25    0.20    0.20                
+Taxon_E    1.00    1.00    1.00    1.00        
+Taxon_F    1.00    0.80    0.80    0.60    0.00
+> 
+> 
+> 
+> cleanEx()
 > nameEx("ImposeConstraint")
 > ### * ImposeConstraint
 > 
@@ -543,6 +584,65 @@ Unrooted; no branch lengths.
 > 
 > constraint <- StringToPhyDat('0000?1111 000111111 0000??110', tips, FALSE)
 > plot(ImposeConstraint(tree, constraint))
+> 
+> 
+> 
+> cleanEx()
+> nameEx("KeptPaths")
+> ### * KeptPaths
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: KeptPaths
+> ### Title: Paths present in reduced tree
+> ### Aliases: KeptPaths KeptPaths.data.frame KeptPaths.matrix
+> 
+> ### ** Examples
+> 
+> master <- BalancedTree(9)
+> paths <- PathLengths(master)
+> keptTips <- c(1, 5, 7, 9)
+> keptVerts <- KeptVerts(master, keptTips)
+> KeptPaths(paths, keptVerts)
+ [1]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[13] FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE
+[25] FALSE FALSE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
+[37] FALSE  TRUE FALSE FALSE FALSE FALSE
+> paths[KeptPaths(paths, keptVerts, all = FALSE), ]
+   start end length
+2     11   1      3
+16    11   5      2
+22    15   7      2
+28    15   9      2
+30    10  11      1
+38    10  15      1
+> 
+> 
+> 
+> cleanEx()
+> nameEx("KeptVerts")
+> ### * KeptVerts
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: KeptVerts
+> ### Title: Identify vertices retained when leaves are dropped
+> ### Aliases: KeptVerts KeptVerts.phylo KeptVerts.numeric
+> 
+> ### ** Examples
+> 
+> master <- BalancedTree(12)
+> master <- Preorder(master) # Nodes must be listed in Preorder sequence
+> plot(master)
+> nodelabels()
+> 
+> allTips <- master[["tip.label"]]
+> keptTips <- sample(allTips, 8)
+> plot(KeepTip(master, keptTips))
+> kept <- KeptVerts(master, allTips %in% keptTips)
+> 
+> map <- which(kept)
+> # Node `i` in the reduced tree corresponds to node `map[i]` in the original.
 > 
 > 
 > 
@@ -611,7 +711,7 @@ Unrooted; no branch lengths.
 > ### ** Examples
 > 
 > tree <- PectinateTree(5)
-> edge   <- tree$edge
+> edge <- tree[["edge"]]
 > 
 > # Identify desired node with:
 > plot(tree)
@@ -1166,8 +1266,378 @@ $Kuamaia_lata
 [109] "?" "?" "?" "1" "?" "?" "?"
 
 > Lobo.phy
-48 sequences with 115 character and 113 different site patterns.
-The states are 0 1 2 3 4 5 - 
+$Tubiluchus_Priapulida
+  [1] 1 1 7 7 7 7 1 1 1 1 1 7 1 2 1 2 2 2 2 1 1 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7
+ [38] 7 1 7 7 7 1 1 1 2 7 2 1 1 1 7 7 7 7 7 7 1 7 7 7 7 2 1 1 7 7 7 7 7 7 7 7 7
+ [75] 7 7 1 7 1 7 7 1 1 7 1 1 7 7 7 7 1 1 7 7 1 1 1 7 7 1 7 7 2 2 2 7 7 1 1 1 2
+[112] 2 2
+
+$Cricocosmia
+  [1]  1  1  7  7  7  7  1  1  1  1  1  7  1  2  1  2  2  2 13  1  1  7  7  7  7
+ [26]  7  7  7  7  7  7  7  7  7  7  7  7  7  1  7  7  7  1  1  1  2  7  2  1  1
+ [51]  2  2  1  1  7  2  1  1  2  7  1  1  2  1  1  7  7  7  7  7  7  7  7  7  7
+ [76]  7  1  7  1  7  7  1  1  7  1  1  7  7  7  7  1  1  7  7  1 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13  1 13 13 13
+
+$Aysheaia
+  [1]  2  1  7  7  7  7  1  1  1  1  1  7  1  2  1 13  1 13 13 13  1  7  7  1  2
+ [26]  1  7  1  1  7  1  7  1  7  1  1  7  7  2  1  7  2  1  1  1  2  2  2  1  1
+ [51]  1  7  7  7  7  7  7  1  7  7  7  7  2  1  1  1  7  1  7  7  1  2  1  1  1
+ [76]  1  1  2  1  5  1  1  1  7  1  1  7  7  7  1  1  2  2  7  2 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13  1 13 13 13
+
+$Siberion
+  [1]  2  1  7  7  7  7  1  1  1  1  1  7  1  2  1 13  1 13 13 13  1  7  7  1  2
+ [26]  1  7  1  1  7  1  7  1  7  1  2  1  7 13 13 13 13  1  1  1  2  2 13  1  1
+ [51]  1  7  7  7  7  7  7 13  7  7  7  7  2 13  1  1  7  1  7  7  1 13 13 13  1
+ [76]  1 13 13 13 13 13 13  1  7  1  1  7  7  7 13  1 13 13 13 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Onychodictyon_ferox
+  [1]  2  1  7  7  7  7  1  1  1  1  1  7  1 13 13 13  1 13 13 13  2  1  1  1  2
+ [26]  1  7  1  1  7  1  7  1  7  1  1  7  7  2  2  2  1  1  1  1  2  2  2  2  1
+ [51]  2  2  1  2  1  2  1 13  2  7  1  1  2  1  1  1  7  1  7  7  1  2  2  7  1
+ [76]  1  1  2  1  2  2  1  1  7  1  1  7  7  7  1  1  2  2  7  2 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Onychodictyon_gracilis
+  [1]  2  1  7  7  7  7  1 13 13  1  1  7  1 13 13 13  1 13 13 13 13 13 13  1 13
+ [26] 13 13  1 13  7 13  7  1  7 13 13 13 13 13 13 13 13  1  1  1  2  2  1 13  1
+ [51]  2  2  1 13 13  2 13 13  2  7  1  1  2  1 13  1  7  1  7  7  1 13 13 13  1
+ [76]  1  1  2  1  2 13  1  1  7  1  1 13 13  7  2  1  2  2  7  1 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Diania
+  [1]  2  1  7  7  7  7  1  1  1  1  1  7 13 13 13 13  1 13 13 13  1  7  7  1  1
+ [26]  7  7  1  1  7  1  7  1  7  1  1  7  7  1  7  7  7  1  1  1  2  2  1  2  1
+ [51]  2  2  1  1  7  1 13 13  1  7  1  1  2  1  1  1  7  1  7  7  1  2  1  1  1
+ [76]  1  1 13 13  7  7  1  1  7  1  1  7  7  7  2  1  1  7  7 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Xenusion
+  [1]  2  1  7  7  7  7  1 13  1  1 13 13 13 13 13 13 13 13 13 13  1  7  7  1  1
+ [26]  7  7  1  1  7  1  7  1  7  1  1  7  7 13 13 13 13  1  1  1  2  2 13  2  1
+ [51]  2  2  1  1  7  1 13 13  2  7  1  1  2 13  1  1  7  1  7  7  1  2 13 13 13
+ [76] 13 13 13 13 13 13 13  1  7  1  1  7  7  7  2  1  1  7  7 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Paucipodia
+  [1]  2  1  7  7  7  7  1  1  1  1  1  7 13 13 13 13  1  2 13 13  1  7  7  1  1
+ [26]  7  7  1  1  7  1  7  1  7  1  1  7  7  1  7  7  7  1  1  1  2  2  1  1  1
+ [51]  1  7  7  7  7  7  7 13  7  7  7  7  1  1  1  1  7  1  7  7  1  1  7  7  1
+ [76]  1  1  2  1  2  1  1  1  7  1  1  7  7  7  2  1  1  7  7 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Microdictyon
+  [1]  2  1  7  7  7  7  1  2  1  1  1  7 13 13 13 13  1 13 13 13  1  7  7  1  1
+ [26]  7  7  1  1  7  1  7  1  7  1  1  7  7  1  7  7  7  1  1  1  2  2  2  2  1
+ [51]  2  2  1  1  7  2  1 13  2  7  1  1  1  1  1  1  7  1  7  7  1  1  7  7  1
+ [76]  1  1  2  1  2 13  1  1  7  1  1  7  7  7  2  1  1  7  7  1 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Cardiodictyon
+  [1]  2  1  7  7  7  7  1  2  2  1 11 13 13 13 13 13  1 13 13 13  2  1 13  1 13
+ [26] 13 13  1 13  7 13 13  1  7  1  1  7  7  1  7  7  7  1  1  1  2  2  2  2  1
+ [51]  2  2  1  1  7  2  1 13  2  7  1  1  1  1  1  1  7  1  7  7  1  1  7  7  1
+ [76]  1  1  2  1  2 13  1  1  7  1  1  7  7  7  2  1  1  7  7  1 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Hallucigenia_sparsa
+  [1]  2  1  7  7  7  7  1  2  2  1  1  7  2  2  1  2  1  2  1  2  2  1  1  1  1
+ [26]  7  7  1  1  7 11  7  1  7  1  1  7  7  1  7  7  7  1  1  1  1  7  7  7  7
+ [51]  2  2  2  2  2  2  2  2  2  1  1  1  7  1  2  1  7  1  7  7  1  1  7  7  1
+ [76]  1  1  2  1  2  1  1  1  7  1  1  2  1  7  1  1  1  7  7  1 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Hallucigenia_fortis
+  [1]  2  1  7  7  7  7  1  2  2  1  1  7 13 13 13 13  1 13 13 13  2  1 13  1  1
+ [26]  7  7  1  1  7 11  7  1  7  1  1  7  7  1  7  7  7  1  1  1  2  2  2  2 13
+ [51]  2  2  2  2  2  2 13 13  2  1  1  1  1  1  2  1  7  1  7  7  1  1  7  7  1
+ [76]  1  1  2  1  2 13  1  1  7  1  1  1  1  7 13  1  1  7  7  1 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Hallucigenia_hongmeia
+  [1]  2 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13  1 13
+ [26] 13 13  1 13  7 13 13  1  7 13 13 13 13 13 13 13 13  1  1  1  2  2 13  2 13
+ [51]  2  2  2  2  2  2  1 13  2  1  2  1  1 13 13  1  7  1  7  7  1  1  7  7  1
+ [76]  1  1  2  1  1  7  1  1  7  1  1 13 13  7  2  1  1  7  7 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Luolishania
+  [1]  2  2  1  1  7  7  7 13  2  1  1  7 13 13 13 13  1 13 13 13  2  1  1  1  2
+ [26]  1  7  1  1  7 11  7  1  7  1  1  7  7  1  7  7  7  1  1  1  2  2  2  2  1
+ [51]  2  2  2  2  2  2 13 13  3  1  2  2  2  1  2  1  7  1  7  7  1  2  1  2  2
+ [76]  1  1  2  1  1  7  1  1  7  1  1  3  2  7  2  1  1  7  7  1 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Collinsium
+  [1]  2  2  1  1  7  7  7  2  1  1  1  7 13 13 13 13 13 13 13 13  1  7  7  1  2
+ [26]  1  7  1  1  7 11  7  1  7  1  1  7  7  1  7  7  7  1  1  1  2  2  1  2  1
+ [51]  2  2  2  2  2  2  1  2  5  1  2  2  2  1  2  1  7  1  7  7  1  2  1  2  1
+ [76]  1  1  2  1  1  7  1  1  7  1  1  4  2  7  2  1  1  7  7  1 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Collins_monster_Burgess_Shale
+  [1]  2 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13  1 13
+ [26] 13 13  1  1  7 11  7  1  7 13 13 13 13 13 13 13 13  1  1  1  2  2 13  2  1
+ [51]  2  2  2  2  2  2 13 13 13 13 13 13 13 13  2  1  7  1  7  7  1  2  1  2 13
+ [76] 13 13 13 13 13 13 13  1  7  1  1  4  2  7 13  1 13 13 13 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Collins_monster_Emu_Bay
+  [1]  2  2  1 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13  1 13
+ [26] 13 13  1 13  7 11  7  1  7 13 13 13 13 13 13 13 13  1  1  1  2  2 13  2  1
+ [51]  2  2  2  2  2  2 13 13  3  1  2 13 13 13  2  1  7  1  7  7  1  2  1  2  1
+ [76]  1  1  2  1  1  7  1  1  7  1  1  3  2  7 13  1 13 13 13 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Acinocrinus
+  [1]  2 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13  1 13
+ [26] 13 13  1  1  7 11  7  1  7 13 13 13 13 13 13 13 13  1  1  1  2  2 13  2  1
+ [51]  2  2  2  2  2  2 13 13  6  2  2 13 13  1  2  1  7  1  7  7  1  2  1  2 13
+ [76] 13 13 13 13 13 13 13  1  7  1  1  3  2  7 13  1 13 13 13 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Orstenotubulus
+  [1]  2 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13  1 13
+ [26] 13 13  1 13  7 13 13 13  7 13 13 13 13 13 13 13 13  1  1  1  2  2 13  2  2
+ [51]  2  2  2 13 13 13 13 13  2  1  2 13  2 13 13  1  7  1  7  7  1  1  7  7  2
+ [76]  2 13 13 13 13 13 13  1  7  1  1 13 13  7 13  1 13 13 13 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Tritonychus
+  [1]  2 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13  1 13
+ [26] 13 13  1 13  7 13 13 13  7 13 13 13 13 13 13 13 13  1  1  1  2  2 13 13  2
+ [51] 13 13 13 13 13 13 13 13 13 13 13 13  2 13 13  1  7  1  7  7  1  1  7  7  2
+ [76]  2  1  2 13  3  1  1  1  7  1  1 13 13 13 13 13 13 13 13 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13  1  2 13 13
+
+$Carbotubulus
+  [1]  2 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13  1 13
+ [26] 13 13  1 13  7 13 13 13  7 13 13 13 13 13 13 13 13  1  1  1  1  7  7  7  7
+ [51] 13 13 13 13 13 13 13 13 13 13 13 13  7 13  2  1  7  1  7  7  1  1  7  7  1
+ [76]  1 13 13 13 13 13 13  1  7  1  1 13 13  7  1  1 13 12  7 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13  1 13 13 13
+
+$Antennacanthopodia
+  [1]  2  1  7  7  7  7  1 13  1  1 13 13 13 13 13 13 13 13 13 13  2  1  1  1  2
+ [26]  1  7  1  2  7  2  7  1  7  1  1  7  7  1  7  7  7  1  1  1  2 13 13 13 13
+ [51]  1  7  7  7  7  7  7 13  7  7  7  7 13 13  1  1  7  1  7  7  1  1  7  7  2
+ [76] 13  1  1  1  7  7  1  1  7  1  1  7  7  7  2  1  1  7  7 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Helenodora
+  [1]  2  1  7  7  7  7  1 13  1  1 13 13 13 13 13 13 13 13 13 13 13 13 13  1  2
+ [26]  1  7  1 13  7 13 13  2  7  1  1  7  7  1  7  7  7  1  1  1 13 13 13 13 13
+ [51]  1  7  7  7  7  7  7 13  7  7  7  7  2  1 13  1  7  1  7  7  1  1  7  7  2
+ [76] 13  1  2  1  2  1 13  1  7  1  1 13 13  7 13 13 13 13 13 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Euperipatoides_Onychophora
+  [1] 2 1 7 7 7 7 1 1 1 1 2 2 2 1 7 2 1 1 7 7 2 1 1 1 2 1 7 1 2 7 3 1 2 7 1 1 7
+ [38] 7 1 7 7 7 1 1 1 2 2 1 1 2 1 7 7 7 7 7 7 2 7 7 7 7 2 1 1 1 7 1 7 7 1 1 7 7
+ [75] 2 2 1 2 1 2 1 2 1 7 1 1 7 7 7 2 1 1 7 7 1 1 2 2 3 1 2 2 2 2 2 1 2 1 2 1 2
+[112] 2 2
+
+$Plicatoperipatus_Onychophora
+  [1] 2 1 7 7 7 7 1 1 1 1 2 2 2 1 7 2 1 1 7 7 2 1 1 1 2 1 7 1 2 7 3 2 2 7 1 1 7
+ [38] 7 1 7 7 7 1 1 1 2 2 1 1 2 1 7 7 7 7 7 7 2 7 7 7 7 2 1 1 1 7 1 7 7 1 1 7 7
+ [75] 2 2 1 2 1 2 1 2 1 7 1 1 7 7 7 2 1 1 7 7 1 1 2 2 3 1 2 2 2 2 2 1 2 1 2 1 2
+[112] 2 2
+
+$Ooperipatellus_Onychophora
+  [1] 2 1 7 7 7 7 1 1 1 1 2 2 2 1 7 2 1 1 7 7 2 1 1 1 2 1 7 1 2 7 3 2 2 7 1 1 7
+ [38] 7 1 7 7 7 1 1 1 2 2 1 1 2 1 7 7 7 7 7 7 2 7 7 7 7 2 1 1 1 7 1 7 7 1 1 7 7
+ [75] 2 2 1 2 1 2 1 2 1 7 1 1 7 7 7 2 1 1 7 7 1 1 2 2 3 1 2 2 2 2 2 1 2 1 2 1 2
+[112] 2 2
+
+$Actinarctus_Heterotardigrada
+  [1]  2  2  1  1  7  7  7  1  1  2  2  1  1  2  1  2  1  2  1  1  2  1  1  1  2
+ [26]  2  1  1  1  7  1  7  1  7  2  1  7  7  1  7  7  7  1  1  1  1  7  7  7  7
+ [51]  2  2  1  1  7  2  1  1 13 13  7  7  7  1  1  1  7  1  7  7  1  1  7  7  1
+ [76]  1  2  2  1  4  2  1  1  7  1  1  7  7  7  1  1  2  2  7  2  2  2  1  1  2
+[101]  1  2  2  2  1  2  2 13  7  2  1  1  7
+
+$Halobiotus_Eutardigrada
+  [1]  2  1  7  7  7  7  1  1  1  1  1  7  1  2  1  2  1  2  1  1  2  1  1  1  2
+ [26]  2  1  1  1  7  1  7  1  7  3  1  7  7  1  7  7  7  1  1  1  1  7  7  7  7
+ [51]  2  1  7  7  7  7  7  1 13 13  7  7  7  1  1  1  7  1  7  7  1  1  7  7  1
+ [76]  1  2  2  2  2  2  1  1  7  1  1  7  7  7  1  1  2  2  7  2  2  2  1  1  2
+[101]  1  2  2  2  1  2  2  2  7  2  1  1  7
+
+$Siberian_Orsten_tardigrade
+  [1]  2  1  7  7  7  7  1  1  1  1  1  7  1  2  1 13 13 13 13 13 13  9 13  1 13
+ [26] 13 13  1 13  7 13 13 13  7 13 13 13 13 13 13 13 13  1  1  1  1  7  7  7  7
+ [51] 13 13 13  7  7 13 13 13 13 13  7  7  7 13  1  1  7  1  7  7  1  1  7  7  1
+ [76]  1  1  2  2  2  2  1  1  7  1  1  7  7  7  1  1  2  8  7 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Megadictyon
+  [1]  2  1  7  7  7  7  1 13  1  1 13 13 13  2 13 13  1 13 13 13  1  7  7  1  2
+ [26]  1  7  1  1  7  1  7  1  7  1  1  7  7  2  1  7  2  1  1  1  2  2 13  1 13
+ [51]  1  7  7  7  7  7  7 13  7  7  7  7  1  2  1  1  7  1  7  7  1  2  2  7  1
+ [76]  1  1 13 13 13 13  1  1  7  1  1  7  7  7 13  1 13 13 13 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Jianshanopodia
+  [1]  2  1  7  7  7  7  1  1  1  1  1  7  1  2 13  2  1  2  2  1  1  7  7  1  2
+ [26]  1  7  1  1  7  1  7  1  7  1 13 13 13  2  1  7 13  1  1  1  2  2 13  2  1
+ [51]  1  7  7  7  7  7  7 13  7  7  7  7  1  2  1  1  7  1  7  7  1  2  2  7  1
+ [76]  1  1 13 13 13 13  1  1  7  1  1  7  7  7  1  1  2  1  2 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Hadranax
+  [1]  2 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13  1 13
+ [26] 13 13  1 13  7 13 13 13  7 13 13 13 13 13 13 13 13  1  1  1  2  2 13  2  1
+ [51]  2  2  1  1  7  1  7 13  4  7  7  1  2 13  1  1  7  1  7  7  1  1  7  7  2
+ [76]  1 13 13 13 13 13  1  1  7  1  1  7  7  7 13  1 13 13 13 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Kerygmachela
+  [1]  2  1  7  7  7  7  1  1  1  1  1  7  1  2  1 13  1 13 13 13 13 13 13  1  2
+ [26]  1  7  1  1  7  1  7  1  7  1  2  1  7  2  1  7  2  1  1  1  2  2  1  2  1
+ [51]  2  2  1  1  7  1  7 13  4  7 13  1  2  2  1  2  1  1  2  1  1  1  7  7  1
+ [76]  1  1  1  1  7  7  1  1  1  1  1  7  7  7  1  1  2  1  1 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13  1 13 13 13
+
+$Pambdelurion
+  [1]  2  1  7  7  7  7  1  1  1  1  2  1  1  2  1 13  1 13 13 13  1  7  7  1  2
+ [26]  1  7  1  1  7  1  7  1  7  2  2  1  7  2  1  7 13  1  1  1  2 13 13 13 13
+ [51] 13 13 13 13 13 13 13 13  7  7 13  7 13  2  1  2  1  1  2  1  1  1  7  7  1
+ [76]  1  1  1  1  7  7  1  1  1  1  1  7  7  7 13 13 13 13 13 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13  2  2  1  7
+
+$Opabinia
+  [1]  2  1  7  7  7  7  1  1  1  1  3  2  1 13 13 13  1 13 13 13  2  2  2  1  2
+ [26]  1  7  1  1  7  1  7  1  7  2  2  2  1  2  1  7  2  2  1  1  1  7  7  7  7
+ [51]  1  7  7  7  7  7  7  7  7  7  7  7  7  2  1  2  1  1  2  2  1  1  7  7  1
+ [76]  1  1  1  1  7  7  1  1  1  1  1  7  7  7 13  2  2  1  2 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Anomalocaris_canadensis
+  [1]  2  2  1  2  1  1  1  1 13  1  2  2  1  2  2  2  1 13 13 13  2  2  2  1  2
+ [26]  2  2  2  1  7  1  7  1  7  2  2  1  7  2  2  1  2  1  1  1  1  7  7  7  7
+ [51]  1  7  7  7  7  7  7  7  7  7  7  7  7  2  1  2  1  1  1  2  1  1  7  7  1
+ [76]  1  1  1  1  7  7  1  2  2  1  2  7  7  7  1  2  2  1  2 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13  2 13 13 13
+
+$Peytoia_nathorsti
+  [1]  2  2  1  2  2  1  1  1 13  1  2  2  1  2  2 13  1 13 13 13  2  2  2  1  2
+ [26]  2  2  2  1  7  1  7  1  7  2  2  1  7  2  1  7  2  1  1  1  1  7  7  7  7
+ [51]  1  7  7  7  7  7  7  7  7  7  7  7  7  2  1  2  1  1  2  2  1  1  7  7  1
+ [76]  1  1  1  1  7  7  1  2  2  1  2  7  7  7  1  1  1  7  7 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Hurdia_victoria
+  [1]  2  2  1  2  2  1  2  1 13  1  2  2  1  2  2  2  1  2  2  1  2  2  2  1  2
+ [26]  2  2  2  1  7  1  7  1  7  2 13 13 13  2  1  7  2 13  1  1  1  7  7  7  7
+ [51]  1  7  7  7  7  7  7  7  7  7  7  7  7 13  1  2  1  1  2  2  1  1  7  7  1
+ [76]  1  1  1  1  7  7  1  2  1  1  2  7  7  7  1  1  2  1  2 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Aegirocassis_benmoulae
+  [1]  2  2  1  2  2  1  2  1 13  1 13  2  1 13 13 13 13 13 13 13 13 13 13  1  2
+ [26]  2  2  2  1  7  1  7  1  7  2 13 13 13  2  1  7  2  1  1  1  1  7  7  7  7
+ [51]  1  7  7  7  7  7  7  7  7  7  7  7  7 13  1  2  1  1  2  2  1  1  7  7  1
+ [76]  1  1  1  1  7  7  1  2  2  1 13  7  7  7  1  1  1  7  7 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Lyrarapax_unguispinus
+  [1]  2  2  1  2  1  1  1  1 13  1  2  2  1  2 13 13 13 13 13 13  2  2  2  1  2
+ [26]  2  2  2  1  7  1  7  1  7  2  2  1  7  2  1  7  2  1  1  1  1  7  7  7  7
+ [51]  1  7  7  7  7  7  7  7  7  7  7  7  7  1  1  2  1  1  1  2  1  1  7  7  1
+ [76]  1  1  1  1  7  7  1 13  2  2  2  7  7  7  1  2  2  1  2 13 13  2  1  1  2
+[101] 13 13 13 13 13 13 13 13 13  2 13 13 13
+
+$Schinderhannes
+  [1]  2 13 13 13 13 13 13  1 13  1  2  2  1  2 13 13 13 13 13 13  2  2  2  1  2
+ [26]  2  2 13 13  7  1  7  1  7  2  2  1  7  2  2  1 13 13 13 13 13 13 13 13 13
+ [51] 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13
+ [76] 13 13 13 13 13 13 13 13 13  2 13  7  7  7  1  1  2  1  2 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Fuxianhuia
+  [1]  2  2  1  2  1  2  7  1  7  7  3  2  1  1  7 13  1 13 13 13  2  2  2  2  2
+ [26]  2  1  7  2  1  7  7  7  2  2  2  2  2  7  7  7  7  2  2  1  7  7  7  7  7
+ [51]  7  7  7  7  7  7  7  7  7  7  7  7  7  1  7  2  2  2  7  1  1  7  7  7  7
+ [76]  7  1  1  1  7  7  1  1  7  1  1  7  7  2  7  1  2  1  2 13 13  2  3  2  2
+[101] 13 13 13 13 13 13 13 13  2  2  1  1  7
+
+$Chengjiangocaris
+  [1]  2  2  1  2  1  2  7  1  7  7  3  2  1  1  7 13  1 13 13 13  2  2  2  2  2
+ [26]  2  1  7  2  1  7  7  7  2  2  2  2  2  7  7  7  7  2  2  1  7  7  7  7  7
+ [51]  7  7  7  7  7  7  7  7  7  7  7  7  7  1  7  2  2  2  7  1  1  7  7  7  7
+ [76]  7  1  1  1  7  7  1  1  7  1  1  7  7  2  7  1  2  1  2 13  2 13 13 13 13
+[101]  1 13  2 13 13 13 13 13 13 13 13 13 13
+
+$Leanchoilia
+  [1]  2  2  2  1  7  7  7  1  7  7  3  2  1  1  7 13  1 13 13 13  2  2  2  2  2
+ [26]  2  1  7  2  2  7  7  7  1  2  2  2  2  7  7  7  7  2  2 13  7  7  7  7  7
+ [51]  7  7  7  7  7  7  7  1  7  7  7  7  7  2  7  2  2  2  7  1  2  7  7  7  7
+ [76]  7  1  2  1 10 13  1  1  7  1  1  7  7  1  7  1  1  7  7 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13 13 13 13 13
+
+$Alalcomenaeus
+  [1]  2  2  2  1  7  7  7  1  7  7  3  2  1  1  7 13  1 13 13 13  2  2  2  2  2
+ [26] 13 13  7  2  2  7  7  7  1  2  2  2  2  7  7  7  7  2  2 13  7  7  7  7  7
+ [51]  7  7  7  7  7  7  7  1  7  7  7  7  7  2  7  2  2  2  7  1  2  7  7  7  7
+ [76]  7  1  2  1  1  7  1  1  7  1  1  7  7  1  7  1  1  7  7 13  2  2  3  2  2
+[101]  1  1  1  7  7 13 13 13 13 13 13 13 13
+
+$Misszhouia_longicaudata
+  [1]  2  2  2  2  1  2  7  1  7  7  3  2  1  1  7 13  1 13 13 13  2  2  2  2  2
+ [26]  2  1  7  2  1  7  7  7  1  2  2  2  2  7  7  7  7  2  2  2  7  7  7  7  7
+ [51]  7  7  7  7  7  7  7  1  7  7  7  7  7  2  7  2  3  2  7  1  2  7  7  7  7
+ [76]  7  1  2  1  1  7  1  1  7  1  1  7  7  1  7  1  1  7  7 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13  2 13 13 13
+
+$Kuamaia_lata
+  [1]  2  2  2  2  1  2  7  1  7  7  3  2  1  1  7 13  1 13 13 13  2  2  2  2  2
+ [26]  2  1  7  2  1  7  7  7  1  2  2  2  2  7  7  7  7  2  2  2  7  7  7  7  7
+ [51]  7  7  7  7  7  7  7  1  7  7  7  7  7  2  7  2  3  2  7  1  2  7  7  7  7
+ [76]  7  1  2  1  3  2  1  1  7  1  1  7  7  1  7  1  1  7  7 13 13 13 13 13 13
+[101] 13 13 13 13 13 13 13 13 13  2 13 13 13
+
+attr(,"class")
+[1] "phyDat"
+attr(,"weight")
+  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ [75] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+[112] 1 1
+attr(,"nr")
+[1] 113
+attr(,"nc")
+[1] 7
+attr(,"index")
+  [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  15  16  17
+ [19]  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35
+ [37]  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53
+ [55]  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71
+ [73]  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88  89
+ [91]  90  91  92  93  94  95  96  97  98  99  97 100 101 102 103 104 105 106
+[109] 107 108 109 110 111 112 113
+attr(,"levels")
+[1] "0" "1" "2" "3" "4" "5" "-"
+attr(,"allLevels")
+ [1] "0" "1" "2" "3" "4" "5" "-" "a" "b" "c" "d" "e" "?"
+attr(,"type")
+[1] "USER"
+attr(,"contrast")
+      0 1 2 3 4 5 -
+ [1,] 1 0 0 0 0 0 0
+ [2,] 0 1 0 0 0 0 0
+ [3,] 0 0 1 0 0 0 0
+ [4,] 0 0 0 1 0 0 0
+ [5,] 0 0 0 0 1 0 0
+ [6,] 0 0 0 0 0 1 0
+ [7,] 0 0 0 0 0 0 1
+ [8,] 0 1 1 0 0 0 0
+ [9,] 1 0 0 0 0 0 1
+[10,] 1 0 1 0 0 0 0
+[11,] 1 1 0 0 0 0 0
+[12,] 0 1 0 0 0 0 1
+[13,] 1 1 1 1 1 1 1
 > 
 > 
 > 
@@ -1258,6 +1728,74 @@ Tip labels:
   t1, t2, t3, t4, t5
 
 Unrooted; no branch lengths.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("MatrixToPhyDat")
+> ### * MatrixToPhyDat
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: MatrixToPhyDat
+> ### Title: Convert between matrices and 'phyDat' objects
+> ### Aliases: MatrixToPhyDat PhyDatToMatrix
+> 
+> ### ** Examples
+> 
+> tokens <- matrix(c(0, 0, '0', 0, 0,
++                    0, 0, '1', 0, 1,
++                    0, 0, '1', 0, 1,
++                    0, 0, '2', 0, 1,
++                    1, 1, '-', 1, 0,
++                    1, 1, '2', 1, '{01}'),
++                    nrow = 6, ncol = 5, byrow = TRUE,
++                    dimnames = list(
++                      paste0("Taxon_", LETTERS[1:6]),
++                      paste0("Char_", 1:5)))
+>                    
+> MatrixToPhyDat(tokens)
+$Taxon_A
+[1] 1 1 1
+
+$Taxon_B
+[1] 1 2 2
+
+$Taxon_C
+[1] 1 2 2
+
+$Taxon_D
+[1] 1 3 2
+
+$Taxon_E
+[1] 2 4 1
+
+$Taxon_F
+[1] 2 3 5
+
+attr(,"weight")
+[1] 3 1 1
+attr(,"nr")
+[1] 3
+attr(,"nc")
+[1] 4
+attr(,"index")
+[1] 1 1 2 1 3
+attr(,"levels")
+[1] "-" "0" "1" "2"
+attr(,"allLevels")
+[1] "0"    "1"    "2"    "-"    "{01}"
+attr(,"type")
+[1] "USER"
+attr(,"contrast")
+     - 0 1 2
+[1,] 0 1 0 0
+[2,] 0 0 1 0
+[3,] 0 0 0 1
+[4,] 1 0 0 0
+[5,] 0 1 1 0
+attr(,"class")
+[1] "phyDat"
 > 
 > 
 > 
@@ -1448,13 +1986,13 @@ integer64
 > 
 > nTip <- 8L
 > tree <- BalancedTree(nTip)
-> edge <- tree$edge
+> edge <- tree[["edge"]]
 > pruningwise <- NeworderPruningwise(nTip, tree$Nnode, edge[, 1], edge[, 2],
 +                                    dim(edge)[1])
 > cladewise <- NeworderPhylo(nTip, edge[, 1], edge[, 2], dim(edge)[1], 1L)
 > postorder <- NeworderPhylo(nTip, edge[, 1], edge[, 2], dim(edge)[1], 2L)
 > 
-> tree$edge <- tree$edge[pruningwise, ]
+> tree[["edge"]] <- tree[["edge"]][pruningwise, ]
 > 
 > 
 > 
@@ -1537,7 +2075,7 @@ integer64
 > ### ** Examples
 > 
 > trees <- list(BalancedTree(8), PectinateTree(8), StarTree(8))
-> TCIDiff <- function (tree1, tree2) {
+> TCIDiff <- function(tree1, tree2) {
 +   TotalCopheneticIndex(tree1) - TotalCopheneticIndex(tree2)
 + }
 > PairwiseDistances(trees, TCIDiff, 1)
@@ -1545,7 +2083,7 @@ integer64
 1     -40  16
 2 -40      56
 3  16  56    
-> TCIRange <- function (tree1, tree2) {
+> TCIRange <- function(tree1, tree2) {
 +   range(TotalCopheneticIndex(tree1), TotalCopheneticIndex(tree2))
 + }
 > PairwiseDistances(trees, TCIRange, 2)
@@ -1565,6 +2103,59 @@ integer64
 > 
 > 
 > cleanEx()
+> nameEx("PathLengths")
+> ### * PathLengths
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: PathLengths
+> ### Title: Calculate length of paths between each pair of vertices within
+> ###   tree
+> ### Aliases: PathLengths
+> 
+> ### ** Examples
+> 
+> tree <- rtree(6)
+> plot(tree)
+> add.scale.bar()
+> nodelabels()
+> tiplabels()
+> PathLengths(tree)
+   start end    length
+1      7   1 0.2059746
+2      7   2 2.0175247
+3      8   2 1.8409680
+4      9   2 1.1539451
+5     10   2 0.7698414
+6      7   3 2.4630011
+7      8   3 2.2864443
+8      9   3 1.5994215
+9     10   3 1.2153178
+10    11   3 0.7176185
+11     7   4 2.7372887
+12     8   4 2.5607319
+13     9   4 1.8737091
+14    10   4 1.4896053
+15    11   4 0.9919061
+16     7   5 1.2436148
+17     8   5 1.0670580
+18     9   5 0.3800352
+19     7   6 0.9540020
+20     8   6 0.7774452
+21     7   8 0.1765568
+22     7   9 0.8635796
+23     8   9 0.6870228
+24     7  10 1.2476833
+25     8  10 1.0711266
+26     9  10 0.3841037
+27     7  11 1.7453826
+28     8  11 1.5688258
+29     9  11 0.8818030
+30    10  11 0.4976992
+> 
+> 
+> 
+> cleanEx()
 > nameEx("PhyToString")
 > ### * PhyToString
 > 
@@ -1578,8 +2169,38 @@ integer64
 > ### ** Examples
 > 
 > StringToPhyDat("-?01231230?-", c('Lion', 'Gazelle'), byTaxon = TRUE)
-2 sequences with 6 character and 6 different site patterns.
-The states are - 0 1 2 3 
+$Lion
+[1] 1 3 5 2 4 6
+
+$Gazelle
+[1] 2 4 6 5 3 1
+
+attr(,"weight")
+[1] 1 1 1 1 1 1
+attr(,"nr")
+[1] 6
+attr(,"nc")
+[1] 5
+attr(,"index")
+[1] 1 2 3 4 5 6
+attr(,"levels")
+[1] "-" "0" "1" "2" "3"
+attr(,"levels")attr(,".match.hash")
+<hash table>
+attr(,"allLevels")
+[1] "-" "1" "?" "2" "0" "3"
+attr(,"type")
+[1] "USER"
+attr(,"contrast")
+     - 0 1 2 3
+[1,] 1 0 0 0 0
+[2,] 0 0 1 0 0
+[3,] 1 1 1 1 1
+[4,] 0 0 0 1 0
+[5,] 0 1 0 0 0
+[6,] 0 0 0 0 1
+attr(,"class")
+[1] "phyDat"
 > # encodes the following matrix:
 > # Lion     -?0123
 > # Gazelle  1230?-
@@ -1757,7 +2378,7 @@ Rooted; no branch lengths.
 Phylogenetic tree with 10 tips and 8 internal nodes.
 
 Tip labels:
-  f, g, b, h, j, i, ...
+  c, e, d, b, i, g, ...
 
 Unrooted; no branch lengths.
 > 
@@ -1799,6 +2420,46 @@ Unrooted; no branch lengths.
 > RightmostCharacter("Hello, World!")
 [1] "!"
 > 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("RoguePlot")
+> ### * RoguePlot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: RoguePlot
+> ### Title: Visualize position of rogue taxa
+> ### Aliases: RoguePlot
+> 
+> ### ** Examples
+> 
+> trees <- list(read.tree(text = "(a, (b, (c, (rogue, (d, (e, f))))));"),
++               read.tree(text = "(a, (b, (c, (rogue, (d, (e, f))))));"),
++               read.tree(text = "(a, (b, (c, (rogue, (d, (e, f))))));"),
++               read.tree(text = "(a, (b, (c, (rogue, (d, (e, f))))));"),
++               read.tree(text = "(rogue, (a, (b, (c, (d, (e, f))))));"),
++               read.tree(text = "((rogue, a), (b, (c, (d, (e, f)))));"),
++               read.tree(text = "(a, (b, ((c, d), (rogue, (e, f)))));"),
++               read.tree(text = "(a, (b, ((c, (rogue, d)), (e, f))));"),
++               read.tree(text = "(a, (b, (c, (d, (rogue, (e, f))))));"))
+> RoguePlot(trees, "rogue")
+$cons
+
+Phylogenetic tree with 6 tips and 4 internal nodes.
+
+Tip labels:
+  a, b, c, d, e, f
+
+Rooted; no branch lengths.
+
+$onEdge
+[1] 1 0 0 0 0 1 2 0 0
+
+$atNode
+[1] 1 0 4 0
+
 > 
 > 
 > 
@@ -1913,7 +2574,30 @@ Rooted; no branch lengths.
 > plot(sorted)
 > ape::nodelabels()
 > ape::edgelabels()
+> ape::tiplabels(adj = c(2, 1/3))
 > 
+> plot(SortTree(messyTree, how = "tip"))
+> 
+> 
+> 
+> cleanEx()
+> nameEx("SpectrumLegend")
+> ### * SpectrumLegend
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: SpectrumLegend
+> ### Title: Produce a legend for continuous gradient scales
+> ### Aliases: SpectrumLegend
+> 
+> ### ** Examples
+> 
+> plot(0:1, 0:1, type = "n", frame.plot = FALSE,
++      xlab = "x", ylab = "y")
+> SpectrumLegend(legend = c("Dark", "Middle", "Bright"),
++                palette = hcl.colors(32L), lwd = 5)
+> SpectrumLegend(0.4, 0.95, 0.9, 0.95, abs = TRUE,
++                legend = seq(1, 9, by = 2), palette = 1:9, pos = 1)
 > 
 > 
 > 
@@ -2022,25 +2706,25 @@ Rooted; no branch lengths.
 > summary(splits)
 3 bipartition splits dividing 6 tips, a .. f
      123456
+ 8   ***...
  9   **....
- 10  ...***
  11  ...**.
 
  Tip 1: a	 Tip 2: b	 Tip 3: c	 Tip 4: d	 Tip 5: e	
  Tip 6: f	> TipsInSplits(splits)
- 9 10 11 
- 2  3  2 
+ 8  9 11 
+ 3  2  2 
 > summary(!splits)
 3 bipartition splits dividing 6 tips, a .. f
      123456
+ 8   ...***
  9   ..****
- 10  ***...
  11  ***..*
 
  Tip 1: a	 Tip 2: b	 Tip 3: c	 Tip 4: d	 Tip 5: e	
  Tip 6: f	> TipsInSplits(!splits)
- 9 10 11 
- 4  3  4 
+ 8  9 11 
+ 3  4  4 
 > 
 > length(splits + !splits)
 [1] 6
@@ -2050,10 +2734,10 @@ Rooted; no branch lengths.
 > summary(c(splits[[2:3]], !splits[[1:2]]))
 4 bipartition splits dividing 6 tips, a .. f
      123456
- 10  ...***
+ 9   **....
  11  ...**.
+ 8   ...***
  9   ..****
- 10  ***...
 
  Tip 1: a	 Tip 2: b	 Tip 3: c	 Tip 4: d	 Tip 5: e	
  Tip 6: f	> 
@@ -2064,9 +2748,10 @@ Rooted; no branch lengths.
  9   ****..
  10  ***...
  11  **....> match(splits, moreSplits)
-[1]  3  2 NA
+[1]  2  3 NA
 > moreSplits %in% splits
-[1] FALSE  TRUE  TRUE
+    9    10    11 
+FALSE  TRUE  TRUE 
 > 
 > 
 > 
@@ -2228,11 +2913,11 @@ Rooted; no branch lengths.
 > ### Name: TipLabels
 > ### Title: Extract tip labels
 > ### Aliases: TipLabels TipLabels.matrix TipLabels.phylo TipLabels.default
-> ###   TipLabels.phyDat TipLabels.TreeNumber TipLabels.Splits TipLabels.list
-> ###   AllTipLabels AllTipLabels.list AllTipLabels.multiPhylo
-> ###   AllTipLabels.phylo AllTipLabels.Splits AllTipLabels.TreeNumber
-> ###   AllTipLabels.matrix TipLabels.multiPhylo TipLabels.character
-> ###   TipLabels.numeric
+> ###   TipLabels.phyDat TipLabels.MixedBase TipLabels.TreeNumber
+> ###   TipLabels.Splits TipLabels.list AllTipLabels AllTipLabels.list
+> ###   AllTipLabels.multiPhylo AllTipLabels.phylo AllTipLabels.Splits
+> ###   AllTipLabels.TreeNumber AllTipLabels.matrix TipLabels.multiPhylo
+> ###   TipLabels.character TipLabels.numeric
 > 
 > ### ** Examples
 > 
@@ -2350,8 +3035,12 @@ Rooted; no branch lengths.
 > ### Name: TreeNumber
 > ### Title: Unique integer indices for bifurcating tree topologies
 > ### Aliases: TreeNumber as.TreeNumber as.TreeNumber.phylo
-> ###   as.TreeNumber.multiPhylo as.TreeNumber.character as.phylo.numeric
-> ###   as.phylo.TreeNumber
+> ###   as.TreeNumber.multiPhylo as.TreeNumber.character
+> ###   as.TreeNumber.TreeNumber as.TreeNumber.MixedBase
+> ###   as.MixedBase.TreeNumber as.MixedBase.integer64 as.MixedBase.numeric
+> ###   as.phylo.numeric as.phylo.TreeNumber as.MixedBase
+> ###   as.MixedBase.MixedBase as.MixedBase.phylo as.MixedBase.multiPhylo
+> ###   as.phylo.MixedBase
 > 
 > ### ** Examples
 > 
@@ -2543,11 +3232,10 @@ integer64
 > 
 > ### ** Examples
 > 
->  UnrootedTreesMatchingSplit(c(3, 5))
+> UnrootedTreesMatchingSplit(c(3, 5))
 [1] 315
->  UnrootedTreesMatchingSplit(3, 2, 1, 2)
+> UnrootedTreesMatchingSplit(3, 2, 1, 2)
 [1] 297
-> 
 > 
 > 
 > 
@@ -2665,14 +3353,15 @@ integer64
 > 
 > 
 > cleanEx()
-> nameEx("match")
-> ### * match
+> nameEx("match.Splits")
+> ### * match.Splits
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: match
+> ### Name: match.Splits
 > ### Title: Split matching
-> ### Aliases: match match.Splits match.list %in% %in%.Splits in.Splits
+> ### Aliases: match.Splits match,Splits,Splits-method in.Splits match
+> ###   %in%,Splits,Splits-method
 > ### Keywords: methods
 > 
 > ### ** Examples
@@ -2681,10 +3370,7 @@ integer64
 > splits2 <- as.Splits(PectinateTree(7))
 > 
 > match(splits1, splits2)
-[1]  1 NA  3 NA
-> splits1 %in% splits2
-[1]  TRUE FALSE  TRUE FALSE
-> 
+[1]  3  1 NA NA
 > 
 > 
 > 
@@ -2710,7 +3396,25 @@ integer64
 > set.seed(0)
 > replicate64(6, as.TreeNumber(RandomTree(6)))
 integer64
-[1] 42 66 29 95 72 82
+[1] 91  45  102 24  92  48 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("sort.multiPhylo")
+> ### * sort.multiPhylo
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: sort.multiPhylo
+> ### Title: Sort a list of phylogenetic trees
+> ### Aliases: sort.multiPhylo ==.phylo <.phylo >.phylo ==.MixedBase
+> ###   <.MixedBase >.MixedBase
+> 
+> ### ** Examples
+> 
+> sort(as.phylo(5:0, 7))
+6 phylogenetic trees
 > 
 > 
 > 
@@ -2719,7 +3423,7 @@ integer64
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  11.502 0.536 12.054 0 0 
+Time elapsed:  6.832 0.481 7.883 0 0 
 > grDevices::dev.off()
 null device 
           1 

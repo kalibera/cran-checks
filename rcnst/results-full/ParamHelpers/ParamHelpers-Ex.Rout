@@ -1,6 +1,6 @@
 
-R Under development (unstable) (2021-09-05 r80856) -- "Unsuffered Consequences"
-Copyright (C) 2021 The R Foundation for Statistical Computing
+R Under development (unstable) (2022-05-10 r82334) -- "Unsuffered Consequences"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -371,52 +371,6 @@ $b
    u    w    y    y 
 -Inf    3    0   10 
 > getUpper(ps)
-  u   w   y   y 
-Inf   2   1  11 
-> 
-> ps = makeParamSet(
-+   makeNumericParam("u"),
-+   makeDiscreteParam("w", values = list(a = list(), b = NULL))
-+ )
-> getValues(ps)
-$w
-$w$a
-list()
-
-$w$b
-NULL
-
-
-> 
-> par.vals = list(
-+   u = makeNumericParam("u"),
-+   v = makeIntegerParam("v", lower = 1, upper = 2),
-+   w = makeDiscreteParam("w", values = 1:2),
-+   x = makeNumericVectorParam("x", len = 2, lower = c(3, 1), upper = expression(n))
-+ )
-> getLower(par.vals)
-   u    v    x    x 
--Inf    1    3    1 
-> getUpper(par.vals, dict = list(n = 12))
-  u   v   x   x 
-Inf   2  12  12 
-> 
-> 
-> 
-> cleanEx()
-> nameEx("getOptPathBestIndex")
-> ### * getOptPathBestIndex
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: getOptPathBestIndex
-> ### Title: Get index of the best element from optimization path.
-> ### Aliases: getOptPathBestIndex
-> 
-> ### ** Examples
-> 
-> ps = makeParamSet(makeNumericParam("x"))
-> op = makeOptPathDF(par.set = ps, y.names = "y", minimize = TRUE)
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"

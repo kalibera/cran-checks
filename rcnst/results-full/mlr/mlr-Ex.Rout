@@ -1,6 +1,6 @@
 
-R Under development (unstable) (2021-09-28 r80976) -- "Unsuffered Consequences"
-Copyright (C) 2021 The R Foundation for Statistical Computing
+R Under development (unstable) (2022-05-10 r82334) -- "Unsuffered Consequences"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -538,7 +538,7 @@ Missings: FALSE
 Has weights: FALSE
 Has blocking: FALSE
 Has coordinates: FALSE
-Classes: 2
+Classes: 2Class
  bad good 
  126  225 
 Positive class: bad
@@ -554,7 +554,7 @@ Missings: FALSE
 Has weights: FALSE
 Has blocking: FALSE
 Has coordinates: FALSE
-Classes: 2
+Classes: 2classes
  1  2 
 50 50 
 Positive class: 1
@@ -647,7 +647,7 @@ Missings: FALSE
 Has weights: FALSE
 Has blocking: FALSE
 Has coordinates: FALSE
-Classes: 2
+Classes: 2y
 a b 
 2 1 
 Positive class: a
@@ -663,7 +663,7 @@ Missings: FALSE
 Has weights: FALSE
 Has blocking: FALSE
 Has coordinates: FALSE
-Classes: 2
+Classes: 2y
 a b 
 2 1 
 Positive class: a
@@ -695,7 +695,7 @@ Missings: FALSE
 Has weights: FALSE
 Has blocking: FALSE
 Has coordinates: FALSE
-Classes: 3
+Classes: 3Species
     setosa versicolor  virginica 
         50         50         50 
 Positive class: NA
@@ -714,7 +714,7 @@ Missings: FALSE
 Has weights: FALSE
 Has blocking: FALSE
 Has coordinates: FALSE
-Classes: 3
+Classes: 3Species
     setosa versicolor  virginica 
         50         50         50 
 Positive class: NA
@@ -907,8 +907,8 @@ detaching ‘package:mmpf’
 +   getCaretParamSet("gbm", length = 9L, task = regrTask, discretize = FALSE)
 + }
 Loading required namespace: caret
-Loading required package: lattice
 Loading required package: ggplot2
+Loading required package: lattice
 
 Attaching package: ‘caret’
 
@@ -936,8 +936,8 @@ n.trees           numeric   -   - 50 to 450   -    TRUE     -
 > 
 > cleanEx()
 
-detaching ‘package:mlbench’, ‘package:caret’, ‘package:ggplot2’,
-  ‘package:lattice’
+detaching ‘package:mlbench’, ‘package:caret’, ‘package:lattice’,
+  ‘package:ggplot2’
 
 > nameEx("getHyperPars")
 > ### * getHyperPars
@@ -1352,7 +1352,7 @@ Missings: FALSE
 Has weights: FALSE
 Has blocking: FALSE
 Has coordinates: FALSE
-Classes: 2
+Classes: 2Species
        foo versicolor 
        100         50 
 Positive class: foo
@@ -1616,7 +1616,7 @@ Properties: regr,response
 Minimize: TRUE
 Best: -Inf; Worst: Inf
 Aggregated by: test.mean
-Arguments: 
+Arguments: list()
 Note: 
 > 
 > 
@@ -1992,7 +1992,7 @@ mmce
 > ms = list("mmce" = mmce, "acc" = acc, "timetrain" = timetrain)
 > performance(pred, measures = ms, task, mod)
      mmce       acc timetrain 
-    0.040     0.960     0.009 
+    0.040     0.960     0.007 
 > 
 > 
 > 
@@ -2355,7 +2355,7 @@ Predict: test
 Stratification: FALSE
 predict.type: response
 threshold: 
-time (mean): 0.01
+time (mean): 0.19
   id  truth response iter  set
 1  2 setosa   setosa    1 test
 2  3 setosa   setosa    1 test
@@ -2508,7 +2508,7 @@ Missings: FALSE
 Has weights: FALSE
 Has blocking: FALSE
 Has coordinates: FALSE
-Classes: 3
+Classes: 3Species
     setosa versicolor  virginica 
         50         50          0 
 Positive class: NA
@@ -2627,102 +2627,6 @@ Imputation value: 1
 [Tune-x] 3: C=0.000244; sigma=4.1e+03
 [Tune-y] 3: mmce.test.mean=0.7333333; time: 0.0 min
 [Tune-x] 4: C=4.1e+03; sigma=4.1e+03
-[Tune-y] 4: mmce.test.mean=0.7333333; time: 0.0 min
-[Tune] Result: C=4.1e+03; sigma=0.000244 : mmce.test.mean=0.0533333
-> print(res)
-Tune result:
-Op. pars: C=4.1e+03; sigma=0.000244
-mmce.test.mean=0.0533333
-> # access data for all evaluated points
-> df = as.data.frame(res$opt.path)
-> df1 = as.data.frame(res$opt.path, trafo = TRUE)
-> print(head(df[, -ncol(df)]))
-    C sigma mmce.test.mean dob eol error.message
-1 -12   -12     0.73333333   1  NA          <NA>
-2  12   -12     0.05333333   2  NA          <NA>
-3 -12    12     0.73333333   3  NA          <NA>
-4  12    12     0.73333333   4  NA          <NA>
-> print(head(df1[, -ncol(df)]))
-    C sigma mmce.test.mean dob eol error.message
-1 -12   -12     0.73333333   1  NA          <NA>
-2  12   -12     0.05333333   2  NA          <NA>
-3 -12    12     0.73333333   3  NA          <NA>
-4  12    12     0.73333333   4  NA          <NA>
-> # access data for all evaluated points - alternative
-> df2 = generateHyperParsEffectData(res)
-> df3 = generateHyperParsEffectData(res, trafo = TRUE)
-> print(head(df2$data[, -ncol(df2$data)]))
-    C sigma mmce.test.mean iteration
-1 -12   -12     0.73333333         1
-2  12   -12     0.05333333         2
-3 -12    12     0.73333333         3
-4  12    12     0.73333333         4
-> print(head(df3$data[, -ncol(df3$data)]))
-             C        sigma mmce.test.mean iteration
-1 2.441406e-04 2.441406e-04     0.73333333         1
-2 4.096000e+03 2.441406e-04     0.05333333         2
-3 2.441406e-04 4.096000e+03     0.73333333         3
-4 4.096000e+03 4.096000e+03     0.73333333         4
-> ## Not run: 
-> ##D # we optimize the SVM over 3 kernels simultanously
-> ##D # note how we use dependent params (requires = ...) and iterated F-racing here
-> ##D ps = makeParamSet(
-> ##D   makeNumericParam("C", lower = -12, upper = 12, trafo = function(x) 2^x),
-> ##D   makeDiscreteParam("kernel", values = c("vanilladot", "polydot", "rbfdot")),
-> ##D   makeNumericParam("sigma", lower = -12, upper = 12, trafo = function(x) 2^x,
-> ##D     requires = quote(kernel == "rbfdot")),
-> ##D   makeIntegerParam("degree", lower = 2L, upper = 5L,
-> ##D     requires = quote(kernel == "polydot"))
-> ##D )
-> ##D print(ps)
-> ##D ctrl = makeTuneControlIrace(maxExperiments = 5, nbIterations = 1, minNbSurvival = 1)
-> ##D rdesc = makeResampleDesc("Holdout")
-> ##D res = tuneParams("classif.ksvm", iris.task, rdesc, par.set = ps, control = ctrl)
-> ##D print(res)
-> ##D df = as.data.frame(res$opt.path)
-> ##D print(head(df[, -ncol(df)]))
-> ##D 
-> ##D # include the training set performance as well
-> ##D rdesc = makeResampleDesc("Holdout", predict = "both")
-> ##D res = tuneParams("classif.ksvm", iris.task, rdesc, par.set = ps,
-> ##D   control = ctrl, measures = list(mmce, setAggregation(mmce, train.mean)))
-> ##D print(res)
-> ##D df2 = as.data.frame(res$opt.path)
-> ##D print(head(df2[, -ncol(df2)]))
-> ## End(Not run)
-> 
-> 
-> 
-> cleanEx()
-> nameEx("tuneParamsMultiCrit")
-> ### * tuneParamsMultiCrit
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: tuneParamsMultiCrit
-> ### Title: Hyperparameter tuning for multiple measures at once.
-> ### Aliases: tuneParamsMultiCrit
-> 
-> ### ** Examples
-> 
-> 
-> 
-> 
-> ### * <FOOTER>
-> ###
-> cleanEx()
-> options(digits = 7L)
-> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  92.456 7.122 103.727 0.024 0.022 
-> grDevices::dev.off()
-null device 
-          1 
-> ###
-> ### Local variables: ***
-> ### mode: outline-minor ***
-> ### outline-regexp: "\\(> \\)?### [*]+" ***
-> ### End: ***
-> quit('no')
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"

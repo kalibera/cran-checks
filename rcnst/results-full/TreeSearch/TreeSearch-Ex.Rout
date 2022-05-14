@@ -1,6 +1,6 @@
 
-R Under development (unstable) (2021-09-28 r80976) -- "Unsuffered Consequences"
-Copyright (C) 2021 The R Foundation for Statistical Computing
+R Under development (unstable) (2022-05-10 r82334) -- "Unsuffered Consequences"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -38,15 +38,12 @@ Type 'q()' to quit R.
 > 
 > data('Lobo', package = 'TreeTools')
 > AdditionTree(Lobo.phy, concavity = 10)
-Addition tree ■■■■                               9% | ETA: 26s
-Addition tree ■■■■■■■■■                         27% | ETA: 17s
-Addition tree ■■■■■■■■■■■■■                     40% | ETA: 15s
-Addition tree ■■■■■■■■■■■■■■■■■                 55% | ETA: 12s
-Addition tree ■■■■■■■■■■■■■■■■■■■■              65% | ETA:  9s
-Addition tree ■■■■■■■■■■■■■■■■■■■■■■■           72% | ETA:  8s
-Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■■         79% | ETA:  6s
-Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■■■■       87% | ETA:  4s
-Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      91% | ETA:  3s
+Addition tree ■■                                 5% | ETA: 48s
+Addition tree ■■■■■■■                           19% | ETA: 17s
+Addition tree ■■■■■■■■■■■■■                     40% | ETA: 11s
+Addition tree ■■■■■■■■■■■■■■■■■■                58% | ETA:  7s
+Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■          76% | ETA:  4s
+Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      91% | ETA:  2s
 Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
 
 Phylogenetic tree with 48 tips and 47 internal nodes.
@@ -55,6 +52,34 @@ Tip labels:
   Tubiluchus_Priapulida, Onychodictyon_ferox, Aegirocassis_benmoulae, Cricocosmia, Pambdelurion, Helenodora, ...
 
 Rooted; no branch lengths.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Carter1")
+> ### * Carter1
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Carter1
+> ### Title: Number of trees with _m_ steps
+> ### Aliases: Carter1 Log2Carter1 LogCarter1
+> 
+> ### ** Examples
+> 
+> # The character `0 0 0 1 1 1`
+> Carter1(1, 3, 3) # Exactly one step
+[1] 9
+> Carter1(2, 3, 3) # Two steps (one extra step)
+[1] 54
+> 
+> # Number of trees that the character can map onto with exactly _m_ steps
+> # if non-parsimonious reconstructions are permitted:
+> cumsum(sapply(1:3, Carter1, 3, 3))
+[1]   9  63 105
+> 
+> # Three steps allow the character to map onto any of the 105 six-leaf trees.
+> 
 > 
 > 
 > 
@@ -74,18 +99,41 @@ Rooted; no branch lengths.
 > dataset <- inapplicable.phyData[[12]]
 > tree <- TreeTools::NJTree(dataset)
 > CharacterLength(tree, dataset)
-  [1]  1  1  3  1  4  5  3  5  1  6  1  2  2  1  2  4  2  5  2  4  1  1  2  2  1
- [26]  1  2  2  4  1  1  1  2  1  4  2  6  7  5  1  2  1  2  1  1  1  1  1  1  1
- [51]  2  1  1  8  3  7  4  3  2  5  2  1  2  2  3 10 12  5  5  2  4  3  6  1  1
- [76]  5  3  3  5  5  2  3  2  8  2  1  8  4  7  6  2  6  1  5  2  3  9  1  2  2
-[101]  2  1  3  2  3  4 11  6  7  7  7  8  8  1  1  2  2  1  1  4  6  2  3  6  7
-[126]  2  1  1  2  3  2  2  2  3  2  2  7
+  [1]  1  1  2  2  3  4  4  5  1  6  1  1  2  1  2  4  2  5  2  4  1  1  2  1  1
+ [26]  2  2  2  5  1  1  1  2  1  4  3  6  5  5  1  2  1  2  1  1  1  1  1  1  1
+ [51]  2  1  1  8  3  7  3  3  2  5  2  1  2  2  2  9 10  5  5  2  4  3  5  1  1
+ [76]  5  6  3  5  5  3  3  2  7  2  1  9  5  7  5  1  7  1  5  2  2  8  1  2  2
+[101]  1  1  3  2  3  4 12  6  8  4  5  8  7  1  1  2  2  1  1  4  6  2  3  6  6
+[126]  1  1  1  1  2  1  1  1  2  1  1  6
 > CharacterLength(tree, dataset, compress = TRUE)
-  [1]  1  1  3  1  4  5  3  5  1  6  1  2  2  1  2  4  2  5  2  4  1  2  2  1  1
- [26]  2  2  4  1  1  1  2  4  2  6  7  5  1  2  2  2  1  8  3  7  4  3  2  5  2
- [51]  1  2  3 10 12  5  5  2  4  3  6  1  1  5  3  3  5  5  2  3  2  8  2  1  8
- [76]  4  7  6  2  6  1  5  2  3  9  1  2  2  2  3  2  3  4 11  6  7  7  7  8  8
-[101]  1  2  2  1  4  6  2  3  6  7  2  1  1  2  3  2  3  7
+  [1]  1  1  2  2  3  4  4  5  1  6  1  1  2  1  2  4  2  5  2  4  1  2  1  1  2
+ [26]  2  2  5  1  1  1  2  4  3  6  5  5  1  2  2  2  1  8  3  7  3  3  2  5  2
+ [51]  1  2  2  9 10  5  5  2  4  3  5  1  1  5  6  3  5  5  3  3  2  7  2  1  9
+ [76]  5  7  5  1  7  1  5  2  2  8  1  2  2  1  3  2  3  4 12  6  8  4  5  8  7
+[101]  1  2  2  1  4  6  2  3  6  6  1  1  1  1  2  1  2  6
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ClusterStrings")
+> ### * ClusterStrings
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ClusterStrings
+> ### Title: Cluster similar strings
+> ### Aliases: ClusterStrings
+> 
+> ### ** Examples
+> 
+> ClusterStrings(c(paste0('FirstCluster ', 1:5),
++                  paste0('SecondCluster.', 8:12),
++                  paste0('AnotherCluster_', letters[1:6])))
+ [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3 3
+attr(,"silhouette")
+[1] 0.911867
+attr(,"med")
+[1] "FirstCluster 1"   "SecondCluster.10" "AnotherCluster_a"
 > 
 > 
 > 
@@ -129,24 +177,24 @@ informationContent             signal              noise      signalToNoise
 > data(inapplicable.datasets)
 > dataset <- inapplicable.phyData[[4]]
 > Consistency(dataset, TreeTools::NJTree(dataset))
-  [1] 0.2500000 0.3333333 0.3333333 0.2500000 0.3333333 0.2500000 0.5000000
-  [8] 0.2500000 0.3333333       NaN 0.2500000 1.0000000 0.3333333 0.3333333
- [15] 1.0000000 0.3333333 0.5000000 0.2000000 1.0000000 1.0000000 0.5000000
+  [1] 0.2500000 0.3333333 0.3333333 0.2500000 0.5000000 0.2500000 0.5000000
+  [8] 0.3333333 0.3333333       NaN 0.3333333 1.0000000 0.3333333 0.3333333
+ [15] 1.0000000 0.5000000 0.5000000 0.2000000 1.0000000 1.0000000 0.5000000
  [22] 0.2500000 0.3333333 0.2500000 0.5000000 0.5000000 0.5000000 1.0000000
- [29] 0.5000000 0.6666667 0.2500000 0.2500000 0.5000000 0.3333333 1.0000000
- [36] 0.2500000 1.0000000 0.1666667 0.5000000 0.5000000 0.5000000 1.0000000
- [43] 0.4000000 0.5000000 0.5000000 0.5000000 0.3333333 0.3333333 0.3333333
- [50] 1.0000000 0.3333333 0.6666667 1.0000000 1.0000000 0.3333333 0.5000000
- [57] 1.0000000 0.2857143 0.5000000 0.2000000 0.6666667 0.5000000 0.1428571
- [64] 0.6666667 0.5000000 0.2000000 0.5714286 0.7500000 0.2500000 0.2000000
- [71] 0.5000000 1.0000000 0.6666667 0.2500000 0.3333333 0.2000000 0.1666667
- [78] 0.2500000 1.0000000 0.3333333 0.2500000 0.6666667 0.3333333 0.2500000
- [85] 0.3333333 1.0000000 0.2500000 1.0000000 0.5000000 0.2857143 0.3333333
+ [29] 0.5000000 0.6666667 0.2500000 0.3333333 0.5000000 0.3333333 0.5000000
+ [36] 0.2500000 1.0000000 0.1666667 0.5000000 0.3333333 1.0000000 0.5000000
+ [43] 0.4000000 0.5000000 1.0000000 0.5000000 0.3333333 0.2500000 0.3333333
+ [50] 1.0000000 0.3333333 0.6666667 0.5000000 0.5000000 0.3333333 0.5000000
+ [57] 1.0000000 0.3333333 0.5000000 0.2500000 0.5000000 0.5000000 0.1428571
+ [64] 0.6666667 0.5000000 0.2500000 0.8000000 0.7500000 0.2500000 0.1666667
+ [71] 0.5000000 1.0000000 1.0000000 0.3333333 0.5000000 0.2500000 0.2000000
+ [78] 0.2500000 0.5000000 0.5000000 0.2500000 0.6666667 0.2500000 0.2500000
+ [85] 0.5000000 1.0000000 0.5000000 1.0000000 0.5000000 0.4000000 0.4000000
  [92] 0.2000000 1.0000000 0.3333333 1.0000000 0.2500000 0.5000000 1.0000000
  [99] 0.3333333 0.5000000 1.0000000 0.5000000 0.5000000 0.5000000 0.5000000
-[106] 1.0000000 0.2500000 0.5000000 1.0000000 0.3333333 1.0000000 0.2000000
-[113] 1.0000000 0.5000000 1.0000000 0.2000000 0.5000000 0.3333333 0.5000000
-[120] 0.3333333 0.3333333 0.3333333 0.2500000 1.0000000 1.0000000 0.3333333
+[106] 1.0000000 0.3333333 0.3333333 1.0000000 0.2500000 1.0000000 0.2500000
+[113] 1.0000000 0.5000000 0.5000000 0.2000000 0.5000000 0.3333333 1.0000000
+[120] 0.5000000 0.3333333 0.3333333 0.2500000 1.0000000 0.5000000 0.5000000
 > 
 > 
 > 
@@ -182,13 +230,6 @@ informationContent             signal              noise      signalToNoise
 > ### ** Examples
 > 
 > library('TreeTools', quietly = TRUE) # for as.phylo
-
-Attaching package: ‘TreeTools’
-
-The following objects are masked from ‘package:base’:
-
-    %in%, match
-
 > 
 > # jackTrees will usually be generated with Jackknife(), but for simplicity:
 > jackTrees <- as.phylo(1:100, 8)
@@ -230,13 +271,6 @@ detaching ‘package:TreeTools’, ‘package:ape’
 > # Load data for analysis in R
 > library('TreeTools')
 Loading required package: ape
-
-Attaching package: ‘TreeTools’
-
-The following objects are masked from ‘package:base’:
-
-    %in%, match
-
 > data('congreveLamsdellMatrices', package = 'TreeSearch')
 > dataset <- congreveLamsdellMatrices[[42]]
 > 
@@ -244,19 +278,19 @@ The following objects are masked from ‘package:base’:
 > trees <- MaximizeParsimony(dataset, ratchIter = 0, startIter = 0,
 +                            tbrIter = 1, maxHits = 4, maxTime = 1/100,
 +                            concavity = 10, verbosity = 4)
-Addition tree ■■■■■■■■■■■■■■■■■■                56% | ETA:  2s
+Addition tree ■■■■■■■■■■■■■■■■■■■■              64% | ETA:  1s
+Addition tree ■■■■■■■■■■■■■■■■■■■■■■■           72% | ETA:  1s
 Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
 
 ── Sample local optimum ────────────────────────────────────────────────────────
 → TBR depth 1; keeping 4 trees; k = 10
-ℹ 2021-09-28 07:00:44: Score: 12.6988
-Final search ■■■■■■■■■■■■■■■■■■■■■■            70% | D0, score 12.2635, hit 1. …
-Final search ■■■                                8% | D0, score 12.1477, hit 1. …
-Final search ■■■■■                             15% | D1, score 11.9697, hit 1. …
-Final search ■■■■■■■■■■■■■■■■■■■■■■            70% | D1, score 11.9697, hit 1. …
+ℹ 2022-05-12 20:02:12: Score: 12.6988
+Final search ■■■■■■■■■■■■■■                    42% | D1, score 11.9697, hit 1. …
   - TBR rearrangement at depth 1 found score 11.9697 1 time.
 
-✔ 2021-09-28 07:00:54: Tree search terminated with score 11.9697
+✔ 2022-05-12 20:02:15: Tree search terminated with score 11.9697
+> names(trees)
+[1] "final_1"
 > 
 > # In actual use, be sure to check that the score has converged on a global
 > # optimum, conducting additional iterations and runs as necessary.
@@ -295,7 +329,7 @@ Final search ■■■■■■■■■■■■■■■■■■■■■■ 
 +   dimnames = list(letters[1:6], NULL)))
 > MaximizeParsimony(characters, constraint = constraint, verbosity = 0)
 ✔ Initialized 1 distinct constraints.
-→ 2021-09-28 07:00:55: Score to beat: 3
+→ 2022-05-12 20:02:15: Score to beat: 3
 1 phylogenetic tree
 > 
 > 
@@ -313,51 +347,38 @@ detaching ‘package:TreeTools’, ‘package:ape’
 > ### Name: MinimumLength
 > ### Title: Minimum length
 > ### Aliases: MinimumLength MinimumLength.phyDat MinimumLength.numeric
-> ###   MinimumSteps
+> ###   MinimumLength.character MinimumSteps
 > 
 > ### ** Examples
 > 
 > data('inapplicable.datasets')
-> myPhyDat <- inapplicable.phyData[[4]] 
+> myPhyDat <- inapplicable.phyData[[4]]
+> 
+> # load your own data with
+> # my.PhyDat <- as.phyDat(read.nexus.data('filepath'))
+> # or Windows users can select a file interactively using:
+> # my.PhyDat <- as.phyDat(read.nexus.data(choose.files()))
+> 
+> class(myPhyDat) # phyDat object
+[1] "phyDat"
+> 
+> # Minimum length of each character in turn
 > MinimumLength(myPhyDat)
   [1] 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 2 1 1 1 1 1 1 1
  [38] 1 1 1 1 1 2 1 1 1 1 1 1 1 1 2 1 1 1 1 1 2 1 1 2 1 1 2 1 1 4 3 1 1 1 1 2 1
  [75] 1 1 1 1 1 1 2 4 1 1 1 1 1 1 1 2 2 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1
 [112] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+> 
+> # Collapse duplicate characters, per phyDat compression
 > MinimumLength(myPhyDat, compress = TRUE)
   [1] 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 2 1 1 1 1 1 1 1
  [38] 1 1 1 1 1 2 1 1 1 1 1 1 1 1 2 1 1 1 1 1 2 1 1 2 1 1 2 1 1 4 3 1 1 1 1 2 1
  [75] 1 1 1 1 1 1 2 4 1 1 1 1 1 1 1 2 2 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1
 [112] 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 > 
-> 
-> class(myPhyDat) # phyDat object
-[1] "phyDat"
-> # load your own data with
-> # my.PhyDat <- as.phyDat(read.nexus.data('filepath'))
-> # or Windows users can select a file interactively using:
-> # my.PhyDat <- as.phyDat(read.nexus.data(choose.files()))
-> 
-> # Convert list of character codings to an array
-> myData <- vapply(myPhyDat, I, myPhyDat[[1]])
-> 
-> # Convert phyDat's representation of states to binary
-> myContrast <- attr(myPhyDat, 'contrast')
-> tokens <- colnames(myContrast)
-> binaryContrast <- integer(length(tokens))
-> tokenApplicable <- tokens != '-'
-> binaryContrast[tokenApplicable] <- 2 ^ (seq_len(sum(tokenApplicable)) - 1)
-> binaryValues <- apply(myContrast, 1, 
-+   function (row) sum(binaryContrast[as.logical(row)]))
-> myStates <- matrix(binaryValues[myData], nrow = nrow(myData),
-+                    ncol = ncol(myData), dimnames = dimnames(myData))
-> 
-> # Finally, work out minimum steps 
-> apply(myStates, 1, MinimumLength)
-  [1] 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 2 1 1 1 1 1 1 1
- [38] 1 1 1 1 1 2 1 1 1 1 1 1 1 1 2 1 1 1 1 1 2 1 1 2 1 1 2 1 1 4 3 1 1 1 1 2 1
- [75] 1 1 1 1 1 1 2 4 1 1 1 1 1 1 1 2 2 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1
-[112] 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+> # Calculate length of a single character from its textual representation
+> MinimumLength('-{-1}{-2}{-3}2233')
+[1] 2
 > 
 > 
 > 
@@ -504,14 +525,6 @@ Rooted; no branch lengths.
 > ## A character with inapplicable data
 > dataset <- TreeTools::StringToPhyDat("23--1??--032", tips = tree)
 > PlotCharacter(tree, dataset)
-Warning in plot.window(...) : "node.color" is not a graphical parameter
-Warning in plot.window(...) : "node.lty" is not a graphical parameter
-Warning in plot.xy(xy, type, ...) :
-  "node.color" is not a graphical parameter
-Warning in plot.xy(xy, type, ...) :
-  "node.lty" is not a graphical parameter
-Warning in title(...) : "node.color" is not a graphical parameter
-Warning in title(...) : "node.lty" is not a graphical parameter
           -     0     1     2     3
  [1,] FALSE FALSE FALSE  TRUE FALSE
  [2,] FALSE FALSE FALSE FALSE  TRUE
@@ -542,14 +555,6 @@ Warning in title(...) : "node.lty" is not a graphical parameter
 > dataset <- Lobo.phy
 > tree <- TreeTools::NJTree(dataset)
 > PlotCharacter(tree, dataset, 14)
-Warning in plot.window(...) : "node.color" is not a graphical parameter
-Warning in plot.window(...) : "node.lty" is not a graphical parameter
-Warning in plot.xy(xy, type, ...) :
-  "node.color" is not a graphical parameter
-Warning in plot.xy(xy, type, ...) :
-  "node.lty" is not a graphical parameter
-Warning in title(...) : "node.color" is not a graphical parameter
-Warning in title(...) : "node.lty" is not a graphical parameter
           0     1
  [1,] FALSE  TRUE
  [2,] FALSE  TRUE
@@ -613,14 +618,14 @@ Warning in title(...) : "node.lty" is not a graphical parameter
 [60,] FALSE  TRUE
 [61,] FALSE  TRUE
 [62,] FALSE  TRUE
-[63,] FALSE  TRUE
-[64,] FALSE  TRUE
-[65,] FALSE  TRUE
-[66,] FALSE  TRUE
-[67,] FALSE  TRUE
-[68,] FALSE  TRUE
+[63,]  TRUE  TRUE
+[64,]  TRUE FALSE
+[65,]  TRUE FALSE
+[66,]  TRUE FALSE
+[67,]  TRUE FALSE
+[68,]  TRUE FALSE
 [69,] FALSE  TRUE
-[70,]  TRUE  TRUE
+[70,] FALSE  TRUE
 [71,] FALSE  TRUE
 [72,] FALSE  TRUE
 [73,] FALSE  TRUE
@@ -631,21 +636,21 @@ Warning in title(...) : "node.lty" is not a graphical parameter
 [78,] FALSE  TRUE
 [79,] FALSE  TRUE
 [80,] FALSE  TRUE
-[81,]  TRUE  TRUE
+[81,] FALSE  TRUE
 [82,] FALSE  TRUE
 [83,] FALSE  TRUE
-[84,]  TRUE FALSE
-[85,]  TRUE FALSE
+[84,] FALSE  TRUE
+[85,] FALSE  TRUE
 [86,] FALSE  TRUE
 [87,] FALSE  TRUE
 [88,] FALSE  TRUE
-[89,] FALSE  TRUE
-[90,]  TRUE FALSE
-[91,]  TRUE FALSE
-[92,]  TRUE FALSE
-[93,]  TRUE FALSE
+[89,]  TRUE  TRUE
+[90,]  TRUE  TRUE
+[91,]  TRUE  TRUE
+[92,]  TRUE  TRUE
+[93,]  TRUE  TRUE
 [94,]  TRUE FALSE
-[95,] FALSE  TRUE
+[95,]  TRUE FALSE
 > par(oPar)
 > 
 > 
@@ -714,8 +719,8 @@ The states are 0 1
 > njtree <- TreeTools::NJTree(Lobo.phy)
 > # Increase value of ratchIter and searchHits to do a proper search
 > quickResult <- Ratchet(njtree, Lobo.phy, ratchIter = 2, searchHits = 3)
-* Beginning Parsimony Ratchet, with initial score 239
-Completed parsimony ratchet after 2 iterations with score 229
+* Beginning Parsimony Ratchet, with initial score 231
+Completed parsimony ratchet after 2 iterations with score 213
 
 > 
 > # Plot result (legibly)
@@ -746,22 +751,22 @@ Completed parsimony ratchet after 2 iterations with score 229
 > dataset <- PhyDat2Morphy(Lobo.phy)
 > RearrangeEdges(parent, child, dataset, EdgeSwapper = RootedNNISwap)
 [[1]]
- [1] 49 49 50 50 51 52 53 54 55 56 56 55 57 57 54 53 58 58 59 59 60 60 61 61 52
-[26] 62 63 64 65 66 66 65 67 68 68 67 69 69 64 70 71 72 72 71 70 73 74 75 76 76
-[51] 75 74 73 63 77 78 79 79 78 80 80 77 81 81 82 83 83 82 84 85 85 86 87 88 89
-[76] 89 88 87 86 84 90 90 91 92 92 91 93 94 94 93 95 95 62 51
+ [1] 49 49 50 50 51 52 53 54 55 56 56 55 57 58 58 57 59 60 60 59 61 62 62 63 64
+[26] 64 63 65 66 66 65 67 67 61 68 69 70 71 71 70 69 72 72 68 54 73 73 74 75 75
+[51] 74 53 76 76 77 77 78 79 79 78 80 81 82 82 81 80 83 83 84 85 86 86 85 87 87
+[76] 84 52 88 88 51 89 90 91 92 92 91 93 93 94 94 95 95 90 89
 
 [[2]]
- [1]  1 50  2 51 52 53 54 55 56  3  4 57 31 32  9 58 23 59 24 60 25 61 26 27 62
-[26] 63 64 65 66  5  6 67 68  7  8 69 10 11 70 71 72 12 13 14 73 74 75 76 15 16
-[51] 18 19 17 77 78 79 22 28 80 29 30 81 33 82 83 34 35 84 85 36 86 87 88 89 37
-[76] 41 39 38 40 90 42 91 92 43 44 93 94 45 46 95 47 48 20 21
+ [1]  1 50  2 51 52 53 54 55 56  3  4 57 58 31 32 59 60 34 35 61 62 36 63 64 43
+[26] 44 65 66 45 46 67 47 48 68 69 70 71 37 41 42 72 38 39 40 73  5 74 75 28 29
+[51] 30 76  6 77  9 78 79 10 11 80 81 82 12 13 22 83 14 84 85 86 15 18 87 16 17
+[76] 19 88  7  8 89 90 91 92 20 21 93 24 94 25 95 26 27 23 33
 
 [[3]]
-[1] 238
+[1] 232
 
 [[4]]
-[1] 1
+[1] 0
 
 > # Remember to free memory:
 > dataset <- UnloadMorphy(dataset)
@@ -943,7 +948,7 @@ detaching ‘package:ape’
 [1] 1117
 > TreeLength(tree, inapplicable.phyData[[1]], concavity = 10)
 [1] 52.75785
-> TreeLength(tree, inapplicable.phyData[[1]], concavity = 'profile')
+> TreeLength(tree, inapplicable.phyData[[1]], concavity = "profile")
 → Inapplicable tokens treated as ambiguous for profile parsimony
 Warning in .RemoveExtraTokens(mataset[i, ], ambiguousTokens = qmLevel) :
   Can handle max. 2 informative tokens. Dropping others.
@@ -987,7 +992,7 @@ Warning in .RemoveExtraTokens(mataset[i, ], ambiguousTokens = qmLevel) :
   Can handle max. 2 informative tokens. Dropping others.
 [1] 3941.387
 > TreeLength(5, inapplicable.phyData[[1]])
-[1] 1932 1919 2000 1948 2022
+[1] 1920 1950 1924 1950 2046
 > 
 > 
 > 
@@ -1094,6 +1099,56 @@ Rooted; no branch lengths.
 > 
 > 
 > cleanEx()
+> nameEx("dot-NonDuplicateRoot")
+> ### * dot-NonDuplicateRoot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: .NonDuplicateRoot
+> ### Title: Non-duplicate root
+> ### Aliases: .NonDuplicateRoot
+> ### Keywords: internal
+> 
+> ### ** Examples
+> 
+> tree <- TreeTools::Preorder(TreeTools::BalancedTree(8))
+> edge <- tree$edge
+> parent <- edge[, 1]
+> child <- edge[, 2]
+> 
+> which(!.NonDuplicateRoot(parent, child))
+[1] 1
+> 
+> 
+> 
+> cleanEx()
+> nameEx("inapplicable.datasets")
+> ### * inapplicable.datasets
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: inapplicable.datasets
+> ### Title: Thirty datasets with inapplicable data
+> ### Aliases: inapplicable.datasets inapplicable.phyData inapplicable.trees
+> ###   inapplicable.citations
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data('inapplicable.datasets', package = 'TreeSearch')
+> names(inapplicable.datasets)
+ [1] "Agnarsson2004" "Aguado2009"    "Aria2015"      "Asher2005"    
+ [5] "Capa2011"      "Conrad2008"    "DeAssis2011"   "Dikow2009"    
+ [9] "Eklund2004"    "Geisler2001"   "Giles2015"     "Griswold1999" 
+[13] "Liljeblad2008" "Loconte1991"   "Longrich2010"  "OLeary1999"   
+[17] "OMeara2014"    "Rougier2012"   "Rousset2004"   "Sano2011"     
+[21] "Sansom2010"    "Schulze2007"   "Shultz2007"    "Vinther2008"  
+[25] "Wetterer2000"  "Wills2012"     "Wilson2003"    "Wortley2006"  
+[29] "Zanol2014"     "Zhu2013"      
+> 
+> 
+> 
+> cleanEx()
 > nameEx("mpl_new_Morphy")
 > ### * mpl_new_Morphy
 > 
@@ -1182,7 +1237,7 @@ Rooted; no branch lengths.
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  63.877 6.159 106.574 0 0 
+Time elapsed:  60.985 2.587 66.666 0 0 
 > grDevices::dev.off()
 null device 
           1 

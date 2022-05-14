@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/mlrMBO.Rcheck’
-* using R Under development (unstable) (2021-09-28 r80976)
+* using R Under development (unstable) (2022-05-10 r82334)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘mlrMBO/DESCRIPTION’ ... OK
@@ -102,26 +102,26 @@ Fatal error: compiler constants were modified!
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-  ── Error (test_mbo_km.R:11:3): mbo works with km ───────────────────────────────
-  Error: promise already under evaluation: recursive default argument reference or earlier problems?
-  Backtrace:
-      █
-   1. └─mlrMBO::mbo(testf.fsphere.2d, des, learner = learner, control = ctrl) test_mbo_km.R:11:2
-   2.   ├─mlrMBO:::mboTemplate(opt.problem)
-   3.   └─mlrMBO:::mboTemplate.OptProblem(opt.problem)
-   4.     ├─mlrMBO:::mboTemplate(opt.state)
-   5.     └─mlrMBO:::mboTemplate.OptState(opt.state)
-   6.       └─mlrMBO:::evalProposedPoints.OptState(opt.state, prop)
-   7.         └─mlrMBO:::evalTargetFun.OptState(opt.state, xs = xs, extras = extras)
+  uncaught bugs meanwhile in {mlr} - please consider switching.
+  Loading required package: smoof
+  Loading required package: checkmate
+  ERROR: modification of compiler constant of type character, length 2
+  ERROR: the modified value of the constant is:
+  [1] "integer"       "integervector"
+  attr(,".match.hash")
+  <hash table>
+  ERROR: the original value of the constant is:
+  [1] "integer"       "integervector"
+  ERROR: the modified constant is at index 1
+  ERROR: the modified constant is in this function body:
+  c("integer", "integervector")
+  Fatal error: compiler constants were modified!
   
-  [ FAIL 1 | WARN 0 | SKIP 0 | PASS 39 ]
-  Error: Test failures
-  Execution halted
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
   ‘mlrMBO.Rmd’ using ‘UTF-8’... OK
-* checking re-building of vignette outputs ... WARNING
+* checking re-building of vignette outputs ... ERROR
 Error(s) in re-building vignettes:
   ...
 --- re-building ‘mlrMBO.Rmd’ using rmarkdown
@@ -135,17 +135,9 @@ ERROR: the original value of the constant is:
 ERROR: the modified constant is at index 1
 ERROR: the modified constant is in this function body:
 c("integer", "integervector")
-Quitting from lines 144-146 (mlrMBO.Rmd) 
-Error: processing vignette 'mlrMBO.Rmd' failed with diagnostics:
-promise already under evaluation: recursive default argument reference or earlier problems?
---- failed re-building ‘mlrMBO.Rmd’
+Fatal error: compiler constants were modified!
 
-SUMMARY: processing the following file failed:
-  ‘mlrMBO.Rmd’
-
-Error: Vignette re-building failed.
-Execution halted
 
 * checking PDF version of manual ... OK
 * DONE
-Status: 2 ERRORs, 1 WARNING, 2 NOTEs
+Status: 3 ERRORs, 2 NOTEs

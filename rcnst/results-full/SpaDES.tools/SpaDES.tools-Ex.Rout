@@ -1,6 +1,6 @@
 
-R Under development (unstable) (2021-09-30 r80996) -- "Unsuffered Consequences"
-Copyright (C) 2021 The R Foundation for Statistical Computing
+R Under development (unstable) (2022-05-10 r82334) -- "Unsuffered Consequences"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -67,13 +67,6 @@ detaching ‘package:raster’, ‘package:sp’
 > library(data.table)
 > library(sp)
 > library(raster)
-
-Attaching package: ‘raster’
-
-The following object is masked from ‘package:data.table’:
-
-    shift
-
 > library(quickPlot)
 > 
 > set.seed(1462)
@@ -161,14 +154,374 @@ The following object is masked from ‘package:data.table’:
 +               allowOverlap = TRUE, returnAngles = TRUE)
 + }
 Loading required package: RandomFields
-Loading required package: RandomFieldsUtils
+Warning in library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE,  :
+  there is no package called ‘RandomFields’
+> 
+> 
+> 
+> cleanEx()
 
-Attaching package: ‘RandomFields’
+detaching ‘package:quickPlot’, ‘package:raster’, ‘package:sp’,
+  ‘package:data.table’
 
-The following object is masked from ‘package:RandomFieldsUtils’:
+> nameEx("directions")
+> ### * directions
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: directionFromEachPoint
+> ### Title: Calculate distances and directions between many points and many
+> ###   grid cells
+> ### Aliases: directionFromEachPoint .pointDirection
+> ### Keywords: internal
+> 
+> ### ** Examples
+> 
+> library(raster)
+Loading required package: sp
+> library(quickPlot)
+> 
+> N <- 2
+> dirRas <- raster(extent(0,40,0,40), res = 1)
+> coords <- cbind(x = round(runif(N, xmin(dirRas), xmax(dirRas))) + 0.5,
++                 y = round(runif(N, xmin(dirRas), xmax(dirRas))) + 0.5,
++                 id = 1:N)
+> 
+> dirs1 <- directionFromEachPoint(from = coords, landscape = dirRas)
+> library(CircStats)
+Loading required package: MASS
 
-    RFoptions
+Attaching package: ‘MASS’
 
+The following objects are masked from ‘package:raster’:
+
+    area, select
+
+Loading required package: boot
+> dirs1[, "angles"] <- deg(dirs1[,"angles"] %% (2*pi))
+> indices <- cellFromXY(dirRas,dirs1[, c("x", "y")])
+> minDir <- tapply(dirs1[, "angles"], indices, function(x) min(x)) # minimum angle
+> dirRas[] <- as.vector(minDir)
+> if (interactive()) {
++   clearPlot()
++   Plot(dirRas)
++   library(sp)
++   start <- SpatialPoints(coords[, c("x", "y"), drop = FALSE])
++   Plot(start, addTo = "dirRas")
++ }
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:CircStats’, ‘package:boot’, ‘package:MASS’,
+  ‘package:quickPlot’, ‘package:raster’, ‘package:sp’
+
+> nameEx("distanceFromEachPoint")
+> ### * distanceFromEachPoint
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: distanceFromEachPoint
+> ### Title: Calculate distances and directions between many points and many
+> ###   grid cells
+> ### Aliases: distanceFromEachPoint
+> 
+> ### ** Examples
+> 
+> library(raster)
+Loading required package: sp
+> library(quickPlot)
+> 
+> n <- 2
+> distRas <- raster(extent(0, 40, 0, 40), res = 1)
+> coords <- cbind(x = round(runif(n, xmin(distRas), xmax(distRas))) + 0.5,
++                 y = round(runif(n, xmin(distRas), xmax(distRas))) + 0.5)
+> 
+> # inverse distance weights
+> dists1 <- distanceFromEachPoint(coords, landscape = distRas)
+> indices <- cellFromXY(distRas, dists1[, c("x", "y")])
+> invDist <- tapply(dists1[, "dists"], indices, function(x) sum(1 / (1 + x))) # idw function
+> distRas[] <- as.vector(invDist)
+> if (interactive()) {
++   clearPlot()
++   Plot(distRas)
++ }
+> 
+> # With iterative summing via cumulativeFn to keep memory use low, with same result
+> dists1 <- distanceFromEachPoint(coords[, c("x", "y"), drop = FALSE],
++                                 landscape = distRas, cumulativeFn = `+`)
+> idwRaster <- raster(distRas)
+> idwRaster[] <- dists1[, "dists"]
+> if (interactive()) Plot(idwRaster)
+> 
+> all(idwRaster[] == distRas[]) # TRUE
+[1] TRUE
+> 
+> # A more complex example of cumulative inverse distance sums, weighted by the value
+> #  of the origin cell
+> ras <- raster(extent(0, 34, 0, 34), res = 1, val = 0)
+> rp <- randomPolygons(ras, numTypes = 10) ^ 2
+> n <- 15
+> cells <- sample(ncell(ras), n)
+> coords <- xyFromCell(ras, cells)
+> distFn <- function(landscape, fromCell, dist) landscape[fromCell] / (1 + dist)
+> 
+> #beginCluster(3) # can do parallel
+> dists1 <- distanceFromEachPoint(coords[, c("x", "y"), drop = FALSE],
++                                 landscape = rp, distFn = distFn, cumulativeFn = `+`)
+> #endCluster() # if beginCluster was run
+> 
+> idwRaster <- raster(ras)
+> idwRaster[] <- dists1[, "dists"]
+> if (interactive()) {
++   clearPlot()
++   Plot(rp, idwRaster)
++   sp1 <- SpatialPoints(coords)
++   Plot(sp1, addTo = "rp")
++   Plot(sp1, addTo = "idwRaster")
++ }
+> 
+> # On linux; can use numeric passed to cl; will use mclapply with mc.cores = cl
+> if (identical(Sys.info()["sysname"], "Linux")) {
++   dists1 <- distanceFromEachPoint(coords[, c("x", "y"), drop = FALSE],
++                                   landscape = rp, distFn = distFn,
++                                   cumulativeFn = `+`, cl = 2)
++ }
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:quickPlot’, ‘package:raster’, ‘package:sp’
+
+> nameEx("dwrpnorm2")
+> ### * dwrpnorm2
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dwrpnorm2
+> ### Title: Vectorized wrapped normal density function
+> ### Aliases: dwrpnorm2
+> 
+> ### ** Examples
+> 
+> # Values for which to evaluate density
+> theta <- c(1:500) * 2 * pi / 500
+> # Compute wrapped normal density function
+> density <- c(1:500)
+> for(i in 1:500) density[i] <- dwrpnorm2(theta[i], pi, .75)
+> if (interactive()) plot(theta, density)
+> # Approximate area under density curve
+> sum(density * 2 * pi / 500)
+[1] 1
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("gaussMap")
+> ### * gaussMap
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: gaussMap
+> ### Title: Produce a 'raster' of a random Gaussian process.
+> ### Aliases: gaussMap
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D if (require(RandomFields)) {
+> ##D   library(raster)
+> ##D   nx <- ny <- 100L
+> ##D   r <- raster(nrows = ny, ncols = nx, xmn = -nx/2, xmx = nx/2, ymn = -ny/2, ymx = ny/2)
+> ##D   speedup <- max(1, nx/5e2)
+> ##D   map1 <- gaussMap(r, scale = 300, var = 0.03, speedup = speedup, inMemory = TRUE)
+> ##D   if (interactive()) Plot(map1)
+> ##D 
+> ##D   # with non-default method
+> ##D   map1 <- gaussMap(r, scale = 300, var = 0.03, method = "RMgauss")
+> ##D }
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("heading")
+> ### * heading
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: heading
+> ### Title: Heading between spatial points.
+> ### Aliases: heading heading,SpatialPoints,SpatialPoints-method
+> ###   heading,matrix,matrix-method heading,matrix,SpatialPoints-method
+> ###   heading,SpatialPoints,matrix-method
+> 
+> ### ** Examples
+> 
+> library(sp)
+> N <- 10L                # number of agents
+> x1 <- stats::runif(N, -50, 50) # previous X location
+> y1 <- stats::runif(N, -50, 50) # previous Y location
+> x0 <- stats::rnorm(N, x1, 5)   # current X location
+> y0 <- stats::rnorm(N, y1, 5)   # current Y location
+> 
+> # using SpatialPoints
+> prev <- SpatialPoints(cbind(x = x1, y = y1))
+> curr <- SpatialPoints(cbind(x = x0, y = y0))
+> heading(prev, curr)
+ [1]  58.70553  26.49322 276.84424 228.06827  61.14567 218.67886 185.93288
+ [8] 147.31021 120.20979  54.86510
+> 
+> # using matrix
+> prev <- matrix(c(x1, y1), ncol = 2, dimnames = list(NULL, c("x","y")))
+> curr <- matrix(c(x0, y0), ncol = 2, dimnames = list(NULL, c("x","y")))
+> heading(prev, curr)
+ [1]  58.70553  26.49322 276.84424 228.06827  61.14567 218.67886 185.93288
+ [8] 147.31021 120.20979  54.86510
+> 
+> #using both
+> prev <- SpatialPoints(cbind(x = x1, y = y1))
+> curr <- matrix(c(x0, y0), ncol = 2, dimnames = list(NULL, c("x","y")))
+> heading(prev, curr)
+ [1]  58.70553  26.49322 276.84424 228.06827  61.14567 218.67886 185.93288
+ [8] 147.31021 120.20979  54.86510
+> 
+> prev <- matrix(c(x1, y1), ncol = 2, dimnames = list(NULL, c("x","y")))
+> curr <- SpatialPoints(cbind(x = x0, y = y0))
+> heading(prev, curr)
+ [1]  58.70553  26.49322 276.84424 228.06827  61.14567 218.67886 185.93288
+ [8] 147.31021 120.20979  54.86510
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:sp’
+
+> nameEx("inRange")
+> ### * inRange
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: inRange
+> ### Title: Test whether a number lies within range '[a,b]'
+> ### Aliases: inRange
+> 
+> ### ** Examples
+> 
+> set.seed(100)
+> x <- stats::rnorm(4) # -0.50219235  0.13153117 -0.07891709  0.88678481
+> inRange(x, 0, 1)
+[1] FALSE  TRUE FALSE  TRUE
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("initiateAgents")
+> ### * initiateAgents
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: initiateAgents
+> ### Title: 'SELES' - Initiate agents
+> ### Aliases: initiateAgents
+> ###   initiateAgents,Raster,missing,missing,ANY,missing-method
+> ###   initiateAgents,Raster,missing,Raster,ANY,missing-method
+> ###   initiateAgents,Raster,numeric,missing,ANY,missing-method
+> ###   initiateAgents,Raster,numeric,Raster,ANY,missing-method
+> ###   initiateAgents,Raster,missing,missing,ANY,numeric-method
+> 
+> ### ** Examples
+> 
+> if (require(RandomFields)) {
++   library(magrittr)
++   library(raster)
++   library(quickPlot)
++ 
++   map <- raster(xmn = 0, xmx = 10, ymn = 0, ymx = 10, val = 0, res = 1)
++   map <- gaussMap(map, scale = 1, var = 4, speedup = 1)
++   pr <- probInit(map, p = (map/maxValue(map))^2)
++   agents <- initiateAgents(map, 100, pr)
++   if (interactive()) {
++     clearPlot()
++     Plot(map)
++     Plot(agents, addTo = "map")
++   }
++   # Test that they are indeed selecting according to probabilities in pr
++   library(data.table)
++   dt1 <- data.table(table(round(map[agents], 0)))
++   setnames(dt1, old = "N", new = "count")
++   dt2 <- data.table(table(round(map[], 0)))
++   setnames(dt2, old = "N", new = "available")
++   dt <-dt1[dt2, on = "V1"]  # join the counts and available data.tables
++   setnames(dt, old = "V1", new = "mapValue")
++   dt[, selection := count/available]
++   dt[is.na(selection), selection := 0]
++   if (interactive())
++     with(dt, {plot(mapValue, selection)})
++   #'
++   # Note, can also produce a Raster representing agents,
++   # then the number of points produced can't be more than
++   # the number of pixels:
++   agentsRas <- initiateAgents(map, 30, pr, asSpatialPoints = FALSE)
++   if (interactive()) Plot(agentsRas)
++   #'
++   if (require(dplyr) && getRversion() >= 3.4) {
++     # Check that the agents are more often at the higher probability areas based on pr
++     if (utils::packageVersion("raster") >= "2.8-11") {
++       out <- data.frame(stats::na.omit(crosstab(agentsRas, map)), table(round(map[]))) %>%
++                dplyr::mutate(selectionRatio = Freq / Freq.1) %>%
++                dplyr::select(-layer.1, -Var1) %>%
++                dplyr::rename(Present = Freq, Avail = Freq.1, Type = layer.2)
++     } else {
++       out <- data.frame(stats::na.omit(crosstab(agentsRas, map)), table(round(map[]))) %>%
++                dplyr::mutate(selectionRatio = Freq/Freq.1) %>%
++                dplyr::select(-Var1, -Var1.1) %>%
++                dplyr::rename(Present = Freq, Avail = Freq.1, Type = Var2)
++     }
++     out
++   }
++ }
+Loading required package: RandomFields
+Warning in library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE,  :
+  there is no package called ‘RandomFields’
+> 
+> 
+> 
+> cleanEx()
+> nameEx("randomPolygons")
+> ### * randomPolygons
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: randomPolygons
+> ### Title: Produce a 'RasterLayer' of random polygons
+> ### Aliases: randomPolygons randomPolygon randomPolygon.SpatialPoints
+> ###   randomPolygon.matrix randomPolygon.SpatialPolygons
+> 
+> ### ** Examples
+> 
+> library(quickPlot)
+> 
+> set.seed(1234)
+> Ras <- randomPolygons(numTypes = 5)
+> if (interactive()) {
++   clearPlot()
++   Plot(Ras, cols = c("yellow", "dark green", "blue", "dark red"))
++ }
+> 
+> library(raster)
+Loading required package: sp
+> # more complex patterning, with a range of patch sizes
+> a <- randomPolygons(numTypes = 400, raster(extent(0, 50, 0, 50), res = 1, vals = 0))
+duplicate initial loci are provided
+> a[a < 320] <- 0
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "includePixel" "excludePixel" "includeRing"  "excludeRing" 
@@ -1068,7 +1421,1061 @@ ERROR: the modified constant is in this function body:
     return(landscape)
 }
 S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature RasterLayer has this body.
-Error in h(simpleError(msg, call)) : 
-  error in evaluating the argument 'x' in selecting a method for function 'raster': promise already under evaluation: recursive default argument reference or earlier problems?
-Calls: gaussMap -> raster -> <Anonymous> -> .handleSimpleError -> h
-Execution halted
+Warning in .local(x, i, j = j, ..., value) :
+  restarting interrupted promise evaluation
+> a[a >= 320] <- 1
+> suppressWarnings(clumped <- clump(a)) # warning sometimes occurs, but not important
+> aHist <- hist(table(getValues(clumped)), plot = FALSE)
+> if (interactive()) {
++   clearPlot()
++   Plot(a)
++   Plot(aHist)
++ }
+> 
+> library(raster)
+> b <- SpatialPoints(cbind(-110, 59))
+> crs(b) <- sp::CRS("+init=epsg:4326")
+> a <- randomPolygon(b, area = 1e6)
+Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj = prefer_proj) :
+  Discarded datum Unknown based on WGS84 ellipsoid in Proj4 definition
+The CRS provided is not in meters; . Converting internally to UTM so area will be approximately correct
+> if (interactive()) {
++   plot(a)
++   points(b, pch = 19)
++ }
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:raster’, ‘package:sp’, ‘package:quickPlot’
+
+> nameEx("rasterizeReduced")
+> ### * rasterizeReduced
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: rasterizeReduced
+> ### Title: Convert reduced representation to full raster
+> ### Aliases: rasterizeReduced
+> 
+> ### ** Examples
+> 
+> library(data.table)
+> library(raster)
+Loading required package: sp
+> library(quickPlot)
+> 
+> ras <- raster(extent(0, 15, 0, 15), res = 1)
+> fullRas <- randomPolygons(ras, numTypes = 2)
+> names(fullRas) <- "mapcodeAll"
+> uniqueComms <- unique(fullRas)
+> reducedDT <- data.table(mapcodeAll = uniqueComms,
++                         communities = sample(1:1000, length(uniqueComms)),
++                         biomass = rnbinom(length(uniqueComms), mu = 4000, 0.4))
+> biomass <- rasterizeReduced(reducedDT, fullRas, "biomass")
+> 
+> # The default key is the layer name of the fullRas, so rekey incase of miskey
+> setkey(reducedDT, biomass)
+> 
+> communities <- rasterizeReduced(reducedDT, fullRas, "communities")
+> setColors(communities) <- c("blue", "orange", "red")
+> if (interactive()) {
++   clearPlot()
++   Plot(biomass, communities, fullRas)
++ }
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:quickPlot’, ‘package:raster’, ‘package:sp’,
+  ‘package:data.table’
+
+> nameEx("rings")
+> ### * rings
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: rings
+> ### Title: Identifies all cells within a ring around the focal cells
+> ### Aliases: rings rings,RasterLayer-method
+> 
+> ### ** Examples
+> 
+> library(raster)
+Loading required package: sp
+> library(quickPlot)
+> 
+> # Make random forest cover map
+> emptyRas <- raster(extent(0, 1e2, 0, 1e2), res = 1)
+> 
+> # start from two cells near middle
+> loci <- (ncell(emptyRas) / 2 - ncol(emptyRas)) / 2 + c(-3, 3)
+> 
+> # Allow overlap
+> ## TODO: need to fix a bug when allowOverlap = TRUE
+> # emptyRas[] <- 0
+> # rngs <- rings(emptyRas, loci = loci, allowOverlap = TRUE, returnIndices = TRUE)
+> # # Make a raster that adds together all id in a cell
+> # wOverlap <- rngs[, list(sumEventID = sum(id)), by = "indices"]
+> # emptyRas[wOverlap$indices] <- wOverlap$sumEventID
+> # if (interactive()) {
+> #  clearPlot()
+> #  Plot(emptyRas)
+> # }
+> 
+> # No overlap is default, occurs randomly
+> emptyRas[] <- 0
+> rngs <- rings(emptyRas, loci = loci, minRadius = 7, maxRadius = 9, returnIndices = TRUE)
+> emptyRas[rngs$indices] <- rngs$id
+> if (interactive()) {
++   clearPlot()
++   Plot(emptyRas)
++ }
+> 
+> # Variable ring widths, including centre cell for smaller one
+> emptyRas[] <- 0
+> rngs <- rings(emptyRas, loci = loci, minRadius = c(0, 7), maxRadius = c(8, 18),
++               returnIndices = TRUE)
+> emptyRas[rngs$indices] <- rngs$id
+> if (interactive()) {
++   clearPlot()
++   Plot(emptyRas)
++ }
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:quickPlot’, ‘package:raster’, ‘package:sp’
+
+> nameEx("specnumperpatch-probs")
+> ### * specnumperpatch-probs
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: specificNumPerPatch
+> ### Title: Initiate a specific number of agents in a map of patches
+> ### Aliases: specificNumPerPatch
+> 
+> ### ** Examples
+> 
+> library(data.table)
+> library(raster)
+Loading required package: sp
+> library(quickPlot)
+> 
+> set.seed(1234)
+> Ntypes <- 4
+> ras <- randomPolygons(numTypes = Ntypes)
+> if (interactive()) {
++   clearPlot()
++   Plot(ras)
++ }
+> 
+> # Use numPerPatchTable
+> patchDT <- data.table(pops = 1:Ntypes, num.in.pop = c(1, 3, 5, 7))
+> rasAgents <- specificNumPerPatch(ras, patchDT)
+> rasAgents[is.na(rasAgents)] <- 0
+> 
+> if (require(testthat))
++   expect_true(all(unname(table(ras[rasAgents])) == patchDT$num.in.pop))
+Loading required package: testthat
+> 
+> # Use numPerPatchMap
+> rasPatches <- ras
+> for (i in 1:Ntypes) {
++   rasPatches[rasPatches==i] <- patchDT$num.in.pop[i]
++ }
+> if (interactive()) {
++   clearPlot()
++   Plot(ras, rasPatches)
++ }
+> rasAgents <- specificNumPerPatch(ras, numPerPatchMap = rasPatches)
+> rasAgents[is.na(rasAgents)] <- 0
+> if (interactive()) {
++   clearPlot()
++   Plot(rasAgents)
++ }
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:testthat’, ‘package:quickPlot’, ‘package:raster’,
+  ‘package:sp’, ‘package:data.table’
+
+> nameEx("splitRaster")
+> ### * splitRaster
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: mergeRaster
+> ### Title: Split and re-merge 'RasterLayer'(s)
+> ### Aliases: mergeRaster mergeRaster,list-method splitRaster
+> ###   splitRaster,RasterLayer-method
+> 
+> ### ** Examples
+> 
+> library(raster)
+Loading required package: sp
+> library(Require)
+> 
+> # an example with dimensions:
+> # nrow: 77
+> # ncol: 101
+> # nlayers: 3
+> b <- brick(system.file("external/rlogo.grd", package = "raster"))
+> r <- b[[1]] # use first layer only
+> nx <- 1
+> ny <- 2
+> 
+> tmpdir <- checkPath(file.path(tempdir(), "splitRaster-example"), create = TRUE)
+> 
+> y0 <- splitRaster(r, nx, ny, path = file.path(tmpdir, "y0")) # no buffer
+> 
+> # buffer: 10 pixels along both axes
+> y1 <- splitRaster(r, nx, ny, c(10, 10), path = file.path(tmpdir, "y1"))
+> 
+> # buffer: half the width and length of each tile
+> y2 <- splitRaster(r, nx, ny, c(0.5, 0.5), path = file.path(tmpdir, "y2"))
+> 
+> # parallel cropping
+> if (interactive()) {
++   n <- pmin(parallel::detectCores(), 4) # use up to 4 cores
++   beginCluster(n)
++   y3 <- splitRaster(r, nx, ny, c(0.7, 0.7), path = file.path(tmpdir, "y3"))
++   endCluster()
++ }
+> 
+> # the original raster:
+> if (interactive()) plot(r) # may require a call to `dev()` if using RStudio
+> 
+> # the split raster:
+> layout(mat = matrix(seq_len(nx * ny), ncol = nx, nrow = ny))
+> plotOrder <- c(4, 8, 12, 3, 7, 11, 2, 6, 10, 1, 5, 9)
+> if (interactive()) invisible(lapply(y0[plotOrder], plot))
+> 
+> # can be recombined using `raster::merge`
+> m0 <- do.call(merge, y0)
+> all.equal(m0, r) ## TRUE
+[1] TRUE
+> 
+> m1 <- do.call(merge, y1)
+> all.equal(m1, r) ## TRUE
+[1] TRUE
+> 
+> m2 <- do.call(merge, y2)
+> all.equal(m2, r) ## TRUE
+[1] TRUE
+> 
+> # or recombine using mergeRaster
+> n0 <- mergeRaster(y0)
+> all.equal(n0, r) ## TRUE
+[1] TRUE
+> 
+> n1 <- mergeRaster(y1)
+> all.equal(n1, r) ## TRUE
+[1] TRUE
+> 
+> n2 <- mergeRaster(y2)
+> all.equal(n2, r) ## TRUE
+[1] TRUE
+> 
+> unlink(tmpdir, recursive = TRUE)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:Require’, ‘package:raster’, ‘package:sp’
+
+> nameEx("spokes")
+> ### * spokes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: spokes
+> ### Title: Identify outward radiating spokes from initial points
+> ### Aliases: spokes spokes,RasterLayer,SpatialPoints,missing-method
+> 
+> ### ** Examples
+> 
+> library(sp)
+> library(raster)
+> library(quickPlot)
+> 
+> set.seed(1234)
+> 
+> ras <- raster(extent(0, 10, 0, 10), res = 1, val = 0)
+> rp <- randomPolygons(ras, numTypes = 10)
+> 
+> clearPlot()
+> Plot(rp)
+> 
+> angles <- seq(0, pi * 2, length.out = 17)
+> angles <- angles[-length(angles)]
+> n <- 2
+> loci <- sample(ncell(rp), n)
+> coords <- SpatialPoints(xyFromCell(rp, loci))
+> stopRule <- function(landscape) landscape < 3
+> d2 <- spokes(rp, coords = coords, stopRule = stopRule,
++              minRadius = 0, maxRadius = 50,
++              returnAngles = TRUE, returnDistances = TRUE,
++              allowOverlap = TRUE, angles = angles, returnIndices = TRUE)
+> 
+> # Assign values to the "patches" that were in the viewshed of a ray
+> rasB <- raster(ras)
+> rasB[] <- 0
+> rasB[d2[d2[, "stop"] == 1, "indices"]] <- 1
+> 
+> Plot(rasB, addTo = "rp", zero.color = "transparent", cols = "red")
+> 
+> if (NROW(d2) > 0) {
++   sp1 <- SpatialPoints(d2[, c("x", "y")])
++   Plot(sp1, addTo = "rp", pch = 19, size = 5, speedup = 0.1)
++ }
+> Plot(coords, addTo = "rp", pch = 19, size = 6, cols = "blue", speedup = 0.1)
+> 
+> clearPlot()
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:quickPlot’, ‘package:raster’, ‘package:sp’
+
+> nameEx("spread")
+> ### * spread
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: spread
+> ### Title: Simulate a spread process on a landscape.
+> ### Aliases: spread spread,RasterLayer-method
+> 
+> ### ** Examples
+> 
+> library(raster)
+Loading required package: sp
+> library(RColorBrewer)
+> library(quickPlot)
+> 
+> # Make random forest cover map
+> set.seed(123)
+> emptyRas <- raster(extent(0, 1e2, 0, 1e2), res = 1)
+> hab <- randomPolygons(emptyRas, numTypes = 40)
+> names(hab) <- "hab"
+> mask <- raster(emptyRas)
+> mask <- setValues(mask, 0)
+> mask[1:5000] <- 1
+> numCol <- ncol(emptyRas)
+> numCell <- ncell(emptyRas)
+> directions <- 8
+> 
+> # Can use transparent as a colour
+> setColors(hab) <- paste(c("transparent", brewer.pal(8, "Greys")))
+> 
+> # note speedup is equivalent to making pyramids, so, some details are lost
+> clearPlot()
+> Plot(hab, speedup = 3)
+> 
+> # initiate 10 fires
+> startCells <- as.integer(sample(1:ncell(emptyRas), 100))
+> fires <- spread(hab, loci = startCells, 0.235, persistence = 0, numNeighs = 2,
++                 mask = NULL, maxSize = 1e8, directions = 8, iterations = 1e6, id = TRUE)
+> 
+> #set colours of raster, including a transparent layer for zeros
+> setColors(fires, 10) <- c("transparent", brewer.pal(8, "Reds")[5:8])
+> Plot(fires)
+> Plot(fires, addTo = "hab")
+> 
+> #alternatively, set colours using cols= in the Plot function
+> clearPlot()
+> Plot(hab)
+> Plot(fires) # default colour range makes zero transparent.
+> 
+> # Instead, to give a colour to the zero values, use \code{zero.color=}
+> Plot(fires, addTo = "hab",
++      cols = colorRampPalette(c("orange", "darkred"))(10), zero.color = "transparent")
+> 
+> hab2 <- hab
+> Plot(hab2)
+> Plot(fires, addTo = "hab2", zero.color = "transparent",
++    cols = colorRampPalette(c("orange", "darkred"))(10))
+> # or overplot the original (NOTE: legend stays at original values)
+> Plot(fires, cols = topo.colors(10), new = TRUE, zero.color = "white")
+> 
+> ##------------------------------------------------------------------------------
+> ## Continue event by passing interrupted object into spreadState
+> ##------------------------------------------------------------------------------
+> 
+> ## Interrupt a spread event using iterations - need `returnIndices = TRUE` to
+> ##  use outputs as new inputs in next iteration
+> fires <- spread(hab, loci = as.integer(sample(1:ncell(hab), 10)),
++                 returnIndices = TRUE, 0.235, 0, NULL, 1e8, 8, iterations = 3, id = TRUE)
+> fires[, list(size = length(initialLocus)), by = id]  # See sizes of fires
+    id size
+ 1:  1    1
+ 2:  2    4
+ 3:  3    6
+ 4:  4    2
+ 5:  5    9
+ 6:  6   11
+ 7:  7    6
+ 8:  8   11
+ 9:  9   11
+10: 10    9
+> 
+> fires2 <- spread(hab, loci = NA_real_, returnIndices = TRUE, 0.235, 0, NULL,
++                  1e8, 8, iterations = 2, id = TRUE, spreadState = fires)
+> # NOTE events are assigned arbitrary IDs, starting at 1
+> 
+> ## Add new fires to the already burning fires
+> fires3 <- spread(hab, loci = as.integer(sample(1:ncell(hab), 10)),
++                  returnIndices = TRUE, 0.235, 0, NULL, 1e8, 8, iterations = 1,
++                  id = TRUE, spreadState = fires)
+> fires3[, list(size = length(initialLocus)), by = id]  # See sizes of fires
+    id size
+ 1:  1    1
+ 2:  2    4
+ 3:  3   14
+ 4:  4    2
+ 5:  5   12
+ 6:  6   16
+ 7:  7   10
+ 8:  8   14
+ 9:  9   16
+10: 10   13
+> # NOTE old ids are maintained, new events get ids begining above previous
+> # maximum (e.g., new fires 11 to 20 here)
+> 
+> ## Use data.table and loci...
+> fires <- spread(hab, loci = as.integer(sample(1:ncell(hab), 10)),
++                 returnIndices = TRUE, 0.235, 0, NULL, 1e8, 8, iterations = 2, id = TRUE)
+> fullRas <- raster(hab)
+> fullRas[] <- 1:ncell(hab)
+> burned <- fires[active == FALSE]
+> burnedMap <- rasterizeReduced(burned, fullRas, "id", "indices")
+> 
+> clearPlot()
+> Plot(burnedMap, new = TRUE)
+> 
+> ####################
+> ## stopRule examples
+> ####################
+> 
+> # examples with stopRule, which means that the eventual size is driven by the values on the raster
+> #  passed in to the landscape argument
+> set.seed(1234)
+> stopRule1 <- function(landscape) sum(landscape) > 50
+> stopRuleA <- spread(hab, loci = as.integer(sample(1:ncell(hab), 10)), 1, 0, NULL,
++                     maxSize = 1e6, 8, 1e6, id = TRUE, circle = TRUE, stopRule = stopRule1)
+> 
+> set.seed(1234)
+> stopRule2 <- function(landscape) sum(landscape) > 100
+> # using stopRuleBehavior = "excludePixel"
+> stopRuleB <- spread(hab, loci = as.integer(sample(1:ncell(hab), 10)), 1, 0, NULL,
++                     maxSize = 1e6, 8, 1e6, id = TRUE, circle = TRUE, stopRule = stopRule2,
++                     stopRuleBehavior = "excludePixel")
+> 
+> # using stopRuleBehavior = "includeRing", means that end result is slightly larger patches, as a
+> #  complete "iteration" of the spread algorithm is used.
+> set.seed(1234)
+> stopRuleBNotExact <- spread(hab, loci = as.integer(sample(1:ncell(hab), 10)), 1, 0,
++                              NULL, maxSize = 1e6, 8, 1e6, id = TRUE, circle = TRUE,
++                              stopRule = stopRule2)
+> clearPlot()
+> Plot(stopRuleA, stopRuleB, stopRuleBNotExact)
+> 
+> # Test that the stopRules work
+> # stopRuleA was not exact, so each value will "overshoot" the stopRule, here it was hab>50
+> foo <- cbind(vals = hab[stopRuleA], id = stopRuleA[stopRuleA > 0]);
+> tapply(foo[, "vals"], foo[, "id"], sum) # Correct ... all are above 50
+  1   2   3   4   5   6   7   8   9  10 
+185  55  95  95 135 130 165 150 125  90 
+> 
+> # stopRuleB was exact, so each value will be as close as possible while rule still is TRUE
+> #  Because we have discrete cells, these numbers will always slightly under the rule
+> foo <- cbind(vals = hab[stopRuleB], id = stopRuleB[stopRuleB > 0]);
+> tapply(foo[, "vals"], foo[, "id"], sum) # Correct ... all are above 50
+  1   2   3   4   5   6   7   8   9  10 
+ 74  99  95  95  81 100  99  90  79  90 
+> 
+> # stopRuleB_notExact will overshoot
+> foo <- cbind(vals = hab[stopRuleBNotExact], id = stopRuleBNotExact[stopRuleBNotExact > 0]);
+> tapply(foo[, "vals"], foo[, "id"], sum) # Correct ... all are above 50
+  1   2   3   4   5   6   7   8   9  10 
+185 137 247 247 135 130 165 150 125 234 
+> 
+> # Cellular automata shapes
+> # Diamonds - can make them with: a boolean raster, directions = 4,
+> #    stopRule in place, spreadProb = 1
+> diamonds <- spread(hab > 0, spreadProb = 1, directions = 4, id = TRUE, stopRule = stopRule2)
+> 
+> clearPlot()
+> Plot(diamonds)
+> 
+> # Squares - can make them with: a boolean raster, directions = 8,
+> #    stopRule in place, spreadProb = 1
+> squares <- spread(hab > 0, spreadProb = 1, directions = 8, id = TRUE, stopRule = stopRule2)
+> Plot(squares)
+> 
+> # Interference shapes - can make them with: a boolean raster, directions = 8,
+> #    stopRule in place, spreadProb = 1
+> stopRule2 <- function(landscape) sum(landscape) > 200
+> squashedDiamonds <- spread(hab > 0, spreadProb = 1,
++                            loci = (ncell(hab) - ncol(hab)) / 2 + c(4, -4),
++                            directions = 4, id = TRUE, stopRule = stopRule2)
+> clearPlot()
+> Plot(squashedDiamonds)
+> 
+> # Circles with spreadProb < 1 will give "more" circular shapes, but definitely not circles
+> stopRule2 <- function(landscape) sum(landscape) > 200
+> seed <- sample(1e4, 1)
+> set.seed(seed)
+> circlish <- spread(hab > 0, spreadProb = 0.23,
++                    loci = (ncell(hab) - ncol(hab)) / 2 + c(4, -4),
++                    directions = 8, id = TRUE, circle = TRUE)#, stopRule = stopRule2)
+> set.seed(seed)
+> regularCA <- spread(hab > 0, spreadProb = 0.23,
++                     loci = (ncell(hab) - ncol(hab)) / 2 + c(4, -4),
++                     directions = 8, id = TRUE)#, stopRule = stopRule2)
+> 
+> clearPlot()
+> Plot(circlish, regularCA)
+> 
+> ####################
+> # complex stopRule
+> ####################
+> 
+> initialLoci <- sample(seq_len(ncell(hab)), 2)
+> endSizes <- seq_along(initialLoci) * 200
+> 
+> # Can be a function of landscape, id, and/or any other named
+> #   variable passed into spread
+> stopRule3 <- function(landscape, id, endSizes) sum(landscape) > endSizes[id]
+> 
+> twoCirclesDiffSize <- spread(hab, spreadProb = 1, loci = initialLoci, circle = TRUE,
++                              directions = 8, id = TRUE, stopRule = stopRule3,
++                              endSizes = endSizes, stopRuleBehavior = "excludePixel")
+> 
+> # or using named list of named elements:
+> twoCirclesDiffSize2 <- spread(hab, spreadProb = 1, loci = initialLoci, circle = TRUE,
++                              directions = 8, id = TRUE, stopRule = stopRule3,
++                              vars = list(endSizes = endSizes), stopRuleBehavior = "excludePixel")
+> 
+> identical(twoCirclesDiffSize, twoCirclesDiffSize2) ## TRUE
+[1] FALSE
+> 
+> clearPlot()
+> Plot(twoCirclesDiffSize)
+> 
+> cirs <- getValues(twoCirclesDiffSize)
+> vals <- tapply(hab[twoCirclesDiffSize], cirs[cirs > 0], sum)
+> 
+> # Stop if sum of landscape is big or mean of quality is too small
+> quality <- raster(hab)
+> quality[] <- runif(ncell(quality), 0, 1)
+> stopRule4 <- function(landscape, quality, cells) {
++   (sum(landscape) > 20) | (mean(quality[cells]) < 0.3)
++ }
+> 
+> twoCirclesDiffSize <- spread(hab, spreadProb = 1, loci = initialLoci, circle = TRUE,
++                              directions = 8, id = TRUE, stopRule = stopRule4,
++                              quality = quality, stopRuleBehavior = "excludePixel")
+> 
+> ##############
+> # allowOverlap
+> ##############
+> ## TODO: fix error when allowOverlap = TRUE
+> # set.seed(3113)
+> # initialLoci <- as.integer(sample(1:ncell(hab), 10))
+> #
+> # # using "landscape", "id", and a variable passed in
+> # maxVal <- rep(500, length(initialLoci))
+> #
+> # # define stopRule
+> # stopRule2 <- function(landscape, id, maxVal) sum(landscape) > maxVal[id]
+> # circs <- spread(hab, spreadProb = 1, circle = TRUE, loci = initialLoci, stopRule = stopRule2,
+> #                 id = TRUE, allowOverlap = TRUE, stopRuleBehavior = "includeRing",
+> #                 maxVal = maxVal, returnIndices = TRUE)
+> # (vals <- tapply(hab[circs$indices], circs$id, sum))
+> # vals <= maxVal ## all TRUE
+> # overlapEvents <- raster(hab)
+> # overlapEvents[] <- 0
+> # toMap <- circs[, sum(id), by = indices]
+> # overlapEvents[toMap$indices] <- toMap$V1
+> #
+> # clearPlot()
+> # Plot(overlapEvents)
+> 
+> ## Using alternative algorithm, not probabilistic diffusion
+> ## Will give exactly correct sizes, yet still with variability
+> ## within the spreading (i.e., cells with and without successes)
+> seed <- sample(1e6, 1)
+> set.seed(seed)
+> startCells <- startCells[1:4]
+> maxSizes <- rexp(length(startCells), rate = 1 / 500)
+> fires <- spread(hab, loci = startCells, 1, persistence = 0,
++                 neighProbs = c(0.5, 0.5, 0.5) / 1.5,
++                 mask = NULL, maxSize = maxSizes, directions = 8,
++                 iterations = 1e6, id = TRUE, plot.it = FALSE, exactSizes = TRUE);
+> all(table(fires[fires > 0][]) == floor(maxSizes))
+[1] TRUE
+> 
+> dev()
+> clearPlot()
+> Plot(fires, new = TRUE, cols = c("red", "yellow"), zero.color = "white")
+> Plot(hist(table(fires[][fires[] > 0])), title = "fire size distribution")
+> 
+> ## Example with relativeSpreadProb ... i.e., a relative probability spreadProb
+> ##  (shown here because because spreadProb raster is not a probability).
+> ##  Here, we force the events to grow, choosing always 2 neighbours,
+> ##  according to the relative probabilities contained on hab layer.
+> ##
+> ## Note: `neighProbs = c(0,1)` forces each active pixel to move to 2 new pixels
+> ## (`prob = 0` for 1 neighbour, `prob = 1` for 2 neighbours)
+> ##
+> ## Note: set hab3 to be very distinct probability differences, to detect spread
+> ##  differences
+> hab3 <- (hab < 20) * 200 + 1
+> seed <- 643503
+> set.seed(seed)
+> sam <- sample(which(hab3[] == 1), 1)
+> set.seed(seed)
+> events1 <- spread(hab3, spreadProb = hab3, loci = sam, directions = 8,
++              neighProbs = c(0, 1), maxSize = c(70), exactSizes = TRUE)
+> 
+> # Compare to absolute probability version
+> set.seed(seed)
+> events2 <- spread(hab3, id = TRUE, loci = sam, directions = 8,
++                  neighProbs = c(0, 1), maxSize = c(70), exactSizes = TRUE)
+> 
+> clearPlot()
+> Plot(events1, new = TRUE, cols = c("red", "yellow"), zero.color = "white")
+> Plot(events2, new = TRUE, cols = c("red", "yellow"), zero.color = "white")
+> Plot(hist(table(events1[][events1[] > 0]), breaks = 30), title = "Event size distribution")
+> # Check that events1 resulted in higher hab3 pixels overall
+> 
+> # Compare outputs -- should be more high value hab pixels spread to in event1
+> #  (randomness may prevent this in all cases)
+> hab3[events1[] > 0]
+ [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+[39] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+> hab3[events2[] > 0]
+ [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+[39] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+> 
+> sum(hab3[events1[] > 0]) >= sum(hab3[events2[] > 0]) ## should be usually TRUE
+[1] TRUE
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:quickPlot’, ‘package:RColorBrewer’,
+  ‘package:raster’, ‘package:sp’
+
+> nameEx("spread2")
+> ### * spread2
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: spread2
+> ### Title: Simulate a contagious spread process on a landscape, with
+> ###   data.table internals
+> ### Aliases: spread2
+> 
+> ### ** Examples
+> 
+> library(data.table)
+> library(raster)
+Loading required package: sp
+> library(quickPlot)
+> 
+> data.table::setDTthreads(1)
+> 
+> a <- raster(extent(0, 10, 0, 10), res = 1)
+> sams <- sort(sample(ncell(a), 3))
+> 
+> # Simple use -- similar to spread(...)
+> out <- spread2(a, start = sams, 0.225)
+> if (interactive()) {
++   clearPlot()
++   Plot(out)
++ }
+> 
+> # Use maxSize -- this gives an upper limit
+> maxSizes <- sort(sample(1:10, size = length(sams)))
+> out <- spread2(a, start = sams, 0.225, maxSize = maxSizes, asRaster = FALSE)
+> # check TRUE using data.table .N
+> out[, .N, by = "initialPixels"]$N <= maxSizes
+[1] TRUE TRUE TRUE
+> 
+> # Use exactSize -- gives an exact size, if there is enough space on the Raster
+> exactSizes <- maxSizes
+> out <- spread2(a, start = sams, spreadProb = 0.225,
++                exactSize = exactSizes, asRaster = FALSE)
+> out[, .N, by = "initialPixels"]$N == maxSizes # should be TRUE TRUE TRUE
+[1] TRUE TRUE TRUE
+> 
+> # Use exactSize -- but where it can't be achieved
+> exactSizes <- sort(sample(100:110, size = length(sams)))
+> out <- spread2(a, start = sams, 1, exactSize = exactSizes)
+> 
+> # Iterative calling -- create a function with a high escape probability
+> spreadWithEscape <- function(ras, start, escapeProb, spreadProb) {
++   out <- spread2(ras, start = sams, spreadProb = escapeProb, asRaster = FALSE)
++   while (any(out$state == "sourceActive")) {
++     # pass in previous output as start
++     out <- spread2(ras, start = out, spreadProb = spreadProb,
++                     asRaster = FALSE, skipChecks = TRUE) # skipChecks for speed
++   }
++   out
++ }
+> 
+> set.seed(421)
+> out1 <- spreadWithEscape(a, sams, escapeProb = 0.25, spreadProb = 0.225)
+> set.seed(421)
+> out2 <- spread2(a, sams, 0.225, asRaster = FALSE)
+> # The one with high escape probability is larger (most of the time)
+> NROW(out1) > NROW(out2)
+[1] FALSE
+> 
+> ## Use neighProbs, with a spreadProb that is a RasterLayer
+> # Create a raster of different values, which will be the relative probabilities
+> #   i.e., they are rescaled to relative probabilities within the 8 neighbour choices.
+> #   The neighProbs below means 70% of the time, 1 neighbour will be chosen,
+> #   30% of the time 2 neighbours.
+> #   The cells with spreadProb of 5 are 5 times more likely than cells with 1 to be chosen,
+> #   when they are both within the 8 neighbours
+> sp <- raster(extent(0, 3, 0, 3), res = 1, vals = 1:9) #small raster, simple values
+> # Check neighProbs worked
+> out <- list()
+> 
+> # enough replicates to see stabilized probabilities
+> for (i in 1:100) {
++   out[[i]] <- spread2(sp, spreadProbRel = sp, spreadProb = 1,
++                       start = 5, iterations = 1,
++                       neighProbs = c(1), asRaster = FALSE)
++ }
+> out <- data.table::rbindlist(out)[pixels != 5] # remove starting cell
+> table(sp[out$pixels])
+
+ 1  2  3  4  6  7  8  9 
+ 3  5  8  8 17 13 26 20 
+> # should be non-significant -- note no 5 because that was the starting cell
+> #  This tests whether the null model is true ... there should be proportions
+> #  equivalent to 1:2:3:4:6:7:8:9 ... i.e,. cell 9 should have 9x as many events
+> #  spread to it as cell 1. This comes from sp object above which is providing
+> #  the relative spread probabilities
+> keep <- c(1:4, 6:9)
+> chisq.test(keep, unname(tabulate(sp[out$pixels], 9)[keep]), simulate.p.value = TRUE)
+
+	Pearson's Chi-squared test with simulated p-value (based on 2000
+	replicates)
+
+data:  keep and unname(tabulate(sp[out$pixels], 9)[keep])
+X-squared = 48, df = NA, p-value = 1
+
+> 
+> ## Example showing asymmetry
+> sams <- ncell(a) / 4 - ncol(a) / 4 * 3
+> circs <- spread2(a, spreadProb = 0.213, start = sams,
++                  asymmetry = 2, asymmetryAngle = 135,
++                  asRaster = TRUE)
+> 
+> ## ADVANCED: Estimate spreadProb when using asymmetry, such that the expected
+> ##   event size is the same as without using asymmetry
+> ## Not run: 
+> ##D   if (interactive()) {
+> ##D     ras <- raster(a)
+> ##D     ras[] <- 1
+> ##D 
+> ##D     n <- 100
+> ##D     sizes <- integer(n)
+> ##D     for (i in 1:n) {
+> ##D       circs <- spread2(ras, spreadProb = 0.225,
+> ##D                        start = round(ncell(ras) / 4 - ncol(ras) / 4 * 3),
+> ##D                        asRaster = FALSE)
+> ##D       sizes[i] <- circs[, .N]
+> ##D     }
+> ##D     goalSize <- mean(sizes)
+> ##D 
+> ##D     library(parallel)
+> ##D     library(DEoptim)
+> ##D     cl <- makeCluster(pmin(10, detectCores() - 2)) # need 10 cores for 10 populations in DEoptim
+> ##D     parallel::clusterEvalQ(cl, {
+> ##D       library(SpaDES.tools)
+> ##D       library(raster)
+> ##D       library(fpCompare)
+> ##D     })
+> ##D 
+> ##D     objFn <- function(sp, n = 20, ras, goalSize) {
+> ##D       sizes <- integer(n)
+> ##D       for (i in 1:n) {
+> ##D         circs <- spread2(ras, spreadProb = sp, start = ncell(ras) / 4 - ncol(ras) / 4 * 3,
+> ##D                          asymmetry = 2, asymmetryAngle = 135,
+> ##D                          asRaster = FALSE)
+> ##D         sizes[i] <- circs[, .N]
+> ##D       }
+> ##D       abs(mean(sizes) - goalSize)
+> ##D     }
+> ##D     aa <- DEoptim(objFn, lower = 0.2, upper = 0.23,
+> ##D                   control = DEoptim.control(cluster = cl, NP = 10, VTR = 0.02,
+> ##D                                             initialpop = as.matrix(rnorm(10, 0.213, 0.001))),
+> ##D                   ras = a, goalSize = goalSize)
+> ##D 
+> ##D     # The value of spreadProb that will give the same expected event sizes to spreadProb = 0.225 is:
+> ##D     sp <- aa$optim$bestmem
+> ##D     circs <- spread2(ras, spreadProb = sp, start = ncell(ras) / 4 - ncol(ras) / 4 * 3,
+> ##D                       asymmetry = 2, asymmetryAngle = 135, asRaster = FALSE)
+> ##D 
+> ##D     stopCluster(cl)
+> ##D   }
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:quickPlot’, ‘package:raster’, ‘package:sp’,
+  ‘package:data.table’
+
+> nameEx("spread3")
+> ### * spread3
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: spread3
+> ### Title: An alternative spread function, conceived for insects
+> ### Aliases: spread3
+> 
+> ### ** Examples
+> 
+> ## these tests are fairly heavy, so don't run during automated tests
+> if (interactive() && require("RandomFields")) {
++   #########################################################
++   # Simple case, no variation in rasQuality, numeric advectionDir and advectionMag
++   #########################################################
++   library(raster)
++   library(quickPlot)
++   maxDim <- 10000
++   ras <- raster::raster(extent(c(0, maxDim, 0, maxDim)), res = 100, vals = 0)
++   rasQuality <- raster(ras)
++   rasQuality[] <- 1
++   rasAbundance <- raster(rasQuality)
++   rasAbundance[] <- 0
++   # startPixel <- middlePixel(rasAbundance)
++   startPixel <- sample(seq(ncell(rasAbundance)), 30)
++   rasAbundance[startPixel] <- 1000
++   advectionDir <- 70
++   advectionMag <- 4 * res(rasAbundance)[1]
++   meanDist <- 2600
++ 
++    if (interactive()) {
++      # Test the dispersal kernel -- create a function
++      plotDispersalKernel <- function(out, meanAdvectionMag) {
++        out[, disGroup := round(distance / 100) * 100]
++        freqs <- out[, .N, by = "disGroup"]
++        freqs[, `:=`(cumSum = cumsum(N), N = N)]
++        Plot(freqs$disGroup, freqs$cumSum, addTo = "CumulativeNumberSettled",
++             title = "Cumulative Number Settled") # can plot the distance X number
++        abline(v = meanAdvectionMag + meanDist)
++        newTitle <- "Number Settled By Distance"
++        Plot(freqs$disGroup, freqs$N, addTo = gsub(" ", "", newTitle),
++             title = newTitle) # can plot the distance X number
++        abline(v = meanAdvectionMag + meanDist)
++        # should be 0.63:
++        freqs[disGroup == meanAdvectionMag + meanDist, cumSum] / tail(freqs,1)[, cumSum]
++        mtext(side = 3, paste("Average habitat quality: ",
++              round(mean(rasQuality[], na.rm = TRUE), 2)),
++              outer = TRUE, line = -2, cex = 2)
++     }
++     dev() # don't use Rstudio windows, which is very slow
++     clearPlot()
++     out <- spread3(rasAbundance = rasAbundance,
++                    rasQuality = rasQuality,
++                    advectionDir = advectionDir,
++                    advectionMag = advectionMag,
++                    meanDist = meanDist, verbose = 2,
++                    plot.it = 2)
++ 
++     plotDispersalKernel(out, advectionMag)
++   }
++ 
++   #########################################################
++   ### The case of variable quality raster
++   #########################################################
++   if (require(sf) && require(fasterize)) {
++     library(SpaDES.tools) # for gaussMap
++     a <- randomStudyArea(size = 1e9)
++     ras <- raster(extent(a), res = 100)
++     mask <- fasterize(st_as_sf(a), ras) # faster than raster::rasterize
++     rasQuality <- gaussMap(ras)
++     crs(rasQuality) <- crs(a)
++     rasQuality[is.na(mask)] <- NA
++     # rescale so min is 0.75 and max is 1
++     rasQuality[] <- rasQuality[] / (maxValue(rasQuality) * 4 ) + 1/4
++     rasAbundance <- raster(rasQuality)
++     rasAbundance[] <- 0
++     startPixel <- sample(seq(ncell(rasAbundance)), 300)
++     rasAbundance[startPixel] <- 1000
++     advectionDir <- 75
++     advectionMag <- 4 * res(rasAbundance)[1]
++     meanDist <- 2600
++     clearPlot()
++     out <- spread3(rasAbundance = rasAbundance,
++                    rasQuality = rasQuality,
++                    advectionDir = advectionDir,
++                    advectionMag = advectionMag,
++                    meanDist = meanDist, verbose = 2,
++                    plot.it = 1)
++     if (interactive()) {
++       plotDispersalKernel(out, advectionMag)
++     }
++   }
++ 
++   ###############################################################################
++   ### The case of variable quality raster, raster for advectionDir & advectionMag
++   ###############################################################################
++   library(raster)
++   library(quickPlot)
++   library(SpaDES.tools)
++   maxDim <- 10000
++   ras <- raster(extent(c(0, maxDim, 0, maxDim)), res = 100, vals = 0)
++   rasQuality <- raster(ras)
++   rasQuality[] <- 1
++   rasAbundance <- raster(rasQuality)
++   rasAbundance[] <- NA
++   # startPixel <- middlePixel(rasAbundance)
++   startPixel <- sample(seq(ncell(rasAbundance)), 25)
++   rasAbundance[startPixel] <- 1000
++ 
++   # raster for advectionDir
++   advectionDir <- gaussMap(ras)
++   crs(advectionDir) <- crs(rasQuality)
++   # rescale so min is 0.75 and max is 1
++   advectionDir[] <- advectionDir[] / (maxValue(advectionDir)) * 180
++ 
++   # raster for advectionMag
++   advectionMag <- gaussMap(ras)
++   crs(advectionMag) <- crs(rasQuality)
++   # rescale so min is 0.75 and max is 1
++   advectionMag[] <- advectionMag[] / (maxValue(advectionMag)) * 600
++ 
++   out <- spread3(rasAbundance = rasAbundance,
++                  rasQuality = rasQuality,
++                  advectionDir = advectionDir,
++                  advectionMag = advectionMag,
++                  meanDist = meanDist, verbose = 2,
++                  plot.it = 1)
++ 
++   if (interactive()) {
++     dev() # don't use Rstudio windows, which is very slow
++     clearPlot()
++     Plot(advectionDir, title = "Wind direction", cols = "Reds")
++     Plot(advectionMag, title = "Wind speed", cols = "Blues")
++     plotDispersalKernel(out, mean(advectionMag[]))
++     Plot(rasAbundance, addTo = "rasAbundance", cols = "black", title = "")
++   }
++ 
++   #########################################
++   # save iterations to a stack to make animated GIF
++   ########################################
++   tmpStack <- raster::rasterTmpFile("stackToAnimate")
++   out <- spread3(rasAbundance = rasAbundance,
++                  rasQuality = rasQuality,
++                  advectionDir = advectionDir,
++                  advectionMag = advectionMag,
++                  meanDist = 2600, verbose = 2,
++                  plot.it = 0, saveStack = tmpStack)
++ 
++   ## This animates the series of images into an animated GIF
++   if (require(animation, quietly = TRUE)) {
++     out2 <- raster::stack(tmpStack)
++     gifName <- file.path(tempdir(), "animation.gif")
++     saveGIF(interval = 0.1, movie.name = gifName, expr = {
++       for (i in seq(numLayers(out2))) plot(out2[[i]])
++     })
++   }
++ }
+> 
+> 
+> 
+> cleanEx()
+> nameEx("wrap")
+> ### * wrap
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: wrap
+> ### Title: Wrap coordinates or pixels in a torus-like fashion
+> ### Aliases: wrap wrap,matrix,Extent,missing-method
+> ###   wrap,SpatialPoints,ANY,missing-method
+> ###   wrap,matrix,Raster,missing-method wrap,matrix,matrix,missing-method
+> ###   wrap,SpatialPointsDataFrame,Extent,logical-method
+> ###   wrap,SpatialPointsDataFrame,Raster,logical-method
+> ###   wrap,SpatialPointsDataFrame,matrix,logical-method
+> 
+> ### ** Examples
+> 
+> library(raster)
+Loading required package: sp
+> library(quickPlot)
+> 
+> xrange <- yrange <- c(-50, 50)
+> hab <- raster(extent(c(xrange, yrange)))
+> hab[] <- 0
+> 
+> # initialize agents
+> N <- 10
+> 
+> # previous points
+> x1 <- rep(0, N)
+> y1 <- rep(0, N)
+> # initial points
+> starts <- cbind(x = stats::runif(N, xrange[1], xrange[2]),
++                 y = stats::runif(N, yrange[1], yrange[2]))
+> 
+> # create the agent object
+> agent <- SpatialPointsDataFrame(coords = starts, data = data.frame(x1, y1))
+> 
+> 
+> ln <- rlnorm(N, 1, 0.02) # log normal step length
+> sd <- 30 # could be specified globally in params
+> 
+> if (interactive()) {
++   clearPlot()
++   Plot(hab, zero.color = "white", axes = "L")
++ }
+> for (i in 1:10) {
++   agent <- crw(agent = agent, extent = extent(hab), stepLength = ln,
++                stddev = sd, lonlat = FALSE, torus = TRUE)
++   if (interactive()) Plot(agent, addTo = "hab", axes = TRUE)
++ }
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+
+detaching ‘package:quickPlot’, ‘package:raster’, ‘package:sp’
+
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  160.334 5.402 171.98 0.211 0.442 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
