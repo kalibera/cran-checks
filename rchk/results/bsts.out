@@ -1,0 +1,28 @@
+Package bsts version 0.9.7
+Package built using 82396/R 4.3.0; x86_64-pc-linux-gnu; 2022-05-24 13:00:22 UTC; unix   
+Checked with rchk version 35d5d01a98903a5f3e9ec166dcdb2f790ecb784f LLVM version 12.0.1
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Function BOOM::AllocateArray(std::__1::vector<int, std::__1::allocator<int> > const&)
+  [UP] calling allocating function Rf_allocArray(?,V) with a fresh pointer (r_dims <arg 2>) Boom/src/boom_r_tools.cpp:580
+
+Function BOOM::RMemoryProtector::protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Boom/include/r_interface/boom_r_tools.hpp:368
+
+Function BOOM::SetColnames(SEXPREC*, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&)
+  [UP] unprotected variable r_dimnames while calling allocating function BOOM::CharacterVector(std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&) Boom/src/boom_r_tools.cpp:245
+
+Function BOOM::ToRArray(BOOM::ConstArrayView const&)
+  [UP] calling allocating function Rf_allocArray(?,V) with a fresh pointer (r_dims <arg 2>) Boom/src/boom_r_tools.cpp:563
+  [UP] unprotected variable ans while calling allocating function BOOM::ConstArrayIterator::operator*() const Boom/src/boom_r_tools.cpp:566
+
+Function BOOM::ToRString(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] unprotected variable ans while calling allocating function Rf_mkChar Boom/src/boom_r_tools.cpp:599
+
+Function BOOM::ToRStringVector(std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&)
+  [UP] unprotected variable ans while calling allocating function Rf_mkChar Boom/src/boom_r_tools.cpp:608
+
+Function analysis_common_r_predict_multivariate_bsts_model_
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function BOOM::Factor::~Factor() bsts/src/mbsts.cc:184
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function std::__1::unique_ptr<BOOM::bsts::MultivariateGaussianModelManager, std::__1::default_delete<BOOM::bsts::MultivariateGaussianModelManager> >::~unique_ptr() bsts/src/mbsts.cc:184

@@ -1,0 +1,58 @@
+Package ECctmc version 0.2.5
+Package built using 82396/R 4.3.0; x86_64-pc-linux-gnu; 2022-05-24 11:59:06 UTC; unix   
+Checked with rchk version 35d5d01a98903a5f3e9ec166dcdb2f790ecb784f LLVM version 12.0.1
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function _ECctmc_comp_expmat
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr ECctmc/src/RcppExports.cpp:171
+  [PB] has negative depth ECctmc/src/RcppExports.cpp:179
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete ECctmc/src/RcppExports.cpp:179
+  [PB] has possible protection stack imbalance ECctmc/src/RcppExports.cpp:180
+
+Function _ECctmc_comp_expmat_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ECctmc_sample_path_mr
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr ECctmc/src/RcppExports.cpp:35
+  [PB] has negative depth ECctmc/src/RcppExports.cpp:43
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete ECctmc/src/RcppExports.cpp:43
+  [PB] has possible protection stack imbalance ECctmc/src/RcppExports.cpp:44
+
+Function _ECctmc_sample_path_mr_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ECctmc_sample_path_unif
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr ECctmc/src/RcppExports.cpp:69
+  [PB] has negative depth ECctmc/src/RcppExports.cpp:77
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete ECctmc/src/RcppExports.cpp:77
+  [PB] has possible protection stack imbalance ECctmc/src/RcppExports.cpp:78
+
+Function _ECctmc_sample_path_unif2
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr ECctmc/src/RcppExports.cpp:106
+  [PB] has negative depth ECctmc/src/RcppExports.cpp:114
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete ECctmc/src/RcppExports.cpp:114
+  [PB] has possible protection stack imbalance ECctmc/src/RcppExports.cpp:115
+
+Function _ECctmc_sample_path_unif2_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %32 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ECctmc_sample_path_unif3
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr ECctmc/src/RcppExports.cpp:141
+  [PB] has negative depth ECctmc/src/RcppExports.cpp:149
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete ECctmc/src/RcppExports.cpp:149
+  [PB] has possible protection stack imbalance ECctmc/src/RcppExports.cpp:150
+
+Function _ECctmc_sample_path_unif3_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ECctmc_sample_path_unif_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

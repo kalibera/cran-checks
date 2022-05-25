@@ -1,0 +1,60 @@
+Package PopGenome version 2.7.5
+Package built using 82396/R 4.3.0; x86_64-pc-linux-gnu; 2022-05-24 12:26:47 UTC; unix   
+Checked with rchk version 35d5d01a98903a5f3e9ec166dcdb2f790ecb784f LLVM version 12.0.1
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+ERROR: Invalid write to symbol tabixhandle_attrname_filename at PopGenome/src/whopgenome/whoptbi_Rifc.cpp:59
+ERROR: Invalid write to symbol vcfhandle_attrname_filename at PopGenome/src/whopgenome/whopgen_main.cpp:58
+
+Function RBool::set(bool)
+  [PB] has possible protection stack imbalance PopGenome/src/whopgenome/whopgen_rsupport.cpp:500
+
+Function RBool::~RBool()
+  [PB] has negative depth PopGenome/src/whopgenome/whopgen_rsupport.cpp:485
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete PopGenome/src/whopgenome/whopgen_rsupport.cpp:485
+  [PB] has possible protection stack imbalance PopGenome/src/whopgenome/whopgen_rsupport.cpp:487
+
+Function RInteger::set(int)
+  [PB] has possible protection stack imbalance PopGenome/src/whopgenome/whopgen_rsupport.cpp:562
+
+Function RInteger::~RInteger()
+  [PB] has negative depth PopGenome/src/whopgenome/whopgen_rsupport.cpp:548
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete PopGenome/src/whopgenome/whopgen_rsupport.cpp:548
+  [PB] has possible protection stack imbalance PopGenome/src/whopgenome/whopgen_rsupport.cpp:549
+
+Function RList::RList(int)
+  [PB] has possible protection stack imbalance PopGenome/src/whopgenome/whopgen_rsupport.cpp:965
+
+Function RList::Rf_isList(SEXPREC*)
+  [PB] has possible protection stack imbalance PopGenome/src/whopgenome/whopgen_rsupport.cpp:984
+
+Function RList::~RList()
+  [PB] has negative depth PopGenome/src/whopgenome/whopgen_rsupport.cpp:972
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete PopGenome/src/whopgenome/whopgen_rsupport.cpp:972
+  [PB] has possible protection stack imbalance PopGenome/src/whopgenome/whopgen_rsupport.cpp:973
+
+Function RMatrix::alloc(int, int, int)
+  [PB] has possible protection stack imbalance PopGenome/src/whopgenome/whopgen_rsupport.cpp:624
+
+Function RMatrix::dealloc()
+  [PB] has negative depth PopGenome/src/whopgenome/whopgen_rsupport.cpp:634
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete PopGenome/src/whopgenome/whopgen_rsupport.cpp:634
+  [PB] has possible protection stack imbalance PopGenome/src/whopgenome/whopgen_rsupport.cpp:636
+
+Function RString::alloc(int)
+  [PB] has negative depth PopGenome/src/whopgenome/whopgen_rsupport.cpp:305
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete PopGenome/src/whopgenome/whopgen_rsupport.cpp:305
+  [PB] has possible protection stack imbalance PopGenome/src/whopgenome/whopgen_rsupport.cpp:310
+
+Function RString::~RString()
+  [PB] has negative depth PopGenome/src/whopgenome/whopgen_rsupport.cpp:240
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete PopGenome/src/whopgenome/whopgen_rsupport.cpp:240
+  [PB] has possible protection stack imbalance PopGenome/src/whopgenome/whopgen_rsupport.cpp:241
+
+Function R_GetExtPtrTag(SEXPREC*)
+  [PB] has possible protection stack imbalance PopGenome/src/whopgenome/whopgen_rsupport.cpp:186
+
+Function createDataFrame(unsigned int, unsigned int, char const**, char const**)
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete PopGenome/src/whopgenome/whop_r_dataframe.cpp:144

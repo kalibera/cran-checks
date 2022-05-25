@@ -1,0 +1,525 @@
+Package trajeR version 0.9.0.5
+Package built using 82396/R 4.3.0; x86_64-pc-linux-gnu; 2022-05-24 12:49:03 UTC; unix   
+Checked with rchk version 35d5d01a98903a5f3e9ec166dcdb2f790ecb784f LLVM version 12.0.1
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Rcpp_namespace()
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using Rcpp::internal::get_Rcpp_namespace() Rcpp/include/Rcpp/Environment.h:361
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::get(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
+  [UP] calling allocating function Rcpp::internal::Rcpp_eval_impl(SEXPREC*, SEXPREC*) with a fresh pointer (res <arg 1>) Rcpp/include/Rcpp/Environment.h:112
+
+Function Rcpp::InternalFunction_Impl<Rcpp::PreserveStorage>::set(SEXPREC*)
+  [UP] ignoring variable xp as it has address taken, results will be incomplete 
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_EMCNORMparam
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:2261
+  [PB] has negative depth trajeR/src/RcppExports.cpp:2273
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:2273
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:2274
+
+Function _trajeR_EMCNORMparam_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_EMCensoredSigmaunique_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:745
+  [PB] has negative depth trajeR/src/RcppExports.cpp:757
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:757
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:758
+
+Function _trajeR_EMCensoredSigmaunique_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %53 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_EMCensored_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:697
+  [PB] has negative depth trajeR/src/RcppExports.cpp:709
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:709
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:710
+
+Function _trajeR_EMCensored_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %53 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_EMLOGITIRLS_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1336
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1348
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1348
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1349
+
+Function _trajeR_EMLOGITIRLS_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_EMLOGIT_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1290
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1302
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1302
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1303
+
+Function _trajeR_EMLOGIT_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_EMLOGITparam
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:2307
+  [PB] has negative depth trajeR/src/RcppExports.cpp:2319
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:2319
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:2320
+
+Function _trajeR_EMLOGITparam_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_EMMult_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:2408
+  [PB] has negative depth trajeR/src/RcppExports.cpp:2420
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:2420
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:2421
+
+Function _trajeR_EMMult_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %62 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_EMSigmaunique_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:649
+  [PB] has negative depth trajeR/src/RcppExports.cpp:661
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:661
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:662
+
+Function _trajeR_EMSigmaunique_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %53 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_EMZIPIRLS_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1828
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1840
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1840
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1841
+
+Function _trajeR_EMZIPIRLS_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %50 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_EMZIP_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1781
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1793
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1793
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1794
+
+Function _trajeR_EMZIP_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %50 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_EMZIPparam
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:2357
+  [PB] has negative depth trajeR/src/RcppExports.cpp:2369
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:2369
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:2370
+
+Function _trajeR_EMZIPparam_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %59 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_EM_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:601
+  [PB] has negative depth trajeR/src/RcppExports.cpp:613
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:613
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:614
+
+Function _trajeR_EM_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %53 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_IEMLOGIT_cpp
+  [UP] ignoring variable <unnamed var:   %42 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_IEMZIP_cpp
+  [UP] ignoring variable <unnamed var:   %45 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_IEM_cpp
+  [UP] ignoring variable <unnamed var:   %48 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_LikelihoodBETA_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:134
+  [PB] has negative depth trajeR/src/RcppExports.cpp:146
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:146
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:147
+
+Function _trajeR_LikelihoodBETA_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_Likelihoodalpha_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:414
+  [PB] has negative depth trajeR/src/RcppExports.cpp:426
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:426
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:427
+
+Function _trajeR_Likelihoodalpha_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_convtolist_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1885
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1897
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1897
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1898
+
+Function _trajeR_convtolist_cpp_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_densityChoice_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:2008
+  [PB] has negative depth trajeR/src/RcppExports.cpp:2020
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:2020
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:2021
+
+Function _trajeR_densityChoice_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %53 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_difLBETA_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:90
+  [PB] has negative depth trajeR/src/RcppExports.cpp:102
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:102
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:103
+
+Function _trajeR_difLBETA_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_difLLOGIT_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1113
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1125
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1125
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1126
+
+Function _trajeR_difLLOGIT_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %38 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_difLPois_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1467
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1479
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1479
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1480
+
+Function _trajeR_difLPois_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %38 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_difLZIP_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1598
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1610
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1610
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1611
+
+Function _trajeR_difLZIP_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_difLalphaMult_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:2106
+  [PB] has negative depth trajeR/src/RcppExports.cpp:2118
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:2118
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:2119
+
+Function _trajeR_difLalphaMult_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %56 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_difLalpha_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:322
+  [PB] has negative depth trajeR/src/RcppExports.cpp:334
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:334
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:335
+
+Function _trajeR_difLalpha_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_difLalphaunique_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:368
+  [PB] has negative depth trajeR/src/RcppExports.cpp:380
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:380
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:381
+
+Function _trajeR_difLalphaunique_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_difLbetakPois_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1424
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1436
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1436
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1437
+
+Function _trajeR_difLbetakPois_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_difLbetakalpha_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:228
+  [PB] has negative depth trajeR/src/RcppExports.cpp:240
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:240
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:241
+
+Function _trajeR_difLbetakalpha_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %56 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_difLsigmaalphaunique_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:276
+  [PB] has negative depth trajeR/src/RcppExports.cpp:288
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:288
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:289
+
+Function _trajeR_difLsigmaalphaunique_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %53 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_difftheta_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:926
+  [PB] has negative depth trajeR/src/RcppExports.cpp:938
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:938
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:939
+
+Function _trajeR_difftheta_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_findtheta_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1007
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1019
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1019
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1020
+
+Function _trajeR_findtheta_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %35 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_ftauxCNORM_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:553
+  [PB] has negative depth trajeR/src/RcppExports.cpp:565
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:565
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:566
+
+Function _trajeR_ftauxCNORM_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %53 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_ftauxLOGIT_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1201
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1213
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1213
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1214
+
+Function _trajeR_ftauxLOGIT_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %44 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_ftauxPiikMult_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:2160
+  [PB] has negative depth trajeR/src/RcppExports.cpp:2172
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:2172
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:2173
+
+Function _trajeR_ftauxPiikMult_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %71 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_ftauxZIP_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1734
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1746
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1746
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1747
+
+Function _trajeR_ftauxZIP_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %50 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_ftheta_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:887
+  [PB] has negative depth trajeR/src/RcppExports.cpp:899
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:899
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:900
+
+Function _trajeR_ftheta_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_gkBETA_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:46
+  [PB] has negative depth trajeR/src/RcppExports.cpp:58
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:58
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:59
+
+Function _trajeR_gkBETA_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_gkCNORM_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:179
+  [PB] has negative depth trajeR/src/RcppExports.cpp:191
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:191
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:192
+
+Function _trajeR_gkCNORM_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %44 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_gkLOGIT_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1070
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1082
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1082
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1083
+
+Function _trajeR_gkLOGIT_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %35 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_gkPois_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1378
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1390
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1390
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1391
+
+Function _trajeR_gkPois_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %35 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_gkZIP_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1554
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1566
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1566
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1567
+
+Function _trajeR_gkZIP_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_likelihoodCNORM_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:459
+  [PB] has negative depth trajeR/src/RcppExports.cpp:471
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:471
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:472
+
+Function _trajeR_likelihoodCNORM_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %44 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_likelihoodEMLOGIT_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1244
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1256
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1256
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1257
+
+Function _trajeR_likelihoodEMLOGIT_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %38 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_likelihoodEMZIP_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1687
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1699
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1699
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1700
+
+Function _trajeR_likelihoodEMZIP_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %44 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_likelihoodEM_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:505
+  [PB] has negative depth trajeR/src/RcppExports.cpp:517
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:517
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:518
+
+Function _trajeR_likelihoodEM_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_likelihoodLOGIT_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1156
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1168
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1168
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1169
+
+Function _trajeR_likelihoodLOGIT_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %38 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_likelihoodMultEM_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:2215
+  [PB] has negative depth trajeR/src/RcppExports.cpp:2227
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:2227
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:2228
+
+Function _trajeR_likelihoodMultEM_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %74 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_likelihoodMult_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:2057
+  [PB] has negative depth trajeR/src/RcppExports.cpp:2069
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:2069
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:2070
+
+Function _trajeR_likelihoodMult_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %56 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_likelihoodPois_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1510
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1522
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1522
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1523
+
+Function _trajeR_likelihoodPois_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %38 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_likelihoodZIP_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1642
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1654
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1654
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1655
+
+Function _trajeR_likelihoodZIP_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_mPsi_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1920
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1932
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1932
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1933
+
+Function _trajeR_mPsi_cpp_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_muikt_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:848
+  [PB] has negative depth trajeR/src/RcppExports.cpp:860
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:860
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:861
+
+Function _trajeR_muikt_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %35 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_piikIntern_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:806
+  [PB] has negative depth trajeR/src/RcppExports.cpp:818
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:818
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:819
+
+Function _trajeR_piikIntern_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_piikMult_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:1960
+  [PB] has negative depth trajeR/src/RcppExports.cpp:1972
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:1972
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:1973
+
+Function _trajeR_piikMult_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _trajeR_thethaIRLS_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr trajeR/src/RcppExports.cpp:965
+  [PB] has negative depth trajeR/src/RcppExports.cpp:977
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete trajeR/src/RcppExports.cpp:977
+  [PB] has possible protection stack imbalance trajeR/src/RcppExports.cpp:978
+
+Function _trajeR_thethaIRLS_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<arma::Col<double> >(arma::Col<double> const&)
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<arma::Glue<arma::Col<double>, arma::Col<double>, arma::glue_join_cols> >(arma::Glue<arma::Col<double>, arma::Col<double>, arma::glue_join_cols> const&)
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<arma::Glue<arma::Col<double>, arma::subview_col<double>, arma::glue_join_cols> >(arma::Glue<arma::Col<double>, arma::subview_col<double>, arma::glue_join_cols> const&)
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<arma::Mat<double> >(arma::Mat<double> const&)
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<arma::subview_col<double> >(arma::subview_col<double> const&)
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

@@ -1,0 +1,29 @@
+Package collapse version 1.7.6
+Package built using 82396/R 4.3.0; x86_64-pc-linux-gnu; 2022-05-24 10:53:00 UTC; unix   
+Checked with rchk version 35d5d01a98903a5f3e9ec166dcdb2f790ecb784f LLVM version 12.0.1
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at dupVecIndex collapse/src/kit_dup.c:137
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at dupVecIndexKeepNA collapse/src/kit_dup.c:280
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at groupAtVec collapse/src/kit_dup.c:511
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at groupVec collapse/src/kit_dup.c:466
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at groupVec collapse/src/kit_dup.c:467
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at groupVec collapse/src/kit_dup.c:477
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at groupVec collapse/src/kit_dup.c:488
+Suspicious call (two or more unprotected arguments) to Rf_defineVar at multiassign collapse/src/small_helper.c:1077
+Suspicious call (two or more unprotected arguments) to Rf_defineVar at multiassign collapse/src/small_helper.c:1082
+Suspicious call (two or more unprotected arguments) to Rf_defineVar at multiassign collapse/src/small_helper.c:1087
+
+Function setcopyv
+  [UP] unprotected variable v while calling allocating function Rf_asChar collapse/src/small_helper.c:801
+
+Function setop
+  [UP] calling allocating function setop_core(?,V,?,?) with argument allocated using Rf_ScalarReal collapse/src/small_helper.c:993
+  [UP] calling allocating function setop_core(?,V,?,?) with argument allocated using Rf_ScalarInteger collapse/src/small_helper.c:999
+
+Function subsetCols
+  [UP] calling allocating function shallow(V,?,?) with a fresh pointer (ans <arg 1>) collapse/src/data.table_subset.c:453
+
+Function subsetDT
+  [UP] calling allocating function shallow(V,?,?) with a fresh pointer (ans <arg 1>) collapse/src/data.table_subset.c:575
