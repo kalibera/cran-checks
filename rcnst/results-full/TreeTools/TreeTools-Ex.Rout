@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2022-05-16 r82368) -- "Unsuffered Consequences"
+R Under development (unstable) (2022-05-29 r82419) -- "Unsuffered Consequences"
 Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -128,6 +128,78 @@ Loading required package: ape
 > CladeSizes(tree, nodes = c(1, 8, 9))
 [1] 1 3 2
 > 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ClusterTable-methods")
+> ### * ClusterTable-methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ClusterTable-methods
+> ### Title: S3 methods for 'ClusterTable' objects
+> ### Aliases: ClusterTable-methods as.matrix.ClusterTable print.ClusterTable
+> ###   summary.ClusterTable
+> 
+> ### ** Examples
+> 
+> clustab <- as.ClusterTable(TreeTools::BalancedTree(6))
+> as.matrix(clustab)
+     [,1] [,2]
+[1,]    0    0
+[2,]    2    3
+[3,]    1    3
+[4,]    1    4
+[5,]    1    5
+[6,]    1    6
+> print(clustab)
+ClusterTable on 6 leaves: t1 .. t6> summary(clustab)
+ClusterTable on 6 leaves:
+ 123456
+ .**...
+ ***...
+ ****..
+ *****.
+ ******
+ 1: t6  2: t5  3: t4  4: t3  5: t2  6: t1 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ClusterTable")
+> ### * ClusterTable
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ClusterTable
+> ### Title: Convert phylogenetic tree to 'ClusterTable'
+> ### Aliases: ClusterTable as.ClusterTable as.ClusterTable.phylo
+> ###   as.ClusterTable.list as.ClusterTable.multiPhylo
+> 
+> ### ** Examples
+> 
+> tree1 <- ape::read.tree(text = "(A, (B, (C, (D, E))));");
+> tree2 <- ape::read.tree(text = "(A, (B, (D, (C, E))));");
+> ct1 <- as.ClusterTable(tree1)
+> summary(ct1)
+ClusterTable on 5 leaves:
+ 12345
+ **...
+ ***..
+ ****.
+ *****
+ 1: E  2: D  3: C  4: B  5: A 
+> as.matrix(ct1)
+     [,1] [,2]
+[1,]    0    0
+[2,]    1    2
+[3,]    1    3
+[4,]    1    4
+[5,]    1    5
+> 
+> # Tip label order must match ct1 to allow comparison
+> ct2 <- as.ClusterTable(tree2, tipLabels = LETTERS[1:5])
 > 
 > 
 > 
@@ -2398,7 +2470,7 @@ Unrooted; no branch lengths.
 > 
 > ### ** Examples
 > 
-> data('Lobo') # Loads the phyDat object Lobo.phy
+> data("Lobo") # Loads the phyDat object Lobo.phy
 > tree <- RandomTree(Lobo.phy)
 > tree <- RenumberTips(tree, names(Lobo.phy))
 > 
@@ -3423,7 +3495,7 @@ integer64
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  7.193 0.743 10.389 0 0 
+Time elapsed:  6.492 0.466 7.084 0 0 
 > grDevices::dev.off()
 null device 
           1 
