@@ -1,0 +1,21 @@
+Package RSclient version 0.7-8
+Package built using 82503/R 4.3.0; x86_64-pc-linux-gnu; 2022-06-21 06:37:23 UTC; unix   
+Checked with rchk version 29e18222e1cfa67ba8e63bd3b22a25f78593c554 LLVM version 14.0.0
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at RS_collect RSclient/src/cli.c:971
+
+Function RS_assign
+  [UP] unprotected variable res while calling allocating function rsc_read RSclient/src/cli.c:1018
+
+Function RS_authkey
+  [UP] unprotected variable res while calling allocating function rsc_read RSclient/src/cli.c:1139
+
+Function RS_eval
+  [UP] unprotected variable res while calling allocating function rsc_read RSclient/src/cli.c:907
+
+Function RS_eval_qap
+  [UP] unprotected variable outv while calling allocating function QAP_storeSEXP RSclient/src/cli.c:837
+  [UP] unprotected variable outv while calling allocating function rsc_write RSclient/src/cli.c:852
+  [UP] unprotected variable res while calling allocating function rsc_read RSclient/src/cli.c:862

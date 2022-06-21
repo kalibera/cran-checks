@@ -1,0 +1,23 @@
+Package ced version 1.0.1
+Package built using 82503/R 4.3.0; x86_64-pc-linux-gnu; 2022-06-21 06:45:56 UTC; unix   
+Checked with rchk version 29e18222e1cfa67ba8e63bd3b22a25f78593c554 LLVM version 14.0.0
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::NamesProxyPolicy<Rcpp::Vector<16, Rcpp::PreserveStorage> >::NamesProxy::operator=(Rcpp::NamesProxyPolicy<Rcpp::Vector<16, Rcpp::PreserveStorage> >::NamesProxy const&)
+  [UP] calling allocating function Rcpp::NamesProxyPolicy<Rcpp::Vector<16, Rcpp::PreserveStorage> >::NamesProxy::set(SEXPREC*) with argument allocated using Rcpp::NamesProxyPolicy<Rcpp::Vector<16, Rcpp::PreserveStorage> >::NamesProxy::get() const Rcpp/include/Rcpp/proxy/NamesProxy.h:33
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function _ced_ced_enc_detect
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ced_ced_version
+  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

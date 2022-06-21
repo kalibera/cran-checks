@@ -1,0 +1,61 @@
+Package iotools version 0.3-2
+Package built using 82503/R 4.3.0; x86_64-pc-linux-gnu; 2022-06-21 06:31:07 UTC; unix   
+Checked with rchk version 29e18222e1cfa67ba8e63bd3b22a25f78593c554 LLVM version 14.0.0
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function as_output_dataframe
+  [UP] allocating function dybuf_add may destroy its unprotected argument (buf <arg 1>), which is later used. iotools/src/as_output.c:451
+  [UP] allocating function dybuf_add1 may destroy its unprotected argument (buf <arg 1>), which is later used. iotools/src/as_output.c:455
+  [UP] allocating function store may destroy its unprotected argument (buf <arg 1>), which is later used. iotools/src/as_output.c:465
+  [UP] allocating function dybuf_add1 may destroy its unprotected argument (buf <arg 1>), which is later used. iotools/src/as_output.c:467
+  [UP] allocating function store may destroy its unprotected argument (buf <arg 1>), which is later used. iotools/src/as_output.c:471
+  [UP] allocating function dybuf_add1 may destroy its unprotected argument (buf <arg 1>), which is later used. iotools/src/as_output.c:473
+  [UP] allocating function dybuf_add1 may destroy its unprotected argument (buf <arg 1>), which is later used. iotools/src/as_output.c:475
+  [PB] has negative depth iotools/src/as_output.c:478
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete iotools/src/as_output.c:478
+  [PB] has negative depth iotools/src/as_output.c:479
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete iotools/src/as_output.c:479
+  [UP] calling allocating function dybuf_collect with a fresh pointer (buf <arg 1>) iotools/src/as_output.c:480
+  [PB] has negative depth iotools/src/as_output.c:481
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete iotools/src/as_output.c:481
+  [PB] has possible protection stack imbalance iotools/src/as_output.c:482
+
+Function as_output_matrix
+  [UP] allocating function dybuf_add may destroy its unprotected argument (buf <arg 1>), which is later used. iotools/src/as_output.c:336
+  [UP] allocating function dybuf_add1 may destroy its unprotected argument (buf <arg 1>), which is later used. iotools/src/as_output.c:338
+  [UP] allocating function dybuf_add1 may destroy its unprotected argument (buf <arg 1>), which is later used. iotools/src/as_output.c:345
+  [UP] allocating function store may destroy its unprotected argument (buf <arg 1>), which is later used. iotools/src/as_output.c:346
+  [UP] allocating function dybuf_add1 may destroy its unprotected argument (buf <arg 1>), which is later used. iotools/src/as_output.c:348
+  [UP] calling allocating function dybuf_collect with a fresh pointer (buf <arg 1>) iotools/src/as_output.c:351
+  [PB] has negative depth iotools/src/as_output.c:352
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete iotools/src/as_output.c:352
+  [PB] has possible protection stack imbalance iotools/src/as_output.c:353
+
+Function as_output_vector
+  [UP] unprotected variable sRnames while calling allocating function Rf_install iotools/src/as_output.c:494
+  [UP] unprotected variable sRnames while calling allocating function Rf_lang2(S:as.character,?) iotools/src/as_output.c:495
+  [UP] unprotected variable sRnames while calling allocating function Rf_eval iotools/src/as_output.c:496
+  [UP] unprotected variable sRnames while calling allocating function isConnection iotools/src/as_output.c:511
+  [UP] allocating function dybuf_add may destroy its unprotected argument (buf <arg 1>), which is later used. iotools/src/as_output.c:523
+  [UP] allocating function dybuf_add1 may destroy its unprotected argument (buf <arg 1>), which is later used. iotools/src/as_output.c:525
+  [UP] allocating function store may destroy its unprotected argument (buf <arg 1>), which is later used. iotools/src/as_output.c:527
+  [UP] allocating function dybuf_add1 may destroy its unprotected argument (buf <arg 1>), which is later used. iotools/src/as_output.c:528
+  [UP] calling allocating function dybuf_collect with a fresh pointer (buf <arg 1>) iotools/src/as_output.c:530
+  [PB] has negative depth iotools/src/as_output.c:531
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete iotools/src/as_output.c:531
+  [PB] has possible protection stack imbalance iotools/src/as_output.c:532
+
+Function chunk_tapply
+  [PB] has too high protection stack depth results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [PB] has possible protection stack imbalance iotools/src/lnchunk.c:387
+
+Function dybuf_alloc
+  [PB] has possible protection stack imbalance iotools/src/as_output.c:69
+
+Function dybuf_collect
+  [PB] has negative depth iotools/src/as_output.c:182
+  [UP] attempt to unprotect more items (2) than protected (1), results will be incomplete iotools/src/as_output.c:182
+  [PB] has possible protection stack imbalance iotools/src/as_output.c:184
