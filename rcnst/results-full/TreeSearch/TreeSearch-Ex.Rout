@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2022-06-30 r82540) -- "Unsuffered Consequences"
+R Under development (unstable) (2022-07-07 r82555) -- "Unsuffered Consequences"
 Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -39,10 +39,11 @@ Type 'q()' to quit R.
 > data('Lobo', package = 'TreeTools')
 > AdditionTree(Lobo.phy, concavity = 10)
 Addition tree ■■                                 3% | ETA:  1m
-Addition tree ■■■■                              11% | ETA: 28s
-Addition tree ■■■■■■■■■■■■■■                    43% | ETA:  9s
-Addition tree ■■■■■■■■■■■■■■■■■■■■              65% | ETA:  5s
-Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■■■■       87% | ETA:  2s
+Addition tree ■■■■                              11% | ETA: 33s
+Addition tree ■■■■■■■■■■■■                      37% | ETA: 12s
+Addition tree ■■■■■■■■■■■■■■■■■                 55% | ETA:  8s
+Addition tree ■■■■■■■■■■■■■■■■■■■■■■■           72% | ETA:  5s
+Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      91% | ETA:  2s
 Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
 
 Phylogenetic tree with 48 tips and 47 internal nodes.
@@ -277,16 +278,17 @@ Loading required package: ape
 > trees <- MaximizeParsimony(dataset, ratchIter = 0, startIter = 0,
 +                            tbrIter = 1, maxHits = 4, maxTime = 1/100,
 +                            concavity = 10, verbosity = 4)
+Addition tree ■■■■■■■                           20% | ETA:  8s
 Addition tree ■■■■■■■■■■■■■■■■■■■■■■■           72% | ETA:  1s
 Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
 
 ── Sample local optimum ────────────────────────────────────────────────────────
 → TBR depth 1; keeping 4 trees; k = 10
-ℹ 2022-06-30 18:03:44: Score: 12.6988
-Final search ■■■■■■■■■■■■■                     40% | D1, score 11.9697, hit 1. …
+ℹ 2022-07-07 15:52:53: Score: 12.6988
+Final search ■■■■■■■■■                         28% | D1, score 11.9697, hit 1. …
   - TBR rearrangement at depth 1 found score 11.9697 1 time.
 
-✔ 2022-06-30 18:03:46: Tree search terminated with score 11.9697
+✔ 2022-07-07 15:52:57: Tree search terminated with score 11.9697
 > names(trees)
 [1] "final_1"
 > 
@@ -327,7 +329,7 @@ Final search ■■■■■■■■■■■■■                     40% | D
 +   dimnames = list(letters[1:6], NULL)))
 > MaximizeParsimony(characters, constraint = constraint, verbosity = 0)
 ✔ Initialized 1 distinct constraints.
-→ 2022-06-30 18:03:46: Score to beat: 3
+→ 2022-07-07 15:52:57: Score to beat: 3
 1 phylogenetic tree
 > 
 > 
@@ -1235,7 +1237,7 @@ Rooted; no branch lengths.
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  52.093 2.104 55.373 0 0 
+Time elapsed:  59.701 4.094 65.9 0 0 
 > grDevices::dev.off()
 null device 
           1 
