@@ -1,0 +1,128 @@
+Package tibblify version 0.2.0
+Package built using 82591/R 4.3.0; x86_64-pc-linux-gnu; 2022-07-15 08:59:46 UTC; unix   
+Checked with rchk version 29e18222e1cfa67ba8e63bd3b22a25f78593c554 LLVM version 14.0.0
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Suspicious call (two or more unprotected arguments) to SET_VECTOR_ELT at Collector_List_Of_Tibble::add_value(SEXPREC*, Path&) tibblify/src/collector-method.cpp:1183
+Suspicious call (two or more unprotected arguments) to SET_VECTOR_ELT at Path::replace(int) tibblify/src/./Path.h:34
+Suspicious call (two or more unprotected arguments) to Rf_lang4 at stop_colmajor_wrong_size_element(Path const&, long, long) tibblify/src/./conditions.h:62
+Suspicious call (two or more unprotected arguments) to Rf_lang3 at stop_empty_name(Path const&, int const&) tibblify/src/./conditions.h:26
+Suspicious call (two or more unprotected arguments) to Rf_lang3 at stop_scalar(Path const&, long) tibblify/src/./conditions.h:6
+
+
+Function Collector_Base::init(long&)
+  [UP] ignoring variable <unnamed var:   %6 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Collector_List::add_value(SEXPREC*, Path&)
+  [UP] unprotected variable value while calling allocating function cpp11::writable::r_vector<SEXPREC*>::operator SEXPREC*() const tibblify/src/collector-method.cpp:564
+
+Function Collector_List::add_value_colmajor(SEXPREC*, long&, Path&)
+  [UP] ignoring variable value as it has address taken, results will be incomplete 
+
+Function Collector_List_Of_Tibble::init(long&)
+  [UP] calling allocating function set_list_of_attributes(SEXPREC*, SEXPREC*) with a fresh pointer (ptype <arg 2>) tibblify/src/collector-method.cpp:1173
+  [UP] unprotected variable ptype while calling allocating function cpp11::writable::r_vector<SEXPREC*>::operator SEXPREC*() const tibblify/src/collector-method.cpp:1173
+
+Function Collector_Vector::add_value(SEXPREC*, Path&)
+  [UP] ignoring variable value_casted as it has address taken, results will be incomplete 
+  [UP] allocating function vec_size(SEXPREC*) may destroy its unprotected argument (value <arg 1>), which is later used. tibblify/src/collector-method.cpp:521
+  [UP] calling allocating function vec_size(SEXPREC*) with a fresh pointer (value <arg 1>) tibblify/src/collector-method.cpp:521
+  [UP] unprotected variable value while calling allocating function cpp11::writable::r_vector<cpp11::r_string>::operator SEXPREC*() const tibblify/src/collector-method.cpp:521
+  [UP] unprotected variable value while calling allocating function na_chr(long) tibblify/src/collector-method.cpp:521
+  [UP] calling allocating function apply_transform(SEXPREC*, SEXPREC*) with a fresh pointer (value <arg 1>) tibblify/src/collector-method.cpp:524
+
+Function Collector_Vector::init_out_df(long)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Multi_Collector::Multi_Collector(SEXPREC*, std::__1::vector<std::__1::unique_ptr<Collector, std::__1::default_delete<Collector> >, std::__1::allocator<std::__1::unique_ptr<Collector, std::__1::default_delete<Collector> > > >&)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Multi_Collector::add_value(SEXPREC*, Path&)
+  [UP] calling allocating function Multi_Collector::update_fields(SEXPREC*, int const&, Path&) with a fresh pointer (field_names <arg 2>) tibblify/src/collector-method.cpp:822
+
+Function Parser_Object_List::get_data(SEXPREC*, long)
+  [UP] unprotected variable names while calling allocating function my_vec_names2(SEXPREC*) tibblify/src/collector-method.cpp:1029
+
+Function Parser_Object_List::parse(SEXPREC*, Path&)
+  [UP] allocating function order_chr(SEXPREC*) may destroy its unprotected argument (field_names <arg 2>), which is later used. tibblify/src/collector-method.cpp:1088
+  [UP] calling allocating function order_chr(SEXPREC*) with a fresh pointer (field_names <arg 2>) tibblify/src/collector-method.cpp:1088
+
+Function Path::Path()
+  [UP] ignoring variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Path::data() const
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _tibblify_get_path_data
+  [UP] ignoring variable <unnamed var:   %6 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _tibblify_init_tibblify_path
+  [UP] ignoring variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _tibblify_tibblify_impl
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function cpp11::attribute_proxy<cpp11::writable::r_vector<SEXPREC*> >::operator SEXPREC*() const
+  [UP] ignoring variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function cpp11::attribute_proxy<cpp11::writable::r_vector<cpp11::r_string> >::operator SEXPREC*() const
+  [UP] ignoring variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function get_collector_vec_rows(SEXPREC*, std::__1::vector<std::__1::unique_ptr<Collector, std::__1::default_delete<Collector> >, std::__1::allocator<std::__1::unique_ptr<Collector, std::__1::default_delete<Collector> > > > const&, SEXPREC*, int const&)
+  [UP] calling allocating function match_chr(SEXPREC*, SEXPREC*) with a fresh pointer (field_names <arg 3>) tibblify/src/collector-method.cpp:641
+
+Function parse_colmajor_impl(SEXPREC*, SEXPREC*, int const&, long&, std::__1::vector<std::__1::unique_ptr<Collector, std::__1::default_delete<Collector> >, std::__1::allocator<std::__1::unique_ptr<Collector, std::__1::default_delete<Collector> > > >&, Path&)
+  [UP] calling allocating function match_chr(SEXPREC*, SEXPREC*) with a fresh pointer (field_names <arg 3>) tibblify/src/collector-method.cpp:677
+
+Function stop_colmajor_non_list_element(Path const&, SEXPREC*)
+  [PB] has possible protection stack imbalance tibblify/src/./conditions.h:82
+
+Function stop_colmajor_wrong_size_element(Path const&, long, long)
+  [PB] has possible protection stack imbalance tibblify/src/./conditions.h:68
+
+Function stop_duplicate_name(Path const&, SEXPREC*)
+  [PB] has possible protection stack imbalance tibblify/src/./conditions.h:23
+
+Function stop_empty_name(Path const&, int const&)
+  [PB] has possible protection stack imbalance tibblify/src/./conditions.h:30
+
+Function stop_names_is_null(Path const&)
+  [PB] has possible protection stack imbalance tibblify/src/./conditions.h:36
+
+Function stop_object_vector_names_is_null(Path const&)
+  [PB] has possible protection stack imbalance tibblify/src/./conditions.h:42
+
+Function stop_required(Path const&)
+  [PB] has possible protection stack imbalance tibblify/src/./conditions.h:16
+
+Function stop_scalar(Path const&, long)
+  [PB] has possible protection stack imbalance tibblify/src/./conditions.h:10
+
+Function stop_vector_non_list_element(Path const&, vector_input_form, SEXPREC*)
+  [PB] has possible protection stack imbalance tibblify/src/./conditions.h:51
+
+Function stop_vector_wrong_size_element(Path const&, vector_input_form, SEXPREC*)
+  [PB] has possible protection stack imbalance tibblify/src/./conditions.h:59
+
+Function tibblify_impl(SEXPREC*, SEXPREC*, cpp11::external_pointer<Path, &(void cpp11::default_deleter<Path>(Path*))>)
+  [UP] unprotected variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> while calling allocating function Parser_Object_List::~Parser_Object_List() tibblify/src/collector-method.cpp:1301
+  [UP] unprotected variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> while calling allocating function Parser_Object::~Parser_Object() tibblify/src/collector-method.cpp:1310
+  [UP] unprotected variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> while calling allocating function std::__1::pair<SEXPREC*, std::__1::vector<std::__1::unique_ptr<Collector, std::__1::default_delete<Collector> >, std::__1::allocator<std::__1::unique_ptr<Collector, std::__1::default_delete<Collector> > > > >::~pair() tibblify/src/collector-method.cpp:1313
+
+Function tibblify_init_utils
+  [UP] allocating function Rf_findFun(S:vec_is_list,?) may destroy its unprotected argument (vctrs_package <arg 2>), which is later used. tibblify/src/shared-objects.c:101
+  [UP] calling allocating function Rf_findFun(S:vec_is_list,?) with a fresh pointer (vctrs_package <arg 2>) tibblify/src/shared-objects.c:101
+  [UP] unprotected variable vctrs_package while calling allocating function Rf_install tibblify/src/shared-objects.c:101
+  [UP] allocating function Rf_findFun(S:vec_is,?) may destroy its unprotected argument (vctrs_package <arg 2>), which is later used. tibblify/src/shared-objects.c:102
+  [UP] calling allocating function Rf_findFun(S:vec_is,?) with a fresh pointer (vctrs_package <arg 2>) tibblify/src/shared-objects.c:102
+  [UP] unprotected variable vctrs_package while calling allocating function Rf_install tibblify/src/shared-objects.c:102
+  [UP] allocating function Rf_findFun(S:vec_names2,?) may destroy its unprotected argument (vctrs_package <arg 2>), which is later used. tibblify/src/shared-objects.c:103
+  [UP] calling allocating function Rf_findFun(S:vec_names2,?) with a fresh pointer (vctrs_package <arg 2>) tibblify/src/shared-objects.c:103
+  [UP] unprotected variable vctrs_package while calling allocating function Rf_install tibblify/src/shared-objects.c:103
+  [UP] calling allocating function Rf_findFun(S:vec_init,?) with a fresh pointer (vctrs_package <arg 2>) tibblify/src/shared-objects.c:104
+  [UP] unprotected variable vctrs_package while calling allocating function Rf_install tibblify/src/shared-objects.c:104
+  [UP] calling allocating function Rf_findFun(S:vec_flatten,?) with a fresh pointer (tibblify_package <arg 2>) tibblify/src/shared-objects.c:108
+  [UP] unprotected variable tibblify_package while calling allocating function Rf_install tibblify/src/shared-objects.c:108
