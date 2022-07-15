@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2022-07-09 r82572) -- "Unsuffered Consequences"
+R Under development (unstable) (2022-07-14 r82591) -- "Unsuffered Consequences"
 Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -916,8 +916,7 @@ ERROR: the modified constant is in this function body:
     }
     return(landscape)
 }
-S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature RasterLayer has this body.
-[ FAIL 0 | WARN 2 | SKIP 13 | PASS 643 ]
+[ FAIL 1 | WARN 2 | SKIP 13 | PASS 629 ]
 
 ══ Skipped tests ═══════════════════════════════════════════════════════════════
 • On CRAN (3)
@@ -925,8 +924,16 @@ S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature R
 • dqrnq cannot be loaded (2)
 • empty test (1)
 
-[ FAIL 0 | WARN 2 | SKIP 13 | PASS 643 ]
-> 
-> proc.time()
-   user  system elapsed 
-196.997   9.498 209.486 
+══ Failed tests ════════════════════════════════════════════════════════════════
+── Error (test-mergeRaster.R:11:3): mergeRaster will return a message if tiles are resampled ──
+Error: promise already under evaluation: recursive default argument reference or earlier problems?
+Backtrace:
+    ▆
+ 1. ├─SpaDES.tools::splitRaster(...) at test-mergeRaster.R:11:2
+ 2. └─SpaDES.tools::splitRaster(...)
+ 3.   └─base::lapply(...)
+ 4.     └─base::match.fun(FUN)
+
+[ FAIL 1 | WARN 2 | SKIP 13 | PASS 629 ]
+Error: Test failures
+Execution halted

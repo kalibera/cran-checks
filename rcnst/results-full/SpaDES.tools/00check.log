@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/SpaDES.tools.Rcheck’
-* using R Under development (unstable) (2022-07-09 r82572)
+* using R Under development (unstable) (2022-07-14 r82591)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘SpaDES.tools/DESCRIPTION’ ... OK
@@ -975,8 +975,25 @@ S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature R
 Fatal error: compiler constants were modified!
 
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... OK
+* checking tests ... ERROR
   Running ‘test-all.R’
+Running the tests in ‘tests/test-all.R’ failed.
+Last 13 lines of output:
+  • empty test (1)
+  
+  ══ Failed tests ════════════════════════════════════════════════════════════════
+  ── Error (test-mergeRaster.R:11:3): mergeRaster will return a message if tiles are resampled ──
+  Error: promise already under evaluation: recursive default argument reference or earlier problems?
+  Backtrace:
+      ▆
+   1. ├─SpaDES.tools::splitRaster(...) at test-mergeRaster.R:11:2
+   2. └─SpaDES.tools::splitRaster(...)
+   3.   └─base::lapply(...)
+   4.     └─base::match.fun(FUN)
+  
+  [ FAIL 1 | WARN 2 | SKIP 13 | PASS 629 ]
+  Error: Test failures
+  Execution halted
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 ERROR, 2 NOTEs
+Status: 2 ERRORs, 2 NOTEs
