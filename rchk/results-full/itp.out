@@ -1,5 +1,5 @@
-Package itp version 1.1.0
-Package built using 82540/R 4.3.0; x86_64-pc-linux-gnu; 2022-07-03 14:20:08 UTC; unix   
+Package itp version 1.2.0
+Package built using 82598/R 4.3.0; x86_64-pc-linux-gnu; 2022-07-17 18:29:14 UTC; unix   
 Checked with rchk version 29e18222e1cfa67ba8e63bd3b22a25f78593c554 LLVM version 14.0.0
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -23,6 +23,15 @@ Function Rcpp::Rcpp_unprotect(int)
 Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _itp_itp_c
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr itp/src/RcppExports.cpp:122
+  [PB] has negative depth itp/src/RcppExports.cpp:134
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete itp/src/RcppExports.cpp:134
+  [PB] has possible protection stack imbalance itp/src/RcppExports.cpp:135
+
+Function _itp_itp_c_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %32 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _itp_itp_cpp
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr itp/src/RcppExports.cpp:45
   [PB] has negative depth itp/src/RcppExports.cpp:57
@@ -33,73 +42,82 @@ Function _itp_itp_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXP
   [UP] ignoring variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _itp_lambert_cpp
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr itp/src/RcppExports.cpp:186
-  [PB] has negative depth itp/src/RcppExports.cpp:198
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete itp/src/RcppExports.cpp:198
-  [PB] has possible protection stack imbalance itp/src/RcppExports.cpp:199
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr itp/src/RcppExports.cpp:227
+  [PB] has negative depth itp/src/RcppExports.cpp:239
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete itp/src/RcppExports.cpp:239
+  [PB] has possible protection stack imbalance itp/src/RcppExports.cpp:240
 
 Function _itp_lambert_cpp_try(SEXPREC*, SEXPREC*)
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _itp_linear_cpp
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr itp/src/RcppExports.cpp:291
-  [PB] has negative depth itp/src/RcppExports.cpp:303
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete itp/src/RcppExports.cpp:303
-  [PB] has possible protection stack imbalance itp/src/RcppExports.cpp:304
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr itp/src/RcppExports.cpp:332
+  [PB] has negative depth itp/src/RcppExports.cpp:344
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete itp/src/RcppExports.cpp:344
+  [PB] has possible protection stack imbalance itp/src/RcppExports.cpp:345
 
 Function _itp_linear_cpp_try(SEXPREC*, SEXPREC*)
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _itp_log_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr itp/src/RcppExports.cpp:402
+  [PB] has negative depth itp/src/RcppExports.cpp:414
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete itp/src/RcppExports.cpp:414
+  [PB] has possible protection stack imbalance itp/src/RcppExports.cpp:415
+
+Function _itp_log_cpp_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _itp_neg_wiki_cpp
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr itp/src/RcppExports.cpp:151
-  [PB] has negative depth itp/src/RcppExports.cpp:163
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete itp/src/RcppExports.cpp:163
-  [PB] has possible protection stack imbalance itp/src/RcppExports.cpp:164
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr itp/src/RcppExports.cpp:192
+  [PB] has negative depth itp/src/RcppExports.cpp:204
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete itp/src/RcppExports.cpp:204
+  [PB] has possible protection stack imbalance itp/src/RcppExports.cpp:205
 
 Function _itp_neg_wiki_cpp_try(SEXPREC*, SEXPREC*)
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _itp_poly3_cpp
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr itp/src/RcppExports.cpp:256
-  [PB] has negative depth itp/src/RcppExports.cpp:268
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete itp/src/RcppExports.cpp:268
-  [PB] has possible protection stack imbalance itp/src/RcppExports.cpp:269
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr itp/src/RcppExports.cpp:297
+  [PB] has negative depth itp/src/RcppExports.cpp:309
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete itp/src/RcppExports.cpp:309
+  [PB] has possible protection stack imbalance itp/src/RcppExports.cpp:310
 
 Function _itp_poly3_cpp_try(SEXPREC*, SEXPREC*)
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _itp_staircase_cpp
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr itp/src/RcppExports.cpp:326
-  [PB] has negative depth itp/src/RcppExports.cpp:338
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete itp/src/RcppExports.cpp:338
-  [PB] has possible protection stack imbalance itp/src/RcppExports.cpp:339
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr itp/src/RcppExports.cpp:367
+  [PB] has negative depth itp/src/RcppExports.cpp:379
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete itp/src/RcppExports.cpp:379
+  [PB] has possible protection stack imbalance itp/src/RcppExports.cpp:380
 
 Function _itp_staircase_cpp_try(SEXPREC*, SEXPREC*)
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _itp_trig1_cpp
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr itp/src/RcppExports.cpp:221
-  [PB] has negative depth itp/src/RcppExports.cpp:233
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete itp/src/RcppExports.cpp:233
-  [PB] has possible protection stack imbalance itp/src/RcppExports.cpp:234
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr itp/src/RcppExports.cpp:262
+  [PB] has negative depth itp/src/RcppExports.cpp:274
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete itp/src/RcppExports.cpp:274
+  [PB] has possible protection stack imbalance itp/src/RcppExports.cpp:275
 
 Function _itp_trig1_cpp_try(SEXPREC*, SEXPREC*)
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _itp_wiki_cpp
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr itp/src/RcppExports.cpp:116
-  [PB] has negative depth itp/src/RcppExports.cpp:128
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete itp/src/RcppExports.cpp:128
-  [PB] has possible protection stack imbalance itp/src/RcppExports.cpp:129
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr itp/src/RcppExports.cpp:157
+  [PB] has negative depth itp/src/RcppExports.cpp:169
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete itp/src/RcppExports.cpp:169
+  [PB] has possible protection stack imbalance itp/src/RcppExports.cpp:170
 
 Function _itp_wiki_cpp_try(SEXPREC*, SEXPREC*)
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _itp_xptr_create
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr itp/src/RcppExports.cpp:360
-  [PB] has negative depth itp/src/RcppExports.cpp:372
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete itp/src/RcppExports.cpp:372
-  [PB] has possible protection stack imbalance itp/src/RcppExports.cpp:373
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr itp/src/RcppExports.cpp:436
+  [PB] has negative depth itp/src/RcppExports.cpp:448
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete itp/src/RcppExports.cpp:448
+  [PB] has possible protection stack imbalance itp/src/RcppExports.cpp:449
 
 Function _itp_xptr_create_try(SEXPREC*)
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
