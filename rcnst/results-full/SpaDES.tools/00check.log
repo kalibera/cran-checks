@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/SpaDES.tools.Rcheck’
-* using R Under development (unstable) (2022-07-27 r82635)
+* using R Under development (unstable) (2022-08-04 r82670)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘SpaDES.tools/DESCRIPTION’ ... OK
@@ -975,8 +975,25 @@ S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature R
 Fatal error: compiler constants were modified!
 
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... OK
+* checking tests ... ERROR
   Running ‘test-all.R’
+Running the tests in ‘tests/test-all.R’ failed.
+Last 13 lines of output:
+          if (exists("potentials")) {
+              if (NROW(potentials) > 0) {
+                  landscape[potentials[, 1L]] <- spreadsDT$spreads[potentials[, 
+                    2L]]
+                  set(spreadsDT, as.integer(potentials[, 1L]), 
+                    "spreads", 0L)
+              }
+          }
+          set(spreadsDT, wh, "spreads", 0L)
+      }
+      return(landscape)
+  }
+  S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature RasterLayer has this body.
+  Fatal error: compiler constants were modified!
+  
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 ERROR, 2 NOTEs
+Status: 2 ERRORs, 2 NOTEs
