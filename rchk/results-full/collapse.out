@@ -1,5 +1,5 @@
-Package collapse version 1.8.6
-Package built using 82503/R 4.3.0; x86_64-pc-linux-gnu; 2022-06-21 06:46:44 UTC; unix   
+Package collapse version 1.8.8
+Package built using 82724/R 4.3.0; x86_64-pc-linux-gnu; 2022-08-18 20:41:37 UTC; unix   
 Checked with rchk version 29e18222e1cfa67ba8e63bd3b22a25f78593c554 LLVM version 14.0.0
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -95,8 +95,8 @@ Function _collapse_fbstatsCpp
   [UP] ignoring variable <unnamed var:   %43 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _collapse_fbstatslCpp
-  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %40 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _collapse_fbstatsmCpp
   [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -221,14 +221,14 @@ Function flagleadmCpp(SEXPREC*, Rcpp::Vector<13, Rcpp::PreserveStorage>, SEXPREC
   [UP] ignoring variable t as it has address taken, results will be incomplete 
 
 Function fmeanC
-  [PB] has an unsupported form of unprotect with a variable results will be incomplete collapse/src/fmean.c:291
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/fmean.c:291
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete collapse/src/fmean.c:277
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/fmean.c:277
 
 Function fmodeC
   [PB] has possible protection stack imbalance collapse/src/fmode.c:892
 
 Function fsumC
-  [PB] has possible protection stack imbalance collapse/src/fsum.c:352
+  [PB] has possible protection stack imbalance collapse/src/fsum.c:370
 
 Function funiqueC
   [PB] has possible protection stack imbalance collapse/src/kit_dup.c:788
@@ -240,15 +240,8 @@ Function rbindlist
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/data.table_rbindlist.c:1055
 
-Function setcopyv
-  [UP] unprotected variable v while calling allocating function Rf_asChar collapse/src/programming.c:329
-
 Function std::__1::enable_if<is_move_constructible<SEXPREC*>::value&&is_move_assignable<SEXPREC*>::value, void>::type std::__1::swap<SEXPREC*>(SEXPREC*&, SEXPREC*&)
   [UP] ignoring variable __t as it has address taken, results will be incomplete 
-
-Function subsetDT
-  [UP] unprotected variable colnam while calling allocating function Rf_allocVector collapse/src/data.table_subset.c:560
-  [UP] unprotected variable colnam while calling allocating function Rf_setAttrib(V,S:names,V) collapse/src/data.table_subset.c:563
 
 Function void Rcpp::Vector<16, Rcpp::PreserveStorage>::fill__dispatch<SEXPREC*>(Rcpp::traits::integral_constant<bool, true>, SEXPREC* const&)
   [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
