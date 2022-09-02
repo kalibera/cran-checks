@@ -1,5 +1,5 @@
-Package mrgsolve version 1.0.4
-Package built using 82503/R 4.3.0; x86_64-pc-linux-gnu; 2022-06-21 09:33:55 UTC; unix   
+Package mrgsolve version 1.0.6
+Package built using 82783/R 4.3.0; x86_64-pc-linux-gnu; 2022-09-02 08:12:55 UTC; unix   
 Checked with rchk version 29e18222e1cfa67ba8e63bd3b22a25f78593c554 LLVM version 14.0.0
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -20,6 +20,9 @@ Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
+Function Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::const_SlotProxy::operator Rcpp::Environment_Impl<Rcpp::PreserveStorage><Rcpp::Environment_Impl<Rcpp::PreserveStorage> >() const
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::const_SlotProxy::get() const Rcpp/include/Rcpp/proxy/SlotProxy.h:68
+
 Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
   [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:683
 
@@ -33,13 +36,16 @@ Function Rcpp::sugar::IndexHash<16>::add_value(int)
   [UP] ignoring variable val as it has address taken, results will be incomplete 
 
 Function _mrgsolve_DEVTRAN
-  [UP] ignoring variable <unnamed var:   %45 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _mrgsolve_EXPAND_EVENTS
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _mrgsolve_EXPAND_OBSERVATIONS
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _mrgsolve_MAKEMATRIX
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _mrgsolve_MVGAUSS
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -48,7 +54,7 @@ Function _mrgsolve_SUPERMATRIX
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _mrgsolve_TOUCH_FUNS
-  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _mrgsolve_get_tokens
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
