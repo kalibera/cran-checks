@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2022-08-31 r82783) -- "Unsuffered Consequences"
+R Under development (unstable) (2022-09-04 r82799) -- "Unsuffered Consequences"
 Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -38,12 +38,11 @@ Type 'q()' to quit R.
 > 
 > data('Lobo', package = 'TreeTools')
 > AdditionTree(Lobo.phy, concavity = 10)
-Addition tree ■■                                 3% | ETA:  2m
-Addition tree ■■■■■■■                           21% | ETA: 24s
-Addition tree ■■■■■■■■■■■■■                     40% | ETA: 14s
-Addition tree ■■■■■■■■■■■■■■■■■                 55% | ETA: 11s
-Addition tree ■■■■■■■■■■■■■■■■■■■■■             68% | ETA:  7s
-Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■■         79% | ETA:  5s
+Addition tree ■■                                 3% | ETA:  1m
+Addition tree ■■■■                              11% | ETA: 34s
+Addition tree ■■■■■■■■■■■■                      37% | ETA: 12s
+Addition tree ■■■■■■■■■■■■■■■■■                 55% | ETA:  8s
+Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■          76% | ETA:  4s
 Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      91% | ETA:  2s
 Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
 
@@ -279,8 +278,7 @@ Loading required package: ape
 > trees <- MaximizeParsimony(dataset, ratchIter = 0, startIter = 0,
 +                            tbrIter = 1, maxHits = 4, maxTime = 1/100,
 +                            concavity = 10, verbosity = 4)
-Addition tree ■■■                                6% | ETA: 35s
-Addition tree ■■■■■■■■■■■■                      36% | ETA:  5s
+Addition tree ■■■■                               9% | ETA: 23s
 Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
 
 ── BEGIN TREE SEARCH (k = 10) ──────────────────────────────────────────────────
@@ -288,11 +286,11 @@ Addition tree ■■■■■■■■■■■■■■■■■■■■■■
 
 ── Sample local optimum ────────────────────────────────────────────────────────
 → TBR depth 1; keeping 4 trees; k = 10
-ℹ 2022-09-01 17:19:14: Score: 12.6988
-Final search ■■■■■■■■■■■■■■■■■■■■              62% | D0, score 12.0038, hit 1. …
+ℹ 2022-09-04 07:24:14: Score: 12.6988
+Final search ■■■■■                             15% | D1, score 11.9697, hit 1. …
   - TBR rearrangement at depth 1 found score 11.9697 1 time.
 
-✔ 2022-09-01 17:19:18: Tree search terminated with score 11.9697
+✔ 2022-09-04 07:24:17: Tree search terminated with score 11.9697
 > names(trees)
 [1] "final_1"
 > 
@@ -333,7 +331,7 @@ Final search ■■■■■■■■■■■■■■■■■■■■       
 +   dimnames = list(letters[1:6], NULL)))
 > MaximizeParsimony(characters, constraint = constraint, verbosity = 0)
 ✔ Initialized 1 distinct constraints.
-→ 2022-09-01 17:19:18: Score to beat: 3
+→ 2022-09-04 07:24:17: Score to beat: 3
 1 phylogenetic tree
 > 
 > 
@@ -1261,7 +1259,7 @@ Rooted; no branch lengths.
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  66.278 5.805 73.843 0 0 
+Time elapsed:  57.298 4.513 67.703 0 0 
 > grDevices::dev.off()
 null device 
           1 
