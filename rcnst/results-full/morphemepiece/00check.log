@@ -1,10 +1,10 @@
-* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/TeXCheckR.Rcheck’
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/morphemepiece.Rcheck’
 * using R Under development (unstable) (2022-09-06 r82818)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* checking for file ‘TeXCheckR/DESCRIPTION’ ... OK
+* checking for file ‘morphemepiece/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘TeXCheckR’ version ‘0.7.0’
+* this is package ‘morphemepiece’ version ‘1.2.3’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -14,8 +14,9 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘TeXCheckR’ can be installed ... OK
+* checking whether package ‘morphemepiece’ can be installed ... OK
 * checking package directory ... OK
+* checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
 * checking for left-over files ... OK
@@ -42,32 +43,35 @@
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
-* checking contents of ‘data’ directory ... OK
-* checking data for non-ASCII characters ... OK
-* checking LazyData ... OK
-* checking data for ASCII and uncompressed saves ... OK
-* checking R/sysdata.rda ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
 * checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... ERROR
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-          context <- lines[line_no]
-          .report_error(line_no = line_no, context = context, error_message = "Space inserted before \\footnote")
-          stop("Space inserted before footnote.")
+          }
+          else {
+              sub_tokens <- append(cur_substr, sub_tokens)
+              end <- start - 1
+              keepgoing <- end >= 1
+          }
       }
-      if (any(grepl("\\footnote{ ", lines, fixed = TRUE))) {
-          line_no <- grep("\\footnote{ ", lines, fixed = TRUE)[[1L]]
-          context <- lines[[line_no]]
-          .report_error(line_no = line_no, context = context, error_message = "Leading spacing in footnotetext.")
-          stop("Leading spacing in footnotetext.")
+      if (is_bad) {
+          return(unk_token)
       }
-      invisible(NULL)
+      return(sub_tokens)
   }
-  Function check_footnote_typography in namespace TeXCheckR has this body.
+  Function .mp_tokenize_word in namespace morphemepiece has this body.
   Fatal error: compiler constants were modified!
   
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘algorithm_test.Rmd’ using ‘UTF-8’... OK
+  ‘generating_vocab.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
 * DONE
 Status: 1 ERROR
