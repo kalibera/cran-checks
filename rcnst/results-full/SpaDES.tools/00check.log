@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/SpaDES.tools.Rcheck’
-* using R Under development (unstable) (2022-09-22 r82895)
+* using R Under development (unstable) (2022-09-25 r82914)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘SpaDES.tools/DESCRIPTION’ ... OK
@@ -96,6 +96,32 @@ The error most likely occurred in:
 > 
 > # Example comparing rings and cir
 > hab <- raster(system.file("extdata", "hab1.tif", package = "SpaDES.tools"))
+> radius <- 4
+> n <- 2
+> coords <- SpatialPoints(coords = cbind(x = stats::runif(n, xmin(hab), xmax(hab)),
++                                        y = stats::runif(n, xmin(hab), xmax(hab))))
+> 
+> # cirs
+> cirs <- cir(hab, coords, maxRadius = rep(radius, length(coords)), simplify = TRUE)
+> 
+> # rings
+> loci <- cellFromXY(hab, coordinates(coords))
+> cirs2 <- rings(hab, loci, maxRadius = radius, minRadius = radius - 1, returnIndices = TRUE)
+> 
+> # Plot both
+> ras1 <- raster(hab)
+> ras1[] <- 0
+> ras1[cirs[, "indices"]] <- cirs[, "id"]
+> 
+> ras2 <- raster(hab)
+> ras2[] <- 0
+> ras2[cirs2$indices] <- cirs2$id
+> if (interactive()) {
++   clearPlot()
++   Plot(ras1, ras2)
++ }
+> 
+> hab <- raster(system.file("extdata", "hab2.tif", package = "SpaDES.tools"))
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "includePixel" "excludePixel" "includeRing"  "excludeRing" 
@@ -1001,21 +1027,21 @@ Fatal error: compiler constants were modified!
   Running ‘test-all.R’
 Running the tests in ‘tests/test-all.R’ failed.
 Last 13 lines of output:
-  ── Error (test-mapReduce.R:26:3): mapReduce: file does not work correctly 1 ────
-  Error: promise already under evaluation: recursive default argument reference or earlier problems?
-  Backtrace:
-      ▆
-   1. └─testthat::expect_true(...) at test-mapReduce.R:26:2
-   2.   └─testthat:::expect_waldo_constant(act, TRUE, info = info)
-   3.     └─testthat:::waldo_compare(...)
-   4.       └─testthat:::local_reporter_output()
-   5.         └─reporter$local_user_output(.env)
-   6.           └─testthat::local_reproducible_output(...)
-   7.             └─withr::local_language(lang, .local_envir = .env)
+          if (exists("potentials")) {
+              if (NROW(potentials) > 0) {
+                  landscape[potentials[, 1L]] <- spreadsDT$spreads[potentials[, 
+                    2L]]
+                  set(spreadsDT, as.integer(potentials[, 1L]), 
+                    "spreads", 0L)
+              }
+          }
+          set(spreadsDT, wh, "spreads", 0L)
+      }
+      return(landscape)
+  }
+  S4 Method spread:SpaDES.tools defined in namespace SpaDES.tools with signature RasterLayer has this body.
+  Fatal error: compiler constants were modified!
   
-  [ FAIL 1 | WARN 1 | SKIP 11 | PASS 908 ]
-  Error: Test failures
-  Execution halted
 * checking PDF version of manual ... OK
 * DONE
 Status: 2 ERRORs, 2 NOTEs

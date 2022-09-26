@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2022-09-22 r82895) -- "Unsuffered Consequences"
+R Under development (unstable) (2022-09-25 r82914) -- "Unsuffered Consequences"
 Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -104,6 +104,32 @@ detaching ‘package:raster’, ‘package:sp’
 > 
 > # Example comparing rings and cir
 > hab <- raster(system.file("extdata", "hab1.tif", package = "SpaDES.tools"))
+> radius <- 4
+> n <- 2
+> coords <- SpatialPoints(coords = cbind(x = stats::runif(n, xmin(hab), xmax(hab)),
++                                        y = stats::runif(n, xmin(hab), xmax(hab))))
+> 
+> # cirs
+> cirs <- cir(hab, coords, maxRadius = rep(radius, length(coords)), simplify = TRUE)
+> 
+> # rings
+> loci <- cellFromXY(hab, coordinates(coords))
+> cirs2 <- rings(hab, loci, maxRadius = radius, minRadius = radius - 1, returnIndices = TRUE)
+> 
+> # Plot both
+> ras1 <- raster(hab)
+> ras1[] <- 0
+> ras1[cirs[, "indices"]] <- cirs[, "id"]
+> 
+> ras2 <- raster(hab)
+> ras2[] <- 0
+> ras2[cirs2$indices] <- cirs2$id
+> if (interactive()) {
++   clearPlot()
++   Plot(ras1, ras2)
++ }
+> 
+> hab <- raster(system.file("extdata", "hab2.tif", package = "SpaDES.tools"))
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "includePixel" "excludePixel" "includeRing"  "excludeRing" 
