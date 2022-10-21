@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/ParamHelpers.Rcheck’
-* using R Under development (unstable) (2022-09-29 r82949)
+* using R Under development (unstable) (2022-10-20 r83136)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * checking for file ‘ParamHelpers/DESCRIPTION’ ... OK
@@ -67,6 +67,29 @@ The error most likely occurred in:
    u    w    y    y 
 -Inf    3    0   10 
 > getUpper(ps)
+  u   w   y   y 
+Inf   2   1  11 
+> 
+> ps = makeParamSet(
++   makeNumericParam("u"),
++   makeDiscreteParam("w", values = list(a = list(), b = NULL))
++ )
+> getValues(ps)
+$w
+$w$a
+list()
+
+$w$b
+NULL
+
+
+> 
+> par.vals = list(
++   u = makeNumericParam("u"),
++   v = makeIntegerParam("v", lower = 1, upper = 2),
++   w = makeDiscreteParam("w", values = 1:2),
++   x = makeNumericVectorParam("x", len = 2, lower = c(3, 1), upper = expression(n))
++ )
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"
