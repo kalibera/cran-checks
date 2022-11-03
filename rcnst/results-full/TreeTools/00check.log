@@ -1,9 +1,9 @@
-* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/mosmafs.Rcheck’
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/TreeTools.Rcheck’
 * using R Under development (unstable) (2022-11-03 r83253)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* checking for file ‘mosmafs/DESCRIPTION’ ... OK
-* this is package ‘mosmafs’ version ‘0.1.2-1’
+* checking for file ‘TreeTools/DESCRIPTION’ ... OK
+* this is package ‘TreeTools’ version ‘1.8.0’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -13,7 +13,7 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘mosmafs’ can be installed ... OK
+* checking whether package ‘TreeTools’ can be installed ... OK
 * checking package directory ... OK
 * checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -42,35 +42,45 @@
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking R/sysdata.rda ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking compiled code ... NOTE
+Note: information on .o files is not available
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
 * checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... ERROR
+  Running ‘spelling.R’
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-  NOTE: .Call function c_sms_indicator modified its argument (number 3, type double, length 6)
-  Fatal error: compiler constants were modified (in .Call?)!
-  
+  > library("TreeTools", quietly = TRUE, warn.conflicts = FALSE)
+  > 
+  > suppressPackageStartupMessages(test_check("TreeTools"))
   ERROR: modification of compiler constant of type character, length 2
   ERROR: the modified value of the constant is:
-  [1] "integer"       "integervector"
+  [1] "END;"      "ENDBLOCK;"
   attr(,".match.hash")
   <hash table>
   ERROR: the original value of the constant is:
-  [1] "integer"       "integervector"
+  [1] "END;"      "ENDBLOCK;"
   ERROR: the modified constant is at index 1
   ERROR: the modified constant is in this function body:
-  c("integer", "integervector")
+  c("END;", "ENDBLOCK;")
   Fatal error: compiler constants were modified!
   
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
-  ‘demo.Rmd’ using ‘UTF-8’... OK
-  ‘multifidelity.Rmd’ using ‘UTF-8’... OK
+  ‘filesystem-navigation.Rmd’ using ‘UTF-8’... OK
+  ‘load-data.Rmd’ using ‘UTF-8’... OK
+  ‘load-trees.Rmd’ using ‘UTF-8’... OK
 * checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 ERROR
+Status: 1 ERROR, 1 NOTE
