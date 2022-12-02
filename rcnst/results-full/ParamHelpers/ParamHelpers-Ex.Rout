@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2022-10-20 r83136) -- "Unsuffered Consequences"
+R Under development (unstable) (2022-12-01 r83394) -- "Unsuffered Consequences"
 Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -366,33 +366,6 @@ $b
 +   makeDiscreteParam("x", values = 1:2),
 +   makeNumericVectorParam("y", len = 2, lower = c(0, 10), upper = c(1, 11)),
 +   keys = "p"
-+ )
-> getLower(ps, dict = list(p = 7))
-   u    w    y    y 
--Inf    3    0   10 
-> getUpper(ps)
-  u   w   y   y 
-Inf   2   1  11 
-> 
-> ps = makeParamSet(
-+   makeNumericParam("u"),
-+   makeDiscreteParam("w", values = list(a = list(), b = NULL))
-+ )
-> getValues(ps)
-$w
-$w$a
-list()
-
-$w$b
-NULL
-
-
-> 
-> par.vals = list(
-+   u = makeNumericParam("u"),
-+   v = makeIntegerParam("v", lower = 1, upper = 2),
-+   w = makeDiscreteParam("w", values = 1:2),
-+   x = makeNumericVectorParam("x", len = 2, lower = c(3, 1), upper = expression(n))
 + )
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:

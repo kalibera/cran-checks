@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2022-11-13 r83340) -- "Unsuffered Consequences"
+R Under development (unstable) (2022-12-01 r83394) -- "Unsuffered Consequences"
 Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -403,8 +403,9 @@ integer64
 > 
 > ### Name: DropTip
 > ### Title: Drop leaves from tree
-> ### Aliases: DropTip DropTip.phylo KeepTipPreorder KeepTipPostorder
-> ###   DropTip.Splits DropTipPhylo DropTip.multiPhylo KeepTip
+> ### Aliases: DropTip DropTip.phylo DropTip.Splits DropTipPhylo
+> ###   DropTip.multiPhylo DropTip.list DropTip.NULL KeepTipPreorder
+> ###   KeepTipPostorder KeepTip
 > 
 > ### ** Examples
 > 
@@ -2614,32 +2615,6 @@ $atNode
 > 
 > 
 > cleanEx()
-> nameEx("SingleTaxonTree")
-> ### * SingleTaxonTree
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: SingleTaxonTree
-> ### Title: Generate a single taxon tree
-> ### Aliases: SingleTaxonTree
-> ### Keywords: tree
-> 
-> ### ** Examples
-> 
-> SingleTaxonTree("Homo_sapiens")
-
-Phylogenetic tree with 1 tips and 1 internal nodes.
-
-Tip labels:
-  Homo_sapiens
-
-Rooted; no branch lengths.
-> plot(SingleTaxonTree("root") + BalancedTree(4))
-> 
-> 
-> 
-> 
-> cleanEx()
 > nameEx("SortTree")
 > ### * SortTree
 > 
@@ -3314,6 +3289,40 @@ integer64
 > 
 > 
 > cleanEx()
+> nameEx("TrivialTree")
+> ### * TrivialTree
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: TrivialTree
+> ### Title: Generate trivial trees
+> ### Aliases: TrivialTree SingleTaxonTree ZeroTaxonTree
+> ### Keywords: tree
+> 
+> ### ** Examples
+> 
+> SingleTaxonTree("Homo_sapiens")
+
+Phylogenetic tree with 1 tips and 1 internal nodes.
+
+Tip labels:
+  Homo_sapiens
+
+Rooted; no branch lengths.
+> plot(SingleTaxonTree("root") + BalancedTree(4))
+> 
+> ZeroTaxonTree()
+
+Phylogenetic tree with 0 tips and 0 internal nodes.
+
+Tip labels:
+  
+
+Rooted; no branch lengths.
+> 
+> 
+> 
+> cleanEx()
 > nameEx("Unquote")
 > ### * Unquote
 > 
@@ -3534,7 +3543,7 @@ integer64
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  7.754 1.382 9.304 0 0 
+Time elapsed:  8.427 0.856 10.479 0 0 
 > grDevices::dev.off()
 null device 
           1 
