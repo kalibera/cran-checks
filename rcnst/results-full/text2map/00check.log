@@ -1,9 +1,10 @@
-* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/mosmafs.Rcheck’
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/text2map.Rcheck’
 * using R Under development (unstable) (2022-12-04 r83401)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* checking for file ‘mosmafs/DESCRIPTION’ ... OK
-* this is package ‘mosmafs’ version ‘0.1.2-1’
+* checking for file ‘text2map/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘text2map’ version ‘0.1.6’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -13,7 +14,7 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘mosmafs’ can be installed ... OK
+* checking whether package ‘text2map’ can be installed ... OK
 * checking package directory ... OK
 * checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -42,35 +43,99 @@
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... NOTE
+  Note: found 3 marked UTF-8 strings
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
-* checking examples ... OK
+* checking examples ... ERROR
+Running examples in ‘text2map-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: CoCA
+> ### Title: Performs Concept Class Analysis (CoCA)
+> ### Aliases: CoCA
+> 
+> ### ** Examples
+> 
+> 
+> #' # load example word embeddings
+> data(ft_wv_sample)
+> 
+> # load example text
+> data(jfk_speech)
+> 
+> # minimal preprocessing
+> jfk_speech$sentence <- tolower(jfk_speech$sentence)
+> jfk_speech$sentence <- gsub("[[:punct:]]+", " ", jfk_speech$sentence)
+> 
+> # create DTM
+> dtm <- dtm_builder(jfk_speech, sentence, sentence_id)
+> 
+> # create semantic directions
+> gen <- data.frame(
++   add = c("woman"),
++   subtract = c("man")
++ )
+> 
+> die <- data.frame(
++   add = c("alive"),
++   subtract = c("die")
++ )
+> 
+> gen.dir <- get_direction(anchors = gen, wv = ft_wv_sample)
+> die.dir <- get_direction(anchors = die, wv = ft_wv_sample)
+> 
+> sem_dirs <- rbind(gen.dir, die.dir)
+> 
+> classes <- CoCA(
++   dtm = dtm,
++   wv = ft_wv_sample,
++   directions = sem_dirs,
++   filter_sig = TRUE,
++   filter_value = 0.05,
++   zero_action = "drop"
++ )
+ERROR: modification of compiler constant of type character, length 4
+ERROR: the modified value of the constant is:
+[1] "pooled" "paired" "L2"     "PCA"   
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "pooled" "paired" "L2"     "PCA"   
+ERROR: the modified constant is at index 1
+ERROR: the modified constant is in this function body:
+c("pooled", "paired", "L2", "PCA")
+Error: promise already under evaluation: recursive default argument reference or earlier problems?
+Execution halted
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... ERROR
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-  NOTE: .Call function c_sms_indicator modified its argument (number 3, type double, length 6)
-  Fatal error: compiler constants were modified (in .Call?)!
-  
-  ERROR: modification of compiler constant of type character, length 2
+  Loading required package: Matrix
+  > 
+  > test_check("text2map")
+  ERROR: modification of compiler constant of type character, length 4
   ERROR: the modified value of the constant is:
-  [1] "integer"       "integervector"
+  [1] "pooled" "paired" "L2"     "PCA"   
   attr(,".match.hash")
   <hash table>
   ERROR: the original value of the constant is:
-  [1] "integer"       "integervector"
+  [1] "pooled" "paired" "L2"     "PCA"   
   ERROR: the modified constant is at index 1
   ERROR: the modified constant is in this function body:
-  c("integer", "integervector")
+  c("pooled", "paired", "L2", "PCA")
   Fatal error: compiler constants were modified!
   
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
-  ‘demo.Rmd’ using ‘UTF-8’... OK
-  ‘multifidelity.Rmd’ using ‘UTF-8’... OK
+  ‘CMDist-concept-movers-distance.Rmd’ using ‘UTF-8’... OK
+  ‘concept-class-analysis.Rmd’ using ‘UTF-8’... OK
 * checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 ERROR
+Status: 2 ERRORs, 1 NOTE
