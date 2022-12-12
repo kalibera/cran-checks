@@ -1,0 +1,133 @@
+
+R Under development (unstable) (2022-12-10 r83428) -- "Unsuffered Consequences"
+Copyright (C) 2022 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "text2map"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('text2map')
+Loading required package: Matrix
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("CMDist")
+> ### * CMDist
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: CMDist
+> ### Title: Calculate Concept Mover's Distance
+> ### Aliases: CMDist
+> 
+> ### ** Examples
+> 
+> 
+> # load example word embeddings
+> data(ft_wv_sample)
+> 
+> # load example text
+> data(jfk_speech)
+> 
+> # minimal preprocessing
+> jfk_speech$sentence <- tolower(jfk_speech$sentence)
+> jfk_speech$sentence <- gsub("[[:punct:]]+", " ", jfk_speech$sentence)
+> 
+> # create DTM
+> dtm <- dtm_builder(jfk_speech, sentence, sentence_id)
+> 
+> # example 1
+> cm.dists <- CMDist(dtm,
++     cw = "space",
++     wv = ft_wv_sample
++ )
+as(<ngCMatrix>, "dgCMatrix") is deprecated since Matrix 1.5-0; do as(., "dMatrix") instead
+> 
+> # example 2
+> space <- c("spacecraft", "rocket", "moon")
+> cen <- get_centroid(anchors = space, wv = ft_wv_sample)
+> 
+> cm.dists <- CMDist(dtm,
++     cv = cen,
++     wv = ft_wv_sample
++ )
+> 
+> 
+> 
+> cleanEx()
+> nameEx("CoCA")
+> ### * CoCA
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: CoCA
+> ### Title: Performs Concept Class Analysis (CoCA)
+> ### Aliases: CoCA
+> 
+> ### ** Examples
+> 
+> 
+> #' # load example word embeddings
+> data(ft_wv_sample)
+> 
+> # load example text
+> data(jfk_speech)
+> 
+> # minimal preprocessing
+> jfk_speech$sentence <- tolower(jfk_speech$sentence)
+> jfk_speech$sentence <- gsub("[[:punct:]]+", " ", jfk_speech$sentence)
+> 
+> # create DTM
+> dtm <- dtm_builder(jfk_speech, sentence, sentence_id)
+> 
+> # create semantic directions
+> gen <- data.frame(
++   add = c("woman"),
++   subtract = c("man")
++ )
+> 
+> die <- data.frame(
++   add = c("alive"),
++   subtract = c("die")
++ )
+> 
+> gen.dir <- get_direction(anchors = gen, wv = ft_wv_sample)
+> die.dir <- get_direction(anchors = die, wv = ft_wv_sample)
+> 
+> sem_dirs <- rbind(gen.dir, die.dir)
+> 
+> classes <- CoCA(
++   dtm = dtm,
++   wv = ft_wv_sample,
++   directions = sem_dirs,
++   filter_sig = TRUE,
++   filter_value = 0.05,
++   zero_action = "drop"
++ )
+ERROR: modification of compiler constant of type character, length 4
+ERROR: the modified value of the constant is:
+[1] "pooled" "paired" "L2"     "PCA"   
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "pooled" "paired" "L2"     "PCA"   
+ERROR: the modified constant is at index 1
+ERROR: the modified constant is in this function body:
+c("pooled", "paired", "L2", "PCA")
+Error: promise already under evaluation: recursive default argument reference or earlier problems?
+Execution halted
