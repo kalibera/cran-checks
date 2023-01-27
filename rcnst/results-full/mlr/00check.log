@@ -1,4 +1,4 @@
-* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/TeXCheckR.Rcheck’
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/mlr.Rcheck’
 * using R Under development (unstable) (2023-01-26 r83693)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * R was compiled by
@@ -6,20 +6,23 @@
     GNU Fortran (GCC) 12.2.1 20221121 (Red Hat 12.2.1-4)
 * running under: Fedora Linux 36 (MATE-Compiz)
 * using session charset: UTF-8
-* checking for file ‘TeXCheckR/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘TeXCheckR’ version ‘0.7.0’
+* checking for file ‘mlr/DESCRIPTION’ ... OK
+* this is package ‘mlr’ version ‘2.19.1’
 * package encoding: UTF-8
 * checking package namespace information ... OK
-* checking package dependencies ... OK
+* checking package dependencies ... NOTE
+Packages suggested but not available for checking:
+  'adabag', 'clusterSim', 'klaR', 'mda', 'Rmpi', 'sparseLDA',
+  'SwarmSVM'
 * checking if this is a source package ... OK
 * checking if there is a namespace ... OK
 * checking for executable files ... OK
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘TeXCheckR’ can be installed ... OK
+* checking whether package ‘mlr’ can be installed ... OK
 * checking package directory ... OK
+* checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
 * checking for left-over files ... OK
@@ -50,28 +53,60 @@
 * checking data for non-ASCII characters ... OK
 * checking LazyData ... OK
 * checking data for ASCII and uncompressed saves ... OK
-* checking R/sysdata.rda ... OK
-* checking examples ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking compiled code ... NOTE
+Note: information on .o files is not available
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... ERROR
+Running examples in ‘mlr-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: tuneParamsMultiCrit
+> ### Title: Hyperparameter tuning for multiple measures at once.
+> ### Aliases: tuneParamsMultiCrit
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  116.366 13.369 139.684 0.01 0.018 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
+ERROR: modification of compiler constant of type character, length 2
+ERROR: the modified value of the constant is:
+[1] "integer"       "integervector"
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "integer"       "integervector"
+ERROR: the modified constant is at index 1
+ERROR: the modified constant is in this function body:
+c("integer", "integervector")
+Fatal error: compiler constants were modified!
+
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... ERROR
+* checking tests ... OK
   Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-          context <- lines[line_no]
-          .report_error(line_no = line_no, context = context, error_message = "Space inserted before \\footnote")
-          stop("Space inserted before footnote.")
-      }
-      if (any(grepl("\\footnote{ ", lines, fixed = TRUE))) {
-          line_no <- grep("\\footnote{ ", lines, fixed = TRUE)[[1L]]
-          context <- lines[[line_no]]
-          .report_error(line_no = line_no, context = context, error_message = "Leading spacing in footnotetext.")
-          stop("Leading spacing in footnotetext.")
-      }
-      invisible(NULL)
-  }
-  Function check_footnote_typography in namespace TeXCheckR has this body.
-  Fatal error: compiler constants were modified!
-  
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘mlr.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 ERROR
+Status: 1 ERROR, 2 NOTEs
