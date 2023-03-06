@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/mlr.Rcheck’
-* using R Under development (unstable) (2023-02-18 r83864)
+* using R Under development (unstable) (2023-03-04 r83937)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * R was compiled by
     gcc (GCC) 12.2.1 20221121 (Red Hat 12.2.1-4)
@@ -36,6 +36,7 @@ Packages suggested but not available for checking:
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
 * checking loading without being on the library search path ... OK
+* checking startup messages can be suppressed ... OK
 * checking dependencies in R code ... OK
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
@@ -92,6 +93,31 @@ Imputation value: 1
 [Tune-x] 3: C=0.000244; sigma=4.1e+03
 [Tune-y] 3: mmce.test.mean=0.7333333; time: 0.0 min
 [Tune-x] 4: C=4.1e+03; sigma=4.1e+03
+[Tune-y] 4: mmce.test.mean=0.7333333; time: 0.0 min
+[Tune] Result: C=4.1e+03; sigma=0.000244 : mmce.test.mean=0.0533333
+> print(res)
+Tune result:
+Op. pars: C=4.1e+03; sigma=0.000244
+mmce.test.mean=0.0533333
+> # access data for all evaluated points
+> df = as.data.frame(res$opt.path)
+> df1 = as.data.frame(res$opt.path, trafo = TRUE)
+> print(head(df[, -ncol(df)]))
+    C sigma mmce.test.mean dob eol error.message
+1 -12   -12     0.73333333   1  NA          <NA>
+2  12   -12     0.05333333   2  NA          <NA>
+3 -12    12     0.73333333   3  NA          <NA>
+4  12    12     0.73333333   4  NA          <NA>
+> print(head(df1[, -ncol(df)]))
+    C sigma mmce.test.mean dob eol error.message
+1 -12   -12     0.73333333   1  NA          <NA>
+2  12   -12     0.05333333   2  NA          <NA>
+3 -12    12     0.73333333   3  NA          <NA>
+4  12    12     0.73333333   4  NA          <NA>
+> # access data for all evaluated points - alternative
+> df2 = generateHyperParsEffectData(res)
+> df3 = generateHyperParsEffectData(res, trafo = TRUE)
+> print(head(df2$data[, -ncol(df2$data)]))
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"
