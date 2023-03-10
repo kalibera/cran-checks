@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/text2map.Rcheck’
-* using R Under development (unstable) (2023-03-04 r83937)
+* using R Under development (unstable) (2023-03-08 r83956)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * R was compiled by
     gcc (GCC) 12.2.1 20221121 (Red Hat 12.2.1-4)
@@ -69,45 +69,6 @@ The error most likely occurred in:
 
 Attaching package: ‘dplyr’
 
-The following objects are masked from ‘package:stats’:
-
-    filter, lag
-
-The following objects are masked from ‘package:base’:
-
-    intersect, setdiff, setequal, union
-
-> 
-> my_corpus <- data.frame(
-+     text = c(
-+         "I hear babies crying I watch them grow",
-+         "They'll learn much more than I'll ever know",
-+         "And I think to myself",
-+         "What a wonderful world",
-+         "Yes I think to myself",
-+         "What a wonderful world"
-+     ),
-+     line_id = paste0("line", seq_len(6))
-+ )
-> ## some text preprocessing
-> my_corpus$clean_text <- tolower(gsub("'", "", my_corpus$text))
-> 
-> # example 1 with R 4.1 pipe
-> 
-> # example 2 without pipe
-> dtm <- dtm_builder(
-+     data = my_corpus,
-+     text = clean_text,
-+     doc_id = line_id
-+ )
-> 
-> # example 3 with dplyr pipe and mutate
-> dtm <- my_corpus %>%
-+     mutate(
-+         clean_text = gsub("'", "", text),
-+         clean_text = tolower(clean_text)
-+     ) %>%
-+     dtm_builder(clean_text, line_id)
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "pooled" "paired" "L2"     "PCA"   
