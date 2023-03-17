@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2023-03-11 r83971) -- "Unsuffered Consequences"
+R Under development (unstable) (2023-03-16 r83985) -- "Unsuffered Consequences"
 Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -2355,7 +2355,7 @@ Predict: test
 Stratification: FALSE
 predict.type: response
 threshold: 
-time (mean): 0.00
+time (mean): 0.01
   id  truth response iter  set
 1  2 setosa   setosa    1 test
 2  3 setosa   setosa    1 test
@@ -2628,6 +2628,101 @@ Imputation value: 1
 [Tune-y] 3: mmce.test.mean=0.7333333; time: 0.0 min
 [Tune-x] 4: C=4.1e+03; sigma=4.1e+03
 [Tune-y] 4: mmce.test.mean=0.7333333; time: 0.0 min
+[Tune] Result: C=4.1e+03; sigma=0.000244 : mmce.test.mean=0.0533333
+> print(res)
+Tune result:
+Op. pars: C=4.1e+03; sigma=0.000244
+mmce.test.mean=0.0533333
+> # access data for all evaluated points
+> df = as.data.frame(res$opt.path)
+> df1 = as.data.frame(res$opt.path, trafo = TRUE)
+> print(head(df[, -ncol(df)]))
+    C sigma mmce.test.mean dob eol error.message
+1 -12   -12     0.73333333   1  NA          <NA>
+2  12   -12     0.05333333   2  NA          <NA>
+3 -12    12     0.73333333   3  NA          <NA>
+4  12    12     0.73333333   4  NA          <NA>
+> print(head(df1[, -ncol(df)]))
+    C sigma mmce.test.mean dob eol error.message
+1 -12   -12     0.73333333   1  NA          <NA>
+2  12   -12     0.05333333   2  NA          <NA>
+3 -12    12     0.73333333   3  NA          <NA>
+4  12    12     0.73333333   4  NA          <NA>
+> # access data for all evaluated points - alternative
+> df2 = generateHyperParsEffectData(res)
+> df3 = generateHyperParsEffectData(res, trafo = TRUE)
+> print(head(df2$data[, -ncol(df2$data)]))
+    C sigma mmce.test.mean iteration
+1 -12   -12     0.73333333         1
+2  12   -12     0.05333333         2
+3 -12    12     0.73333333         3
+4  12    12     0.73333333         4
+> print(head(df3$data[, -ncol(df3$data)]))
+             C        sigma mmce.test.mean iteration
+1 2.441406e-04 2.441406e-04     0.73333333         1
+2 4.096000e+03 2.441406e-04     0.05333333         2
+3 2.441406e-04 4.096000e+03     0.73333333         3
+4 4.096000e+03 4.096000e+03     0.73333333         4
+> ## Not run: 
+> ##D # we optimize the SVM over 3 kernels simultanously
+> ##D # note how we use dependent params (requires = ...) and iterated F-racing here
+> ##D ps = makeParamSet(
+> ##D   makeNumericParam("C", lower = -12, upper = 12, trafo = function(x) 2^x),
+> ##D   makeDiscreteParam("kernel", values = c("vanilladot", "polydot", "rbfdot")),
+> ##D   makeNumericParam("sigma", lower = -12, upper = 12, trafo = function(x) 2^x,
+> ##D     requires = quote(kernel == "rbfdot")),
+> ##D   makeIntegerParam("degree", lower = 2L, upper = 5L,
+> ##D     requires = quote(kernel == "polydot"))
+> ##D )
+> ##D print(ps)
+> ##D ctrl = makeTuneControlIrace(maxExperiments = 5, nbIterations = 1, minNbSurvival = 1)
+> ##D rdesc = makeResampleDesc("Holdout")
+> ##D res = tuneParams("classif.ksvm", iris.task, rdesc, par.set = ps, control = ctrl)
+> ##D print(res)
+> ##D df = as.data.frame(res$opt.path)
+> ##D print(head(df[, -ncol(df)]))
+> ##D 
+> ##D # include the training set performance as well
+> ##D rdesc = makeResampleDesc("Holdout", predict = "both")
+> ##D res = tuneParams("classif.ksvm", iris.task, rdesc, par.set = ps,
+> ##D   control = ctrl, measures = list(mmce, setAggregation(mmce, train.mean)))
+> ##D print(res)
+> ##D df2 = as.data.frame(res$opt.path)
+> ##D print(head(df2[, -ncol(df2)]))
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("tuneParamsMultiCrit")
+> ### * tuneParamsMultiCrit
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: tuneParamsMultiCrit
+> ### Title: Hyperparameter tuning for multiple measures at once.
+> ### Aliases: tuneParamsMultiCrit
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  103.734 11.383 120.49 0.01 0.02 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"
