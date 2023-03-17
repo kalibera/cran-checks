@@ -1,0 +1,125 @@
+
+R Under development (unstable) (2023-03-16 r83985) -- "Unsuffered Consequences"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "RmdConcord"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('RmdConcord')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("html_with_concordance")
+> ### * html_with_concordance
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: html_with_concordance
+> ### Title: Convert an R Markdown driver to one that handles concordances.
+> ### Aliases: html_with_concordance pdf_with_concordance
+> 
+> ### ** Examples
+> 
+> html_with_concordance(rmarkdown::html_fragment)
+function (sourcepos = TRUE, ...) 
+{
+    test_packages()
+    res <- driver(...)
+    res$knitr$opts_knit$concordance <- sourcepos
+    if (sourcepos) {
+        res$knitr$opts_knit$out_format <- "markdown"
+        oldpost <- res$post_processor
+        res$post_processor <- function(...) {
+            res <- oldpost(...)
+            processConcordance(res, res)
+            res
+        }
+        res$pandoc$from <- fix_pandoc_from_options(res$pandoc$from, 
+            sourcepos)
+    }
+    res
+}
+<bytecode: 0x4bda6f8>
+<environment: 0x4bdeae8>
+> pdf_with_concordance(rmarkdown::latex_fragment)
+function (latex_engine = "pdflatex", sourcepos = TRUE, defineSconcordance = TRUE, 
+    ...) 
+{
+    test_packages()
+    res <- driver(latex_engine = latex_engine, ...)
+    res$knitr$opts_knit$concordance <- sourcepos
+    if (sourcepos) {
+        res$pandoc$from <- fix_pandoc_from_options(res$pandoc$from, 
+            sourcepos)
+        res$pandoc$lua_filters <- c(res$pandoc$lua_filters, system.file("rmarkdown/lua/pagebreak.lua", 
+            package = "RmdConcord"), system.file("rmarkdown/lua/latex-datapos.lua", 
+            package = "RmdConcord"))
+        res$pandoc$RmdConcord_ext <- res$pandoc$ext
+        res$pandoc$ext = ".tex"
+        res$RmdConcord_post_processor <- res$post_processor
+        res$post_processor <- function(yaml, infile, outfile, 
+            ...) {
+            workdir <- dirname(outfile)
+            concordanceFile <- paste0(sans_ext(normalizePath(infile)), 
+                "-concordance.tex")
+            origdir <- setwd(workdir)
+            on.exit(setwd(origdir))
+            processLatexConcordance(outfile, followConcordance = concordanceFile, 
+                defineSconcordance = defineSconcordance)
+            outfile
+        }
+    }
+    res
+}
+<bytecode: 0x4bf3280>
+<environment: 0x4bf8530>
+> 
+> 
+> 
+> cleanEx()
+> nameEx("processConcordance")
+> ### * processConcordance
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: processConcordance
+> ### Title: Get the concordance from the "datapos" values and record it in a
+> ###   file.
+> ### Aliases: processConcordance
+> 
+> ### ** Examples
+> 
+> # This example works on the file inst/sample/Sample.Rmd,
+> # which should be a copy of the vignette Sample.Rmd.  This
+> # is convenient because RStudio doesn't install vignettes by default.
+> 
+> # First, see the results without concordances:
+> 
+> library(RmdConcord)
+> dir <- tempdir()
+> infile <- system.file("sample/Sample.Rmd", package = "RmdConcord")
+> outfile1 <- file.path(dir, "html_vignette.html")
+> rmarkdown::render(infile,
++                   output_file = outfile1,
++                   quiet = TRUE)
+Warning in file(con, "w") :
+  cannot open file 'Sample.knit.md': Read-only file system
+Error in file(con, "w") : cannot open the connection
+Calls: <Anonymous> -> <Anonymous> -> write_utf8 -> writeLines -> file
+Execution halted
