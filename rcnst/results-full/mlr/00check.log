@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/mlr.Rcheck’
-* using R Under development (unstable) (2023-04-06 r84177)
+* using R Under development (unstable) (2023-04-20 r84290)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * R was compiled by
     gcc (GCC) 12.2.1 20221121 (Red Hat 12.2.1-4)
@@ -63,30 +63,35 @@ Note: information on .o files is not available
 Running examples in ‘mlr-Ex.R’ failed
 The error most likely occurred in:
 
-> ### Name: tuneParamsMultiCrit
-> ### Title: Hyperparameter tuning for multiple measures at once.
-> ### Aliases: tuneParamsMultiCrit
+> ### Name: tuneParams
+> ### Title: Hyperparameter tuning.
+> ### Aliases: tuneParams
 > 
 > ### ** Examples
 > 
-> 
-> 
-> 
-> ### * <FOOTER>
-> ###
-> cleanEx()
-> options(digits = 7L)
-> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  116.015 7.026 128.136 0.01 0.018 
-> grDevices::dev.off()
-null device 
-          1 
-> ###
-> ### Local variables: ***
-> ### mode: outline-minor ***
-> ### outline-regexp: "\\(> \\)?### [*]+" ***
-> ### End: ***
-> quit('no')
+> set.seed(123)
+> # a grid search for an SVM (with a tiny number of points...)
+> # note how easily we can optimize on a log-scale
+> ps = makeParamSet(
++   makeNumericParam("C", lower = -12, upper = 12, trafo = function(x) 2^x),
++   makeNumericParam("sigma", lower = -12, upper = 12, trafo = function(x) 2^x)
++ )
+> ctrl = makeTuneControlGrid(resolution = 2L)
+> rdesc = makeResampleDesc("CV", iters = 2L)
+> res = tuneParams("classif.ksvm", iris.task, rdesc, par.set = ps, control = ctrl)
+[Tune] Started tuning learner classif.ksvm for parameter set:
+         Type len Def    Constr Req Tunable Trafo
+C     numeric   -   - -12 to 12   -    TRUE     Y
+sigma numeric   -   - -12 to 12   -    TRUE     Y
+With control class: TuneControlGrid
+Imputation value: 1
+[Tune-x] 1: C=0.000244; sigma=0.000244
+[Tune-y] 1: mmce.test.mean=0.7333333; time: 0.0 min
+[Tune-x] 2: C=4.1e+03; sigma=0.000244
+[Tune-y] 2: mmce.test.mean=0.0533333; time: 0.0 min
+[Tune-x] 3: C=0.000244; sigma=4.1e+03
+[Tune-y] 3: mmce.test.mean=0.7333333; time: 0.0 min
+[Tune-x] 4: C=4.1e+03; sigma=4.1e+03
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"
