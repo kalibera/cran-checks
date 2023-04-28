@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2023-04-06 r84177) -- "Unsuffered Consequences"
+R Under development (unstable) (2023-04-27 r84331) -- "Unsuffered Consequences"
 Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -2538,22 +2538,7 @@ Unrooted; no branch lengths.
 +               read.tree(text = "(a, (b, ((c, d), (rogue, (e, f)))));"),
 +               read.tree(text = "(a, (b, ((c, (rogue, d)), (e, f))));"),
 +               read.tree(text = "(a, (b, (c, (d, (rogue, (e, f))))));"))
-> RoguePlot(trees, "rogue")
-$cons
-
-Phylogenetic tree with 6 tips and 4 internal nodes.
-
-Tip labels:
-  a, b, c, d, e, f
-
-Rooted; no branch lengths.
-
-$onEdge
-[1] 1 0 0 0 0 1 2 0 0
-
-$atNode
-[1] 1 0 4 0
-
+> RoguePlot(trees, "rogue", legend = "topleft", legend.inset = 0.02)
 > 
 > 
 > 
@@ -2645,28 +2630,6 @@ $atNode
 > ape::tiplabels(adj = c(2, 1/3))
 > 
 > plot(SortTree(messyTree, how = "tip"))
-> 
-> 
-> 
-> cleanEx()
-> nameEx("SpectrumLegend")
-> ### * SpectrumLegend
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: SpectrumLegend
-> ### Title: Produce a legend for continuous gradient scales
-> ### Aliases: SpectrumLegend
-> 
-> ### ** Examples
-> 
-> plot(0:1, 0:1, type = "n", frame.plot = FALSE,
-+      xlab = "x", ylab = "y")
-> SpectrumLegend(legend = c("Dark", "Middle", "Bright"),
-+                palette = hcl.colors(32L), lwd = 5,
-+                title = "Brightness")
-> SpectrumLegend(0.4, 0.95, 0.9, 0.95, abs = TRUE,
-+                legend = seq(1, 9, by = 2), palette = 1:8, pos = 1)
 > 
 > 
 > 
@@ -3552,7 +3515,7 @@ integer64
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  7.489 0.419 8.048 0 0 
+Time elapsed:  7.102 0.754 8.215 0 0 
 > grDevices::dev.off()
 null device 
           1 

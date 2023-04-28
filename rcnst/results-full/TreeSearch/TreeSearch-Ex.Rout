@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2023-04-20 r84290) -- "Unsuffered Consequences"
+R Under development (unstable) (2023-04-27 r84331) -- "Unsuffered Consequences"
 Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -38,10 +38,11 @@ Type 'q()' to quit R.
 > 
 > data("Lobo", package = "TreeTools")
 > AdditionTree(Lobo.phy, concavity = 10)
-Addition tree ■■                                 2% | ETA: 45s
-Addition tree ■■■■■■■■■                         27% | ETA: 12s
-Addition tree ■■■■■■■■■■■■■■■                   45% | ETA:  8s
-Addition tree ■■■■■■■■■■■■■■■■■■■■■             68% | ETA:  5s
+Addition tree ■                                  1% | ETA:  2m
+Addition tree ■■■■■                             14% | ETA: 21s
+Addition tree ■■■■■■■■■■■                       34% | ETA: 12s
+Addition tree ■■■■■■■■■■■■■■■■■                 55% | ETA:  8s
+Addition tree ■■■■■■■■■■■■■■■■■■■■■■■           72% | ETA:  5s
 Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■■■        83% | ETA:  3s
 Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
 
@@ -309,12 +310,12 @@ Loading required package: ape
 
 ── Sample local optimum ────────────────────────────────────────────────────────
 → TBR depth 1; keeping 4 trees; k = 10
-ℹ 14:35:58: Score: 12.6988
-Final search ■■■■■■■■■                         25% | D0, score 12.066, hit 1. E…
-Final search ■■■■■■■■■■■■                      38% | D1, score 11.9697, hit 1. …
+ℹ 13:42:05: Score: 12.6988
+Final search ■                                  0% | D0, score 12.2635, hit 1. …
+Final search ■■■■■■■■■■■■■■                    42% | D1, score 11.9697, hit 1. …
   - TBR rearrangement at depth 1 found score 11.9697 1 time.
 
-✔ 2023-04-20 14:36:02: Tree search terminated with score 11.9697
+✔ 2023-04-27 13:42:09: Tree search terminated with score 11.9697
 > names(trees)
 [1] "final_1"
 > 
@@ -355,7 +356,7 @@ Final search ■■■■■■■■■■■■                      38% | D1,
 +   dimnames = list(letters[1:6], NULL)))
 > MaximizeParsimony(characters, constraint = constraint, verbosity = 0)
 ✔ Initialized 1 distinct constraints.
-→ 2023-04-20 14:36:02: Score to beat: 3
+→ 2023-04-27 13:42:10: Score to beat: 3
 1 phylogenetic tree
 > 
 > 
@@ -1218,7 +1219,7 @@ Rooted; no branch lengths.
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  56.261 2.673 60.829 0 0 
+Time elapsed:  62.635 3.841 69.038 0 0 
 > grDevices::dev.off()
 null device 
           1 
