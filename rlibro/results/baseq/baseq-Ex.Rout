@@ -1,0 +1,45 @@
+
+R Under development (unstable) (2023-04-27 r84331) -- "Unsuffered Consequences"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "baseq"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('baseq')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("clean_DNA_file")
+> ### * clean_DNA_file
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: clean_DNA_file
+> ### Title: Clean DNA file
+> ### Aliases: clean_DNA_file
+> 
+> ### ** Examples
+> 
+> sample_file_path_three <- system.file("extdata", "sample2_fa.fasta", package = "baseq")
+> clean_DNA_file(sample_file_path_three)
+Warning in file(output_file, "w") :
+  cannot open file '/var/scratch2ro/tomas/cran/rlibro/lib/baseq/extdata/sample2_fa_clean.fasta': Read-only file system
+Error in file(output_file, "w") : cannot open the connection
+Calls: clean_DNA_file -> file
+Execution halted
