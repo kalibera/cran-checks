@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2023-04-27 r84331) -- "Unsuffered Consequences"
+R Under development (unstable) (2023-04-30 r84349) -- "Unsuffered Consequences"
 Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -37,9 +37,285 @@ Type 'q()' to quit R.
 > ### ** Examples
 > 
 > sample_file_path_three <- system.file("extdata", "sample2_fa.fasta", package = "baseq")
-> clean_DNA_file(sample_file_path_three)
+> tempdir <- tempdir()
+> temp_file_path <- file.path(tempdir, basename(sample_file_path_three))
+> file.copy(sample_file_path_three, temp_file_path, overwrite = TRUE)
+[1] TRUE
+> clean_DNA_file(temp_file_path, output_dir = tempdir)
+Cleaned sequences written to file '/var/scratch2/tomas/tmp/RtmpvpN3Xg/sample2_fa_clean.fasta'.
+[1] "/var/scratch2/tomas/tmp/RtmpvpN3Xg/sample2_fa_clean.fasta"
+> 
+> # Write to working directory
+> # clean_DNA_file(file_path)
+> 
+> # Write to custom directory
+> # clean_DNA_file(file_path, output_dir = "/path/to/directory/")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("clean_DNA_sequence")
+> ### * clean_DNA_sequence
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: clean_DNA_sequence
+> ### Title: Clean DNA sequence
+> ### Aliases: clean_DNA_sequence
+> 
+> ### ** Examples
+> 
+> clean_DNA_sequence("ATGTCGTAGCTAGCTN")
+[1] "ATGTCGTAGCTAGCT"
+> # Output: "ATGTCGTAGCTAGCT"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("clean_RNA_file")
+> ### * clean_RNA_file
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: clean_RNA_file
+> ### Title: Clean RNA file
+> ### Aliases: clean_RNA_file
+> 
+> ### ** Examples
+> 
+> sample_file_path_three <- system.file("extdata", "sample2_fa.fasta", package = "baseq")
+> tempdir <- tempdir()
+> temp_file_path <- file.path(tempdir, basename(sample_file_path_three))
+> file.copy(sample_file_path_three, temp_file_path, overwrite = TRUE)
+[1] TRUE
+> clean_RNA_file(temp_file_path, output_dir = tempdir)
+Cleaned sequences written to file '/var/scratch2/tomas/tmp/RtmpvpN3Xg/sample2_fa_clean.fasta'.
+[1] "/var/scratch2/tomas/tmp/RtmpvpN3Xg/sample2_fa_clean.fasta"
+> 
+> # Write to working directory
+> # clean_RNA_file(file_path)
+> 
+> # Write to custom directory
+> # clean_RNA_file(file_path, output_dir = "/path/to/directory/")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("clean_RNA_sequence")
+> ### * clean_RNA_sequence
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: clean_RNA_sequence
+> ### Title: Clean RNA sequence
+> ### Aliases: clean_RNA_sequence
+> 
+> ### ** Examples
+> 
+> clean_RNA_sequence("AUGUCGTAGCTAGCTN")
+[1] "AUGUCGAGCAGC"
+> # Output: "AUGUCGAGCAGC"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("clean_sequence")
+> ### * clean_sequence
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: clean_sequence
+> ### Title: Clean DNA or RNA sequence
+> ### Aliases: clean_sequence
+> 
+> ### ** Examples
+> 
+> clean_sequence("atgcNnRYMK") # Returns "ATGC"
+[1] "ATGC"
+> clean_sequence("auggcuuNnRYMK", type = "RNA") # Returns "AUGGCUU"
+[1] "AUGGCUU"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("count_bases")
+> ### * count_bases
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: count_bases
+> ### Title: Count the number of A's, C's, G's, and T's in a DNA sequence
+> ### Aliases: count_bases
+> 
+> ### ** Examples
+> 
+> sequence <- "ATCGAGCTAGCTAGCTAGCTAGCT"
+> count_bases(sequence)
+A C G T 
+6 6 6 6 
+> # A  C  G  T
+> # 6  6  6  6
+> 
+> 
+> 
+> cleanEx()
+> nameEx("count_seq_pattern")
+> ### * count_seq_pattern
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: count_seq_pattern
+> ### Title: Count frequency of a pattern in a sequence
+> ### Aliases: count_seq_pattern
+> 
+> ### ** Examples
+> 
+> seq <- "ATGGTGCTCCGTGCGCGCGCGCGCGCGCGCGCGCGCGCGCGCGCGCGCGCGCGCGCGCGCGCGCGCGCGCGCTACGTAG"
+> count_seq_pattern(seq, "CG")
+[1] 31
+> # [1] 31
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("dna_to_protein")
+> ### * dna_to_protein
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dna_to_protein
+> ### Title: Translation of a DNA sequence
+> ### Aliases: dna_to_protein
+> 
+> ### ** Examples
+> 
+> sequence <- "ATCGAGCTAGCTAGCTAGCTAGCT"
+> dna_to_protein(sequence)
+$`Frame F1`
+[1] "IELAS"
+
+$`Frame F2`
+[1] "SS"
+
+$`Frame F3`
+[1] "RAS"
+
+$`Frame R1`
+[1] "S"
+
+$`Frame R2`
+[1] "AS"
+
+$`Frame R3`
+[1] "LAS"
+
+> # Returns a list containing the translated protein sequences in all six frames:
+> # $`Frame F1`
+> # [1] "IELAS"
+> #
+> # $`Frame F2`
+> # [1] "SS"
+> #
+> # $`Frame F3`
+> # [1] "RAS"
+> #
+> # $`Frame R1`
+> # [1] "S"
+> #
+> # $`Frame R2`
+> # [1] "AS"
+> #
+> # $`Frame R3`
+> # [1] "LAS"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("dna_to_rna")
+> ### * dna_to_rna
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dna_to_rna
+> ### Title: Transcription of a DNA sequence
+> ### Aliases: dna_to_rna
+> 
+> ### ** Examples
+> 
+> sequence <- "ATCGAGCTAGCTAGCTAGCTAGCT"
+> dna_to_rna(sequence)
+[1] "AUCGAGCUAGCUAGCUAGCUAGCU"
+> # Returns "AUCGAGCUAGCUAGCUAGCUAGCU"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("fastq_to_fasta")
+> ### * fastq_to_fasta
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: fastq_to_fasta
+> ### Title: Convert a FASTQ file to a FASTA file
+> ### Aliases: fastq_to_fasta
+> 
+> ### ** Examples
+> 
+> sample_file_path_two <- system.file("extdata", "sample_fq.fastq", package = "baseq")
+> tempdir <- tempdir()
+> temp_file_path <- file.path(tempdir, basename(sample_file_path_two))
+> file.copy(sample_file_path_two, temp_file_path, overwrite = TRUE)
+[1] TRUE
+> fastq_to_fasta(temp_file_path)
+[1] "/var/scratch2/tomas/tmp/RtmpvpN3Xg/sample_fq.fasta"
+> 
+> # Output: "path/to/Temp/tempfoldername/sample_fq.fasta"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("gc_content")
+> ### * gc_content
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: gc_content
+> ### Title: Calculate GC content of a DNA sequence
+> ### Aliases: gc_content
+> 
+> ### ** Examples
+> 
+> sequence <- "ATCGAGCTAGCTAGCTAGCTAGCT"
+> gc_content(sequence)
+[1] 50
+> 50
+[1] 50
+> 
+> 
+> 
+> cleanEx()
+> nameEx("gc_content_file")
+> ### * gc_content_file
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: gc_content_file
+> ### Title: GC content of sequences in a multi FASTA file
+> ### Aliases: gc_content_file
+> 
+> ### ** Examples
+> 
+> sample_file_path <- system.file("extdata", "sample_fa.fasta", package = "baseq")
+> 
+> clean_DNA_file(sample_file_path)
 Warning in file(output_file, "w") :
-  cannot open file '/var/scratch2ro/tomas/cran/rlibro/lib/baseq/extdata/sample2_fa_clean.fasta': Read-only file system
+  cannot open file '/var/scratch2ro/tomas/cran/rlibro/lib/baseq/extdata/sample_fa_clean.fasta': Read-only file system
 Error in file(output_file, "w") : cannot open the connection
 Calls: clean_DNA_file -> file
 Execution halted
