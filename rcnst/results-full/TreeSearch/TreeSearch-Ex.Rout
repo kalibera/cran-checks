@@ -1,7 +1,7 @@
 
-R Under development (unstable) (2023-05-10 r84418) -- "Unsuffered Consequences"
+R Under development (unstable) (2023-05-18 r84448) -- "Unsuffered Consequences"
 Copyright (C) 2023 The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
+Platform: x86_64-pc-linux-gnu
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -38,7 +38,7 @@ Type 'q()' to quit R.
 > 
 > data("inapplicable.phyData", package = "TreeSearch")
 > AdditionTree(inapplicable.phyData[["Longrich2010"]], concavity = 10)
-Addition tree ■■■■■                             15% | ETA:  6s
+Addition tree ■                                  1% | ETA:  2m
 Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
 
 Phylogenetic tree with 20 tips and 19 internal nodes.
@@ -305,12 +305,12 @@ Loading required package: ape
 
 ── Sample local optimum ────────────────────────────────────────────────────────
 → TBR depth 1; keeping 4 trees; k = 10
-ℹ 12:33:46: Score: 12.6988
+ℹ 04:11:12: Score: 12.6988
 Final search ■■■■■                             15% | D0, score 12.1477, hit 1. …
-Final search ■■■■■■■■■                         28% | D1, score 11.9697, hit 1. …
+Final search ■■■■■■■■■■                        30% | D0, score 12.066, hit 1. E…
   - TBR rearrangement at depth 1 found score 11.9697 1 time.
 
-✔ 2023-05-11 12:33:49: Tree search terminated with score 11.9697
+✔ 2023-05-19 04:11:16: Tree search terminated with score 11.9697
 > names(trees)
 [1] "final_1"
 > 
@@ -351,7 +351,7 @@ Final search ■■■■■■■■■                         28% | D1, score
 +   dimnames = list(letters[1:6], NULL)))
 > MaximizeParsimony(characters, constraint = constraint, verbosity = 0)
 ✔ Initialized 1 distinct constraints.
-→ 2023-05-11 12:33:49: Score to beat: 3
+→ 2023-05-19 04:11:16: Score to beat: 3
 1 phylogenetic tree
 > 
 > 
@@ -1214,7 +1214,7 @@ Rooted; no branch lengths.
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  49.782 2.444 53.659 0 0 
+Time elapsed:  52.788 3.553 58.134 0 0 
 > grDevices::dev.off()
 null device 
           1 
