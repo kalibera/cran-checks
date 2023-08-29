@@ -1,0 +1,498 @@
+
+R Under development (unstable) (2023-08-27 r85017) -- "Unsuffered Consequences"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # This file is part of the standard setup for testthat.
+> # It is recommended that you do not modify it.
+> #
+> # Where should you do additional test configuration?
+> # Learn more about the roles of various files in:
+> # * https://r-pkgs.org/tests.html
+> # * https://testthat.r-lib.org/reference/test_package.html#special-files
+> 
+> library(testthat)
+> library(jlmerclusterperm)
+> 
+> test_check("jlmerclusterperm")
+i Starting Julia with 2 threads
+v Starting Julia with 2 threads [12.4s]
+
+i Activating package environment
+    Updating registry at `~/.julia/registries/General.toml`
+   Installed BandedMatrices ─ v0.17.38
+   Installed TimeZones ────── v1.13.0
+x Activating package environment [21.8s]
+
+i Starting Julia with 2 threads
+v Starting Julia with 2 threads [12.2s]
+
+i Activating package environment
+    Updating registry at `~/.julia/registries/General.toml`
+x Activating package environment [12.1s]
+
+    Updating registry at `~/.julia/registries/General.toml`
+    Updating registry at `~/.julia/registries/General.toml`
+    Updating registry at `~/.julia/registries/General.toml`
+    Updating registry at `~/.julia/registries/General.toml`
+    Updating registry at `~/.julia/registries/General.toml`
+    Updating registry at `~/.julia/registries/General.toml`
+    Updating registry at `~/.julia/registries/General.toml`
+    Updating registry at `~/.julia/registries/General.toml`
+[ FAIL 12 | WARN 0 | SKIP 0 | PASS 5 ]
+
+══ Failed tests ════════════════════════════════════════════════════════════════
+── Error ('test-aaa.R:11:3'): Setup with seed works (use 2 for testing) ────────
+Error: Evaluation in Julia failed.
+Original Julia error message:
+LoadError: SystemError: opening file "/var/scratch2ro/tomas/cran/rlibro/lib/jlmerclusterperm/julia/Manifest.toml": Read-only file system
+Stacktrace:
+  [1] instantiate
+    @ /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1653 [inlined]
+  [2] instantiate(; kwargs::Base.Pairs{Symbol, Union{}, Tuple{}, NamedTuple{(), Tuple{}}})
+    @ Pkg.API /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1652
+  [3] instantiate()
+    @ Pkg.API /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1652
+  [4] top-level scope
+    @ string:1
+  [5] include_string (repeats 2 times)
+    @ ./loading.jl:1913 [inlined]
+  [6] mainevalcmd(str::String)
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:150
+  [7] evaluate!
+    @ /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:67 [inlined]
+  [8] evaluate_checked!(call::Main.RConnector.Call, communicator::Main.RConnector.CommunicatoR{Sockets.TCPSocket})
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:55
+  [9] serve_repl(sock::Sockets.TCPSocket)
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/communicating.jl:185
+ [10] (::Main.RConnector.var"#3#5")()
+    @ Main.RConnector ./task.jl:514
+in expression starting at string:1
+Backtrace:
+     ▆
+  1. ├─testthat::expect_true(jlmerclusterperm_setup()) at test-aaa.R:11:2
+  2. │ └─testthat::quasi_label(enquo(object), label, arg = "object")
+  3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
+  4. └─jlmerclusterperm::jlmerclusterperm_setup()
+  5.   └─jlmerclusterperm:::setup_with_progress(verbose = verbose)
+  6.     └─jlmerclusterperm:::set_projenv(verbose = verbose)
+  7.       └─JuliaConnectoR::juliaEval("Pkg.instantiate()")
+  8.         └─JuliaConnectoR::juliaCall("RConnector.mainevalcmd", expr)
+  9.           ├─base::tryCatch(...)
+ 10.           │ └─base (local) tryCatchList(expr, classes, parentenv, handlers)
+ 11.           │   └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])
+ 12.           │     └─base (local) doTryCatch(return(expr), name, parentenv, handler)
+ 13.           └─JuliaConnectoR:::doCallJulia(funName, jlargs)
+ 14.             └─JuliaConnectoR:::handleCallbacksAndOutput()
+── Error ('test-aaa.R:22:5'): Don't restart if FALSE ───────────────────────────
+Error: Evaluation in Julia failed.
+Original Julia error message:
+LoadError: SystemError: opening file "/var/scratch2ro/tomas/cran/rlibro/lib/jlmerclusterperm/julia/Manifest.toml": Read-only file system
+Stacktrace:
+  [1] instantiate
+    @ /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1653 [inlined]
+  [2] instantiate(; kwargs::Base.Pairs{Symbol, Union{}, Tuple{}, NamedTuple{(), Tuple{}}})
+    @ Pkg.API /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1652
+  [3] instantiate()
+    @ Pkg.API /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1652
+  [4] top-level scope
+    @ string:1
+  [5] include_string (repeats 2 times)
+    @ ./loading.jl:1913 [inlined]
+  [6] mainevalcmd(str::String)
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:150
+  [7] evaluate!
+    @ /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:67 [inlined]
+  [8] evaluate_checked!(call::Main.RConnector.Call, communicator::Main.RConnector.CommunicatoR{Sockets.TCPSocket})
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:55
+  [9] serve_repl(sock::Sockets.TCPSocket)
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/communicating.jl:185
+ [10] (::Main.RConnector.var"#3#5")()
+    @ Main.RConnector ./task.jl:514
+in expression starting at string:1
+Backtrace:
+     ▆
+  1. ├─testthat::expect_message(...) at test-aaa.R:22:4
+  2. │ └─testthat:::expect_condition_matching(...)
+  3. │   └─testthat:::quasi_capture(...)
+  4. │     ├─testthat (local) .capture(...)
+  5. │     │ └─base::withCallingHandlers(...)
+  6. │     └─rlang::eval_bare(quo_get_expr(.quo), quo_get_env(.quo))
+  7. └─jlmerclusterperm::jlmerclusterperm_setup(restart = FALSE)
+  8.   └─jlmerclusterperm:::setup_with_progress(verbose = verbose)
+  9.     └─jlmerclusterperm:::set_projenv(verbose = verbose)
+ 10.       └─JuliaConnectoR::juliaEval("Pkg.instantiate()")
+ 11.         └─JuliaConnectoR::juliaCall("RConnector.mainevalcmd", expr)
+ 12.           ├─base::tryCatch(...)
+ 13.           │ └─base (local) tryCatchList(expr, classes, parentenv, handlers)
+ 14.           │   └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])
+ 15.           │     └─base (local) doTryCatch(return(expr), name, parentenv, handler)
+ 16.           └─JuliaConnectoR:::doCallJulia(funName, jlargs)
+ 17.             └─JuliaConnectoR:::handleCallbacksAndOutput()
+── Failure ('test-aaa.R:27:3'): RNG initializes to seed=1 counter=0 ────────────
+get_rng_seed() (`actual`) not equal to 1 (`expected`).
+
+`actual` is NULL
+`expected` is a double vector (1)
+── Error ('test-aaa.R:28:3'): RNG initializes to seed=1 counter=0 ──────────────
+Error: Evaluation in Julia failed.
+Original Julia error message:
+LoadError: UndefVarError: `rng` not defined
+Stacktrace:
+ [1] top-level scope
+   @ string:1
+ [2] include_string (repeats 2 times)
+   @ ./loading.jl:1913 [inlined]
+ [3] mainevalcmd(str::String)
+   @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:150
+ [4] evaluate!
+   @ /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:67 [inlined]
+ [5] evaluate_checked!(call::Main.RConnector.Call, communicator::Main.RConnector.CommunicatoR{Sockets.TCPSocket})
+   @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:55
+ [6] serve_repl(sock::Sockets.TCPSocket)
+   @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/communicating.jl:185
+ [7] (::Main.RConnector.var"#3#5")()
+   @ Main.RConnector ./task.jl:514
+in expression starting at string:1
+Backtrace:
+     ▆
+  1. ├─testthat::expect_equal(get_rng_state(), 0) at test-aaa.R:28:2
+  2. │ └─testthat::quasi_label(enquo(object), label, arg = "object")
+  3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
+  4. └─jlmerclusterperm::get_rng_state()
+  5.   └─JuliaConnectoR::juliaEval("Int(rng.ctr1)")
+  6.     └─JuliaConnectoR::juliaCall("RConnector.mainevalcmd", expr)
+  7.       ├─base::tryCatch(...)
+  8.       │ └─base (local) tryCatchList(expr, classes, parentenv, handlers)
+  9.       │   └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])
+ 10.       │     └─base (local) doTryCatch(return(expr), name, parentenv, handler)
+ 11.       └─JuliaConnectoR:::doCallJulia(funName, jlargs)
+ 12.         └─JuliaConnectoR:::handleCallbacksAndOutput()
+── Error ('test-clusterpermute.R:3:1'): (code run outside of `test_that()`) ────
+Error: Evaluation in Julia failed.
+Original Julia error message:
+LoadError: SystemError: opening file "/var/scratch2ro/tomas/cran/rlibro/lib/jlmerclusterperm/julia/Manifest.toml": Read-only file system
+Stacktrace:
+  [1] instantiate
+    @ /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1653 [inlined]
+  [2] instantiate(; kwargs::Base.Pairs{Symbol, Union{}, Tuple{}, NamedTuple{(), Tuple{}}})
+    @ Pkg.API /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1652
+  [3] instantiate()
+    @ Pkg.API /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1652
+  [4] top-level scope
+    @ string:1
+  [5] include_string (repeats 2 times)
+    @ ./loading.jl:1913 [inlined]
+  [6] mainevalcmd(str::String)
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:150
+  [7] evaluate!
+    @ /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:67 [inlined]
+  [8] evaluate_checked!(call::Main.RConnector.Call, communicator::Main.RConnector.CommunicatoR{Sockets.TCPSocket})
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:55
+  [9] serve_repl(sock::Sockets.TCPSocket)
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/communicating.jl:185
+ [10] (::Main.RConnector.var"#3#5")()
+    @ Main.RConnector ./task.jl:514
+in expression starting at string:1
+Backtrace:
+     ▆
+  1. └─jlmerclusterperm::jlmerclusterperm_setup(restart = FALSE, verbose = FALSE) at test-clusterpermute.R:3:0
+  2.   └─jlmerclusterperm:::setup_with_progress(verbose = verbose)
+  3.     └─jlmerclusterperm:::set_projenv(verbose = verbose)
+  4.       └─JuliaConnectoR::juliaEval("Pkg.instantiate()")
+  5.         └─JuliaConnectoR::juliaCall("RConnector.mainevalcmd", expr)
+  6.           ├─base::tryCatch(...)
+  7.           │ └─base (local) tryCatchList(expr, classes, parentenv, handlers)
+  8.           │   └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])
+  9.           │     └─base (local) doTryCatch(return(expr), name, parentenv, handler)
+ 10.           └─JuliaConnectoR:::doCallJulia(funName, jlargs)
+ 11.             └─JuliaConnectoR:::handleCallbacksAndOutput()
+── Error ('test-jlmer.R:6:1'): (code run outside of `test_that()`) ─────────────
+Error: Evaluation in Julia failed.
+Original Julia error message:
+LoadError: SystemError: opening file "/var/scratch2ro/tomas/cran/rlibro/lib/jlmerclusterperm/julia/Manifest.toml": Read-only file system
+Stacktrace:
+  [1] instantiate
+    @ /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1653 [inlined]
+  [2] instantiate(; kwargs::Base.Pairs{Symbol, Union{}, Tuple{}, NamedTuple{(), Tuple{}}})
+    @ Pkg.API /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1652
+  [3] instantiate()
+    @ Pkg.API /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1652
+  [4] top-level scope
+    @ string:1
+  [5] include_string (repeats 2 times)
+    @ ./loading.jl:1913 [inlined]
+  [6] mainevalcmd(str::String)
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:150
+  [7] evaluate!
+    @ /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:67 [inlined]
+  [8] evaluate_checked!(call::Main.RConnector.Call, communicator::Main.RConnector.CommunicatoR{Sockets.TCPSocket})
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:55
+  [9] serve_repl(sock::Sockets.TCPSocket)
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/communicating.jl:185
+ [10] (::Main.RConnector.var"#3#5")()
+    @ Main.RConnector ./task.jl:514
+in expression starting at string:1
+Backtrace:
+     ▆
+  1. └─jlmerclusterperm::jlmerclusterperm_setup(restart = FALSE, verbose = FALSE) at test-jlmer.R:6:0
+  2.   └─jlmerclusterperm:::setup_with_progress(verbose = verbose)
+  3.     └─jlmerclusterperm:::set_projenv(verbose = verbose)
+  4.       └─JuliaConnectoR::juliaEval("Pkg.instantiate()")
+  5.         └─JuliaConnectoR::juliaCall("RConnector.mainevalcmd", expr)
+  6.           ├─base::tryCatch(...)
+  7.           │ └─base (local) tryCatchList(expr, classes, parentenv, handlers)
+  8.           │   └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])
+  9.           │     └─base (local) doTryCatch(return(expr), name, parentenv, handler)
+ 10.           └─JuliaConnectoR:::doCallJulia(funName, jlargs)
+ 11.             └─JuliaConnectoR:::handleCallbacksAndOutput()
+── Error ('test-julia_rng.R:3:1'): (code run outside of `test_that()`) ─────────
+Error: Evaluation in Julia failed.
+Original Julia error message:
+LoadError: SystemError: opening file "/var/scratch2ro/tomas/cran/rlibro/lib/jlmerclusterperm/julia/Manifest.toml": Read-only file system
+Stacktrace:
+  [1] instantiate
+    @ /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1653 [inlined]
+  [2] instantiate(; kwargs::Base.Pairs{Symbol, Union{}, Tuple{}, NamedTuple{(), Tuple{}}})
+    @ Pkg.API /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1652
+  [3] instantiate()
+    @ Pkg.API /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1652
+  [4] top-level scope
+    @ string:1
+  [5] include_string (repeats 2 times)
+    @ ./loading.jl:1913 [inlined]
+  [6] mainevalcmd(str::String)
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:150
+  [7] evaluate!
+    @ /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:67 [inlined]
+  [8] evaluate_checked!(call::Main.RConnector.Call, communicator::Main.RConnector.CommunicatoR{Sockets.TCPSocket})
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:55
+  [9] serve_repl(sock::Sockets.TCPSocket)
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/communicating.jl:185
+ [10] (::Main.RConnector.var"#3#5")()
+    @ Main.RConnector ./task.jl:514
+in expression starting at string:1
+Backtrace:
+     ▆
+  1. └─jlmerclusterperm::jlmerclusterperm_setup(restart = FALSE, verbose = FALSE) at test-julia_rng.R:3:0
+  2.   └─jlmerclusterperm:::setup_with_progress(verbose = verbose)
+  3.     └─jlmerclusterperm:::set_projenv(verbose = verbose)
+  4.       └─JuliaConnectoR::juliaEval("Pkg.instantiate()")
+  5.         └─JuliaConnectoR::juliaCall("RConnector.mainevalcmd", expr)
+  6.           ├─base::tryCatch(...)
+  7.           │ └─base (local) tryCatchList(expr, classes, parentenv, handlers)
+  8.           │   └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])
+  9.           │     └─base (local) doTryCatch(return(expr), name, parentenv, handler)
+ 10.           └─JuliaConnectoR:::doCallJulia(funName, jlargs)
+ 11.             └─JuliaConnectoR:::handleCallbacksAndOutput()
+── Error ('test-permute.R:3:1'): (code run outside of `test_that()`) ───────────
+Error: Evaluation in Julia failed.
+Original Julia error message:
+LoadError: SystemError: opening file "/var/scratch2ro/tomas/cran/rlibro/lib/jlmerclusterperm/julia/Manifest.toml": Read-only file system
+Stacktrace:
+  [1] instantiate
+    @ /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1653 [inlined]
+  [2] instantiate(; kwargs::Base.Pairs{Symbol, Union{}, Tuple{}, NamedTuple{(), Tuple{}}})
+    @ Pkg.API /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1652
+  [3] instantiate()
+    @ Pkg.API /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1652
+  [4] top-level scope
+    @ string:1
+  [5] include_string (repeats 2 times)
+    @ ./loading.jl:1913 [inlined]
+  [6] mainevalcmd(str::String)
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:150
+  [7] evaluate!
+    @ /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:67 [inlined]
+  [8] evaluate_checked!(call::Main.RConnector.Call, communicator::Main.RConnector.CommunicatoR{Sockets.TCPSocket})
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:55
+  [9] serve_repl(sock::Sockets.TCPSocket)
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/communicating.jl:185
+ [10] (::Main.RConnector.var"#3#5")()
+    @ Main.RConnector ./task.jl:514
+in expression starting at string:1
+Backtrace:
+     ▆
+  1. └─jlmerclusterperm::jlmerclusterperm_setup(restart = FALSE, verbose = FALSE) at test-permute.R:3:0
+  2.   └─jlmerclusterperm:::setup_with_progress(verbose = verbose)
+  3.     └─jlmerclusterperm:::set_projenv(verbose = verbose)
+  4.       └─JuliaConnectoR::juliaEval("Pkg.instantiate()")
+  5.         └─JuliaConnectoR::juliaCall("RConnector.mainevalcmd", expr)
+  6.           ├─base::tryCatch(...)
+  7.           │ └─base (local) tryCatchList(expr, classes, parentenv, handlers)
+  8.           │   └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])
+  9.           │     └─base (local) doTryCatch(return(expr), name, parentenv, handler)
+ 10.           └─JuliaConnectoR:::doCallJulia(funName, jlargs)
+ 11.             └─JuliaConnectoR:::handleCallbacksAndOutput()
+── Error ('test-progress.R:3:1'): (code run outside of `test_that()`) ──────────
+Error: Evaluation in Julia failed.
+Original Julia error message:
+LoadError: SystemError: opening file "/var/scratch2ro/tomas/cran/rlibro/lib/jlmerclusterperm/julia/Manifest.toml": Read-only file system
+Stacktrace:
+  [1] instantiate
+    @ /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1653 [inlined]
+  [2] instantiate(; kwargs::Base.Pairs{Symbol, Union{}, Tuple{}, NamedTuple{(), Tuple{}}})
+    @ Pkg.API /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1652
+  [3] instantiate()
+    @ Pkg.API /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1652
+  [4] top-level scope
+    @ string:1
+  [5] include_string (repeats 2 times)
+    @ ./loading.jl:1913 [inlined]
+  [6] mainevalcmd(str::String)
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:150
+  [7] evaluate!
+    @ /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:67 [inlined]
+  [8] evaluate_checked!(call::Main.RConnector.Call, communicator::Main.RConnector.CommunicatoR{Sockets.TCPSocket})
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:55
+  [9] serve_repl(sock::Sockets.TCPSocket)
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/communicating.jl:185
+ [10] (::Main.RConnector.var"#3#5")()
+    @ Main.RConnector ./task.jl:514
+in expression starting at string:1
+Backtrace:
+     ▆
+  1. └─jlmerclusterperm::jlmerclusterperm_setup(restart = FALSE, verbose = FALSE) at test-progress.R:3:0
+  2.   └─jlmerclusterperm:::setup_with_progress(verbose = verbose)
+  3.     └─jlmerclusterperm:::set_projenv(verbose = verbose)
+  4.       └─JuliaConnectoR::juliaEval("Pkg.instantiate()")
+  5.         └─JuliaConnectoR::juliaCall("RConnector.mainevalcmd", expr)
+  6.           ├─base::tryCatch(...)
+  7.           │ └─base (local) tryCatchList(expr, classes, parentenv, handlers)
+  8.           │   └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])
+  9.           │     └─base (local) doTryCatch(return(expr), name, parentenv, handler)
+ 10.           └─JuliaConnectoR:::doCallJulia(funName, jlargs)
+ 11.             └─JuliaConnectoR:::handleCallbacksAndOutput()
+── Error ('test-singularity.R:3:1'): (code run outside of `test_that()`) ───────
+Error: Evaluation in Julia failed.
+Original Julia error message:
+LoadError: SystemError: opening file "/var/scratch2ro/tomas/cran/rlibro/lib/jlmerclusterperm/julia/Manifest.toml": Read-only file system
+Stacktrace:
+  [1] instantiate
+    @ /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1653 [inlined]
+  [2] instantiate(; kwargs::Base.Pairs{Symbol, Union{}, Tuple{}, NamedTuple{(), Tuple{}}})
+    @ Pkg.API /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1652
+  [3] instantiate()
+    @ Pkg.API /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1652
+  [4] top-level scope
+    @ string:1
+  [5] include_string (repeats 2 times)
+    @ ./loading.jl:1913 [inlined]
+  [6] mainevalcmd(str::String)
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:150
+  [7] evaluate!
+    @ /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:67 [inlined]
+  [8] evaluate_checked!(call::Main.RConnector.Call, communicator::Main.RConnector.CommunicatoR{Sockets.TCPSocket})
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:55
+  [9] serve_repl(sock::Sockets.TCPSocket)
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/communicating.jl:185
+ [10] (::Main.RConnector.var"#3#5")()
+    @ Main.RConnector ./task.jl:514
+in expression starting at string:1
+Backtrace:
+     ▆
+  1. └─jlmerclusterperm::jlmerclusterperm_setup(restart = FALSE, verbose = FALSE) at test-singularity.R:3:0
+  2.   └─jlmerclusterperm:::setup_with_progress(verbose = verbose)
+  3.     └─jlmerclusterperm:::set_projenv(verbose = verbose)
+  4.       └─JuliaConnectoR::juliaEval("Pkg.instantiate()")
+  5.         └─JuliaConnectoR::juliaCall("RConnector.mainevalcmd", expr)
+  6.           ├─base::tryCatch(...)
+  7.           │ └─base (local) tryCatchList(expr, classes, parentenv, handlers)
+  8.           │   └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])
+  9.           │     └─base (local) doTryCatch(return(expr), name, parentenv, handler)
+ 10.           └─JuliaConnectoR:::doCallJulia(funName, jlargs)
+ 11.             └─JuliaConnectoR:::handleCallbacksAndOutput()
+── Error ('test-threshold_search.R:3:1'): (code run outside of `test_that()`) ──
+Error: Evaluation in Julia failed.
+Original Julia error message:
+LoadError: SystemError: opening file "/var/scratch2ro/tomas/cran/rlibro/lib/jlmerclusterperm/julia/Manifest.toml": Read-only file system
+Stacktrace:
+  [1] instantiate
+    @ /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1653 [inlined]
+  [2] instantiate(; kwargs::Base.Pairs{Symbol, Union{}, Tuple{}, NamedTuple{(), Tuple{}}})
+    @ Pkg.API /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1652
+  [3] instantiate()
+    @ Pkg.API /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1652
+  [4] top-level scope
+    @ string:1
+  [5] include_string (repeats 2 times)
+    @ ./loading.jl:1913 [inlined]
+  [6] mainevalcmd(str::String)
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:150
+  [7] evaluate!
+    @ /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:67 [inlined]
+  [8] evaluate_checked!(call::Main.RConnector.Call, communicator::Main.RConnector.CommunicatoR{Sockets.TCPSocket})
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:55
+  [9] serve_repl(sock::Sockets.TCPSocket)
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/communicating.jl:185
+ [10] (::Main.RConnector.var"#3#5")()
+    @ Main.RConnector ./task.jl:514
+in expression starting at string:1
+Backtrace:
+     ▆
+  1. └─jlmerclusterperm::jlmerclusterperm_setup(restart = FALSE, verbose = FALSE) at test-threshold_search.R:3:0
+  2.   └─jlmerclusterperm:::setup_with_progress(verbose = verbose)
+  3.     └─jlmerclusterperm:::set_projenv(verbose = verbose)
+  4.       └─JuliaConnectoR::juliaEval("Pkg.instantiate()")
+  5.         └─JuliaConnectoR::juliaCall("RConnector.mainevalcmd", expr)
+  6.           ├─base::tryCatch(...)
+  7.           │ └─base (local) tryCatchList(expr, classes, parentenv, handlers)
+  8.           │   └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])
+  9.           │     └─base (local) doTryCatch(return(expr), name, parentenv, handler)
+ 10.           └─JuliaConnectoR:::doCallJulia(funName, jlargs)
+ 11.             └─JuliaConnectoR:::handleCallbacksAndOutput()
+── Error ('test-timewise_statistics.R:3:1'): (code run outside of `test_that()`) ──
+Error: Evaluation in Julia failed.
+Original Julia error message:
+LoadError: SystemError: opening file "/var/scratch2ro/tomas/cran/rlibro/lib/jlmerclusterperm/julia/Manifest.toml": Read-only file system
+Stacktrace:
+  [1] instantiate
+    @ /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1653 [inlined]
+  [2] instantiate(; kwargs::Base.Pairs{Symbol, Union{}, Tuple{}, NamedTuple{(), Tuple{}}})
+    @ Pkg.API /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1652
+  [3] instantiate()
+    @ Pkg.API /usr/share/julia/stdlib/v1.9/Pkg/src/API.jl:1652
+  [4] top-level scope
+    @ string:1
+  [5] include_string (repeats 2 times)
+    @ ./loading.jl:1913 [inlined]
+  [6] mainevalcmd(str::String)
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:150
+  [7] evaluate!
+    @ /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:67 [inlined]
+  [8] evaluate_checked!(call::Main.RConnector.Call, communicator::Main.RConnector.CommunicatoR{Sockets.TCPSocket})
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/evaluating.jl:55
+  [9] serve_repl(sock::Sockets.TCPSocket)
+    @ Main.RConnector /var/scratch2ro/tomas/cran/rlibro/lib/JuliaConnectoR/Julia/communicating.jl:185
+ [10] (::Main.RConnector.var"#3#5")()
+    @ Main.RConnector ./task.jl:514
+in expression starting at string:1
+Backtrace:
+     ▆
+  1. └─jlmerclusterperm::jlmerclusterperm_setup(restart = FALSE, verbose = FALSE) at test-timewise_statistics.R:3:0
+  2.   └─jlmerclusterperm:::setup_with_progress(verbose = verbose)
+  3.     └─jlmerclusterperm:::set_projenv(verbose = verbose)
+  4.       └─JuliaConnectoR::juliaEval("Pkg.instantiate()")
+  5.         └─JuliaConnectoR::juliaCall("RConnector.mainevalcmd", expr)
+  6.           ├─base::tryCatch(...)
+  7.           │ └─base (local) tryCatchList(expr, classes, parentenv, handlers)
+  8.           │   └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])
+  9.           │     └─base (local) doTryCatch(return(expr), name, parentenv, handler)
+ 10.           └─JuliaConnectoR:::doCallJulia(funName, jlargs)
+ 11.             └─JuliaConnectoR:::handleCallbacksAndOutput()
+
+[ FAIL 12 | WARN 0 | SKIP 0 | PASS 5 ]
+Error: Test failures
+Execution halted
