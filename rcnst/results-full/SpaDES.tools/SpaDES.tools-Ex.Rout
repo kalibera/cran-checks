@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2023-08-27 r85017) -- "Unsuffered Consequences"
+R Under development (unstable) (2023-09-03 r85049) -- "Unsuffered Consequences"
 Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -45,6 +45,10 @@ The following object is masked from ‘package:SpaDES.tools’:
 
     wrap
 
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> 
 > a <- rast(ext(0, 1000, 0, 1000), res = 1)
 > sam <- sample(1:ncell(a), 1e4)
 > numCol <- ncol(a)
@@ -52,6 +56,10 @@ The following object is masked from ‘package:SpaDES.tools’:
 > adj.new <- adj(numCol = numCol, numCell = numCell, cells = sam, directions = 8)
 > adj.new <- adj(numCol = numCol, numCell = numCell, cells = sam, directions = 8,
 +                include = TRUE)
+> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
 > 
 > 
 > 
@@ -66,27 +74,34 @@ detaching ‘package:terra’
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: cir
-> ### Title: Identify pixels in a circle or ring (donut) around an object.
+> ### Title: Identify pixels in a circle or ring (doughnut) around an object.
 > ### Aliases: cir
 > 
 > ### ** Examples
 > 
+> library(data.table)
 > library(terra)
 terra 1.7.39
 
 Attaching package: ‘terra’
+
+The following object is masked from ‘package:data.table’:
+
+    shift
 
 The following object is masked from ‘package:SpaDES.tools’:
 
     wrap
 
 > 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
 > set.seed(1462)
 > 
 > # circle centred
 > ras <- rast(ext(0, 15, 0, 15), res = 1, val = 0)
 > middleCircle <- cir(ras)
-> ras[middleCircle[, "indices"]] <- 1
+> ras[middleCircle[ , "indices"]] <- 1
 > circlePoints <- vect(middleCircle[, c("x", "y")])
 > if (interactive()) {
 +   # clearPlot()
@@ -107,7 +122,6 @@ The following object is masked from ‘package:SpaDES.tools’:
 > cirsRas[cirs[, "indices"]] <- 1
 > 
 > if (interactive()) {
-+   # clearPlot()
 +   terra::plot(ras)
 +   terra::plot(cirsRas, add = TRUE, col = c("transparent", "#00000055"))
 +   terra::plot(agent, add = TRUE)
@@ -132,27 +146,15 @@ The following object is masked from ‘package:SpaDES.tools’:
 + }
 > 
 > # rings
-> if (require("CircStats")) {
-+   loci <- cellFromXY(hab, crds(coords))
-+   cirs2 <- rings(hab, loci, maxRadius = radius, minRadius = radius - 1, returnIndices = TRUE)
-+ 
-+   ras2 <- rast(hab)
-+   ras2[] <- 0
-+   ras2[cirs2$indices] <- cirs2$id
-+   if (interactive()) {
-+     terra::plot(c(ras1, ras2))
-+   }
+> loci <- cellFromXY(hab, crds(coords))
+> cirs2 <- rings(hab, loci, maxRadius = radius, minRadius = radius - 1, returnIndices = TRUE)
+> 
+> ras2 <- rast(hab)
+> ras2[] <- 0
+> ras2[cirs2$indices] <- cirs2$id
+> if (interactive()) {
++   terra::plot(c(ras1, ras2))
 + }
-Loading required package: CircStats
-Loading required package: MASS
-
-Attaching package: ‘MASS’
-
-The following object is masked from ‘package:terra’:
-
-    area
-
-Loading required package: boot
 > 
 > hab <- rast(system.file("extdata", "hab2.tif", package = "SpaDES.tools"))
 > cirs <- cir(hab, coords, maxRadius = 44, minRadius = 0)
@@ -174,14 +176,90 @@ Loading required package: boot
 +             maxRadius = 200, minRadius = 0, returnIndices = FALSE,
 +             allowOverlap = TRUE, returnAngles = TRUE)
 > 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
 > 
 > 
 > 
 > cleanEx()
 
-detaching ‘package:CircStats’, ‘package:boot’, ‘package:MASS’,
-  ‘package:terra’
+detaching ‘package:terra’, ‘package:data.table’
 
+> nameEx("crw")
+> ### * crw
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: move
+> ### Title: Move
+> ### Aliases: move crw
+> 
+> ### ** Examples
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> 
+> # using just matrix
+> N <- 10
+> xrange <- yrange <- c(-50, 50)
+> starts <- cbind(x = stats::runif(N, xrange[1], xrange[2]),
++                 y = stats::runif(N, yrange[1], yrange[2]))
+> moved <- crw(starts, stepLength = 5, stddev = 10)
+> plot(starts, col = rainbow(10), pch = 19)
+> points(moved, col = rainbow(10))
+> 
+> # as SpatVector
+> agent <- terra::vect(starts)
+> moved <- crw(agent, stepLength = 5, stddev = 10)
+> movedAgain <- crw(moved, stepLength = 5, stddev = 10)
+> terra::plot(agent)
+> terra::plot(moved, add = TRUE, col = "red")
+> terra::plot(movedAgain, add = TRUE, col = "green")
+> 
+> # 1000x faster!! -- returnMatrix = TRUE
+> agentOrig <- agent
+> reps <- 1e2
+> system.time({
++   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10, returnMatrix = TRUE)
++ })
+   user  system elapsed 
+  0.705   0.140   0.856 
+> agent <- agentOrig
+> system.time({
++   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10)
++ })
+   user  system elapsed 
+ 40.363   4.598  46.171 
+> 
+> # as sp
+> if (requireNamespace("sp")) {
++   agent <- sp::SpatialPoints(starts)
++   spdf <- crw(agent, stepLength = 5, stddev = 10)
++   spdfNew <- crw(spdf, stepLength = 5, stddev = 10)
++   terra::plot(spdf, pch = 19)
++   terra::points(spdfNew, col = "blue", pch = 19)
++ }
+Loading required namespace: sp
+The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,
+which was just loaded, will retire in October 2023.
+Please refer to R-spatial evolution reports for details, especially
+https://r-spatial.org/r/2023/05/15/evolution4.html.
+It may be desirable to make the sf package available;
+package maintainers should consider adding sf to Suggests:.
+The sp package is now running under evolution status 2
+     (status 2 uses the sf package in place of rgdal)
+agent does not have columns named x1 and y1, which represent the 'previous' locations. Assigning random values to those columns.
+agent does not have columns named x1 and y1, which represent the 'previous' locations. Assigning random values to those columns.
+> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
+> 
+> 
+> 
+> 
+> cleanEx()
 > nameEx("directions")
 > ### * directions
 > 
@@ -205,6 +283,9 @@ The following object is masked from ‘package:SpaDES.tools’:
     wrap
 
 > 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> 
 > N <- 2
 > dirRas <- terra::rast(terra::ext(0,40,0,40), res = 1)
 > coords <- cbind(x = round(runif(N, xmin(dirRas), xmax(dirRas))) + 0.5,
@@ -212,35 +293,30 @@ The following object is masked from ‘package:SpaDES.tools’:
 +                 id = 1:N)
 > 
 > dirs1 <- directionFromEachPoint(from = coords, landscape = dirRas)
-> if (require("CircStats")) {
-+   dirs1[, "angles"] <- CircStats::deg(dirs1[,"angles"] %% (2*pi))
-+   indices <- cellFromXY(dirRas,dirs1[, c("x", "y")])
-+   minDir <- tapply(dirs1[, "angles"], indices, function(x) min(x)) # minimum angle
-+   dirRas[] <- as.vector(minDir)
-+   if (interactive()) {
-+     terra::plot(dirRas)
-+     start <- terra::vect(coords[, c("x", "y"), drop = FALSE])
-+     terra::plot(start, add = TRUE)
-+   }
+> 
+> # helper function for converting radians to degrees
+> deg2 <- function(radian) (radian * 180)/pi
+> dirs1[, "angles"] <- deg2(dirs1[,"angles"] %% (2*pi))
+> indices <- cellFromXY(dirRas,dirs1[, c("x", "y")])
+> minDir <- tapply(dirs1[, "angles"], indices, function(x) min(x)) # minimum angle
+> dirRas[] <- as.vector(minDir)
+> 
+> if (interactive()) {
++   terra::plot(dirRas)
++   start <- terra::vect(coords[, c("x", "y"), drop = FALSE])
++   terra::plot(start, add = TRUE)
 + }
-Loading required package: CircStats
-Loading required package: MASS
-
-Attaching package: ‘MASS’
-
-The following object is masked from ‘package:terra’:
-
-    area
-
-Loading required package: boot
+> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
 > 
 > 
 > 
 > 
 > cleanEx()
 
-detaching ‘package:CircStats’, ‘package:boot’, ‘package:MASS’,
-  ‘package:terra’
+detaching ‘package:terra’
 
 > nameEx("distanceFromEachPoint")
 > ### * distanceFromEachPoint
@@ -264,6 +340,9 @@ The following object is masked from ‘package:SpaDES.tools’:
     wrap
 
 > 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> 
 > n <- 2
 > distRas <- rast(ext(0, 40, 0, 40), res = 1)
 > coords <- cbind(x = round(runif(n, xmin(distRas), xmax(distRas))) + 0.5,
@@ -282,14 +361,6 @@ The following object is masked from ‘package:SpaDES.tools’:
 > # With iterative summing via cumulativeFn to keep memory use low, with same result
 > dists1 <- distanceFromEachPoint(coords[, c("x", "y"), drop = FALSE],
 +                                 landscape = distRas, cumulativeFn = `+`)
-The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,
-which was just loaded, will retire in October 2023.
-Please refer to R-spatial evolution reports for details, especially
-https://r-spatial.org/r/2023/05/15/evolution4.html.
-It may be desirable to make the sf package available;
-package maintainers should consider adding sf to Suggests:.
-The sp package is now running under evolution status 2
-     (status 2 uses the sf package in place of rgdal)
 > idwRaster <- rast(distRas)
 > idwRaster[] <- dists1[, "dists"]
 > if (interactive()) terra::plot(idwRaster)
@@ -329,6 +400,10 @@ The sp package is now running under evolution status 2
 +                                   cumulativeFn = `+`, cl = 2)
 + }
 > 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
+> 
 > 
 > 
 > cleanEx()
@@ -350,8 +425,14 @@ detaching ‘package:terra’
 > theta <- c(1:500) * 2 * pi / 500
 > # Compute wrapped normal density function
 > density <- c(1:500)
-> for(i in 1:500) density[i] <- dwrpnorm2(theta[i], pi, .75)
-> if (interactive()) plot(theta, density)
+> for(i in 1:500) {
++   density[i] <- dwrpnorm2(theta[i], pi, .75)
++ }
+> 
+> if (interactive()) {
++   plot(theta, density)
++ }
+> 
 > # Approximate area under density curve
 > sum(density * 2 * pi / 500)
 [1] 1
@@ -380,52 +461,53 @@ The following object is masked from ‘package:SpaDES.tools’:
 
     wrap
 
-> if (require("CircStats")) {
-+ N <- 10L                # number of agents
-+ x1 <- stats::runif(N, -50, 50) # previous X location
-+ y1 <- stats::runif(N, -50, 50) # previous Y location
-+ x0 <- stats::rnorm(N, x1, 5)   # current X location
-+ y0 <- stats::rnorm(N, y1, 5)   # current Y location
-+ 
-+ # using SpatVector
-+ prev <- terra::vect(cbind(x = x1, y = y1))
-+ curr <- terra::vect(cbind(x = x0, y = y0))
-+ heading(prev, curr)
-+ 
-+ # using matrix
-+ prev <- matrix(c(x1, y1), ncol = 2, dimnames = list(NULL, c("x","y")))
-+ curr <- matrix(c(x0, y0), ncol = 2, dimnames = list(NULL, c("x","y")))
-+ heading(prev, curr)
-+ 
-+ #using both
-+ prev <- terra::vect(cbind(x = x1, y = y1))
-+ curr <- matrix(c(x0, y0), ncol = 2, dimnames = list(NULL, c("x","y")))
-+ heading(prev, curr)
-+ 
-+ prev <- matrix(c(x1, y1), ncol = 2, dimnames = list(NULL, c("x","y")))
-+ curr <- terra::vect(cbind(x = x0, y = y0))
-+ heading(prev, curr)
-+ }
-Loading required package: CircStats
-Loading required package: MASS
-
-Attaching package: ‘MASS’
-
-The following object is masked from ‘package:terra’:
-
-    area
-
-Loading required package: boot
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> 
+> N <- 10L                       # number of agents
+> x1 <- stats::runif(N, -50, 50) # previous X location
+> y1 <- stats::runif(N, -50, 50) # previous Y location
+> x0 <- stats::rnorm(N, x1, 5)   # current X location
+> y0 <- stats::rnorm(N, y1, 5)   # current Y location
+> 
+> # using SpatVector
+> prev <- terra::vect(cbind(x = x1, y = y1))
+> curr <- terra::vect(cbind(x = x0, y = y0))
+> heading(prev, curr)
  [1]  58.70553  26.49322 276.84424 228.06827  61.14567 218.67886 185.93288
  [8] 147.31021 120.20979  54.86510
+> 
+> # using matrix
+> prev <- matrix(c(x1, y1), ncol = 2, dimnames = list(NULL, c("x","y")))
+> curr <- matrix(c(x0, y0), ncol = 2, dimnames = list(NULL, c("x","y")))
+> heading(prev, curr)
+ [1]  58.70553  26.49322 276.84424 228.06827  61.14567 218.67886 185.93288
+ [8] 147.31021 120.20979  54.86510
+> 
+> #using both
+> prev <- terra::vect(cbind(x = x1, y = y1))
+> curr <- matrix(c(x0, y0), ncol = 2, dimnames = list(NULL, c("x","y")))
+> heading(prev, curr)
+ [1]  58.70553  26.49322 276.84424 228.06827  61.14567 218.67886 185.93288
+ [8] 147.31021 120.20979  54.86510
+> 
+> prev <- matrix(c(x1, y1), ncol = 2, dimnames = list(NULL, c("x","y")))
+> curr <- terra::vect(cbind(x = x0, y = y0))
+> heading(prev, curr)
+ [1]  58.70553  26.49322 276.84424 228.06827  61.14567 218.67886 185.93288
+ [8] 147.31021 120.20979  54.86510
+> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
 > 
 > 
 > 
 > 
 > cleanEx()
 
-detaching ‘package:CircStats’, ‘package:boot’, ‘package:MASS’,
-  ‘package:terra’
+detaching ‘package:terra’
 
 > nameEx("inRange")
 > ### * inRange
@@ -459,7 +541,11 @@ detaching ‘package:CircStats’, ‘package:boot’, ‘package:MASS’,
 > ### ** Examples
 > 
 > if (require("sf", quietly = TRUE)) {
++   library(data.table)
 +   library(terra)
++ 
++   origDTThreads <- data.table::setDTthreads(2L)
++   origNcpus <- options(Ncpus = 2L)
 + 
 +   map <- rast(system.file("extdata", "map.tif", package = "SpaDES.tools"))
 +   names(map) <- "layer"
@@ -470,7 +556,6 @@ detaching ‘package:CircStats’, ‘package:boot’, ‘package:MASS’,
 +     terra::plot(agents, add = TRUE)
 +   }
 +   # Test that they are indeed selecting according to probabilities in pr
-+   library(data.table)
 +   dt1 <- data.table(table(round(extract(map, agents), 0)[, "layer"]))
 +   setnames(dt1, old = "N", new = "count")
 +   dt2 <- data.table(table(round(map[], 0)))
@@ -490,29 +575,30 @@ detaching ‘package:CircStats’, ‘package:boot’, ‘package:MASS’,
 +   if (interactive()) {
 +     terra::plot(agentsRas)
 +   }
++   #'
++   # clean up
++   data.table::setDTthreads(origDTThreads)
++   options(Ncpus = origNcpus)
 + }
 Linking to GEOS 3.11.1, GDAL 3.6.4, PROJ 9.1.1; sf_use_s2() is TRUE
 terra 1.7.39
 
 Attaching package: ‘terra’
 
+The following object is masked from ‘package:data.table’:
+
+    shift
+
 The following object is masked from ‘package:SpaDES.tools’:
 
     wrap
-
-
-Attaching package: ‘data.table’
-
-The following object is masked from ‘package:terra’:
-
-    shift
 
 > 
 > 
 > 
 > cleanEx()
 
-detaching ‘package:data.table’, ‘package:terra’, ‘package:sf’
+detaching ‘package:terra’, ‘package:data.table’, ‘package:sf’
 
 > nameEx("neutralLandscapeMap")
 > ### * neutralLandscapeMap
@@ -541,6 +627,9 @@ detaching ‘package:data.table’, ‘package:terra’, ‘package:sf’
 > 
 > ### ** Examples
 > 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> 
 > set.seed(1234)
 > Ras <- randomPolygons(numTypes = 5)
 > if (interactive() ) {
@@ -548,7 +637,8 @@ detaching ‘package:data.table’, ‘package:terra’, ‘package:sf’
 + }
 > 
 > # more complex patterning, with a range of patch sizes
-> a <- randomPolygons(numTypes = 400, terra::rast(terra::ext(0, 50, 0, 50), res = 1, vals = 0))
+> r <- terra::rast(terra::ext(0, 50, 0, 50), resolution = 1, vals = 0)
+> a <- randomPolygons(numTypes = 400, r)
 duplicate initial loci are provided
 > a[a < 320] <- 0
 > a[a >= 320] <- 1
@@ -556,6 +646,11 @@ duplicate initial loci are provided
 > if (interactive()) {
 +   terra::plot(a)
 + }
+> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
+> 
 > library(terra)
 terra 1.7.39
 
@@ -565,8 +660,7 @@ The following object is masked from ‘package:SpaDES.tools’:
 
     wrap
 
-> b <- terra::vect(cbind(-110, 59))
-> crs(b) <- terra::crs("epsg:4326")
+> b <- terra::vect(cbind(-110, 59), crs = "epsg:4326")
 > a <- randomPolygon(b, area = 1e6)
 The CRS provided is not in meters; converting internally to UTM so area will be approximately correct.
 > if (interactive()) {
@@ -626,6 +720,9 @@ The following object is masked from ‘package:SpaDES.tools’:
     wrap
 
 > 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> 
 > ras <- rast(ext(0, 15, 0, 15), res = 1)
 > fullRas <- randomPolygons(ras, numTypes = 2)
 > names(fullRas) <- "mapcodeAll"
@@ -658,8 +755,9 @@ The following object is masked from ‘package:SpaDES.tools’:
 > 
 > biomass2 <- rasterizeReduced(reducedDT, fullRas, "biomass")
 > 
-> 
-> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
 > 
 > 
 > 
@@ -687,48 +785,43 @@ The following object is masked from ‘package:SpaDES.tools’:
 
     wrap
 
-> if (require("CircStats")) {
-+ 
-+   # Make random forest cover map
-+   emptyRas <- terra::rast(terra::ext(0, 1e2, 0, 1e2), res = 1)
-+ 
-+   # start from two cells near middle
-+   loci <- (ncell(emptyRas) / 2 - ncol(emptyRas)) / 2 + c(-3, 3)
-+ 
-+   # No overlap is default, occurs randomly
-+   emptyRas[] <- 0
-+   rngs <- rings(emptyRas, loci = loci, minRadius = 7, maxRadius = 9, returnIndices = TRUE)
-+   emptyRas[rngs$indices] <- rngs$id
-+   if (interactive()) {
-+     terra::plot(emptyRas)
-+   }
-+ 
-+   # Variable ring widths, including centre cell for smaller one
-+   emptyRas[] <- 0
-+   rngs <- rings(emptyRas, loci = loci, minRadius = c(0, 7), maxRadius = c(8, 18),
-+                 returnIndices = TRUE)
-+   emptyRas[rngs$indices] <- rngs$id
-+   if (interactive()) {
-+     terra::plot(emptyRas)
-+   }
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> set.seed(1462)
+> 
+> # Make random forest cover map
+> emptyRas <- terra::rast(terra::ext(0, 1e2, 0, 1e2), res = 1)
+> 
+> # start from two cells near middle
+> loci <- (ncell(emptyRas) / 2 - ncol(emptyRas)) / 2 + c(-3, 3)
+> 
+> # No overlap is default, occurs randomly
+> emptyRas[] <- 0
+> rngs <- rings(emptyRas, loci = loci, minRadius = 7, maxRadius = 9, returnIndices = TRUE)
+> emptyRas[rngs$indices] <- rngs$id
+> if (interactive()) {
++   terra::plot(emptyRas)
 + }
-Loading required package: CircStats
-Loading required package: MASS
-
-Attaching package: ‘MASS’
-
-The following object is masked from ‘package:terra’:
-
-    area
-
-Loading required package: boot
+> 
+> # Variable ring widths, including centre cell for smaller one
+> emptyRas[] <- 0
+> rngs <- rings(emptyRas, loci = loci, minRadius = c(0, 7), maxRadius = c(8, 18),
++               returnIndices = TRUE)
+> emptyRas[rngs$indices] <- rngs$id
+> if (interactive()) {
++   terra::plot(emptyRas)
++ }
+> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
 > 
 > 
 > 
 > cleanEx()
 
-detaching ‘package:CircStats’, ‘package:boot’, ‘package:MASS’,
-  ‘package:terra’
+detaching ‘package:terra’
 
 > nameEx("specnumperpatch-probs")
 > ### * specnumperpatch-probs
@@ -742,6 +835,9 @@ detaching ‘package:CircStats’, ‘package:boot’, ‘package:MASS’,
 > ### ** Examples
 > 
 > library(data.table)
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
 > 
 > set.seed(1234)
 > Ntypes <- 4
@@ -773,6 +869,10 @@ Loading required package: testthat
 +   terra::plot(rasAgents)
 + }
 > 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
+> 
 > 
 > 
 > 
@@ -801,10 +901,11 @@ The following object is masked from ‘package:SpaDES.tools’:
     wrap
 
 > 
-> # an example with dimensions:
-> # nrow: 77
-> # ncol: 101
-> # nlayers: 3
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> set.seed(1462)
+> 
+> ## an example with dimensions: nrow = 77,  ncol = 101, nlayers = 3
 > b <- rast(system.file("ex/logo.tif", package = "terra"))
 > r <- b[[1]] # use first layer only
 > nx <- 3
@@ -814,16 +915,16 @@ The following object is masked from ‘package:SpaDES.tools’:
 > 
 > y0 <- splitRaster(r, nx, ny, path = file.path(tmpdir, "y0")) # no buffer
 > 
-> # buffer: 10 pixels along both axes
+> ## buffer: 10 pixels along both axes
 > y1 <- splitRaster(r, nx, ny, c(10, 10), path = file.path(tmpdir, "y1"))
 > 
-> # buffer: half the width and length of each tile
+> ## buffer: half the width and length of each tile
 > y2 <- splitRaster(r, nx, ny, c(0.5, 0.5), path = file.path(tmpdir, "y2"))
 > 
-> # the original raster:
+> ## the original raster:
 > if (interactive()) plot(r) # may require a call to `dev()` if using RStudio
 > 
-> # the split raster:
+> ## the split raster:
 > layout(mat = matrix(seq_len(nx * ny), ncol = nx, nrow = ny))
 > plotOrder <- unlist(lapply(split(1:12, rep(1:nx, each = ny)), rev))
 > 
@@ -831,11 +932,12 @@ The following object is masked from ‘package:SpaDES.tools’:
 +   invisible(lapply(y0[plotOrder], terra::plot))
 + }
 > 
-> # parallel splitting
-> if (require("raster") && require("snow")) {
+> ## parallel splitting
+> if (requireNamespace("raster", quietly = TRUE) &&
++     requireNamespace("parallel")) {
 +   if (interactive()) {
 +     n <- pmin(parallel::detectCores(), 4) # use up to 4 cores
-+     raster::beginCluster(n)
++     raster::beginCluster(n, type = "PSOCK")
 +     y3 <- splitRaster(r, nx, ny, c(0.7, 0.7), path = file.path(tmpdir, "y3"))
 +     raster::endCluster()
 +     if (interactive()) {
@@ -843,12 +945,8 @@ The following object is masked from ‘package:SpaDES.tools’:
 +     }
 +   }
 + }
-Loading required package: raster
-Loading required package: sp
-Loading required package: snow
 > 
-> 
-> # can be recombined using `terra::merge`
+> ## can be recombined using `terra::merge`
 > m0 <- do.call(merge, y0)
 > all.equal(m0, r) ## TRUE
 [1] TRUE
@@ -861,7 +959,7 @@ Loading required package: snow
 > all.equal(m2, r) ## TRUE
 [1] TRUE
 > 
-> # or recombine using mergeRaster
+> ## or recombine using mergeRaster
 > n0 <- mergeRaster(y0)
 > all.equal(n0, r) ## TRUE
 [1] TRUE
@@ -874,14 +972,16 @@ Loading required package: snow
 > all.equal(n2, r) ## TRUE
 [1] TRUE
 > 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
 > unlink(tmpdir, recursive = TRUE)
 > 
 > 
 > 
 > cleanEx()
 
-detaching ‘package:snow’, ‘package:raster’, ‘package:sp’,
-  ‘package:terra’
+detaching ‘package:terra’
 
 > nameEx("spokes")
 > ### * spokes
@@ -894,15 +994,23 @@ detaching ‘package:snow’, ‘package:raster’, ‘package:sp’,
 > 
 > ### ** Examples
 > 
+> library(data.table)
 > library(terra)
 terra 1.7.39
 
 Attaching package: ‘terra’
 
+The following object is masked from ‘package:data.table’:
+
+    shift
+
 The following object is masked from ‘package:SpaDES.tools’:
 
     wrap
 
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
 > set.seed(1234)
 > 
 > ras <- terra::rast(terra::ext(0, 10, 0, 10), res = 1, val = 0)
@@ -941,11 +1049,15 @@ This function is very experimental and may not behave as expected
 > if (interactive())
 +   terra::plot(coords, add = TRUE, pch = 19, col = "blue")
 > 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
+> 
 > 
 > 
 > cleanEx()
 
-detaching ‘package:terra’
+detaching ‘package:terra’, ‘package:data.table’
 
 > nameEx("spread")
 > ### * spread
@@ -967,6 +1079,8 @@ The following object is masked from ‘package:SpaDES.tools’:
 
     wrap
 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
 > 
 > # Make random forest cover map
 > set.seed(123)
@@ -1045,35 +1159,27 @@ The following object is masked from ‘package:SpaDES.tools’:
 > #  passed in to the landscape argument. It won't be exact because the pixel values
 > #  will likely not allow it
 > stopRule22 <- function(landscape) sum(landscape) > 100
-> if (require("CircStats")) {
-+ 
-+   set.seed(1234)
-+   stopRule1 <- function(landscape) sum(landscape) > 50
-+   stopRuleA <- spread(hab, loci = as.integer(sample(1:ncell(hab), 10)), 1, 0, NULL,
-+                       maxSize = 1e6, 8, 1e6, id = TRUE, circle = TRUE, stopRule = stopRule1,
-+                       stopRuleBehavior = "excludePixel")
-+   tapply(hab[], stopRuleA[], sum) # all below 50
-+ 
-+   set.seed(1234)
-+   # using stopRuleBehavior = "excludePixel"
-+   stopRuleB <- spread(hab, loci = as.integer(sample(1:ncell(hab), 10)), 1, 0, NULL,
-+                       maxSize = 1e6, 8, 1e6, id = TRUE, circle = TRUE, stopRule = stopRule22,
-+                       stopRuleBehavior = "excludePixel")
-+   tapply(hab[], stopRuleB[], sum) # all below 100
-+ 
-+   if (interactive())
-+     terra::plot(c(stopRuleA, stopRuleB))
-+ }
-Loading required package: CircStats
-Loading required package: MASS
-
-Attaching package: ‘MASS’
-
-The following object is masked from ‘package:terra’:
-
-    area
-
-Loading required package: boot
+> 
+> set.seed(1234)
+> stopRule1 <- function(landscape) sum(landscape) > 50
+> stopRuleA <- spread(hab, loci = as.integer(sample(1:ncell(hab), 10)), 1, 0, NULL,
++                     maxSize = 1e6, 8, 1e6, id = TRUE, circle = TRUE, stopRule = stopRule1,
++                     stopRuleBehavior = "excludePixel")
+> tapply(hab[], stopRuleA[], sum) # all below 50
+     0      1      2      3      4      5      6      7      8      9     10 
+215048     37     44     38     38     27     50     33     30     33     36 
+> 
+> set.seed(1234)
+> # using stopRuleBehavior = "excludePixel"
+> stopRuleB <- spread(hab, loci = as.integer(sample(1:ncell(hab), 10)), 1, 0, NULL,
++                     maxSize = 1e6, 8, 1e6, id = TRUE, circle = TRUE, stopRule = stopRule22,
++                     stopRuleBehavior = "excludePixel")
+> tapply(hab[], stopRuleB[], sum) # all below 100
+     0      1      2      3      4      5      6      7      8      9     10 
+214512     74     99     95     95     81    100     99     90     79     90 
+> 
+> if (interactive())
++   terra::plot(c(stopRuleA, stopRuleB))
 > # Cellular automata shapes
 > # Diamonds - can make them with: a boolean raster, directions = 4,
 > #    stopRule in place, spreadProb = 1
@@ -1099,13 +1205,12 @@ Loading required package: boot
 > seed <- sample(1e4, 1)
 > set.seed(seed)
 > 
-> if (require("CircStats")) {
-+   circlish <- spread(hab > 0, spreadProb = 1, iterations = 10,
-+                      loci = (ncell(hab) - ncol(hab)) / 2 + c(4, -4),
-+                      directions = 8, id = TRUE, circle = TRUE)#, stopRule = stopRule2)
-+   if (interactive())
-+     terra::plot(c(circlish))
-+ }
+> circlish <- spread(hab > 0, spreadProb = 1, iterations = 10,
++                    loci = (ncell(hab) - ncol(hab)) / 2 + c(4, -4),
++                    directions = 8, id = TRUE, circle = TRUE)#, stopRule = stopRule2)
+> if (interactive())
++   terra::plot(c(circlish))
+> 
 > set.seed(seed)
 > regularCA <- spread(hab > 0, spreadProb = 1, iterations = 10,
 +                     loci = (ncell(hab) - ncol(hab)) / 2 + c(4, -4),
@@ -1125,41 +1230,41 @@ Loading required package: boot
 > #   variable passed into spread
 > stopRule3 <- function(landscape, id, endSizes) sum(landscape) > endSizes[id]
 > 
-> if (require("CircStats")) {
-+   set.seed(1)
-+   twoCirclesDiffSize <- spread(hab, spreadProb = 1, loci = initialLoci,
-+                                circle = TRUE, directions = 8, id = TRUE,
-+                                stopRule = stopRule3, endSizes = endSizes,
-+                                stopRuleBehavior = "excludePixel")
-+ 
-+   # or using named list of named elements:
-+   set.seed(1)
-+   twoCirclesDiffSize2 <- spread(hab, spreadProb = 1, loci = initialLoci,
-+                                 circle = TRUE, directions = 8, id = TRUE,
-+                                 stopRule = stopRule3,
-+                                 vars = list(endSizes = endSizes),
-+                                 stopRuleBehavior = "excludePixel")
-+ 
-+   compareGeom(twoCirclesDiffSize, twoCirclesDiffSize2, res = TRUE,
-+               stopOnError = FALSE)
-+ 
-+   terra::plot(c(twoCirclesDiffSize , twoCirclesDiffSize2))
-+ 
-+   cirs <- values(twoCirclesDiffSize)
-+   vals <- tapply(hab[][cirs > 0], cirs[cirs > 0], sum) # one is <200, other is <400 as per endSizes
-+ 
-+   # Stop if sum of landscape is big or mean of quality is too small
-+   quality <- rast(hab)
-+   quality[] <- runif(ncell(quality), 0, 1)
-+   stopRule4 <- function(landscape, quality, cells) {
-+     (sum(landscape) > 20) | (mean(values(quality)[cells]) < 0.3)
-+   }
-+ 
-+   twoCirclesDiffSize <- spread(hab, spreadProb = 1, loci = initialLoci, circle = TRUE,
-+                                directions = 8, id = TRUE, stopRule = stopRule4,
-+                                quality = quality, stopRuleBehavior = "excludePixel")
-+ 
+> set.seed(1)
+> twoCirclesDiffSize <- spread(hab, spreadProb = 1, loci = initialLoci,
++                              circle = TRUE, directions = 8, id = TRUE,
++                              stopRule = stopRule3, endSizes = endSizes,
++                              stopRuleBehavior = "excludePixel")
+> 
+> # or using named list of named elements:
+> set.seed(1)
+> twoCirclesDiffSize2 <- spread(hab, spreadProb = 1, loci = initialLoci,
++                               circle = TRUE, directions = 8, id = TRUE,
++                               stopRule = stopRule3,
++                               vars = list(endSizes = endSizes),
++                               stopRuleBehavior = "excludePixel")
+> 
+> compareGeom(twoCirclesDiffSize, twoCirclesDiffSize2, res = TRUE,
++             stopOnError = FALSE)
+[1] TRUE
+> 
+> terra::plot(c(twoCirclesDiffSize , twoCirclesDiffSize2))
+> 
+> cirs <- values(twoCirclesDiffSize)
+> vals <- tapply(hab[][cirs > 0], cirs[cirs > 0], sum) # one is <200, other is <400 as per endSizes
+> 
+> # Stop if sum of landscape is big or mean of quality is too small
+> quality <- rast(hab)
+> quality[] <- runif(ncell(quality), 0, 1)
+> stopRule4 <- function(landscape, quality, cells) {
++   (sum(landscape) > 20) | (mean(values(quality)[cells]) < 0.3)
 + }
+> 
+> twoCirclesDiffSize <- spread(hab, spreadProb = 1, loci = initialLoci, circle = TRUE,
++                              directions = 8, id = TRUE, stopRule = stopRule4,
++                              quality = quality, stopRuleBehavior = "excludePixel")
+> 
+> 
 > ## Using alternative algorithm, not probabilistic diffusion
 > ## Will give exactly correct sizes, yet still with variability
 > ## within the spreading (i.e., cells with and without successes)
@@ -1210,13 +1315,15 @@ Loading required package: boot
 > sum(hab3[events1[] > 0]) >= sum(hab3[events2[] > 0]) ## should be usually TRUE
 [1] TRUE
 > 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
 > 
 > 
 > 
 > cleanEx()
 
-detaching ‘package:CircStats’, ‘package:boot’, ‘package:MASS’,
-  ‘package:terra’
+detaching ‘package:terra’
 
 > nameEx("spread2")
 > ### * spread2
@@ -1239,6 +1346,9 @@ The following object is masked from ‘package:SpaDES.tools’:
 
     wrap
 
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
 > 
 > a <- rast(ext(0, 10, 0, 10), res = 1)
 > sams <- sort(sample(ncell(a), 3))
@@ -1266,6 +1376,34 @@ The following object is masked from ‘package:SpaDES.tools’:
 > # Use exactSize -- but where it can't be achieved
 > exactSizes <- sort(sample(100:110, size = length(sams)))
 > out <- spread2(a, start = sams, 1, exactSize = exactSizes)
+> 
+> # Iterative calling -- create a function with a high escape probability
+> spreadWithEscape <- function(ras, start, escapeProb, spreadProb) {
++   out <- spread2(ras, start = sams, spreadProb = escapeProb, asRaster = FALSE)
++   while (any(out$state == "sourceActive")) {
++     # pass in previous output as start
++     out <- spread2(ras, start = out, spreadProb = spreadProb,
++                     asRaster = FALSE, skipChecks = TRUE) # skipChecks for speed
++   }
++   out
++ }
+> 
+> set.seed(421)
+> out1 <- spreadWithEscape(a, sams, escapeProb = 0.25, spreadProb = 0.225)
+> set.seed(421)
+> out2 <- spread2(a, sams, 0.225, asRaster = FALSE)
+> # The one with high escape probability is larger (most of the time)
+> NROW(out1) > NROW(out2) ## TODO: not true
+[1] FALSE
+> 
+> ## Use neighProbs, with a spreadProb that is a RasterLayer
+> # Create a raster of different values, which will be the relative probabilities
+> #   i.e., they are rescaled to relative probabilities within the 8 neighbour choices.
+> #   The neighProbs below means 70% of the time, 1 neighbour will be chosen,
+> #   30% of the time 2 neighbours.
+> #   The cells with spreadProb of 5 are 5 times more likely than cells with 1 to be chosen,
+> #   when they are both within the 8 neighbours
+> sp <- rast(ext(0, 3, 0, 3), res = 1, vals = 1:9) #small raster, simple values
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "activeSource" "holding"      "successful"   "tooSmall"    
