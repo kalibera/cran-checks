@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2023-09-03 r85049) -- "Unsuffered Consequences"
+R Under development (unstable) (2023-09-13 r85142) -- "Unsuffered Consequences"
 Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -37,7 +37,7 @@ Type 'q()' to quit R.
 > ### ** Examples
 > 
 > library(terra)
-terra 1.7.39
+terra 1.7.46
 
 Attaching package: ‘terra’
 
@@ -81,7 +81,7 @@ detaching ‘package:terra’
 > 
 > library(data.table)
 > library(terra)
-terra 1.7.39
+terra 1.7.46
 
 Attaching package: ‘terra’
 
@@ -224,13 +224,13 @@ detaching ‘package:terra’, ‘package:data.table’
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10, returnMatrix = TRUE)
 + })
    user  system elapsed 
-  0.705   0.140   0.856 
+  0.024   0.000   0.025 
 > agent <- agentOrig
 > system.time({
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10)
 + })
    user  system elapsed 
- 40.363   4.598  46.171 
+ 21.387   0.247  22.142 
 > 
 > # as sp
 > if (requireNamespace("sp")) {
@@ -274,7 +274,7 @@ agent does not have columns named x1 and y1, which represent the 'previous' loca
 > ### ** Examples
 > 
 > library(terra)
-terra 1.7.39
+terra 1.7.46
 
 Attaching package: ‘terra’
 
@@ -331,7 +331,7 @@ detaching ‘package:terra’
 > ### ** Examples
 > 
 > library(terra)
-terra 1.7.39
+terra 1.7.46
 
 Attaching package: ‘terra’
 
@@ -453,7 +453,7 @@ detaching ‘package:terra’
 > ### ** Examples
 > 
 > library(terra)
-terra 1.7.39
+terra 1.7.46
 
 Attaching package: ‘terra’
 
@@ -581,7 +581,7 @@ detaching ‘package:terra’
 +   options(Ncpus = origNcpus)
 + }
 Linking to GEOS 3.11.1, GDAL 3.6.4, PROJ 9.1.1; sf_use_s2() is TRUE
-terra 1.7.39
+terra 1.7.46
 
 Attaching package: ‘terra’
 
@@ -652,7 +652,7 @@ duplicate initial loci are provided
 > options(Ncpus = origNcpus)
 > 
 > library(terra)
-terra 1.7.39
+terra 1.7.46
 
 Attaching package: ‘terra’
 
@@ -707,7 +707,7 @@ detaching ‘package:terra’
 > 
 > library(data.table)
 > library(terra)
-terra 1.7.39
+terra 1.7.46
 
 Attaching package: ‘terra’
 
@@ -777,7 +777,7 @@ detaching ‘package:terra’, ‘package:data.table’
 > ### ** Examples
 > 
 > library(terra)
-terra 1.7.39
+terra 1.7.46
 
 Attaching package: ‘terra’
 
@@ -892,7 +892,7 @@ detaching ‘package:testthat’, ‘package:data.table’
 > ### ** Examples
 > 
 > library(terra)
-terra 1.7.39
+terra 1.7.46
 
 Attaching package: ‘terra’
 
@@ -996,7 +996,7 @@ detaching ‘package:terra’
 > 
 > library(data.table)
 > library(terra)
-terra 1.7.39
+terra 1.7.46
 
 Attaching package: ‘terra’
 
@@ -1071,7 +1071,7 @@ detaching ‘package:terra’, ‘package:data.table’
 > ### ** Examples
 > 
 > library(terra)
-terra 1.7.39
+terra 1.7.46
 
 Attaching package: ‘terra’
 
@@ -1338,7 +1338,7 @@ detaching ‘package:terra’
 > ### ** Examples
 > 
 > library(terra)
-terra 1.7.39
+terra 1.7.46
 
 Attaching package: ‘terra’
 
@@ -1390,20 +1390,6 @@ The following object is masked from ‘package:SpaDES.tools’:
 > 
 > set.seed(421)
 > out1 <- spreadWithEscape(a, sams, escapeProb = 0.25, spreadProb = 0.225)
-> set.seed(421)
-> out2 <- spread2(a, sams, 0.225, asRaster = FALSE)
-> # The one with high escape probability is larger (most of the time)
-> NROW(out1) > NROW(out2) ## TODO: not true
-[1] FALSE
-> 
-> ## Use neighProbs, with a spreadProb that is a RasterLayer
-> # Create a raster of different values, which will be the relative probabilities
-> #   i.e., they are rescaled to relative probabilities within the 8 neighbour choices.
-> #   The neighProbs below means 70% of the time, 1 neighbour will be chosen,
-> #   30% of the time 2 neighbours.
-> #   The cells with spreadProb of 5 are 5 times more likely than cells with 1 to be chosen,
-> #   when they are both within the 8 neighbours
-> sp <- rast(ext(0, 3, 0, 3), res = 1, vals = 1:9) #small raster, simple values
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "activeSource" "holding"      "successful"   "tooSmall"    
