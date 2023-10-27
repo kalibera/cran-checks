@@ -1,0 +1,518 @@
+
+R Under development (unstable) (2023-10-26 r85417) -- "Unsuffered Consequences"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "geohabnet"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('geohabnet')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("cropharvest_rast")
+> ### * cropharvest_rast
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: cropharvest_rast
+> ### Title: Get raster object for crop
+> ### Aliases: cropharvest_rast
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("crops_rast")
+> ### * crops_rast
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: crops_rast
+> ### Title: Get sum of rasters for individual crops
+> ### Aliases: crops_rast
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("dist_methods")
+> ### * dist_methods
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dist_methods
+> ### Title: Distance methods supported
+> ### Aliases: dist_methods
+> 
+> ### ** Examples
+> 
+> dist_methods()
+[1] "geodesic"          "vincentyellipsoid"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_param_metrics")
+> ### * get_param_metrics
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_param_metrics
+> ### Title: Get metrics from parameters
+> ### Aliases: get_param_metrics
+> 
+> ### ** Examples
+> 
+> # Get metrics from parameters
+> get_param_metrics()
+$pl
+$pl$metrics
+[1] "betweeness"               "node_strength"           
+[3] "sum_of_nearest_neighbors" "eigenvector_centrality"  
+
+$pl$weights
+[1] 50 15 15 20
+
+
+$ne
+$ne$metrics
+[1] "betweeness"               "node_strength"           
+[3] "sum_of_nearest_neighbors" "eigenvector_centrality"  
+
+$ne$weights
+[1] 50 15 15 20
+
+
+> get_param_metrics(load_parameters())
+$pl
+$pl$metrics
+[1] "betweeness"               "node_strength"           
+[3] "sum_of_nearest_neighbors" "eigenvector_centrality"  
+
+$pl$weights
+[1] 50 15 15 20
+
+
+$ne
+$ne$metrics
+[1] "betweeness"               "node_strength"           
+[3] "sum_of_nearest_neighbors" "eigenvector_centrality"  
+
+$ne$weights
+[1] 50 15 15 20
+
+
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_parameters")
+> ### * get_parameters
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_parameters
+> ### Title: Get Parameters
+> ### Aliases: get_parameters
+> 
+> ### ** Examples
+> 
+> get_parameters()
+parameters fetched successfully
+[1] "/var/scratch2/tomas/tmp/RtmpasYDE3/parameters.yaml"
+> get_parameters(out = tempdir())
+parameters fetched successfully
+[1] "/var/scratch2/tomas/tmp/RtmpasYDE3/parameters.yaml"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_rasters")
+> ### * get_rasters
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_rasters
+> ### Title: Get rasters object from parameters
+> ### Aliases: get_rasters
+> 
+> ### ** Examples
+> 
+> # Get default rasters
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_supported_sources")
+> ### * get_supported_sources
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_supported_sources
+> ### Title: Get supported sources of crops
+> ### Aliases: get_supported_sources
+> 
+> ### ** Examples
+> 
+> # Get currently supported sources
+> get_supported_sources()
+[1] "monfreda" "mapspam" 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("load_parameters")
+> ### * load_parameters
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: load_parameters
+> ### Title: Load Parameters from YAML File
+> ### Aliases: load_parameters
+> 
+> ### ** Examples
+> 
+> # Load parameters from default file
+> load_parameters()
+$`CCRI parameters`
+$`CCRI parameters`$Hosts
+$`CCRI parameters`$Hosts$monfreda
+[1] "avocado"
+
+$`CCRI parameters`$Hosts$mapspam
+NULL
+
+$`CCRI parameters`$Hosts$file
+NULL
+
+
+$`CCRI parameters`$GeoExtent
+$`CCRI parameters`$GeoExtent$global
+[1] TRUE
+
+$`CCRI parameters`$GeoExtent$customExt
+[1] -115  -75    5   32
+
+
+$`CCRI parameters`$DispersalKernelModels
+$`CCRI parameters`$DispersalKernelModels$InversePowerLaw
+$`CCRI parameters`$DispersalKernelModels$InversePowerLaw$beta
+$`CCRI parameters`$DispersalKernelModels$InversePowerLaw$beta[[1]]
+[1] 0.5
+
+$`CCRI parameters`$DispersalKernelModels$InversePowerLaw$beta[[2]]
+[1] 1
+
+$`CCRI parameters`$DispersalKernelModels$InversePowerLaw$beta[[3]]
+[1] 1.5
+
+
+
+$`CCRI parameters`$DispersalKernelModels$NegativeExponential
+$`CCRI parameters`$DispersalKernelModels$NegativeExponential$gamma
+$`CCRI parameters`$DispersalKernelModels$NegativeExponential$gamma[[1]]
+[1] 0.05
+
+$`CCRI parameters`$DispersalKernelModels$NegativeExponential$gamma[[2]]
+[1] 1
+
+$`CCRI parameters`$DispersalKernelModels$NegativeExponential$gamma[[3]]
+[1] 0.2
+
+$`CCRI parameters`$DispersalKernelModels$NegativeExponential$gamma[[4]]
+[1] 0.3
+
+
+
+
+$`CCRI parameters`$NetworkMetrics
+$`CCRI parameters`$NetworkMetrics$InversePowerLaw
+$`CCRI parameters`$NetworkMetrics$InversePowerLaw$metrics
+[1] "betweeness"               "NODE_STRENGTH"           
+[3] "Sum_of_nearest_neighbors" "eigenVector_centrAlitY"  
+
+$`CCRI parameters`$NetworkMetrics$InversePowerLaw$weights
+[1] 50 15 15 20
+
+
+$`CCRI parameters`$NetworkMetrics$NegativeExponential
+$`CCRI parameters`$NetworkMetrics$NegativeExponential$metrics
+[1] "betweeness"               "NODE_STRENGTH"           
+[3] "Sum_of_nearest_neighbors" "eigenVector_centrAlitY"  
+
+$`CCRI parameters`$NetworkMetrics$NegativeExponential$weights
+[1] 50 15 15 20
+
+
+
+$`CCRI parameters`$PriorityMaps
+$`CCRI parameters`$PriorityMaps$OutDir
+NULL
+
+$`CCRI parameters`$PriorityMaps$MeanCC
+[1] TRUE
+
+$`CCRI parameters`$PriorityMaps$Difference
+[1] TRUE
+
+$`CCRI parameters`$PriorityMaps$Variance
+[1] TRUE
+
+
+$`CCRI parameters`$HostDensityThreshold
+[1] 1.5e-04 2.5e-05
+
+$`CCRI parameters`$AggregationStrategy
+[1] "sum"  "mean"
+
+$`CCRI parameters`$DistanceStrategy
+[1] "geodesic"
+
+$`CCRI parameters`$Resolution
+[1] 12
+
+$`CCRI parameters`$LinkThreshold
+[1] 1e-06
+
+
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("reset_params")
+> ### * reset_params
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: reset_params
+> ### Title: Reset parameters.yaml
+> ### Aliases: reset_params
+> 
+> ### ** Examples
+> 
+> reset_params()
+Warning in file.create(to[okay]) :
+  cannot create file '/var/scratch2ro/tomas/cran/rlibro/lib/geohabnet/parameters.yaml', reason 'Read-only file system'
+[1] TRUE
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("sa_onrasters")
+> ### * sa_onrasters
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: sa_onrasters
+> ### Title: Run senstivity analysis
+> ### Aliases: sa_onrasters
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("sean")
+> ### * sean
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: sean
+> ### Title: Calculate sensitivity analysis on cropland harvested area
+> ###   fraction
+> ### Aliases: sean
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("search_crop")
+> ### * search_crop
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: search_crop
+> ### Title: Search for crop
+> ### Aliases: search_crop
+> 
+> ### ** Examples
+> 
+> search_crop("coffee")
+[1] "monfreda"
+> search_crop("wheat")
+[1] "monfreda" "spam"    
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("sensitivity_analysis")
+> ### * sensitivity_analysis
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: sensitivity_analysis
+> ### Title: Calculate sensitivity analysis on parameters
+> ### Aliases: sensitivity_analysis
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("set_global_scales")
+> ### * set_global_scales
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: set_global_scales
+> ### Title: Set global geographical extent
+> ### Aliases: set_global_scales
+> 
+> ### ** Examples
+> 
+> set_global_scales(list(east = c(-24, 180, -58, 60), west = c(-140, -34, -58, 60)))
+$east
+[1] -24 180 -58  60
+
+$west
+[1] -140  -34  -58   60
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("set_parameters")
+> ### * set_parameters
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: set_parameters
+> ### Title: Set Parameters
+> ### Aliases: set_parameters
+> 
+> ### ** Examples
+> 
+> param_fp <- get_parameters()
+parameters fetched successfully
+> set_parameters(param_fp)
+Warning in file.create(to[okay]) :
+  cannot create file '/var/scratch2ro/tomas/cran/rlibro/lib/geohabnet/parameters.yaml', reason 'Read-only file system'
+[1] FALSE
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("set_reso")
+> ### * set_reso
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: set_reso
+> ### Title: Set resolution value
+> ### Aliases: set_reso
+> 
+> ### ** Examples
+> 
+> set_reso(24)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("sp_rast")
+> ### * sp_rast
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: sp_rast
+> ### Title: raster for mapspam crop.
+> ### Aliases: sp_rast
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("supported_metrics")
+> ### * supported_metrics
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: supported_metrics
+> ### Title: Returns metrics currently supported in the analysis.
+> ### Aliases: supported_metrics
+> 
+> ### ** Examples
+> 
+> supported_metrics()
+[1] "betweeness"               "node_strength"           
+[3] "sum_of_nearest_neighbors" "eigenvector_centrality"  
+[5] "closeness"                "degree"                  
+[7] "page_rank"               
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("tiff_torast")
+> ### * tiff_torast
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: tiff_torast
+> ### Title: Get raster object from tif file
+> ### Aliases: tiff_torast
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  11.334 0.678 12.166 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

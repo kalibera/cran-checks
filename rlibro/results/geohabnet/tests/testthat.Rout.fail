@@ -1,0 +1,89 @@
+
+R Under development (unstable) (2023-10-26 r85417) -- "Unsuffered Consequences"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # This file is part of the standard setup for testthat.
+> # It is recommended that you do not modify it.
+> #
+> # Where should you do additional test configuration?
+> # Learn more about the roles of various files in:
+> # * https://r-pkgs.org/tests.html
+> # * https://testthat.r-lib.org/reference/test_package.html#special-files
+> 
+> library(testthat)
+> library(geohabnet)
+> 
+> test_check("geohabnet")
+trying URL 'https://s3.us-east-2.amazonaws.com/earthstatdata/HarvestedAreaYield175Crops_Indvidual_Geotiff/avocado_HarvAreaYield_Geotiff.zip'
+Content type 'application/zip' length 6271196 bytes (6.0 MB)
+==================================================
+downloaded 6.0 MB
+
+trying URL 'https://geohabnet.s3.us-east-2.amazonaws.com/util-rasters/avocado_HarvestedAreaFraction.tif'
+Content type 'image/tiff' length 30241066 bytes (28.8 MB)
+==================================================
+downloaded 28.8 MB
+
+trying URL 'https://geohabnet.s3.us-east-2.amazonaws.com/util-rasters/ZeroRaster.tif'
+Content type 'image/tiff' length 1056851 bytes (1.0 MB)
+==================================================
+downloaded 1.0 MB
+
+trying URL 'https://geohabnet.s3.us-east-2.amazonaws.com/util-rasters/map_grey_background.tif'
+Content type 'image/tiff' length 1091916 bytes (1.0 MB)
+==================================================
+downloaded 1.0 MB
+
+[ FAIL 3 | WARN 0 | SKIP 0 | PASS 18 ]
+
+══ Failed tests ════════════════════════════════════════════════════════════════
+── Error ('test-functional.R:7:3'): System test - Test Senstivity analysis run on default configuration ──
+Error in `dyn.load(file, DLLpath = DLLpath, ...)`: unable to load shared object '/var/scratch2ro/tomas/cran/rlibro/lib/stringi/libs/stringi.so':
+  libicui18n.so.69: cannot open shared object file: No such file or directory
+Backtrace:
+     ▆
+  1. ├─testthat::expect_no_condition(...) at test-functional.R:7:2
+  2. │ └─testthat:::expect_no_(...)
+  3. │   └─testthat:::quasi_capture(enquo(object), NULL, capture)
+  4. │     ├─testthat (local) .capture(...)
+  5. │     │ └─rlang::try_fetch(...)
+  6. │     │   └─base::withCallingHandlers(...)
+  7. │     └─rlang::eval_bare(quo_get_expr(.quo), quo_get_env(.quo))
+  8. ├─geohabnet::sensitivity_analysis()
+  9. │ └─geohabnet::connectivity(...)
+ 10. │   └─geohabnet::ccri_mean(indexes, global, geoscale, pmean, outdir)
+ 11. │     └─geohabnet:::.plot(...)
+ 12. │       └─geohabnet:::.saverast(typ, rast, outdir)
+ 13. │         ├─base::file.path(...)
+ 14. │         └─base::paste(...)
+ 15. └─base::loadNamespace(x)
+ 16.   ├─base::namespaceImport(...)
+ 17.   └─base::loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]])
+ 18.     └─base::library.dynam(lib, package, package.lib)
+ 19.       └─base::dyn.load(file, DLLpath = DLLpath, ...)
+── Failure ('test-get_rasters.R:2:3'): get rasters with valid tif ──────────────
+Expected `get_rasters(list(file = c(.get_helper_filepath("avocado"))))` to run without any conditions.
+ℹ Actually got a <simpleError> with text:
+  unable to load shared object '/var/scratch2ro/tomas/cran/rlibro/lib/stringi/libs/stringi.so':
+    libicui18n.so.69: cannot open shared object file: No such file or directory
+── Failure ('test-parameters.R:38:3'): Test 6: Test to set new parameters.yaml ──
+Expected `set_parameters(new_param_file)` to run without any conditions.
+ℹ Actually got a <simpleWarning> with text:
+  cannot create file '/var/scratch2ro/tomas/cran/rlibro/lib/geohabnet/parameters.yaml', reason 'Read-only file system'
+
+[ FAIL 3 | WARN 0 | SKIP 0 | PASS 18 ]
+Error: Test failures
+Execution halted
