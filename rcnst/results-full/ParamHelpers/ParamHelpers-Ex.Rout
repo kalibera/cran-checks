@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2023-08-27 r85017) -- "Unsuffered Consequences"
+R Under development (unstable) (2023-10-26 r85417) -- "Unsuffered Consequences"
 Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -321,6 +321,21 @@ u numeric   -   - 1 to Inf   -    TRUE     -
 +   makeIntegerParam("z", default = 99)
 + )
 > getDefaults(ps1, include.null = TRUE)
+$x
+[1] "a"
+
+$y
+NULL
+
+$z
+[1] 99
+
+> 
+> ps2 = makeParamSet(
++   makeNumericVectorParam("a", len = expression(k), default = expression(p)),
++   makeIntegerParam("b", default = 99),
++   makeLogicalParam("c")
++ )
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"

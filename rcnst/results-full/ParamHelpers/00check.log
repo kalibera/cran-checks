@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/ParamHelpers.Rcheck’
-* using R Under development (unstable) (2023-08-27 r85017)
+* using R Under development (unstable) (2023-10-26 r85417)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (GCC) 13.2.1 20230728 (Red Hat 13.2.1-1)
@@ -65,6 +65,21 @@ The error most likely occurred in:
 +   makeIntegerParam("z", default = 99)
 + )
 > getDefaults(ps1, include.null = TRUE)
+$x
+[1] "a"
+
+$y
+NULL
+
+$z
+[1] 99
+
+> 
+> ps2 = makeParamSet(
++   makeNumericVectorParam("a", len = expression(k), default = expression(p)),
++   makeIntegerParam("b", default = 99),
++   makeLogicalParam("c")
++ )
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"

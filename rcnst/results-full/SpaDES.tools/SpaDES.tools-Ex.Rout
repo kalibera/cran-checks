@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2023-10-14 r85331) -- "Unsuffered Consequences"
+R Under development (unstable) (2023-10-26 r85417) -- "Unsuffered Consequences"
 Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -224,13 +224,13 @@ detaching ‘package:terra’, ‘package:data.table’
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10, returnMatrix = TRUE)
 + })
    user  system elapsed 
-  0.032   0.000   0.032 
+  0.018   0.000   0.018 
 > agent <- agentOrig
 > system.time({
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10)
 + })
    user  system elapsed 
- 38.237   0.400  39.347 
+ 16.292   0.090  16.383 
 > 
 > # as sp
 > if (requireNamespace("sp")) {
@@ -241,12 +241,6 @@ detaching ‘package:terra’, ‘package:data.table’
 +   terra::points(spdfNew, col = "blue", pch = 19)
 + }
 Loading required namespace: sp
-The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,
-which was just loaded, were retired in October 2023.
-Please refer to R-spatial evolution reports for details, especially
-https://r-spatial.org/r/2023/05/15/evolution4.html.
-It may be desirable to make the sf package available;
-package maintainers should consider adding sf to Suggests:.
 agent does not have columns named x1 and y1, which represent the 'previous' locations. Assigning random values to those columns.
 agent does not have columns named x1 and y1, which represent the 'previous' locations. Assigning random values to those columns.
 > 
