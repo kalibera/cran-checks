@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2023-10-26 r85417) -- "Unsuffered Consequences"
+R Under development (unstable) (2023-11-16 r85537) -- "Unsuffered Consequences"
 Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -224,13 +224,13 @@ detaching ‘package:terra’, ‘package:data.table’
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10, returnMatrix = TRUE)
 + })
    user  system elapsed 
-  0.018   0.000   0.018 
+  0.031   0.001   0.034 
 > agent <- agentOrig
 > system.time({
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10)
 + })
    user  system elapsed 
- 16.292   0.090  16.383 
+ 28.352   1.909  31.758 
 > 
 > # as sp
 > if (requireNamespace("sp")) {
@@ -572,26 +572,10 @@ detaching ‘package:terra’
 +   data.table::setDTthreads(origDTThreads)
 +   options(Ncpus = origNcpus)
 + }
-Linking to GEOS 3.11.1, GDAL 3.6.4, PROJ 9.1.1; sf_use_s2() is TRUE
-terra 1.7.55
-
-Attaching package: ‘terra’
-
-The following object is masked from ‘package:data.table’:
-
-    shift
-
-The following object is masked from ‘package:SpaDES.tools’:
-
-    wrap
-
 > 
 > 
 > 
 > cleanEx()
-
-detaching ‘package:terra’, ‘package:data.table’, ‘package:sf’
-
 > nameEx("neutralLandscapeMap")
 > ### * neutralLandscapeMap
 > 
@@ -643,30 +627,34 @@ duplicate initial loci are provided
 > data.table::setDTthreads(origDTThreads)
 > options(Ncpus = origNcpus)
 > 
-> library(terra)
-terra 1.7.55
-
-Attaching package: ‘terra’
-
-The following object is masked from ‘package:SpaDES.tools’:
-
-    wrap
-
-> b <- terra::vect(cbind(-110, 59), crs = "epsg:4326")
-> a <- randomPolygon(b, area = 1e6)
+> a1 <- terra::vect(cbind(-110, 59), crs = "epsg:4326")
+> a2 <- randomPolygon(a1, area = 1e7)
 The CRS provided is not in meters; converting internally to UTM so area will be approximately correct.
+> 
 > if (interactive()) {
-+   plot(a)
-+   points(b, pch = 19)
++   terra::plot(a1)
++   terra::points(a2, pch = 19)
++ }
+> 
+> if (require("sf", quietly = TRUE)) {
++   b1 <- list(cbind(
++     x = c(-122.98, -116.1, -99.2, -106, -122.98),
++     y = c(59.9, 65.73, 63.58, 54.79, 59.9)
++   )) |>
++     sf::st_polygon() |>
++     sf::st_sfc() |>
++     sf::st_sf(geometry = _, ID = 1L, shinyLabel = "zone2", crs = "epsg:4326")
++   b2 <- randomPolygon(b1, area = 1e10)
++ 
++   if (interactive()) {
++     plot(sf::st_geometry(b1))
++     plot(sf::st_geometry(b2), add = TRUE)
++   }
 + }
 > 
 > 
 > 
-> 
 > cleanEx()
-
-detaching ‘package:terra’
-
 > nameEx("randomStudyArea")
 > ### * randomStudyArea
 > 
