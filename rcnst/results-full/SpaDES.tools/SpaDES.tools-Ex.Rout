@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2023-11-16 r85537) -- "Unsuffered Consequences"
+R Under development (unstable) (2023-11-23 r85612) -- "Unsuffered Consequences"
 Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -224,13 +224,13 @@ detaching ‘package:terra’, ‘package:data.table’
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10, returnMatrix = TRUE)
 + })
    user  system elapsed 
-  0.031   0.001   0.034 
+  0.018   0.000   0.019 
 > agent <- agentOrig
 > system.time({
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10)
 + })
    user  system elapsed 
- 28.352   1.909  31.758 
+ 13.824   0.077  13.902 
 > 
 > # as sp
 > if (requireNamespace("sp")) {
@@ -572,10 +572,26 @@ detaching ‘package:terra’
 +   data.table::setDTthreads(origDTThreads)
 +   options(Ncpus = origNcpus)
 + }
+Linking to GEOS 3.11.1, GDAL 3.6.4, PROJ 9.1.1; sf_use_s2() is TRUE
+terra 1.7.55
+
+Attaching package: ‘terra’
+
+The following object is masked from ‘package:data.table’:
+
+    shift
+
+The following object is masked from ‘package:SpaDES.tools’:
+
+    wrap
+
 > 
 > 
 > 
 > cleanEx()
+
+detaching ‘package:terra’, ‘package:data.table’, ‘package:sf’
+
 > nameEx("neutralLandscapeMap")
 > ### * neutralLandscapeMap
 > 
@@ -651,10 +667,15 @@ The CRS provided is not in meters; converting internally to UTM so area will be 
 +     plot(sf::st_geometry(b2), add = TRUE)
 +   }
 + }
+Linking to GEOS 3.11.1, GDAL 3.6.4, PROJ 9.1.1; sf_use_s2() is TRUE
+The CRS provided is not in meters; converting internally to UTM so area will be approximately correct.
 > 
 > 
 > 
 > cleanEx()
+
+detaching ‘package:sf’
+
 > nameEx("randomStudyArea")
 > ### * randomStudyArea
 > 
