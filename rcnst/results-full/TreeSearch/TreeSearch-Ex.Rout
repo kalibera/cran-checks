@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2023-11-30 r85648) -- "Unsuffered Consequences"
+R Under development (unstable) (2023-12-02 r85657) -- "Unsuffered Consequences"
 Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -38,8 +38,7 @@ Type 'q()' to quit R.
 > 
 > data("inapplicable.phyData", package = "TreeSearch")
 > AdditionTree(inapplicable.phyData[["Longrich2010"]], concavity = 10)
-Addition tree ■                                  1% | ETA:  2m
-Addition tree ■■■■■                             15% | ETA: 20s
+Addition tree ■■■■■■■■                          25% | ETA:  3s
 Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
 
 Phylogenetic tree with 20 tips and 19 internal nodes.
@@ -300,20 +299,18 @@ Loading required package: ape
 > trees <- MaximizeParsimony(dataset, ratchIter = 0, startIter = 0,
 +                            tbrIter = 1, maxHits = 4, maxTime = 1/100,
 +                            concavity = 10, verbosity = 4)
-Addition tree ■■■■■■■■■■■■■■■■                  49% | ETA:  1s
-Addition tree ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
 
 ── BEGIN TREE SEARCH (k = 10) ──────────────────────────────────────────────────
 → Initial score: 12.6988 
 
 ── Sample local optimum ────────────────────────────────────────────────────────
 → TBR depth 1; keeping 4 trees; k = 10
-ℹ 2023-11-30 08:58:21: Score: 12.6988
-Final search ■                                  0% | D0, score 12.2635, hit 1. …
-Final search ■■■■■■■■■■■■■■■■■■■■■■■           75% | D1, score 11.9697, hit 1. …
+ℹ 2023-12-03 10:26:49: Score: 12.6988
+Final search ■■■■■                             15% | D0, score 12.1477, hit 1. …
+Final search ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | D1, score 11.9697, hit 1. …
   - TBR rearrangement at depth 1 found score 11.9697 1 time.
 
-✔ 2023-11-30 08:58:25: Tree search terminated with score 11.9697
+✔ 2023-12-03 10:26:54: Tree search terminated with score 11.9697
 > names(trees)
 [1] "final_1"
 > 
@@ -904,8 +901,8 @@ Loading required package: ape
 
 ── Sample local optimum ────────────────────────────────────────────────────────
 → TBR depth 2; keeping 14.4 trees; k = Inf
-ℹ 2023-11-30 08:58:36: Score: 85
-✔ 2023-11-30 08:58:36: Tree search terminated with score 83
+ℹ 2023-12-03 10:27:04: Score: 85
+✔ 2023-12-03 10:27:04: Tree search terminated with score 83
 > 
 > # Colour tip labels according to their influence
 > upperBound <- 2 * TreeDist::ClusteringEntropy(
@@ -1270,7 +1267,7 @@ Rooted; no branch lengths.
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  50.973 2.507 57.634 0 0 
+Time elapsed:  46.927 2.536 51.626 0 0 
 > grDevices::dev.off()
 null device 
           1 
