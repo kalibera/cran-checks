@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/ParamHelpers.Rcheck’
-* using R Under development (unstable) (2023-11-16 r85537)
+* using R Under development (unstable) (2023-12-04 r85659)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (GCC) 13.2.1 20231011 (Red Hat 13.2.1-4)
@@ -10,8 +10,7 @@
 * this is package ‘ParamHelpers’ version ‘1.14.1’
 * package encoding: UTF-8
 * checking package namespace information ... OK
-* checking package dependencies ... NOTE
-Package suggested but not available for checking: ‘GGally’
+* checking package dependencies ... OK
 * checking if this is a source package ... OK
 * checking if there is a namespace ... OK
 * checking for executable files ... OK
@@ -42,8 +41,7 @@ Package suggested but not available for checking: ‘GGally’
 * checking R code for possible problems ... OK
 * checking Rd files ... OK
 * checking Rd metadata ... OK
-* checking Rd cross-references ... NOTE
-Package unavailable to check Rd xrefs: ‘GGally’
+* checking Rd cross-references ... OK
 * checking for missing documentation entries ... OK
 * checking for code/documentation mismatches ... OK
 * checking Rd \usage sections ... OK
@@ -56,33 +54,49 @@ Note: information on .o files is not available
 Running examples in ‘ParamHelpers-Ex.R’ failed
 The error most likely occurred in:
 
-> ### Name: getDefaults
-> ### Title: Return defaults of parameters in parameter set.
-> ### Aliases: getDefaults
+> ### Name: getLower
+> ### Title: Get lower / upper bounds and allowed discrete values for
+> ###   parameters.
+> ### Aliases: getLower getUpper getValues
 > 
 > ### ** Examples
 > 
-> ps1 = makeParamSet(
-+   makeDiscreteParam("x", values = c("a", "b"), default = "a"),
-+   makeNumericVectorParam("y", len = 2),
-+   makeIntegerParam("z", default = 99)
+> ps = makeParamSet(
++   makeNumericParam("u"),
++   makeDiscreteParam("v", values = c("a", "b")),
++   makeIntegerParam("w", lower = expression(ceiling(p / 3)), upper = 2),
++   makeDiscreteParam("x", values = 1:2),
++   makeNumericVectorParam("y", len = 2, lower = c(0, 10), upper = c(1, 11)),
++   keys = "p"
 + )
-> getDefaults(ps1, include.null = TRUE)
-$x
-[1] "a"
+> getLower(ps, dict = list(p = 7))
+   u    w    y    y 
+-Inf    3    0   10 
+> getUpper(ps)
+  u   w   y   y 
+Inf   2   1  11 
+> 
+> ps = makeParamSet(
++   makeNumericParam("u"),
++   makeDiscreteParam("w", values = list(a = list(), b = NULL))
++ )
+> getValues(ps)
+$w
+$w$a
+list()
 
-$y
+$w$b
 NULL
 
-$z
-[1] 99
 
 > 
-> ps2 = makeParamSet(
-+   makeNumericVectorParam("a", len = expression(k), default = expression(p)),
-+   makeIntegerParam("b", default = 99),
-+   makeLogicalParam("c")
+> par.vals = list(
++   u = makeNumericParam("u"),
++   v = makeIntegerParam("v", lower = 1, upper = 2),
++   w = makeDiscreteParam("w", values = 1:2),
++   x = makeNumericVectorParam("x", len = 2, lower = c(3, 1), upper = expression(n))
 + )
+> getLower(par.vals)
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"
@@ -117,4 +131,4 @@ Last 13 lines of output:
   
 * checking PDF version of manual ... OK
 * DONE
-Status: 2 ERRORs, 3 NOTEs
+Status: 2 ERRORs, 1 NOTE
