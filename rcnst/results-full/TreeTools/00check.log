@@ -1,4 +1,4 @@
-* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/morphemepiece.Rcheck’
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/TreeTools.Rcheck’
 * using R Under development (unstable) (2024-01-14 r85805)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
@@ -6,9 +6,8 @@
     GNU Fortran (GCC) 13.2.1 20231011 (Red Hat 13.2.1-4)
 * running under: Fedora Linux 38 (MATE-Compiz)
 * using session charset: UTF-8
-* checking for file ‘morphemepiece/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘morphemepiece’ version ‘1.2.3’
+* checking for file ‘TreeTools/DESCRIPTION’ ... OK
+* this is package ‘TreeTools’ version ‘1.10.0’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -18,7 +17,11 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘morphemepiece’ can be installed ... OK
+* checking whether package ‘TreeTools’ can be installed ... OK
+* used C compiler: ‘gcc (GCC) 13.2.1 20231011 (Red Hat 13.2.1-4)’
+* used C++ compiler: ‘g++ (GCC) 13.2.1 20231011 (Red Hat 13.2.1-4)’
+* checking C++ specification ... OK
+  Not all R platforms support C++17
 * checking package directory ... OK
 * checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -34,7 +37,6 @@
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
 * checking loading without being on the library search path ... OK
-* checking whether startup messages can be suppressed ... OK
 * checking dependencies in R code ... OK
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
@@ -48,27 +50,36 @@
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking R/sysdata.rda ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking compiled code ... NOTE
+Note: information on .o files is not available
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
 * checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... ERROR
+  Running ‘spelling.R’
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-          }
-          else {
-              sub_tokens <- append(cur_substr, sub_tokens)
-              end <- start - 1
-              keepgoing <- end >= 1
-          }
-      }
-      if (is_bad) {
-          return(unk_token)
-      }
-      return(sub_tokens)
-  }
-  Function .mp_tokenize_word in namespace morphemepiece has this body.
+  > library("TreeTools", quietly = TRUE, warn.conflicts = FALSE)
+  > 
+  > suppressPackageStartupMessages(test_check("TreeTools"))
+  ERROR: modification of compiler constant of type character, length 2
+  ERROR: the modified value of the constant is:
+  [1] "END;"      "ENDBLOCK;"
+  attr(,".match.hash")
+  <hash table>
+  ERROR: the original value of the constant is:
+  [1] "END;"      "ENDBLOCK;"
+  ERROR: the modified constant is at index 1
+  ERROR: the modified constant is in this function body:
+  c("END;", "ENDBLOCK;")
   Fatal error: compiler constants were modified!
   
 * checking for unstated dependencies in vignettes ... OK
@@ -76,4 +87,4 @@ Last 13 lines of output:
 * checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 ERROR
+Status: 1 ERROR, 1 NOTE
