@@ -1,0 +1,57 @@
+
+R Under development (unstable) (2024-01-17 r85813) -- "Unsuffered Consequences"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # This file is part of the standard setup for testthat.
+> # It is recommended that you do not modify it.
+> #
+> # Where should you do additional test configuration?
+> # Learn more about the roles of various files in:
+> # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
+> # * https://testthat.r-lib.org/articles/special-files.html
+> 
+> library(testthat)
+> library(psidread)
+> 
+> test_check("psidread")
+[ FAIL 3 | WARN 0 | SKIP 0 | PASS 2 ]
+
+══ Failed tests ════════════════════════════════════════════════════════════════
+── Error ('test-psid_read.R:6:3'): psid_read() load the data from multiple data files ──
+Error in `utils::unzip(zipfile = file.path(indir, list_tozip[i]), exdir = file.path(indir, 
+    list_foldername[i]), overwrite = TRUE)`: cannot open file '/var/scratch2ro/tomas/cran/rlibro/lib/psidread/extdata/fam2013er/FAM2013ER_codebook.pdf': Read-only file system
+Backtrace:
+    ▆
+ 1. └─psidread::psid_unzip(...) at test-psid_read.R:6:3
+ 2.   └─utils::unzip(...)
+── Error ('test-psid_reshape.R:7:3'): psid_reshape() renames and reshapes the data frame ──
+Error in `utils::unzip(zipfile = file.path(indir, list_tozip[i]), exdir = file.path(indir, 
+    list_foldername[i]), overwrite = TRUE)`: cannot open file '/var/scratch2ro/tomas/cran/rlibro/lib/psidread/extdata/fam2013er/FAM2013ER_codebook.pdf': Read-only file system
+Backtrace:
+    ▆
+ 1. └─psidread::psid_unzip(...) at test-psid_reshape.R:7:3
+ 2.   └─utils::unzip(...)
+── Error ('test-psid_unzip.R:6:3'): psid_unzip() helps unzip and convert the data to .rda files ──
+Error in `utils::unzip(zipfile = file.path(indir, list_tozip[i]), exdir = file.path(indir, 
+    list_foldername[i]), overwrite = TRUE)`: cannot open file '/var/scratch2ro/tomas/cran/rlibro/lib/psidread/extdata/fam2013er/FAM2013ER_codebook.pdf': Read-only file system
+Backtrace:
+    ▆
+ 1. └─psidread::psid_unzip(...) at test-psid_unzip.R:6:3
+ 2.   └─utils::unzip(...)
+
+[ FAIL 3 | WARN 0 | SKIP 0 | PASS 2 ]
+Error: Test failures
+Execution halted

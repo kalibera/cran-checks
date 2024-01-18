@@ -1,0 +1,56 @@
+
+R Under development (unstable) (2024-01-17 r85813) -- "Unsuffered Consequences"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "psidread"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('psidread')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("psid_read")
+> ### * psid_read
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: psid_read
+> ### Title: Read PSID data from the packaged data file or customized data
+> ###   file
+> ### Aliases: psid_read
+> 
+> ### ** Examples
+> 
+> # Example 1: Read from multiple package data files (Whole procedure)
+> psid_varlist = c(" hh_age || [13]ER53017 [17]ER66017",
++                             " p_age || [13]ER34204")
+> str_df <- psid_str(varlist = psid_varlist,
++                    type = "separated")
+> # Below is the file path for the package test data, set this to your own directory
+> exdir <- system.file(package = "psidread","extdata")
+> indir <- system.file(package = "psidread","extdata")
+> psid_unzip(indir = indir,
++            exdir = exdir,
++            zipped = TRUE,
++            type = "package",
++            filename = NA)
+Error in utils::unzip(zipfile = file.path(indir, list_tozip[i]), exdir = file.path(indir,  : 
+  cannot open file '/var/scratch2ro/tomas/cran/rlibro/lib/psidread/extdata/fam2013er/FAM2013ER_codebook.pdf': Read-only file system
+Calls: psid_unzip -> <Anonymous>
+Execution halted
