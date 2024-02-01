@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2024-01-14 r85805) -- "Unsuffered Consequences"
+R Under development (unstable) (2024-01-31 r85845) -- "Unsuffered Consequences"
 Copyright (C) 2024 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -21,6 +21,7 @@ Type 'q()' to quit R.
 > source(file.path(R.home("share"), "R", "examples-header.R"))
 > options(warn = 1)
 > library('TeXCheckR')
+Warning: replacing previous import ‘data.table::%notin%’ by ‘hutils::%notin%’ when loading ‘TeXCheckR’
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 > base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
@@ -39,6 +40,7 @@ Type 'q()' to quit R.
 > nth_arg_positions("This is a \\textbf{strong} statement.", "textbf")
 [[1]]
    starts stops zero_width
+    <int> <int>     <lgcl>
 1:     18    25      FALSE
 
 > replace_nth_LaTeX_argument("This is a \\textbf{strong} statement.", "textbf")
@@ -255,7 +257,7 @@ Type 'q()' to quit R.
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.721 0.198 1.997 0 0 
+Time elapsed:  1.52 0.439 2.149 0 0 
 > grDevices::dev.off()
 null device 
           1 

@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/SpaDES.tools.Rcheck’
-* using R Under development (unstable) (2024-01-14 r85805)
+* using R Under development (unstable) (2024-01-31 r85845)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (GCC) 13.2.1 20231011 (Red Hat 13.2.1-4)
@@ -64,7 +64,7 @@ The error most likely occurred in:
 > ### ** Examples
 > 
 > library(terra)
-terra 1.7.65
+terra 1.7.71
 
 Attaching package: ‘terra’
 
@@ -102,43 +102,6 @@ The following object is masked from ‘package:SpaDES.tools’:
 > # Use exactSize -- but where it can't be achieved
 > exactSizes <- sort(sample(100:110, size = length(sams)))
 > out <- spread2(a, start = sams, 1, exactSize = exactSizes)
-> 
-> # Iterative calling -- create a function with a high escape probability
-> spreadWithEscape <- function(ras, start, escapeProb, spreadProb) {
-+   out <- spread2(ras, start = sams, spreadProb = escapeProb, asRaster = FALSE)
-+   while (any(out$state == "sourceActive")) {
-+     # pass in previous output as start
-+     out <- spread2(ras, start = out, spreadProb = spreadProb,
-+                     asRaster = FALSE, skipChecks = TRUE) # skipChecks for speed
-+   }
-+   out
-+ }
-> 
-> set.seed(421)
-> out1 <- spreadWithEscape(a, sams, escapeProb = 0.25, spreadProb = 0.225)
-> set.seed(421)
-> out2 <- spread2(a, sams, 0.225, asRaster = FALSE)
-> # The one with high escape probability is larger (most of the time)
-> NROW(out1) > NROW(out2) ## TODO: not true
-[1] FALSE
-> 
-> ## Use neighProbs, with a spreadProb that is a RasterLayer
-> # Create a raster of different values, which will be the relative probabilities
-> #   i.e., they are rescaled to relative probabilities within the 8 neighbour choices.
-> #   The neighProbs below means 70% of the time, 1 neighbour will be chosen,
-> #   30% of the time 2 neighbours.
-> #   The cells with spreadProb of 5 are 5 times more likely than cells with 1 to be chosen,
-> #   when they are both within the 8 neighbours
-> sp <- rast(ext(0, 3, 0, 3), res = 1, vals = 1:9) #small raster, simple values
-> # Check neighProbs worked
-> out <- list()
-> 
-> # enough replicates to see stabilized probabilities
-> for (i in 1:100) {
-+   out[[i]] <- spread2(sp, spreadProbRel = sp, spreadProb = 1,
-+                       start = 5, iterations = 1,
-+                       neighProbs = c(1), asRaster = FALSE)
-+ }
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "activeSource" "holding"      "successful"   "tooSmall"    
@@ -152,4 +115,23 @@ c("activeSource", "holding", "successful", "tooSmall")
 Fatal error: compiler constants were modified!
 
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ...
+* checking tests ... ERROR
+  Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+                                            
+  duplicate initial loci are provided
+  duplicate initial loci are provided
+  ERROR: modification of compiler constant of type character, length 4
+  ERROR: the modified value of the constant is:
+  [1] "activeSource" "holding"      "successful"   "tooSmall"    
+  attr(,".match.hash")
+  <hash table>
+  ERROR: the original value of the constant is:
+  [1] "activeSource" "holding"      "successful"   "tooSmall"    
+  ERROR: the modified constant is at index 1
+  ERROR: the modified constant is in this function body:
+  c("activeSource", "holding", "successful", "tooSmall")
+  Fatal error: compiler constants were modified!
+  
+* checking PDF version of manual ...

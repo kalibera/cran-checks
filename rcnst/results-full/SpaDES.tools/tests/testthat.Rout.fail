@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2024-01-14 r85805) -- "Unsuffered Consequences"
+R Under development (unstable) (2024-01-31 r85845) -- "Unsuffered Consequences"
 Copyright (C) 2024 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -32,3 +32,17 @@ Type 'q()' to quit R.
 > test_check("SpaDES.tools")
 Assuming matrix is in latitude/longitude
 The CRS provided is not in meters; converting internally to UTM so area will be approximately correct.
+|---------|---------|---------|---------|=========================================                                          |---------|---------|---------|---------|=========================================                                          |---------|---------|---------|---------|=========================================                                          duplicate initial loci are provided
+duplicate initial loci are provided
+ERROR: modification of compiler constant of type character, length 4
+ERROR: the modified value of the constant is:
+[1] "activeSource" "holding"      "successful"   "tooSmall"    
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "activeSource" "holding"      "successful"   "tooSmall"    
+ERROR: the modified constant is at index 1
+ERROR: the modified constant is in this function body:
+c("activeSource", "holding", "successful", "tooSmall")
+Fatal error: compiler constants were modified!
+
