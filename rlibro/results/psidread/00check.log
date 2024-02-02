@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rlibro/check/psidread.Rcheck’
-* using R Under development (unstable) (2024-01-17 r85813)
+* using R Under development (unstable) (2024-01-31 r85845)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (GCC) 13.2.1 20231011 (Red Hat 13.2.1-4)
@@ -7,7 +7,7 @@
 * running under: Fedora Linux 38 (MATE-Compiz)
 * using session charset: UTF-8
 * checking for file ‘psidread/DESCRIPTION’ ... OK
-* this is package ‘psidread’ version ‘1.0.0’
+* this is package ‘psidread’ version ‘1.0.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... NOTE
@@ -53,26 +53,16 @@ Package suggested but not available for checking: ‘DiagrammeR’
 Running examples in ‘psidread-Ex.R’ failed
 The error most likely occurred in:
 
-> ### Name: psid_read
-> ### Title: Read PSID data from the packaged data file or customized data
-> ###   file
-> ### Aliases: psid_read
+> ### Name: psid_unzip
+> ### Title: Unzip and transfer the downloaded PSID data files
+> ### Aliases: psid_unzip
 > 
 > ### ** Examples
 > 
-> # Example 1: Read from multiple package data files (Whole procedure)
-> psid_varlist = c(" hh_age || [13]ER53017 [17]ER66017",
-+                             " p_age || [13]ER34204")
-> str_df <- psid_str(varlist = psid_varlist,
-+                    type = "separated")
-> # Below is the file path for the package test data, set this to your own directory
-> exdir <- system.file(package = "psidread","extdata")
-> indir <- system.file(package = "psidread","extdata")
-> psid_unzip(indir = indir,
-+            exdir = exdir,
-+            zipped = TRUE,
-+            type = "package",
-+            filename = NA)
+> # Example 1: Unzip and convert packaged files
+> exdir <- tempdir()
+> indir <- system.file(package = "psidread","extdata") # Define the input directory
+> psid_unzip(indir = indir, exdir = exdir, zipped = TRUE, type = "package", filename = NA)
 Error in utils::unzip(zipfile = file.path(indir, list_tozip[i]), exdir = file.path(indir,  : 
   cannot open file '/var/scratch2ro/tomas/cran/rlibro/lib/psidread/extdata/fam2013er/FAM2013ER_codebook.pdf': Read-only file system
 Calls: psid_unzip -> <Anonymous>
@@ -83,10 +73,10 @@ Execution halted
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-  Backtrace:
-      ▆
-   1. └─psidread::psid_unzip(...) at test-psid_reshape.R:7:3
-   2.   └─utils::unzip(...)
+  Data for year 2017 has been added!
+  [ FAIL 1 | WARN 0 | SKIP 0 | PASS 5 ]
+  
+  ══ Failed tests ════════════════════════════════════════════════════════════════
   ── Error ('test-psid_unzip.R:6:3'): psid_unzip() helps unzip and convert the data to .rda files ──
   Error in `utils::unzip(zipfile = file.path(indir, list_tozip[i]), exdir = file.path(indir, 
       list_foldername[i]), overwrite = TRUE)`: cannot open file '/var/scratch2ro/tomas/cran/rlibro/lib/psidread/extdata/fam2013er/FAM2013ER_codebook.pdf': Read-only file system
@@ -95,7 +85,7 @@ Last 13 lines of output:
    1. └─psidread::psid_unzip(...) at test-psid_unzip.R:6:3
    2.   └─utils::unzip(...)
   
-  [ FAIL 3 | WARN 0 | SKIP 0 | PASS 2 ]
+  [ FAIL 1 | WARN 0 | SKIP 0 | PASS 5 ]
   Error: Test failures
   Execution halted
 * checking for unstated dependencies in vignettes ... OK
