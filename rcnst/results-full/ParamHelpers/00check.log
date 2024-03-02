@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/ParamHelpers.Rcheck’
-* using R Under development (unstable) (2024-01-31 r85845)
+* using R Under development (unstable) (2024-03-01 r86033)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (GCC) 13.2.1 20231011 (Red Hat 13.2.1-4)
@@ -39,7 +39,19 @@
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
 * checking R code for possible problems ... OK
-* checking Rd files ... OK
+* checking Rd files ... NOTE
+checkRd: (-1) getParamNr.Rd:15: Lost braces
+    15 | Default is code{FALSE}.}
+       |                ^
+checkRd: (-1) getRequirements.Rd:16: Lost braces
+    16 | code{TRUE}.}
+       |     ^
+checkRd: (-1) sampleValue.Rd:15: Lost braces; missing escapes or markup?
+    15 | Default is code {FALSE}.}
+       |                 ^
+checkRd: (-1) sampleValues.Rd:18: Lost braces; missing escapes or markup?
+    18 | Default is code {FALSE}.}
+       |                 ^
 * checking Rd metadata ... OK
 * checking Rd cross-references ... OK
 * checking for missing documentation entries ... OK
@@ -97,9 +109,6 @@ NULL
 +   x = makeNumericVectorParam("x", len = 2, lower = c(3, 1), upper = expression(n))
 + )
 > getLower(par.vals)
-   u    v    x    x 
--Inf    1    3    1 
-> getUpper(par.vals, dict = list(n = 12))
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"
@@ -134,4 +143,4 @@ Last 13 lines of output:
   
 * checking PDF version of manual ... OK
 * DONE
-Status: 2 ERRORs, 1 NOTE
+Status: 2 ERRORs, 2 NOTEs
