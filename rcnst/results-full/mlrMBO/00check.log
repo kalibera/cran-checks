@@ -1,0 +1,169 @@
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/mlrMBO.Rcheck’
+* using R Under development (unstable) (2024-03-11 r86089)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (GCC) 13.2.1 20231011 (Red Hat 13.2.1-4)
+    GNU Fortran (GCC) 13.2.1 20231011 (Red Hat 13.2.1-4)
+* running under: Fedora Linux 38 (MATE-Compiz)
+* using session charset: UTF-8
+* checking for file ‘mlrMBO/DESCRIPTION’ ... OK
+* this is package ‘mlrMBO’ version ‘1.1.5.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘mlrMBO’ can be installed ... OK
+* used C compiler: ‘gcc (GCC) 13.2.1 20231011 (Red Hat 13.2.1-4)’
+* checking package directory ... OK
+* checking ‘build’ directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking whether startup messages can be suppressed ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... NOTE
+checkRd: (-1) MBOMultiObjResult.Rd:8: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) MBOMultiObjResult.Rd:9: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) MBOMultiObjResult.Rd:10: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) MBOMultiObjResult.Rd:11-13: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) MBOMultiObjResult.Rd:15: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) MBOSingleObjResult.Rd:8: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) MBOSingleObjResult.Rd:9-11: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) MBOSingleObjResult.Rd:12: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) MBOSingleObjResult.Rd:13-15: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) MBOSingleObjResult.Rd:16: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) MBOSingleObjResult.Rd:27: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) error_handling.Rd:12: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) error_handling.Rd:13: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) error_handling.Rd:14: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) error_handling.Rd:15: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) error_handling.Rd:16-17: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) error_handling.Rd:18-20: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) error_handling.Rd:21: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) mbo_parallel.Rd:9: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) mbo_parallel.Rd:10: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) setMBOControlMultiObj.Rd:119-120: Lost braces
+   119 | Notes in Computer Science, ISBN 978-3-642-37139-4, pp. 756{770,
+       |                                                           ^
+checkRd: (-1) trafos.Rd:28: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) trafos.Rd:29: Lost braces in \itemize; meant \describe ?
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking compiled code ... NOTE
+Note: information on .o files is not available
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... ERROR
+Running examples in ‘mlrMBO-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: mbo
+> ### Title: Optimizes a function with sequential model based optimization.
+> ### Aliases: mbo
+> 
+> ### ** Examples
+> 
+> # simple 2d objective function
+> obj.fun = makeSingleObjectiveFunction(
++  fn = function(x) x[1]^2 + sin(x[2]),
++  par.set = makeNumericParamSet(id = "x", lower = -1, upper = 1, len = 2)
++ )
+> 
+> # create base control object
+> ctrl = makeMBOControl()
+> 
+> # do three MBO iterations
+> ctrl = setMBOControlTermination(ctrl, iters = 3L)
+> 
+> # use 500 points in the focussearch (should be sufficient for 2d)
+> ctrl = setMBOControlInfill(ctrl, opt.focussearch.points = 500)
+> # create initial design
+> des = generateDesign(n = 5L, getParamSet(obj.fun), fun = lhs::maximinLHS)
+> 
+> # start mbo
+> res = mbo(obj.fun, design = des, control = ctrl)
+Computing y column(s) for design. Not provided.
+[mbo] 0: x=0.0607,-0.047 : y = -0.0433 : 0.0 secs : initdesign
+[mbo] 0: x=-0.95,0.548 : y = 1.42 : 0.0 secs : initdesign
+[mbo] 0: x=0.707,-0.864 : y = -0.261 : 0.0 secs : initdesign
+[mbo] 0: x=0.354,0.793 : y = 0.838 : 0.0 secs : initdesign
+[mbo] 0: x=-0.595,-0.36 : y = 0.00116 : 0.0 secs : initdesign
+ERROR: modification of compiler constant of type character, length 2
+ERROR: the modified value of the constant is:
+[1] "integer"       "integervector"
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "integer"       "integervector"
+ERROR: the modified constant is at index 1
+ERROR: the modified constant is in this function body:
+c("integer", "integervector")
+Fatal error: compiler constants were modified!
+
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... ERROR
+  Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  uncaught bugs meanwhile in {mlr} - please consider switching.
+  Loading required package: smoof
+  Loading required package: checkmate
+  ERROR: modification of compiler constant of type character, length 2
+  ERROR: the modified value of the constant is:
+  [1] "integer"       "integervector"
+  attr(,".match.hash")
+  <hash table>
+  ERROR: the original value of the constant is:
+  [1] "integer"       "integervector"
+  ERROR: the modified constant is at index 1
+  ERROR: the modified constant is in this function body:
+  c("integer", "integervector")
+  Fatal error: compiler constants were modified!
+  
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... ERROR
+Error(s) in re-building vignettes:
+  ...
+--- re-building ‘mlrMBO.Rmd’ using rmarkdown
+ERROR: modification of compiler constant of type character, length 2
+ERROR: the modified value of the constant is:
+[1] "integer"       "integervector"
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "integer"       "integervector"
+ERROR: the modified constant is at index 1
+ERROR: the modified constant is in this function body:
+c("integer", "integervector")
+Fatal error: compiler constants were modified!
+
+
+* checking PDF version of manual ... OK
+* DONE
+Status: 3 ERRORs, 2 NOTEs
