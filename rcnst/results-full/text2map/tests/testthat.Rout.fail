@@ -15,19 +15,40 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> library("testthat")
-> library("TreeTools", quietly = TRUE, warn.conflicts = FALSE)
+> library(testthat)
+> library(text2map)
+Loading required package: Matrix
+> options(useFancyQuotes = FALSE)
 > 
-> suppressPackageStartupMessages(test_check("TreeTools"))
-ERROR: modification of compiler constant of type character, length 2
+> test_check("text2map")
+Loading required package: tm
+Loading required package: NLP
+Loading required package: quanteda
+Package version: 3.3.1
+Unicode version: 15.0
+ICU version: 72.1
+Parallel computing: 2 of 64 threads used.
+See https://quanteda.io for tutorials and examples.
+
+Attaching package: 'quanteda'
+
+The following object is masked from 'package:tm':
+
+    stopwords
+
+The following objects are masked from 'package:NLP':
+
+    meta, meta<-
+
+ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
-[1] "END;"      "ENDBLOCK;"
+[1] "pooled" "paired" "L2"     "PCA"   
 attr(,".match.hash")
 <hash table>
 ERROR: the original value of the constant is:
-[1] "END;"      "ENDBLOCK;"
+[1] "pooled" "paired" "L2"     "PCA"   
 ERROR: the modified constant is at index 1
 ERROR: the modified constant is in this function body:
-c("END;", "ENDBLOCK;")
-Fatal error: compiler constants were modified!
-
+c("pooled", "paired", "L2", "PCA")
+Error: promise already under evaluation: recursive default argument reference or earlier problems?
+Execution halted

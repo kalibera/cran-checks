@@ -1,4 +1,4 @@
-* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/SpaDES.tools.Rcheck’
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/text2map.Rcheck’
 * using R Under development (unstable) (2024-03-18 r86145)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
@@ -6,21 +6,19 @@
     GNU Fortran (GCC) 13.2.1 20231011 (Red Hat 13.2.1-4)
 * running under: Fedora Linux 38 (MATE-Compiz)
 * using session charset: UTF-8
-* checking for file ‘SpaDES.tools/DESCRIPTION’ ... OK
+* checking for file ‘text2map/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘SpaDES.tools’ version ‘2.0.5’
+* this is package ‘text2map’ version ‘0.1.9’
 * package encoding: UTF-8
 * checking package namespace information ... OK
-* checking package dependencies ... NOTE
-Package suggested but not available for checking: ‘NLMR’
+* checking package dependencies ... OK
 * checking if this is a source package ... OK
 * checking if there is a namespace ... OK
 * checking for executable files ... OK
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘SpaDES.tools’ can be installed ... OK
-* used C++ compiler: ‘g++ (GCC) 13.2.1 20231011 (Red Hat 13.2.1-4)’
+* checking whether package ‘text2map’ can be installed ... OK
 * checking package directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
@@ -49,69 +47,68 @@ Package suggested but not available for checking: ‘NLMR’
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
-* checking line endings in C/C++/Fortran sources/headers ... OK
-* checking compiled code ... NOTE
-Note: information on .o files is not available
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
 * checking examples ... ERROR
-Running examples in ‘SpaDES.tools-Ex.R’ failed
+Running examples in ‘text2map-Ex.R’ failed
 The error most likely occurred in:
 
-> ### Name: spread2
-> ### Title: Simulate a contagious spread process on a landscape, with
-> ###   'data.table' internals
-> ### Aliases: spread2
+> ### Name: CoCA
+> ### Title: Performs Concept Class Analysis (CoCA)
+> ### Aliases: CoCA coca
 > 
 > ### ** Examples
 > 
-> library(terra)
-terra 1.7.71
-
-Attaching package: ‘terra’
-
-The following object is masked from ‘package:SpaDES.tools’:
-
-    wrap
-
 > 
-> origDTThreads <- data.table::setDTthreads(2L)
-> origNcpus <- options(Ncpus = 2L)
+> #' # load example word embeddings
+> data(ft_wv_sample)
 > 
-> a <- rast(ext(0, 10, 0, 10), res = 1)
-> sams <- sort(sample(ncell(a), 3))
+> # load example text
+> data(jfk_speech)
 > 
-> # Simple use -- similar to spread(...)
-> out <- spread2(a, start = sams, 0.225)
-> if (interactive()) {
-+   terra::plot(out)
-+ }
+> # minimal preprocessing
+> jfk_speech$sentence <- tolower(jfk_speech$sentence)
+> jfk_speech$sentence <- gsub("[[:punct:]]+", " ", jfk_speech$sentence)
 > 
-> # Use maxSize -- this gives an upper limit
-> maxSizes <- sort(sample(1:10, size = length(sams)))
-> out <- spread2(a, start = sams, 0.225, maxSize = maxSizes, asRaster = FALSE)
-> # check TRUE using data.table .N
-> out[, .N, by = "initialPixels"]$N <= maxSizes
-[1] TRUE TRUE TRUE
+> # create DTM
+> dtm <- dtm_builder(jfk_speech, sentence, sentence_id)
 > 
-> # Use exactSize -- gives an exact size, if there is enough space on the Raster
-> exactSizes <- maxSizes
-> out <- spread2(a, start = sams, spreadProb = 0.225,
-+                exactSize = exactSizes, asRaster = FALSE)
-> out[, .N, by = "initialPixels"]$N == maxSizes # should be TRUE TRUE TRUE
-[1] TRUE TRUE TRUE
+> # create semantic directions
+> gen <- data.frame(
++   add = c("woman"),
++   subtract = c("man")
++ )
 > 
-> # Use exactSize -- but where it can't be achieved
-> exactSizes <- sort(sample(100:110, size = length(sams)))
-> out <- spread2(a, start = sams, 1, exactSize = exactSizes)
+> die <- data.frame(
++   add = c("alive"),
++   subtract = c("die")
++ )
+> 
+> gen_dir <- get_direction(anchors = gen, wv = ft_wv_sample)
+> die_dir <- get_direction(anchors = die, wv = ft_wv_sample)
+> 
+> sem_dirs <- rbind(gen_dir, die_dir)
+> 
+> classes <- CoCA(
++   dtm = dtm,
++   wv = ft_wv_sample,
++   directions = sem_dirs,
++   filter_sig = TRUE,
++   filter_value = 0.05,
++   zero_action = "drop"
++ )
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
-[1] "activeSource" "holding"      "successful"   "tooSmall"    
+[1] "pooled" "paired" "L2"     "PCA"   
 attr(,".match.hash")
 <hash table>
 ERROR: the original value of the constant is:
-[1] "activeSource" "holding"      "successful"   "tooSmall"    
+[1] "pooled" "paired" "L2"     "PCA"   
 ERROR: the modified constant is at index 1
 ERROR: the modified constant is in this function body:
-c("activeSource", "holding", "successful", "tooSmall")
+c("pooled", "paired", "L2", "PCA")
 Fatal error: compiler constants were modified!
 
 * checking for unstated dependencies in ‘tests’ ... OK
@@ -119,21 +116,21 @@ Fatal error: compiler constants were modified!
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-                                            
-  duplicate initial loci are provided
-  duplicate initial loci are provided
+  
+      meta, meta<-
+  
   ERROR: modification of compiler constant of type character, length 4
   ERROR: the modified value of the constant is:
-  [1] "activeSource" "holding"      "successful"   "tooSmall"    
+  [1] "pooled" "paired" "L2"     "PCA"   
   attr(,".match.hash")
   <hash table>
   ERROR: the original value of the constant is:
-  [1] "activeSource" "holding"      "successful"   "tooSmall"    
+  [1] "pooled" "paired" "L2"     "PCA"   
   ERROR: the modified constant is at index 1
   ERROR: the modified constant is in this function body:
-  c("activeSource", "holding", "successful", "tooSmall")
-  Fatal error: compiler constants were modified!
-  
+  c("pooled", "paired", "L2", "PCA")
+  Error: promise already under evaluation: recursive default argument reference or earlier problems?
+  Execution halted
 * checking PDF version of manual ... OK
 * DONE
-Status: 2 ERRORs, 2 NOTEs
+Status: 2 ERRORs
