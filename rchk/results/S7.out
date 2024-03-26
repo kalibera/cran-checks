@@ -1,0 +1,26 @@
+Package S7 version 0.1.1
+Package built using 86189/R 4.4.0; x86_64-pc-linux-gnu; 2024-03-25 22:22:05 UTC; unix   
+Checked with rchk version fdc068715daa3a256062cc20e0d4a5157dacc9a4 LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Function S7_obj_dispatch
+  [UP] allocating function Rf_findVarInFrame(?,S:obj_dispatch) may destroy its unprotected argument (ns <arg 1>), which is later used. S7/src/method-dispatch.c:111
+  [UP] calling allocating function Rf_findVarInFrame(?,S:obj_dispatch) with a fresh pointer (ns <arg 1>) S7/src/method-dispatch.c:111
+  [UP] unprotected variable ns while calling allocating function Rf_install S7/src/method-dispatch.c:111
+  [UP] unprotected variable ns while calling allocating function Rf_lang2 S7/src/method-dispatch.c:114
+  [UP] calling allocating function Rf_eval with a fresh pointer (ns <arg 2>) S7/src/method-dispatch.c:115
+
+Function generic_args
+  [UP] calling allocating function Rf_eval with a fresh pointer (arg <arg 1>) S7/src/method-dispatch.c:57
+
+Function method_
+  [UP] unprotected variable m while calling allocating function Rf_asInteger S7/src/method-dispatch.c:98
+
+Function method_call_
+  [UP] allocating function Rf_eval may destroy its unprotected argument (arg <arg 1>), which is later used. S7/src/method-dispatch.c:158
+  [UP] calling allocating function Rf_eval with a fresh pointer (arg <arg 1>) S7/src/method-dispatch.c:158
+
+Function method_rec
+  [UP] calling allocating function method_rec with a fresh pointer (val <arg 1>) S7/src/method-dispatch.c:20
+  [UP] calling allocating function method_rec with a fresh pointer (val <arg 1>) S7/src/method-dispatch.c:30

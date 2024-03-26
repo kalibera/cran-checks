@@ -1,0 +1,60 @@
+Package exdex version 1.2.3
+Package built using 86189/R 4.4.0; x86_64-pc-linux-gnu; 2024-03-25 23:13:33 UTC; unix   
+Checked with rchk version fdc068715daa3a256062cc20e0d4a5157dacc9a4 LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _exdex_arma_rowSums_minus_col
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr exdex/src/RcppExports.cpp:37
+  [PB] has negative depth exdex/src/RcppExports.cpp:49
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete exdex/src/RcppExports.cpp:49
+  [PB] has possible protection stack imbalance exdex/src/RcppExports.cpp:50
+
+Function _exdex_arma_rowSums_minus_col_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _exdex_cpp_col_ms
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr exdex/src/RcppExports.cpp:106
+  [PB] has negative depth exdex/src/RcppExports.cpp:118
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete exdex/src/RcppExports.cpp:118
+  [PB] has possible protection stack imbalance exdex/src/RcppExports.cpp:119
+
+Function _exdex_cpp_col_ms_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _exdex_cpp_log0const
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr exdex/src/RcppExports.cpp:72
+  [PB] has negative depth exdex/src/RcppExports.cpp:84
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete exdex/src/RcppExports.cpp:84
+  [PB] has possible protection stack imbalance exdex/src/RcppExports.cpp:85
+
+Function _exdex_cpp_log0const_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _exdex_cpp_sigma2hat_dj
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr exdex/src/RcppExports.cpp:145
+  [PB] has negative depth exdex/src/RcppExports.cpp:157
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete exdex/src/RcppExports.cpp:157
+  [PB] has possible protection stack imbalance exdex/src/RcppExports.cpp:158
+
+Function _exdex_cpp_sigma2hat_dj_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

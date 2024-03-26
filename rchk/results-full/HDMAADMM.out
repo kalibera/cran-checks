@@ -1,0 +1,58 @@
+Package HDMAADMM version 0.0.1
+Package built using 86189/R 4.4.0; x86_64-pc-linux-gnu; 2024-03-25 23:58:55 UTC; unix   
+Checked with rchk version fdc068715daa3a256062cc20e0d4a5157dacc9a4 LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _HDMAADMM_elasticNetFit
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _HDMAADMM_fMatChol
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _HDMAADMM_fMatInv
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _HDMAADMM_fMatProd
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _HDMAADMM_fMatTransProd
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _HDMAADMM_singleModalityAdmmFit
+  [UP] ignoring variable <unnamed var:   %93 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function fMatChol(SEXPREC*)
+  [UP] calling allocating function Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > Rcpp::as<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >(SEXPREC*) with argument allocated using cast_numeric(SEXPREC*) HDMAADMM/src/matrix_utility.cpp:120
+
+Function fMatInv(SEXPREC*, bool)
+  [UP] calling allocating function Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > Rcpp::as<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >(SEXPREC*) with argument allocated using cast_numeric(SEXPREC*) HDMAADMM/src/matrix_utility.cpp:101
+
+Function fMatProd(SEXPREC*, SEXPREC*, bool)
+  [UP] calling allocating function Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > Rcpp::as<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >(SEXPREC*) with argument allocated using cast_numeric(SEXPREC*) HDMAADMM/src/matrix_utility.cpp:38
+  [UP] calling allocating function Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > Rcpp::as<Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > >(SEXPREC*) with argument allocated using cast_numeric(SEXPREC*) HDMAADMM/src/matrix_utility.cpp:40
+  [UP] calling allocating function Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > Rcpp::as<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >(SEXPREC*) with argument allocated using cast_numeric(SEXPREC*) HDMAADMM/src/matrix_utility.cpp:47
+
+Function fMatTransProd(SEXPREC*, SEXPREC*, bool)
+  [UP] calling allocating function Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > Rcpp::as<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >(SEXPREC*) with argument allocated using cast_numeric(SEXPREC*) HDMAADMM/src/matrix_utility.cpp:70
+  [UP] calling allocating function Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > Rcpp::as<Eigen::Map<Eigen::Matrix<double, -1, 1, 0, -1, 1>, 0, Eigen::Stride<0, 0> > >(SEXPREC*) with argument allocated using cast_numeric(SEXPREC*) HDMAADMM/src/matrix_utility.cpp:75
+  [UP] calling allocating function Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > Rcpp::as<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >(SEXPREC*) with argument allocated using cast_numeric(SEXPREC*) HDMAADMM/src/matrix_utility.cpp:82

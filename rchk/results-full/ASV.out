@@ -1,0 +1,81 @@
+Package ASV version 1.1.4
+Package built using 86189/R 4.4.0; x86_64-pc-linux-gnu; 2024-03-25 23:03:31 UTC; unix   
+Checked with rchk version fdc068715daa3a256062cc20e0d4a5157dacc9a4 LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Rcpp_namespace()
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using Rcpp::internal::get_Rcpp_namespace() Rcpp/include/Rcpp/Environment.h:361
+
+Function Rcpp::InternalFunction_Impl<Rcpp::PreserveStorage>::set(SEXPREC*)
+  [UP] ignoring variable xp as it has address taken, results will be incomplete 
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage> Rcpp::sample<14>(Rcpp::Vector<14, Rcpp::PreserveStorage> const&, int, bool, Rcpp::Nullable<Rcpp::Vector<14, Rcpp::PreserveStorage> >)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ASV_asv_apf
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ASV_asv_logML
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ASV_asv_mcmc
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ASV_asv_pf
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ASV_asv_posterior
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ASV_asv_prior
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ASV_sv_apf
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ASV_sv_logML
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ASV_sv_mcmc
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ASV_sv_pf
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ASV_sv_posterior
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ASV_sv_prior
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function asv_mcmc(arma::Col<double>, Rcpp::Nullable<double>, Rcpp::Nullable<double>, Rcpp::Nullable<Rcpp::Vector<14, Rcpp::PreserveStorage> >)
+  [UP] ignoring variable <unnamed var:   %164 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function asv_posterior(arma::Col<double>, arma::Col<double>, arma::Col<double>, arma::Col<double>, Rcpp::Nullable<int>, Rcpp::Nullable<Rcpp::Vector<14, Rcpp::PreserveStorage> >)
+  [UP] ignoring variable <unnamed var:   %237 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function sv_mcmc(arma::Col<double>, Rcpp::Nullable<double>, Rcpp::Nullable<double>, Rcpp::Nullable<Rcpp::Vector<14, Rcpp::PreserveStorage> >)
+  [UP] ignoring variable <unnamed var:   %148 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function sv_posterior(arma::Col<double>, arma::Col<double>, arma::Col<double>, arma::Col<double>, Rcpp::Nullable<int>, Rcpp::Nullable<Rcpp::Vector<14, Rcpp::PreserveStorage> >)
+  [UP] ignoring variable <unnamed var:   %235 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

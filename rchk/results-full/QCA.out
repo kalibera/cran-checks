@@ -1,0 +1,15 @@
+Package QCA version 3.22
+Package built using 86189/R 4.4.0; x86_64-pc-linux-gnu; 2024-03-26 01:14:22 UTC; unix   
+Checked with rchk version fdc068715daa3a256062cc20e0d4a5157dacc9a4 LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at CCubes QCA/src/CCubes.c:221
+
+
+Function CCubes
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:library,V) QCA/src/CCubes.c:221
+  [UP] allocating function Rf_findVarInFrame(?,S:findmin) may destroy its unprotected argument (pkg_env <arg 1>), which is later used. QCA/src/CCubes.c:223
+  [UP] calling allocating function Rf_findVarInFrame(?,S:findmin) with a fresh pointer (pkg_env <arg 1>) QCA/src/CCubes.c:223
+  [UP] unprotected variable pkg_env while calling allocating function Rf_install QCA/src/CCubes.c:223
+  [UP] unprotected variable pkg_env while calling allocating function Rf_lang2 QCA/src/CCubes.c:224

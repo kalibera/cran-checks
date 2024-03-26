@@ -1,0 +1,303 @@
+Package collapse version 2.0.11
+Package built using 86189/R 4.4.0; x86_64-pc-linux-gnu; 2024-03-25 22:28:35 UTC; unix   
+Checked with rchk version fdc068715daa3a256062cc20e0d4a5157dacc9a4 LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Suspicious call (two or more unprotected arguments) to R_compute_identical at coerce_single_to_equal_types collapse/src/match.c:308
+Suspicious call (two or more unprotected arguments) to match_single at coerce_single_to_equal_types collapse/src/match.c:309
+Suspicious call (two or more unprotected arguments) to falloc at match_multiple collapse/src/match.c:969
+Suspicious call (two or more unprotected arguments) to falloc at match_single collapse/src/match.c:10
+Suspicious call (two or more unprotected arguments) to match_single at match_single collapse/src/match.c:35
+Suspicious call (two or more unprotected arguments) to R_compute_identical at match_single collapse/src/match.c:59
+Suspicious call (two or more unprotected arguments) to match_single at match_single collapse/src/match.c:65
+Suspicious call (two or more unprotected arguments) to falloc at match_two_vectors collapse/src/match.c:348
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::Matrix<14, Rcpp::PreserveStorage> fnobs5pImpl<10>(Rcpp::Vector<10, Rcpp::PreserveStorage>, bool, int, Rcpp::Vector<13, Rcpp::PreserveStorage>, int, Rcpp::Vector<13, Rcpp::PreserveStorage>, bool, bool, SEXPREC*)
+  [UP] ignoring variable gn as it has address taken, results will be incomplete 
+
+Function Rcpp::Matrix<14, Rcpp::PreserveStorage> fnobs5pImpl<13>(Rcpp::Vector<13, Rcpp::PreserveStorage>, bool, int, Rcpp::Vector<13, Rcpp::PreserveStorage>, int, Rcpp::Vector<13, Rcpp::PreserveStorage>, bool, bool, SEXPREC*)
+  [UP] ignoring variable gn as it has address taken, results will be incomplete 
+
+Function Rcpp::Matrix<14, Rcpp::PreserveStorage> fnobs5pImpl<14>(Rcpp::Vector<14, Rcpp::PreserveStorage>, bool, int, Rcpp::Vector<13, Rcpp::PreserveStorage>, int, Rcpp::Vector<13, Rcpp::PreserveStorage>, bool, bool, SEXPREC*)
+  [UP] ignoring variable gn as it has address taken, results will be incomplete 
+
+Function Rcpp::Matrix<14, Rcpp::PreserveStorage> fnobs5pImpl<16>(Rcpp::Vector<16, Rcpp::PreserveStorage>, bool, int, Rcpp::Vector<13, Rcpp::PreserveStorage>, int, Rcpp::Vector<13, Rcpp::PreserveStorage>, bool, bool, SEXPREC*)
+  [UP] ignoring variable gn as it has address taken, results will be incomplete 
+
+Function Rcpp::Matrix<16, Rcpp::PreserveStorage> flagleadmCppImpl<16>(Rcpp::Matrix<16, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, SEXPREC* const&, int, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, SEXPREC* const&, bool)
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::Matrix<16, Rcpp::PreserveStorage> psmatCppImpl<16>(Rcpp::Vector<16, Rcpp::PreserveStorage>, Rcpp::Vector<13, Rcpp::PreserveStorage>, SEXPREC*, bool)
+  [UP] ignoring variable <unnamed var:   %45 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::Vector<10, Rcpp::PreserveStorage> flagleadCppImpl<10>(Rcpp::Vector<10, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, SEXPREC* const&, int, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, SEXPREC* const&, bool)
+  [UP] ignoring variable <unnamed var:   %130 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::Vector<10, Rcpp::PreserveStorage> varyingCppImpl<16>(Rcpp::Vector<16, Rcpp::PreserveStorage>, int, Rcpp::Vector<13, Rcpp::PreserveStorage>, bool)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::Vector<13, Rcpp::PreserveStorage> flagleadCppImpl<13>(Rcpp::Vector<13, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, SEXPREC* const&, int, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, SEXPREC* const&, bool)
+  [UP] ignoring variable <unnamed var:   %130 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage> fdiffgrowthCppImpl<fdiffgrowthCpp(Rcpp::Vector<14, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, double, int, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, SEXPREC* const&, SEXPREC* const&, int, double, bool, double)::$_0>(Rcpp::Vector<14, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, double, int, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, SEXPREC* const&, SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool, fdiffgrowthCpp(Rcpp::Vector<14, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, double, int, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, SEXPREC* const&, SEXPREC* const&, int, double, bool, double)::$_0)
+  [UP] ignoring variable <unnamed var:   %434 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage> fdiffgrowthCppImpl<fdiffgrowthCpp(Rcpp::Vector<14, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, double, int, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, SEXPREC* const&, SEXPREC* const&, int, double, bool, double)::$_1>(Rcpp::Vector<14, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, double, int, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, SEXPREC* const&, SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool, fdiffgrowthCpp(Rcpp::Vector<14, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, double, int, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, SEXPREC* const&, SEXPREC* const&, int, double, bool, double)::$_1)
+  [UP] ignoring variable <unnamed var:   %434 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage> fdiffgrowthCppImpl<fdiffgrowthCpp(Rcpp::Vector<14, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, double, int, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, SEXPREC* const&, SEXPREC* const&, int, double, bool, double)::$_2>(Rcpp::Vector<14, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, double, int, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, SEXPREC* const&, SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool, fdiffgrowthCpp(Rcpp::Vector<14, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, double, int, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, SEXPREC* const&, SEXPREC* const&, int, double, bool, double)::$_2)
+  [UP] ignoring variable <unnamed var:   %435 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage> flagleadCppImpl<14>(Rcpp::Vector<14, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, SEXPREC* const&, int, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, SEXPREC* const&, bool)
+  [UP] ignoring variable <unnamed var:   %130 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage> fnobs5Impl<10>(Rcpp::Vector<10, Rcpp::PreserveStorage>, bool, int, Rcpp::Vector<13, Rcpp::PreserveStorage>, bool, bool, SEXPREC*)
+  [UP] ignoring variable gn as it has address taken, results will be incomplete 
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage> fnobs5Impl<13>(Rcpp::Vector<13, Rcpp::PreserveStorage>, bool, int, Rcpp::Vector<13, Rcpp::PreserveStorage>, bool, bool, SEXPREC*)
+  [UP] ignoring variable gn as it has address taken, results will be incomplete 
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage> fnobs5Impl<14>(Rcpp::Vector<14, Rcpp::PreserveStorage>, bool, int, Rcpp::Vector<13, Rcpp::PreserveStorage>, bool, bool, SEXPREC*)
+  [UP] ignoring variable gn as it has address taken, results will be incomplete 
+
+Function Rcpp::Vector<14, Rcpp::PreserveStorage> fnobs5Impl<16>(Rcpp::Vector<16, Rcpp::PreserveStorage>, bool, int, Rcpp::Vector<13, Rcpp::PreserveStorage>, bool, bool, SEXPREC*)
+  [UP] ignoring variable gn as it has address taken, results will be incomplete 
+
+Function Rcpp::Vector<16, Rcpp::PreserveStorage> flagleadCppImpl<16>(Rcpp::Vector<16, Rcpp::PreserveStorage> const&, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, SEXPREC* const&, int, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, SEXPREC* const&, bool)
+  [UP] ignoring variable <unnamed var:   %154 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::sugar::IndexHash<16>::add_value(int)
+  [UP] ignoring variable val as it has address taken, results will be incomplete 
+
+Function _collapse_BWCpp
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_BWlCpp
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_BWmCpp
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_fbstatsCpp
+  [UP] ignoring variable <unnamed var:   %42 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %43 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_fbstatslCpp
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %40 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_fbstatsmCpp
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %40 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_fdiffgrowthCpp
+  [UP] ignoring variable <unnamed var:   %45 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_fdiffgrowthlCpp
+  [UP] ignoring variable <unnamed var:   %45 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_fdiffgrowthmCpp
+  [UP] ignoring variable <unnamed var:   %45 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_fdroplevelsCpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_flagleadCpp
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %31 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_flagleadlCpp
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_flagleadmCpp
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %31 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_fscaleCpp
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_fscalelCpp
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_fscalemCpp
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_fvarsdCpp
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_fvarsdlCpp
+  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %37 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_fvarsdmCpp
+  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %37 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_groupid
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_mctl
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %19 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_mrtl
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %19 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_psmatCpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_pwnobsmCpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_qFCpp
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_seqid
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_sortuniqueCpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_varyingCpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_varyinglCpp
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _collapse_varyingmCpp
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function bool std::__1::__insertion_sort_incomplete<Rcpp::internal::NAComparator<SEXPREC*>&, SEXPREC**>(SEXPREC**, SEXPREC**, Rcpp::internal::NAComparator<SEXPREC*>&)
+  [UP] ignoring variable __t as it has address taken, results will be incomplete 
+
+Function bool std::__1::__insertion_sort_incomplete<Rcpp::internal::NAComparatorGreater<SEXPREC*>&, SEXPREC**>(SEXPREC**, SEXPREC**, Rcpp::internal::NAComparatorGreater<SEXPREC*>&)
+  [UP] ignoring variable __t as it has address taken, results will be incomplete 
+
+Function coerce_single_to_equal_types
+  [UP] calling allocating function match_single(?,?,V) with argument allocated using Rf_ScalarInteger collapse/src/match.c:309
+
+Function fbstatslCpp(Rcpp::Vector<19, Rcpp::PreserveStorage> const&, bool, int, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, int, Rcpp::Vector<13, Rcpp::PreserveStorage> const&, SEXPREC* const&, bool, bool, SEXPREC* const&)
+  [UP] ignoring variable <unnamed var:   %124 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %217 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %307 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %74 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function fbstatstemp(Rcpp::Vector<14, Rcpp::PreserveStorage>, bool, int, Rcpp::Vector<13, Rcpp::PreserveStorage>, SEXPREC*, bool, bool, SEXPREC*)
+  [UP] ignoring variable gn as it has address taken, results will be incomplete 
+
+Function flagleadCpp(SEXPREC*, Rcpp::Vector<13, Rcpp::PreserveStorage>, SEXPREC*, int, Rcpp::Vector<13, Rcpp::PreserveStorage>, SEXPREC*, bool)
+  [UP] ignoring variable fill as it has address taken, results will be incomplete 
+  [UP] ignoring variable t as it has address taken, results will be incomplete 
+
+Function flagleadmCpp(SEXPREC*, Rcpp::Vector<13, Rcpp::PreserveStorage>, SEXPREC*, int, Rcpp::Vector<13, Rcpp::PreserveStorage>, SEXPREC*, bool)
+  [UP] ignoring variable fill as it has address taken, results will be incomplete 
+  [UP] ignoring variable t as it has address taken, results will be incomplete 
+
+Function fmeanC
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete collapse/src/fmean.c:277
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/fmean.c:277
+
+Function fmeanlC
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete collapse/src/fmean.c:524
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/fmean.c:524
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete collapse/src/fmean.c:591
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/fmean.c:591
+
+Function fnthC
+  [PB] has possible protection stack imbalance collapse/src/fnth_fmedian_fquantile.c:1395
+
+Function match_multiple
+  [UP] calling allocating function falloc(V,V,V) with argument allocated using Rf_ScalarInteger collapse/src/match.c:969
+
+Function match_single
+  [UP] calling allocating function falloc(V,V,V) with argument allocated using Rf_ScalarInteger collapse/src/match.c:10
+  [UERROR: too many states (abstraction error?) in function rbindlist
+P] calling allocating function match_single(?,?,V) with argument allocated using Rf_ScalarInteger collapse/src/match.c:35
+  [UP] calling allocating function match_single(?,?,V) with argument allocated using Rf_ScalarInteger collapse/src/match.c:65
+
+Function match_two_vectors
+  [UP] calling allocating function falloc(V,V,V) with argument allocated using Rf_ScalarInteger collapse/src/match.c:348
+
+Function na_focb
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete collapse/src/programming.c:856
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/programming.c:856
+
+Function na_locf
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete collapse/src/programming.c:790
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/programming.c:790
+
+Function pivot_long
+  [UP] unprotected variable names while calling allocating function Rf_allocVector collapse/src/pivot.c:109
+  [UP] unprotected variable names while calling allocating function Rf_allocVector collapse/src/pivot.c:111
+
+Function rbindlist
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/data.table_rbindlist.c:718
+
+Function replace_outliers
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete collapse/src/programming.c:724
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/programming.c:724
+
+Function std::__1::enable_if<is_move_constructible<SEXPREC*>::value&&is_move_assignable<SEXPREC*>::value, void>::type std::__1::swap[abi:v160006]<SEXPREC*>(SEXPREC*&, SEXPREC*&)
+  [UP] ignoring variable __t as it has address taken, results will be incomplete 
+
+Function vlabels
+  [UP] calling allocating function Rf_asChar with a fresh pointer (labxi <arg 1>) collapse/src/small_helper.c:241
+
+Function void Rcpp::Vector<16, Rcpp::PreserveStorage>::fill__dispatch<SEXPREC*>(Rcpp::traits::integral_constant<bool, true>, SEXPREC* const&)
+  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<16, Rcpp::PreserveStorage>::push_back<char [7]>(char const (&) [7])
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void std::__1::__insertion_sort_3[abi:v160006]<std::__1::_ClassicAlgPolicy, Rcpp::internal::NAComparator<SEXPREC*>&, SEXPREC**>(SEXPREC**, SEXPREC**, Rcpp::internal::NAComparator<SEXPREC*>&)
+  [UP] ignoring variable __t as it has address taken, results will be incomplete 
+
+Function void std::__1::__insertion_sort_3[abi:v160006]<std::__1::_ClassicAlgPolicy, Rcpp::internal::NAComparatorGreater<SEXPREC*>&, SEXPREC**>(SEXPREC**, SEXPREC**, Rcpp::internal::NAComparatorGreater<SEXPREC*>&)
+  [UP] ignoring variable __t as it has address taken, results will be incomplete 
+
+Function void std::__1::__pop_heap[abi:v160006]<std::__1::_ClassicAlgPolicy, Rcpp::internal::NAComparator<SEXPREC*>, SEXPREC**>(SEXPREC**, SEXPREC**, Rcpp::internal::NAComparator<SEXPREC*>&, std::__1::iterator_traits<SEXPREC**>::difference_type)
+  [UP] ignoring variable __top as it has address taken, results will be incomplete 
+
+Function void std::__1::__pop_heap[abi:v160006]<std::__1::_ClassicAlgPolicy, Rcpp::internal::NAComparatorGreater<SEXPREC*>, SEXPREC**>(SEXPREC**, SEXPREC**, Rcpp::internal::NAComparatorGreater<SEXPREC*>&, std::__1::iterator_traits<SEXPREC**>::difference_type)
+  [UP] ignoring variable __top as it has address taken, results will be incomplete 
+
+Function void std::__1::__sift_down[abi:v160006]<std::__1::_ClassicAlgPolicy, Rcpp::internal::NAComparator<SEXPREC*>&, SEXPREC**>(SEXPREC**, Rcpp::internal::NAComparator<SEXPREC*>&, std::__1::iterator_traits<SEXPREC**>::difference_type, SEXPREC**)
+  [UP] ignoring variable __top as it has address taken, results will be incomplete 
+
+Function void std::__1::__sift_down[abi:v160006]<std::__1::_ClassicAlgPolicy, Rcpp::internal::NAComparatorGreater<SEXPREC*>&, SEXPREC**>(SEXPREC**, Rcpp::internal::NAComparatorGreater<SEXPREC*>&, std::__1::iterator_traits<SEXPREC**>::difference_type, SEXPREC**)
+  [UP] ignoring variable __top as it has address taken, results will be incomplete 
+
+Function void std::__1::__sift_up[abi:v160006]<std::__1::_ClassicAlgPolicy, Rcpp::internal::NAComparator<SEXPREC*>&, SEXPREC**>(SEXPREC**, SEXPREC**, Rcpp::internal::NAComparator<SEXPREC*>&, std::__1::iterator_traits<SEXPREC**>::difference_type)
+  [UP] ignoring variable __t as it has address taken, results will be incomplete 
+
+Function void std::__1::__sift_up[abi:v160006]<std::__1::_ClassicAlgPolicy, Rcpp::internal::NAComparatorGreater<SEXPREC*>&, SEXPREC**>(SEXPREC**, SEXPREC**, Rcpp::internal::NAComparatorGreater<SEXPREC*>&, std::__1::iterator_traits<SEXPREC**>::difference_type)
+  [UP] ignoring variable __t as it has address taken, results will be incomplete 

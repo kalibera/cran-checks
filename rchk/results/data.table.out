@@ -1,0 +1,25 @@
+Package data.table version 1.15.2
+Package built using 86189/R 4.4.0; x86_64-pc-linux-gnu; 2024-03-25 22:17:05 UTC; unix   
+Checked with rchk version fdc068715daa3a256062cc20e0d4a5157dacc9a4 LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Function checkVars
+  [UP] allocating function uniq_diff may destroy its unprotected argument (measure_int_or_list <arg 1>), which is later used. data.table/src/fmelt.c:251
+  [UP] calling allocating function uniq_diff with a fresh pointer (measure_int_or_list <arg 1>) data.table/src/fmelt.c:251
+  [UP] unprotected variable measure_int_or_list while calling allocating function Rf_allocVector data.table/src/fmelt.c:254
+
+Function coerceToRealListR
+  [UP] calling allocating function coerceAs(?,V,?) with argument allocated using Rf_ScalarReal data.table/src/frollR.c:18
+
+Function frollapplyR
+  [UP] calling allocating function coerceAs(?,V,?) with argument allocated using Rf_ScalarReal data.table/src/frollR.c:260
+
+Function frollfunR
+  [UP] calling allocating function coerceAs(?,V,?) with argument allocated using Rf_ScalarReal data.table/src/frollR.c:148
+
+Function gmean
+  [UP] calling allocating function coerceAs(?,V,?) with argument allocated using Rf_ScalarReal data.table/src/gsumm.c:594
+
+Function uniq_diff
+  [UP] calling allocating function set_diff(V,?) with a fresh pointer (unique_col_numbers <arg 1>) data.table/src/fmelt.c:201

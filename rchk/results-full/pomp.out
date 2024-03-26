@@ -1,0 +1,23 @@
+Package pomp version 5.6
+Package built using 86189/R 4.4.0; x86_64-pc-linux-gnu; 2024-03-25 23:32:05 UTC; unix   
+Checked with rchk version fdc068715daa3a256062cc20e0d4a5157dacc9a4 LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Suspicious call (two or more unprotected arguments) to Rf_lcons at add_args.36 pomp/src/dmeasure.c:22
+Suspicious call (two or more unprotected arguments) to Rf_lcons at add_args.48 pomp/src/dprior.c:16
+
+
+Function add_args.62
+  [UP] calling allocating function paste0(?,V) with argument allocated using Rf_mkString pomp/src/dprocess.c:21
+  [UP] calling allocating function paste0(?,V) with argument allocated using Rf_mkString pomp/src/dprocess.c:22
+
+Function do_rinit
+  [UP] calling allocating function paste0.319(?,V,V) with argument allocated using Rf_mkString pomp/src/rinit.c:229
+  [UP] calling allocating function paste0.319(V,V,V) with argument allocated using Rf_mkString pomp/src/rinit.c:229
+
+Function paste0
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(S:paste0,?,?) pomp/src/dprocess.c:11
+
+Function paste0.319
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang4(S:paste0,?,?,?) pomp/src/rinit.c:11

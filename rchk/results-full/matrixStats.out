@@ -1,0 +1,12 @@
+Package matrixStats version 1.2.0
+Package built using 86189/R 4.4.0; x86_64-pc-linux-gnu; 2024-03-25 22:19:23 UTC; unix   
+Checked with rchk version fdc068715daa3a256062cc20e0d4a5157dacc9a4 LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function diff2
+  [UP] unprotected variable ans while calling allocating function Rf_getAttrib(?,S:names) matrixStats/src/diff2.c:62
+  [UP] allocating function setNamesDiff(V,?,?,?,?) may destroy its unprotected argument (ans <arg 1>), which is later used. matrixStats/src/diff2.c:64
+  [UP] calling allocating function setNamesDiff(V,?,?,?,?) with a fresh pointer (ans <arg 1>) matrixStats/src/diff2.c:64
+  [UP] calling allocating function setNamesDiff(V,?,?,?,?) with a fresh pointer (namesVec <arg 2>) matrixStats/src/diff2.c:64

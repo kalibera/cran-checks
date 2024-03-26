@@ -1,0 +1,890 @@
+Package rxode2 version 2.1.2
+Package built using 86189/R 4.4.0; x86_64-pc-linux-gnu; 2024-03-26 01:17:53 UTC; unix   
+Checked with rchk version fdc068715daa3a256062cc20e0d4a5157dacc9a4 LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::BindingPolicy<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >::Binding::operator Rcpp::Environment_Impl<Rcpp::PreserveStorage><Rcpp::Environment_Impl<Rcpp::PreserveStorage> >() const
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::BindingPolicy<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >::Binding::get() const Rcpp/include/Rcpp/api/meat/proxy.h:138
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:682
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::set(SEXPREC*)
+  [UP] ignoring variable rhs as it has address taken, results will be incomplete 
+
+Function Rcpp::sugar::IndexHash<16>::add_value(int)
+  [UP] ignoring variable val as it has address taken, results will be incomplete 
+
+Function __cxx_global_var_init.72
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [4]>(char const (&) [4]) const rxode2/src/rxData.cpp:422
+
+Function _calcDerived
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2parse.cpp:213
+
+Function _cbindOme
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:120
+  [UP] unprotected variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:124
+
+Function _linCmtParse
+  [UP] unprotected variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2parse.cpp:177
+
+Function _phi
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:131
+  [UP] unprotected variable <unnamed var:   %2 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:135
+
+Function _rxSetSeed
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:142
+  [UP] unprotected variable <unnamed var:   %2 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:146
+
+Function _rxode2_assignSeedInfo
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:558
+
+Function _rxode2_atolRtolFactor_
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:667
+  [PB] has negative depth rxode2/src/RcppExports.cpp:679
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:679
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:680
+
+Function _rxode2_binomProbsPredVec_
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1852
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1864
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1864
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1865
+
+Function _rxode2_binomProbsPredVec__try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_binomProbs_
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1890
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1902
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1902
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1903
+
+Function _rxode2_binomProbs__try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_codeLoaded
+  [UP] unprotected variable <unnamed var:   %1 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2parse.cpp:76
+
+Function _rxode2_codegen
+  [UP] unprotected variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2parse.cpp:141
+
+Function _rxode2_cvPost_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:153
+  [UP] unprotected variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:157
+
+Function _rxode2_dropUnitsRxSolve
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1593
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1605
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1605
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1606
+
+Function _rxode2_dropUnitsRxSolve_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_dynLoad
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:352
+  [PB] has negative depth rxode2/src/RcppExports.cpp:364
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:364
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:365
+
+Function _rxode2_dynLoad_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_etRep_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [9]>(char const (&) [9]) const rxode2/src/utilcpp.cpp:95
+
+Function _rxode2_etSeq_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [9]>(char const (&) [9]) const rxode2/src/utilcpp.cpp:83
+
+Function _rxode2_etTrans
+  [UP] ignoring variable <unnamed var:   %42 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_etUpdate
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [9]>(char const (&) [9]) const rxode2/src/utilcpp.cpp:72
+
+Function _rxode2_et_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [9]>(char const (&) [9]) const rxode2/src/utilcpp.cpp:63
+
+Function _rxode2_expandPars_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:98
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:102
+
+Function _rxode2_expandTheta_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:529
+  [UP] unprotected variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:533
+
+Function _rxode2_getProgSupported
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1523
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1535
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1535
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1536
+
+Function _rxode2_getProgSupported_try()
+  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_getRxFn
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:318
+  [PB] has negative depth rxode2/src/RcppExports.cpp:330
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:330
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:331
+
+Function _rxode2_getRxFn_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_invWR1d
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:540
+  [UP] unprotected variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:544
+
+Function _rxode2_isLinCmt
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [12]>(char const (&) [12]) const rxode2/src/rxode2parse.cpp:156
+  [UP] unprotected variable <unnamed var:   %1 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2parse.cpp:160
+
+Function _rxode2_isNullZero
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1779
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1791
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1791
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1792
+
+Function _rxode2_isNullZero_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_linCmtGen
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2parse.cpp:185
+
+Function _rxode2_meanProbs_
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1929
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1941
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1941
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1942
+
+Function _rxode2_meanProbs__try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_nestingInfo_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:164
+  [UP] unprotected variable <unnamed var:   %3 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:168
+
+Function _rxode2_parseModel
+  [UP] unprotected variable <unnamed var:   %2 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2parse.cpp:149
+
+Function _rxode2_rLKJ1
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:186
+  [UP] unprotected variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:190
+
+Function _rxode2_rLKJcv1
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:197
+  [UP] unprotected variable <unnamed var:   %3 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:201
+
+Function _rxode2_rLKJcvLsd1
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:208
+  [UP] unprotected variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:212
+
+Function _rxode2_rcvC1
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:219
+  [UP] unprotected variable <unnamed var:   %6 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:223
+
+Function _rxode2_rinvchisq
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:175
+  [UP] unprotected variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:179
+
+Function _rxode2_rpp_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:496
+  [UP] unprotected variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:500
+
+Function _rxode2_rxAllowUnload
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1321
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1333
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1333
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1334
+
+Function _rxode2_rxAllowUnload_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxAssignPtr
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1083
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1095
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1095
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1096
+
+Function _rxode2_rxC
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1151
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1163
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1163
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1164
+
+Function _rxode2_rxC_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxCholperm
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:252
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:256
+
+Function _rxode2_rxDelete
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1422
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1434
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1434
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1435
+
+Function _rxode2_rxDelete_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxDfdy
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:489
+  [PB] has negative depth rxode2/src/RcppExports.cpp:501
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:501
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:502
+
+Function _rxode2_rxDfdy_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxDll
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1117
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1129
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1129
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1130
+
+Function _rxode2_rxDll_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxDynLoad
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1219
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1231
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1231
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1232
+
+Function _rxode2_rxDynLoad_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxDynUnload
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1388
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1400
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1400
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1401
+
+Function _rxode2_rxDynUnload_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxErf
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1813
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1825
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1825
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1826
+
+Function _rxode2_rxErf_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxExpandFEta_
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:168
+  [PB] has negative depth rxode2/src/RcppExports.cpp:180
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:180
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:181
+
+Function _rxode2_rxExpandFEta__try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxExpandGrid_
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:60
+  [PB] has negative depth rxode2/src/RcppExports.cpp:72
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:72
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:73
+
+Function _rxode2_rxExpandGrid__try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxExpandNesting
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:238
+  [PB] has negative depth rxode2/src/RcppExports.cpp:250
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:250
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:251
+
+Function _rxode2_rxExpandNesting_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxExpandSens2_
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:131
+  [PB] has negative depth rxode2/src/RcppExports.cpp:143
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:143
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:144
+
+Function _rxode2_rxExpandSens2__try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxExpandSens_
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:95
+  [PB] has negative depth rxode2/src/RcppExports.cpp:107
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:107
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:108
+
+Function _rxode2_rxExpandSens__try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxGetSeed
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:518
+  [UP] unprotected variable <unnamed var:   %1 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:522
+
+Function _rxode2_rxGetrxode2
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1016
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1028
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1028
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1029
+
+Function _rxode2_rxGetrxode2_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxGradpsi
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:264
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:268
+
+Function _rxode2_rxIndLin_
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxInits
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:563
+  [PB] has negative depth rxode2/src/RcppExports.cpp:575
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:575
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:576
+
+Function _rxode2_rxInits_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxInv
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1661
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1673
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1673
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1674
+
+Function _rxode2_rxInv_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxIs
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:284
+  [PB] has negative depth rxode2/src/RcppExports.cpp:296
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:296
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:297
+
+Function _rxode2_rxIsCurrent
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1050
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1062
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1062
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1063
+
+Function _rxode2_rxIsCurrent_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxIsLoaded
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1185
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1197
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1197
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1198
+
+Function _rxode2_rxIsLoaded_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxIs_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxLhs
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:523
+  [PB] has negative depth rxode2/src/RcppExports.cpp:535
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:535
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:536
+
+Function _rxode2_rxLhs_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxLock
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1253
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1265
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1265
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1266
+
+Function _rxode2_rxLock_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxModelVars_
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:386
+  [PB] has negative depth rxode2/src/RcppExports.cpp:398
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:398
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:399
+
+Function _rxode2_rxModelVars__try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxMvnrnd
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:241
+  [UP] unprotected variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:245
+
+Function _rxode2_rxMvrandn_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:286
+  [UP] unprotected variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:290
+
+Function _rxode2_rxNleq
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:275
+  [UP] unprotected variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:279
+
+Function _rxode2_rxOptRep_
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxParams_
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:455
+  [PB] has negative depth rxode2/src/RcppExports.cpp:467
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:467
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:468
+
+Function _rxode2_rxParams__try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxRepR0_
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:202
+  [PB] has negative depth rxode2/src/RcppExports.cpp:214
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:214
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:215
+
+Function _rxode2_rxRepR0__try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxRmModelLib_
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:982
+  [PB] has negative depth rxode2/src/RcppExports.cpp:994
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:994
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:995
+
+Function _rxode2_rxRmvn0
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:473
+  [UP] unprotected variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:477
+
+Function _rxode2_rxRmvnSEXP
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:485
+  [UP] unprotected variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:489
+
+Function _rxode2_rxRmvn_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:230
+  [UP] unprotected variable <unnamed var:   %6 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:234
+
+Function _rxode2_rxSeedEng
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:297
+  [UP] unprotected variable <unnamed var:   %2 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:301
+
+Function _rxode2_rxSetSilentErr
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1627
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1639
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1639
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1640
+
+Function _rxode2_rxSetSilentErr_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxSetupIni
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:598
+  [PB] has negative depth rxode2/src/RcppExports.cpp:610
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:610
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:611
+
+Function _rxode2_rxSetupIni_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxSetupScale
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:634
+  [PB] has negative depth rxode2/src/RcppExports.cpp:646
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:646
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:647
+
+Function _rxode2_rxSetupScale_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxSimThetaOmega
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:728
+  [PB] has negative depth rxode2/src/RcppExports.cpp:740
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:740
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:741
+
+Function _rxode2_rxSimThetaOmega_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %92 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxSolveDollarNames
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:836
+  [PB] has negative depth rxode2/src/RcppExports.cpp:848
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:848
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:849
+
+Function _rxode2_rxSolveDollarNames_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxSolveFree
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:761
+  [PB] has negative depth rxode2/src/RcppExports.cpp:773
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:773
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:774
+
+Function _rxode2_rxSolveFree_try()
+  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxSolveGet
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:872
+  [PB] has negative depth rxode2/src/RcppExports.cpp:884
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:884
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:885
+
+Function _rxode2_rxSolveGet_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxSolveSEXP
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:949
+  [PB] has negative depth rxode2/src/RcppExports.cpp:961
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:961
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:962
+
+Function _rxode2_rxSolveSEXP_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %32 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxSolveUpdate
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:908
+  [PB] has negative depth rxode2/src/RcppExports.cpp:920
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:920
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:921
+
+Function _rxode2_rxSolveUpdate_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxSolve_
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:802
+  [PB] has negative depth rxode2/src/RcppExports.cpp:814
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:814
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:815
+
+Function _rxode2_rxSolve__try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %32 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxState
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:421
+  [PB] has negative depth rxode2/src/RcppExports.cpp:433
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:433
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:434
+
+Function _rxode2_rxState_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxSymInvChol
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1698
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1710
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1710
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1711
+
+Function _rxode2_rxSymInvCholEnvCalculate
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1734
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1746
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1746
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1747
+
+Function _rxode2_rxSymInvCholEnvCalculate_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxSymInvChol_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxUnloadAll_
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1354
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1366
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1366
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1367
+
+Function _rxode2_rxUnloadAll__try()
+  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxUnlock
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1287
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1299
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1299
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1300
+
+Function _rxode2_rxUnlock_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxUpdateTrans_
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1559
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1571
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1571
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1572
+
+Function _rxode2_rxUpdateTrans__try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_rxbeta_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:407
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:411
+
+Function _rxode2_rxbinom_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:352
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:356
+
+Function _rxode2_rxcauchy_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:363
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:367
+
+Function _rxode2_rxchisq_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:374
+  [UP] unprotected variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:378
+
+Function _rxode2_rxexp_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:385
+  [UP] unprotected variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:389
+
+Function _rxode2_rxf_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:396
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:400
+
+Function _rxode2_rxgamma_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:319
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:323
+
+Function _rxode2_rxgeom_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:418
+  [UP] unprotected variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:422
+
+Function _rxode2_rxnbinomMu_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:341
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:345
+
+Function _rxode2_rxnbinom_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:308
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:312
+
+Function _rxode2_rxnorm_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:429
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:433
+
+Function _rxode2_rxordSelect
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:507
+  [UP] unprotected variable <unnamed var:   %3 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:511
+
+Function _rxode2_rxpois_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:330
+  [UP] unprotected variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:334
+
+Function _rxode2_rxt__
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:440
+  [UP] unprotected variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:444
+
+Function _rxode2_rxunif_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:451
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:455
+
+Function _rxode2_rxweibull_
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:462
+  [UP] unprotected variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:466
+
+Function _rxode2_setEvCur
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [9]>(char const (&) [9]) const rxode2/src/utilcpp.cpp:105
+
+Function _rxode2_setProgSupported
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1490
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1502
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1502
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1503
+
+Function _rxode2_setProgSupported_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_setRstudio
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rxode2/src/RcppExports.cpp:1456
+  [PB] has negative depth rxode2/src/RcppExports.cpp:1468
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rxode2/src/RcppExports.cpp:1468
+  [PB] has possible protection stack imbalance rxode2/src/RcppExports.cpp:1469
+
+Function _rxode2_setRstudio_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rxode2_trans
+  [UP] unprotected variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2parse.cpp:169
+
+Function _rxode2parse_rxC
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _vecDF
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:109
+  [UP] unprotected variable <unnamed var:   %3 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:113
+
+Function assignRxode2ParsePtrs
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [12]>(char const (&) [12]) const rxode2/src/rxode2parse.cpp:45
+
+Function cbindThetaOmega(Rcpp::RObject_Impl<Rcpp::PreserveStorage>, Rcpp::Vector<19, Rcpp::PreserveStorage>&)
+  [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [9]>(char const (&) [9]) const rxode2/src/utilcpp.cpp:114
+
+Function cliAlert
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function getEtRxsolve(Rcpp::Environment_Impl<Rcpp::PreserveStorage>)
+  [UP] ignoring variable <unnamed var:   %105 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %107 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %118 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %120 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %131 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %133 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %144 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %146 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %157 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %159 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %170 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %172 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %40 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %42 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %53 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %55 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %66 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %68 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %79 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %81 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %92 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %94 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function getRxModels()
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()() const rxode2/src/rxData.cpp:592
+
+Function parseFree
+  [PB] has possible protection stack imbalance rxode2/src/rxode2parse.cpp:205
+
+Function parseFreeSexp
+  [UP] unprotected variable <unnamed var:   %2 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2parse.cpp:193
+
+Function qassertS
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:83
+  [UP] unprotected variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:91
+  [UP] unprotected variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::~Vector() rxode2/src/rxode2random.cpp:91
+
+Function qstrictS
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:44
+  [UP] unprotected variable <unnamed var:   %3 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:50
+  [UP] unprotected variable <unnamed var:   %3 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::~Vector() rxode2/src/rxode2random.cpp:50
+
+Function qstrictSdn
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:70
+  [UP] unprotected variable <unnamed var:   %3 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:76
+  [UP] unprotected variable <unnamed var:   %3 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::~Vector() rxode2/src/rxode2random.cpp:76
+
+Function qstrictSn
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:57
+  [UP] unprotected variable <unnamed var:   %3 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() rxode2/src/rxode2random.cpp:63
+  [UP] unprotected variable <unnamed var:   %3 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::~Vector() rxode2/src/rxode2random.cpp:63
+
+Function qtest
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [13]>(char const (&) [13]) const rxode2/src/rxode2random.cpp:31
+
+Function rxC(Rcpp::RObject_Impl<Rcpp::PreserveStorage>)
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::AttributeProxyPolicy<Rcpp::Vector<16, Rcpp::PreserveStorage> >::AttributeProxy::operator SEXPREC*() const rxode2/src/rxData.cpp:6249
+
+Function rxDll(Rcpp::RObject_Impl<Rcpp::PreserveStorage>)
+  [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<SEXPREC*>(SEXPREC* const&) const rxode2/src/rxData.cpp:6201
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::AttributeProxyPolicy<Rcpp::Vector<16, Rcpp::PreserveStorage> >::AttributeProxy::operator SEXPREC*() const rxode2/src/rxData.cpp:6206
+
+Function rxGetModelLib
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function rxInv(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function rxIsCurrent(Rcpp::RObject_Impl<Rcpp::PreserveStorage>)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*)(?,V) with argument allocated using Rcpp::internal::string_name_proxy<16, Rcpp::PreserveStorage>::operator SEXPREC*() const rxode2/src/rxData.cpp:6126
+
+Function rxIs_list(Rcpp::RObject_Impl<Rcpp::PreserveStorage> const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::AttributeProxyPolicy<Rcpp::Vector<16, Rcpp::PreserveStorage> >::AttributeProxy::operator SEXPREC*() const rxode2/src/rxData.cpp:200
+
+Function rxModelVars_(Rcpp::RObject_Impl<Rcpp::PreserveStorage> const&)
+  [UP] calling allocating function asEnv(SEXPREC*, char const*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::RObject_Impl<Rcpp::PreserveStorage> >(Rcpp::RObject_Impl<Rcpp::PreserveStorage> const&) const rxode2/src/rxData.cpp:855
+  [UP] calling allocating function asEnv(SEXPREC*, char const*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::RObject_Impl<Rcpp::PreserveStorage> >(Rcpp::RObject_Impl<Rcpp::PreserveStorage> const&) const rxode2/src/rxData.cpp:860
+  [UP] calling allocating function asEnv(SEXPREC*, char const*) with argument allocated using Rcpp::AttributeProxyPolicy<Rcpp::Vector<16, Rcpp::PreserveStorage> >::AttributeProxy::operator SEXPREC*() const rxode2/src/rxData.cpp:869
+
+Function rxModelVars_character(Rcpp::RObject_Impl<Rcpp::PreserveStorage> const&)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()() const rxode2/src/rxData.cpp:769
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const rxode2/src/rxData.cpp:773
+  [UP] calling allocating function asStr(SEXPREC*, char const*)(?,V,?) with argument allocated using Rcpp::internal::string_name_proxy<16, Rcpp::PreserveStorage>::operator SEXPREC*() const rxode2/src/rxData.cpp:794
+
+Function rxModelVars_rxode2(Rcpp::RObject_Impl<Rcpp::PreserveStorage> const&)
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::RObject_Impl<Rcpp::PreserveStorage> >(Rcpp::RObject_Impl<Rcpp::PreserveStorage> const&) const rxode2/src/rxData.cpp:657
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >(Rcpp::Environment_Impl<Rcpp::PreserveStorage> const&) const rxode2/src/rxData.cpp:669
+
+Function rxModelsAssign(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, SEXPREC*)
+  [UP] ignoring variable assign as it has address taken, results will be incomplete 
+
+Function rxModelsAssignC
+  [UP] ignoring variable assign as it has address taken, results will be incomplete 
+
+Function rxSolveDollarNames(Rcpp::RObject_Impl<Rcpp::PreserveStorage>)
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::AttributeProxyPolicy<Rcpp::Vector<16, Rcpp::PreserveStorage> >::AttributeProxy::operator SEXPREC*() const rxode2/src/rxData.cpp:5695
+
+Function rxSolveGet_rxSolve(Rcpp::RObject_Impl<Rcpp::PreserveStorage>&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&, Rcpp::Vector<10, Rcpp::PreserveStorage>&, Rcpp::Vector<19, Rcpp::PreserveStorage>&)
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::AttributeProxyPolicy<Rcpp::Vector<16, Rcpp::PreserveStorage> >::AttributeProxy::operator SEXPREC*() const rxode2/src/rxData.cpp:5559
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*)(?,V) with argument allocated using Rcpp::internal::string_name_proxy<16, Rcpp::PreserveStorage>::operator SEXPREC*() const rxode2/src/rxData.cpp:5566
+
+Function rxSolveUpdate(Rcpp::RObject_Impl<Rcpp::PreserveStorage>, Rcpp::RObject_Impl<Rcpp::PreserveStorage>, Rcpp::RObject_Impl<Rcpp::PreserveStorage>)
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::AttributeProxyPolicy<Rcpp::Vector<16, Rcpp::PreserveStorage> >::AttributeProxy::operator SEXPREC*() const rxode2/src/rxData.cpp:5809
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::AttributeProxyPolicy<Rcpp::Vector<16, Rcpp::PreserveStorage> >::AttributeProxy::operator SEXPREC*() const rxode2/src/rxData.cpp:5840
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::AttributeProxyPolicy<Rcpp::Vector<16, Rcpp::PreserveStorage> >::AttributeProxy::operator SEXPREC*() const rxode2/src/rxData.cpp:5846
+
+Function rxSolve_(Rcpp::RObject_Impl<Rcpp::PreserveStorage> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, Rcpp::Nullable<Rcpp::Vector<16, Rcpp::PreserveStorage> > const&, Rcpp::Nullable<Rcpp::Vector<19, Rcpp::PreserveStorage> > const&, Rcpp::RObject_Impl<Rcpp::PreserveStorage> const&, Rcpp::RObject_Impl<Rcpp::PreserveStorage> const&, Rcpp::RObject_Impl<Rcpp::PreserveStorage> const&, int)
+  [UP] ignoring variable <unnamed var:   %100 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %112 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %196 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %329 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %88 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function rxSolve_genenv(Rcpp::RObject_Impl<Rcpp::PreserveStorage> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, Rcpp::Nullable<Rcpp::Vector<16, Rcpp::PreserveStorage> > const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, Rcpp::RObject_Impl<Rcpp::PreserveStorage> const&, Rcpp::RObject_Impl<Rcpp::PreserveStorage> const&, Rcpp::RObject_Impl<Rcpp::PreserveStorage> const&, rxSolve_t*)
+  [UP] ignoring variable tmp as it has address taken, results will be incomplete 
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::traits::named_object<int>, Rcpp::traits::named_object<Rcpp::Environment_Impl<Rcpp::PreserveStorage> > >(Rcpp::traits::named_object<int> const&, Rcpp::traits::named_object<Rcpp::Environment_Impl<Rcpp::PreserveStorage> > const&) const rxode2/src/rxData.cpp:4162
+
+Function rxSolve_update(Rcpp::RObject_Impl<Rcpp::PreserveStorage> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, Rcpp::Nullable<Rcpp::Vector<16, Rcpp::PreserveStorage> > const&, Rcpp::Nullable<Rcpp::Vector<19, Rcpp::PreserveStorage> > const&, Rcpp::RObject_Impl<Rcpp::PreserveStorage> const&, Rcpp::RObject_Impl<Rcpp::PreserveStorage> const&, Rcpp::RObject_Impl<Rcpp::PreserveStorage> const&, rxSolve_t*)
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::AttributeProxyPolicy<Rcpp::Vector<16, Rcpp::PreserveStorage> >::AttributeProxy::operator SEXPREC*() const rxode2/src/rxData.cpp:2772
+
+Function rxSymInvChol(Rcpp::RObject_Impl<Rcpp::PreserveStorage>, Rcpp::Nullable<Rcpp::Vector<14, Rcpp::PreserveStorage> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, int)
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::traits::named_object<SEXPREC*> >(Rcpp::traits::named_object<SEXPREC*> const&) const rxode2/src/rxInv.cpp:112
+
+Function rxSymInvCholEnvCalculate(Rcpp::Vector<19, Rcpp::PreserveStorage>, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, Rcpp::Nullable<Rcpp::Vector<14, Rcpp::PreserveStorage> >)
+  [UP] ignoring variable <unnamed var:   %102 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function rxode2_df
+  [UP] ignoring variable <unnamed var:   %103 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function rxode2env()
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [7]>(char const (&) [7]) const rxode2/src/rxData.cpp:578
+
+Function rxrxode2env(Rcpp::RObject_Impl<Rcpp::PreserveStorage>)
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using Rcpp::AttributeProxyPolicy<Rcpp::Vector<16, Rcpp::PreserveStorage> >::AttributeProxy::operator SEXPREC*() const rxode2/src/rxData.cpp:6078
+
+Function sortIds
+  [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
