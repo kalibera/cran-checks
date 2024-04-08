@@ -1,12 +1,18 @@
-Package cheapr version 0.4.0
-Package built using 86233/R 4.5.0; x86_64-pc-linux-gnu; 2024-04-01 07:07:30 UTC; unix   
+Package cheapr version 0.5.0
+Package built using 86351/R 4.5.0; x86_64-pc-linux-gnu; 2024-04-08 17:18:31 UTC; unix   
 Checked with rchk version fdc068715daa3a256062cc20e0d4a5157dacc9a4 LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
 
+Function _cheapr_alt_data1
+  [UP] ignoring variable <unnamed var:   %6 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _cheapr_cpp_col_na_counts
   [UP] ignoring variable <unnamed var:   %6 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _cheapr_cpp_count_val
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _cheapr_cpp_dbl_sequence
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -77,11 +83,23 @@ Function _cheapr_cpp_row_na_counts
 Function _cheapr_cpp_sequence
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _cheapr_cpp_set_copy_attributes
+Function _cheapr_cpp_set_add_attr
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _cheapr_cpp_set_add_attributes
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _cheapr_cpp_set_rm_attr
+  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _cheapr_cpp_set_rm_attributes
   [UP] ignoring variable <unnamed var:   %6 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _cheapr_cpp_sset_df
+  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _cheapr_cpp_sset_range
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _cheapr_cpp_which_
   [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -92,6 +110,9 @@ Function _cheapr_cpp_which_na
 Function _cheapr_cpp_which_not_na
   [UP] ignoring variable <unnamed var:   %6 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _cheapr_cpp_which_val
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _cheapr_cpp_window_sequence
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -100,23 +121,21 @@ Function cpp11::package::operator[](char const*)
 
 Function cpp_col_na_counts(SEXPREC*)
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/nas.cpp:881
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/nas.cpp:876
 
 Function cpp_row_na_counts(SEXPREC*)
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/nas.cpp:807
-
-Function cpp_set_copy_attributes(SEXPREC*, SEXPREC*, SEXPREC*)
-  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
-  [PB] has too high protection stack depth results will be incomplete
-  [PB] has an unsupported form of unprotect with a variable results will be incomplete cheapr/src/utils.cpp:197
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/utils.cpp:197
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/nas.cpp:802
 
 Function cpp_set_rm_attributes(SEXPREC*)
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
   [PB] has too high protection stack depth results will be incomplete
-  [PB] has an unsupported form of unprotect with a variable results will be incomplete cheapr/src/utils.cpp:179
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/utils.cpp:179
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete cheapr/src/attrs.cpp:18
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/attrs.cpp:18
+
+Function cpp_sset_df(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable indices2 as it has address taken, results will be incomplete 
+  [UP] ignoring variable r_zero as it has address taken, results will be incomplete 
 
 Function cpp_vec_length(SEXPREC*)
   [UP] ignoring variable x as it has address taken, results will be incomplete 
@@ -126,3 +145,6 @@ Function r_min(SEXPREC*)
 
 Function r_sum(SEXPREC*, bool)
   [UP] ignoring variable x as it has address taken, results will be incomplete 
+
+Function scalar_count(SEXPREC*, SEXPREC*, bool)
+  [PB] has possible protection stack imbalance cheapr/src/nas.cpp:1255

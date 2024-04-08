@@ -1,39 +1,10 @@
-Package collapse version 2.0.11
-Package built using 86189/R 4.4.0; x86_64-pc-linux-gnu; 2024-03-25 22:28:35 UTC; unix   
+Package collapse version 2.0.12
+Package built using 86351/R 4.5.0; x86_64-pc-linux-gnu; 2024-04-08 17:14:52 UTC; unix   
 Checked with rchk version fdc068715daa3a256062cc20e0d4a5157dacc9a4 LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
-Suspicious call (two or more unprotected arguments) to R_compute_identical at coerce_single_to_equal_types collapse/src/match.c:308
-Suspicious call (two or more unprotected arguments) to match_single at coerce_single_to_equal_types collapse/src/match.c:309
-Suspicious call (two or more unprotected arguments) to falloc at match_multiple collapse/src/match.c:969
-Suspicious call (two or more unprotected arguments) to falloc at match_single collapse/src/match.c:10
-Suspicious call (two or more unprotected arguments) to match_single at match_single collapse/src/match.c:35
-Suspicious call (two or more unprotected arguments) to R_compute_identical at match_single collapse/src/match.c:59
-Suspicious call (two or more unprotected arguments) to match_single at match_single collapse/src/match.c:65
-Suspicious call (two or more unprotected arguments) to falloc at match_two_vectors collapse/src/match.c:348
-
-Function coerce_single_to_equal_types
-  [UP] calling allocating function match_single(?,?,V) with argument allocated using Rf_ScalarInteger collapse/src/match.c:309
-
-Function fnthC
-  [PB] has possible protection stack imbalance collapse/src/fnth_fmedian_fquantile.c:1395
-
-Function match_multiple
-  [UP] calling allocating function falloc(V,V,V) with argument allocated using Rf_ScalarInteger collapse/src/match.c:969
-
-Function match_single
-  [UP] calling allocating function falloc(V,V,V) with argument allocated using Rf_ScalarInteger collapse/src/match.c:10
-  [UERROR: too many states (abstraction error?) in function rbindlist
-P] calling allocating function match_single(?,?,V) with argument allocated using Rf_ScalarInteger collapse/src/match.c:35
-  [UP] calling allocating function match_single(?,?,V) with argument allocated using Rf_ScalarInteger collapse/src/match.c:65
-
-Function match_two_vectors
-  [UP] calling allocating function falloc(V,V,V) with argument allocated using Rf_ScalarInteger collapse/src/match.c:348
-
-Function pivot_long
-  [UP] unprotected variable names while calling allocating function Rf_allocVector collapse/src/pivot.c:109
-  [UP] unprotected variable names while calling allocating function Rf_allocVector collapse/src/pivot.c:111
-
-Function vlabels
-  [UP] calling allocating function Rf_asChar with a fresh pointer (labxi <arg 1>) collapse/src/small_helper.c:241
+Suspicious call (two or more unprotected arguments) to R_compute_identical at coerce_single_to_equal_types collapse/src/match.c:318
+Suspicious call (two or more unprotected arguments) to match_single at coerce_single_to_equal_types collapse/src/match.c:320
+Suspicious call (two or more unprotected arguments) to R_compute_identical at match_single collapse/src/match.c:68
+Suspicious call (two or more unprotected arguments) to match_single at match_single collapse/src/match.c:75
