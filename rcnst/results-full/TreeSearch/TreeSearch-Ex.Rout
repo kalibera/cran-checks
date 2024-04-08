@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2024-03-30 r86233) -- "Unsuffered Consequences"
+R Under development (unstable) (2024-04-06 r86351) -- "Unsuffered Consequences"
 Copyright (C) 2024 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -169,25 +169,14 @@ informationContent             signal              noise      signalToNoise
 > 
 > data(inapplicable.datasets)
 > dataset <- inapplicable.phyData[[4]]
-> Consistency(dataset, TreeTools::NJTree(dataset))
-  [1] 0.2500000 0.3333333 0.3333333 0.2500000 0.5000000 0.2500000 0.5000000
-  [8] 0.3333333 0.3333333       NaN 0.3333333 1.0000000 0.3333333 0.3333333
- [15] 1.0000000 0.5000000 0.5000000 0.2000000 1.0000000 1.0000000 0.5000000
- [22] 0.2500000 0.3333333 0.2500000 0.5000000 0.5000000 0.5000000 1.0000000
- [29] 0.5000000 0.6666667 0.2500000 0.3333333 0.5000000 0.3333333 0.5000000
- [36] 0.2500000 1.0000000 0.1666667 0.5000000 0.3333333 1.0000000 0.5000000
- [43] 0.4000000 0.5000000 1.0000000 0.5000000 0.3333333 0.2500000 0.3333333
- [50] 1.0000000 0.3333333 0.6666667 0.5000000 0.5000000 0.3333333 0.5000000
- [57] 1.0000000 0.3333333 0.5000000 0.2500000 0.5000000 0.5000000 0.1428571
- [64] 0.6666667 0.5000000 0.2500000 0.8000000 0.7500000 0.2500000 0.1666667
- [71] 0.5000000 1.0000000 1.0000000 0.3333333 0.5000000 0.2500000 0.2000000
- [78] 0.2500000 0.5000000 0.5000000 0.2500000 0.6666667 0.2500000 0.2500000
- [85] 0.5000000 1.0000000 0.5000000 1.0000000 0.5000000 0.4000000 0.4000000
- [92] 0.2000000 1.0000000 0.3333333 1.0000000 0.2500000 0.5000000 1.0000000
- [99] 0.3333333 0.5000000 1.0000000 0.5000000 0.5000000 0.5000000 0.5000000
-[106] 1.0000000 0.3333333 0.3333333 1.0000000 0.2500000 1.0000000 0.2500000
-[113] 1.0000000 0.5000000 0.5000000 0.2000000 0.5000000 0.3333333 1.0000000
-[120] 0.5000000 0.3333333 0.3333333 0.2500000 1.0000000 0.5000000 0.5000000
+> head(Consistency(dataset, TreeTools::NJTree(dataset)))
+            ci        ri        rc
+[1,] 0.2500000 0.6250000 0.1562500
+[2,] 0.3333333 0.3333333 0.1111111
+[3,] 0.3333333 0.6000000 0.2000000
+[4,] 0.2500000 0.2500000 0.0625000
+[5,] 0.5000000 0.8333333 0.4166667
+[6,] 0.2500000 0.2500000 0.0625000
 > 
 > 
 > 
@@ -303,11 +292,12 @@ Loading required package: ape
 
 ── Sample local optimum ────────────────────────────────────────────────────────
 → TBR depth 1; keeping 4 trees; k = 10
-ℹ 2024-03-31 08:50:53: Score: 12.6988
-Final search ■■■■■■■■■                         28% | D0, score 12.066, hit 1. E…
+ℹ 2024-04-07 07:01:54: Score: 12.6988
+Final search ■■■■■■■■■■■■■■                    42% | D0, score 12.066, hit 1. E…
+Final search ■                                  0% | D0, score 12.0038, hit 1. …
   - TBR rearrangement at depth 1 found score 11.9697 1 time.
 
-✔ 2024-03-31 08:50:56: Tree search terminated with score 11.9697
+✔ 2024-04-07 07:01:56: Tree search terminated with score 11.9697
 > names(trees)
 [1] "final_1"
 > 
@@ -363,9 +353,10 @@ detaching ‘package:TreeTools’, ‘package:ape’
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: MinimumLength
-> ### Title: Minimum length
+> ### Title: Minimum and Maximum lengths possible for a character
 > ### Aliases: MinimumLength MinimumLength.phyDat MinimumLength.numeric
-> ###   MinimumLength.character MinimumSteps
+> ###   MinimumLength.character MaximumLength.character MinimumSteps
+> ###   MaximumLength MaximumLength.numeric
 > 
 > ### ** Examples
 > 
@@ -397,6 +388,8 @@ detaching ‘package:TreeTools’, ‘package:ape’
 > # Calculate length of a single character from its textual representation
 > MinimumLength("-{-1}{-2}{-3}2233")
 [1] 2
+> MaximumLength("----0011")
+[1] 3
 > 
 > 
 > 
@@ -898,8 +891,8 @@ Loading required package: ape
 
 ── Sample local optimum ────────────────────────────────────────────────────────
 → TBR depth 2; keeping 14.4 trees; k = Inf
-ℹ 2024-03-31 08:51:05: Score: 85
-✔ 2024-03-31 08:51:05: Tree search terminated with score 83
+ℹ 2024-04-07 07:02:05: Score: 85
+✔ 2024-04-07 07:02:05: Tree search terminated with score 83
 > 
 > # Colour tip labels according to their influence
 > upperBound <- 2 * TreeDist::ClusteringEntropy(
@@ -1264,7 +1257,7 @@ Rooted; no branch lengths.
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  36.221 1.776 39.313 0 0 
+Time elapsed:  37.187 1.742 39.999 0 0 
 > grDevices::dev.off()
 null device 
           1 

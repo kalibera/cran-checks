@@ -1,5 +1,5 @@
-Package TreeSearch version 1.4.0
-Package built using /R 4.4.0; x86_64-pc-linux-gnu; 2024-03-01 14:49:48 UTC; unix
+Package TreeSearch version 1.5.0
+Package built using /R 4.5.0; x86_64-pc-linux-gnu; 2024-04-07 11:22:29 UTC; unix
 Excerpts from error reports follow. Please refer to the included outputs for details.
 
 --------------------
@@ -18,11 +18,11 @@ ERROR: the modified constant is in this function body:
         return(dataset)
     }
     at <- attributes(dataset)
-    nLevel <- length(at$level)
+    nLevel <- length(at[["levels"]])
     cont <- attr(dataset, "contrast")
     nTip <- length(dataset)
-    index <- at$index
-    allLevels <- as.character(at$allLevels)
+    index <- at[["index"]]
+    allLevels <- as.character(at[["allLevels"]])
     contSums <- rowSums(cont)
     qmLevel <- which(contSums == ncol(cont))
     if (length(qmLevel) == 0) {
