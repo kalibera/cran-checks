@@ -1,5 +1,5 @@
-Package lme4 version 1.1-35.2
-Package built using 86233/R 4.5.0; x86_64-pc-linux-gnu; 2024-04-01 07:09:01 UTC; unix   
+Package lme4 version 1.1-35.3
+Package built using 86444/R 4.5.0; x86_64-pc-linux-gnu; 2024-04-19 01:36:48 UTC; unix   
 Checked with rchk version fdc068715daa3a256062cc20e0d4a5157dacc9a4 LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -20,26 +20,8 @@ Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
-Function Rcpp::S4_Impl<Rcpp::PreserveStorage>::S4_Impl(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
-  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS Rcpp/include/Rcpp/S4.h:58
-
 Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function SEXPREC* lme4::Eigen_cholmod_wrap<double>(lme4::lme4CholmodDecomposition<Eigen::SparseMatrix<double, 0, int>, 1> const&)
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %31 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %34 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %37 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %40 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %43 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %46 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %49 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %52 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function glmFamily_aic
   [UP] unprotected variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::XPtr<glm::glmFamily, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<glm::glmFamily>(glm::glmFamily*)), false>::~XPtr() lme4/src/external.cpp:232
@@ -95,6 +77,9 @@ Function lmer_opt1
 
 Function merPredDCcNumer
   [UP] unprotected variable <unnamed var:   %2 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::XPtr<lme4::merPredD, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<lme4::merPredD>(lme4::merPredD*)), false>::~XPtr() lme4/src/external.cpp:721
+
+Function merPredDL
+  [UP] unprotected variable <unnamed var:   %2 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::XPtr<lme4::merPredD, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<lme4::merPredD>(lme4::merPredD*)), false>::~XPtr() lme4/src/external.cpp:727
 
 Function merPredDldL2
   [UP] unprotected variable <unnamed var:   %2 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::XPtr<lme4::merPredD, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<lme4::merPredD>(lme4::merPredD*)), false>::~XPtr() lme4/src/external.cpp:763

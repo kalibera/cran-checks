@@ -1,5 +1,5 @@
-Package rivnet version 0.4.1
-Package built using 86444/R 4.5.0; x86_64-pc-linux-gnu; 2024-04-19 01:39:32 UTC; unix   
+Package fastcpd version 0.14.0
+Package built using 86444/R 4.5.0; x86_64-pc-linux-gnu; 2024-04-19 01:51:24 UTC; unix   
 Checked with rchk version fdc068715daa3a256062cc20e0d4a5157dacc9a4 LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -13,8 +13,17 @@ Function Rcpp::Armor<SEXPREC*>::~Armor()
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
 
+Function Rcpp::CppFunction3<SEXPREC*, double, arma::Mat<double>, Rcpp::Function_Impl<Rcpp::PreserveStorage> >::operator()(SEXPREC**)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Rcpp_namespace()
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using Rcpp::internal::get_Rcpp_namespace() Rcpp/include/Rcpp/Environment.h:361
+
 Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::namespace_env(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::InternalFunction_Impl<Rcpp::PreserveStorage>::set(SEXPREC*)
+  [UP] ignoring variable xp as it has address taken, results will be incomplete 
 
 Function Rcpp::Rcpp_protect(SEXPREC*)
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
@@ -26,8 +35,9 @@ Function Rcpp::Rcpp_unprotect(int)
 Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _rivnet_init_perm_rev_cpp
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _fastcpd_fastcpd_impl
+  [UP] ignoring variable <unnamed var:   %87 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _rivnet_path_vel_cpp
-  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function fastcpd::classes::Fastcpd::get_nll_glm(unsigned int, unsigned int, Rcpp::Nullable<arma::Col<double> >)
+  [UP] ignoring variable <unnamed var:   %50 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %54 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
