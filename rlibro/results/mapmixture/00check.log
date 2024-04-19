@@ -1,0 +1,109 @@
+* using log directory ‘/var/scratch2/tomas/cran/rlibro/check/mapmixture.Rcheck’
+* using R Under development (unstable) (2024-04-18 r86444)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (GCC) 13.2.1 20240316 (Red Hat 13.2.1-7)
+    GNU Fortran (GCC) 13.2.1 20240316 (Red Hat 13.2.1-7)
+* running under: Fedora Linux 38 (MATE-Compiz)
+* using session charset: UTF-8
+* checking for file ‘mapmixture/DESCRIPTION’ ... OK
+* this is package ‘mapmixture’ version ‘1.1.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘mapmixture’ can be installed ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking examples ... ERROR
+Running examples in ‘mapmixture-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: mapmixture
+> ### Title: Plot Pie Charts on Map
+> ### Aliases: mapmixture
+> 
+> ### ** Examples
+> 
+> # Admixture Format 1
+> file <- system.file("extdata", "admixture1.csv", package = "mapmixture")
+> admixture1 <- read.csv(file)
+> 
+> # Admixture Format 2
+> file <- system.file("extdata", "admixture2.csv", package = "mapmixture")
+> admixture2 <- read.csv(file)
+> 
+> # Admixture Format 3
+> file <- system.file("extdata", "admixture3.csv", package = "mapmixture")
+> admixture3 <- read.csv(file)
+> 
+> # Coordinates Format
+> file <- system.file("extdata", "coordinates.csv", package = "mapmixture")
+> coordinates <- read.csv(file)
+> 
+> # Plot using default parameters
+> mapmixture(admixture1, coordinates)
+Downloading countries10 data from Natural Earth...
+Warning in utils::download.file(url, destfile = desfile, mode = "wb") :
+  URL https://github.com/ropensci/rnaturalearthhires/raw/master/data/countries10.rda: cannot open destfile '/var/scratch2ro/tomas/cran/rlibro/lib/mapmixture/extdata/countries10.rda', reason 'Read-only file system'
+Warning in utils::download.file(url, destfile = desfile, mode = "wb") :
+  download had nonzero exit status
+Data downloaded to 'mapmixture/inst/extdata' folder.
+Warning in readChar(con, 5L, useBytes = TRUE) :
+  cannot open compressed file '', probable reason 'No such file or directory'
+Error in readChar(con, 5L, useBytes = TRUE) : cannot open the connection
+Calls: mapmixture -> load -> readChar
+Execution halted
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... ERROR
+  Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+    cannot open the connection
+  ── Error ('test-mapmixture.R:19:3'): mapmixture() outputs a ggplot object ──────
+  Error in `readChar(con, 5L, useBytes = TRUE)`: cannot open the connection
+  Backtrace:
+      ▆
+   1. ├─testthat::expect_s3_class(...) at test-mapmixture.R:19:3
+   2. │ └─testthat::quasi_label(enquo(object), arg = "object")
+   3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
+   4. └─mapmixture::mapmixture(obj_admix1, obj_coords)
+   5.   └─base::load(system.file("extdata", "countries10.rda", package = "mapmixture"))
+   6.     └─base::readChar(con, 5L, useBytes = TRUE)
+  
+  [ FAIL 2 | WARN 6 | SKIP 0 | PASS 50 ]
+  Error: Test failures
+  Execution halted
+* checking PDF version of manual ... OK
+* DONE
+Status: 2 ERRORs

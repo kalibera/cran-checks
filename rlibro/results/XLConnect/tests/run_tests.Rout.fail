@@ -1,0 +1,603 @@
+
+R Under development (unstable) (2024-04-18 r86444) -- "Unsuffered Consequences"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> #############################################################################
+> #
+> # XLConnect
+> # Copyright (C) 2010-2024 Mirai Solutions GmbH
+> #
+> # This program is free software: you can redistribute it and/or modify
+> # it under the terms of the GNU General Public License as published by
+> # the Free Software Foundation, either version 3 of the License, or
+> # (at your option) any later version.
+> #
+> # This program is distributed in the hope that it will be useful,
+> # but WITHOUT ANY WARRANTY; without even the implied warranty of
+> # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+> # GNU General Public License for more details.
+> #
+> # You should have received a copy of the GNU General Public License
+> # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+> #
+> #############################################################################
+> 
+> #############################################################################
+> #
+> # RUnit test-runner script
+> # 
+> # Author: Martin Studer, Mirai Solutions GmbH
+> #
+> #############################################################################
+> 
+> # Set timezone to UTC
+> # Sys.setenv("TZ" = "UTC")
+> 
+> # Option to determine if full test suite should be run
+> options("FULL.TEST.SUITE" = Sys.getenv("FULL_TEST_SUITE") == "1")
+> 
+> # Limit number of GC threads; set timezone
+> j_params <- c("-XX:+UseParallelGC", "-XX:ParallelGCThreads=1", paste0("-Duser.timezone=", Sys.timezone()))
+> if(!getOption("FULL.TEST.SUITE")) {
++ 	j_params = c(j_params, "-XX:ActiveProcessorCount=1")
++ }
+> options(java.parameters = j_params)
+> 
+> # Load library built by R CMD check
+> library(package = "XLConnect", character.only = TRUE)
+XLConnect 1.0.9 by Mirai Solutions GmbH [aut],
+  Martin Studer [cre],
+  The Apache Software Foundation [ctb, cph] (Apache POI),
+  Graph Builder [ctb, cph] (Curvesapi Java library),
+  Brett Woolridge [ctb, cph] (SparseBitSet Java library)
+https://mirai-solutions.ch
+https://github.com/miraisolutions/xlconnect
+> require(rJava)
+Loading required package: rJava
+> 
+> rsrc <- function(resource) {
++   file.path(options()$path.unit.tests, resource)
++ }
+> 
+> checkNoException <- function(expr) {
++         res <- try(expr)
++         checkTrue(!is(res, "try-error"))
++ }
+> 
+> runUnitTests <- function() {
++ 	
++ 	pkg <- "XLConnect"
++ 
++ 	if(!getOption("FULL.TEST.SUITE")) {
++ 		Sys.setenv("OMP_THREAD_LIMIT" = 1)
++ 	}
++ 
++ 	# RUnit is required for unit testing
++ 	if(require("RUnit", quietly = TRUE)) {
++ 		if(Sys.getenv("RCMDCHECK") == "FALSE") {
++ 			# Path to unit tests for standalone running under Makefile (not R CMD check)
++ 			path <- file.path(getwd(), "..", "inst", "unitTests")
++ 		} else {
++ 			# Path to unit tests for 'R CMD check' and as part of public API
++ 			path <- system.file(package = pkg, "unitTests")
++ 		}
++ 		cat("\nRunning Unit Tests\n")
++ 		print(list(WorkingDir = getwd(), PathToUnitTests = path))
++ 		
++ 		# Add path to unit tests as option
++ 		# (used by rsrc function in unit tests)
++ 		options(path.unit.tests = path)
++ 		
++ 		# Set up and run test suite
++ 		Sys.setlocale(category = "LC_NUMERIC", locale = "C")
++ 		jlocale = J("java.util.Locale")
++ 		jlocale$setDefault(jlocale$US)
++ 		orig.opts <- options(encoding = "UTF-8")
++ 		TestSuite <- defineTestSuite(paste(pkg, "Test Suite"), dirs = path)
++ 		TestResult <- runTestSuite(TestSuite)
++ 		options(orig.opts)
++ 		
++ 		# Test protocol files
++ 		protocol <- file.path(getwd(), paste(pkg, "Unit_Tests", sep = "_"))
++ 		txtProtocol <- paste(protocol, ".txt", sep = "")
++ 		htmlProtocol <- paste(protocol, ".html", sep = "")
++ 		
++ 		# Print (summary) test protocol to stdout
++ 		printTextProtocol(TestResult, showDetails = FALSE)
++ 		# Write detailed test protocol to text file
++ 		printTextProtocol(TestResult, showDetails = TRUE, fileName = txtProtocol)
++ 		# Write HTML protocol
++ 		printHTMLProtocol(TestResult, fileName = htmlProtocol)
++ 		
++ 		# Show HTML Test Protocol
++ 		if (interactive()) { browseURL(url = htmlProtocol) }
++ 		
++ 		## Return stop() to cause R CMD check stop in case of
++ 		##  - failures i.e. FALSE to unit tests or
++ 		##  - errors i.e. R errors
++ 		tmp <- getErrors(TestResult)
++ 		if(tmp$nFail > 0 | tmp$nErr > 0) {
++ 			stop(paste("\n\nUnit Testing failed (#test failures: ", tmp$nFail,
++ 				", #R errors: ",  tmp$nErr, ")\n\n", sep=""))
++ 		}
++ 	} else {
++ 		warning("Cannot run unit tests -- Package 'RUnit' is not available!")
++ 	}
++ 	
++ 	invisible()
++ }
+> 
+> # Run unit tests
+> runUnitTests()
+
+Running Unit Tests
+$WorkingDir
+[1] "/var/scratch2/tomas/cran/rlibro/check/XLConnect.Rcheck/tests"
+
+$PathToUnitTests
+[1] "/var/scratch2ro/tomas/cran/rlibro/lib/XLConnect/unitTests"
+
+
+
+Executing test function test.arefidx  ...  done successfully.
+
+
+
+Executing test function test.colidx  ...  done successfully.
+
+
+
+Executing test function test.crefidx  ...  done successfully.
+
+
+
+Executing test function test.dataframeConversion  ... Error in as.data.frame.default(df) : 
+  cannot coerce class '"function"' to a data.frame
+In addition: Warning messages:
+1: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+2: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+3: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+4: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+5: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+6: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+7: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+8: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+Error in try(eval(expr, envir = parent.frame()), silent = silent) : 
+  Invalid object - object of class 'jobjRef' required!
+Error in try(eval(expr, envir = parent.frame()), silent = silent) : 
+  Invalid object - object of class 'jobjRef' required!
+Error in try(eval(expr, envir = parent.frame()), silent = silent) : 
+  Invalid object - object of class 'jobjRef' required!
+Error in try(eval(expr, envir = parent.frame()), silent = silent) : 
+  Invalid object - object of class 'jobjRef' required!
+ done successfully.
+
+
+
+Executing test function test.dumpAndRestore  ...  done successfully.
+
+
+
+Executing test function test.extractSheetName  ...  done successfully.
+
+
+
+Executing test function test.loadWorkbook  ... Error : FileNotFoundException (Java): File 'fileWhichDoesNotExist.xls' could not be found - you may specify to automatically create the file if not existing.
+In addition: Warning messages:
+1: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+2: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+3: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+4: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+5: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+6: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+Error : FileNotFoundException (Java): File 'fileWhichDoesNotExist.xlsx' could not be found - you may specify to automatically create the file if not existing.
+Error : EncryptedDocumentException (Java): The supplied spreadsheet is protected, but no password was supplied
+Error : EncryptedDocumentException (Java): Password incorrect
+Error : EncryptedDocumentException (Java): The supplied spreadsheet is protected, but no password was supplied
+Error : EncryptedDocumentException (Java): Password incorrect
+ done successfully.
+
+
+
+Executing test function test.with.workbook  ...  done successfully.
+
+
+
+Executing test function test.workbook.cellstyles  ...  done successfully.
+
+
+
+Executing test function test.workbook.createName  ... Error : IllegalArgumentException (Java): java.lang.IllegalArgumentException: Invalid name: ''Test': first character must be underscore or a letter
+In addition: Warning messages:
+1: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+2: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+3: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+4: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+5: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+6: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+Error : IllegalArgumentException (Java): java.lang.IllegalArgumentException: Invalid name: ''Test': first character must be underscore or a letter
+Error : IllegalArgumentException (Java): org.apache.poi.ss.formula.FormulaParseException: Parse error near char 0 '?' in specified formula '??-%&'. Expected cell ref or constant literal
+Error : IllegalArgumentException (Java): org.apache.poi.ss.formula.FormulaParseException: Parse error near char 0 '?' in specified formula '??-%&'. Expected cell ref or constant literal
+Error : IllegalArgumentException (Java): Specified name 'ImHere' already exists!
+Error : IllegalArgumentException (Java): Specified name 'ImHere' already exists!
+Error : IllegalArgumentException (Java): org.apache.poi.ss.formula.FormulaParseException: Specified name 'A1A4' for sheet Test not found
+ done successfully.
+
+
+
+Executing test function test.workbook.createSheet  ... Error : IllegalArgumentException (Java): Invalid sheet name ''Invalid Sheet Name'. Sheet names must not begin or end with (').
+In addition: Warning messages:
+1: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+2: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+Error : IllegalArgumentException (Java): Invalid sheet name ''Invalid Sheet Name'. Sheet names must not begin or end with (').
+Error : IllegalArgumentException (Java): Invalid sheet name 'Invalid Sheet Name''. Sheet names must not begin or end with (').
+Error : IllegalArgumentException (Java): Invalid sheet name 'Invalid Sheet Name''. Sheet names must not begin or end with (').
+Error : IllegalArgumentException (Java): Sheet names are not allowed to contain more than 31 characters!
+Error : IllegalArgumentException (Java): Sheet names are not allowed to contain more than 31 characters!
+ done successfully.
+
+
+
+Executing test function test.workbook.existsName  ...  done successfully.
+
+
+
+Executing test function test.workbook.existsSheet  ...  done successfully.
+
+
+
+Executing test function test.workbook.extraction  ...  done successfully.
+
+
+
+Executing test function test.workbook.getBoundingBox  ...  done successfully.
+
+
+
+Executing test function test.workbook.getDefinedNames  ...  done successfully.
+
+
+
+Executing test function test.workbook.getSheetPos  ...  done successfully.
+
+
+
+Executing test function test.workbook.getSheets  ...  done successfully.
+
+
+
+Executing test function test.workbook.hideSheet  ...  done successfully.
+
+
+
+Executing test function test.workbook.onErrorCell  ... Error : IllegalArgumentException (Java): Error when trying to evaluate cell MySheet!C10 - Error detected in cell MySheet!C10 - No such name defined
+In addition: There were 28 warnings (use warnings() to see them)
+Error : IllegalArgumentException (Java): Error when trying to evaluate cell MySheet!D8 - Error detected in cell MySheet!D8 - Incompatible type
+Error : IllegalArgumentException (Java): Error when trying to evaluate cell MySheet!E8 - Error detected in cell MySheet!E8 - Incompatible type
+Error : IllegalArgumentException (Java): Error when trying to evaluate cell MySheet!F11 - Error detected in cell MySheet!F11 - Division by 0
+Error : IllegalArgumentException (Java): Error when trying to evaluate cell MySheet!G9 - Could not resolve external workbook name '/home/mstuder/Documents/Projects/R/XLConnect/xlconnect/inst/unitTests/resources/MySheet2'. Workbook environment has not been set up.
+Error : IllegalArgumentException (Java): Error when trying to evaluate cell MySheet!C10 - Specified named range 'myname' does not exist in the current workbook.
+Error : IllegalArgumentException (Java): Error when trying to evaluate cell MySheet!D8 - Error detected in cell MySheet!D8 - Incompatible type
+Error : IllegalArgumentException (Java): Error when trying to evaluate cell MySheet!E8 - Error detected in cell MySheet!E8 - Incompatible type
+Error : IllegalArgumentException (Java): Error when trying to evaluate cell MySheet!F11 - Error detected in cell MySheet!F11 - Division by 0
+Error : IllegalArgumentException (Java): Error when trying to evaluate cell MySheet!G9 - Index 0 out of bounds for length 0
+ done successfully.
+
+
+
+Executing test function test.workbook.readNamedRegion  ... Error : IllegalArgumentException (Java): Name 'NameThatDoesNotExist' does not exist!
+In addition: Warning messages:
+1: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+2: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+Error : IllegalArgumentException (Java): Name 'NameThatDoesNotExist' does not exist!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Specify either keep OR drop (not both)
+In addition: Warning messages:
+1: Cell Conversion!B8 cannot be converted from String to Numeric - returning NA 
+2: Cell Conversion!E10 cannot be converted from String to DateTime - returning NA - cause: class java.time.format.DateTimeParseException:Text 'not-a-date' could not be parsed at index 0 
+3: Cell Conversion!B8 cannot be converted from String to Numeric - returning NA 
+4: Cell Conversion!E10 cannot be converted from String to DateTime - returning NA - cause: class java.time.format.DateTimeParseException:Text 'not-a-date' could not be parsed at index 0 
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Specify either keep OR drop (not both)
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column name(s) 'ZZZ' not existing or out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column name(s) 'ZZZ' not existing or out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column(s) '5' out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column(s) '5' out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column name(s) 'ZZZ' not existing or out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column name(s) 'ZZZ' not existing or out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column(s) '5' out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column(s) '5' out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Header=F and keep values NumericColumn, BooleanColumn of type character
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Header=F and keep values NumericColumn, BooleanColumn of type character
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Header=F and drop values StringColumn, DateTimeColumn of type character
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Header=F and drop values StringColumn, DateTimeColumn of type character
+Error : IllegalArgumentException (Java): Name 'HeaderRemote' does not exist!
+Error : IllegalArgumentException (Java): Error when trying to evaluate cell BodyRemote!A2 - Could not resolve external workbook name '/Documents and Settings/pa022139/My Documents/reboots.xls'. Workbook environment has not been set up.
+Error : IllegalArgumentException (Java): Name 'AllRemote' does not exist!
+Error : IllegalArgumentException (Java): Name 'HeaderRemote' does not exist!
+Error : IllegalArgumentException (Java): Error when trying to evaluate cell BodyRemote!A2 - Failed to evaluate cell: BodyRemote!A2, value: '[1]Actual Reboots'!$K$7
+Error : IllegalArgumentException (Java): Name 'AllRemote' does not exist!
+ done successfully.
+
+
+
+Executing test function test.workbook.readWorksheet  ... Error : IllegalArgumentException (Java): Sheet index (22) is out of range (0..9)
+In addition: Warning messages:
+1: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+2: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+Error : IllegalArgumentException (Java): Sheet index (-1) is out of range (0..9)
+Error : IllegalArgumentException (Java): Sheet index (22) is out of range (0..9)
+Error : IllegalArgumentException (Java): Sheet index (-1) is out of range (0..9)
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Specify either keep OR drop (not both)
+In addition: Warning messages:
+1: Data frame contains 0 rows and 0 columns! 
+2: Data frame contains 0 rows and 0 columns! 
+3: Data frame contains 0 rows and 0 columns! 
+4: Data frame contains 0 rows and 0 columns! 
+5: Cell Conversion!A3 cannot be converted from String to Numeric - returning NA 
+6: Cell Conversion!D5 cannot be converted from String to DateTime - returning NA - cause: class java.time.format.DateTimeParseException:Text 'not-a-date' could not be parsed at index 0 
+7: Cell Conversion!A3 cannot be converted from String to Numeric - returning NA 
+8: Cell Conversion!D5 cannot be converted from String to DateTime - returning NA - cause: class java.time.format.DateTimeParseException:Text 'not-a-date' could not be parsed at index 0 
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Specify either keep OR drop (not both)
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column name(s) 'Z' not existing or out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column name(s) 'Z' not existing or out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column(s) '5' out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column(s) '5' out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column name(s) 'Z' not existing or out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column name(s) 'Z' not existing or out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column(s) '5' out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column(s) '5' out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Header=F and keep values A, C of type character
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Header=F and keep values A, C of type character
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Header=F and drop values B, D of type character
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Header=F and drop values B, D of type character
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Specify either keep OR drop (not both)
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Specify either keep OR drop (not both)
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column name(s) 'Z' not existing or out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column name(s) 'Z' not existing or out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column(s) '5' out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column(s) '5' out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column name(s) 'Z' not existing or out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column name(s) 'Z' not existing or out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column(s) '5' out of the bounding box!
+Error in getColSubset(object, sheet, startRow, endRow, startCol, endCol,  : 
+  Column(s) '5' out of the bounding box!
+Error : IllegalArgumentException (Java): Sheet index (-1) is out of range (0..3)
+Error : IllegalArgumentException (Java): Error when trying to evaluate cell BodyRemote!A2 - Could not resolve external workbook name '/Documents and Settings/pa022139/My Documents/reboots.xls'. Workbook environment has not been set up.
+Error : IllegalArgumentException (Java): Sheet index (-1) is out of range (0..3)
+Error : IllegalArgumentException (Java): Sheet index (-1) is out of range (0..3)
+Error : IllegalArgumentException (Java): Error when trying to evaluate cell BodyRemote!A2 - Failed to evaluate cell: BodyRemote!A2, value: '[1]Actual Reboots'!$K$7
+Error : IllegalArgumentException (Java): Sheet index (-1) is out of range (0..3)
+ done successfully.
+
+
+
+Executing test function test.workbook.renameSheet  ... Error : IllegalArgumentException (Java): Sheet index (-1) is out of range (0..1)
+In addition: Warning messages:
+1: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+2: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+Error : IllegalArgumentException (Java): Sheet index (-1) is out of range (0..1)
+Error : IllegalArgumentException (Java): Invalid sheet name ''invalid'. Sheet names must not begin or end with (').
+Error : IllegalArgumentException (Java): Invalid sheet name ''invalid'. Sheet names must not begin or end with (').
+ done successfully.
+
+
+
+Executing test function test.workbook.saveWorkbook  ...  done successfully.
+
+
+
+Executing test function test.workbook.setForceFormulaRecalculation  ... Error : IllegalArgumentException (Java): Sheet with index 11 does not exist!
+In addition: Warning messages:
+1: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+2: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+3: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+4: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+Error : IllegalArgumentException (Java): Sheet with name 'SheetWhichDoesNotExist' does not exist!
+ done successfully.
+
+
+
+Executing test function test.workbook.setMissingValue  ...  done successfully.
+
+
+
+Executing test function test.workbook.setSheetPos  ... Error : IndexOutOfBoundsException (Java): Index: -2, Size: 3
+In addition: Warning messages:
+1: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+2: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+3: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+4: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+Error : IndexOutOfBoundsException (Java): Index: 36297, Size: 2
+Error : IndexOutOfBoundsException (Java): Index: -2, Size: 3
+Error : IndexOutOfBoundsException (Java): Index -1 out of bounds for length 3
+Error : IndexOutOfBoundsException (Java): Index -1 out of bounds for length 2
+Error : IndexOutOfBoundsException (Java): Index -1 out of bounds for length 3
+ done successfully.
+
+
+
+Executing test function test.workbook.testBug181  ...  done successfully.
+
+
+
+Executing test function test.workbook.writeNamedRegion  ... Error in as.data.frame.default(x) : 
+  cannot coerce class '"function"' to a data.frame
+In addition: Warning messages:
+1: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+2: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+3: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+4: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+Error in as.data.frame.default(x) : 
+  cannot coerce class '"function"' to a data.frame
+Error : IllegalArgumentException (Java): Name 'nameDoesNotExist' does not exist!
+Error : IllegalArgumentException (Java): Name 'nameDoesNotExist' does not exist!
+Error : IllegalArgumentException (Java): Name 'nope' has invalid reference!
+Error : IllegalArgumentException (Java): Name 'nope' does not refer to a valid sheet!
+ done successfully.
+
+
+
+Executing test function test.workbook.writeWorksheet  ... Error in as.data.frame.default(x) : 
+  cannot coerce class '"function"' to a data.frame
+In addition: Warning messages:
+1: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+2: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+Error in as.data.frame.default(x) : 
+  cannot coerce class '"function"' to a data.frame
+Error : IllegalArgumentException (Java): Sheet index (-1) is out of range (0..0)
+Error : IllegalArgumentException (Java): Sheet index (-1) is out of range (0..0)
+ done successfully.
+
+
+
+Executing test function test.writeAndReadNamedRegion  ...  done successfully.
+
+
+
+Executing test function test.workbook.writeAndReadWorksheet  ...  done successfully.
+
+
+
+Executing test function test.writeNamedRegionToFile  ... [1] "Writing dataset  cdf to file testWriteNamedRegionToFileWorkbook.xls"
+Timing stopped at: 0.102 0.001 0.051
+Error : FileNotFoundException (Java): testWriteNamedRegionToFileWorkbook.xls (Read-only file system)
+In addition: Warning messages:
+1: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+2: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+3: Error detected in cell cdf!X106 - Value is not available 
+4: Error detected in cell cdf!Y104 - Value is not available 
+5: Error detected in cell cdf!X106 - Value is not available 
+6: Error detected in cell cdf!Y104 - Value is not available 
+7: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+8: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+9: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+10: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+ done successfully.
+
+
+
+Executing test function test.writeWorksheetToFile  ... [1] "Writing dataset  cdf to file testWriteWorksheetToFileWorkbook.xls"
+Timing stopped at: 0.098 0 0.05
+Error : FileNotFoundException (Java): testWriteWorksheetToFileWorkbook.xls (Read-only file system)
+In addition: Warning messages:
+1: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: Marsaglia-Multicarry has poor statistical properties
+2: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+  RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+ done successfully.
+
+RUNIT TEST PROTOCOL -- Thu Apr 18 17:45:01 2024 
+*********************************************** 
+Number of test functions: 34 
+Number of errors: 2 
+Number of failures: 0 
+
+ 
+1 Test Suite : 
+XLConnect Test Suite - 34 test functions, 2 errors, 0 failures
+ERROR in test.writeNamedRegionToFile: Error : FileNotFoundException (Java): testWriteNamedRegionToFileWorkbook.xls (Read-only file system)
+ERROR in test.writeWorksheetToFile: Error : FileNotFoundException (Java): testWriteWorksheetToFileWorkbook.xls (Read-only file system)
+Error in file(file, ifelse(append, "a", "w")) : 
+  cannot open the connection
+Calls: runUnitTests -> printTextProtocol -> cat -> file
+In addition: Warning message:
+In file(file, ifelse(append, "a", "w")) :
+  cannot open file '/var/scratch2ro/tomas/cran/rlibro/lib/XLConnect/unitTests/resources/XLConnect_Unit_Tests.txt': Read-only file system
+Execution halted
