@@ -1,0 +1,74 @@
+Package drclust version 0.1
+Package built using 86483/R 4.5.0; x86_64-pc-linux-gnu; 2024-04-26 14:46:07 UTC; unix   
+Checked with rchk version fdc068715daa3a256062cc20e0d4a5157dacc9a4 LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _drclust_CronbachAlpha
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _drclust_cluster
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _drclust_disfa
+  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _drclust_dispca
+  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _drclust_doublekm
+  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _drclust_dpcakm
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _drclust_factkm
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _drclust_mrand
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _drclust_redkm
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function disfa(Rcpp::Matrix<14, Rcpp::PreserveStorage>, int, int, int, int, double, arma::Col<double>, int, int)
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:print,?) drclust/src/dfa.cpp:324
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:print,?) drclust/src/dfa.cpp:338
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:print,?) drclust/src/dfa.cpp:356
+
+Function dispca(Rcpp::Matrix<14, Rcpp::PreserveStorage>, int, int, int, int, double, int, int, arma::Col<double>)
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:print,?) drclust/src/dpca.cpp:207
+
+Function doublekm(arma::Mat<double>, int, int, int, int, int, double, int, int)
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:print,?) drclust/src/double_km.cpp:207
+
+Function dpcakm(Rcpp::Matrix<14, Rcpp::PreserveStorage>, int, int, int, int, int, double, arma::Col<double>, int, int)
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:print,?) drclust/src/dpca_km.cpp:328
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:print,?) drclust/src/dpca_km.cpp:340
+
+Function factkm(Rcpp::Matrix<14, Rcpp::PreserveStorage>, int, int, int, int, int, double, int, int, int)
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:print,?) drclust/src/redfac_km.cpp:580
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:print,?) drclust/src/redfac_km.cpp:593
+
+Function redkm(Rcpp::Matrix<14, Rcpp::PreserveStorage>, int, int, int, int, int, double, int, int, int)
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:print,?) drclust/src/redfac_km.cpp:300
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:print,?) drclust/src/redfac_km.cpp:313
