@@ -1,5 +1,5 @@
-Package bnlearn version 4.9.3
-Package built using 86189/R 4.4.0; x86_64-pc-linux-gnu; 2024-03-25 22:16:22 UTC; unix   
+Package bnlearn version 4.9.4
+Package built using 86521/R 4.5.0; x86_64-pc-linux-gnu; 2024-05-05 22:15:06 UTC; unix   
 Checked with rchk version fdc068715daa3a256062cc20e0d4a5157dacc9a4 LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -69,18 +69,6 @@ Function dpred
   [UP] attempt to unprotect more items (2) than protected (1), results will be incomplete bnlearn/src/predict/predict.c:182
   [PB] has possible protection stack imbalance bnlearn/src/predict/predict.c:196
 
-Function fitted_network_from_SEXP
-  [UP] unprotected variable fitted_bn_nodes while calling allocating function getListElement bnlearn/src/fitted/fitted.c:32
-  [UP] allocating function Rf_match may destroy its unprotected argument (fitted_bn_nodes <arg 1>), which is later used. bnlearn/src/fitted/fitted.c:33
-  [UP] calling allocating function Rf_match with a fresh pointer (fitted_bn_nodes <arg 1>) bnlearn/src/fitted/fitted.c:33
-  [UP] unprotected variable fitted_bn_nodes while calling allocating function getListElement bnlearn/src/fitted/fitted.c:43
-  [UP] unprotected variable fitted_bn_nodes while calling allocating function getListElement bnlearn/src/fitted/fitted.c:53
-  [UP] unprotected variable fitted_bn_nodes while calling allocating function getListElement bnlearn/src/fitted/fitted.c:56
-  [UP] unprotected variable fitted_bn_nodes while calling allocating function getListElement bnlearn/src/fitted/fitted.c:63
-  [UP] unprotected variable fitted_bn_nodes while calling allocating function getListElement bnlearn/src/fitted/fitted.c:68
-  [UP] unprotected variable fitted_bn_nodes while calling allocating function getListElement bnlearn/src/fitted/fitted.c:73
-  [UP] unprotected variable fitted_bn_nodes while calling allocating function getListElement bnlearn/src/fitted/fitted.c:77
-
 Function gaussian_ols_parameters
   [UP] unprotected variable fitted while calling allocating function mkReal bnlearn/src/parameters/rinterface/ordinary_least_squares.c:79
   [UP] unprotected variable residuals while calling allocating function mkReal bnlearn/src/parameters/rinterface/ordinary_least_squares.c:79
@@ -94,22 +82,12 @@ Function hc_to_be_added
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete bnlearn/src/learning/score/hc.cache.lookup.c:482
   [PB] has possible protection stack imbalance bnlearn/src/learning/score/hc.cache.lookup.c:487
 
-Function hierarchical_dirichlet_parameters
-  [UP] unprotected variable cptable while calling allocating function Rf_warning bnlearn/src/parameters/rinterface/hierarchical_dirichlet.c:70
-  [UP] unprotected variable cptable while calling allocating function Rf_warning bnlearn/src/parameters/rinterface/hierarchical_dirichlet.c:73
-  [UP] unprotected variable cptable while calling allocating function Rf_warning bnlearn/src/parameters/rinterface/hierarchical_dirichlet.c:76
-  [UP] unprotected variable cptable while calling allocating function Rf_warning bnlearn/src/parameters/rinterface/hierarchical_dirichlet.c:79
-  [UP] unprotected variable cptable while calling allocating function Rf_warning bnlearn/src/parameters/rinterface/hierarchical_dirichlet.c:82
-
 Function joint_discretize
   [PB] has too high protection stack depth results will be incomplete
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
   [PB] has too high protection stack depth results will be incomplete
   [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete bnlearn/src/preprocessing/discretize.c:565
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete bnlearn/src/preprocessing/discretize.c:565
-
-Function loglikelihood_function
-  [UP] calling allocating function Rf_match with argument allocated using Rf_getAttrib(?,S:names) bnlearn/src/inference/rinterface/loglikelihood.c:39
 
 Function mappred
   [UP] calling allocating function Rf_match with a fresh pointer (colnames <arg 1>) bnlearn/src/predict/map.lw.c:110
