@@ -1,9 +1,9 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/ParamHelpers.Rcheck’
-* using R Under development (unstable) (2024-03-30 r86233)
+* using R Under development (unstable) (2024-05-26 r86625)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
-    gcc (GCC) 13.2.1 20231011 (Red Hat 13.2.1-4)
-    GNU Fortran (GCC) 13.2.1 20231011 (Red Hat 13.2.1-4)
+    gcc (GCC) 13.2.1 20240316 (Red Hat 13.2.1-7)
+    GNU Fortran (GCC) 13.2.1 20240316 (Red Hat 13.2.1-7)
 * running under: Fedora Linux 38 (MATE-Compiz)
 * using session charset: UTF-8
 * checking for file ‘ParamHelpers/DESCRIPTION’ ... OK
@@ -66,49 +66,15 @@ Note: information on .o files is not available
 Running examples in ‘ParamHelpers-Ex.R’ failed
 The error most likely occurred in:
 
-> ### Name: getLower
-> ### Title: Get lower / upper bounds and allowed discrete values for
-> ###   parameters.
-> ### Aliases: getLower getUpper getValues
+> ### Name: getOptPathBestIndex
+> ### Title: Get index of the best element from optimization path.
+> ### Aliases: getOptPathBestIndex
 > 
 > ### ** Examples
 > 
-> ps = makeParamSet(
-+   makeNumericParam("u"),
-+   makeDiscreteParam("v", values = c("a", "b")),
-+   makeIntegerParam("w", lower = expression(ceiling(p / 3)), upper = 2),
-+   makeDiscreteParam("x", values = 1:2),
-+   makeNumericVectorParam("y", len = 2, lower = c(0, 10), upper = c(1, 11)),
-+   keys = "p"
-+ )
-> getLower(ps, dict = list(p = 7))
-   u    w    y    y 
--Inf    3    0   10 
-> getUpper(ps)
-  u   w   y   y 
-Inf   2   1  11 
-> 
-> ps = makeParamSet(
-+   makeNumericParam("u"),
-+   makeDiscreteParam("w", values = list(a = list(), b = NULL))
-+ )
-> getValues(ps)
-$w
-$w$a
-list()
-
-$w$b
-NULL
-
-
-> 
-> par.vals = list(
-+   u = makeNumericParam("u"),
-+   v = makeIntegerParam("v", lower = 1, upper = 2),
-+   w = makeDiscreteParam("w", values = 1:2),
-+   x = makeNumericVectorParam("x", len = 2, lower = c(3, 1), upper = expression(n))
-+ )
-> getLower(par.vals)
+> ps = makeParamSet(makeNumericParam("x"))
+> op = makeOptPathDF(par.set = ps, y.names = "y", minimize = TRUE)
+> addOptPathEl(op, x = list(x = 1), y = 5)
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"

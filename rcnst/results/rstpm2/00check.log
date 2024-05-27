@@ -1,0 +1,148 @@
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/rstpm2.Rcheck’
+* using R Under development (unstable) (2024-05-26 r86625)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (GCC) 13.2.1 20240316 (Red Hat 13.2.1-7)
+    GNU Fortran (GCC) 13.2.1 20240316 (Red Hat 13.2.1-7)
+* running under: Fedora Linux 38 (MATE-Compiz)
+* using session charset: UTF-8
+* checking for file ‘rstpm2/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘rstpm2’ version ‘1.6.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘rstpm2’ can be installed ... OK
+* used C compiler: ‘gcc (GCC) 13.2.1 20231011 (Red Hat 13.2.1-4)’
+* used Fortran compiler: ‘GNU Fortran (GCC) 13.2.1 20231011 (Red Hat 13.2.1-4)’
+* used C++ compiler: ‘g++ (GCC) 13.2.1 20231011 (Red Hat 13.2.1-4)’
+* checking package directory ... OK
+* checking ‘build’ directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking compiled code ... NOTE
+Note: information on .o files is not available
+* checking usage of KIND in Fortran files ... OK
+* checking sizes of PDF files under ‘inst/doc’ ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... ERROR
+Running examples in ‘rstpm2-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: voptimize
+> ### Title: Vectorised One Dimensional Optimization
+> ### Aliases: voptimize voptimise
+> ### Keywords: optimize
+> 
+> ### ** Examples
+> 
+> require(graphics)
+> 
+> f <- function (x, a) (x - a)^2
+> xmin <- voptimize(f, lower=c(0, 0), upper=c(1,1), tol = 0.0001, a = c(1/3,2/3))
+> xmin
+$minimum
+[1] 0.3333333 0.6666667
+
+$objective
+[1] 0 0
+
+> 
+> ## See where the function is evaluated:
+> voptimize(function(x) x^2*(print(x)-1), lower = c(0,0), upper = c(10,10))
+[1] 3.81966 3.81966
+[1] 6.18034 6.18034
+[1] 2.36068 2.36068
+[1] 2.077939 2.077939
+[1] 1.505823 1.505823
+[1] 0.9306496 0.9306496
+[1] 0.9196752 0.9196752
+[1] 0.772905 0.772905
+[1] 0.4776816 0.4776816
+[1] 0.6491436 0.6491436
+[1] 0.656315 0.656315
+[1] 0.6653777 0.6653777
+[1] 0.6667786 0.6667786
+[1] 0.6666728 0.6666728
+[1] 0.6666321 0.6666321
+[1] 0.6667135 0.6667135
+[1] 0.6666728 0.6666728
+$minimum
+[1] 0.6666728 0.6666728
+
+$objective
+[1] -0.1481481 -0.1481481
+
+> 
+> ## "wrong" solution with unlucky interval and piecewise constant f():
+> f  <- function(x) ifelse(x > -1, ifelse(x < 4, exp(-1/abs(x - 1)), 10), 10)
+> fp <- function(x) { print(x); f(x) }
+> 
+> plot(f, -2,5, ylim = 0:1, col = 2)
+> voptimize(fp, cbind(-4, 20))   # doesn't see the minimum
+ERROR: modification of compiler constant of type list, length 1
+ERROR: the modified value of the constant is:
+[1] "S3Part"
+ERROR: the original value of the constant is:
+[[1]]
+<CHARSXP: "S3Part">
+
+ERROR: the modified constant is at index 6
+ERROR: the modified constant is in this function body:
+{
+    if (strict) 
+        methods::S3Part(from, S3Class = "oldClass")
+    else from
+}
+Fatal error: compiler constants were modified!
+
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
+* checking PDF version of manual ... OK
+* DONE
+Status: 1 ERROR, 1 NOTE
