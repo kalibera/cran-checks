@@ -1,5 +1,5 @@
-Package readODS version 2.2.0
-Package built using 86189/R 4.4.0; x86_64-pc-linux-gnu; 2024-03-26 01:57:17 UTC; unix   
+Package readODS version 2.3.0
+Package built using 86625/R 4.5.0; x86_64-pc-linux-gnu; 2024-05-27 09:10:50 UTC; unix   
 Checked with rchk version fdc068715daa3a256062cc20e0d4a5157dacc9a4 LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -14,6 +14,15 @@ Function cpp11::attribute_proxy<cpp11::writable::r_vector<cpp11::r_string> >::op
 Function cpp11::package::operator[](char const*)
   [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function cpp11::writable::r_vector<SEXPREC*>::operator SEXPREC*() const
+  [UP] calling allocating function cpp11::writable::truncate(SEXPREC*, long, long) with a fresh pointer (nms <arg 1>) readODS/src/../inst/include/cpp11/r_vector.hpp:924
+
+Function cpp11::writable::r_vector<cpp11::r_string>::operator SEXPREC*() const
+  [UP] calling allocating function cpp11::writable::truncate(SEXPREC*, long, long) with a fresh pointer (nms <arg 1>) readODS/src/../inst/include/cpp11/r_vector.hpp:924
+
+Function cpp11::writable::truncate(SEXPREC*, long, long)
+  [UP] ignoring variable x as it has address taken, results will be incomplete 
+
 Function dimnames(cpp11::data_frame const&, bool)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -21,8 +30,8 @@ Function get_column_types(cpp11::data_frame const&)
   [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function get_sheet_names_from_content(rapidxml::xml_node<char>*, bool)
-  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %19 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function sanitize(cpp11::data_frame const&, cpp11::r_vector<cpp11::r_string>)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
