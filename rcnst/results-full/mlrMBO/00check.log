@@ -1,10 +1,10 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/mlrMBO.Rcheck’
-* using R Under development (unstable) (2024-05-26 r86625)
+* using R Under development (unstable) (2024-10-26 r87273)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
-    gcc (GCC) 13.2.1 20240316 (Red Hat 13.2.1-7)
-    GNU Fortran (GCC) 13.2.1 20240316 (Red Hat 13.2.1-7)
-* running under: Fedora Linux 38 (MATE-Compiz)
+    gcc (GCC) 14.2.1 20240912 (Red Hat 14.2.1-3)
+    GNU Fortran (GCC) 14.2.1 20240912 (Red Hat 14.2.1-3)
+* running under: Fedora Linux 40 (MATE-Compiz)
 * using session charset: UTF-8
 * checking for file ‘mlrMBO/DESCRIPTION’ ... OK
 * this is package ‘mlrMBO’ version ‘1.1.5.1’
@@ -18,7 +18,7 @@
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
 * checking whether package ‘mlrMBO’ can be installed ... OK
-* used C compiler: ‘gcc (GCC) 13.2.1 20231011 (Red Hat 13.2.1-4)’
+* used C compiler: ‘gcc (GCC) 14.2.1 20240912 (Red Hat 14.2.1-3)’
 * checking package directory ... OK
 * checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -130,6 +130,7 @@ Fatal error: compiler constants were modified!
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
+  ══ Failed tests ════════════════════════════════════════════════════════════════
   ── Error ('test_mbo_km.R:11:3'): mbo works with km ─────────────────────────────
   Error: promise already under evaluation: recursive default argument reference or earlier problems?
   Backtrace:
@@ -140,7 +141,6 @@ Last 13 lines of output:
    4.     ├─mlrMBO:::mboTemplate(opt.state)
    5.     └─mlrMBO:::mboTemplate.OptState(opt.state)
    6.       └─mlrMBO:::evalProposedPoints.OptState(opt.state, prop)
-   7.         └─mlrMBO:::evalTargetFun.OptState(opt.state, xs = xs, extras = extras)
   
   [ FAIL 1 | WARN 0 | SKIP 0 | PASS 39 ]
   Error: Test failures
@@ -153,24 +153,24 @@ Error(s) in re-building vignettes:
 ** Processing: /var/scratch2/tomas/cran/rcnst/check/mlrMBO.Rcheck/vign_test/mlrMBO/vignettes/mlrMBO_files/figure-html/cosine_fun-1.png
 1344x960 pixels, 8 bits/pixel, 256 colors in palette
 Reducing image to 8 bits/pixel, grayscale
-Input IDAT size = 28973 bytes
-Input file size = 29867 bytes
+Input IDAT size = 28819 bytes
+Input file size = 29713 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 24072
-  zc = 9  zm = 8  zs = 1  f = 0		IDAT size = 24027
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 23816
+  zc = 9  zm = 8  zs = 1  f = 0		IDAT size = 23525
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
-  zc = 9  zm = 8  zs = 0  f = 5		IDAT size = 23138
-  zc = 9  zm = 8  zs = 1  f = 5		IDAT size = 23047
+  zc = 9  zm = 8  zs = 0  f = 5		IDAT size = 22820
+  zc = 9  zm = 8  zs = 1  f = 5		IDAT size = 22557
   zc = 1  zm = 8  zs = 2  f = 5
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 1  f = 5		IDAT size = 23047
+  zc = 9  zm = 8  zs = 1  f = 5		IDAT size = 22557
 
-Output IDAT size = 23047 bytes (5926 bytes decrease)
-Output file size = 23125 bytes (6742 bytes = 22.57% decrease)
+Output IDAT size = 22557 bytes (6262 bytes decrease)
+Output file size = 22635 bytes (7078 bytes = 23.82% decrease)
 
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:

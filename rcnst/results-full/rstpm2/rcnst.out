@@ -1,21 +1,21 @@
-Package rstpm2 version 1.6.3
-Package built using /R 4.4.0; x86_64-pc-linux-gnu; 2024-03-11 11:15:42 UTC; unix
+Package rstpm2 version 1.6.5
+Package built using /R 4.5.0; x86_64-pc-linux-gnu; 2024-10-28 14:16:50 UTC; unix
 Excerpts from error reports follow. Please refer to the included outputs for details.
 
 --------------------
-ERROR: modification of compiler constant of type list, length 1
-ERROR: modification of compiler constant of type list, length 1
+ERROR: modification of compiler constant of type language, length 4
+ERROR: modification of compiler constant of type language, length 4
+ERROR: the modified constant is function body:
+ifelse(x == 0, -0.0986659612490242, sin(x)/x)
+ERROR: the body was originally:
+ifelse(x == 0, 1, sin(x)/x)
+ERROR: modification of compiler constant of type double, length 1
+ERROR: modification of compiler constant of type double, length 1
 ERROR: the modified value of the constant is:
-[1] "S3Part"
+[1] -0.09866596
 ERROR: the original value of the constant is:
-[[1]]
-<CHARSXP: "S3Part">
-
-ERROR: the modified constant is at index 6
+[1] 1
+ERROR: the modified constant is at index 3
 ERROR: the modified constant is in this function body:
-{
-    if (strict) 
-        methods::S3Part(from, S3Class = "oldClass")
-    else from
-}
+ifelse(x == 0, -0.0986659612490242, sin(x)/x)
 Fatal error: compiler constants were modified!

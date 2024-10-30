@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2024-05-26 r86625) -- "Unsuffered Consequences"
+R Under development (unstable) (2024-10-26 r87273) -- "Unsuffered Consequences"
 Copyright (C) 2024 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -41,8 +41,8 @@ The following object is masked from ‘package:survival’:
 > 
 > ### Name: aft-class
 > ### Title: Class "stpm2" ~~~
-> ### Aliases: aft-class plot,aft,missing-method predict,aft-method
-> ###   predictnl,aft-method
+> ### Aliases: aft-class plot,aft,missing-method lines,aft-method
+> ###   predict,aft-method predictnl,aft-method
 > ### Keywords: classes
 > 
 > ### ** Examples
@@ -85,11 +85,11 @@ bbmle::mle2(minuslogl = negll, start = coef, eval.only = TRUE,
 
 Coefficients:
                                       Estimate Std. Error  z value     Pr(z)
-hormon                                0.285474   0.094189   3.0309  0.002438
-nsx(logtstar, df, intercept = TRUE)1 -0.272989   0.235853  -1.1575  0.247086
-nsx(logtstar, df, intercept = TRUE)2  2.045560   0.214611   9.5315 < 2.2e-16
-nsx(logtstar, df, intercept = TRUE)3 -7.387203   0.586909 -12.5866 < 2.2e-16
-nsx(logtstar, df, intercept = TRUE)4  4.361118   0.346428  12.5888 < 2.2e-16
+hormon                                0.285471   0.094189   3.0308  0.002439
+nsx(logtstar, df, intercept = TRUE)1 -0.273013   0.235850  -1.1576  0.247038
+nsx(logtstar, df, intercept = TRUE)2  2.045508   0.214606   9.5315 < 2.2e-16
+nsx(logtstar, df, intercept = TRUE)3 -7.387086   0.586894 -12.5868 < 2.2e-16
+nsx(logtstar, df, intercept = TRUE)4  4.361046   0.346420  12.5889 < 2.2e-16
                                         
 hormon                               ** 
 nsx(logtstar, df, intercept = TRUE)1    
@@ -350,128 +350,130 @@ function (var, increment = 1)
 > ### ** Examples
 > 
 > ## Not run: 
-> ##D library(readstata13)
-> ##D library(mstate)
-> ##D library(ggplot2)
-> ##D library(survival)
-> ##D ## Two states: Initial -> Final
-> ##D ## Note: this shows how to use markov_msm to estimate survival and risk probabilities based on
-> ##D ## smooth hazard models.
-> ##D two_states <- function(model, ...) {
-> ##D     transmat = matrix(c(NA,1,NA,NA),2,2,byrow=TRUE)
-> ##D     rownames(transmat) <- colnames(transmat) <- c("Initial","Final")
-> ##D     rstpm2::markov_msm(list(model), ..., trans = transmat)
-> ##D }
-> ##D ## Note: the first argument is the hazard model. The other arguments are arguments to the
-> ##D ## markov_msm function, except for the transition matrix, which is defined by the new function.
-> ##D death = gsm(Surv(time,status)~factor(rx), data=survival::colon, subset=(etype==2), df=3)
-> ##D cr = two_states(death, newdata=data.frame(rx="Obs"), t = seq(0,2500, length=301))
-> ##D plot(cr,ggplot=TRUE)
+> ##D if (requireNamespace("deSolve")) {
+> ##D     library(readstata13)
+> ##D     library(mstate)
+> ##D     library(ggplot2)
+> ##D     library(survival)
+> ##D     ## Two states: Initial -> Final
+> ##D     ## Note: this shows how to use markov_msm to estimate survival and risk probabilities based on
+> ##D     ## smooth hazard models.
+> ##D     two_states <- function(model, ...) {
+> ##D         transmat = matrix(c(NA,1,NA,NA),2,2,byrow=TRUE)
+> ##D         rownames(transmat) <- colnames(transmat) <- c("Initial","Final")
+> ##D         rstpm2::markov_msm(list(model), ..., trans = transmat)
+> ##D     }
+> ##D     ## Note: the first argument is the hazard model. The other arguments are arguments to the
+> ##D     ## markov_msm function, except for the transition matrix, which is defined by the new function.
+> ##D     death = gsm(Surv(time,status)~factor(rx), data=survival::colon, subset=(etype==2), df=3)
+> ##D     cr = two_states(death, newdata=data.frame(rx="Obs"), t = seq(0,2500, length=301))
+> ##D     plot(cr,ggplot=TRUE)
 > ##D 
-> ##D ## Competing risks
-> ##D ## Note: this shows how to adapt the markov_msm model for competing risks.
-> ##D competing_risks <- function(listOfModels, ...) {
-> ##D     nRisks = length(listOfModels)
-> ##D     transmat = matrix(NA,nRisks+1,nRisks+1)
-> ##D     transmat[1,1+(1:nRisks)] = 1:nRisks
-> ##D     rownames(transmat) <- colnames(transmat) <- c("Initial",names(listOfModels))
-> ##D     rstpm2::markov_msm(listOfModels, ..., trans = transmat)
+> ##D     ## Competing risks
+> ##D     ## Note: this shows how to adapt the markov_msm model for competing risks.
+> ##D     competing_risks <- function(listOfModels, ...) {
+> ##D         nRisks = length(listOfModels)
+> ##D         transmat = matrix(NA,nRisks+1,nRisks+1)
+> ##D         transmat[1,1+(1:nRisks)] = 1:nRisks
+> ##D         rownames(transmat) <- colnames(transmat) <- c("Initial",names(listOfModels))
+> ##D         rstpm2::markov_msm(listOfModels, ..., trans = transmat)
+> ##D     }
+> ##D     ## Note: The first argument for competing_risks is a list of models. Names from that list are
+> ##D     ## used for labelling the states. The other arguments are as per the markov_msm function,
+> ##D     ## except for the transition matrix, which is defined by the competing_risks function.
+> ##D     recurrence = gsm(Surv(time,status)~factor(rx), data=survival::colon, subset=(etype==1), df=3)
+> ##D     death = gsm(Surv(time,status)~factor(rx), data=survival::colon, subset=(etype==2), df=3)
+> ##D     cr = competing_risks(list(Recurrence=recurrence,Death=death),
+> ##D                          newdata=data.frame(rx=levels(survival::colon$rx)),
+> ##D                          t = seq(0,2500, length=301))
+> ##D     ## Plot the probabilities for each state for three different treatment arms
+> ##D     plot(cr, ggplot=TRUE) + facet_grid(~ rx)
+> ##D     ## And: differences in probabilities
+> ##D     cr_diff = diff(subset(cr,rx=="Lev+5FU"),subset(cr,rx=="Obs"))
+> ##D     plot(cr_diff, ggplot=TRUE, stacked=FALSE)
+> ##D     
+> ##D     ## Extended example: Crowther and Lambert (2017)
+> ##D     ## library(rstpm2); library(readstata13); library(ggplot2)
+> ##D     mex.1 <- read.dta13("http://fmwww.bc.edu/repec/bocode/m/multistate_example.dta")
+> ##D     transmat <- rbind("Post-surgery"=c(NA,1,2), 
+> ##D                       "Relapsed"=c(NA,NA,3),
+> ##D                       "Died"=c(NA,NA,NA))
+> ##D     colnames(transmat) <- rownames(transmat)
+> ##D     mex.2 <- transform(mex.1,osi=(osi=="deceased")+0)
+> ##D     levels(mex.2$size)[2] <- ">20-50 mm" # fix typo
+> ##D     mex <- mstate::msprep(time=c(NA,"rf","os"),status=c(NA,"rfi","osi"),
+> ##D                           data=mex.2,trans=transmat,id="pid",
+> ##D                           keep=c("age","size","nodes","pr_1","hormon"))
+> ##D     mex <- transform(mex,
+> ##D                      size2=(unclass(size)==2)+0, # avoids issues with TRUE/FALSE
+> ##D                      size3=(unclass(size)==3)+0,
+> ##D                      hormon=(hormon=="yes")+0,
+> ##D                      Tstart=Tstart/12,
+> ##D                      Tstop=Tstop/12)
+> ##D     ##
+> ##D     c.ar <- stpm2(Surv(Tstart,Tstop,status) ~ age + size2 + size3 + nodes + pr_1 + hormon,
+> ##D                   data = mex, subset=trans==1, df=3, tvc=list(size2=1,size3=1,pr_1=1))
+> ##D     c.ad <- stpm2(Surv(Tstart, Tstop, status) ~ age + size + nodes + pr_1 + hormon,
+> ##D                   data = mex, subset=trans==2, df=1)
+> ##D     c.rd <- stpm2( Surv(Tstart,Tstop,status) ~ age + size + nodes + pr_1 + hormon,
+> ##D                   data=mex, subset=trans==3, df=3, tvc=list(pr_1=1))
+> ##D     ##
+> ##D     nd <- expand.grid(nodes=seq(0,20,10), size=levels(mex$size))
+> ##D     nd <- transform(nd, age=54, pr_1=3, hormon=0,
+> ##D                     size2=(unclass(size)==2)+0,
+> ##D                     size3=(unclass(size)==3)+0)
+> ##D     ## Predictions
+> ##D     system.time(pred1 <- rstpm2::markov_msm(list(c.ar,c.ad,c.rd), t = seq(0,15,length=301),
+> ##D                                             newdata=nd, trans = transmat)) # ~2 seconds
+> ##D     pred1 <- transform(pred1, Nodes=paste("Nodes =",nodes), Size=paste("Size",size))
+> ##D     ## Figure 3
+> ##D     plot(pred1, ggplot=TRUE) + facet_grid(Nodes ~ Size) + xlab("Years since surgery")
+> ##D     plot(pred1, ggplot=TRUE, flipped=TRUE) +
+> ##D         facet_grid(Nodes ~ Size) + xlab("Years since surgery")
+> ##D     plot(pred1, strata=~nodes+size, xlab="Years since surgery", lattice=TRUE)
+> ##D     ## Figure 4
+> ##D     plot(subset(pred1, nodes==0 & size=="<=20 mm"), stacked=FALSE, ggplot=TRUE) +
+> ##D         facet_grid(. ~ state) +
+> ##D         xlab("Years since surgery")
+> ##D     ## Figure 5
+> ##D     a <- diff(subset(pred1,nodes==0 & size=="<=20 mm"),
+> ##D               subset(pred1,nodes==0 & size==">20-50 mm"))
+> ##D     a <- transform(a, label = "Prob(Size<=20 mm)-Prob(20mm<Size<50mm)")
+> ##D     b <- ratio_markov_msm(subset(pred1,nodes==0 & size=="<=20 mm"),
+> ##D                           subset(pred1,nodes==0 & size==">20-50 mm"))
+> ##D     b <- transform(b,label="Prob(Size<=20 mm)-Prob(20mm<Size<50mm)")
+> ##D     ##
+> ##D     c <- diff(subset(pred1,nodes==0 & size=="<=20 mm"),
+> ##D               subset(pred1,nodes==0 & size==">50 mm"))
+> ##D     c <- transform(c, label = "Prob(Size<=20 mm)-Prob(Size>=50mm)")
+> ##D     d <- ratio_markov_msm(subset(pred1,nodes==0 & size=="<=20 mm"),
+> ##D                           subset(pred1,nodes==0 & size==">50 mm"))
+> ##D     d <- transform(d,label= "Prob(Size<=20 mm)-Prob(Size>=50mm)")
+> ##D     ##
+> ##D     e <- diff(subset(pred1,nodes==0 & size==">20-50 mm"),
+> ##D               subset(pred1,nodes==0 & size==">50 mm"))
+> ##D     e <- transform(e,label="Prob(20mm<Size<50 mm)-Prob(Size>=50mm)")
+> ##D     f <- ratio_markov_msm(subset(pred1,nodes==0 & size==">20-50 mm"),
+> ##D                           subset(pred1,nodes==0 & size==">50 mm"))
+> ##D     f <- transform(f, label = "Prob(20mm<Size<50 mm)-Prob(Size>=50mm)")
+> ##D     ## combine
+> ##D     diffs <- rbind(a,c,e)
+> ##D     ratios <- rbind(b,d,f)
+> ##D     ## Figure 5
+> ##D     plot(diffs, stacked=FALSE, ggplot2=TRUE) + xlab("Years since surgery") +
+> ##D         ylim(c(-0.4, 0.4)) + facet_grid(label ~ state)
+> ##D     ##
+> ##D     plot(ratios, stacked=FALSE, ggplot2=TRUE) + xlab("Years since surgery") +
+> ##D         ylim(c(0, 3)) + facet_grid(label ~ state)
+> ##D     ## Figure 6
+> ##D     plot(subset(pred1, nodes==0 & size=="<=20 mm"), stacked=FALSE, which="L", ggplot2=TRUE) +
+> ##D         facet_grid(. ~ state) + xlab("Years since surgery")
+> ##D     ## Figure 7
+> ##D     plot(diffs, stacked=FALSE, which="L", ggplot2=TRUE) + xlab("Years since surgery") +
+> ##D         ylim(c(-4, 4)) + facet_grid(label ~ state)
+> ##D     plot(ratios, stacked=FALSE, which="L", ggplot2=TRUE) + xlab("Years since surgery") +
+> ##D         ylim(c(0.1, 10)) + coord_trans(y="log10") + facet_grid(label ~ state)
 > ##D }
-> ##D ## Note: The first argument for competing_risks is a list of models. Names from that list are
-> ##D ## used for labelling the states. The other arguments are as per the markov_msm function,
-> ##D ## except for the transition matrix, which is defined by the competing_risks function.
-> ##D recurrence = gsm(Surv(time,status)~factor(rx), data=survival::colon, subset=(etype==1), df=3)
-> ##D death = gsm(Surv(time,status)~factor(rx), data=survival::colon, subset=(etype==2), df=3)
-> ##D cr = competing_risks(list(Recurrence=recurrence,Death=death),
-> ##D                      newdata=data.frame(rx=levels(survival::colon$rx)),
-> ##D                      t = seq(0,2500, length=301))
-> ##D ## Plot the probabilities for each state for three different treatment arms
-> ##D plot(cr, ggplot=TRUE) + facet_grid(~ rx)
-> ##D ## And: differences in probabilities
-> ##D cr_diff = diff(subset(cr,rx=="Lev+5FU"),subset(cr,rx=="Obs"))
-> ##D plot(cr_diff, ggplot=TRUE, stacked=FALSE)
-> ##D 
-> ##D ## Extended example: Crowther and Lambert (2017)
-> ##D ## library(rstpm2); library(readstata13); library(ggplot2)
-> ##D mex.1 <- read.dta13("http://fmwww.bc.edu/repec/bocode/m/multistate_example.dta")
-> ##D transmat <- rbind("Post-surgery"=c(NA,1,2), 
-> ##D                   "Relapsed"=c(NA,NA,3),
-> ##D                   "Died"=c(NA,NA,NA))
-> ##D colnames(transmat) <- rownames(transmat)
-> ##D mex.2 <- transform(mex.1,osi=(osi=="deceased")+0)
-> ##D levels(mex.2$size)[2] <- ">20-50 mm" # fix typo
-> ##D mex <- mstate::msprep(time=c(NA,"rf","os"),status=c(NA,"rfi","osi"),
-> ##D                       data=mex.2,trans=transmat,id="pid",
-> ##D                       keep=c("age","size","nodes","pr_1","hormon"))
-> ##D mex <- transform(mex,
-> ##D                  size2=(unclass(size)==2)+0, # avoids issues with TRUE/FALSE
-> ##D                  size3=(unclass(size)==3)+0,
-> ##D                  hormon=(hormon=="yes")+0,
-> ##D                  Tstart=Tstart/12,
-> ##D                  Tstop=Tstop/12)
-> ##D ##
-> ##D c.ar <- stpm2(Surv(Tstart,Tstop,status) ~ age + size2 + size3 + nodes + pr_1 + hormon,
-> ##D               data = mex, subset=trans==1, df=3, tvc=list(size2=1,size3=1,pr_1=1))
-> ##D c.ad <- stpm2(Surv(Tstart, Tstop, status) ~ age + size + nodes + pr_1 + hormon,
-> ##D               data = mex, subset=trans==2, df=1)
-> ##D c.rd <- stpm2( Surv(Tstart,Tstop,status) ~ age + size + nodes + pr_1 + hormon,
-> ##D               data=mex, subset=trans==3, df=3, tvc=list(pr_1=1))
-> ##D ##
-> ##D nd <- expand.grid(nodes=seq(0,20,10), size=levels(mex$size))
-> ##D nd <- transform(nd, age=54, pr_1=3, hormon=0,
-> ##D                 size2=(unclass(size)==2)+0,
-> ##D                 size3=(unclass(size)==3)+0)
-> ##D ## Predictions
-> ##D system.time(pred1 <- rstpm2::markov_msm(list(c.ar,c.ad,c.rd), t = seq(0,15,length=301),
-> ##D                                         newdata=nd, trans = transmat)) # ~2 seconds
-> ##D pred1 <- transform(pred1, Nodes=paste("Nodes =",nodes), Size=paste("Size",size))
-> ##D ## Figure 3
-> ##D plot(pred1, ggplot=TRUE) + facet_grid(Nodes ~ Size) + xlab("Years since surgery")
-> ##D plot(pred1, ggplot=TRUE, flipped=TRUE) +
-> ##D     facet_grid(Nodes ~ Size) + xlab("Years since surgery")
-> ##D plot(pred1, strata=~nodes+size, xlab="Years since surgery", lattice=TRUE)
-> ##D ## Figure 4
-> ##D plot(subset(pred1, nodes==0 & size=="<=20 mm"), stacked=FALSE, ggplot=TRUE) +
-> ##D     facet_grid(. ~ state) +
-> ##D     xlab("Years since surgery")
-> ##D ## Figure 5
-> ##D a <- diff(subset(pred1,nodes==0 & size=="<=20 mm"),
-> ##D           subset(pred1,nodes==0 & size==">20-50 mm"))
-> ##D a <- transform(a, label = "Prob(Size<=20 mm)-Prob(20mm<Size<50mm)")
-> ##D b <- ratio_markov_msm(subset(pred1,nodes==0 & size=="<=20 mm"),
-> ##D                       subset(pred1,nodes==0 & size==">20-50 mm"))
-> ##D b <- transform(b,label="Prob(Size<=20 mm)-Prob(20mm<Size<50mm)")
-> ##D ##
-> ##D c <- diff(subset(pred1,nodes==0 & size=="<=20 mm"),
-> ##D           subset(pred1,nodes==0 & size==">50 mm"))
-> ##D c <- transform(c, label = "Prob(Size<=20 mm)-Prob(Size>=50mm)")
-> ##D d <- ratio_markov_msm(subset(pred1,nodes==0 & size=="<=20 mm"),
-> ##D                       subset(pred1,nodes==0 & size==">50 mm"))
-> ##D d <- transform(d,label= "Prob(Size<=20 mm)-Prob(Size>=50mm)")
-> ##D ##
-> ##D e <- diff(subset(pred1,nodes==0 & size==">20-50 mm"),
-> ##D           subset(pred1,nodes==0 & size==">50 mm"))
-> ##D e <- transform(e,label="Prob(20mm<Size<50 mm)-Prob(Size>=50mm)")
-> ##D f <- ratio_markov_msm(subset(pred1,nodes==0 & size==">20-50 mm"),
-> ##D                       subset(pred1,nodes==0 & size==">50 mm"))
-> ##D f <- transform(f, label = "Prob(20mm<Size<50 mm)-Prob(Size>=50mm)")
-> ##D ## combine
-> ##D diffs <- rbind(a,c,e)
-> ##D ratios <- rbind(b,d,f)
-> ##D ## Figure 5
-> ##D plot(diffs, stacked=FALSE, ggplot2=TRUE) + xlab("Years since surgery") +
-> ##D     ylim(c(-0.4, 0.4)) + facet_grid(label ~ state)
-> ##D ##
-> ##D plot(ratios, stacked=FALSE, ggplot2=TRUE) + xlab("Years since surgery") +
-> ##D     ylim(c(0, 3)) + facet_grid(label ~ state)
-> ##D ## Figure 6
-> ##D plot(subset(pred1, nodes==0 & size=="<=20 mm"), stacked=FALSE, which="L", ggplot2=TRUE) +
-> ##D     facet_grid(. ~ state) + xlab("Years since surgery")
-> ##D ## Figure 7
-> ##D plot(diffs, stacked=FALSE, which="L", ggplot2=TRUE) + xlab("Years since surgery") +
-> ##D     ylim(c(-4, 4)) + facet_grid(label ~ state)
-> ##D plot(ratios, stacked=FALSE, which="L", ggplot2=TRUE) + xlab("Years since surgery") +
-> ##D     ylim(c(0.1, 10)) + coord_trans(y="log10") + facet_grid(label ~ state)
 > ## End(Not run)
 > 
 > 
@@ -1055,6 +1057,54 @@ Extends: "mle2"
 > 
 > f <- function (x, a) (x - a)^2
 > xmin <- voptimize(f, lower=c(0, 0), upper=c(1,1), tol = 0.0001, a = c(1/3,2/3))
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
 > xmin
 $minimum
 [1] 0.3333333 0.6666667
@@ -1066,21 +1116,149 @@ $objective
 > ## See where the function is evaluated:
 > voptimize(function(x) x^2*(print(x)-1), lower = c(0,0), upper = c(10,10))
 [1] 3.81966 3.81966
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
 [1] 6.18034 6.18034
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
 [1] 2.36068 2.36068
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
 [1] 2.077939 2.077939
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
 [1] 1.505823 1.505823
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
 [1] 0.9306496 0.9306496
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
 [1] 0.9196752 0.9196752
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
 [1] 0.772905 0.772905
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
 [1] 0.4776816 0.4776816
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
 [1] 0.6491436 0.6491436
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
 [1] 0.656315 0.656315
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
 [1] 0.6653777 0.6653777
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
 [1] 0.6667786 0.6667786
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
 [1] 0.6666728 0.6666728
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
 [1] 0.6666321 0.6666321
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
 [1] 0.6667135 0.6667135
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
+Warning in voptimizeRcpp(function(arg) f(arg, ...), lower, upper, tol) :
+  subscript out of bounds (index 1 >= vector size 1)
 [1] 0.6666728 0.6666728
 $minimum
 [1] 0.6666728 0.6666728
@@ -1095,19 +1273,207 @@ $objective
 > 
 > plot(f, -2,5, ylim = 0:1, col = 2)
 > voptimize(fp, cbind(-4, 20))   # doesn't see the minimum
-ERROR: modification of compiler constant of type list, length 1
-ERROR: the modified value of the constant is:
-[1] "S3Part"
-ERROR: the original value of the constant is:
-[[1]]
-<CHARSXP: "S3Part">
+[1] 5.167184
+[1] 10.83282
+[1] 14.33437
+[1] 16.49845
+[1] 17.83592
+[1] 18.66253
+[1] 19.1734
+[1] 19.48913
+[1] 19.68427
+[1] 19.80487
+[1] 19.8794
+[1] 19.92547
+[1] 19.95393
+[1] 19.97153
+[1] 19.9824
+[1] 19.98913
+[1] 19.99328
+[1] 19.99585
+[1] 19.99743
+[1] 19.99841
+[1] 19.99902
+[1] 19.99939
+[1] 19.99963
+[1] 19.99977
+[1] 19.99986
+[1] 19.99991
+[1] 19.99995
+[1] 19.99995
+$minimum
+[1] 19.99995
 
-ERROR: the modified constant is at index 6
+$objective
+[1] 10
+
+> voptimize(fp, cbind(-7, 20))   # ok
+[1] 3.313082
+[1] 9.686918
+[1] -0.6261646
+[1] 1.244956
+[1] 1.250965
+[1] 0.771827
+[1] 0.2378417
+[1] 1.000451
+[1] 0.9906964
+[1] 0.9955736
+[1] 0.9980122
+[1] 0.9992315
+[1] 0.9998411
+[1] 0.9996083
+[1] 0.9994644
+[1] 0.9993754
+[1] 0.9993204
+[1] 0.9992797
+[1] 0.9992797
+$minimum
+[1] 0.9992797
+
+$objective
+[1] 0
+
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("vuniroot")
+> ### * vuniroot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: vuniroot
+> ### Title: Vectorised One Dimensional Root (Zero) Finding
+> ### Aliases: vuniroot
+> ### Keywords: optimize
+> 
+> ### ** Examples
+> 
+> ##--- vuniroot() with new interval extension + checking features: --------------
+> 
+> f1 <- function(x) (121 - x^2)/(x^2+1)
+> f2 <- function(x) exp(-x)*(x - 12)
+> 
+> tools::assertCondition(vuniroot(f1, cbind(0,10)),
++                        "error", verbose=TRUE)
+assertCondition: caught “error”
+> tools::assertCondition(vuniroot(f2, cbind(0, 2)),
++                        "error", verbose=TRUE)
+assertCondition: caught “error”
+> ##--> error: f() .. end points not of opposite sign
+> 
+> ## where as  'extendInt="yes"'  simply first enlarges the search interval:
+> u1 <- vuniroot(f1, cbind(0,10),extendInt="yes", trace=1)
+search in [0,10] ... extended to [-1.5e-05, 11.5] in 4 steps
+> u2 <- vuniroot(f2, cbind(0,2), extendInt="yes", trace=2)
+search in [0,2]
+ .. modified lower,upper: (         -1e-06,           2.02)
+ .. modified lower,upper: (         -3e-06,           2.06)
+ .. modified lower,upper: (         -7e-06,           2.14)
+ .. modified lower,upper: (       -1.5e-05,            2.3)
+ .. modified lower,upper: (       -3.1e-05,           2.62)
+ .. modified lower,upper: (       -6.3e-05,           3.26)
+ .. modified lower,upper: (      -0.000127,           4.54)
+ .. modified lower,upper: (      -0.000255,            7.1)
+ .. modified lower,upper: (      -0.000511,          12.22)
+> stopifnot(all.equal(u1$root, 11, tolerance = 1e-5),
++           all.equal(u2$root, 12, tolerance = 6e-6))
+> 
+> ## The *danger* of interval extension:
+> ## No way to find a zero of a positive function, but
+> ## numerically, f(-|M|) becomes zero :
+> tools::assertCondition(u3 <- vuniroot(exp, cbind(0,2), extendInt="yes", trace=TRUE),
++                        "error", verbose=TRUE)
+search in [0,2] ... extended to [-1073.74, 2.14748e+07] in 30 steps
+assertCondition: caught “error”
+> 
+> ## Nonsense example (must give an error):
+> tools::assertCondition( vuniroot(function(x) 1, cbind(0,1), extendInt="yes"),
++                        "error", verbose=TRUE)
+assertCondition: caught “error”
+> 
+> ## Convergence checking :
+> sinc_ <- function(x) ifelse(x == 0, 1, sin(x)/x)
+> curve(sinc_, -6,18); abline(h=0,v=0, lty=3, col=adjustcolor("gray", 0.8))
+> ## Don't show: 
+> tools::assertWarning(
++ ## End(Don't show)
++ vuniroot(sinc_, cbind(0,5), extendInt="yes", maxiter=4) #-> "just" a warning
++ ## Don't show: 
++  , verbose=TRUE)
+Asserted warning: _NOT_ converged in 4 iterations
+> ## End(Don't show)
+> 
+> ## now with  check.conv=TRUE, must signal a convergence error :
+> ## Don't show: 
+> tools::assertError(
++ ## End(Don't show)
++ vuniroot(sinc_, cbind(0,5), extendInt="yes", maxiter=4, check.conv=TRUE)
++ ## Don't show: 
++  , verbose=TRUE)
+Asserted error: _NOT_ converged in 4 iterations
+> ## End(Don't show)
+> 
+> ### Weibull cumulative hazard (example origin, Ravi Varadhan):
+> cumhaz <- function(t, a, b) b * (t/b)^a
+> froot <- function(x, u, a, b) cumhaz(x, a, b) - u
+> 
+> n <- 10
+> u <- -log(runif(n))
+> a <- 1/2
+> b <- 1
+> ## Find failure times
+> ru <- vuniroot(froot, u=u, a=a, b=b, interval= cbind(rep(1.e-14,n), rep(1e4,n)),
++                extendInt="yes")$root
+> ru2 <- vuniroot(froot, u=u, a=a, b=b, interval= cbind(rep(0.01,n), rep(10,n)),
++                 extendInt="yes")$root
+> stopifnot(all.equal(ru, ru2, tolerance = 6e-6))
+> 
+> r1 <- vuniroot(froot, u= 0.99, a=a, b=b, interval= cbind(0.01, 10),
++              extendInt="up")
+> stopifnot(all.equal(0.99, cumhaz(r1$root, a=a, b=b)))
+> 
+> ## An error if 'extendInt' assumes "wrong zero-crossing direction":
+> ## Don't show: 
+> tools::assertError(
++ ## End(Don't show)
++ vuniroot(froot, u= 0.99, a=a, b=b, interval= cbind(0.1, 10), extendInt="down")
++ ## Don't show: 
++  , verbose=TRUE)
+Asserted error: no sign change found in 1000 iterations
+> ## End(Don't show)
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  17.331 0.357 17.871 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
+ERROR: modification of compiler constant of type language, length 4
+ERROR: the modified constant is function body:
+ifelse(x == 0, -0.0986659612490242, sin(x)/x)
+ERROR: the body was originally:
+ifelse(x == 0, 1, sin(x)/x)
+ERROR: modification of compiler constant of type double, length 1
+ERROR: the modified value of the constant is:
+[1] -0.09866596
+ERROR: the original value of the constant is:
+[1] 1
+ERROR: the modified constant is at index 3
 ERROR: the modified constant is in this function body:
-{
-    if (strict) 
-        methods::S3Part(from, S3Class = "oldClass")
-    else from
-}
+ifelse(x == 0, -0.0986659612490242, sin(x)/x)
 Fatal error: compiler constants were modified!
 
