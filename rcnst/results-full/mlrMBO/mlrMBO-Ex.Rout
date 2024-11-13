@@ -1,0 +1,79 @@
+
+R Under development (unstable) (2024-11-11 r87319) -- "Unsuffered Consequences"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "mlrMBO"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('mlrMBO')
+Loading required package: mlr
+Loading required package: ParamHelpers
+Loading required package: smoof
+Loading required package: checkmate
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("mbo")
+> ### * mbo
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: mbo
+> ### Title: Optimizes a function with sequential model based optimization.
+> ### Aliases: mbo
+> 
+> ### ** Examples
+> 
+> # simple 2d objective function
+> obj.fun = makeSingleObjectiveFunction(
++  fn = function(x) x[1]^2 + sin(x[2]),
++  par.set = makeNumericParamSet(id = "x", lower = -1, upper = 1, len = 2)
++ )
+> 
+> # create base control object
+> ctrl = makeMBOControl()
+> 
+> # do three MBO iterations
+> ctrl = setMBOControlTermination(ctrl, iters = 3L)
+> 
+> # use 500 points in the focussearch (should be sufficient for 2d)
+> ctrl = setMBOControlInfill(ctrl, opt.focussearch.points = 500)
+> # create initial design
+> des = generateDesign(n = 5L, getParamSet(obj.fun), fun = lhs::maximinLHS)
+> 
+> # start mbo
+> res = mbo(obj.fun, design = des, control = ctrl)
+Computing y column(s) for design. Not provided.
+[mbo] 0: x=0.0607,-0.047 : y = -0.0433 : 0.0 secs : initdesign
+[mbo] 0: x=-0.95,0.548 : y = 1.42 : 0.0 secs : initdesign
+[mbo] 0: x=0.707,-0.864 : y = -0.261 : 0.0 secs : initdesign
+[mbo] 0: x=0.354,0.793 : y = 0.838 : 0.0 secs : initdesign
+[mbo] 0: x=-0.595,-0.36 : y = 0.00116 : 0.0 secs : initdesign
+ERROR: modification of compiler constant of type character, length 2
+ERROR: the modified value of the constant is:
+[1] "integer"       "integervector"
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "integer"       "integervector"
+ERROR: the modified constant is at index 1
+ERROR: the modified constant is in this function body:
+c("integer", "integervector")
+Fatal error: compiler constants were modified!
+

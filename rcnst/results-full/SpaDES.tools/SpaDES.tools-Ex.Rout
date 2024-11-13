@@ -1,0 +1,1393 @@
+
+R Under development (unstable) (2024-11-12 r87322) -- "Unsuffered Consequences"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "SpaDES.tools"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('SpaDES.tools')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("adj")
+> ### * adj
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: adj
+> ### Title: Fast 'adjacent' function, and Just In Time compiled version
+> ### Aliases: adj
+> 
+> ### ** Examples
+> 
+> library(terra)
+terra 1.7.83
+
+Attaching package: ‘terra’
+
+The following object is masked from ‘package:SpaDES.tools’:
+
+    wrap
+
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> 
+> a <- rast(ext(0, 1000, 0, 1000), res = 1)
+> sam <- sample(1:ncell(a), 1e4)
+> numCol <- ncol(a)
+> numCell <- ncell(a)
+> adj.new <- adj(numCol = numCol, numCell = numCell, cells = sam, directions = 8)
+> adj.new <- adj(numCol = numCol, numCell = numCell, cells = sam, directions = 8,
++                include = TRUE)
+> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:terra’
+
+> nameEx("cir")
+> ### * cir
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: cir
+> ### Title: Identify pixels in a circle or ring (doughnut) around an object.
+> ### Aliases: cir
+> 
+> ### ** Examples
+> 
+> library(data.table)
+> library(terra)
+terra 1.7.83
+
+Attaching package: ‘terra’
+
+The following object is masked from ‘package:data.table’:
+
+    shift
+
+The following object is masked from ‘package:SpaDES.tools’:
+
+    wrap
+
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> set.seed(1462)
+> 
+> # circle centred
+> ras <- rast(ext(0, 15, 0, 15), res = 1, val = 0)
+> middleCircle <- cir(ras)
+> ras[middleCircle[, "indices"]] <- 1
+> circlePoints <- vect(middleCircle[, c("x", "y")])
+> if (interactive()) {
++   # clearPlot()
++   terra::plot(ras)
++   terra::plot(circlePoints, add = TRUE)
++ }
+> 
+> # circles non centred
+> ras <- randomPolygons(ras, numTypes = 4)
+> n <- 2
+> agent <- vect(cbind(x = stats::runif(n, xmin(ras), xmax(ras)),
++                     y = stats::runif(n, xmin(ras), xmax(ras))))
+> 
+> cirs <- cir(ras, agent, maxRadius = 15, simplify = TRUE) ## TODO: empty with some seeds! e.g. 1642
+> cirsSP <- vect(cirs[, c("x", "y")]) ## TODO: error with some seeds! e.g. 1642
+> cirsRas <- rast(ras)
+> cirsRas[] <- 0
+> cirsRas[cirs[, "indices"]] <- 1
+> 
+> if (interactive()) {
++   terra::plot(ras)
++   terra::plot(cirsRas, add = TRUE, col = c("transparent", "#00000055"))
++   terra::plot(agent, add = TRUE)
++   terra::plot(cirsSP, add = TRUE)
++ }
+> 
+> # Example comparing rings and cir
+> hab <- rast(system.file("extdata", "hab1.tif", package = "SpaDES.tools"))
+> radius <- 4
+> n <- 2
+> coords <- vect(cbind(x = stats::runif(n, xmin(hab), xmax(hab)),
++                      y = stats::runif(n, xmin(hab), xmax(hab))))
+> 
+> # cirs
+> cirs <- cir(hab, coords, maxRadius = rep(radius, length(coords)), simplify = TRUE)
+> 
+> ras1 <- rast(hab)
+> ras1[] <- 0
+> ras1[cirs[, "indices"]] <- cirs[, "id"]
+> if (interactive()) {
++   terra::plot(ras1)
++ }
+> 
+> # rings
+> loci <- cellFromXY(hab, crds(coords))
+> cirs2 <- rings(hab, loci, maxRadius = radius, minRadius = radius - 1, returnIndices = TRUE)
+> 
+> ras2 <- rast(hab)
+> ras2[] <- 0
+> ras2[cirs2$indices] <- cirs2$id
+> if (interactive()) {
++   terra::plot(c(ras1, ras2))
++ }
+> 
+> hab <- rast(system.file("extdata", "hab2.tif", package = "SpaDES.tools"))
+> cirs <- cir(hab, coords, maxRadius = 44, minRadius = 0)
+> ras1 <- rast(hab)
+> ras1[] <- 0
+> cirsOverlap <- data.table::data.table(cirs)[, list(sumIDs = sum(id)), by = indices]
+> ras1[cirsOverlap$indices] <- cirsOverlap$sumIDs
+> if (interactive()) {
++   terra::plot(ras1)
++ }
+> 
+> # Provide a specific set of angles
+> ras <- rast(ext(0, 330, 0, 330), res = 1)
+> ras[] <- 0
+> n <- 2
+> coords <- cbind(x = stats::runif(n, xmin(ras), xmax(ras)),
++                 y = stats::runif(n, xmin(ras), xmax(ras)))
+> circ <- cir(ras, coords, angles = seq(0, 2 * pi, length.out = 21),
++             maxRadius = 200, minRadius = 0, returnIndices = FALSE,
++             allowOverlap = TRUE, returnAngles = TRUE)
+> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:terra’, ‘package:data.table’
+
+> nameEx("crw")
+> ### * crw
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: move
+> ### Title: Move
+> ### Aliases: move crw
+> 
+> ### ** Examples
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> 
+> # using just matrix
+> N <- 10
+> xrange <- yrange <- c(-50, 50)
+> starts <- cbind(x = stats::runif(N, xrange[1], xrange[2]),
++                 y = stats::runif(N, yrange[1], yrange[2]))
+> moved <- crw(starts, stepLength = 5, stddev = 10)
+> plot(starts, col = rainbow(10), pch = 19)
+> points(moved, col = rainbow(10))
+> 
+> # as SpatVector
+> agent <- terra::vect(starts)
+> moved <- crw(agent, stepLength = 5, stddev = 10)
+> movedAgain <- crw(moved, stepLength = 5, stddev = 10)
+> terra::plot(agent)
+> terra::plot(moved, add = TRUE, col = "red")
+> terra::plot(movedAgain, add = TRUE, col = "green")
+> 
+> # 1000x faster!! -- returnMatrix = TRUE
+> agentOrig <- agent
+> reps <- 1e2
+> system.time({
++   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10, returnMatrix = TRUE)
++ })
+   user  system elapsed 
+   0.03    0.00    0.03 
+> agent <- agentOrig
+> system.time({
++   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10)
++ })
+   user  system elapsed 
+ 22.145   0.115  22.784 
+> 
+> # as sp
+> if (requireNamespace("sp")) {
++   agent <- sp::SpatialPoints(starts)
++   spdf <- crw(agent, stepLength = 5, stddev = 10)
++   spdfNew <- crw(spdf, stepLength = 5, stddev = 10)
++   terra::plot(spdf, pch = 19)
++   terra::points(spdfNew, col = "blue", pch = 19)
++ }
+Loading required namespace: sp
+agent does not have columns named x1 and y1, which represent the 'previous' locations. Assigning random values to those columns.
+agent does not have columns named x1 and y1, which represent the 'previous' locations. Assigning random values to those columns.
+> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("directions")
+> ### * directions
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: directionFromEachPoint
+> ### Title: Calculate distances and directions between many points and many
+> ###   grid cells
+> ### Aliases: directionFromEachPoint .pointDirection
+> ### Keywords: internal
+> 
+> ### ** Examples
+> 
+> library(terra)
+terra 1.7.83
+
+Attaching package: ‘terra’
+
+The following object is masked from ‘package:SpaDES.tools’:
+
+    wrap
+
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> 
+> N <- 2
+> dirRas <- terra::rast(terra::ext(0,40,0,40), res = 1)
+> coords <- cbind(x = round(runif(N, xmin(dirRas), xmax(dirRas))) + 0.5,
++                 y = round(runif(N, xmin(dirRas), xmax(dirRas))) + 0.5,
++                 id = 1:N)
+> 
+> dirs1 <- directionFromEachPoint(from = coords, landscape = dirRas)
+> 
+> # helper function for converting radians to degrees
+> deg2 <- function(radian) (radian * 180)/pi
+> dirs1[, "angles"] <- deg2(dirs1[,"angles"] %% (2*pi))
+> indices <- cellFromXY(dirRas,dirs1[, c("x", "y")])
+> minDir <- tapply(dirs1[, "angles"], indices, function(x) min(x)) # minimum angle
+> dirRas[] <- as.vector(minDir)
+> 
+> if (interactive()) {
++   terra::plot(dirRas)
++   start <- terra::vect(coords[, c("x", "y"), drop = FALSE])
++   terra::plot(start, add = TRUE)
++ }
+> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:terra’
+
+> nameEx("distanceFromEachPoint")
+> ### * distanceFromEachPoint
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: distanceFromEachPoint
+> ### Title: Calculate distances and directions between many points and many
+> ###   grid cells
+> ### Aliases: distanceFromEachPoint
+> 
+> ### ** Examples
+> 
+> library(terra)
+terra 1.7.83
+
+Attaching package: ‘terra’
+
+The following object is masked from ‘package:SpaDES.tools’:
+
+    wrap
+
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> 
+> n <- 2
+> distRas <- rast(ext(0, 40, 0, 40), res = 1)
+> coords <- cbind(x = round(runif(n, xmin(distRas), xmax(distRas))) + 0.5,
++                 y = round(runif(n, xmin(distRas), xmax(distRas))) + 0.5)
+> 
+> # inverse distance weights
+> dists1 <- distanceFromEachPoint(coords, landscape = distRas)
+> indices <- cellFromXY(distRas, dists1[, c("x", "y")])
+> invDist <- tapply(dists1[, "dists"], indices, function(x) sum(1 / (1 + x))) # idw function
+> distRas[] <- as.vector(invDist)
+> if (interactive()) {
++   # clearPlot()
++   terra::plot(distRas)
++ }
+> 
+> # With iterative summing via cumulativeFn to keep memory use low, with same result
+> dists1 <- distanceFromEachPoint(coords[, c("x", "y"), drop = FALSE],
++                                 landscape = distRas, cumulativeFn = `+`)
+> idwRaster <- rast(distRas)
+> idwRaster[] <- dists1[, "dists"]
+> if (interactive()) terra::plot(idwRaster)
+> 
+> all(idwRaster[] == distRas[]) # TRUE
+[1] TRUE
+> 
+> # A more complex example of cumulative inverse distance sums, weighted by the value
+> #  of the origin cell
+> ras <- rast(ext(0, 34, 0, 34), res = 1, val = 0)
+> rp <- randomPolygons(ras, numTypes = 10) ^ 2
+> n <- 15
+> cells <- sample(ncell(ras), n)
+> coords <- xyFromCell(ras, cells)
+> distFn <- function(landscape, fromCell, dist) landscape[fromCell] / (1 + dist)
+> 
+> #beginCluster(3) # can do parallel
+> dists1 <- distanceFromEachPoint(coords[, c("x", "y"), drop = FALSE],
++                                 landscape = rp, distFn = distFn, cumulativeFn = `+`)
+> #endCluster() # if beginCluster was run
+> 
+> idwRaster <- rast(ras)
+> idwRaster[] <- dists1[, "dists"]
+> if (interactive()) {
++   # clearPlot()
++   terra::plot(rp)
++   sp1 <- vect(coords)
++   terra::plot(sp1, add = TRUE)
++   terra::plot(idwRaster)
++   terra::plot(sp1, add = TRUE)
++ }
+> 
+> # On linux; can use numeric passed to cl; will use mclapply with mc.cores = cl
+> if (identical(Sys.info()["sysname"], "Linux")) {
++   dists1 <- distanceFromEachPoint(coords[, c("x", "y"), drop = FALSE],
++                                   landscape = rp, distFn = distFn,
++                                   cumulativeFn = `+`, cl = 2)
++ }
+> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:terra’
+
+> nameEx("dwrpnorm2")
+> ### * dwrpnorm2
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dwrpnorm2
+> ### Title: Vectorized wrapped normal density function
+> ### Aliases: dwrpnorm2
+> 
+> ### ** Examples
+> 
+> # Values for which to evaluate density
+> theta <- c(1:500) * 2 * pi / 500
+> # Compute wrapped normal density function
+> density <- c(1:500)
+> for(i in 1:500) {
++   density[i] <- dwrpnorm2(theta[i], pi, .75)
++ }
+> 
+> if (interactive()) {
++   plot(theta, density)
++ }
+> 
+> # Approximate area under density curve
+> sum(density * 2 * pi / 500)
+[1] 1
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("heading")
+> ### * heading
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: heading
+> ### Title: Heading between spatial points.
+> ### Aliases: heading
+> 
+> ### ** Examples
+> 
+> library(terra)
+terra 1.7.83
+
+Attaching package: ‘terra’
+
+The following object is masked from ‘package:SpaDES.tools’:
+
+    wrap
+
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> 
+> N <- 10L                       # number of agents
+> x1 <- stats::runif(N, -50, 50) # previous X location
+> y1 <- stats::runif(N, -50, 50) # previous Y location
+> x0 <- stats::rnorm(N, x1, 5)   # current X location
+> y0 <- stats::rnorm(N, y1, 5)   # current Y location
+> 
+> # using SpatVector
+> prev <- terra::vect(cbind(x = x1, y = y1))
+> curr <- terra::vect(cbind(x = x0, y = y0))
+> heading(prev, curr)
+ [1]  58.70553  26.49322 276.84424 228.06827  61.14567 218.67886 185.93288
+ [8] 147.31021 120.20979  54.86510
+> 
+> # using matrix
+> prev <- matrix(c(x1, y1), ncol = 2, dimnames = list(NULL, c("x","y")))
+> curr <- matrix(c(x0, y0), ncol = 2, dimnames = list(NULL, c("x","y")))
+> heading(prev, curr)
+ [1]  58.70553  26.49322 276.84424 228.06827  61.14567 218.67886 185.93288
+ [8] 147.31021 120.20979  54.86510
+> 
+> #using both
+> prev <- terra::vect(cbind(x = x1, y = y1))
+> curr <- matrix(c(x0, y0), ncol = 2, dimnames = list(NULL, c("x","y")))
+> heading(prev, curr)
+ [1]  58.70553  26.49322 276.84424 228.06827  61.14567 218.67886 185.93288
+ [8] 147.31021 120.20979  54.86510
+> 
+> prev <- matrix(c(x1, y1), ncol = 2, dimnames = list(NULL, c("x","y")))
+> curr <- terra::vect(cbind(x = x0, y = y0))
+> heading(prev, curr)
+ [1]  58.70553  26.49322 276.84424 228.06827  61.14567 218.67886 185.93288
+ [8] 147.31021 120.20979  54.86510
+> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:terra’
+
+> nameEx("inRange")
+> ### * inRange
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: inRange
+> ### Title: Test whether a number lies within range [a,b]
+> ### Aliases: inRange
+> 
+> ### ** Examples
+> 
+> set.seed(100)
+> x <- stats::rnorm(4) # -0.50219235  0.13153117 -0.07891709  0.88678481
+> inRange(x, 0, 1)
+[1] FALSE  TRUE FALSE  TRUE
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("initiateAgents")
+> ### * initiateAgents
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: initiateAgents
+> ### Title: 'SELES' - Initiate agents
+> ### Aliases: initiateAgents
+> 
+> ### ** Examples
+> 
+> if (require("sf", quietly = TRUE)) {
++   library(data.table)
++   library(terra)
++ 
++   origDTThreads <- data.table::setDTthreads(2L)
++   origNcpus <- options(Ncpus = 2L)
++ 
++   map <- rast(system.file("extdata", "map.tif", package = "SpaDES.tools"))
++   names(map) <- "layer"
++   pr <- probInit(map, p = (map[] / terra::minmax(map)[2])^2)
++   agents <- initiateAgents(map, 100, pr, asSpatialPoints = "sf")
++   if (interactive()) {
++     terra::plot(map)
++     terra::plot(agents, add = TRUE)
++   }
++   # Test that they are indeed selecting according to probabilities in pr
++   dt1 <- data.table(table(round(extract(map, agents), 0)[, "layer"]))
++   setnames(dt1, old = "N", new = "count")
++   dt2 <- data.table(table(round(map[], 0)))
++   setnames(dt2, old = "N", new = "available")
++   dt <- dt1[dt2, on = "V1"]  # join the counts and available data.tables
++   setnames(dt, old = "V1", new = "mapValue")
++   dt[, selection := count / available]
++   dt[is.na(selection), selection := 0]
++   if (interactive()) {
++     with(dt, plot(mapValue, selection))
++   }
++   #'
++   # Note, can also produce a Raster representing agents,
++   # then the number of points produced can't be more than
++   # the number of pixels:
++   agentsRas <- initiateAgents(map, 30, pr, asSpatialPoints = FALSE)
++   if (interactive()) {
++     terra::plot(agentsRas)
++   }
++   #'
++   # clean up
++   data.table::setDTthreads(origDTThreads)
++   options(Ncpus = origNcpus)
++ }
+Linking to GEOS 3.12.2, GDAL 3.8.5, PROJ 9.3.1; sf_use_s2() is TRUE
+terra 1.7.83
+
+Attaching package: ‘terra’
+
+The following object is masked from ‘package:data.table’:
+
+    shift
+
+The following object is masked from ‘package:SpaDES.tools’:
+
+    wrap
+
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:terra’, ‘package:data.table’, ‘package:sf’
+
+> nameEx("neutralLandscapeMap")
+> ### * neutralLandscapeMap
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: neutralLandscapeMap
+> ### Title: Produce a neutral landscape using a midpoint displacement
+> ###   algorithm
+> ### Aliases: neutralLandscapeMap
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("randomPolygons")
+> ### * randomPolygons
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: randomPolygons
+> ### Title: Produce a 'SpatRaster' of random polygons
+> ### Aliases: randomPolygons randomPolygon randomPolygon.default
+> 
+> ### ** Examples
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> 
+> set.seed(1234)
+> Ras <- randomPolygons(numTypes = 5)
+> if (interactive() ) {
++   terra::plot(Ras, col = c("yellow", "dark green", "blue", "dark red"))
++ }
+> 
+> # more complex patterning, with a range of patch sizes
+> r <- terra::rast(terra::ext(0, 50, 0, 50), resolution = 1, vals = 0)
+> a <- randomPolygons(numTypes = 400, r)
+duplicate initial loci are provided
+> a[a < 320] <- 0
+> a[a >= 320] <- 1
+> clumped <- terra::patches(a)
+> if (interactive()) {
++   terra::plot(a)
++ }
+> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
+> 
+> a1 <- terra::vect(cbind(-110, 59), crs = "epsg:4326")
+> a2 <- randomPolygon(a1, area = 1e7)
+The CRS provided is not in meters; converting internally to UTM so area will be approximately correct.
+> 
+> if (interactive()) {
++   terra::plot(a1)
++   terra::points(a2, pch = 19)
++ }
+> 
+> if (require("sf", quietly = TRUE)) {
++   b1 <- list(cbind(
++     x = c(-122.98, -116.1, -99.2, -106, -122.98),
++     y = c(59.9, 65.73, 63.58, 54.79, 59.9)
++   )) |>
++     sf::st_polygon() |>
++     sf::st_sfc() |>
++     sf::st_sf(geometry = _, ID = 1L, shinyLabel = "zone2", crs = "epsg:4326")
++   b2 <- randomPolygon(b1, area = 1e10)
++ 
++   if (interactive()) {
++     plot(sf::st_geometry(b1))
++     plot(sf::st_geometry(b2), add = TRUE)
++   }
++ }
+Linking to GEOS 3.12.2, GDAL 3.8.5, PROJ 9.3.1; sf_use_s2() is TRUE
+The CRS provided is not in meters; converting internally to UTM so area will be approximately correct.
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:sf’
+
+> nameEx("randomStudyArea")
+> ### * randomStudyArea
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: randomStudyArea
+> ### Title: Create default study areas for use with 'SpaDES' modules
+> ### Aliases: randomStudyArea
+> 
+> ### ** Examples
+> 
+> a <- randomStudyArea(seed = 123)
+> if (interactive()) {
++   terra::plot(a)
++ }
+> 
+> 
+> 
+> cleanEx()
+> nameEx("rasterizeReduced")
+> ### * rasterizeReduced
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: rasterizeReduced
+> ### Title: Convert reduced representation to full raster
+> ### Aliases: rasterizeReduced
+> 
+> ### ** Examples
+> 
+> library(data.table)
+> library(terra)
+terra 1.7.83
+
+Attaching package: ‘terra’
+
+The following object is masked from ‘package:data.table’:
+
+    shift
+
+The following object is masked from ‘package:SpaDES.tools’:
+
+    wrap
+
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> 
+> ras <- rast(ext(0, 15, 0, 15), res = 1)
+> fullRas <- randomPolygons(ras, numTypes = 2)
+> names(fullRas) <- "mapcodeAll"
+> uniqueComms <- unique(fullRas)
+> reducedDT <- data.table(uniqueComms,
++                         communities = sample(1:1000, length(uniqueComms)),
++                         biomass = rnbinom(length(uniqueComms), mu = 4000, 0.4))
+> biomass <- rasterizeReduced(reducedDT, fullRas, "biomass")
+> 
+> # The default key is the layer name of the fullRas, so rekey incase of miskey
+> setkey(reducedDT, biomass)
+> 
+> communities <- rasterizeReduced(reducedDT, fullRas, "communities")
+> coltab(communities) <- c("blue", "orange", "red")
+> if (interactive()) {
++   terra::plot(c(biomass, communities, fullRas))
++ }
+> 
+> ## with a factor SpatRaster, the mapcode should correspond to the
+> ## active category (not the ids)
+> cls <- data.frame(id = sort(unique(as.vector(fullRas[]))))
+> cls$Bclass <- LETTERS[cls$id]
+> levels(fullRas) <- cls
+> is.factor(fullRas)
+[1] TRUE
+> 
+> clsDT <- as.data.table(cls)
+> reducedDT <- reducedDT[clsDT, on = "mapcodeAll==id"]
+> reducedDT[, mapcodeAll := Bclass]
+> 
+> biomass2 <- rasterizeReduced(reducedDT, fullRas, "biomass")
+> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:terra’, ‘package:data.table’
+
+> nameEx("rings")
+> ### * rings
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: rings
+> ### Title: Identifies all cells within a ring around the focal cells
+> ### Aliases: rings
+> 
+> ### ** Examples
+> 
+> library(terra)
+terra 1.7.83
+
+Attaching package: ‘terra’
+
+The following object is masked from ‘package:SpaDES.tools’:
+
+    wrap
+
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> set.seed(1462)
+> 
+> # Make random forest cover map
+> emptyRas <- terra::rast(terra::ext(0, 1e2, 0, 1e2), res = 1)
+> 
+> # start from two cells near middle
+> loci <- (ncell(emptyRas) / 2 - ncol(emptyRas)) / 2 + c(-3, 3)
+> 
+> # No overlap is default, occurs randomly
+> emptyRas[] <- 0
+> rngs <- rings(emptyRas, loci = loci, minRadius = 7, maxRadius = 9, returnIndices = TRUE)
+> emptyRas[rngs$indices] <- rngs$id
+> if (interactive()) {
++   terra::plot(emptyRas)
++ }
+> 
+> # Variable ring widths, including centre cell for smaller one
+> emptyRas[] <- 0
+> rngs <- rings(emptyRas, loci = loci, minRadius = c(0, 7), maxRadius = c(8, 18),
++               returnIndices = TRUE)
+> emptyRas[rngs$indices] <- rngs$id
+> if (interactive()) {
++   terra::plot(emptyRas)
++ }
+> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:terra’
+
+> nameEx("specnumperpatch-probs")
+> ### * specnumperpatch-probs
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: specificNumPerPatch
+> ### Title: Initiate a specific number of agents in a map of patches
+> ### Aliases: specificNumPerPatch
+> 
+> ### ** Examples
+> 
+> library(data.table)
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> 
+> set.seed(1234)
+> Ntypes <- 4
+> ras <- randomPolygons(numTypes = Ntypes)
+> if (interactive()) {
++   terra::plot(ras)
++ }
+> 
+> # Use numPerPatchTable
+> patchDT <- data.table(pops = 1:Ntypes, num.in.pop = c(1, 3, 5, 7))
+> rasAgents <- specificNumPerPatch(ras, patchDT)
+> rasAgents[is.na(rasAgents)] <- 0
+> 
+> if (require(testthat))
++   expect_true(all(unname(table(ras[rasAgents])) == patchDT$num.in.pop))
+Loading required package: testthat
+> 
+> # Use numPerPatchMap
+> rasPatches <- ras
+> for (i in 1:Ntypes) {
++   rasPatches[rasPatches==i] <- patchDT$num.in.pop[i]
++ }
+> if (interactive()) {
++   terra::plot(c(ras, rasPatches))
++ }
+> rasAgents <- specificNumPerPatch(ras, numPerPatchMap = rasPatches)
+> rasAgents[is.na(rasAgents)] <- 0
+> if (interactive()) {
++   terra::plot(rasAgents)
++ }
+> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:testthat’, ‘package:data.table’
+
+> nameEx("splitRaster")
+> ### * splitRaster
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: mergeRaster
+> ### Title: Split and re-merge 'RasterLayer'(s)
+> ### Aliases: mergeRaster mergeRaster,list-method splitRaster
+> 
+> ### ** Examples
+> 
+> library(terra)
+terra 1.7.83
+
+Attaching package: ‘terra’
+
+The following object is masked from ‘package:SpaDES.tools’:
+
+    wrap
+
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> set.seed(1462)
+> 
+> ## an example with dimensions: nrow = 77,  ncol = 101, nlayers = 3
+> b <- rast(system.file("ex/logo.tif", package = "terra"))
+> r <- b[[1]] # use first layer only
+> nx <- 3
+> ny <- 4
+> 
+> tmpdir <- dir.create(file.path(tempdir(), "splitRaster-example"), showWarnings = FALSE)
+> 
+> y0 <- splitRaster(r, nx, ny, path = file.path(tmpdir, "y0")) # no buffer
+> 
+> ## buffer: 10 pixels along both axes
+> y1 <- splitRaster(r, nx, ny, c(10, 10), path = file.path(tmpdir, "y1"))
+> 
+> ## buffer: half the width and length of each tile
+> y2 <- splitRaster(r, nx, ny, c(0.5, 0.5), path = file.path(tmpdir, "y2"))
+> 
+> ## the original raster:
+> if (interactive()) plot(r) # may require a call to `dev()` if using RStudio
+> 
+> ## the split raster:
+> layout(mat = matrix(seq_len(nx * ny), ncol = nx, nrow = ny))
+> plotOrder <- unlist(lapply(split(1:12, rep(1:nx, each = ny)), rev))
+> 
+> if (interactive()) {
++   invisible(lapply(y0[plotOrder], terra::plot))
++ }
+> 
+> ## parallel splitting
+> if (requireNamespace("raster", quietly = TRUE) &&
++     requireNamespace("parallel")) {
++   if (interactive()) {
++     n <- pmin(parallel::detectCores(), 4) # use up to 4 cores
++     raster::beginCluster(n, type = "PSOCK")
++     y3 <- splitRaster(r, nx, ny, c(0.7, 0.7), path = file.path(tmpdir, "y3"))
++     raster::endCluster()
++     if (interactive()) {
++       invisible(lapply(y3[plotOrder], terra::plot))
++     }
++   }
++ }
+> 
+> ## can be recombined using `terra::merge`
+> m0 <- do.call(merge, y0)
+> all.equal(m0, r) ## TRUE
+[1] TRUE
+> 
+> m1 <- do.call(merge, y1)
+> all.equal(m1, r) ## TRUE
+[1] TRUE
+> 
+> m2 <- do.call(merge, y2)
+> all.equal(m2, r) ## TRUE
+[1] TRUE
+> 
+> ## or recombine using mergeRaster
+> n0 <- mergeRaster(y0)
+> all.equal(n0, r) ## TRUE
+[1] TRUE
+> 
+> n1 <- mergeRaster(y1)
+> all.equal(n1, r) ## TRUE
+[1] TRUE
+> 
+> n2 <- mergeRaster(y2)
+> all.equal(n2, r) ## TRUE
+[1] TRUE
+> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
+> unlink(tmpdir, recursive = TRUE)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:terra’
+
+> nameEx("spokes")
+> ### * spokes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: spokes
+> ### Title: Identify outward radiating spokes from initial points
+> ### Aliases: spokes
+> 
+> ### ** Examples
+> 
+> library(data.table)
+> library(terra)
+terra 1.7.83
+
+Attaching package: ‘terra’
+
+The following object is masked from ‘package:data.table’:
+
+    shift
+
+The following object is masked from ‘package:SpaDES.tools’:
+
+    wrap
+
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> set.seed(1234)
+> 
+> ras <- terra::rast(terra::ext(0, 10, 0, 10), res = 1, val = 0)
+> rp <- randomPolygons(ras, numTypes = 10)
+> 
+> if (interactive())
++   terra::plot(rp)
+> 
+> angles <- seq(0, pi * 2, length.out = 17)
+> angles <- angles[-length(angles)]
+> n <- 2
+> loci <- sample(terra::ncell(rp), n)
+> coords <- terra::vect(terra::xyFromCell(rp, loci))
+> stopRule <- function(landscape) landscape < 3
+> d2 <- spokes(rp, coords = coords, stopRule = stopRule,
++              minRadius = 0, maxRadius = 50,
++              returnAngles = TRUE, returnDistances = TRUE,
++              allowOverlap = TRUE, angles = angles, returnIndices = TRUE)
+This function is very experimental and may not behave as expected
+> 
+> # Assign values to the "patches" that were in the viewshed of a ray
+> rasB <- terra::rast(ras)
+> rasB[] <- 0
+> rasB[d2[d2[, "stop"] == 1, "indices"]] <- 1
+> 
+> if (interactive()) {
++   rasB[rasB == 0] <- NA
++   terra::plot(rasB, add = TRUE, col = "red", legend = FALSE)
++ }
+> 
+> if (NROW(d2) > 0) {
++   sp1 <- terra::vect(d2[, c("x", "y")])
++   if (interactive())
++     terra::plot(sp1, add = TRUE, pch = 19)
++ }
+> if (interactive())
++   terra::plot(coords, add = TRUE, pch = 19, col = "blue")
+> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:terra’, ‘package:data.table’
+
+> nameEx("spread")
+> ### * spread
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: spread
+> ### Title: Simulate a spread process on a landscape.
+> ### Aliases: spread
+> 
+> ### ** Examples
+> 
+> library(terra)
+terra 1.7.83
+
+Attaching package: ‘terra’
+
+The following object is masked from ‘package:SpaDES.tools’:
+
+    wrap
+
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> 
+> # Make random forest cover map
+> set.seed(123)
+> emptyRas <- rast(ext(0, 1e2, 0, 1e2), res = 1)
+> hab <- randomPolygons(emptyRas, numTypes = 40)
+> names(hab) <- "hab"
+> mask <- rast(emptyRas)
+> values(mask) <- 0
+> mask[1:5000] <- 1
+> numCol <- ncol(emptyRas)
+> numCell <- ncell(emptyRas)
+> directions <- 8
+> 
+> # Can use transparent as a colour
+> coltab(hab) <- paste(c("transparent", grey(0:40/40)))
+> 
+> terra::plot(hab)
+> 
+> # initiate 10 fires
+> startCells <- as.integer(sample(1:ncell(emptyRas), 100))
+> fires <- spread(hab, loci = startCells, 0.235, persistence = 0, numNeighs = 2,
++                 mask = NULL, maxSize = 1e8, directions = 8, iterations = 1e6, id = TRUE)
+> 
+> terra::plot(hab, type = "classes", legend = FALSE)
+> fires[fires == 0] <- NA
+> terra::plot(fires, add = TRUE, col = "red", type = "continuous", legend = FALSE)
+> 
+> # Instead, to give a colour to the zero values, use \code{zero.color=}
+> coltab(fires) <- NULL
+> # need to specify "type" to get correct legend
+> terra::plot(fires,  col = c(colorRampPalette(c("blue", "green"))(100)),
++             type = "continuous")
+> 
+> ##------------------------------------------------------------------------------
+> ## Continue event by passing interrupted object into spreadState
+> ##------------------------------------------------------------------------------
+> 
+> ## Interrupt a spread event using iterations - need `returnIndices = TRUE` to
+> ##  use outputs as new inputs in next iteration
+> fires <- spread(hab, loci = as.integer(sample(1:ncell(hab), 10)),
++                 returnIndices = TRUE, 0.235, 0, NULL, 1e8, 8, iterations = 3, id = TRUE)
+> fires[, list(size = length(initialLocus)), by = id]  # See sizes of fires
+Key: <id>
+       id  size
+    <int> <int>
+ 1:     1     3
+ 2:     2     7
+ 3:     3     4
+ 4:     4     5
+ 5:     5    11
+ 6:     6    15
+ 7:     7     9
+ 8:     8     6
+ 9:     9     9
+10:    10     6
+> 
+> fires2 <- spread(hab, loci = NA_real_, returnIndices = TRUE, 0.235, 0, NULL,
++                  1e8, 8, iterations = 2, id = TRUE, spreadState = fires)
+> # NOTE events are assigned arbitrary IDs, starting at 1
+> 
+> 
+> ## Use data.table and loci...
+> fires <- spread(hab, loci = as.integer(sample(1:ncell(hab), 10)),
++                 returnIndices = TRUE, 0.235, 0, NULL, 1e8, 8,
++                 iterations = 2, id = TRUE)
+> fullRas <- rast(hab)
+> fullRas[] <- 1:ncell(hab)
+> burned <- fires[active == FALSE]
+> burnedMap <- rasterizeReduced(burned, fullRas, "id", "indices")
+> 
+> terra::plot(burnedMap, type = "classes")
+> 
+> ####################
+> ## stopRule examples
+> ####################
+> 
+> # examples with stopRule, which means that the eventual size is driven by the values on the raster
+> #  passed in to the landscape argument. It won't be exact because the pixel values
+> #  will likely not allow it
+> stopRule22 <- function(landscape) sum(landscape) > 100
+> 
+> set.seed(1234)
+> stopRule1 <- function(landscape) sum(landscape) > 50
+> stopRuleA <- spread(hab, loci = as.integer(sample(1:ncell(hab), 10)), 1, 0, NULL,
++                     maxSize = 1e6, 8, 1e6, id = TRUE, circle = TRUE, stopRule = stopRule1,
++                     stopRuleBehavior = "excludePixel")
+> tapply(hab[], stopRuleA[], sum) # all below 50
+     0      1      2      3      4      5      6      7      8      9     10 
+214968     37     44     38     38     27     50     33     30     33     36 
+> 
+> set.seed(1234)
+> # using stopRuleBehavior = "excludePixel"
+> stopRuleB <- spread(hab, loci = as.integer(sample(1:ncell(hab), 10)), 1, 0, NULL,
++                     maxSize = 1e6, 8, 1e6, id = TRUE, circle = TRUE, stopRule = stopRule22,
++                     stopRuleBehavior = "excludePixel")
+> tapply(hab[], stopRuleB[], sum) # all below 100
+     0      1      2      3      4      5      6      7      8      9     10 
+214439     74     99     95     95     81     80     99     90     92     90 
+> 
+> if (interactive())
++   terra::plot(c(stopRuleA, stopRuleB))
+> # Cellular automata shapes
+> # Diamonds - can make them with: a boolean raster, directions = 4,
+> #    stopRule in place, spreadProb = 1
+> diamonds <- spread(hab > 0, spreadProb = 1, directions = 4, id = TRUE, stopRule = stopRule22)
+> 
+> terra::plot(diamonds)
+> 
+> # Squares - can make them with: a boolean raster, directions = 8,
+> #    stopRule in place, spreadProb = 1
+> squares <- spread(hab > 0, spreadProb = 1, directions = 8, id = TRUE, stopRule = stopRule22)
+> terra::plot(squares)
+> 
+> # Interference shapes - can make them with: a boolean raster, directions = 8,
+> #    stopRule in place, spreadProb = 1
+> stopRule2 <- function(landscape) sum(landscape) > 200
+> squashedDiamonds <- spread(hab > 0, spreadProb = 1,
++                            loci = (ncell(hab) - ncol(hab)) / 2 + c(4, -4),
++                            directions = 4, id = TRUE, stopRule = stopRule2)
+> terra::plot(squashedDiamonds)
+> 
+> # Circles with spreadProb < 1 will give "more" circular shapes, but definitely not circles
+> stopRule2 <- function(landscape) sum(landscape) > 200
+> seed <- sample(1e4, 1)
+> set.seed(seed)
+> 
+> circlish <- spread(hab > 0, spreadProb = 1, iterations = 10,
++                    loci = (ncell(hab) - ncol(hab)) / 2 + c(4, -4),
++                    directions = 8, id = TRUE, circle = TRUE)#, stopRule = stopRule2)
+> if (interactive())
++   terra::plot(c(circlish))
+> 
+> set.seed(seed)
+> regularCA <- spread(hab > 0, spreadProb = 1, iterations = 10,
++                     loci = (ncell(hab) - ncol(hab)) / 2 + c(4, -4),
++                     directions = 8, id = TRUE)#, stopRule = stopRule2)
+> 
+> if (interactive()) # compare to circlish
++   terra::plot(regularCA)
+> 
+> ####################
+> # complex stopRule
+> ####################
+> 
+> initialLoci <- sample(seq_len(ncell(hab)), 2)
+> endSizes <- seq_along(initialLoci) * 200
+> 
+> # Can be a function of landscape, id, and/or any other named
+> #   variable passed into spread
+> stopRule3 <- function(landscape, id, endSizes) sum(landscape) > endSizes[id]
+> 
+> set.seed(1)
+> twoCirclesDiffSize <- spread(hab, spreadProb = 1, loci = initialLoci,
++                              circle = TRUE, directions = 8, id = TRUE,
++                              stopRule = stopRule3, endSizes = endSizes,
++                              stopRuleBehavior = "excludePixel")
+> 
+> # or using named list of named elements:
+> set.seed(1)
+> twoCirclesDiffSize2 <- spread(hab, spreadProb = 1, loci = initialLoci,
++                               circle = TRUE, directions = 8, id = TRUE,
++                               stopRule = stopRule3,
++                               vars = list(endSizes = endSizes),
++                               stopRuleBehavior = "excludePixel")
+> 
+> compareGeom(twoCirclesDiffSize, twoCirclesDiffSize2, res = TRUE,
++             stopOnError = FALSE)
+[1] TRUE
+> 
+> terra::plot(c(twoCirclesDiffSize , twoCirclesDiffSize2))
+> 
+> cirs <- values(twoCirclesDiffSize)
+> vals <- tapply(hab[][cirs > 0], cirs[cirs > 0], sum) # one is <200, other is <400 as per endSizes
+> 
+> # Stop if sum of landscape is big or mean of quality is too small
+> quality <- rast(hab)
+> quality[] <- runif(ncell(quality), 0, 1)
+> stopRule4 <- function(landscape, quality, cells) {
++   (sum(landscape) > 20) | (mean(values(quality)[cells]) < 0.3)
++ }
+> 
+> twoCirclesDiffSize <- spread(hab, spreadProb = 1, loci = initialLoci, circle = TRUE,
++                              directions = 8, id = TRUE, stopRule = stopRule4,
++                              quality = quality, stopRuleBehavior = "excludePixel")
+> 
+> 
+> ## Using alternative algorithm, not probabilistic diffusion
+> ## Will give exactly correct sizes, yet still with variability
+> ## within the spreading (i.e., cells with and without successes)
+> seed <- sample(1e6, 1)
+> set.seed(seed)
+> startCells <- startCells[1:4]
+> maxSizes <- rexp(length(startCells), rate = 1 / 500)
+> fires <- spread(hab, loci = startCells, 1, persistence = 0,
++                 neighProbs = c(0.5, 0.5, 0.5) / 1.5,
++                 mask = NULL, maxSize = maxSizes, directions = 8,
++                 iterations = 1e6, id = TRUE, plot.it = FALSE, exactSizes = TRUE)
+> all(table(fires[fires > 0][]) == floor(maxSizes))
+[1] TRUE
+> 
+> terra::plot(fires)
+> hist(fires[][fires[] > 0], main = "fire size distribution")
+> 
+> ## Example with relativeSpreadProb ... i.e., a relative probability spreadProb
+> ##  (shown here because because spreadProb raster is not a probability).
+> ##  Here, we force the events to grow, choosing always 2 neighbours,
+> ##  according to the relative probabilities contained on hab layer.
+> ##
+> ## Note: `neighProbs = c(0,1)` forces each active pixel to move to 2 new pixels
+> ## (`prob = 0` for 1 neighbour, `prob = 1` for 2 neighbours)
+> ##
+> ## Note: set hab3 to be very distinct probability differences, to detect spread
+> ##  differences
+> hab3 <- (hab < 20) * 200 + 1
+> seed <- 643503
+> set.seed(seed)
+> sam <- sample(which(hab3[] == 1), 1)
+> set.seed(seed)
+> events1 <- spread(hab3, spreadProb = hab3, loci = sam, directions = 8,
++                   neighProbs = c(0, 1), maxSize = c(70), exactSizes = TRUE)
+> 
+> # Compare to absolute probability version
+> set.seed(seed)
+> events2 <- spread(hab3, id = TRUE, loci = sam, directions = 8,
++                   neighProbs = c(0, 1), maxSize = c(70), exactSizes = TRUE)
+> 
+> terra::plot(events1)
+> 
+> terra::plot(events2, col = c("white", "red", "red"))
+> 
+> hist(events1[], breaks = 30, main = "Event size distribution") ## TODO: fix this plot
+> # Compare outputs -- should be more high value hab pixels spread to in event1
+> #  (randomness may prevent this in all cases)
+> sum(hab3[events1[] > 0]) >= sum(hab3[events2[] > 0]) ## should be usually TRUE
+[1] TRUE
+> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:terra’
+
+> nameEx("spread2")
+> ### * spread2
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: spread2
+> ### Title: Simulate a contagious spread process on a landscape, with
+> ###   'data.table' internals
+> ### Aliases: spread2
+> 
+> ### ** Examples
+> 
+> library(terra)
+terra 1.7.83
+
+Attaching package: ‘terra’
+
+The following object is masked from ‘package:SpaDES.tools’:
+
+    wrap
+
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> 
+> a <- rast(ext(0, 10, 0, 10), res = 1)
+> sams <- sort(sample(ncell(a), 3))
+> 
+> # Simple use -- similar to spread(...)
+> out <- spread2(a, start = sams, 0.225)
+> if (interactive()) {
++   terra::plot(out)
++ }
+> 
+> # Use maxSize -- this gives an upper limit
+> maxSizes <- sort(sample(1:10, size = length(sams)))
+> out <- spread2(a, start = sams, 0.225, maxSize = maxSizes, asRaster = FALSE)
+> # check TRUE using data.table .N
+> out[, .N, by = "initialPixels"]$N <= maxSizes
+[1] TRUE TRUE TRUE
+> 
+> # Use exactSize -- gives an exact size, if there is enough space on the Raster
+> exactSizes <- maxSizes
+> out <- spread2(a, start = sams, spreadProb = 0.225,
++                exactSize = exactSizes, asRaster = FALSE)
+> out[, .N, by = "initialPixels"]$N == maxSizes # should be TRUE TRUE TRUE
+[1] TRUE TRUE TRUE
+> 
+> # Use exactSize -- but where it can't be achieved
+> exactSizes <- sort(sample(100:110, size = length(sams)))
+> out <- spread2(a, start = sams, 1, exactSize = exactSizes)
+ERROR: modification of compiler constant of type character, length 4
+ERROR: the modified value of the constant is:
+[1] "activeSource" "holding"      "successful"   "tooSmall"    
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "activeSource" "holding"      "successful"   "tooSmall"    
+ERROR: the modified constant is at index 1
+ERROR: the modified constant is in this function body:
+c("activeSource", "holding", "successful", "tooSmall")
+Fatal error: compiler constants were modified!
+
