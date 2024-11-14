@@ -1,0 +1,94 @@
+
+R Under development (unstable) (2024-11-13 r87325) -- "Unsuffered Consequences"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "PvSTATEM"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('PvSTATEM')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("Model")
+> ### * Model
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Model
+> ### Title: Logistic regression model for the standard curve
+> ### Aliases: Model
+> 
+> ### ** Examples
+> 
+> plate_file <- system.file("extdata", "CovidOISExPONTENT.csv", package = "PvSTATEM")
+> layout_file <- system.file("extdata", "CovidOISExPONTENT_layout.csv", package = "PvSTATEM")
+> plate <- read_luminex_data(plate_file, layout_filepath = layout_file)
+Reading Luminex data from: /var/scratch2ro/tomas/cran/rlibro/lib/PvSTATEM/extdata/CovidOISExPONTENT.csv
+using format xPONENT
+[32m
+New plate object has been created with name: CovidOISExPONTENT!
+[39m
+> model <- create_standard_curve_model_analyte(plate, "S2", log_mfi = TRUE)
+> print(model)
+Instance of the Model class fitted for analyte ' S2 ': 
+ - fitted with 5 parameters
+ - using 11 samples
+ - using log residuals (mfi):  TRUE 
+ - using log dilution:  TRUE 
+ - top asymptote: 6587.765 
+ - bottom asymptote: 24.6534 
+ - goodness of fit: 0.996416 
+ - weighted goodness of fit: 0.9998704 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("generate_plate_report")
+> ### * generate_plate_report
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: generate_plate_report
+> ### Title: Generate a report for a plate.
+> ### Aliases: generate_plate_report
+> 
+> ### ** Examples
+> 
+> 
+> plate_file <- system.file("extdata", "CovidOISExPONTENT_CO_reduced.csv", package = "PvSTATEM")
+> # a plate file with reduced number of analytes to speed up the computation
+> layout_file <- system.file("extdata", "CovidOISExPONTENT_CO_layout.xlsx", package = "PvSTATEM")
+> note <- "This is a test report.\n**Author**: Jane Doe \n**Tester**: John Doe"
+> 
+> plate <- read_luminex_data(plate_file, layout_file, verbose = FALSE)
+> example_dir <- tempdir(check = TRUE) # a temporary directory
+> generate_plate_report(plate,
++   output_dir = example_dir,
++   counts_lower_threshold = 40,
++   counts_higher_threshold = 50,
++   additional_notes = note
++ )
+Generating report...This will take approximately 30 seconds.
+Error in file(con, "w") : cannot open the connection
+Calls: generate_plate_report ... <Anonymous> -> <Anonymous> -> write_utf8 -> writeLines -> file
+In addition: Warning message:
+In file(con, "w") :
+  cannot open file 'plate_report_template.knit.md': Read-only file system
+Execution halted
