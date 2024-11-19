@@ -1,0 +1,71 @@
+Package yyjsonr version 0.1.20
+Package built using 87343/R 4.5.0; x86_64-pc-linux-gnu; 2024-11-19 09:48:41 UTC; unix   
+Checked with rchk version baa186024c3a38e5db74ac4a72f8e2c1e04417ef LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at parse_feature yyjsonr/src/geojson-parse.c:836
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at parse_feature yyjsonr/src/geojson-parse.c:837
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at parse_feature yyjsonr/src/geojson-parse.c:864
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at parse_feature yyjsonr/src/geojson-parse.c:865
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at parse_feature_collection_geometry yyjsonr/src/geojson-parse.c:1083
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at parse_feature_collection_geometry yyjsonr/src/geojson-parse.c:1084
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at parse_feature_collection_geometry yyjsonr/src/geojson-parse.c:1089
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at parse_feature_collection_geometry yyjsonr/src/geojson-parse.c:1090
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at parse_feature_collection_geometry yyjsonr/src/geojson-parse.c:1093
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at parse_feature_collection_geometry yyjsonr/src/geojson-parse.c:1097
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at promote_bare_geometry_to_df yyjsonr/src/geojson-parse.c:1383
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at promote_bare_geometry_to_list yyjsonr/src/geojson-parse.c:1321
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at promote_bare_geometry_to_list yyjsonr/src/geojson-parse.c:1334
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at promote_bare_geometry_to_list yyjsonr/src/geojson-parse.c:1335
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at promote_bare_geometry_to_list yyjsonr/src/geojson-parse.c:1337
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at promote_bare_geometry_to_list yyjsonr/src/geojson-parse.c:1338
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at promote_bare_geometry_to_list yyjsonr/src/geojson-parse.c:1341
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at promote_bare_geometry_to_list yyjsonr/src/geojson-parse.c:1345
+
+Function parse_ndjson_file_as_list_
+  [UP] calling allocating function grow_list with a fresh pointer (list_ <arg 1>) yyjsonr/src/ndjson-parse.c:167
+  [UP] calling allocating function grow_list(V) with a fresh pointer (list_ <arg 1>) yyjsonr/src/ndjson-parse.c:167
+
+Function parse_ndjson_str_as_list_
+  [UP] calling allocating function grow_list with a fresh pointer (list_ <arg 1>) yyjsonr/src/ndjson-parse.c:287
+  [UP] calling allocating function grow_list(V) with a fresh pointer (list_ <arg 1>) yyjsonr/src/ndjson-parse.c:287
+
+Function serialize_df_to_ndjson_file_
+  [UP] unprotected variable nms_ while calling allocating function unsafe_yyjson_val_pool_grow yyjsonr/src/./yyjson.h:5359
+  [UP] unprotected variable nms_ while calling allocating function yyjson_mut_doc_new yyjsonr/src/ndjson-serialize.c:143
+  [UP] unprotected variable nms_ while calling allocating function scalar_logical_to_json_val yyjsonr/src/ndjson-serialize.c:153
+  [UP] unprotected variable nms_ while calling allocating function scalar_factor_to_json_val yyjsonr/src/ndjson-serialize.c:157
+  [UP] unprotected variable nms_ while calling allocating function scalar_date_to_json_val yyjsonr/src/ndjson-serialize.c:159
+  [UP] unprotected variable nms_ while calling allocating function scalar_posixct_to_json_val yyjsonr/src/ndjson-serialize.c:161
+  [UP] unprotected variable nms_ while calling allocating function scalar_integer_to_json_val yyjsonr/src/ndjson-serialize.c:163
+  [UP] unprotected variable nms_ while calling allocating function scalar_date_to_json_val yyjsonr/src/ndjson-serialize.c:168
+  [UP] unprotected variable nms_ while calling allocating function scalar_posixct_to_json_val yyjsonr/src/ndjson-serialize.c:170
+  [UP] unprotected variable nms_ while calling allocating function scalar_integer64_to_json_val yyjsonr/src/ndjson-serialize.c:172
+  [UP] unprotected variable nms_ while calling allocating function scalar_double_to_json_val yyjsonr/src/ndjson-serialize.c:174
+  [UP] unprotected variable nms_ while calling allocating function scalar_strsxp_to_json_val yyjsonr/src/ndjson-serialize.c:179
+  [UP] unprotected variable nms_ while calling allocating function serialize_core yyjsonr/src/ndjson-serialize.c:183
+  [UP] unprotected variable nms_ while calling allocating function scalar_rawsxp_to_json_val yyjsonr/src/ndjson-serialize.c:186
+  [UP] unprotected variable nms_ while calling allocating function yyjson_mut_write_fp yyjsonr/src/ndjson-serialize.c:202
+  [UP] unprotected variable nms_ while calling allocating function yyjson_mut_doc_free yyjsonr/src/ndjson-serialize.c:211
+
+Function serialize_df_to_ndjson_str_
+  [UP] unprotected variable nms_ while calling allocating function yyjson_mut_write_opts yyjsonr/src/./yyjson.h:1346
+  [UP] unprotected variable nms_ while calling allocating function unsafe_yyjson_val_pool_grow yyjsonr/src/./yyjson.h:5359
+  [UP] unprotected variable nms_ while calling allocating function yyjson_mut_doc_new yyjsonr/src/ndjson-serialize.c:252
+  [UP] unprotected variable nms_ while calling allocating function scalar_logical_to_json_val yyjsonr/src/ndjson-serialize.c:262
+  [UP] unprotected variable nms_ while calling allocating function scalar_factor_to_json_val yyjsonr/src/ndjson-serialize.c:266
+  [UP] unprotected variable nms_ while calling allocating function scalar_date_to_json_val yyjsonr/src/ndjson-serialize.c:268
+  [UP] unprotected variable nms_ while calling allocating function scalar_posixct_to_json_val yyjsonr/src/ndjson-serialize.c:270
+  [UP] unprotected variable nms_ while calling allocating function scalar_integer_to_json_val yyjsonr/src/ndjson-serialize.c:272
+  [UP] unprotected variable nms_ while calling allocating function scalar_date_to_json_val yyjsonr/src/ndjson-serialize.c:277
+  [UP] unprotected variable nms_ while calling allocating function scalar_posixct_to_json_val yyjsonr/src/ndjson-serialize.c:279
+  [UP] unprotected variable nms_ while calling allocating function scalar_integer64_to_json_val yyjsonr/src/ndjson-serialize.c:281
+  [UP] unprotected variable nms_ while calling allocating function scalar_double_to_json_val yyjsonr/src/ndjson-serialize.c:283
+  [UP] unprotected variable nms_ while calling allocating function scalar_strsxp_to_json_val yyjsonr/src/ndjson-serialize.c:288
+  [UP] unprotected variable nms_ while calling allocating function serialize_core yyjsonr/src/ndjson-serialize.c:292
+  [UP] unprotected variable nms_ while calling allocating function scalar_rawsxp_to_json_val yyjsonr/src/ndjson-serialize.c:295
+  [UP] unprotected variable nms_ while calling allocating function yyjson_mut_doc_free yyjsonr/src/ndjson-serialize.c:315
+
+Function sf_to_json
+  [UP] calling allocating function Rf_getAttrib(?,V) with argument allocated using Rf_mkString yyjsonr/src/geojson-serialize.c:168

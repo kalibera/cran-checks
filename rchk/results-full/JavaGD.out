@@ -1,0 +1,14 @@
+Package JavaGD version 0.6-5
+Package built using 87343/R 4.5.0; x86_64-pc-linux-gnu; 2024-11-19 09:50:52 UTC; unix   
+Checked with rchk version baa186024c3a38e5db74ac4a72f8e2c1e04417ef LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Suspicious call (two or more unprotected arguments) to Rf_gsetVar at Rf_addJavaGDDevice JavaGD/src/javaGD.c:218
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at initJavaGD JavaGD/src/jGDtalk.c:831
+
+
+Function initJavaGD
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang2(S:.jnew,V) JavaGD/src/jGDtalk.c:831
+  [UP] unprotected variable cl while calling allocating function chkX JavaGD/src/jGDtalk.c:832
+  [UP] calling allocating function R_do_slot(?,S:jobj) with a fresh pointer (cl <arg 1>) JavaGD/src/jGDtalk.c:834

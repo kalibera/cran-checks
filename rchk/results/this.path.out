@@ -1,0 +1,34 @@
+Package this.path version 2.5.0
+Package built using 87343/R 4.5.0; x86_64-pc-linux-gnu; 2024-11-19 09:48:17 UTC; unix   
+Checked with rchk version baa186024c3a38e5db74ac4a72f8e2c1e04417ef LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Suspicious call (two or more unprotected arguments) to Rf_cons at makePROMISE this.path/src/promises.c:207
+Suspicious call (two or more unprotected arguments) to Rf_lcons at makePROMISE this.path/src/promises.c:207
+
+Function ThisPathUnrecognizedConnectionClassError_Rcon_V1
+  [UP] calling allocating function EncodeChar with argument allocated using Rf_mkChar this.path/src/error.c:134
+
+Function do_asArgs
+  [PB] has possible protection stack imbalance this.path/src/progargs.c:87
+
+Function do_set_gui_path
+  [UP] unprotected variable value while calling allocating function Rf_eval this.path/src/thispath.c:558
+  [UP] unprotected variable value while calling allocating function Rf_eval this.path/src/thispath.c:567
+  [UP] unprotected variable value while calling allocating function Rf_defineVar(S:.custom_gui_path.function,?,?) this.path/src/thispath.c:604
+  [UP] unprotected variable value while calling allocating function Rf_defineVar(S:.custom_gui_path.function,V,?) this.path/src/thispath.c:604
+  [UP] unprotected variable value while calling allocating function Rf_eval this.path/src/thispath.c:625
+  [UP] unprotected variable value while calling allocating function is_abs_path_unix this.path/src/thispath.c:633
+  [UP] unprotected variable value while calling allocating function Rf_eval this.path/src/thispath.c:645
+  [UP] unprotected variable value while calling allocating function Rf_findVarInFrame(?,S:ofile) this.path/src/thispath.c:662
+  [UP] unprotected variable value while calling allocating function Rf_findVarInFrame(?,S:file) this.path/src/thispath.c:666
+  [UP] unprotected variable value while calling allocating function Rf_defineVar(S:guiname,?,?) this.path/src/thispath.c:672
+  [UP] unprotected variable value while calling allocating function Rf_defineVar(S:.get_contents,?,?) this.path/src/thispath.c:692
+  [UP] unprotected variable value while calling allocating function Rf_eval this.path/src/thispath.c:702
+
+Function path_join
+  [PB] has possible protection stack imbalance this.path/src/pathjoin.c:695
+
+Function path_unsplit
+  [PB] has possible protection stack imbalance this.path/src/pathsplit.c:457

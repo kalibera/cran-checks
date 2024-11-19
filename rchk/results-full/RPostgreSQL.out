@@ -1,0 +1,34 @@
+Package RPostgreSQL version 0.7-7
+Package built using 87343/R 4.5.0; x86_64-pc-linux-gnu; 2024-11-19 09:51:25 UTC; unix   
+Checked with rchk version baa186024c3a38e5db74ac4a72f8e2c1e04417ef LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function RS_DBI_createNamedList
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [PB] has too high protection stack depth results will be incomplete
+  [PB] has too high protection stack depth results will be incomplete
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete RPostgreSQL/src/RS-DBI.c:740
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete RPostgreSQL/src/RS-DBI.c:740
+
+Function RS_DBI_freeConnection
+  [UP] calling allocating function RS_DBI_freeResultSet(V) with a fresh pointer (rsHandle <arg 1>) RPostgreSQL/src/RS-DBI.c:228
+
+Function RS_PostgreSQL_cloneConnection
+  [UP] calling allocating function RS_PostgreSQL_newConnection(V,V) with a fresh pointer (con_params <arg 2>) RPostgreSQL/src/RS-PostgreSQL.c:233
+  [UP] calling allocating function RS_PostgreSQL_newConnection(V,V) with a fresh pointer (mgrHandle <arg 1>) RPostgreSQL/src/RS-PostgreSQL.c:233
+
+Function RS_PostgreSQL_dbApply
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete RPostgreSQL/src/RS-PostgreSQL.c:1478
+
+Function RS_PostgreSQL_exec
+  [UP] allocating function RS_DBI_getResultSet(V) may destroy its unprotected argument (rsHandle <arg 1>), which is later used. RPostgreSQL/src/RS-PostgreSQL.c:416
+  [UP] calling allocating function RS_DBI_getResultSet(V) with a fresh pointer (rsHandle <arg 1>) RPostgreSQL/src/RS-PostgreSQL.c:416
+  [UP] calling allocating function RS_PostgreSQL_closeResultSet(V) with a fresh pointer (rsHandle <arg 1>) RPostgreSQL/src/RS-PostgreSQL.c:422
+
+Function RS_PostgreSQL_getResult
+  [UP] allocating function RS_DBI_getResultSet(V) may destroy its unprotected argument (rsHandle <arg 1>), which is later used. RPostgreSQL/src/RS-pgsql-getResult.c:50
+  [UP] calling allocating function RS_DBI_getResultSet(V) with a fresh pointer (rsHandle <arg 1>) RPostgreSQL/src/RS-pgsql-getResult.c:50
+  [UP] calling allocating function RS_PostgreSQL_closeResultSet(V) with a fresh pointer (rsHandle <arg 1>) RPostgreSQL/src/RS-pgsql-getResult.c:55

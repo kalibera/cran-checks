@@ -1,0 +1,24 @@
+Package treesitter version 0.1.0
+Package built using 87343/R 4.5.0; x86_64-pc-linux-gnu; 2024-11-19 09:54:00 UTC; unix   
+Checked with rchk version baa186024c3a38e5db74ac4a72f8e2c1e04417ef LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function dict_hash
+  [UP] ignoring variable key as it has address taken, results will be incomplete 
+
+Function ffi_query_matches
+  [UP] unprotected variable elt while calling allocating function r_alloc_character.369 treesitter/src/query-matches.c:94
+  [UP] unprotected variable elt while calling allocating function r_alloc_list.361 treesitter/src/query-matches.c:97
+  [UP] unprotected variable names while calling allocating function r_alloc_list.361 treesitter/src/query-matches.c:97
+  [UP] unprotected variable names while calling allocating function r_exec_new_node treesitter/src/query-matches.c:103
+  [UP] unprotected variable nodes while calling allocating function r_exec_new_node treesitter/src/query-matches.c:103
+
+Function r_exec_new_node
+  [UP] allocating function r_env_find may destroy its unprotected argument (ns <arg 1>), which is later used. treesitter/src/node.c:395
+  [UP] calling allocating function r_env_find with a fresh pointer (ns <arg 1>) treesitter/src/node.c:395
+  [UP] unprotected variable ns while calling allocating function r_sym treesitter/src/node.c:395
+  [UP] unprotected variable ns while calling allocating function Rf_lang3 treesitter/src/node.c:396
+  [UP] unprotected variable ns while calling allocating function R_PreserveObject treesitter/src/node.c:397
+  [UP] unprotected variable ns while calling allocating function _r_preserve treesitter/src/node.c:397
