@@ -1,0 +1,168 @@
+Package magi version 1.2.4
+Package built using 87358/R 4.5.0; x86_64-pc-linux-gnu; 2024-11-21 16:39:15 UTC; unix   
+Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:682
+
+Function Rcpp::as<OdeSystem>(SEXPREC*)::$_0::operator()(arma::Col<double> const&, arma::Mat<double> const&, arma::Col<double> const&) const
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::as<OdeSystem>(SEXPREC*)::$_1::operator()(arma::Col<double> const&, arma::Mat<double> const&, arma::Col<double> const&) const
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::as<OdeSystem>(SEXPREC*)::$_2::operator()(arma::Col<double> const&, arma::Mat<double> const&, arma::Col<double> const&) const
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function SEXPREC* Rcpp::wrap<MagiSolver>(MagiSolver const&)
+  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function SEXPREC* Rcpp::wrap<std::__1::vector<gpcov, std::__1::allocator<gpcov> > >(std::__1::vector<gpcov, std::__1::allocator<gpcov> > const&)
+  [UP] ignoring variable <unnamed var:   %6 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_MagiPosterior
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_bandTest
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_basic_hmcRcpp
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_calcFrequencyBasedPrior
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_calcMeanCurve
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_chainSamplerRcpp
+  [UP] ignoring variable <unnamed var:   %48 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_changeGPcovFromC
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_generalMaternCovRcpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_gpsmooth
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_hmcNormal
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_hmcTest
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_maternCovTestInput
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_maternCovTestOutput
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_optimizePhi
+  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_optimizeThetaInit
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_optimizeThetaInitRcpp
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_phisigSample
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_phisigllikC
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_phisigllikHard2DC
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_solveMagi
+  [UP] ignoring variable <unnamed var:   %90 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_solveMagiRcpp
+  [UP] ignoring variable <unnamed var:   %90 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_speedbenchmarkXthetallik
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_xthetaSample
+  [UP] ignoring variable <unnamed var:   %42 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_xthetallikBandApproxC
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_xthetallikC
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_xthetallikRcpp
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_xthetallikWithmuBandC
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_xthetallik_rescaledC
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_xthetallik_withmuC
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_xthetaphisigmaSample
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_xthetaphisigmallikRcpp
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_xthetasigmaSample
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _magi_xthetasigmallikRcpp
+  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function optimizeThetaInitRcpp(arma::Mat<double> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, arma::Col<double> const&, arma::Col<double> const&, arma::Mat<double> const&, bool)::$_2::operator()(arma::Col<double> const&, arma::Mat<double> const&, arma::Col<double> const&) const
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function optimizeThetaInitRcpp(arma::Mat<double> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, arma::Col<double> const&, arma::Col<double> const&, arma::Mat<double> const&, bool)::$_3::operator()(arma::Col<double> const&, arma::Mat<double> const&, arma::Col<double> const&) const
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function optimizeThetaInitRcpp(arma::Mat<double> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, arma::Col<double> const&, arma::Col<double> const&, arma::Mat<double> const&, bool)::$_4::operator()(arma::Col<double> const&, arma::Mat<double> const&, arma::Col<double> const&) const
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function solveMagiRcpp(arma::Mat<double> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, arma::Col<double> const&, arma::Col<double> const&, arma::Mat<double> const&, arma::Mat<double> const&, arma::Col<double> const&, arma::Mat<double> const&, arma::Mat<double> const&, double, double, double, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, int, double, unsigned int, arma::Col<double>, int, int, bool, bool, bool, bool, bool, bool, bool, bool)::$_0::operator()(arma::Col<double> const&, arma::Mat<double> const&, arma::Col<double> const&) const
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function solveMagiRcpp(arma::Mat<double> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, arma::Col<double> const&, arma::Col<double> const&, arma::Mat<double> const&, arma::Mat<double> const&, arma::Col<double> const&, arma::Mat<double> const&, arma::Mat<double> const&, double, double, double, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, int, double, unsigned int, arma::Col<double>, int, int, bool, bool, bool, bool, bool, bool, bool, bool)::$_1::operator()(arma::Col<double> const&, arma::Mat<double> const&, arma::Col<double> const&) const
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function solveMagiRcpp(arma::Mat<double> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, arma::Col<double> const&, arma::Col<double> const&, arma::Mat<double> const&, arma::Mat<double> const&, arma::Col<double> const&, arma::Mat<double> const&, arma::Mat<double> const&, double, double, double, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, int, double, unsigned int, arma::Col<double>, int, int, bool, bool, bool, bool, bool, bool, bool, bool)::$_2::operator()(arma::Col<double> const&, arma::Mat<double> const&, arma::Col<double> const&) const
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&)
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<arma::Col<double> >(arma::Col<double> const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<arma::Mat<double> >(arma::Mat<double> const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

@@ -1,0 +1,363 @@
+Package miceadds version 3.17-44
+Package built using 87358/R 4.5.0; x86_64-pc-linux-gnu; 2024-11-21 18:31:11 UTC; unix   
+Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::Vector<13, Rcpp::PreserveStorage> Rcpp::sample<13>(Rcpp::Vector<13, Rcpp::PreserveStorage> const&, int, bool, Rcpp::Nullable<Rcpp::Vector<14, Rcpp::PreserveStorage> >)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_kernelpls_1dim_C
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_kernelplsaux
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_arma2vec
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:361
+  [PB] has negative depth miceadds/src/RcppExports.cpp:373
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:373
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:374
+
+Function _miceadds_miceadds_rcpp_arma2vec_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_arma_chol_ridge
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:145
+  [PB] has negative depth miceadds/src/RcppExports.cpp:157
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:157
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:158
+
+Function _miceadds_miceadds_rcpp_arma_chol_ridge_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_create_interactions
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_crossprod_one_matrix
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:887
+  [PB] has negative depth miceadds/src/RcppExports.cpp:899
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:899
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:900
+
+Function _miceadds_miceadds_rcpp_crossprod_one_matrix_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_impute_pmm6
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_compute_xtx
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:506
+  [PB] has negative depth miceadds/src/RcppExports.cpp:518
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:518
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:519
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_compute_xtx_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_compute_ztz
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:542
+  [PB] has negative depth miceadds/src/RcppExports.cpp:554
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:554
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:555
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_compute_ztz_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_predict_fixed
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:577
+  [PB] has negative depth miceadds/src/RcppExports.cpp:589
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:589
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:590
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_predict_fixed_random
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:726
+  [PB] has negative depth miceadds/src/RcppExports.cpp:738
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:738
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:739
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_predict_fixed_random_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_predict_fixed_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_predict_random
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:649
+  [PB] has negative depth miceadds/src/RcppExports.cpp:661
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:661
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:662
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_predict_random_list
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:687
+  [PB] has negative depth miceadds/src/RcppExports.cpp:699
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:699
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:700
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_predict_random_list_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_predict_random_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_probit_category_prob
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:1231
+  [PB] has negative depth miceadds/src/RcppExports.cpp:1243
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:1243
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:1244
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_probit_category_prob_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_probit_fill_index_lower
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:1159
+  [PB] has negative depth miceadds/src/RcppExports.cpp:1171
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:1171
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:1172
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_probit_fill_index_lower_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_probit_fill_index_upper
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:1194
+  [PB] has negative depth miceadds/src/RcppExports.cpp:1206
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:1206
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:1207
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_probit_fill_index_upper_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_probit_loglike
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:1268
+  [PB] has negative depth miceadds/src/RcppExports.cpp:1280
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:1280
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:1281
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_probit_loglike_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_sample_beta
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:807
+  [PB] has negative depth miceadds/src/RcppExports.cpp:819
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:819
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:820
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_sample_beta_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %38 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_sample_covariance_matrix
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:924
+  [PB] has negative depth miceadds/src/RcppExports.cpp:936
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:936
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:937
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_sample_covariance_matrix_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_sample_latent_probit
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:1124
+  [PB] has negative depth miceadds/src/RcppExports.cpp:1136
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:1136
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:1137
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_sample_latent_probit_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %38 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_sample_psi
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:1000
+  [PB] has negative depth miceadds/src/RcppExports.cpp:1012
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:1012
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:1013
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_sample_psi_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_sample_sigma2
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:1081
+  [PB] has negative depth miceadds/src/RcppExports.cpp:1093
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:1093
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:1094
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_sample_sigma2_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_sample_thresholds
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:1346
+  [PB] has negative depth miceadds/src/RcppExports.cpp:1358
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:1358
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:1359
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_sample_thresholds_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %38 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_sample_u
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:853
+  [PB] has negative depth miceadds/src/RcppExports.cpp:865
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:865
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:866
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_sample_u_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_sample_variance
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:1037
+  [PB] has negative depth miceadds/src/RcppExports.cpp:1049
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:1049
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:1050
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_sample_variance_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_sampler
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:110
+  [PB] has negative depth miceadds/src/RcppExports.cpp:122
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:122
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:123
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_sampler_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %101 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_subtract_fixed
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:613
+  [PB] has negative depth miceadds/src/RcppExports.cpp:625
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:625
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:626
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_subtract_fixed_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_subtract_random
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:764
+  [PB] has negative depth miceadds/src/RcppExports.cpp:776
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:776
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:777
+
+Function _miceadds_miceadds_rcpp_ml_mcmc_subtract_random_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_mvrnorm
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:181
+  [PB] has negative depth miceadds/src/RcppExports.cpp:193
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:193
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:194
+
+Function _miceadds_miceadds_rcpp_mvrnorm_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_pnorm
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:397
+  [PB] has negative depth miceadds/src/RcppExports.cpp:409
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:409
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:410
+
+Function _miceadds_miceadds_rcpp_pnorm_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_print_arma_mat
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:962
+  [PB] has negative depth miceadds/src/RcppExports.cpp:974
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:974
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:975
+
+Function _miceadds_miceadds_rcpp_qnorm
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:433
+  [PB] has negative depth miceadds/src/RcppExports.cpp:445
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:445
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:446
+
+Function _miceadds_miceadds_rcpp_qnorm_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_riwishart
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:253
+  [PB] has negative depth miceadds/src/RcppExports.cpp:265
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:265
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:266
+
+Function _miceadds_miceadds_rcpp_riwishart_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_rnorm_double
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:1303
+  [PB] has negative depth miceadds/src/RcppExports.cpp:1315
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:1315
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:1316
+
+Function _miceadds_miceadds_rcpp_rnorm_double_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_rtnorm
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:327
+  [PB] has negative depth miceadds/src/RcppExports.cpp:339
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:339
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:340
+
+Function _miceadds_miceadds_rcpp_rtnorm2
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:472
+  [PB] has negative depth miceadds/src/RcppExports.cpp:484
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:484
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:485
+
+Function _miceadds_miceadds_rcpp_rtnorm2_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_rtnorm_double
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:290
+  [PB] has negative depth miceadds/src/RcppExports.cpp:302
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:302
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:303
+
+Function _miceadds_miceadds_rcpp_rtnorm_double_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_rtnorm_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_rwishart
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr miceadds/src/RcppExports.cpp:217
+  [PB] has negative depth miceadds/src/RcppExports.cpp:229
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete miceadds/src/RcppExports.cpp:229
+  [PB] has possible protection stack imbalance miceadds/src/RcppExports.cpp:230
+
+Function _miceadds_miceadds_rcpp_rwishart_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_sort_partial_index
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_weighted_cor
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_weighted_pmm_match
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_weighted_pmm_match_case
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_miceadds_rcpp_weighted_sd
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_scale2_C
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _miceadds_scale2_NA_C
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

@@ -1,0 +1,503 @@
+Package hpa version 1.3.3
+Package built using 87358/R 4.5.0; x86_64-pc-linux-gnu; 2024-11-21 15:53:53 UTC; unix   
+Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Rcpp_namespace()
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using Rcpp::internal::get_Rcpp_namespace() Rcpp/include/Rcpp/Environment.h:361
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::namespace_env(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::InternalFunction_Impl<Rcpp::PreserveStorage>::set(SEXPREC*)
+  [UP] ignoring variable xp as it has address taken, results will be incomplete 
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:682
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::set(SEXPREC*)
+  [UP] ignoring variable rhs as it has address taken, results will be incomplete 
+
+Function _hpa_bsplineComb
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:1663
+  [PB] has negative depth hpa/src/RcppExports.cpp:1675
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1675
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1676
+
+Function _hpa_bsplineComb_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_bsplineEstimate
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:1629
+  [PB] has negative depth hpa/src/RcppExports.cpp:1641
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1641
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1642
+
+Function _hpa_bsplineEstimate_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_bsplineGenerate
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:1594
+  [PB] has negative depth hpa/src/RcppExports.cpp:1606
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1606
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1607
+
+Function _hpa_bsplineGenerate_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_bsplineMerge
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:1526
+  [PB] has negative depth hpa/src/RcppExports.cpp:1538
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1538
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1539
+
+Function _hpa_bsplineMerge_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_bsplineMult
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:1492
+  [PB] has negative depth hpa/src/RcppExports.cpp:1504
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1504
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1505
+
+Function _hpa_bsplineMult_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_bsplineNames
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:1559
+  [PB] has negative depth hpa/src/RcppExports.cpp:1571
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1571
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1572
+
+Function _hpa_bsplineNames_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_dhpa
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:645
+  [PB] has negative depth hpa/src/RcppExports.cpp:657
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:657
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:658
+
+Function _hpa_dhpa0
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:114
+  [PB] has negative depth hpa/src/RcppExports.cpp:126
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:126
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:127
+
+Function _hpa_dhpa0_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %32 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_dhpaDiff
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:945
+  [PB] has negative depth hpa/src/RcppExports.cpp:957
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:957
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:958
+
+Function _hpa_dhpaDiff_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_dhpa_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %38 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_dhsa
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:1701
+  [PB] has negative depth hpa/src/RcppExports.cpp:1713
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1713
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1714
+
+Function _hpa_dhsa_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_dnorm_parallel
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:38
+  [PB] has negative depth hpa/src/RcppExports.cpp:50
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:50
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:51
+
+Function _hpa_dnorm_parallel_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_dtrhpa
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:857
+  [PB] has negative depth hpa/src/RcppExports.cpp:869
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:869
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:870
+
+Function _hpa_dtrhpa_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %44 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_ehpa
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:772
+  [PB] has negative depth hpa/src/RcppExports.cpp:784
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:784
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:785
+
+Function _hpa_ehpaDiff
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:989
+  [PB] has negative depth hpa/src/RcppExports.cpp:1001
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1001
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1002
+
+Function _hpa_ehpaDiff_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %44 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_ehpa_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %38 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_ehsa
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:1738
+  [PB] has negative depth hpa/src/RcppExports.cpp:1750
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1750
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1751
+
+Function _hpa_ehsa_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_etrhpa
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:813
+  [PB] has negative depth hpa/src/RcppExports.cpp:825
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:825
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:826
+
+Function _hpa_etrhpa_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %35 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_hpaBinary
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:203
+  [PB] has negative depth hpa/src/RcppExports.cpp:215
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:215
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:216
+
+Function _hpa_hpaBinary_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %56 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_hpaML
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:386
+  [PB] has negative depth hpa/src/RcppExports.cpp:398
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:398
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:399
+
+Function _hpa_hpaML_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_hpaMain
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:603
+  [PB] has negative depth hpa/src/RcppExports.cpp:615
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:615
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:616
+
+Function _hpa_hpaMain_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %53 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_hpaSelection
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:1159
+  [PB] has negative depth hpa/src/RcppExports.cpp:1171
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1171
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1172
+
+Function _hpa_hpaSelection_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %53 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_ihpa
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:730
+  [PB] has negative depth hpa/src/RcppExports.cpp:742
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:742
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:743
+
+Function _hpa_ihpaDiff
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:1033
+  [PB] has negative depth hpa/src/RcppExports.cpp:1045
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1045
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1046
+
+Function _hpa_ihpaDiff_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %44 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_ihpa_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_itrhpa
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:902
+  [PB] has negative depth hpa/src/RcppExports.cpp:914
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:914
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:915
+
+Function _hpa_itrhpa_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_logLik_hpaBinary
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:340
+  [PB] has negative depth hpa/src/RcppExports.cpp:352
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:352
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:353
+
+Function _hpa_logLik_hpaBinary_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_logLik_hpaML
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:522
+  [PB] has negative depth hpa/src/RcppExports.cpp:534
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:534
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:535
+
+Function _hpa_logLik_hpaML_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_logLik_hpaSelection
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:1298
+  [PB] has negative depth hpa/src/RcppExports.cpp:1310
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1310
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1311
+
+Function _hpa_logLik_hpaSelection_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_mecdf
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:556
+  [PB] has negative depth hpa/src/RcppExports.cpp:568
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:568
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:569
+
+Function _hpa_mecdf_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_normalMoment
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:1338
+  [PB] has negative depth hpa/src/RcppExports.cpp:1350
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1350
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1351
+
+Function _hpa_normalMoment_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_phpa
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:687
+  [PB] has negative depth hpa/src/RcppExports.cpp:699
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:699
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:700
+
+Function _hpa_phpa0
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:154
+  [PB] has negative depth hpa/src/RcppExports.cpp:166
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:166
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:167
+
+Function _hpa_phpa0_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %32 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_phpa_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %38 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_pnorm_parallel
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:74
+  [PB] has negative depth hpa/src/RcppExports.cpp:86
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:86
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:87
+
+Function _hpa_pnorm_parallel_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_polynomialIndex
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:1420
+  [PB] has negative depth hpa/src/RcppExports.cpp:1432
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1432
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1433
+
+Function _hpa_polynomialIndex_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_predict_hpaBinary
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:239
+  [PB] has negative depth hpa/src/RcppExports.cpp:251
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:251
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:252
+
+Function _hpa_predict_hpaBinary_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_predict_hpaML
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:421
+  [PB] has negative depth hpa/src/RcppExports.cpp:433
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:433
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:434
+
+Function _hpa_predict_hpaML_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_predict_hpaSelection
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:1197
+  [PB] has negative depth hpa/src/RcppExports.cpp:1209
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1209
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1210
+
+Function _hpa_predict_hpaSelection_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_printPolynomial
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:1456
+  [PB] has negative depth hpa/src/RcppExports.cpp:1468
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1468
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1469
+
+Function _hpa_printPolynomial_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_print_summary_hpaBinary
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:306
+  [PB] has negative depth hpa/src/RcppExports.cpp:318
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:318
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:319
+
+Function _hpa_print_summary_hpaML
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:488
+  [PB] has negative depth hpa/src/RcppExports.cpp:500
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:500
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:501
+
+Function _hpa_print_summary_hpaSelection
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:1264
+  [PB] has negative depth hpa/src/RcppExports.cpp:1276
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1276
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1277
+
+Function _hpa_qhpa
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:1073
+  [PB] has negative depth hpa/src/RcppExports.cpp:1085
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1085
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1086
+
+Function _hpa_qhpa_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %32 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_rhpa
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:1111
+  [PB] has negative depth hpa/src/RcppExports.cpp:1123
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1123
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1124
+
+Function _hpa_rhpa_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_summary_hpaBinary
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:273
+  [PB] has negative depth hpa/src/RcppExports.cpp:285
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:285
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:286
+
+Function _hpa_summary_hpaBinary_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_summary_hpaML
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:455
+  [PB] has negative depth hpa/src/RcppExports.cpp:467
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:467
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:468
+
+Function _hpa_summary_hpaML_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_summary_hpaSelection
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:1231
+  [PB] has negative depth hpa/src/RcppExports.cpp:1243
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1243
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1244
+
+Function _hpa_summary_hpaSelection_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _hpa_truncatedNormalMoment
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr hpa/src/RcppExports.cpp:1385
+  [PB] has negative depth hpa/src/RcppExports.cpp:1397
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete hpa/src/RcppExports.cpp:1397
+  [PB] has possible protection stack imbalance hpa/src/RcppExports.cpp:1398
+
+Function _hpa_truncatedNormalMoment_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %50 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function hpaBinary(Rcpp::Formula_Impl<Rcpp::PreserveStorage>, Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>, int, double, double, double, bool, bool, bool, Rcpp::Vector<14, Rcpp::PreserveStorage>, Rcpp::String, int, bool, Rcpp::String, Rcpp::Vector<19, Rcpp::PreserveStorage>, bool)
+  [UP] ignoring variable <unnamed var:   %465 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %514 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %519 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %276 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %834 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>::DataFrame_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::traits::named_object<Rcpp::Formula_Impl<Rcpp::PreserveStorage> >, Rcpp::traits::named_object<Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> >, Rcpp::traits::named_object<Rcpp::Function_Impl<Rcpp::PreserveStorage> > >(Rcpp::traits::named_object<Rcpp::Formula_Impl<Rcpp::PreserveStorage> > const&, Rcpp::traits::named_object<Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> > const&, Rcpp::traits::named_object<Rcpp::Function_Impl<Rcpp::PreserveStorage> > const&) const hpa/src/hpaBinary.cpp:182
+  [UP] calling allocating function Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> >(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> const&) const hpa/src/hpaBinary.cpp:186
+
+Function hpaML(Rcpp::Vector<14, Rcpp::PreserveStorage>, Rcpp::Vector<14, Rcpp::PreserveStorage>, Rcpp::Vector<14, Rcpp::PreserveStorage>, Rcpp::Vector<14, Rcpp::PreserveStorage>, Rcpp::Vector<14, Rcpp::PreserveStorage>, Rcpp::Vector<14, Rcpp::PreserveStorage>, Rcpp::Vector<14, Rcpp::PreserveStorage>, Rcpp::String, int, bool, Rcpp::String, Rcpp::Vector<19, Rcpp::PreserveStorage>, bool)
+  [UP] ignoring variable <unnamed var:   %322 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %371 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %376 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %611 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %76 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function hpaSelection(Rcpp::Formula_Impl<Rcpp::PreserveStorage>, Rcpp::Formula_Impl<Rcpp::PreserveStorage>, Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>, int, int, int, bool, Rcpp::Vector<14, Rcpp::PreserveStorage>, bool, Rcpp::String, int, bool, Rcpp::String, Rcpp::Vector<19, Rcpp::PreserveStorage>, bool)
+  [UP] ignoring variable <unnamed var:   %766 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %815 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %820 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %1187 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %1193 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>::DataFrame_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::traits::named_object<Rcpp::Formula_Impl<Rcpp::PreserveStorage> >, Rcpp::traits::named_object<Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> >, Rcpp::traits::named_object<Rcpp::Function_Impl<Rcpp::PreserveStorage> > >(Rcpp::traits::named_object<Rcpp::Formula_Impl<Rcpp::PreserveStorage> > const&, Rcpp::traits::named_object<Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> > const&, Rcpp::traits::named_object<Rcpp::Function_Impl<Rcpp::PreserveStorage> > const&) const hpa/src/hpaSelection.cpp:244
+  [UP] calling allocating function Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>::DataFrame_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::traits::named_object<Rcpp::Formula_Impl<Rcpp::PreserveStorage> >, Rcpp::traits::named_object<Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> >, Rcpp::traits::named_object<Rcpp::Function_Impl<Rcpp::PreserveStorage> > >(Rcpp::traits::named_object<Rcpp::Formula_Impl<Rcpp::PreserveStorage> > const&, Rcpp::traits::named_object<Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> > const&, Rcpp::traits::named_object<Rcpp::Function_Impl<Rcpp::PreserveStorage> > const&) const hpa/src/hpaSelection.cpp:248
+  [UP] calling allocating function Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>::DataFrame_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>, Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> >(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> const&, Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> const&) const hpa/src/hpaSelection.cpp:252
+  [UP] calling allocating function Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::traits::named_object<Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> >, Rcpp::traits::named_object<Rcpp::Vector<10, Rcpp::PreserveStorage> > >(Rcpp::traits::named_object<Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> > const&, Rcpp::traits::named_object<Rcpp::Vector<10, Rcpp::PreserveStorage> > const&) const hpa/src/hpaSelection.cpp:262
+  [UP] calling allocating function Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::traits::named_object<Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> >, Rcpp::traits::named_object<Rcpp::Vector<10, Rcpp::PreserveStorage> > >(Rcpp::traits::named_object<Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> > const&, Rcpp::traits::named_object<Rcpp::Vector<10, Rcpp::PreserveStorage> > const&) const hpa/src/hpaSelection.cpp:265
+
+Function predict_hpaBinary(Rcpp::Vector<19, Rcpp::PreserveStorage>, Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>, bool)
+  [UP] calling allocating function Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> >(Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> const&) const hpa/src/hpaBinary.cpp:1576
+  [UP] calling allocating function Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> >(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> const&) const hpa/src/hpaBinary.cpp:1581
+  [UP] calling allocating function Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>::DataFrame_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::traits::named_object<Rcpp::Formula_Impl<Rcpp::PreserveStorage> >, Rcpp::traits::named_object<Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> > >(Rcpp::traits::named_object<Rcpp::Formula_Impl<Rcpp::PreserveStorage> > const&, Rcpp::traits::named_object<Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> > const&) const hpa/src/hpaBinary.cpp:1587
+
+Function predict_hpaSelection(Rcpp::Vector<19, Rcpp::PreserveStorage>, Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool, bool)
+  [UP] calling allocating function Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> >(Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> const&) const hpa/src/hpaSelection.cpp:1795
+  [UP] calling allocating function Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>::DataFrame_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::traits::named_object<Rcpp::Formula_Impl<Rcpp::PreserveStorage> >, Rcpp::traits::named_object<Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> >, Rcpp::traits::named_object<Rcpp::Function_Impl<Rcpp::PreserveStorage> > >(Rcpp::traits::named_object<Rcpp::Formula_Impl<Rcpp::PreserveStorage> > const&, Rcpp::traits::named_object<Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> > const&, Rcpp::traits::named_object<Rcpp::Function_Impl<Rcpp::PreserveStorage> > const&) const hpa/src/hpaSelection.cpp:1801
+  [UP] calling allocating function Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>::DataFrame_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::traits::named_object<Rcpp::Formula_Impl<Rcpp::PreserveStorage> >, Rcpp::traits::named_object<Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> >, Rcpp::traits::named_object<Rcpp::Function_Impl<Rcpp::PreserveStorage> > >(Rcpp::traits::named_object<Rcpp::Formula_Impl<Rcpp::PreserveStorage> > const&, Rcpp::traits::named_object<Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> > const&, Rcpp::traits::named_object<Rcpp::Function_Impl<Rcpp::PreserveStorage> > const&) const hpa/src/hpaSelection.cpp:1804
+
+Function print_summary_hpaBinary(Rcpp::Vector<19, Rcpp::PreserveStorage>)
+  [UP] ignoring variable <unnamed var:   %135 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %136 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %149 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>::DataFrame_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> >(Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> const&) const hpa/src/hpaBinary.cpp:1701
+  [UP] calling allocating function Rcpp::print(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<SEXPREC*>(SEXPREC* const&) const hpa/src/hpaBinary.cpp:1754
+
+Function print_summary_hpaML(Rcpp::Vector<19, Rcpp::PreserveStorage>)
+  [UP] ignoring variable <unnamed var:   %71 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %72 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function print_summary_hpaSelection(Rcpp::Vector<19, Rcpp::PreserveStorage>)
+  [UP] ignoring variable <unnamed var:   %136 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %147 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %148 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %161 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %162 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] calling allocating function Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>::DataFrame_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> >(Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> const&) const hpa/src/hpaSelection.cpp:2058
+  [UP] calling allocating function Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>::DataFrame_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> >(Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> const&) const hpa/src/hpaSelection.cpp:2059
+  [UP] calling allocating function Rcpp::print(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<SEXPREC*>(SEXPREC* const&) const hpa/src/hpaSelection.cpp:2110
+
+Function void Rcpp::Vector<16, Rcpp::PreserveStorage>::push_back<char [12]>(char const (&) [12])
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<16, Rcpp::PreserveStorage>::push_front<Rcpp::String>(Rcpp::String const&)
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
