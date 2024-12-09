@@ -16,20 +16,11 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(testthat)
-> library(text2map)
-Loading required package: Matrix
-> options(useFancyQuotes = FALSE)
+> if (identical(Sys.getenv("NOT_CRAN"), "true")) {
++   set.seed(getOption("mlr.debug.seed"))
++   test_check("mlr")
++ }
 > 
-> test_check("text2map")
-ERROR: modification of compiler constant of type character, length 4
-ERROR: the modified value of the constant is:
-[1] "pooled" "paired" "L2"     "PCA"   
-attr(,".match.hash")
-<hash table>
-ERROR: the original value of the constant is:
-[1] "pooled" "paired" "L2"     "PCA"   
-ERROR: the modified constant is at index 1
-ERROR: the modified constant is in this function body:
-c("pooled", "paired", "L2", "PCA")
-Fatal error: compiler constants were modified!
-
+> proc.time()
+   user  system elapsed 
+  0.935   0.116   1.114 
