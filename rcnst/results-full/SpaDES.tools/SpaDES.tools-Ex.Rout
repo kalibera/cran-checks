@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2024-12-07 r87428) -- "Unsuffered Consequences"
+R Under development (unstable) (2024-12-13 r87441) -- "Unsuffered Consequences"
 Copyright (C) 2024 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -37,7 +37,7 @@ Type 'q()' to quit R.
 > ### ** Examples
 > 
 > library(terra)
-terra 1.7.83
+terra 1.8.5
 
 Attaching package: ‘terra’
 
@@ -81,7 +81,7 @@ detaching ‘package:terra’
 > 
 > library(data.table)
 > library(terra)
-terra 1.7.83
+terra 1.8.5
 
 Attaching package: ‘terra’
 
@@ -224,13 +224,13 @@ detaching ‘package:terra’, ‘package:data.table’
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10, returnMatrix = TRUE)
 + })
    user  system elapsed 
-  0.027   0.000   0.028 
+  0.033   0.000   0.065 
 > agent <- agentOrig
 > system.time({
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10)
 + })
    user  system elapsed 
- 23.168   0.121  23.603 
+ 25.794   0.224  36.849 
 > 
 > # as sp
 > if (requireNamespace("sp")) {
@@ -266,7 +266,7 @@ agent does not have columns named x1 and y1, which represent the 'previous' loca
 > ### ** Examples
 > 
 > library(terra)
-terra 1.7.83
+terra 1.8.5
 
 Attaching package: ‘terra’
 
@@ -323,7 +323,7 @@ detaching ‘package:terra’
 > ### ** Examples
 > 
 > library(terra)
-terra 1.7.83
+terra 1.8.5
 
 Attaching package: ‘terra’
 
@@ -445,7 +445,7 @@ detaching ‘package:terra’
 > ### ** Examples
 > 
 > library(terra)
-terra 1.7.83
+terra 1.8.5
 
 Attaching package: ‘terra’
 
@@ -573,7 +573,7 @@ detaching ‘package:terra’
 +   options(Ncpus = origNcpus)
 + }
 Linking to GEOS 3.12.2, GDAL 3.8.5, PROJ 9.3.1; sf_use_s2() is TRUE
-terra 1.7.83
+terra 1.8.5
 
 Attaching package: ‘terra’
 
@@ -708,7 +708,7 @@ detaching ‘package:sf’
 > 
 > library(data.table)
 > library(terra)
-terra 1.7.83
+terra 1.8.5
 
 Attaching package: ‘terra’
 
@@ -778,7 +778,7 @@ detaching ‘package:terra’, ‘package:data.table’
 > ### ** Examples
 > 
 > library(terra)
-terra 1.7.83
+terra 1.8.5
 
 Attaching package: ‘terra’
 
@@ -893,7 +893,7 @@ detaching ‘package:testthat’, ‘package:data.table’
 > ### ** Examples
 > 
 > library(terra)
-terra 1.7.83
+terra 1.8.5
 
 Attaching package: ‘terra’
 
@@ -997,7 +997,7 @@ detaching ‘package:terra’
 > 
 > library(data.table)
 > library(terra)
-terra 1.7.83
+terra 1.8.5
 
 Attaching package: ‘terra’
 
@@ -1072,7 +1072,7 @@ detaching ‘package:terra’, ‘package:data.table’
 > ### ** Examples
 > 
 > library(terra)
-terra 1.7.83
+terra 1.8.5
 
 Attaching package: ‘terra’
 
@@ -1341,7 +1341,7 @@ detaching ‘package:terra’
 > ### ** Examples
 > 
 > library(terra)
-terra 1.7.83
+terra 1.8.5
 
 Attaching package: ‘terra’
 
@@ -1358,27 +1358,6 @@ The following object is masked from ‘package:SpaDES.tools’:
 > 
 > # Simple use -- similar to spread(...)
 > out <- spread2(a, start = sams, 0.225)
-> if (interactive()) {
-+   terra::plot(out)
-+ }
-> 
-> # Use maxSize -- this gives an upper limit
-> maxSizes <- sort(sample(1:10, size = length(sams)))
-> out <- spread2(a, start = sams, 0.225, maxSize = maxSizes, asRaster = FALSE)
-> # check TRUE using data.table .N
-> out[, .N, by = "initialPixels"]$N <= maxSizes
-[1] TRUE TRUE TRUE
-> 
-> # Use exactSize -- gives an exact size, if there is enough space on the Raster
-> exactSizes <- maxSizes
-> out <- spread2(a, start = sams, spreadProb = 0.225,
-+                exactSize = exactSizes, asRaster = FALSE)
-> out[, .N, by = "initialPixels"]$N == maxSizes # should be TRUE TRUE TRUE
-[1] TRUE TRUE TRUE
-> 
-> # Use exactSize -- but where it can't be achieved
-> exactSizes <- sort(sample(100:110, size = length(sams)))
-> out <- spread2(a, start = sams, 1, exactSize = exactSizes)
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "activeSource" "holding"      "successful"   "tooSmall"    
