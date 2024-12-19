@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/text2map.Rcheck’
-* using R Under development (unstable) (2024-12-13 r87441)
+* using R Under development (unstable) (2024-12-17 r87446)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (GCC) 14.2.1 20240912 (Red Hat 14.2.1-3)
@@ -55,15 +55,12 @@
 Running examples in ‘text2map-Ex.R’ failed
 The error most likely occurred in:
 
-> ### Name: CoCA
-> ### Title: Performs Concept Class Analysis (CoCA)
-> ### Aliases: CoCA coca
+> ### Name: doc_centrality
+> ### Title: Find a specified document centrality metric
+> ### Aliases: doc_centrality
 > 
 > ### ** Examples
 > 
-> 
-> #' # load example word embeddings
-> data(ft_wv_sample)
 > 
 > # load example text
 > data(jfk_speech)
@@ -75,30 +72,9 @@ The error most likely occurred in:
 > # create DTM
 > dtm <- dtm_builder(jfk_speech, sentence, sentence_id)
 > 
-> # create semantic directions
-> gen <- data.frame(
-+   add = c("woman"),
-+   subtract = c("man")
-+ )
-> 
-> die <- data.frame(
-+   add = c("alive"),
-+   subtract = c("die")
-+ )
-> 
-> gen_dir <- get_direction(anchors = gen, wv = ft_wv_sample)
-> die_dir <- get_direction(anchors = die, wv = ft_wv_sample)
-> 
-> sem_dirs <- rbind(gen_dir, die_dir)
-> 
-> classes <- CoCA(
-+   dtm = dtm,
-+   wv = ft_wv_sample,
-+   directions = sem_dirs,
-+   filter_sig = TRUE,
-+   filter_value = 0.05,
-+   zero_action = "drop"
-+ )
+> ddeg <- doc_centrality(dtm, method = "degree")
+> deig <- doc_centrality(dtm, method = "eigen")
+> dbet <- doc_centrality(dtm, method = "between")
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "pooled" "paired" "L2"     "PCA"   
@@ -112,25 +88,8 @@ c("pooled", "paired", "L2", "PCA")
 Fatal error: compiler constants were modified!
 
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... ERROR
+* checking tests ... OK
   Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  > options(useFancyQuotes = FALSE)
-  > 
-  > test_check("text2map")
-  ERROR: modification of compiler constant of type character, length 4
-  ERROR: the modified value of the constant is:
-  [1] "pooled" "paired" "L2"     "PCA"   
-  attr(,".match.hash")
-  <hash table>
-  ERROR: the original value of the constant is:
-  [1] "pooled" "paired" "L2"     "PCA"   
-  ERROR: the modified constant is at index 1
-  ERROR: the modified constant is in this function body:
-  c("pooled", "paired", "L2", "PCA")
-  Fatal error: compiler constants were modified!
-  
 * checking PDF version of manual ... OK
 * DONE
-Status: 2 ERRORs
+Status: 1 ERROR

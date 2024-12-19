@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2024-12-13 r87441) -- "Unsuffered Consequences"
+R Under development (unstable) (2024-12-17 r87446) -- "Unsuffered Consequences"
 Copyright (C) 2024 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -44,7 +44,7 @@ Phylogenetic tree with 20 tips and 19 internal nodes.
 Tip labels:
   Psittacosaurus_spp, Stegoceras_validum, Sphaerotholus_brevis, Thescelosaurus_neglectus, Colepiocephale_lambei, Prenocephale_prenes, ...
 
-Rooted; no branch lengths.
+Rooted; no branch length.
 > 
 > 
 > 
@@ -292,11 +292,11 @@ Loading required package: ape
 
 ── Sample local optimum ────────────────────────────────────────────────────────
 → TBR depth 1; keeping 4 trees; k = 10
-ℹ 2024-12-15 08:30:29: Score: 12.6988
+ℹ 2024-12-19 06:51:11: Score: 12.6988
 Final search ■■■■■■■■■■■■■■■                   48% | D0, score 12.0038, hit 1. …
   - TBR rearrangement at depth 1 found score 11.9697 1 time.
 
-✔ 2024-12-15 08:30:31: Tree search terminated with score 11.9697
+✔ 2024-12-19 06:51:13: Tree search terminated with score 11.9697
 > names(trees)
 [1] "final_1"
 > 
@@ -445,7 +445,7 @@ Phylogenetic tree with 8 tips and 7 internal nodes.
 Tip labels:
   t1, t2, t3, t4, t5, t6, ...
 
-Rooted; no branch lengths.
+Rooted; no branch length.
 > cNNI(tree)
 
 Phylogenetic tree with 8 tips and 7 internal nodes.
@@ -453,7 +453,7 @@ Phylogenetic tree with 8 tips and 7 internal nodes.
 Tip labels:
   t1, t2, t3, t4, t5, t6, ...
 
-Rooted; no branch lengths.
+Rooted; no branch length.
 > 
 > # All trees one NNI rearrangement away
 > NNI(tree, edgeToBreak = -1)
@@ -467,7 +467,7 @@ Phylogenetic tree with 8 tips and 7 internal nodes.
 Tip labels:
   t1, t2, t3, t4, t5, t6, ...
 
-Rooted; no branch lengths.
+Rooted; no branch length.
 > 
 > # A specified rearrangement
 > cNNI(tree, 0, 0)
@@ -477,7 +477,7 @@ Phylogenetic tree with 8 tips and 7 internal nodes.
 Tip labels:
   t1, t2, t3, t4, t5, t6, ...
 
-Rooted; no branch lengths.
+Rooted; no branch length.
 > 
 > # If a tree may not be binary, collapse nodes with
 > tree <- TreeTools::MakeTreeBinary(tree)
@@ -945,7 +945,7 @@ Phylogenetic tree with 20 tips and 19 internal nodes.
 Tip labels:
   t10, t14, t20, t7, t9, t15, ...
 
-Rooted; includes branch lengths.
+Rooted; includes branch length(s).
 > 
 > 
 > 
@@ -1044,7 +1044,7 @@ Phylogenetic tree with 20 tips and 19 internal nodes.
 Tip labels:
   t10, t14, t20, t7, t9, t15, ...
 
-Rooted; no branch lengths.
+Rooted; no branch length.
 > 
 > 
 > 
@@ -1104,8 +1104,8 @@ Loading required package: ape
 
 ── Sample local optimum ────────────────────────────────────────────────────────
 → TBR depth 2; keeping 14.4 trees; k = Inf
-ℹ 2024-12-15 08:30:40: Score: 84
-✔ 2024-12-15 08:30:40: Tree search terminated with score 82
+ℹ 2024-12-19 06:51:21: Score: 84
+✔ 2024-12-19 06:51:21: Tree search terminated with score 82
 > 
 > # Colour tip labels according to their influence
 > upperBound <- 2 * TreeDist::ClusteringEntropy(
@@ -1296,7 +1296,7 @@ Phylogenetic tree with 8 tips and 7 internal nodes.
 Tip labels:
   t1, t2, t3, t4, t5, t6, ...
 
-Rooted; no branch lengths.
+Rooted; no branch length.
 > 
 > # Specific rearrangement
 > cSPR(tree, 9)
@@ -1306,7 +1306,7 @@ Phylogenetic tree with 8 tips and 7 internal nodes.
 Tip labels:
   t1, t2, t3, t4, t5, t6, ...
 
-Rooted; no branch lengths.
+Rooted; no branch length.
 > 
 > 
 > 
@@ -1470,7 +1470,7 @@ Rooted; no branch lengths.
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  24.011 0.804 26.483 0 0 
+Time elapsed:  21.761 0.733 23.394 0 0 
 > grDevices::dev.off()
 null device 
           1 
