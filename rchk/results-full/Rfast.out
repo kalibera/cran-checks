@@ -1,5 +1,5 @@
-Package Rfast version 2.1.0
-Package built using 87358/R 4.5.0; x86_64-pc-linux-gnu; 2024-11-21 16:46:12 UTC; unix   
+Package Rfast version 2.1.2
+Package built using 87453/R 4.5.0; x86_64-pc-linux-gnu; 2024-12-22 20:00:00 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -71,6 +71,9 @@ Function Rfast_Sort
 Function Rfast_Trigamma
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function Rfast_Unique
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function Rfast_apply_condition
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -138,7 +141,7 @@ Function Rfast_col_sums
   [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function Rfast_col_sums_p
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function Rfast_col_true
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -160,6 +163,9 @@ Function Rfast_eachcol_apply
 
 Function Rfast_eachrow
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rfast_group
+  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function Rfast_min_max
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -219,7 +225,7 @@ Function Rfast_row_sums
   [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function Rfast_row_sums_p
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function Rfast_row_true
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -236,6 +242,12 @@ Function Rfast_stable_sort
 Function Rfast_vecdist
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function Set<SEXPREC*, HashBase<SEXPREC*> >::insert(SEXPREC*, int)
+  [UP] ignoring variable d as it has address taken, results will be incomplete 
+
+Function Unique(SEXPREC*, bool)
+  [UP] ignoring variable indx as it has address taken, results will be incomplete 
+
 Function bool std::__1::__insertion_sort_incomplete<Rcpp::internal::NAComparator<SEXPREC*>&, SEXPREC**>(SEXPREC**, SEXPREC**, Rcpp::internal::NAComparator<SEXPREC*>&)
   [UP] ignoring variable __t as it has address taken, results will be incomplete 
 
@@ -243,14 +255,17 @@ Function bool std::__1::__insertion_sort_incomplete<Rcpp::internal::NAComparator
   [UP] ignoring variable __t as it has address taken, results will be incomplete 
 
 Function col_nth(Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::Vector<13, Rcpp::PreserveStorage>, int, bool, bool, bool)
-  [PB] has negative depth Rfast/src/col_row_utilities.cpp:843
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rfast/src/col_row_utilities.cpp:843
-  [PB] has possible protection stack imbalance Rfast/src/col_row_utilities.cpp:844
+  [PB] has negative depth Rfast/src/col_row_utilities.cpp:844
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rfast/src/col_row_utilities.cpp:844
+  [PB] has possible protection stack imbalance Rfast/src/col_row_utilities.cpp:845
+
+Function group2(SEXPREC*, SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool, bool)
+  [UP] ignoring variable indx as it has address taken, results will be incomplete 
 
 Function row_nth(Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::Vector<13, Rcpp::PreserveStorage>, int, bool, bool, bool)
-  [PB] has negative depth Rfast/src/col_row_utilities.cpp:919
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rfast/src/col_row_utilities.cpp:919
-  [PB] has possible protection stack imbalance Rfast/src/col_row_utilities.cpp:920
+  [PB] has negative depth Rfast/src/col_row_utilities.cpp:920
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rfast/src/col_row_utilities.cpp:920
+  [PB] has possible protection stack imbalance Rfast/src/col_row_utilities.cpp:921
 
 Function std::__1::enable_if<is_move_constructible<SEXPREC*>::value&&is_move_assignable<SEXPREC*>::value, void>::type std::__1::swap<SEXPREC*>(SEXPREC*&, SEXPREC*&)
   [UP] ignoring variable __t as it has address taken, results will be incomplete 
