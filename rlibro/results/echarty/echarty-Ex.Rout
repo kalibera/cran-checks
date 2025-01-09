@@ -1,0 +1,721 @@
+
+R Under development (unstable) (2025-01-08 r87540) -- "Unsuffered Consequences"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "echarty"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('echarty')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("ec.clmn")
+> ### * ec.clmn
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ec.clmn
+> ### Title: Data column format
+> ### Aliases: ec.clmn
+> 
+> ### ** Examples
+> 
+> tmp <- data.frame(Species = as.vector(unique(iris$Species)),
++                   emoji = c('A','B','C'))
+> df <- iris |> dplyr::inner_join(tmp)      # add 6th column emoji
+Joining with `by = join_by(Species)`
+> df |> dplyr::group_by(Species) |> ec.init(
++   series.param= list(label= list(show= TRUE, formatter= ec.clmn('emoji'))),
++   tooltip= list(formatter=
++     # with sprintf template + multiple column indexes
++     ec.clmn('%M@ species <b>%@</b><br>s.len <b>%@</b><br>s.wid <b>%@</b>', 5,1,2))
++ )
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ec.data")
+> ### * ec.data
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ec.data
+> ### Title: Data helper
+> ### Aliases: ec.data
+> 
+> ### ** Examples
+> 
+> library(dplyr)
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+> ds <- iris |> relocate(Species) |>
++ 	 ec.data(format= 'boxplot', jitter= 0.1, layout= 'v')
+> ec.init(
++   dataset= ds$dataset, series= ds$series, xAxis= ds$xAxis, yAxis= ds$yAxis,
++   legend= list(show= TRUE), tooltip= list(show= TRUE)
++ )
+> 
+> hc <- hclust(dist(USArrests), "complete")
+> ec.init(preset= FALSE,
++   series= list(list(
++     type= 'tree', orient= 'TB', roam= TRUE, initialTreeDepth= -1,
++     data= ec.data(hc, format='dendrogram'),
++     # layout= 'radial', symbolSize= ec.clmn(scale= 0.33),
++     ## exclude added labels like 'pXX', leaving only the originals
++     label= list(formatter= htmlwidgets::JS(
++       "function(n) { out= /p\\d+/.test(n.name) ? '' : n.name; return out;}"))
++   ))
++ )
+> 
+> # build required pathString,value and optional itemStyle columns
+> df <- as.data.frame(Titanic) |> rename(value= Freq) |> mutate(
++   pathString= paste('Titanic\nSurvival', Survived, Age, Sex, Class, sep='/'),
++ 	 itemStyle= case_when(Survived=='Yes' ~"color='green'", TRUE ~"color='LightSalmon'")) |>
++ 	 select(pathString, value, itemStyle)
+> ec.init(
++ 	  series= list(list(
++ 		  data= ec.data(df, format='treeTT'),
++ 		  type= 'tree', symbolSize= ec.clmn("(x) => {return Math.log(x)*10}")
++ 	  )),
++ 	  tooltip= list(formatter= ec.clmn('%@<br>%@%','value','pct'))
++ )
+> 
+> # column itemStyle_color will become itemStyle= list(color=...) in data list
+> # attribute names separator (nasep) is "_"
+> df <- data.frame(name= c('A','B','C'), value= c(1,2,3), 
++      itemStyle_color= c('chartreuse','lightblue','pink'),
++      itemStyle_decal_symbol= c('rect','diamond','none'),
++      emphasis_itemStyle_color= c('darkgreen','blue','red')
++ )
+> ec.init(series.param= list(type='pie', data= ec.data(df, 'names', nasep='_')))
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:dplyr’
+
+> nameEx("ec.examples")
+> ### * ec.examples
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ec.examples
+> ### Title: Code Examples
+> ### Aliases: ec.examples
+> 
+> ### ** Examples
+> 
+>   # donttest
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ec.fromJson")
+> ### * ec.fromJson
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ec.fromJson
+> ### Title: JSON to chart
+> ### Aliases: ec.fromJson
+> 
+> ### ** Examples
+> 
+> txt <- '{
++    "xAxis": { "data": ["Mon", "Tue", "Wed"]}, "yAxis": { },
++    "series": { "type": "line", "data": [150, 230, 224] } }'
+> ec.fromJson(txt)  # text json
+> # outFile <- 'c:/temp/cars.json'
+> # cars |> ec.init() |> ec.inspect(target='full', file=outFile)
+> # ec.fromJson(file(outFile, 'rb'))
+> # ec.fromJson(url('http://localhost/echarty/cars.json'))
+> ec.fromJson('https://helgasoft.github.io/echarty/test/pfull.json')
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ec.init")
+> ### * ec.init
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ec.init
+> ### Title: Initialize command
+> ### Aliases: ec.init
+> 
+> ### ** Examples
+> 
+>  # basic scatter chart from a data.frame, using presets
+> cars |> ec.init()
+>  
+>  # grouping, tooltips, formatting
+> iris |> dplyr::group_by(Species) |> 
++ ec.init(        # init with presets
++   tooltip= list(show= TRUE),
++   series.param= list( 
++     symbolSize= ec.clmn('Petal.Width', scale=7),
++     tooltip= list(formatter= ec.clmn('Petal.Width: %@', 'Petal.Width'))
++   )
++ )
+> 
+> data.frame(n=1:5) |> dplyr::group_by(n) |> ec.init(
++   timeline= list(show=TRUE, autoPlay=TRUE),
++   series.param= list(type='gauge', max=5)
++ )
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ec.inspect")
+> ### * ec.inspect
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ec.inspect
+> ### Title: Chart to JSON
+> ### Aliases: ec.inspect
+> 
+> ### ** Examples
+> 
+> # extract JSON
+> json <- cars |> ec.init() |> ec.inspect()
+> json
+{
+  "dataset": [
+    {
+      "source": [
+        ["speed", "dist"],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          22
+        ],
+        [
+          8,
+          16
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          18
+        ],
+        [
+          10,
+          26
+        ],
+        [
+          10,
+          34
+        ],
+        [
+          11,
+          17
+        ],
+        [
+          11,
+          28
+        ],
+        [
+          12,
+          14
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          12,
+          24
+        ],
+        [
+          12,
+          28
+        ],
+        [
+          13,
+          26
+        ],
+        [
+          13,
+          34
+        ],
+        [
+          13,
+          34
+        ],
+        [
+          13,
+          46
+        ],
+        [
+          14,
+          26
+        ],
+        [
+          14,
+          36
+        ],
+        [
+          14,
+          60
+        ],
+        [
+          14,
+          80
+        ],
+        [
+          15,
+          20
+        ],
+        [
+          15,
+          26
+        ],
+        [
+          15,
+          54
+        ],
+        [
+          16,
+          32
+        ],
+        [
+          16,
+          40
+        ],
+        [
+          17,
+          32
+        ],
+        [
+          17,
+          40
+        ],
+        [
+          17,
+          50
+        ],
+        [
+          18,
+          42
+        ],
+        [
+          18,
+          56
+        ],
+        [
+          18,
+          76
+        ],
+        [
+          18,
+          84
+        ],
+        [
+          19,
+          36
+        ],
+        [
+          19,
+          46
+        ],
+        [
+          19,
+          68
+        ],
+        [
+          20,
+          32
+        ],
+        [
+          20,
+          48
+        ],
+        [
+          20,
+          52
+        ],
+        [
+          20,
+          56
+        ],
+        [
+          20,
+          64
+        ],
+        [
+          22,
+          66
+        ],
+        [
+          23,
+          54
+        ],
+        [
+          24,
+          70
+        ],
+        [
+          24,
+          92
+        ],
+        [
+          24,
+          93
+        ],
+        [
+          24,
+          120
+        ],
+        [
+          25,
+          85
+        ]
+      ]
+    }
+  ],
+  "xAxis": {
+    "show": true,
+    "type": "value",
+    "name": "speed"
+  },
+  "yAxis": {
+    "show": true,
+    "type": "value",
+    "name": "dist"
+  },
+  "series": [
+    {
+      "type": "scatter"
+    }
+  ]
+} 
+> 
+> # get from JSON and modify plot
+> ec.fromJson(json) |> ec.theme('macarons')
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ec.paxis")
+> ### * ec.paxis
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ec.paxis
+> ### Title: Parallel Axis
+> ### Aliases: ec.paxis
+> 
+> ### ** Examples
+> 
+> iris |> dplyr::group_by(Species) |>    # chained
++ ec.init(ctype= 'parallel', series.param= list(lineStyle= list(width=3))) |> 
++ ec.paxis(cols= c('Petal.Length','Petal.Width','Sepal.Width'))
+> 
+> mtcars |> ec.init(ctype= 'parallel', 
++    parallelAxis= ec.paxis(mtcars, cols= c('gear','cyl','hp','carb'), nameRotate= 45),
++    series.param= list(smooth= TRUE)
++ )
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ec.plugjs")
+> ### * ec.plugjs
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ec.plugjs
+> ### Title: Install Javascript plugin from URL source
+> ### Aliases: ec.plugjs
+> 
+> ### ** Examples
+> 
+> # import map plugin and display two (lon,lat) locations
+> if (interactive()) {
++   ec.init(preset= FALSE,
++           geo = list(map= 'china-contour', roam= TRUE),
++           series = list(list(
++             type= 'scatter', coordinateSystem= 'geo',
++             symbolSize= 9, itemStyle= list(color= 'red'),
++             data= list(list(value= c(113, 40)), list(value= c(118, 39))) ))
++   ) |> 
++   ec.plugjs( paste0('https://raw.githubusercontent.com/apache/echarts/',
++                     'master/test/data/map/js/china-contour.js') )
++ }
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ec.theme")
+> ### * ec.theme
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ec.theme
+> ### Title: Themes
+> ### Aliases: ec.theme
+> 
+> ### ** Examples
+> 
+> mtcars |> ec.init() |> ec.theme('dark-mushroom')
+> cars |> ec.init() |> ec.theme('mine', code=
++   '{"color": ["green","#eeaa33"], 
++     "backgroundColor": "lemonchiffon"}')
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ec.upd")
+> ### * ec.upd
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ec.upd
+> ### Title: Update option lists
+> ### Aliases: ec.upd
+> 
+> ### ** Examples
+> 
+> library(dplyr)
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+> df <- data.frame(x= 1:30, y= runif(30, 5, 10), cat= sample(LETTERS[1:3],size=30,replace=TRUE)) |>
++   		mutate(lwr= y-runif(30, 1, 3), upr= y+runif(30, 2, 4))
+> band.df <- df  |> group_by(cat) |> group_split()
+> 
+> df |> group_by(cat) |> 
++ ec.init(load='custom', ctype='line', 
++         xAxis=list(data=c(0,unique(df$x)), boundaryGap=FALSE) ) |> 
++ ec.upd({
++   for(ii in 1:length(band.df))   # add bands to their respective groups
++     series <- append(series,   
++       ecr.band(band.df[[ii]], 'lwr', 'upr', type='stack', smooth=FALSE,
++          name= unique(band.df[[ii]]$cat), areaStyle= list(color=c('blue','green','yellow')[ii])) )
++ })
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:dplyr’
+
+> nameEx("ec.util")
+> ### * ec.util
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ec.util
+> ### Title: Utility functions
+> ### Aliases: ec.util
+> 
+> ### ** Examples
+> 
+> if (interactive()) {  # comm.out: Fedora errors about some 'browser'
++   library(sf)
++   fname <- system.file("shape/nc.shp", package="sf")
++   nc <- as.data.frame(st_read(fname))
++   ec.init(load= c('leaflet', 'custom'),  # load custom for polygons
++      js= ec.util(cmd= 'sf.bbox', bbox= st_bbox(nc$geometry)),
++      series= ec.util(cmd= 'sf.series', df= nc, nid= 'NAME', itemStyle= list(opacity=0.3)),
++      tooltip= list(formatter= '{a}')
++   )
++ 
++   htmltools::browsable(
++     lapply(iris |> dplyr::group_by(Species) |> dplyr::group_split(), 
++            function(x) {
++      x |> ec.init(ctype= 'scatter', title= list(text= unique(x$Species)))
++            }) |> 
++     ec.util(cmd= 'tabset')
++   )
++ 
++   p1 <- cars |> ec.init(grid= list(top= 20))  # move chart up
++   p2 <- mtcars |> ec.init()
++   ec.util(cmd= 'tabset', cars= p1, mtcars= p2, width= 333, height= 333)
++ 
++   lapply(list('dark','macarons','gray','jazz','dark-mushroom'),
++                 \(x) cars |> ec.init() |> ec.theme(x) ) |>
++   ec.util(cmd='layout', cols= 2, title= 'my layout')
++   
++   setd <- \(type) {
++ 	   mtcars |> group_by(cyl) |> 
++ 	 ec.init(ctype= type,
++ 		  title= list(subtext= 'mouseover points to morph'),
++ 		  xAxis= list(scale= TRUE))
++   }
++   oscatter <- setd('scatter')
++   obar <- setd('bar')
++   ec.util(cmd='morph', oscatter, obar)
++ }
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ecr.band")
+> ### * ecr.band
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ecr.band
+> ### Title: Area band
+> ### Aliases: ecr.band
+> 
+> ### ** Examples
+> 
+> set.seed(222)
+> df <- data.frame( x = 1:10, y = round(runif(10, 5, 10),2)) |>
++   dplyr::mutate(lwr= round(y-runif(10, 1, 3),2), upr= round(y+runif(10, 2, 4),2) )
+> banda <- ecr.band(df, 'lwr', 'upr', type='stack', name='stak', areaStyle= list(color='green'))
+> #banda <- ecr.band(df, 'lwr', 'upr', type='polygon', name='poly1')
+> 
+> df |> ec.init( load='custom', # polygon only
++   legend= list(show= TRUE),
++   xAxis= list(type='category', boundaryGap=FALSE), # stack
++   #xAxis= list(scale=T, min='dataMin'),            # polygon 
++   series= append(
++     list(list(type='line', color='blue', name='line1')),
++     banda
++   ),
++   tooltip= list(trigger='axis', formatter= banda[[1]]$tipFmt)
++ )
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ecr.ebars")
+> ### * ecr.ebars
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ecr.ebars
+> ### Title: Error bars
+> ### Aliases: ecr.ebars
+> 
+> ### ** Examples
+> 
+> library(dplyr)
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+> df <- mtcars |> group_by(cyl,gear) |> summarise(yy= round(mean(mpg),2)) |>
++   mutate(low= round(yy-cyl*runif(1),2), high= round(yy+cyl*runif(1),2))
+`summarise()` has grouped output by 'cyl'. You can override using the `.groups`
+argument.
+> ec.init(df, load= 'custom', ctype= 'bar', tooltip= list(show=TRUE), 
++       xAxis= list(type='category')) |> 
++ ecr.ebars(encode= list(y=c(3,4,5), x=2))
+>      
+> # ----- riErrBarSimple ------
+> df <- mtcars |> mutate(x=1:nrow(mtcars),hi=hp-drat*3, lo=hp+wt*3) |> select(x,hp,hi,lo)
+> ec.init(df, load= 'custom', legend= list(show= TRUE)) |> 
++ ec.upd({ series <- append(series, list(
++     list(type= 'custom', name= 'error',
++          data= ec.data(df |> select(x,hi,lo)),
++          renderItem= htmlwidgets::JS('riErrBarSimple')
++     )))
++ })
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:dplyr’
+
+> nameEx("ecs.exec")
+> ### * ecs.exec
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ecs.exec
+> ### Title: Shiny: Execute a proxy command
+> ### Aliases: ecs.exec
+> 
+> ### ** Examples
+> 
+> if (interactive()) {
++    demo(eshiny, package='echarty')
++ }
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  3.851 0.279 6.609 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

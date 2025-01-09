@@ -1,4 +1,4 @@
-* using log directory ‘/var/scratch2/tomas/cran/rlibro/check/fluxfinder.Rcheck’
+* using log directory ‘/var/scratch2/tomas/cran/rlibro/check/echarty.Rcheck’
 * using R Under development (unstable) (2025-01-08 r87540)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
@@ -6,9 +6,8 @@
     GNU Fortran (GCC) 14.2.1 20240912 (Red Hat 14.2.1-3)
 * running under: Fedora Linux 40 (MATE-Compiz)
 * using session charset: UTF-8
-* checking for file ‘fluxfinder/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘fluxfinder’ version ‘1.0.0’
+* checking for file ‘echarty/DESCRIPTION’ ... OK
+* this is package ‘echarty’ version ‘1.6.4’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -18,7 +17,7 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘fluxfinder’ can be installed ... OK
+* checking whether package ‘echarty’ can be installed ... OK
 * checking package directory ... OK
 * checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -49,31 +48,27 @@
 * checking for unstated dependencies in examples ... OK
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
-* checking examples ... ERROR
-Running examples in ‘fluxfinder-Ex.R’ failed
-The error most likely occurred in:
-
-> ### Name: ffi_qaqc
-> ### Title: Generate a QA/QC document
-> ### Aliases: ffi_qaqc
-> 
-> ### ** Examples
-> 
-> # Toy data
-> cars$Plot <- c("A", "B")
-> fd <- ffi_compute_fluxes(cars, "Plot", "speed", "dist")
-> x <- ffi_qaqc(fd, group_column = "Plot")
-
-
-processing file: qaqc.Rmd
-Warning in file(con, "w") :
-  cannot open file 'qaqc.knit.md': Read-only file system
-Error in file(con, "w") : cannot open the connection
-Calls: ffi_qaqc ... <Anonymous> -> <Anonymous> -> write_utf8 -> writeLines -> file
-Execution halted
+* checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... OK
+* checking tests ... ERROR
   Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  
+  geoJSON has 5 features
+  geoJSON has 5 features[ FAIL 1 | WARN 2 | SKIP 0 | PASS 271 ]
+  
+  ══ Failed tests ════════════════════════════════════════════════════════════════
+  ── Error ('test-ec.util.R:73:3'): shapefile POINTS from ZIP ────────────────────
+  Error in `download.file(opts$url, destfile, mode = "wb")`: cannot open URL 'https://mapcruzin.com/sierra-leone-shapefiles/points.zip'
+  Backtrace:
+      ▆
+   1. └─echarty::ec.util(cmd = "sf.unzip", url = "https://mapcruzin.com/sierra-leone-shapefiles/points.zip") at test-ec.util.R:73:3
+   2.   └─utils::download.file(opts$url, destfile, mode = "wb")
+  
+  [ FAIL 1 | WARN 2 | SKIP 0 | PASS 271 ]
+  Error: Test failures
+  Execution halted
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes ... OK
 * checking re-building of vignette outputs ... OK

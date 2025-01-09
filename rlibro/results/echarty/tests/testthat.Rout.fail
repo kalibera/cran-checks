@@ -1,0 +1,49 @@
+
+R Under development (unstable) (2025-01-08 r87540) -- "Unsuffered Consequences"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> library(echarty)
+> 
+> test_check("echarty")
+
+ series: 1 coords: 3 
+ec.plugjs: simpleWarning in download.file(source, ffull, quiet = TRUE): URL https://cdn.jsdelivr.net/npm/echarts-gl@2.0.9/dist/echarts-gl.min.js: cannot open destfile '/var/scratch2ro/tomas/cran/rlibro/lib/echarty/js/echarts-gl.min.js', reason 'Read-only file system'
+
+ series: 108 coords: 2529 
+
+ series: 1 coords: 3 
+
+ series: 1 coords: 2 
+trying URL 'https://mapcruzin.com/sierra-leone-shapefiles/points.zip'
+ec.plugjs: simpleWarning in download.file(source, ffull, quiet = TRUE): URL https://cdn.jsdelivr.net/npm/echarts-gl@2.0.9/dist/echarts-gl.min.js: cannot open destfile '/var/scratch2ro/tomas/cran/rlibro/lib/echarty/js/echarts-gl.min.js', reason 'Read-only file system'
+ec.plugjs: simpleWarning in download.file(source, ffull, quiet = TRUE): URL https://cdn.jsdelivr.net/npm/echarts-gl@2.0.9/dist/echarts-gl.min.js: cannot open destfile '/var/scratch2ro/tomas/cran/rlibro/lib/echarty/js/echarts-gl.min.js', reason 'Read-only file system'
+ec.plugjs: simpleWarning in download.file(source, ffull, quiet = TRUE): URL https://raw.githubusercontent.com/apache/echarts/master/test/data/map/js/china-contour.js: cannot open destfile '/var/scratch2ro/tomas/cran/rlibro/lib/echarty/js/china-contour.js', reason 'Read-only file system'
+
+geoJSON has 5 features
+geoJSON has 5 features[ FAIL 1 | WARN 2 | SKIP 0 | PASS 271 ]
+
+══ Failed tests ════════════════════════════════════════════════════════════════
+── Error ('test-ec.util.R:73:3'): shapefile POINTS from ZIP ────────────────────
+Error in `download.file(opts$url, destfile, mode = "wb")`: cannot open URL 'https://mapcruzin.com/sierra-leone-shapefiles/points.zip'
+Backtrace:
+    ▆
+ 1. └─echarty::ec.util(cmd = "sf.unzip", url = "https://mapcruzin.com/sierra-leone-shapefiles/points.zip") at test-ec.util.R:73:3
+ 2.   └─utils::download.file(opts$url, destfile, mode = "wb")
+
+[ FAIL 1 | WARN 2 | SKIP 0 | PASS 271 ]
+Error: Test failures
+Execution halted
