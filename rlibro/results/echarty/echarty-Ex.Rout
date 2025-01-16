@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2025-01-08 r87540) -- "Unsuffered Consequences"
+R Under development (unstable) (2025-01-15 r87576) -- "Unsuffered Consequences"
 Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -36,21 +36,44 @@ Type 'q()' to quit R.
 > 
 > ### ** Examples
 > 
+> library(dplyr)
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
 > tmp <- data.frame(Species = as.vector(unique(iris$Species)),
 +                   emoji = c('A','B','C'))
-> df <- iris |> dplyr::inner_join(tmp)      # add 6th column emoji
+> df <- iris |> inner_join(tmp)      # add 6th column emoji
 Joining with `by = join_by(Species)`
-> df |> dplyr::group_by(Species) |> ec.init(
+> df |> group_by(Species) |> ec.init(
 +   series.param= list(label= list(show= TRUE, formatter= ec.clmn('emoji'))),
 +   tooltip= list(formatter=
 +     # with sprintf template + multiple column indexes
 +     ec.clmn('%M@ species <b>%@</b><br>s.len <b>%@</b><br>s.wid <b>%@</b>', 5,1,2))
 + )
 > 
+> # tooltip decimal indexes work with full data sets (no missing/partial data)
+> ChickWeight |> mutate(Chick=as.numeric(Chick)) |> filter(Chick>47) |> group_by(Chick) |>
++ ec.init(
++   tooltip= list(trigger='axis', 
++                 formatter= ec.clmn("48: %@<br>49: %@<br>50: %@", 1.1, 2.1, 3.1)),
++   xAxis= list(type='category'), legend= list(formatter= 'Ch.{name}'),
++   series.param= list(type='line', encode= list(x='Time', y='weight')),
++ )
 > 
 > 
 > 
 > cleanEx()
+
+detaching ‘package:dplyr’
+
 > nameEx("ec.data")
 > ### * ec.data
 > 
@@ -86,7 +109,7 @@ The following objects are masked from ‘package:base’:
 +   series= list(list(
 +     type= 'tree', orient= 'TB', roam= TRUE, initialTreeDepth= -1,
 +     data= ec.data(hc, format='dendrogram'),
-+     # layout= 'radial', symbolSize= ec.clmn(scale= 0.33),
++     layout= 'radial', # symbolSize= ec.clmn(scale= 0.33),
 +     ## exclude added labels like 'pXX', leaving only the originals
 +     label= list(formatter= htmlwidgets::JS(
 +       "function(n) { out= /p\\d+/.test(n.name) ? '' : n.name; return out;}"))
@@ -122,22 +145,6 @@ The following objects are masked from ‘package:base’:
 
 detaching ‘package:dplyr’
 
-> nameEx("ec.examples")
-> ### * ec.examples
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: ec.examples
-> ### Title: Code Examples
-> ### Aliases: ec.examples
-> 
-> ### ** Examples
-> 
->   # donttest
-> 
-> 
-> 
-> cleanEx()
 > nameEx("ec.fromJson")
 > ### * ec.fromJson
 > 
@@ -157,6 +164,7 @@ detaching ‘package:dplyr’
 > # cars |> ec.init() |> ec.inspect(target='full', file=outFile)
 > # ec.fromJson(file(outFile, 'rb'))
 > # ec.fromJson(url('http://localhost/echarty/cars.json'))
+> 
 > ec.fromJson('https://helgasoft.github.io/echarty/test/pfull.json')
 > 
 > 
@@ -187,6 +195,7 @@ detaching ‘package:dplyr’
 + )
 > 
 > data.frame(n=1:5) |> dplyr::group_by(n) |> ec.init(
++   title= list(text= "gauge #%@"),
 +   timeline= list(show=TRUE, autoPlay=TRUE),
 +   series.param= list(type='gauge', max=5)
 + )
@@ -212,8 +221,8 @@ detaching ‘package:dplyr’
 {
   "dataset": [
     {
+      "dimensions": ["speed", "dist"],
       "source": [
-        ["speed", "dist"],
         [
           4,
           2
@@ -478,15 +487,16 @@ detaching ‘package:dplyr’
 > 
 > # import map plugin and display two (lon,lat) locations
 > if (interactive()) {
-+   ec.init(preset= FALSE,
-+           geo = list(map= 'china-contour', roam= TRUE),
-+           series = list(list(
-+             type= 'scatter', coordinateSystem= 'geo',
-+             symbolSize= 9, itemStyle= list(color= 'red'),
-+             data= list(list(value= c(113, 40)), list(value= c(118, 39))) ))
++   durl <- paste0('https://raw.githubusercontent.com/apache/echarts/',
++            'master/test/data/map/js/china-contour.js')
++   ec.init(  # load= durl,
++     geo = list(map= 'china-contour', roam= TRUE),
++     series.param = list(
++       type= 'scatter', coordinateSystem= 'geo',
++       symbolSize= 9, itemStyle= list(color= 'red'),
++       data= list(list(value= c(113, 40)), list(value= c(118, 39))) )
 +   ) |> 
-+   ec.plugjs( paste0('https://raw.githubusercontent.com/apache/echarts/',
-+                     'master/test/data/map/js/china-contour.js') )
++   ec.plugjs(durl)
 + }
 > 
 > 
@@ -566,7 +576,19 @@ detaching ‘package:dplyr’
 > 
 > ### ** Examples
 > 
-> if (interactive()) {  # comm.out: Fedora errors about some 'browser'
+> library(dplyr)
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+> if (interactive()) {  # comm.out: Cran Fedora errors about some 'browser'
 +   library(sf)
 +   fname <- system.file("shape/nc.shp", package="sf")
 +   nc <- as.data.frame(st_read(fname))
@@ -577,35 +599,63 @@ detaching ‘package:dplyr’
 +   )
 + 
 +   htmltools::browsable(
-+     lapply(iris |> dplyr::group_by(Species) |> dplyr::group_split(), 
++     lapply(iris |> group_by(Species) |> group_split(), 
 +            function(x) {
 +      x |> ec.init(ctype= 'scatter', title= list(text= unique(x$Species)))
 +            }) |> 
 +     ec.util(cmd= 'tabset')
 +   )
 + 
-+   p1 <- cars |> ec.init(grid= list(top= 20))  # move chart up
-+   p2 <- mtcars |> ec.init()
-+   ec.util(cmd= 'tabset', cars= p1, mtcars= p2, width= 333, height= 333)
++   p1 <- cars |> ec.init(grid= list(top=26), height=333)  # move chart up
++   p2 <- mtcars |> arrange(mpg) |> ec.init(height=333, ctype='line')
++   ec.util(cmd= 'tabset', cars= p1, mtcars= p2)
++ 
++ 
++   cars |> ec.init(
++     graphic = list(
++       ec.util(cmd='button', text='see type', right='center', top=20,
++         js="function(a) {op=ec_option(echwid); alert(op.series[0].type);}")
++     )
++   )
 + 
 +   lapply(list('dark','macarons','gray','jazz','dark-mushroom'),
-+                 \(x) cars |> ec.init() |> ec.theme(x) ) |>
++     function(x) cars |> ec.init(grid= list(bottom=0)) |> ec.theme(x) ) |>
 +   ec.util(cmd='layout', cols= 2, title= 'my layout')
-+   
-+   setd <- \(type) {
-+ 	   mtcars |> group_by(cyl) |> 
-+ 	 ec.init(ctype= type,
-+ 		  title= list(subtext= 'mouseover points to morph'),
-+ 		  xAxis= list(scale= TRUE))
-+   }
-+   oscatter <- setd('scatter')
-+   obar <- setd('bar')
-+   ec.util(cmd='morph', oscatter, obar)
 + }
+> 
+> colors <- c("blue","red","green")
+> cyls <- as.character(sort(unique(mtcars$cyl)))
+> sers <- lapply(mtcars |> group_by(cyl) |> group_split(), \(x) {
++   cyl <- as.character(unique(x$cyl))
++   list(type='scatter', id=cyl, dataGroupId=cyl, 
++        data= ec.data(x |> select(mpg,hp)),
++        universalTransition= TRUE)
++ })
+> oscatter <- list(
++   title= list(subtext='click points to morph'), 
++   color= colors, tooltip= list(show=TRUE),
++   xAxis= list(scale=TRUE, name='mpg'), yAxis= list(scale=TRUE, name='hp'),
++   series= sers
++ )
+> opie <- list(
++   title= list(text= 'Average hp'), 
++   color= colors, tooltip= list(show=TRUE),
++   series= list(list(
++     type= 'pie', label= list(show=TRUE), colorBy= 'data',
++     data= ec.data(mtcars |> group_by(cyl) |> summarize(value= mean(hp)) |>
++        mutate(groupId= as.character(cyl), name= as.character(cyl)),'names'),
++     universalTransition= list(enabled=TRUE, seriesKey= cyls)
++   ))
++ )
+> ec.util(cmd='morph', oscatter, opie) 
+>   
 > 
 > 
 > 
 > cleanEx()
+
+detaching ‘package:dplyr’
+
 > nameEx("ecr.band")
 > ### * ecr.band
 > 
@@ -661,22 +711,31 @@ The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
 
-> df <- mtcars |> group_by(cyl,gear) |> summarise(yy= round(mean(mpg),2)) |>
-+   mutate(low= round(yy-cyl*runif(1),2), high= round(yy+cyl*runif(1),2))
+> df <- mtcars |> group_by(cyl,gear) |> summarise(avg.mpg= round(mean(mpg),2)) |>
++   mutate(low = round(avg.mpg-cyl*runif(1),2), 
++          high= round(avg.mpg+cyl*runif(1),2))
 `summarise()` has grouped output by 'cyl'. You can override using the `.groups`
 argument.
-> ec.init(df, load= 'custom', ctype= 'bar', tooltip= list(show=TRUE), 
-+       xAxis= list(type='category')) |> 
-+ ecr.ebars(encode= list(y=c(3,4,5), x=2))
->      
+> ec.init(df, load= 'custom', ctype= 'bar',
++       xAxis= list(type='category'), tooltip= list(show=TRUE)) |>
++ ecr.ebars(encode= list(y=c('avg.mpg','low','high'), x='gear'))
+> #ecr.ebars(encode= list(y=c(3,4,5), x=2))  # ok: data indexes
+> 
+> # same but horizontal
+> ec.init(df, load= 'custom',
++   yAxis= list(type='category'), tooltip= list(show=TRUE),
++   series.param= list(type='bar', encode= list(x='avg.mpg', y='gear') )) |>
++ ecr.ebars(encode= list(x=c('avg.mpg','low','high'), y='gear'))
+> 
 > # ----- riErrBarSimple ------
-> df <- mtcars |> mutate(x=1:nrow(mtcars),hi=hp-drat*3, lo=hp+wt*3) |> select(x,hp,hi,lo)
-> ec.init(df, load= 'custom', legend= list(show= TRUE)) |> 
+> df <- mtcars |> mutate(name= row.names(mtcars), hi= hp-drat*3, lo= hp+wt*3) |> 
++   filter(cyl==4) |> select(name,hp,hi,lo)
+> ec.init(df, load= 'custom', legend= list(show=TRUE)) |>
 + ec.upd({ series <- append(series, list(
-+     list(type= 'custom', name= 'error',
-+          data= ec.data(df |> select(x,hi,lo)),
-+          renderItem= htmlwidgets::JS('riErrBarSimple')
-+     )))
++   list(type= 'custom', name= 'error',
++     data= ec.data(df |> select(name,hi,lo)),
++     renderItem= htmlwidgets::JS('riErrBarSimple')
++   )))
 + })
 > 
 > 
@@ -698,7 +757,7 @@ detaching ‘package:dplyr’
 > ### ** Examples
 > 
 > if (interactive()) {
-+    demo(eshiny, package='echarty')
++  # run with  demo(eshiny, package='echarty')
 + }
 > 
 > 
@@ -709,7 +768,7 @@ detaching ‘package:dplyr’
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  3.851 0.279 6.609 0 0 
+Time elapsed:  3.822 0.236 4.534 0 0 
 > grDevices::dev.off()
 null device 
           1 

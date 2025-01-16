@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2025-01-08 r87540) -- "Unsuffered Consequences"
+R Under development (unstable) (2025-01-15 r87576) -- "Unsuffered Consequences"
 Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -20,30 +20,41 @@ Type 'q()' to quit R.
 > 
 > test_check("echarty")
 
- series: 1 coords: 3 
+ series: 1 records: 3 
 ec.plugjs: simpleWarning in download.file(source, ffull, quiet = TRUE): URL https://cdn.jsdelivr.net/npm/echarts-gl@2.0.9/dist/echarts-gl.min.js: cannot open destfile '/var/scratch2ro/tomas/cran/rlibro/lib/echarty/js/echarts-gl.min.js', reason 'Read-only file system'
 
- series: 108 coords: 2529 
+ series: 108 records: 2529 
 
- series: 1 coords: 3 
+ series: 1 records: 3 
 
- series: 1 coords: 2 
-trying URL 'https://mapcruzin.com/sierra-leone-shapefiles/points.zip'
+ series: 1 records: 2 
+trying URL 'https://helgasoft.github.io/echarty/test/sl.shape.points.zip'
+Content type 'application/zip' length 32564 bytes (31 KB)
+==================================================
+downloaded 31 KB
+
+
+ series: 1 records: 10 
 ec.plugjs: simpleWarning in download.file(source, ffull, quiet = TRUE): URL https://cdn.jsdelivr.net/npm/echarts-gl@2.0.9/dist/echarts-gl.min.js: cannot open destfile '/var/scratch2ro/tomas/cran/rlibro/lib/echarty/js/echarts-gl.min.js', reason 'Read-only file system'
 ec.plugjs: simpleWarning in download.file(source, ffull, quiet = TRUE): URL https://cdn.jsdelivr.net/npm/echarts-gl@2.0.9/dist/echarts-gl.min.js: cannot open destfile '/var/scratch2ro/tomas/cran/rlibro/lib/echarty/js/echarts-gl.min.js', reason 'Read-only file system'
 ec.plugjs: simpleWarning in download.file(source, ffull, quiet = TRUE): URL https://raw.githubusercontent.com/apache/echarts/master/test/data/map/js/china-contour.js: cannot open destfile '/var/scratch2ro/tomas/cran/rlibro/lib/echarty/js/china-contour.js', reason 'Read-only file system'
 
+ coln= speed distec.plugjs: simpleWarning in download.file(source, ffull, quiet = TRUE): URL https://cdn.jsdelivr.net/npm/echarts-gl@2.0.9/dist/echarts-gl.min.js: cannot open destfile '/var/scratch2ro/tomas/cran/rlibro/lib/echarty/js/echarts-gl.min.js', reason 'Read-only file system'
+ec.plugjs: simpleWarning in download.file(source, ffull, quiet = TRUE): URL https://cdn.jsdelivr.net/npm/echarts-gl@2.0.9/dist/echarts-gl.min.js: cannot open destfile '/var/scratch2ro/tomas/cran/rlibro/lib/echarty/js/echarts-gl.min.js', reason 'Read-only file system'
+
 geoJSON has 5 features
-geoJSON has 5 features[ FAIL 1 | WARN 2 | SKIP 0 | PASS 271 ]
+geoJSON has 5 features[ FAIL 1 | WARN 0 | SKIP 2 | PASS 297 ]
+
+══ Skipped tests (2) ═══════════════════════════════════════════════════════════
+• empty test (2): 'test-ec.util.R:114:1', 'test-other.R:158:1'
 
 ══ Failed tests ════════════════════════════════════════════════════════════════
-── Error ('test-ec.util.R:73:3'): shapefile POINTS from ZIP ────────────────────
-Error in `download.file(opts$url, destfile, mode = "wb")`: cannot open URL 'https://mapcruzin.com/sierra-leone-shapefiles/points.zip'
-Backtrace:
-    ▆
- 1. └─echarty::ec.util(cmd = "sf.unzip", url = "https://mapcruzin.com/sierra-leone-shapefiles/points.zip") at test-ec.util.R:73:3
- 2.   └─utils::download.file(opts$url, destfile, mode = "wb")
+── Failure ('test-other.R:177:3'): 3D globe & autoload 3D ──────────────────────
+file.exists(lif) is not TRUE
 
-[ FAIL 1 | WARN 2 | SKIP 0 | PASS 271 ]
+`actual`:   FALSE
+`expected`: TRUE 
+
+[ FAIL 1 | WARN 0 | SKIP 2 | PASS 297 ]
 Error: Test failures
 Execution halted

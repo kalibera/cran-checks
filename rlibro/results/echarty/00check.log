@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rlibro/check/echarty.Rcheck’
-* using R Under development (unstable) (2025-01-08 r87540)
+* using R Under development (unstable) (2025-01-15 r87576)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (GCC) 14.2.1 20240912 (Red Hat 14.2.1-3)
@@ -7,7 +7,7 @@
 * running under: Fedora Linux 40 (MATE-Compiz)
 * using session charset: UTF-8
 * checking for file ‘echarty/DESCRIPTION’ ... OK
-* this is package ‘echarty’ version ‘1.6.4’
+* this is package ‘echarty’ version ‘1.6.5’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -54,19 +54,19 @@
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
+  geoJSON has 5 features[ FAIL 1 | WARN 0 | SKIP 2 | PASS 297 ]
   
-  geoJSON has 5 features
-  geoJSON has 5 features[ FAIL 1 | WARN 2 | SKIP 0 | PASS 271 ]
+  ══ Skipped tests (2) ═══════════════════════════════════════════════════════════
+  • empty test (2): 'test-ec.util.R:114:1', 'test-other.R:158:1'
   
   ══ Failed tests ════════════════════════════════════════════════════════════════
-  ── Error ('test-ec.util.R:73:3'): shapefile POINTS from ZIP ────────────────────
-  Error in `download.file(opts$url, destfile, mode = "wb")`: cannot open URL 'https://mapcruzin.com/sierra-leone-shapefiles/points.zip'
-  Backtrace:
-      ▆
-   1. └─echarty::ec.util(cmd = "sf.unzip", url = "https://mapcruzin.com/sierra-leone-shapefiles/points.zip") at test-ec.util.R:73:3
-   2.   └─utils::download.file(opts$url, destfile, mode = "wb")
+  ── Failure ('test-other.R:177:3'): 3D globe & autoload 3D ──────────────────────
+  file.exists(lif) is not TRUE
   
-  [ FAIL 1 | WARN 2 | SKIP 0 | PASS 271 ]
+  `actual`:   FALSE
+  `expected`: TRUE 
+  
+  [ FAIL 1 | WARN 0 | SKIP 2 | PASS 297 ]
   Error: Test failures
   Execution halted
 * checking for unstated dependencies in vignettes ... OK
