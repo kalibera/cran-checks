@@ -1,6 +1,6 @@
 
-R Under development (unstable) (2024-12-25 r87465) -- "Unsuffered Consequences"
-Copyright (C) 2024 The R Foundation for Statistical Computing
+R Under development (unstable) (2025-01-15 r87576) -- "Unsuffered Consequences"
+Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -27,15 +27,30 @@ The following object is masked from 'package:base':
 > library(ParamHelpers)
 > 
 > test_check("ParamHelpers")
-ERROR: modification of compiler constant of type character, length 2
-ERROR: the modified value of the constant is:
-[1] "integer"       "integervector"
-attr(,".match.hash")
-<hash table>
-ERROR: the original value of the constant is:
-[1] "integer"       "integervector"
-ERROR: the modified constant is at index 1
-ERROR: the modified constant is in this function body:
-c("integer", "integervector")
-Fatal error: compiler constants were modified!
+Starting 2 test processes
 
+
+Error in `private$handle_error()`:
+! testthat subprocess exited in file `test_convertParamSetToIrace.R`
+Caused by error:
+! R session crashed with exit code 2
+Backtrace:
+     ▆
+  1. └─testthat::test_check("ParamHelpers")
+  2.   └─testthat::test_dir(...)
+  3.     └─testthat:::test_files(...)
+  4.       └─testthat:::test_files_parallel(...)
+  5.         ├─withr::with_dir(...)
+  6.         │ └─base::force(code)
+  7.         ├─testthat::with_reporter(...)
+  8.         │ └─base::tryCatch(...)
+  9.         │   └─base (local) tryCatchList(expr, classes, parentenv, handlers)
+ 10.         │     └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])
+ 11.         │       └─base (local) doTryCatch(return(expr), name, parentenv, handler)
+ 12.         └─testthat:::parallel_event_loop_chunky(queue, reporters, ".")
+ 13.           └─queue$poll(Inf)
+ 14.             └─base::lapply(...)
+ 15.               └─testthat (local) FUN(X[[i]], ...)
+ 16.                 └─private$handle_error(msg, i)
+ 17.                   └─rlang::abort(...)
+Execution halted

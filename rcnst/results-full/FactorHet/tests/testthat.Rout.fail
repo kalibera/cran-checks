@@ -15,19 +15,36 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> library("testthat")
-> library("TreeTools", quietly = TRUE, warn.conflicts = FALSE)
+> library(testthat)
+> library(FactorHet)
 > 
-> suppressPackageStartupMessages(test_check("TreeTools"))
+> test_check("FactorHet")
+$`letter state`
+
+$`state letter`
+
+$`state region`
+
+$`letter region`
+
+
+---Summary of FactorHet---
+The model was estimated with 2 groups and 3 factors with each group having 13 parameters.
+
+---Summary of Fusion---
+
+No levels were fused together.
+----
+Use AME or AMIE to examine the effects in detail.
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
-[1] "END;"      "ENDBLOCK;"
+[1] "integer"       "integervector"
 attr(,".match.hash")
 <hash table>
 ERROR: the original value of the constant is:
-[1] "END;"      "ENDBLOCK;"
+[1] "integer"       "integervector"
 ERROR: the modified constant is at index 1
 ERROR: the modified constant is in this function body:
-c("END;", "ENDBLOCK;")
+c("integer", "integervector")
 Fatal error: compiler constants were modified!
 

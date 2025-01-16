@@ -1,0 +1,383 @@
+
+R Under development (unstable) (2025-01-15 r87576) -- "Unsuffered Consequences"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "FactorHet"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('FactorHet')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("FactorHet")
+> ### * FactorHet
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: FactorHet
+> ### Title: Estimate heterogeneous effects in factorial and conjoint
+> ###   experiments
+> ### Aliases: FactorHet FactorHet_mbo
+> 
+> ### ** Examples
+> 
+> # Use a small subset of the immigration data from Hainmueller and Hopkins
+> data(immigration)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("FactorHet_control")
+> ### * FactorHet_control
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: FactorHet_control
+> ### Title: Control for FactorHet estimation
+> ### Aliases: FactorHet_control
+> 
+> ### ** Examples
+> 
+> str(FactorHet_control())
+List of 34
+ $ adaptive_weight       : chr "B&R"
+ $ backtrack_SQUAREM     : num 10
+ $ beta_cg_it            : num 25
+ $ beta_method           : chr "cpp"
+ $ calc_df               : logi TRUE
+ $ calc_se               : logi TRUE
+ $ debug                 : logi FALSE
+ $ df_method             : chr "EM"
+ $ do_SQUAREM            : logi TRUE
+ $ force_reset           : logi FALSE
+ $ forced_randomize      : logi FALSE
+ $ gamma                 : num 1
+ $ init_method           : chr "short_EM"
+ $ iterations            : num 1000
+ $ lambda_scale          :function (lambda, N)  
+ $ log_method            : chr "log_ginv"
+ $ maxit_pi              : NULL
+ $ optim_phi_controls    :List of 1
+  ..$ method: chr "lib_lbfgs"
+ $ override_BR           : logi FALSE
+ $ prior_var_beta        : num Inf
+ $ prior_var_phi         : num 4
+ $ quiet_tictoc          : logi TRUE
+ $ rare_threshold        : num 5
+ $ rare_verbose          : num 1
+ $ repeat_beta           : num 1
+ $ return_data           : logi FALSE
+ $ single_intercept      : NULL
+ $ step_SQUAREM          : NULL
+ $ tau_method            : chr "nullspace"
+ $ tau_stabilization     : num 5
+ $ tau_truncate          : num 1e+06
+ $ tolerance.logposterior: num 1e-05
+ $ tolerance.parameters  : num 1e-05
+ $ weight_dlist          : logi FALSE
+ - attr(*, "class")= chr "FactorHet_control"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("FactorHet_init")
+> ### * FactorHet_init
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: FactorHet_init
+> ### Title: Arguments for initializing FactorHet
+> ### Aliases: FactorHet_init
+> 
+> ### ** Examples
+> 
+> str(FactorHet_init())
+List of 12
+ $ debug_repeat        : logi FALSE
+ $ force_rep           : logi FALSE
+ $ nrep                : num 5
+ $ plot_repeat         : logi FALSE
+ $ return_all          : logi FALSE
+ $ short_EM            : logi FALSE
+ $ short_EM_beta_method: chr "cpp"
+ $ short_EM_cg_it      : num 10
+ $ short_EM_init       : chr "random_member"
+ $ short_EM_it         : num 40
+ $ short_EM_pi         : NULL
+ $ verbose             : logi FALSE
+ - attr(*, "class")= chr "FactorHet_init"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("FactorHet_mbo_control")
+> ### * FactorHet_mbo_control
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: FactorHet_mbo_control
+> ### Title: Control for model-based optimization
+> ### Aliases: FactorHet_mbo_control
+> 
+> ### ** Examples
+> 
+> str(FactorHet_mbo_control())
+List of 14
+ $ criterion         : chr "BIC"
+ $ fast_estimation   : NULL
+ $ final_method      : chr "best.predicted"
+ $ ic_method         : chr "EM"
+ $ iters             : num 11
+ $ mbo_design        : num -1.5
+ $ mbo_initialize    : chr "mm_mclust_prob"
+ $ mbo_method        : chr "regr.bgp"
+ $ mbo_noisy         : logi TRUE
+ $ mbo_range         : num [1:2] -5 0
+ $ mbo_type          : chr "sparse"
+ $ mm_init_iterations: NULL
+ $ se_final          : logi TRUE
+ $ verbose           : logi FALSE
+> 
+> 
+> 
+> cleanEx()
+> nameEx("FactorHet_refit")
+> ### * FactorHet_refit
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: FactorHet_refit
+> ### Title: Refit model using estimated sparsity patterns
+> ### Aliases: FactorHet_refit
+> 
+> ### ** Examples
+> 
+> data(immigration)
+> set.seed(1)
+> # Split the data into two parts for sample-splitting
+> train_data <- subset(immigration, CaseID < 900)
+> refit_data <- subset(immigration, CaseID >= 900)
+> # Fit using fixed lambda for demonstration
+> # only
+> fit <- FactorHet(Chosen_Immigrant ~ Plans + Ed + Country,
++   design = train_data, lambda = 1e-2,
++   moderator = ~ party_ID + census_div,
++   control = FactorHet_control(init = 'mclust'),
++   K = 2, group = ~ CaseID, task = ~ contest_no, choice_order = ~ choice_id)
+SQUAREM has proposed a large step size (before backtracking); this often results in
+good performance but may induce numerical differences across machines.
+> # Refit using the other half of data
+> 
+> 
+> 
+> cleanEx()
+> nameEx("HTE")
+> ### * HTE
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: HTE
+> ### Title: Estimate heterogeneous treatment effects by individual or
+> ###   moderator
+> ### Aliases: HTE HTE_by_individual HTE_by_moderator
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("calc_effects")
+> ### * calc_effects
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: AME
+> ### Title: Calculate marginal effects
+> ### Aliases: AME manual_AME ACE AMIE
+> 
+> ### ** Examples
+> 
+> data(immigration)
+> # Induce "fake" randomization restriction
+> immigration$joint_id <- paste(immigration$CaseID, immigration$contest_no)
+> remove_profiles <- subset(immigration, Plans == 'No plans' & Ed == 'GradDeg')
+> immigration <- subset(immigration, !(joint_id %in% remove_profiles$joint_id))
+> # Fit with one group and limited regularization for example only
+> fit <- FactorHet(Chosen_Immigrant ~ Plans + Ed + Country,
++   design = immigration, lambda = 1e-4,
++   K = 1, group = ~ CaseID, task = ~ contest_no, choice_order = ~ choice_id)
+> # Estimate AME of "Ed" with randomization restriction
+> est_AME <- AME(fit, baseline = list('Ed' = 'GradDeg'))
+For choice "1", 22.32% of observations removed from the empirical distribution of AMCE
+because of randomization restrictions.
+For choice "2", 22.98% of observations removed from the empirical distribution of AMCE
+because of randomization restrictions.
+.> # Estimate ACE and AMIE
+> est_AMIE <- AMIE(fit, baseline = list('Ed' = 'GradDeg', 'Plans' = 'Has contract'))
+For choice "1", 31.29% of observations removed from the empirical distribution of AMCE
+because of randomization restrictions.
+For choice "2", 34.79% of observations removed from the empirical distribution of AMCE
+because of randomization restrictions.
+.For choice "1", 31.29% of observations removed from the empirical distribution of AMCE
+because of randomization restrictions.
+For choice "2", 34.79% of observations removed from the empirical distribution of AMCE
+because of randomization restrictions.
+.For choice "1", 31.29% of observations removed from the empirical distribution of AMCE
+because of randomization restrictions.
+For choice "2", 34.79% of observations removed from the empirical distribution of AMCE
+because of randomization restrictions.
+.......$`Ed Plans`
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("cjoint_plot")
+> ### * cjoint_plot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: cjoint_plot
+> ### Title: Plot a FactorHet object
+> ### Aliases: cjoint_plot
+> 
+> ### ** Examples
+> 
+> # Fit with one group and limited regularization for example only
+> # Ignore conjoint structure for simplicity
+> fit <- FactorHet(Chosen_Immigrant ~ Plans + Ed + Country,
++   design = immigration, lambda = 1e-2,
++   K = 1, group = ~ CaseID, task = ~ contest_no, choice_order = ~ choice_id)
+> # Plot the raw coefficients
+> cjoint_plot(fit)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("diff_AME")
+> ### * diff_AME
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: diff_AME
+> ### Title: Difference between AMEs in each group
+> ### Aliases: diff_AME
+> 
+> ### ** Examples
+> 
+>   # Fit with two groups and fixed lambda for quick illustration
+> 
+> 
+> 
+> cleanEx()
+> nameEx("margeff_moderators")
+> ### * margeff_moderators
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: margeff_moderators
+> ### Title: Compute association between moderators and group membership
+> ### Aliases: margeff_moderators
+> 
+> ### ** Examples
+> 
+> # Estimate model with arbitrary choice of lambda
+> data(immigration)
+> set.seed(15)
+> # Estimate model with arbitrary choice of lambda
+> fit <- FactorHet(Chosen_Immigrant ~ Plans + Ed + Country,
++   design = immigration, lambda = 1e-2,
++   moderator = ~ party_ID,
++   K = 2, group = ~ CaseID,
++   control = FactorHet_control(init = 'mclust'),
++   task = ~ contest_no, choice_order = ~ choice_id)
+> margeff_moderators(fit)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("posterior_by_moderators")
+> ### * posterior_by_moderators
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: posterior_by_moderators
+> ### Title: Visualize the posterior by observed moderators
+> ### Aliases: posterior_by_moderators
+> 
+> ### ** Examples
+> 
+> data(immigration)
+> set.seed(15)
+> # Estimate model with arbitrary choice of lambda
+> fit <- FactorHet(Chosen_Immigrant ~ Plans + Ed + Country,
++   design = immigration, lambda = 1e-2,
++   moderator = ~ party_ID,
++   K = 2, group = ~ CaseID,
++   control = FactorHet_control(init = 'mclust'),
++   task = ~ contest_no, choice_order = ~ choice_id)
+> posterior_by_moderators(fit)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("predict.FactorHet")
+> ### * predict.FactorHet
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: predict.FactorHet
+> ### Title: Predict after using FactorHet
+> ### Aliases: predict.FactorHet
+> 
+> ### ** Examples
+> 
+> data(immigration)
+> set.seed(1)
+> # Fit a model once for simplicity
+> fit <- FactorHet(Chosen_Immigrant ~ Plans + Ed + Country,
++  design = immigration, lambda = 1e-4,
++  # Randomly initialize, do only one iteration for speed
++  init = FactorHet_init(nrep = 1),
++  control = FactorHet_control(init = 'random_member'),
++  K = 2, group = ~ CaseID, task = ~ contest_no, 
++  choice_order = ~ choice_id)
+> immigration$pred_FH <- predict(fit)  
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  90.338 1.193 94.741 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

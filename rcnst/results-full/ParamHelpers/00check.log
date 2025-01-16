@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/ParamHelpers.Rcheck’
-* using R Under development (unstable) (2024-12-25 r87465)
+* using R Under development (unstable) (2025-01-15 r87576)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (GCC) 14.2.1 20240912 (Red Hat 14.2.1-3)
@@ -7,7 +7,7 @@
 * running under: Fedora Linux 40 (MATE-Compiz)
 * using session charset: UTF-8
 * checking for file ‘ParamHelpers/DESCRIPTION’ ... OK
-* this is package ‘ParamHelpers’ version ‘1.14.1’
+* this is package ‘ParamHelpers’ version ‘1.14.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -39,19 +39,7 @@
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
 * checking R code for possible problems ... OK
-* checking Rd files ... NOTE
-checkRd: (-1) getParamNr.Rd:15: Lost braces
-    15 | Default is code{FALSE}.}
-       |                ^
-checkRd: (-1) getRequirements.Rd:16: Lost braces
-    16 | code{TRUE}.}
-       |     ^
-checkRd: (-1) sampleValue.Rd:15: Lost braces; missing escapes or markup?
-    15 | Default is code {FALSE}.}
-       |                 ^
-checkRd: (-1) sampleValues.Rd:18: Lost braces; missing escapes or markup?
-    18 | Default is code {FALSE}.}
-       |                 ^
+* checking Rd files ... OK
 * checking Rd metadata ... OK
 * checking Rd cross-references ... OK
 * checking for missing documentation entries ... OK
@@ -75,8 +63,6 @@ The error most likely occurred in:
 > ps = makeParamSet(makeNumericParam("x"))
 > op = makeOptPathDF(par.set = ps, y.names = "y", minimize = TRUE)
 > addOptPathEl(op, x = list(x = 1), y = 5)
-> addOptPathEl(op, x = list(x = 2), y = 3)
-> addOptPathEl(op, x = list(x = 3), y = 9)
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"
@@ -94,21 +80,21 @@ Fatal error: compiler constants were modified!
   Running ‘run-all.R’
 Running the tests in ‘tests/run-all.R’ failed.
 Last 13 lines of output:
-  > library(ParamHelpers)
-  > 
-  > test_check("ParamHelpers")
-  ERROR: modification of compiler constant of type character, length 2
-  ERROR: the modified value of the constant is:
-  [1] "integer"       "integervector"
-  attr(,".match.hash")
-  <hash table>
-  ERROR: the original value of the constant is:
-  [1] "integer"       "integervector"
-  ERROR: the modified constant is at index 1
-  ERROR: the modified constant is in this function body:
-  c("integer", "integervector")
-  Fatal error: compiler constants were modified!
-  
+    4.       └─testthat:::test_files_parallel(...)
+    5.         ├─withr::with_dir(...)
+    6.         │ └─base::force(code)
+    7.         ├─testthat::with_reporter(...)
+    8.         │ └─base::tryCatch(...)
+    9.         │   └─base (local) tryCatchList(expr, classes, parentenv, handlers)
+   10.         │     └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])
+   11.         │       └─base (local) doTryCatch(return(expr), name, parentenv, handler)
+   12.         └─testthat:::parallel_event_loop_chunky(queue, reporters, ".")
+   13.           └─queue$poll(Inf)
+   14.             └─base::lapply(...)
+   15.               └─testthat (local) FUN(X[[i]], ...)
+   16.                 └─private$handle_error(msg, i)
+   17.                   └─rlang::abort(...)
+  Execution halted
 * checking PDF version of manual ... OK
 * DONE
-Status: 2 ERRORs, 2 NOTEs
+Status: 2 ERRORs, 1 NOTE
