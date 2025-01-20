@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2025-01-15 r87576) -- "Unsuffered Consequences"
+R Under development (unstable) (2025-01-18 r87593) -- "Unsuffered Consequences"
 Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -224,13 +224,13 @@ detaching ‘package:terra’, ‘package:data.table’
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10, returnMatrix = TRUE)
 + })
    user  system elapsed 
-  0.033   0.000   0.037 
+  0.033   0.000   0.033 
 > agent <- agentOrig
 > system.time({
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10)
 + })
    user  system elapsed 
- 22.588   0.026  22.918 
+ 22.449   0.130  23.044 
 > 
 > # as sp
 > if (requireNamespace("sp")) {
@@ -1358,6 +1358,27 @@ The following object is masked from ‘package:SpaDES.tools’:
 > 
 > # Simple use -- similar to spread(...)
 > out <- spread2(a, start = sams, 0.225)
+> if (interactive()) {
++   terra::plot(out)
++ }
+> 
+> # Use maxSize -- this gives an upper limit
+> maxSizes <- sort(sample(1:10, size = length(sams)))
+> out <- spread2(a, start = sams, 0.225, maxSize = maxSizes, asRaster = FALSE)
+> # check TRUE using data.table .N
+> out[, .N, by = "initialPixels"]$N <= maxSizes
+[1] TRUE TRUE TRUE
+> 
+> # Use exactSize -- gives an exact size, if there is enough space on the Raster
+> exactSizes <- maxSizes
+> out <- spread2(a, start = sams, spreadProb = 0.225,
++                exactSize = exactSizes, asRaster = FALSE)
+> out[, .N, by = "initialPixels"]$N == maxSizes # should be TRUE TRUE TRUE
+[1] TRUE TRUE TRUE
+> 
+> # Use exactSize -- but where it can't be achieved
+> exactSizes <- sort(sample(100:110, size = length(sams)))
+> out <- spread2(a, start = sams, 1, exactSize = exactSizes)
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "activeSource" "holding"      "successful"   "tooSmall"    
