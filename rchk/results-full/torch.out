@@ -1,5 +1,5 @@
-Package torch version 0.13.0
-Package built using 87358/R 4.5.0; x86_64-pc-linux-gnu; 2024-11-21 15:33:28 UTC; unix   
+Package torch version 0.14.0
+Package built using 87674/R 4.5.0; x86_64-pc-linux-gnu; 2025-02-03 09:01:51 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -14,10 +14,10 @@ Function Rcpp::Armor<SEXPREC*>::~Armor()
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
 
 Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::find(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
-  [UP] calling allocating function Rcpp::internal::Rcpp_eval_impl(SEXPREC*, SEXPREC*) with a fresh pointer (res <arg 1>) Rcpp/include/Rcpp/Environment.h:154
+  [UP] calling allocating function Rcpp::internal::Rcpp_eval_impl(SEXPREC*, SEXPREC*) with a fresh pointer (res <arg 1>) Rcpp/include/Rcpp/Environment.h:149
 
 Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::get(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
-  [UP] calling allocating function Rcpp::internal::Rcpp_eval_impl(SEXPREC*, SEXPREC*) with a fresh pointer (res <arg 1>) Rcpp/include/Rcpp/Environment.h:112
+  [UP] calling allocating function Rcpp::internal::Rcpp_eval_impl(SEXPREC*, SEXPREC*) with a fresh pointer (res <arg 1>) Rcpp/include/Rcpp/Environment.h:107
 
 Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::namespace_env(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -32,8 +32,14 @@ Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:682
+
 Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::set(SEXPREC*)
+  [UP] ignoring variable rhs as it has address taken, results will be incomplete 
 
 Function Rcpp::new_env(SEXPREC*, int)
   [UP] ignoring variable parent as it has address taken, results will be incomplete 
@@ -268,6 +274,14 @@ Function _torch_cpp_jit_script_module_new
 
 Function _torch_cpp_jit_script_module_parameters
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_jit_script_module_serialize
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_jit_script_module_unserialize
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_lantern_has_error
   [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -552,13 +566,16 @@ Function _torch_cpp_torch_method__is_any_true_self_Tensor
 Function _torch_cpp_torch_method__is_zerotensor_self_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_method__lazy_clone_self_Tensor
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_method__neg_view_self_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_method__nested_tensor_offsets_self_Tensor
+Function _torch_cpp_torch_method__nested_tensor_size_self_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_method__nested_tensor_size_self_Tensor
+Function _torch_cpp_torch_method__nested_tensor_storage_offsets_self_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_method__nested_tensor_strides_self_Tensor
@@ -570,7 +587,28 @@ Function _torch_cpp_torch_method__nnz_self_Tensor
 Function _torch_cpp_torch_method__reshape_alias_self_Tensor_size_IntArrayRef_stride_IntArrayRef
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_method__sparse_mask_projection_self_Tensor_mask_Tensor
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_method__to_dense_self_Tensor
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_method__to_sparse_bsc_self_Tensor_blocksize_IntArrayRef
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_method__to_sparse_bsr_self_Tensor_blocksize_IntArrayRef
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_method__to_sparse_csc_self_Tensor
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_method__to_sparse_csr_self_Tensor
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_method__to_sparse_self_Tensor
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_method__to_sparse_self_Tensor_sparse_dim_int64_t
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_method__values_self_Tensor
@@ -672,6 +710,9 @@ Function _torch_cpp_torch_method_all_self_Tensor
 Function _torch_cpp_torch_method_all_self_Tensor_dim_Dimname
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_method_all_self_Tensor_dim_IntArrayRef
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_method_all_self_Tensor_dim_int64_t
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -694,6 +735,9 @@ Function _torch_cpp_torch_method_any_self_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_method_any_self_Tensor_dim_Dimname
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_method_any_self_Tensor_dim_IntArrayRef
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_method_any_self_Tensor_dim_int64_t
@@ -1497,10 +1541,10 @@ Function _torch_cpp_torch_method_index_fill_self_Tensor_dim_int64_t_index_Tensor
 Function _torch_cpp_torch_method_index_fill_self_Tensor_dim_int64_t_index_Tensor_value_Tensor
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_method_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor
+Function _torch_cpp_torch_method_index_put__self_Tensor_indices_constc10ListstdoptionalTensor_values_Tensor
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_method_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor
+Function _torch_cpp_torch_method_index_put_self_Tensor_indices_constc10ListstdoptionalTensor_values_Tensor
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_method_index_reduce__self_Tensor_dim_int64_t_index_Tensor_source_Tensor_reduce_c10string_view
@@ -1515,7 +1559,7 @@ Function _torch_cpp_torch_method_index_select_self_Tensor_dim_Dimname_index_Tens
 Function _torch_cpp_torch_method_index_select_self_Tensor_dim_int64_t_index_Tensor
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_method_index_self_Tensor_indices_constc10Listc10optionalTensor
+Function _torch_cpp_torch_method_index_self_Tensor_indices_constc10ListstdoptionalTensor
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_method_indices_self_Tensor
@@ -2004,6 +2048,9 @@ Function _torch_cpp_torch_method_nonzero_numpy_self_Tensor
 Function _torch_cpp_torch_method_nonzero_self_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_method_nonzero_static_self_Tensor_size_int64_t
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_method_norm_self_Tensor_p_Scalar
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -2355,6 +2402,9 @@ Function _torch_cpp_torch_method_sinh_self_Tensor
 Function _torch_cpp_torch_method_size_self_Tensor_dim_Dimname
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_method_slice_inverse_self_Tensor_src_Tensor
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_method_slice_scatter_self_Tensor_src_Tensor
   [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -2551,7 +2601,7 @@ Function _torch_cpp_torch_method_tile_self_Tensor_dims_IntArrayRef
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_method_to_dense_self_Tensor
-  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_method_to_mkldnn_self_Tensor
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -2847,6 +2897,21 @@ Function _torch_cpp_torch_namespace__batch_norm_impl_index_backward_impl_index_i
 Function _torch_cpp_torch_namespace__batch_norm_impl_index_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_training_bool_momentum_double_eps_double_cudnn_enabled_bool
   [UP] ignoring variable <unnamed var:   %35 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace__batch_norm_no_update_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_momentum_double_eps_double
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__batch_norm_no_update_out_out0_Tensor_out1_Tensor_out2_Tensor_out3_Tensor_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_momentum_double_eps_double
+  [UP] ignoring variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__batch_norm_with_update_functional_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_momentum_double_eps_double
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__batch_norm_with_update_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_momentum_double_eps_double
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__batch_norm_with_update_out_out_Tensor_save_mean_Tensor_save_invstd_Tensor_reserve_Tensor_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_momentum_double_eps_double
+  [UP] ignoring variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace__cast_Byte_self_Tensor
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -2892,8 +2957,11 @@ Function _torch_cpp_torch_namespace__cholesky_solve_helper_self_Tensor_A_Tensor_
 Function _torch_cpp_torch_namespace__choose_qparams_per_tensor_self_Tensor
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace__chunk_grad_outputs_efficient_attention_query_Tensor_key_Tensor_value_Tensor
+Function _torch_cpp_torch_namespace__chunk_cat_out_out_Tensor_tensors_TensorList_dim_int64_t_num_chunks_int64_t
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__chunk_cat_tensors_TensorList_dim_int64_t_num_chunks_int64_t
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__coalesce_out_out_Tensor_self_Tensor
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -2946,6 +3014,9 @@ Function _torch_cpp_torch_namespace__convert_indices_from_csr_to_coo_crow_indice
 Function _torch_cpp_torch_namespace__convert_indices_from_csr_to_coo_out_out_Tensor_crow_indices_Tensor_col_indices_Tensor
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace__convert_weight_to_int4pack_self_Tensor_innerKTiles_int64_t
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace__convolution_double_backward_ggI_Tensor_ggW_Tensor_ggb_Tensor_gO_Tensor_weight_Tensor_self_Tensor_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef_transposed_bool_output_padding_IntArrayRef_groups_int64_t_output_mask_stdarraybool3
   [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -2972,6 +3043,15 @@ Function _torch_cpp_torch_namespace__copy_from_out_out_Tensor_self_Tensor_dst_Te
 
 Function _torch_cpp_torch_namespace__copy_from_self_Tensor_dst_Tensor
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__cslt_compress_input_Tensor
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__cslt_sparse_mm_compressed_A_Tensor_dense_B_Tensor
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__cslt_sparse_mm_search_compressed_A_Tensor_dense_B_Tensor
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__ctc_loss_backward_grad_Tensor_log_probs_Tensor_targets_Tensor_input_lengths_IntArrayRef_target_lengths_IntArrayRef_neg_log_likelihood_Tensor_log_alpha_Tensor_blank_int64_t
   [UP] ignoring variable <unnamed var:   %35 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -3024,12 +3104,6 @@ Function _torch_cpp_torch_namespace__cudnn_rnn_input_Tensor_weight_TensorList_we
 Function _torch_cpp_torch_namespace__cudnn_rnn_out_out0_Tensor_out1_Tensor_out2_Tensor_out3_Tensor_out4_Tensor_input_Tensor_weight_TensorList_weight_stride0_int64_t_weight_buf_Tensor_hx_Tensor_cx_Tensor_mode_int64_t_hidden_size_int64_t_proj_size_int64_t_num_layers_int64_t_batch_first_bool_dropout_double_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_dropout_state_Tensor
   [UP] ignoring variable <unnamed var:   %71 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace__cufft_get_plan_cache_max_size_device_index_int64_t
-  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _torch_cpp_torch_namespace__cufft_get_plan_cache_size_device_index_int64_t
-  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
 Function _torch_cpp_torch_namespace__debug_has_internal_overlap_self_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -3042,11 +3116,11 @@ Function _torch_cpp_torch_namespace__dirichlet_grad_out_out_Tensor_x_Tensor_alph
 Function _torch_cpp_torch_namespace__dirichlet_grad_x_Tensor_alpha_Tensor_total_Tensor
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace__efficient_attention_backward_grad_out__Tensor_query_Tensor_key_Tensor_value_Tensor_out_Tensor_logsumexp_Tensor
-  [UP] ignoring variable <unnamed var:   %32 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _torch_cpp_torch_namespace__efficient_attention_backward_grad_out__Tensor_query_Tensor_key_Tensor_value_Tensor_bias_Tensor_out_Tensor_cu_seqlens_q_Tensor_cu_seqlens_k_Tensor_max_seqlen_q_int64_t_max_seqlen_k_int64_t_logsumexp_Tensor_dropout_p_double_philox_seed_Tensor_philox_offset_Tensor_custom_mask_type_int64_t_bias_requires_grad_bool
+  [UP] ignoring variable <unnamed var:   %68 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace__efficient_attention_forward_query_Tensor_key_Tensor_value_Tensor_cu_seqlens_q_Tensor_cu_seqlens_k_Tensor_max_seqlen_q_int64_t
-  [UP] ignoring variable <unnamed var:   %32 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _torch_cpp_torch_namespace__efficient_attention_forward_query_Tensor_key_Tensor_value_Tensor_bias_Tensor_cu_seqlens_q_Tensor_cu_seqlens_k_Tensor_max_seqlen_q_int64_t_max_seqlen_k_int64_t_dropout_p_double_custom_mask_type_int64_t
+  [UP] ignoring variable <unnamed var:   %50 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__efficientzerotensor_out_out_Tensor_size_IntArrayRef
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -3144,11 +3218,14 @@ Function _torch_cpp_torch_namespace__fft_r2c_out_out_Tensor_self_Tensor_dim_IntA
 Function _torch_cpp_torch_namespace__fft_r2c_self_Tensor_dim_IntArrayRef_normalization_int64_t_onesided_bool
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace__flash_attention_backward_grad_out_Tensor_query_Tensor_key_Tensor_value_Tensor_out_Tensor_logsumexp_Tensor_cum_seq_q_Tensor_cum_seq_k_Tensor_max_q_int64_t_max_k_int64_t_dropout_p_double_is_causal_bool_philox_seed_int64_t_philox_offset_int64_t
-  [UP] ignoring variable <unnamed var:   %50 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _torch_cpp_torch_namespace__fill_mem_eff_dropout_mask__self_Tensor_dropout_p_double_seed_int64_t_offset_int64_t
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__flash_attention_backward_grad_out_Tensor_query_Tensor_key_Tensor_value_Tensor_out_Tensor_logsumexp_Tensor_cum_seq_q_Tensor_cum_seq_k_Tensor_max_q_int64_t_max_k_int64_t_dropout_p_double_is_causal_bool_philox_seed_Tensor_philox_offset_Tensor
+  [UP] ignoring variable <unnamed var:   %59 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__flash_attention_forward_query_Tensor_key_Tensor_value_Tensor_cum_seq_q_Tensor_cum_seq_k_Tensor_max_q_int64_t_max_k_int64_t_dropout_p_double_is_causal_bool_return_debug_mask_bool
-  [UP] ignoring variable <unnamed var:   %38 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %53 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__foobar_out_out_Tensor_self_Tensor
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -3161,6 +3238,9 @@ Function _torch_cpp_torch_namespace__foreach_abs_self_TensorList
 
 Function _torch_cpp_torch_namespace__foreach_acos_self_TensorList
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__foreach_add_self_TensorList_other_Tensor
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__foreach_add_self_TensorList_other_TensorList
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -3216,11 +3296,17 @@ Function _torch_cpp_torch_namespace__foreach_clamp_min_self_TensorList_scalar_Sc
 Function _torch_cpp_torch_namespace__foreach_clamp_min_self_TensorList_scalars_ArrayRefScalar
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace__foreach_copy_self_TensorList_src_TensorList
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace__foreach_cos_self_TensorList
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__foreach_cosh_self_TensorList
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__foreach_div_self_TensorList_other_Tensor
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__foreach_div_self_TensorList_other_TensorList
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -3270,6 +3356,9 @@ Function _torch_cpp_torch_namespace__foreach_log2_self_TensorList
 Function _torch_cpp_torch_namespace__foreach_log_self_TensorList
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace__foreach_max_self_TensorList
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace__foreach_maximum_self_TensorList_other_TensorList
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -3288,6 +3377,9 @@ Function _torch_cpp_torch_namespace__foreach_minimum_self_TensorList_scalar_Scal
 Function _torch_cpp_torch_namespace__foreach_minimum_self_TensorList_scalars_ArrayRefScalar
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace__foreach_mul_self_TensorList_other_Tensor
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace__foreach_mul_self_TensorList_other_TensorList
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -3301,6 +3393,18 @@ Function _torch_cpp_torch_namespace__foreach_neg_self_TensorList
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__foreach_norm_self_TensorList
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__foreach_pow_self_Scalar_exponent_TensorList
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__foreach_pow_self_TensorList_exponent_ArrayRefScalar
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__foreach_pow_self_TensorList_exponent_Scalar
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__foreach_pow_self_TensorList_exponent_TensorList
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__foreach_reciprocal_self_TensorList
@@ -3310,6 +3414,9 @@ Function _torch_cpp_torch_namespace__foreach_round_self_TensorList
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__foreach_sigmoid_self_TensorList
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__foreach_sign_self_TensorList
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__foreach_sin_self_TensorList
@@ -3342,7 +3449,28 @@ Function _torch_cpp_torch_namespace__foreach_trunc_self_TensorList
 Function _torch_cpp_torch_namespace__foreach_zero_self_TensorList
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace__functional_assert_async_self_Tensor_assert_msg_c10string_view_dep_token_Tensor
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__functional_assert_scalar_self_Scalar_assert_msg_c10string_view_dep_token_Tensor
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__functional_sym_constrain_range_for_size_size_Scalar_min_int64_t_max_int64_t_dep_token_Tensor
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__functional_sym_constrain_range_size_Scalar_min_int64_t_max_int64_t_dep_token_Tensor
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__fused_adagrad_self_TensorList_grads_TensorList_state_sums_TensorList_state_steps_TensorList_lr_double_lr_decay_double_weight_decay_double_eps_double_maximize_bool
+  [UP] ignoring variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__fused_adam_self_TensorList_grads_TensorList_exp_avgs_TensorList_exp_avg_sqs_TensorList_max_exp_avg_sqs_TensorList_state_steps_TensorList_lr_Tensor_beta1_double_beta2_double_weight_decay_double_eps_double_amsgrad_bool_maximize_bool
+  [UP] ignoring variable <unnamed var:   %53 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace__fused_adam_self_TensorList_grads_TensorList_exp_avgs_TensorList_exp_avg_sqs_TensorList_max_exp_avg_sqs_TensorList_state_steps_TensorList_lr_double_beta1_double_beta2_double_weight_decay_double_eps_double_amsgrad_bool_maximize_bool
+  [UP] ignoring variable <unnamed var:   %53 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__fused_adamw_self_TensorList_grads_TensorList_exp_avgs_TensorList_exp_avg_sqs_TensorList_max_exp_avg_sqs_TensorList_state_steps_TensorList_lr_Tensor_beta1_double_beta2_double_weight_decay_double_eps_double_amsgrad_bool_maximize_bool
   [UP] ignoring variable <unnamed var:   %53 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__fused_adamw_self_TensorList_grads_TensorList_exp_avgs_TensorList_exp_avg_sqs_TensorList_max_exp_avg_sqs_TensorList_state_steps_TensorList_lr_double_beta1_double_beta2_double_weight_decay_double_eps_double_amsgrad_bool_maximize_bool
@@ -3364,7 +3492,13 @@ Function _torch_cpp_torch_namespace__fused_moving_avg_obs_fq_helper_self_Tensor_
   [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__fused_sdp_choice_query_Tensor_key_Tensor_value_Tensor
-  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %32 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__fused_sgd_self_TensorList_grads_TensorList_momentum_buffer_list_TensorList_weight_decay_double_momentum_double_lr_Tensor_dampening_double_nesterov_bool_maximize_bool_is_first_step_bool
+  [UP] ignoring variable <unnamed var:   %44 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__fused_sgd_self_TensorList_grads_TensorList_momentum_buffer_list_TensorList_weight_decay_double_momentum_double_lr_double_dampening_double_nesterov_bool_maximize_bool_is_first_step_bool
+  [UP] ignoring variable <unnamed var:   %44 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__fw_primal_copy_out_out_Tensor_self_Tensor_level_int64_t
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -3405,13 +3539,13 @@ Function _torch_cpp_torch_namespace__histogramdd_from_bin_tensors_out_out_Tensor
 Function _torch_cpp_torch_namespace__histogramdd_from_bin_tensors_self_Tensor_bins_TensorList
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace__index_put_impl__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor
+Function _torch_cpp_torch_namespace__index_put_impl__self_Tensor_indices_constc10ListstdoptionalTensor_values_Tensor
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace__index_put_impl_out_out_Tensor_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor
+Function _torch_cpp_torch_namespace__index_put_impl_out_out_Tensor_self_Tensor_indices_constc10ListstdoptionalTensor_values_Tensor
   [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace__index_put_impl_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor
+Function _torch_cpp_torch_namespace__index_put_impl_self_Tensor_indices_constc10ListstdoptionalTensor_values_Tensor
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__indices_copy_out_out_Tensor_self_Tensor
@@ -3420,6 +3554,12 @@ Function _torch_cpp_torch_namespace__indices_copy_out_out_Tensor_self_Tensor
 Function _torch_cpp_torch_namespace__indices_copy_self_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace__int_mm_out_out_Tensor_self_Tensor_mat2_Tensor
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__int_mm_self_Tensor_mat2_Tensor
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace__is_all_true_self_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -3427,6 +3567,12 @@ Function _torch_cpp_torch_namespace__is_any_true_self_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__is_zerotensor_self_Tensor
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__jagged_to_padded_dense_forward_values_Tensor_offsets_TensorList_max_lengths_IntArrayRef
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__lazy_clone_self_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__linalg_det_A_Tensor
@@ -3440,6 +3586,9 @@ Function _torch_cpp_torch_namespace__linalg_eigh_A_Tensor
 
 Function _torch_cpp_torch_namespace__linalg_eigh_out_eigenvalues_Tensor_eigenvectors_Tensor_A_Tensor
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__linalg_eigvals_self_Tensor
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__linalg_slogdet_A_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -3528,6 +3677,9 @@ Function _torch_cpp_torch_namespace__masked_softmax_out_out_Tensor_self_Tensor_m
 Function _torch_cpp_torch_namespace__masked_softmax_self_Tensor_mask_Tensor
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace__mixed_dtypes_linear_input_Tensor_weight_Tensor_scale_Tensor
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace__mkldnn_reshape_out_out_Tensor_self_Tensor_shape_IntArrayRef
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -3564,17 +3716,17 @@ Function _torch_cpp_torch_namespace__native_batch_norm_legit_input_Tensor_weight
 Function _torch_cpp_torch_namespace__native_batch_norm_legit_input_Tensor_weight_Tensor_bias_Tensor_training_bool_momentum_double_eps_double
   [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace__native_batch_norm_legit_no_training_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_momentum_double_eps_double
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__native_batch_norm_legit_no_training_out_out0_Tensor_out1_Tensor_out2_Tensor_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_momentum_double_eps_double
+  [UP] ignoring variable <unnamed var:   %38 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace__native_batch_norm_legit_out_out_Tensor_save_mean_Tensor_save_invstd_Tensor_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_training_bool_momentum_double_eps_double
   [UP] ignoring variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__native_batch_norm_legit_out_out_Tensor_save_mean_Tensor_save_invstd_Tensor_input_Tensor_weight_Tensor_bias_Tensor_training_bool_momentum_double_eps_double
   [UP] ignoring variable <unnamed var:   %35 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _torch_cpp_torch_namespace__native_decoder_only_multi_head_attention_out_out0_Tensor_out1_Tensor_out2_Tensor_out3_Tensor_query_Tensor_key_Tensor_value_Tensor_embed_dim_int64_t_num_head_int64_t_qkv_weight_Tensor_qkv_bias_Tensor_proj_weight_Tensor_proj_bias_Tensor
-  [UP] ignoring variable <unnamed var:   %62 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _torch_cpp_torch_namespace__native_decoder_only_multi_head_attention_query_Tensor_key_Tensor_value_Tensor_embed_dim_int64_t_num_head_int64_t_qkv_weight_Tensor_qkv_bias_Tensor_proj_weight_Tensor_proj_bias_Tensor
-  [UP] ignoring variable <unnamed var:   %50 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__native_multi_head_attention_out_out0_Tensor_out1_Tensor_query_Tensor_key_Tensor_value_Tensor_embed_dim_int64_t_num_head_int64_t_qkv_weight_Tensor_qkv_bias_Tensor_proj_weight_Tensor_proj_bias_Tensor
   [UP] ignoring variable <unnamed var:   %53 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -3591,6 +3743,9 @@ Function _torch_cpp_torch_namespace__neg_view_copy_self_Tensor
 Function _torch_cpp_torch_namespace__neg_view_self_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace__nested_compute_contiguous_strides_offsets_nested_size_Tensor
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace__nested_from_padded_and_nested_example_out_out_Tensor_padded_Tensor_nt_example_Tensor
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -3602,6 +3757,33 @@ Function _torch_cpp_torch_namespace__nested_from_padded_out_out_Tensor_padded_Te
 
 Function _torch_cpp_torch_namespace__nested_from_padded_padded_Tensor_cpu_nested_shape_example_Tensor
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__nested_get_jagged_dummy_any_Tensor
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__nested_get_lengths_self_Tensor
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__nested_get_max_seqlen_self_Tensor
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__nested_get_min_seqlen_self_Tensor
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__nested_get_offsets_self_Tensor
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__nested_get_ragged_idx_self_Tensor
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__nested_get_values_copy_out_out_Tensor_self_Tensor
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__nested_get_values_copy_self_Tensor
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__nested_get_values_self_Tensor
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__nested_select_backward_grad_output_Tensor_self_Tensor_dim_int64_t_index_int64_t
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -3630,17 +3812,29 @@ Function _torch_cpp_torch_namespace__nested_tensor_size_out_out_Tensor_self_Tens
 Function _torch_cpp_torch_namespace__nested_tensor_softmax_with_shape_self_Tensor_query_Tensor
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace__nested_tensor_storage_offsets_out_out_Tensor_self_Tensor
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace__nested_tensor_strides_out_out_Tensor_self_Tensor
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace__nested_view_from_buffer_copy_out_out_Tensor_self_Tensor_nested_size_Tensor_nested_strides_Tensor_offsets_IntArrayRef
+Function _torch_cpp_torch_namespace__nested_view_from_buffer_copy_out_out_Tensor_self_Tensor_nested_size_Tensor_nested_strides_Tensor_offsets_Tensor
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace__nested_view_from_buffer_copy_self_Tensor_nested_size_Tensor_nested_strides_Tensor_offsets_IntArrayRef
+Function _torch_cpp_torch_namespace__nested_view_from_buffer_copy_self_Tensor_nested_size_Tensor_nested_strides_Tensor_offsets_Tensor
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace__nested_view_from_buffer_self_Tensor_nested_size_Tensor_nested_strides_Tensor_offsets_IntArrayRef
+Function _torch_cpp_torch_namespace__nested_view_from_buffer_self_Tensor_nested_size_Tensor_nested_strides_Tensor_offsets_Tensor
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__nested_view_from_jagged_copy_out_out_Tensor_self_Tensor_offsets_Tensor_dummy_Tensor
+  [UP] ignoring variable <unnamed var:   %32 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__nested_view_from_jagged_copy_self_Tensor_offsets_Tensor_dummy_Tensor
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__nested_view_from_jagged_self_Tensor_offsets_Tensor_dummy_Tensor
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__new_zeros_with_same_feature_meta_out_out_Tensor_self_Tensor_other_Tensor
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -3671,6 +3865,9 @@ Function _torch_cpp_torch_namespace__pad_enum_self_Tensor_pad_IntArrayRef_mode_i
 
 Function _torch_cpp_torch_namespace__pad_packed_sequence_data_Tensor_batch_sizes_Tensor_batch_first_bool_padding_value_Scalar_total_length_int64_t
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__padded_dense_to_jagged_forward_dense_Tensor_offsets_TensorList
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__pdist_backward_grad_Tensor_self_Tensor_p_double_pdist_Tensor
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -3726,6 +3923,9 @@ Function _torch_cpp_torch_namespace__resize_output_self_Tensor_size_IntArrayRef_
 Function _torch_cpp_torch_namespace__rowwise_prune_weight_Tensor_mask_Tensor_compressed_indices_dtype_ScalarType
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace__safe_softmax_self_Tensor_dim_int64_t
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace__sample_dirichlet_out_out_Tensor_self_Tensor
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -3735,23 +3935,47 @@ Function _torch_cpp_torch_namespace__sample_dirichlet_self_Tensor
 Function _torch_cpp_torch_namespace__saturate_weight_to_fp16_weight_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace__scaled_dot_product_attention_math_query_Tensor_key_Tensor_value_Tensor
-  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _torch_cpp_torch_namespace__scaled_dot_product_attention_query_Tensor_key_Tensor_value_Tensor
-  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _torch_cpp_torch_namespace__scaled_dot_product_efficient_attention_backward_grad_out__Tensor_query_Tensor_key_Tensor_value_Tensor_out_Tensor_logsumexp_Tensor
+Function _torch_cpp_torch_namespace__scaled_dot_product_attention_math_for_mps_query_Tensor_key_Tensor_value_Tensor
   [UP] ignoring variable <unnamed var:   %32 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace__scaled_dot_product_efficient_attention_query_Tensor_key_Tensor_value_Tensor_compute_log_sumexp_bool
-  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _torch_cpp_torch_namespace__scaled_dot_product_attention_math_query_Tensor_key_Tensor_value_Tensor
+  [UP] ignoring variable <unnamed var:   %35 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace__scaled_dot_product_flash_attention_backward_grad_out_Tensor_query_Tensor_key_Tensor_value_Tensor_out_Tensor_logsumexp_Tensor_cum_seq_q_Tensor_cum_seq_k_Tensor_max_q_int64_t_max_k_int64_t_dropout_p_double_is_causal_bool_philox_seed_int64_t_philox_offset_int64_t
-  [UP] ignoring variable <unnamed var:   %50 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _torch_cpp_torch_namespace__scaled_dot_product_cudnn_attention_backward_grad_out_Tensor_query_Tensor_key_Tensor_value_Tensor_out_Tensor_logsumexp_Tensor_philox_seed_Tensor_philox_offset_Tensor_attn_bias_Tensor_cum_seq_q_Tensor_cum_seq_k_Tensor_max_q_int64_t_max_k_int64_t_dropout_p_double_is_causal_bool
+  [UP] ignoring variable <unnamed var:   %56 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__scaled_dot_product_cudnn_attention_query_Tensor_key_Tensor_value_Tensor_attn_bias_Tensor_compute_log_sumexp_bool
+  [UP] ignoring variable <unnamed var:   %35 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__scaled_dot_product_efficient_attention_backward_grad_out__Tensor_query_Tensor_key_Tensor_value_Tensor_attn_bias_Tensor_out_Tensor_logsumexp_Tensor_philox_seed_Tensor_philox_offset_Tensor_dropout_p_double_grad_input_mask_stdarraybool4
+  [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__scaled_dot_product_efficient_attention_query_Tensor_key_Tensor_value_Tensor_attn_bias_Tensor_compute_log_sumexp_bool
+  [UP] ignoring variable <unnamed var:   %32 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__scaled_dot_product_flash_attention_backward_grad_out_Tensor_query_Tensor_key_Tensor_value_Tensor_out_Tensor_logsumexp_Tensor_cum_seq_q_Tensor_cum_seq_k_Tensor_max_q_int64_t_max_k_int64_t_dropout_p_double_is_causal_bool_philox_seed_Tensor_philox_offset_Tensor
+  [UP] ignoring variable <unnamed var:   %53 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__scaled_dot_product_flash_attention_for_cpu_backward_grad_out_Tensor_query_Tensor_key_Tensor_value_Tensor_out_Tensor_logsumexp_Tensor_dropout_p_double_is_causal_bool
+  [UP] ignoring variable <unnamed var:   %38 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__scaled_dot_product_flash_attention_for_cpu_query_Tensor_key_Tensor_value_Tensor
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__scaled_dot_product_flash_attention_query_Tensor_key_Tensor_value_Tensor
-  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__scaled_dot_product_fused_attention_overrideable_backward_grad_out_Tensor_query_Tensor_key_Tensor_value_Tensor_attn_bias_Tensor_grad_input_mask_stdarraybool4_out_Tensor_logsumexp_Tensor_cum_seq_q_Tensor_cum_seq_k_Tensor_max_q_int64_t_max_k_int64_t_dropout_p_double_is_causal_bool_philox_seed_Tensor_philox_offset_Tensor
+  [UP] ignoring variable <unnamed var:   %59 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__scaled_dot_product_fused_attention_overrideable_query_Tensor_key_Tensor_value_Tensor
+  [UP] ignoring variable <unnamed var:   %32 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__scaled_mm_out_out_Tensor_self_Tensor_mat2_Tensor_scale_a_Tensor_scale_b_Tensor
+  [UP] ignoring variable <unnamed var:   %35 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__scaled_mm_self_Tensor_mat2_Tensor_scale_a_Tensor_scale_b_Tensor
+  [UP] ignoring variable <unnamed var:   %32 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__segment_reduce_backward_grad_Tensor_output_Tensor_data_Tensor_reduce_c10string_view
   [UP] ignoring variable <unnamed var:   %32 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -3825,14 +4049,17 @@ Function _torch_cpp_torch_namespace__sparse_bsr_tensor_unsafe_crow_indices_Tenso
 Function _torch_cpp_torch_namespace__sparse_compressed_tensor_unsafe_compressed_indices_Tensor_plain_indices_Tensor_values_Tensor_size_IntArrayRef
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace__sparse_compressed_tensor_with_dims_nnz_int64_t_dense_dim_int64_t_size_IntArrayRef_blocksize_IntArrayRef_index_dtype_ScalarType_options_TensorOptions
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace__sparse_coo_tensor_unsafe_indices_Tensor_values_Tensor_size_IntArrayRef
-  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__sparse_coo_tensor_with_dims_and_tensors_out_out_Tensor_sparse_dim_int64_t_dense_dim_int64_t_size_IntArrayRef_indices_Tensor_values_Tensor
-  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__sparse_coo_tensor_with_dims_and_tensors_sparse_dim_int64_t_dense_dim_int64_t_size_IntArrayRef_indices_Tensor_values_Tensor_options_TensorOptions
-  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__sparse_coo_tensor_with_dims_out_out_Tensor_sparse_dim_int64_t_dense_dim_int64_t_size_IntArrayRef
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -3876,6 +4103,9 @@ Function _torch_cpp_torch_namespace__sparse_log_softmax_self_Tensor_dim_int64_t
 Function _torch_cpp_torch_namespace__sparse_log_softmax_self_Tensor_dim_int64_t_half_to_float_bool
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace__sparse_mask_projection_out_out_Tensor_self_Tensor_mask_Tensor
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace__sparse_mm_reduce_impl_backward_self_Tensor_grad_out_Tensor_weight_Tensor_reduce_c10string_view_arg_out_Tensor_output_mask_stdarraybool2
   [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -3886,6 +4116,24 @@ Function _torch_cpp_torch_namespace__sparse_mm_sparse_Tensor_dense_Tensor
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__sparse_mm_sparse_Tensor_dense_Tensor_reduce_c10string_view
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__sparse_semi_structured_addmm_input_Tensor_mat1_Tensor_mat1_meta_Tensor_mat2_Tensor
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__sparse_semi_structured_apply_dense_input_Tensor_thread_masks_Tensor
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__sparse_semi_structured_apply_input_Tensor_thread_masks_Tensor
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__sparse_semi_structured_linear_input_Tensor_weight_Tensor_meta_Tensor
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__sparse_semi_structured_mm_mat1_Tensor_mat1_meta_Tensor_mat2_Tensor
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__sparse_semi_structured_tile_input_Tensor
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__sparse_softmax_backward_data_grad_output_Tensor_output_Tensor_dim_int64_t_self_Tensor
@@ -3939,6 +4187,9 @@ Function _torch_cpp_torch_namespace__spdiags_diagonals_Tensor_offsets_Tensor_sha
 Function _torch_cpp_torch_namespace__spdiags_out_out_Tensor_diagonals_Tensor_offsets_Tensor_shape_IntArrayRef
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace__spsolve_A_Tensor_B_Tensor
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace__stack_out_out_Tensor_tensors_TensorList
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -3978,6 +4229,12 @@ Function _torch_cpp_torch_namespace__test_autograd_multiple_dispatch_view_self_T
 Function _torch_cpp_torch_namespace__test_check_tensor_self_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace__test_functorch_fallback_out_out_Tensor_self_Tensor_other_Tensor
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__test_functorch_fallback_self_Tensor_other_Tensor
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace__test_optional_filled_intlist_out_out_Tensor_values_Tensor_addends_IntArrayRef
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -3995,6 +4252,9 @@ Function _torch_cpp_torch_namespace__test_optional_intlist_out_out_Tensor_values
 
 Function _torch_cpp_torch_namespace__test_optional_intlist_values_Tensor_addends_IntArrayRef
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__test_parallel_materialize_self_Tensor_num_parallel_int64_t
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__test_serialization_subcmul_self_Tensor_other_Tensor
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -4048,19 +4308,34 @@ Function _torch_cpp_torch_namespace__to_cpu_tensors_TensorList
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__to_dense_out_out_Tensor_self_Tensor
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__to_sparse_bsc_out_out_Tensor_self_Tensor_blocksize_IntArrayRef
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__to_sparse_bsr_out_out_Tensor_self_Tensor_blocksize_IntArrayRef
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__to_sparse_csc_out_out_Tensor_self_Tensor
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__to_sparse_csr_out_out_Tensor_self_Tensor
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__to_sparse_out_out_Tensor_self_Tensor
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__to_sparse_out_out_Tensor_self_Tensor_sparse_dim_int64_t
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__to_sparse_semi_structured_dense_Tensor
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__transform_bias_rescale_qkv_out_out0_Tensor_out1_Tensor_out2_Tensor_qkv_Tensor_qkv_bias_Tensor_num_heads_int64_t
   [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__transform_bias_rescale_qkv_qkv_Tensor_qkv_bias_Tensor_num_heads_int64_t
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _torch_cpp_torch_namespace__transformer_decoder_only_layer_fwd_out_out0_Tensor_out1_Tensor_out2_Tensor_src_Tensor_embed_dim_int64_t_num_heads_int64_t_qkv_weight_Tensor_qkv_bias_Tensor_proj_weight_Tensor_proj_bias_Tensor_use_gelu_bool_norm_first_bool_eps_double_norm_weight_1_Tensor_norm_bias_1_Tensor_norm_weight_2_Tensor_norm_bias_2_Tensor_ffn_weight_1_Tensor_ffn_bias_1_Tensor_ffn_weight_2_Tensor_ffn_bias_2_Tensor
-  [UP] ignoring variable <unnamed var:   %80 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _torch_cpp_torch_namespace__transformer_decoder_only_layer_fwd_src_Tensor_embed_dim_int64_t_num_heads_int64_t_qkv_weight_Tensor_qkv_bias_Tensor_proj_weight_Tensor_proj_bias_Tensor_use_gelu_bool_norm_first_bool_eps_double_norm_weight_1_Tensor_norm_bias_1_Tensor_norm_weight_2_Tensor_norm_bias_2_Tensor_ffn_weight_1_Tensor_ffn_bias_1_Tensor_ffn_weight_2_Tensor_ffn_bias_2_Tensor
-  [UP] ignoring variable <unnamed var:   %71 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__transformer_encoder_layer_fwd_out_out_Tensor_src_Tensor_embed_dim_int64_t_num_heads_int64_t_qkv_weight_Tensor_qkv_bias_Tensor_proj_weight_Tensor_proj_bias_Tensor_use_gelu_bool_norm_first_bool_eps_double_norm_weight_1_Tensor_norm_bias_1_Tensor_norm_weight_2_Tensor_norm_bias_2_Tensor_ffn_weight_1_Tensor_ffn_bias_1_Tensor_ffn_weight_2_Tensor_ffn_bias_2_Tensor
   [UP] ignoring variable <unnamed var:   %71 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -4100,6 +4375,18 @@ Function _torch_cpp_torch_namespace__unique_self_Tensor
 
 Function _torch_cpp_torch_namespace__unpack_dual_dual_Tensor_level_int64_t
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__unsafe_index_put_self_Tensor_indices_constc10ListstdoptionalTensor_values_Tensor
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__unsafe_index_self_Tensor_indices_constc10ListstdoptionalTensor
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__unsafe_masked_index_put_accumulate_self_Tensor_mask_Tensor_indices_constc10ListstdoptionalTensor_values_Tensor
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__unsafe_masked_index_self_Tensor_mask_Tensor_indices_constc10ListstdoptionalTensor_fill_Scalar
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace__unsafe_view_out_out_Tensor_self_Tensor_size_IntArrayRef
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -4197,6 +4484,12 @@ Function _torch_cpp_torch_namespace__values_copy_out_out_Tensor_self_Tensor
 Function _torch_cpp_torch_namespace__values_copy_self_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace__weight_int4pack_mm_self_Tensor_mat2_Tensor_qGroupSize_int64_t_qScaleAndZeros_Tensor
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__weight_int8pack_mm_self_Tensor_mat2_Tensor_scales_Tensor
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace__weight_norm_differentiable_backward_grad_w_Tensor_saved_v_Tensor_saved_g_Tensor_saved_norms_Tensor_dim_int64_t
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -4214,6 +4507,12 @@ Function _torch_cpp_torch_namespace__weight_norm_interface_v_Tensor_g_Tensor
 
 Function _torch_cpp_torch_namespace__weight_norm_v_Tensor_g_Tensor
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__wrapped_linear_prepack_weight_Tensor_weight_scale_Tensor_weight_zero_point_Tensor_bias_Tensor
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace__wrapped_quantized_linear_prepacked_input_Tensor_input_scale_Tensor_input_zero_point_Tensor_packed_weight_Tensor_output_scale_Tensor_output_zero_point_Tensor_out_channel_int64_t
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_abs__self_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -4374,6 +4673,9 @@ Function _torch_cpp_torch_namespace_all_out_out_Tensor_self_Tensor
 Function _torch_cpp_torch_namespace_all_out_out_Tensor_self_Tensor_dim_Dimname
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace_all_out_out_Tensor_self_Tensor_dim_IntArrayRef
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace_all_out_out_Tensor_self_Tensor_dim_int64_t
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -4381,6 +4683,9 @@ Function _torch_cpp_torch_namespace_all_self_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_all_self_Tensor_dim_Dimname
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace_all_self_Tensor_dim_IntArrayRef
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_all_self_Tensor_dim_int64_t
@@ -4425,6 +4730,9 @@ Function _torch_cpp_torch_namespace_any_out_out_Tensor_self_Tensor
 Function _torch_cpp_torch_namespace_any_out_out_Tensor_self_Tensor_dim_Dimname
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace_any_out_out_Tensor_self_Tensor_dim_IntArrayRef
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace_any_out_out_Tensor_self_Tensor_dim_int64_t
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -4432,6 +4740,9 @@ Function _torch_cpp_torch_namespace_any_self_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_any_self_Tensor_dim_Dimname
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace_any_self_Tensor_dim_IntArrayRef
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_any_self_Tensor_dim_int64_t
@@ -4659,11 +4970,14 @@ Function _torch_cpp_torch_namespace_bartlett_window_window_length_int64_t
 Function _torch_cpp_torch_namespace_bartlett_window_window_length_int64_t_periodic_bool
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace_batch_norm_backward_elemt_grad_out_Tensor_input_Tensor_mean_Tensor_invstd_Tensor_weight_Tensor_mean_dy_Tensor_mean_dy_xmu_Tensor_count_Tensor
+Function _torch_cpp_torch_namespace_batch_norm_backward_elemt_grad_out_Tensor_input_Tensor_mean_Tensor_invstd_Tensor_weight_Tensor_sum_dy_Tensor_sum_dy_xmu_Tensor_count_Tensor
   [UP] ignoring variable <unnamed var:   %32 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace_batch_norm_backward_elemt_out_out_Tensor_grad_out_Tensor_input_Tensor_mean_Tensor_invstd_Tensor_weight_Tensor_mean_dy_Tensor_mean_dy_xmu_Tensor_count_Tensor
+Function _torch_cpp_torch_namespace_batch_norm_backward_elemt_out_out_Tensor_grad_out_Tensor_input_Tensor_mean_Tensor_invstd_Tensor_weight_Tensor_sum_dy_Tensor_sum_dy_xmu_Tensor_count_Tensor
   [UP] ignoring variable <unnamed var:   %35 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace_batch_norm_backward_grad_out_Tensor_input_Tensor_weight_Tensor_running_mean_Tensor_running_var_Tensor_save_mean_Tensor_save_var_Tensor_update_bool_eps_double_output_mask_stdarraybool3_reserve_Tensor
+  [UP] ignoring variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_batch_norm_backward_reduce_grad_out_Tensor_input_Tensor_mean_Tensor_invstd_Tensor_weight_Tensor_input_g_bool_weight_g_bool_bias_g_bool
   [UP] ignoring variable <unnamed var:   %32 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -4893,7 +5207,7 @@ Function _torch_cpp_torch_namespace_bucketize_self_Scalar_boundaries_Tensor
 Function _torch_cpp_torch_namespace_bucketize_self_Tensor_boundaries_Tensor
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace_can_cast_from_ScalarType_to_ScalarType
+Function _torch_cpp_torch_namespace_can_cast_from__ScalarType_to_ScalarType
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_cartesian_prod_tensors_TensorList
@@ -5625,6 +5939,12 @@ Function _torch_cpp_torch_namespace_empty_out_out_Tensor_size_IntArrayRef
 Function _torch_cpp_torch_namespace_empty_out_out_Tensor_size_IntArrayRef_names_DimnameList
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace_empty_permuted_out_out_Tensor_size_IntArrayRef_physical_layout_IntArrayRef
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace_empty_permuted_size_IntArrayRef_physical_layout_IntArrayRef
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace_empty_quantized_out_out_Tensor_size_IntArrayRef_qtensor_Tensor
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -5996,6 +6316,9 @@ Function _torch_cpp_torch_namespace_float_power_self_Tensor_exponent_Tensor
 
 Function _torch_cpp_torch_namespace_floor__self_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace_floor_divide_out_out_Tensor_self_Tensor_other_Scalar
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_floor_divide_out_out_Tensor_self_Tensor_other_Tensor
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -6528,16 +6851,16 @@ Function _torch_cpp_torch_namespace_index_fill_self_Tensor_dim_int64_t_index_Ten
 Function _torch_cpp_torch_namespace_index_fill_self_Tensor_dim_int64_t_index_Tensor_value_Tensor
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace_index_out_out_Tensor_self_Tensor_indices_constc10Listc10optionalTensor
+Function _torch_cpp_torch_namespace_index_out_out_Tensor_self_Tensor_indices_constc10ListstdoptionalTensor
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor
+Function _torch_cpp_torch_namespace_index_put__self_Tensor_indices_constc10ListstdoptionalTensor_values_Tensor
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace_index_put_out_out_Tensor_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor
+Function _torch_cpp_torch_namespace_index_put_out_out_Tensor_self_Tensor_indices_constc10ListstdoptionalTensor_values_Tensor
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor
+Function _torch_cpp_torch_namespace_index_put_self_Tensor_indices_constc10ListstdoptionalTensor_values_Tensor
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_index_reduce_out_out_Tensor_self_Tensor_dim_int64_t_index_Tensor_source_Tensor_reduce_c10string_view
@@ -6561,7 +6884,7 @@ Function _torch_cpp_torch_namespace_index_select_self_Tensor_dim_Dimname_index_T
 Function _torch_cpp_torch_namespace_index_select_self_Tensor_dim_int64_t_index_Tensor
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _torch_cpp_torch_namespace_index_self_Tensor_indices_constc10Listc10optionalTensor
+Function _torch_cpp_torch_namespace_index_self_Tensor_indices_constc10ListstdoptionalTensor
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_indices_copy_out_out_Tensor_self_Tensor
@@ -7131,7 +7454,25 @@ Function _torch_cpp_torch_namespace_linear_out_out_Tensor_input_Tensor_weight_Te
 Function _torch_cpp_torch_namespace_linspace_out_out_Tensor_start_Scalar_end_Scalar_steps_int64_t
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace_linspace_out_out_Tensor_start_Scalar_end_Tensor_steps_int64_t
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace_linspace_out_out_Tensor_start_Tensor_end_Scalar_steps_int64_t
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace_linspace_out_out_Tensor_start_Tensor_end_Tensor_steps_int64_t
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace_linspace_start_Scalar_end_Scalar_steps_int64_t
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace_linspace_start_Scalar_end_Tensor_steps_int64_t
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace_linspace_start_Tensor_end_Scalar_steps_int64_t
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace_linspace_start_Tensor_end_Tensor_steps_int64_t
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_log10__self_Tensor
@@ -7272,7 +7613,25 @@ Function _torch_cpp_torch_namespace_logit_self_Tensor
 Function _torch_cpp_torch_namespace_logspace_out_out_Tensor_start_Scalar_end_Scalar_steps_int64_t
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace_logspace_out_out_Tensor_start_Scalar_end_Tensor_steps_int64_t
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace_logspace_out_out_Tensor_start_Tensor_end_Scalar_steps_int64_t
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace_logspace_out_out_Tensor_start_Tensor_end_Tensor_steps_int64_t
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace_logspace_start_Scalar_end_Scalar_steps_int64_t
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace_logspace_start_Scalar_end_Tensor_steps_int64_t
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace_logspace_start_Tensor_end_Scalar_steps_int64_t
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace_logspace_start_Tensor_end_Tensor_steps_int64_t
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_logsumexp_out_out_Tensor_self_Tensor_dim_DimnameList
@@ -7336,6 +7695,9 @@ Function _torch_cpp_torch_namespace_masked_fill_self_Tensor_mask_Tensor_value_Sc
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_masked_fill_self_Tensor_mask_Tensor_value_Tensor
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace_masked_scatter_backward_grad_output_Tensor_mask_Tensor_sizes_IntArrayRef
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_masked_scatter_out_out_Tensor_self_Tensor_mask_Tensor_source_Tensor
@@ -7461,6 +7823,9 @@ Function _torch_cpp_torch_namespace_maximum_out_out_Tensor_self_Tensor_other_Ten
 Function _torch_cpp_torch_namespace_maximum_self_Tensor_other_Tensor
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace_mean_out_out_Tensor_self_Tensor
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace_mean_out_out_Tensor_self_Tensor_dim_DimnameList
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -7508,6 +7873,9 @@ Function _torch_cpp_torch_namespace_min_out_min_Tensor_min_indices_Tensor_self_T
 
 Function _torch_cpp_torch_namespace_min_out_out_Tensor_other_Tensor_self_Tensor
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace_min_out_out_Tensor_self_Tensor
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_min_self_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -7657,10 +8025,10 @@ Function _torch_cpp_torch_namespace_mkldnn_reorder_conv2d_weight_self_Tensor
   [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_mkldnn_reorder_conv3d_weight_out_out_Tensor_self_Tensor
-  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_mkldnn_reorder_conv3d_weight_self_Tensor
-  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_mkldnn_rnn_layer_backward_input_Tensor_weight1_Tensor_weight2_Tensor_weight3_Tensor_weight4_Tensor_hx__Tensor_cx_tmp_Tensor_output_Tensor_hy__Tensor_cy__Tensor_grad_output_Tensor_grad_hy_Tensor_grad_cy_Tensor_reverse_bool_mode_int64_t_hidden_size_int64_t_num_layers_int64_t_has_biases_bool_train_bool_bidirectional_bool_batch_sizes_IntArrayRef_batch_first_bool_workspace_Tensor
   [UP] ignoring variable <unnamed var:   %77 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -8031,6 +8399,12 @@ Function _torch_cpp_torch_namespace_nonzero_out_out_Tensor_self_Tensor
 Function _torch_cpp_torch_namespace_nonzero_self_Tensor
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace_nonzero_static_out_out_Tensor_self_Tensor_size_int64_t
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace_nonzero_static_self_Tensor_size_int64_t
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace_norm_except_dim_v_Tensor
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -8155,7 +8529,7 @@ Function _torch_cpp_torch_namespace_pad_self_Tensor_pad_IntArrayRef
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_pad_sequence_sequences_TensorList
-  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_pairwise_distance_x1_Tensor_x2_Tensor
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -8344,6 +8718,12 @@ Function _torch_cpp_torch_namespace_quantized_max_pool2d_out_out_Tensor_self_Ten
   [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_quantized_max_pool2d_self_Tensor_kernel_size_IntArrayRef
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace_quantized_max_pool3d_out_out_Tensor_self_Tensor_kernel_size_IntArrayRef
+  [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_cpp_torch_namespace_quantized_max_pool3d_self_Tensor_kernel_size_IntArrayRef
   [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_quantized_rnn_relu_cell_input_Tensor_hx_Tensor_w_ih_Tensor_w_hh_Tensor_b_ih_Tensor_b_hh_Tensor_packed_ih_Tensor_packed_hh_Tensor_col_offsets_ih_Tensor_col_offsets_hh_Tensor_scale_ih_Scalar_scale_hh_Scalar_zero_point_ih_Scalar_zero_point_hh_Scalar
@@ -8679,6 +9059,9 @@ Function _torch_cpp_torch_namespace_result_type_scalar1_Scalar_scalar2_Scalar
 Function _torch_cpp_torch_namespace_result_type_scalar_Scalar_tensor_Tensor
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace_rms_norm_input_Tensor_normalized_shape_IntArrayRef
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace_rnn_relu_cell_input_Tensor_hx_Tensor_w_ih_Tensor_w_hh_Tensor
   [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -8788,7 +9171,7 @@ Function _torch_cpp_torch_namespace_scalar_tensor_s_Scalar
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_scaled_dot_product_attention_query_Tensor_key_Tensor_value_Tensor
-  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %32 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_scatter_add_out_out_Tensor_self_Tensor_dim_int64_t_index_Tensor_src_Tensor
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -9000,6 +9383,9 @@ Function _torch_cpp_torch_namespace_slice_copy_out_out_Tensor_self_Tensor
 Function _torch_cpp_torch_namespace_slice_copy_self_Tensor
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_cpp_torch_namespace_slice_inverse_self_Tensor_src_Tensor
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_cpp_torch_namespace_slice_scatter_out_out_Tensor_self_Tensor_src_Tensor
   [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -9154,10 +9540,10 @@ Function _torch_cpp_torch_namespace_sparse_compressed_tensor_compressed_indices_
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_sparse_coo_tensor_indices_Tensor_values_Tensor_options_TensorOptions
-  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_sparse_coo_tensor_indices_Tensor_values_Tensor_size_IntArrayRef_options_TensorOptions
-  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_sparse_coo_tensor_out_out_Tensor_size_IntArrayRef
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -9949,7 +10335,7 @@ Function _torch_cpp_torch_namespace_tile_self_Tensor_dims_IntArrayRef
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_to_dense_backward_grad_Tensor_input_Tensor
-  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_to_mkldnn_backward_grad_Tensor_input_Tensor
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -9959,24 +10345,6 @@ Function _torch_cpp_torch_namespace_to_mkldnn_out_out_Tensor_self_Tensor
 
 Function _torch_cpp_torch_namespace_to_padded_tensor_out_out_Tensor_self_Tensor_padding_double
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _torch_cpp_torch_namespace_to_sparse_bsc_out_out_Tensor_self_Tensor_blocksize_IntArrayRef
-  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _torch_cpp_torch_namespace_to_sparse_bsr_out_out_Tensor_self_Tensor_blocksize_IntArrayRef
-  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _torch_cpp_torch_namespace_to_sparse_csc_out_out_Tensor_self_Tensor
-  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _torch_cpp_torch_namespace_to_sparse_csr_out_out_Tensor_self_Tensor
-  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _torch_cpp_torch_namespace_to_sparse_out_out_Tensor_self_Tensor
-  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _torch_cpp_torch_namespace_to_sparse_out_out_Tensor_self_Tensor_sparse_dim_int64_t
-  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _torch_cpp_torch_namespace_topk_out_values_Tensor_indices_Tensor_self_Tensor_k_int64_t
   [UP] ignoring variable <unnamed var:   %29 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -10515,6 +10883,63 @@ Function _torch_ivalue_test_function
 Function _torch_nnf_pad_circular
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _torch_rcpp_as_list_adagrad_param_groups
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_rcpp_as_list_adam_param_groups
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_rcpp_as_list_adamw_param_groups
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_rcpp_as_list_rmsprop_param_groups
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_rcpp_as_list_sgd_param_groups
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_rcpp_ignite_adagrad
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_rcpp_ignite_adagrad_get_states
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_rcpp_ignite_adam
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_rcpp_ignite_adam_get_states
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_rcpp_ignite_adamw
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_rcpp_ignite_adamw_get_states
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_rcpp_ignite_optim_get_param_group_params
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_rcpp_ignite_optim_get_param_groups
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_rcpp_ignite_optim_param_groups_size
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_rcpp_ignite_optim_parameters_with_state
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_rcpp_ignite_rmsprop
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_rcpp_ignite_rmsprop_get_states
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_rcpp_ignite_sgd
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _torch_rcpp_ignite_sgd_get_states
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _torch_set_xptr_address
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -10539,8 +10964,8 @@ Function _torch_xptr_address
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function cpp_tensor_register_hook(Rcpp::XPtr<XPtrTorchTensor, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<XPtrTorchTensor>(XPtrTorchTensor*)), false>, Rcpp::Function_Impl<Rcpp::PreserveStorage>)::$_4::operator()(void*) const::{lambda()#1}::operator()() const
-  [PB] has possible protection stack imbalance torch/src/autograd.cpp:151
+Function cpp_tensor_register_hook(Rcpp::XPtr<XPtrTorchTensor, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<XPtrTorchTensor>(XPtrTorchTensor*)), false>, Rcpp::Function_Impl<Rcpp::PreserveStorage>)::$_5::operator()(void*) const::{lambda()#1}::operator()() const
+  [PB] has possible protection stack imbalance torch/src/autograd.cpp:155
 
 Function create_tensor_from_any(SEXPREC*, XPtrTorchDtype)
   [UP] ignoring variable x as it has address taken, results will be incomplete 
@@ -10555,6 +10980,17 @@ Function from_sexp_optional_tensor_list(SEXPREC*)
 Function from_sexp_tensor_list(SEXPREC*)
   [UP] ignoring variable x as it has address taken, results will be incomplete 
 
+Function index_append_sexp(XPtrTorchTensorIndex&, SEXPREC*, bool, XPtrTorchDevice)
+  [UP] unprotected variable slice while calling allocating function XPtrTorchDtype::~XPtrTorchDtype() torch/src/indexing.cpp:264
+  [UP] unprotected variable slice while calling allocating function XPtrTorchTensor::~XPtrTorchTensor() torch/src/indexing.cpp:264
+  [UP] unprotected variable slice while calling allocating function Rcpp::RObject_Impl<Rcpp::PreserveStorage>::~RObject_Impl() torch/src/indexing.cpp:265
+  [UP] unprotected variable slice while calling allocating function Rcpp::RObject_Impl<Rcpp::PreserveStorage>::RObject_Impl(SEXPREC*) torch/src/indexing.cpp:268
+  [UP] allocating function index_append_bool_vector(XPtrTorchTensorIndex&, SEXPREC*) may destroy its unprotected argument (slice <arg 2>), which is later used. torch/src/indexing.cpp:270
+  [UP] calling allocating function torch_tensor_cpp(SEXPREC*, Rcpp::Nullable<XPtrTorchDtype>, Rcpp::Nullable<XPtrTorchDevice>, bool, bool) with a fresh pointer (slice <arg 2>) torch/src/indexing.cpp:274
+  [UP] unprotected variable slice while calling allocating function XPtrTorchDtype::~XPtrTorchDtype() torch/src/indexing.cpp:274
+  [UP] unprotected variable slice while calling allocating function XPtrTorchTensor::~XPtrTorchTensor() torch/src/indexing.cpp:274
+  [UP] unprotected variable slice while calling allocating function Rcpp::RObject_Impl<Rcpp::PreserveStorage>::~RObject_Impl() torch/src/indexing.cpp:275
+
 Function operator_sexp_generic_dict(XPtrTorchGenericDict const*)
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -10568,7 +11004,7 @@ Function operator_sexp_jit_named_parameter_list(XPtrTorchjit_named_parameter_lis
   [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function operator_sexp_optional_tensor(XPtrTorchOptionalTensor const*)
-  [UP] unprotected variable <unnamed var:   %2 = alloca %struct.SEXPREC*, align 8> while calling allocating function XPtrTorchTensor::~XPtrTorchTensor() torch/src/torch_api.cpp:156
+  [UP] unprotected variable <unnamed var:   %2 = alloca %struct.SEXPREC*, align 8> while calling allocating function XPtrTorchTensor::~XPtrTorchTensor() torch/src/torch_api.cpp:161
 
 Function rlang_is_named(SEXPREC*)
   [UP] ignoring variable x as it has address taken, results will be incomplete 
@@ -10578,3 +11014,6 @@ Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::Vector<19
 
 Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::XPtr<XPtrTorch, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<XPtrTorch>(XPtrTorch*)), false> >(Rcpp::XPtr<XPtrTorch, Rcpp::PreserveStorage, &(void Rcpp::standard_delete_finalizer<XPtrTorch>(XPtrTorch*)), false> const&)
   [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
