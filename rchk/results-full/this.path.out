@@ -1,11 +1,12 @@
 Package this.path version 2.6.0
-Package built using 87446/R 4.5.0; x86_64-pc-linux-gnu; 2024-12-19 20:18:25 UTC; unix   
+Package built using 87687/R 4.5.0; x86_64-pc-linux-gnu; 2025-02-05 22:50:46 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
 
 Function _env_path
+  [PB] uses multiple pointer protection counters results will be incomplete
   [PB] uses multiple pointer protection counters results will be incomplete
   [UP] unprotected variable envir while calling allocating function Rf_GetOption1(S:topLevelEnvironment) this.path/src/thispath.c:2356
   [UP] calling allocating function Rf_topenv with a fresh pointer (envir <arg 2>) this.path/src/thispath.c:2358
@@ -54,9 +55,9 @@ Function _src_path
   [UP] calling allocating function Rf_findVarInFrame(?,S:errcnd) with a fresh pointer (documentcontext <arg 1>) this.path/src/thispath.c:2778
   [UP] calling allocating function Rf_findVarInFrame(?,S:file) with a fresh pointer (documentcontext <arg 1>) this.path/src/thispath.c:2778
   [UP] calling allocating function Rf_findVarInFrame(?,S:for.msg) with a fresh pointer (documentcontext <arg 1>) this.path/src/thispath.c:2778
-  [UP] calling allocating function Rf_findVarInFrame(?,S:lines) with a fresh pointer (documentcontext <arg 1>) this.path/src/thispath.c:2778
-  [UP] calling allocating function Rf_findVERROR: too many states (abstraction error?) in function _sys_path
-arInFrame(?,S:ofile) with a fresh pointer (documentcontext <arg 1>) this.path/src/thispath.c:2778
+  [UP] calling allocating function Rf_findVarInFrame(?,S:lines) with a fresh pointer (documentcontext <arg 1>) /var/scratch2/tomas/cran/rchk/pkgbuild/FEiDguERROR: too many states (abstraction error?) in function _sys_path
+kQ/this.path/src/thispath.c:2778
+  [UP] calling allocating function Rf_findVarInFrame(?,S:ofile) with a fresh pointer (documentcontext <arg 1>) this.path/src/thispath.c:2778
   [UP] calling allocating function Rf_findVarInFrame(?,S:source) with a fresh pointer (documentcontext <arg 1>) this.path/src/thispath.c:2778
   [UP] unprotected variable documentcontext while calling allocating function Rf_ScalarString this.path/src/thispath.c:2778
   [UP] unprotected variable documentcontext while calling allocating function Rf_duplicate this.path/src/thispath.c:2778
@@ -229,7 +230,6 @@ Function _sys_path
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete this.path/src/thispath.c:2136
 
 Function do_wrap_source
-  [PB] uses multiple pointer protection counters results will be incomplete
   [PB] uses multiple pointer protection counters results will be incomplete
   [UP] unprotected variable promise while calling allocating function MissingArgError(S:expr,?,?,?) this.path/src/setsyspath.c:27
   [UP] unprotected variable promise while calling allocating function Rf_asInteger this.path/src/setsyspath.c:37

@@ -1,0 +1,61 @@
+Package cooltools version 2.4
+Package built using 87687/R 4.5.0; x86_64-pc-linux-gnu; 2025-02-06 00:03:46 UTC; unix   
+Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:682
+
+Function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::set(SEXPREC*)
+  [UP] ignoring variable rhs as it has address taken, results will be incomplete 
+
+Function _cooltools_kde2stampxx
+  [UP] ignoring variable <unnamed var:   %42 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _cooltools_paircountxx
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr cooltools/src/RcppExports.cpp:37
+  [PB] has negative depth cooltools/src/RcppExports.cpp:49
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete cooltools/src/RcppExports.cpp:49
+  [PB] has possible protection stack imbalance cooltools/src/RcppExports.cpp:50
+
+Function _cooltools_paircountxx1d
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr cooltools/src/RcppExports.cpp:110
+  [PB] has negative depth cooltools/src/RcppExports.cpp:122
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete cooltools/src/RcppExports.cpp:122
+  [PB] has possible protection stack imbalance cooltools/src/RcppExports.cpp:123
+
+Function _cooltools_paircountxx1d_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _cooltools_paircountxx_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _cooltools_paircountxy
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr cooltools/src/RcppExports.cpp:74
+  [PB] has negative depth cooltools/src/RcppExports.cpp:86
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete cooltools/src/RcppExports.cpp:86
+  [PB] has possible protection stack imbalance cooltools/src/RcppExports.cpp:87
+
+Function _cooltools_paircountxy1d
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr cooltools/src/RcppExports.cpp:147
+  [PB] has negative depth cooltools/src/RcppExports.cpp:159
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete cooltools/src/RcppExports.cpp:159
+  [PB] has possible protection stack imbalance cooltools/src/RcppExports.cpp:160
+
+Function _cooltools_paircountxy1d_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _cooltools_paircountxy_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
