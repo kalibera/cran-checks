@@ -1,0 +1,49 @@
+Package parseLatex version 0.2.1
+Package built using 87714/R 4.5.0; x86_64-pc-linux-gnu; 2025-02-12 22:20:17 UTC; unix   
+Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at mkSpecial parseLatex/src/parser/gramLatex.y:1262
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at xxblock parseLatex/src/parser/gramLatex.y:509
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at xxenv parseLatex/src/parser/gramLatex.y:391
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at xxenv parseLatex/src/parser/gramLatex.y:395
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at xxmath parseLatex/src/parser/gramLatex.y:487
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at xxnewdef parseLatex/src/parser/gramLatex.y:420
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at xxsavevalue parseLatex/src/parser/gramLatex.y:554
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at xxtag parseLatex/src/parser/gramLatex.y:561
+
+Function addString
+  [UP] unprotected variable temp while calling allocating function Rf_mkCharLenCE parseLatex/src/parser/gramLatex.y:1135
+
+Function xxblock
+  [UP] unprotected variable ans while calling allocating function Rf_install parseLatex/src/parser/gramLatex.y:509
+  [UP] unprotected variable ans while calling allocating function makeSrcref parseLatex/src/parser/gramLatex.y:509
+  [UP] unprotected variable ans while calling allocating function Rf_mkString parseLatex/src/parser/gramLatex.y:510
+  [UP] unprotected variable ans while calling allocating function Rf_mkString parseLatex/src/parser/gramLatex.y:511
+
+Function xxenv
+  [UP] unprotected variable ans while calling allocating function Rf_install parseLatex/src/parser/gramLatex.y:391
+  [UP] unprotected variable ans while calling allocating function Rf_mkString parseLatex/src/parser/gramLatex.y:391
+  [UP] unprotected variable ans while calling allocating function Rf_install parseLatex/src/parser/gramLatex.y:395
+  [UP] unprotected variable ans while calling allocating function makeSrcref parseLatex/src/parser/gramLatex.y:395
+  [UP] unprotected variable ans while calling allocating function Rf_mkString parseLatex/src/parser/gramLatex.y:396
+  [UP] unprotected variable ans while calling allocating function Rf_mkString parseLatex/src/parser/gramLatex.y:397
+
+Function xxmath
+  [UP] unprotected variable ans while calling allocating function Rf_install parseLatex/src/parser/gramLatex.y:487
+  [UP] unprotected variable ans while calling allocating function makeSrcref parseLatex/src/parser/gramLatex.y:487
+  [UP] unprotected variable ans while calling allocating function Rf_mkString parseLatex/src/parser/gramLatex.y:489
+  [UP] unprotected variable ans while calling allocating function Rf_mkString parseLatex/src/parser/gramLatex.y:490
+
+Function xxnewdef
+  [UP] unprotected variable temp while calling allocating function R_PreserveInMSet(V,?) parseLatex/src/parser/gramLatex.y:413
+  [UP] unprotected variable temp while calling allocating function Rf_allocVector parseLatex/src/parser/gramLatex.y:413
+  [UP] unprotected variable ans while calling allocating function Rf_install parseLatex/src/parser/gramLatex.y:420
+  [UP] unprotected variable ans while calling allocating function makeSrcref parseLatex/src/parser/gramLatex.y:420
+  [UP] unprotected variable ans while calling allocating function Rf_mkString parseLatex/src/parser/gramLatex.y:421
+  [UP] unprotected variable ans while calling allocating function Rf_mkString parseLatex/src/parser/gramLatex.y:422
+
+Function xxnewlist
+  [UP] allocating function GrowList may destroy its unprotected argument (ans <arg 1>), which is later used. parseLatex/src/parser/gramLatex.y:320
+  [UP] calling allocating function GrowList with a fresh pointer (ans <arg 1>) parseLatex/src/parser/gramLatex.y:320
