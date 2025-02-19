@@ -1,0 +1,55 @@
+
+R Under development (unstable) (2025-02-19 r87756) -- "Unsuffered Consequences"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> library(text2map)
+Loading required package: Matrix
+> options(useFancyQuotes = FALSE)
+> 
+> test_check("text2map")
+ERROR: modification of compiler constant of type character, length 4
+ERROR: the modified value of the constant is:
+[1] "pooled" "paired" "L2"     "PCA"   
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "pooled" "paired" "L2"     "PCA"   
+ERROR: the modified constant is at index 1
+ERROR: the modified constant is in this function body:
+c("pooled", "paired", "L2", "PCA")
+[ FAIL 0 | WARN 0 | SKIP 22 | PASS 420 ]
+
+══ Skipped tests (22) ══════════════════════════════════════════════════════════
+• On CRAN (22): 'test-utils-perm.R:3:5', 'test-utils-perm.R:24:3',
+  'test-utils-perm.R:134:3', 'test-utils-perm.R:187:3',
+  'test-x-nocran-dtm-pkgs.R:9:3', 'test-x-nocran-dtm-pkgs.R:50:3',
+  'test-x-nocran-dtm-pkgs.R:97:3', 'test-x-nocran-dtm-pkgs.R:118:3',
+  'test-x-nocran-dtm-pkgs.R:136:3', 'test-x-nocran-dtm-pkgs.R:154:3',
+  'test-x-nocran-dtm-pkgs.R:186:3', 'test-x-nocran-dtm-pkgs.R:219:3',
+  'test-x-nocran-dtm-pkgs.R:251:3', 'test-y-nocran-CoCA.R:3:3',
+  'test-y-nocran-CoCA.R:33:3', 'test-y-nocran-CoCA.R:92:3',
+  'test-y-nocran-CoCA.R:155:3', 'test-y-nocran-CoCA.R:174:3',
+  'test-z-nocran-CMDist-parallel.R:4:5',
+  'test-z-nocran-CMDist-parallel.R:87:5',
+  'test-z-nocran-CMDist-parallel.R:116:5',
+  'test-z-nocran-CMDist-parallel.R:185:5'
+
+[ FAIL 0 | WARN 0 | SKIP 22 | PASS 420 ]
+> 
+> proc.time()
+   user  system elapsed 
+ 52.069   2.407  55.854 
