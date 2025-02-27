@@ -1,5 +1,5 @@
-Package reticulate version 1.40.0
-Package built using 87687/R 4.5.0; x86_64-pc-linux-gnu; 2025-02-05 23:48:30 UTC; unix   
+Package reticulate version 1.41.0
+Package built using 87829/R 4.5.0; x86_64-pc-linux-gnu; 2025-02-26 23:03:40 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -150,8 +150,8 @@ Function _reticulate_py_iter_next
   [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _reticulate_py_iterate
-  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %19 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _reticulate_py_len_impl
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -256,16 +256,22 @@ Function py_convert_pandas_series(PyObjectRef)
   [UP] ignoring variable <unnamed var:   %57 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function py_iterate(PyObjectRef, Rcpp::Function_Impl<Rcpp::PreserveStorage>, bool)
-  [PB] has possible protection stack imbalance reticulate/src/python.cpp:4765
+  [PB] has possible protection stack imbalance reticulate/src/python.cpp:4807
 
 Function py_to_r_cpp(reticulate::libpython::_object*, bool, bool)
   [UP] ignoring variable <unnamed var:   %100 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %112 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %115 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %120 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %80 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %84 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %88 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %95 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function r_to_py_numpy(Rcpp::RObject_Impl<Rcpp::PreserveStorage>, bool)
+  [PB] has negative depth reticulate/src/python.cpp:2172
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete reticulate/src/python.cpp:2172
+  [PB] has possible protection stack imbalance reticulate/src/python.cpp:2207
 
 Function try_py_resolve_module_proxy(SEXPREC*)
   [UP] ignoring variable proxy as it has address taken, results will be incomplete 
