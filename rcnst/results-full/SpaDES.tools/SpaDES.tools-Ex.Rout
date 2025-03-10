@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2025-02-26 r87829) -- "Unsuffered Consequences"
+R Under development (unstable) (2025-03-09 r87912) -- "Unsuffered Consequences"
 Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -224,13 +224,13 @@ detaching ‘package:terra’, ‘package:data.table’
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10, returnMatrix = TRUE)
 + })
    user  system elapsed 
-  0.032   0.000   0.033 
+  0.030   0.000   0.031 
 > agent <- agentOrig
 > system.time({
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10)
 + })
    user  system elapsed 
- 19.579   0.198  20.013 
+ 24.283   0.005  24.624 
 > 
 > # as sp
 > if (requireNamespace("sp")) {
@@ -1379,6 +1379,20 @@ The following object is masked from ‘package:SpaDES.tools’:
 > # Use exactSize -- but where it can't be achieved
 > exactSizes <- sort(sample(100:110, size = length(sams)))
 > out <- spread2(a, start = sams, 1, exactSize = exactSizes)
+> 
+> # Iterative calling -- create a function with a high escape probability
+> spreadWithEscape <- function(ras, start, escapeProb, spreadProb) {
++   out <- spread2(ras, start = sams, spreadProb = escapeProb, asRaster = FALSE)
++   while (any(out$state == "sourceActive")) {
++     # pass in previous output as start
++     out <- spread2(ras, start = out, spreadProb = spreadProb,
++                     asRaster = FALSE, skipChecks = TRUE) # skipChecks for speed
++   }
++   out
++ }
+> 
+> set.seed(421)
+> out1 <- spreadWithEscape(a, sams, escapeProb = 0.25, spreadProb = 0.225)
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "activeSource" "holding"      "successful"   "tooSmall"    
@@ -1389,5 +1403,160 @@ ERROR: the original value of the constant is:
 ERROR: the modified constant is at index 1
 ERROR: the modified constant is in this function body:
 c("activeSource", "holding", "successful", "tooSmall")
-Fatal error: compiler constants were modified!
+> set.seed(421)
+> out2 <- spread2(a, sams, 0.225, asRaster = FALSE)
+> # The one with high escape probability is larger (most of the time)
+> NROW(out1) > NROW(out2) ## TODO: not true
+[1] FALSE
+> 
+> ## Use neighProbs, with a spreadProb that is a RasterLayer
+> # Create a raster of different values, which will be the relative probabilities
+> #   i.e., they are rescaled to relative probabilities within the 8 neighbour choices.
+> #   The neighProbs below means 70% of the time, 1 neighbour will be chosen,
+> #   30% of the time 2 neighbours.
+> #   The cells with spreadProb of 5 are 5 times more likely than cells with 1 to be chosen,
+> #   when they are both within the 8 neighbours
+> sp <- rast(ext(0, 3, 0, 3), res = 1, vals = 1:9) #small raster, simple values
+> # Check neighProbs worked
+> out <- list()
+> 
+> # enough replicates to see stabilized probabilities
+> for (i in 1:100) {
++   out[[i]] <- spread2(sp, spreadProbRel = sp, spreadProb = 1,
++                       start = 5, iterations = 1,
++                       neighProbs = c(1), asRaster = FALSE)
++ }
+> out <- data.table::rbindlist(out)[pixels != 5] # remove starting cell
+> table(sp[out$pixels])
+lyr.1
+ 1  2  3  4  6  7  8  9 
+ 3  5  8  8 17 13 26 20 
+> # should be non-significant -- note no 5 because that was the starting cell
+> #  This tests whether the null model is true ... there should be proportions
+> #  equivalent to 1:2:3:4:6:7:8:9 ... i.e,. cell 9 should have 9x as many events
+> #  spread to it as cell 1. This comes from sp object above which is providing
+> #  the relative spread probabilities
+> keep <- c(1:4, 6:9)
+> chisq.test(keep, unname(tabulate(sp[out$pixels]$lyr.1, 9)[keep]),
++            simulate.p.value = TRUE)
 
+	Pearson's Chi-squared test with simulated p-value (based on 2000
+	replicates)
+
+data:  keep and unname(tabulate(sp[out$pixels]$lyr.1, 9)[keep])
+X-squared = 48, df = NA, p-value = 1
+
+> 
+> ## Example showing asymmetry
+> sams <- ncell(a) / 4 - ncol(a) / 4 * 3
+> circs <- spread2(a, spreadProb = 0.213, start = sams,
++                  asymmetry = 2, asymmetryAngle = 135,
++                  asRaster = TRUE)
+> ## ADVANCED: Estimate spreadProb when using asymmetry, such that the expected
+> ##   event size is the same as without using asymmetry
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:terra’
+
+> nameEx("spread3")
+> ### * spread3
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: spread3
+> ### Title: An alternative spread function, conceived for insects
+> ### Aliases: spread3
+> 
+> ### ** Examples
+> 
+> ## these tests are fairly heavy, so don't run during automated tests
+> #########################################################
+> # Simple case, no variation in rasQuality, numeric advectionDir and advectionMag
+> #########################################################
+> 
+> 
+> 
+> cleanEx()
+> nameEx("wrap")
+> ### * wrap
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: wrap
+> ### Title: Wrap coordinates or pixels in a torus-like fashion
+> ### Aliases: wrap
+> 
+> ### ** Examples
+> 
+> origDTThreads <- data.table::setDTthreads(2L)
+> origNcpus <- options(Ncpus = 2L)
+> 
+> xrange <- yrange <- c(-50, 50)
+> hab <- terra::rast(terra::ext(c(xrange, yrange)))
+> hab[] <- 0
+> 
+> # initialize agents
+> N <- 10
+> 
+> # previous points
+> x1 <- y1 <- rep(0, N)
+> # initial points
+> starts <- cbind(x = stats::runif(N, xrange[1], xrange[2]),
++                 y = stats::runif(N, yrange[1], yrange[2]))
+> 
+> # create the agent object # the x1 and y1 are needed for "previous location"
+> agent <- terra::vect(data.frame(x1, y1, starts), geom = c("x", "y"))
+> 
+> ln <- rlnorm(N, 1, 0.02) # log normal step length
+> sd <- 30 # could be specified globally in params
+> 
+> if (interactive()) {
++   # clearPlot()
++   terra::plot(hab, col = "white")
++ }
+> 
+> for (i in 1:10) {
++   agent <- crw(agent = agent, extent = terra::ext(hab), stepLength = ln,
++                stddev = sd, lonlat = FALSE, torus = FALSE) # don't wrap
++   if (interactive()) terra::plot(agent[, 1], add = TRUE, col = 1:10)
++ }
+> terra::crds(agent) # many are "off" the map, i.e., beyond the extent of hab
+              x          y
+ [1,] -36.85999 -12.908798
+ [2,] -21.79904 -56.855522
+ [3,]  22.67343  15.703130
+ [4,]  43.77481   9.164618
+ [5,] -53.64911  36.510524
+ [6,]  55.18933 -11.642447
+ [7,]  50.27894  43.935200
+ [8,]  11.99916  75.522000
+ [9,]  22.43341 -36.590531
+[10,] -32.48183  44.411046
+> agent <- SpaDES.tools::wrap(agent, bounds = terra::ext(hab))
+> terra::plot(agent, add = TRUE, col = 1:10) # now inside the extent of hab
+> 
+> # clean up
+> data.table::setDTthreads(origDTThreads)
+> options(Ncpus = origNcpus)
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  211.254 2.085 216.933 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
