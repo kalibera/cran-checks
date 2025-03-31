@@ -1,0 +1,312 @@
+
+R Under development (unstable) (2025-03-29 r88074) -- "Unsuffered Consequences"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "bsplus"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('bsplus')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("bs_accordion")
+> ### * bs_accordion
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bs_accordion
+> ### Title: Accordion panel-group
+> ### Aliases: bs_accordion bs_append.bsplus_accordion
+> ###   bs_set_opts.bsplus_accordion
+> 
+> ### ** Examples
+> 
+> bs_accordion(id = "meet_the_beatles") %>%
++   bs_set_opts(panel_type = "success", use_heading_link = TRUE) %>%
++   bs_append(title = "John Lennon", content = "Rhythm guitar, vocals") %>%
++   bs_set_opts(panel_type = "info") %>%
++   bs_append(title = "Paul McCartney", content = "Bass guitar, vocals")
+<div id="meet_the_beatles" class="panel-group" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-success" id="meet_the_beatles-0">
+    <div id="meet_the_beatles-0-heading" class="panel-heading" role="tab" data-toggle="collapse" data-target="#meet_the_beatles-0-collapse" data-parent="#meet_the_beatles" aria-expanded="true" aria-controls="meet_the_beatles-0-collapse" style="cursor: pointer;">
+      <h4 class="panel-title">John Lennon</h4>
+    </div>
+    <div aria-labelledby="meet_the_beatles-0-heading" class="panel-collapse collapse in" id="meet_the_beatles-0-collapse" role="tabpanel">
+      <div class="panel-body" style="">Rhythm guitar, vocals</div>
+    </div>
+  </div>
+  <div class="panel panel-info" id="meet_the_beatles-1">
+    <div id="meet_the_beatles-1-heading" class="panel-heading" role="tab" data-toggle="collapse" data-target="#meet_the_beatles-1-collapse" data-parent="#meet_the_beatles" aria-expanded="true" aria-controls="meet_the_beatles-1-collapse" style="cursor: pointer;">
+      <h4 class="panel-title">Paul McCartney</h4>
+    </div>
+    <div id="meet_the_beatles-1-collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="meet_the_beatles-1-heading">
+      <div class="panel-body" style="">Bass guitar, vocals</div>
+    </div>
+  </div>
+</div>
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("bs_accordion_sidebar")
+> ### * bs_accordion_sidebar
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bs_accordion_sidebar
+> ### Title: Accordion-sidebar panel-group
+> ### Aliases: bs_accordion_sidebar use_bs_accordion_sidebar
+> ###   bs_append.bsplus_accordion_sidebar
+> ###   bs_set_opts.bsplus_accordion_sidebar
+> 
+> ### ** Examples
+> 
+> bs_accordion_sidebar(id = "meet_the_beatles") %>%
++   bs_append(
++     title_side = "John Lennon",
++     content_side = "Rhythm guitar, vocals",
++     content_main = "Dear Prudence"
++   ) %>%
++   bs_append(
++     title_side = "Paul McCartney",
++     content_side = "Bass guitar, vocals",
++     content_main = "Blackbird"
++   )
+<div class="row" id="meet_the_beatles">
+  <div class="col-sm-4" id="meet_the_beatles-side">
+    <div id="meet_the_beatles-side-accordion" class="panel-group" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-success" class-active="panel-success" class-inactive="panel-primary" id="meet_the_beatles-side-accordion-0">
+        <div id="meet_the_beatles-side-accordion-0-heading" class="panel-heading" role="tab" data-toggle="collapse" data-target="#meet_the_beatles-side-accordion-0-collapse" data-parent="#meet_the_beatles-side-accordion" aria-expanded="true" aria-controls="meet_the_beatles-side-accordion-0-collapse" style="cursor: pointer;">
+          <h4 class="panel-title">John Lennon</h4>
+        </div>
+        <div aria-labelledby="meet_the_beatles-side-accordion-0-heading" class="panel-collapse collapse in panel-collapse-leader" id="meet_the_beatles-side-accordion-0-collapse" role="tabpanel">
+          <div class="panel-body" style="">Rhythm guitar, vocals</div>
+        </div>
+      </div>
+      <div class="panel panel-primary" class-active="panel-success" class-inactive="panel-primary" id="meet_the_beatles-side-accordion-1">
+        <div id="meet_the_beatles-side-accordion-1-heading" class="panel-heading" role="tab" data-toggle="collapse" data-target="#meet_the_beatles-side-accordion-1-collapse" data-parent="#meet_the_beatles-side-accordion" aria-expanded="true" aria-controls="meet_the_beatles-side-accordion-1-collapse" style="cursor: pointer;">
+          <h4 class="panel-title">Paul McCartney</h4>
+        </div>
+        <div aria-labelledby="meet_the_beatles-side-accordion-1-heading" class="panel-collapse collapse panel-collapse-leader" id="meet_the_beatles-side-accordion-1-collapse" role="tabpanel">
+          <div class="panel-body" style="">Bass guitar, vocals</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-8" id="meet_the_beatles-main">
+    <div class="collapse in" id="meet_the_beatles-side-accordion-0-follow">
+      <div class="panel panel-success">
+        <div class="panel-body">Dear Prudence</div>
+      </div>
+    </div>
+    <div class="collapse" id="meet_the_beatles-side-accordion-1-follow">
+      <div class="panel panel-success">
+        <div class="panel-body">Blackbird</div>
+      </div>
+    </div>
+  </div>
+</div>
+> ## Not run: 
+> ##D use_bs_accordion_sidebar()
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("bs_button")
+> ### * bs_button
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bs_button
+> ### Title: Button
+> ### Aliases: bs_button
+> 
+> ### ** Examples
+> 
+> bs_button("Click me", button_type = "primary", button_size = "small")
+<button class="btn btn-primary btn-sm">Click me</button>
+> 
+> 
+> 
+> cleanEx()
+> nameEx("bs_carousel")
+> ### * bs_carousel
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bs_append.bsplus_carousel
+> ### Title: Carousel
+> ### Aliases: bs_append.bsplus_carousel bs_carousel
+> 
+> ### ** Examples
+> 
+> bs_carousel(id = "with_the_beatles") %>%
++   bs_append(content = bs_carousel_image(src = "img/john.jpg")) %>%
++   bs_append(content = bs_carousel_image(src = "img/paul.jpg")) %>%
++   bs_append(content = bs_carousel_image(src = "img/george.jpg")) %>%
++   bs_append(content = bs_carousel_image(src = "img/ringo.jpg"))
+<div id="with_the_beatles" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img src="img/john.jpg" class="img-responsive center-block"/>
+    </div>
+    <div class="item">
+      <img src="img/paul.jpg" class="img-responsive center-block"/>
+    </div>
+    <div class="item">
+      <img src="img/george.jpg" class="img-responsive center-block"/>
+    </div>
+    <div class="item">
+      <img src="img/ringo.jpg" class="img-responsive center-block"/>
+    </div>
+  </div>
+  <a class="left carousel-control" href="#with_the_beatles" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#with_the_beatles" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("bs_collapse")
+> ### * bs_collapse
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bs_collapse
+> ### Title: Collapsible element
+> ### Aliases: bs_collapse bs_attach_collapse
+> 
+> ### ** Examples
+> 
+> library("htmltools")
+> 
+> bs_collapse(id = "id_yeah", "Yeah Yeah Yeah")
+<div class="collapse" id="id_yeah">Yeah Yeah Yeah</div>
+> 
+> bs_button("She Loves You", button_type = "primary") %>%
++   bs_attach_collapse("id_yeah")
+<button class="btn btn-primary" data-toggle="collapse" data-target="#id_yeah">She Loves You</button>
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:htmltools’
+
+> nameEx("bs_embed_popover")
+> ### * bs_embed_popover
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bs_embed_popover
+> ### Title: Popover
+> ### Aliases: bs_embed_popover use_bs_popover
+> 
+> ### ** Examples
+> 
+> library("htmltools")
+> 
+> bs_button("A button") %>%
++   bs_embed_popover(title = "I'm a popover", content = "Really!")
+<button class="btn btn-default" title="I&#39;m a popover" data-toggle="popover" data-content="Really!" data-placement="top">A button</button>
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:htmltools’
+
+> nameEx("bs_embed_tooltip")
+> ### * bs_embed_tooltip
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bs_embed_tooltip
+> ### Title: Tooltip
+> ### Aliases: bs_embed_tooltip use_bs_tooltip
+> 
+> ### ** Examples
+> 
+> library("htmltools")
+> bs_button("I'm a button") %>%
++   bs_embed_tooltip(title = "I'm a tooltip")
+<button class="btn btn-default" title="I&#39;m a tooltip" data-toggle="tooltip" data-placement="top">I'm a button</button>
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:htmltools’
+
+> nameEx("bs_modal")
+> ### * bs_modal
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bs_modal
+> ### Title: Modal window
+> ### Aliases: bs_modal bs_modal_closebutton bs_attach_modal
+> 
+> ### ** Examples
+> 
+> library("htmltools") # also needs `markdown` package
+> library("shiny")
+> 
+> bs_modal(id = "modal", title = "I'm a modal", body = "Yes, I am.")
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal-title">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="modal-title">I'm a modal</h4>
+      </div>
+      <div class="modal-body">Yes, I am.</div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+> bs_button("Click for modal") %>%
++   bs_attach_modal(id_modal = "modal")
+<button class="btn btn-default" data-toggle="modal" data-target="#modal">Click for modal</button>
+> 
+> bs_modal(
++   id = "modal_large",
++   title = "I'm a modal",
++   size = "large",
++   body = includeMarkdown(system.file("markdown", "modal.md", package = "bsplus"))
++ )
+Warning in file(con, "w") :
+  cannot open file '/var/scratch2ro/tomas/cran/rlibro/lib/bsplus/markdown/modal.md': Read-only file system
+Error in file(con, "w") : cannot open the connection
+Calls: bs_modal ... includeMarkdown -> <Anonymous> -> <Anonymous> -> writeLines -> file
+Execution halted
