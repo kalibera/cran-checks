@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2025-04-01 r88093) -- "Unsuffered Consequences"
+R Under development (unstable) (2025-04-16 r88148) -- "Unsuffered Consequences"
 Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -223,6 +223,13 @@ informationContent             signal              noise      signalToNoise
 > 
 > tree$node.label <- JackLabels(tree, jackTrees, plot = FALSE)
 > 
+> # Write the labelled tree to screen
+> ape::write.tree(tree)
+[1] "(t1,((((((t2,t8)1,t7)1,t6)0.14,t5)0.08,t4)0.13,t3));"
+> 
+> # Write labelled trees to a nexus file:
+> # write.nexus(tree, file = filename)
+> 
 > 
 > 
 > cleanEx()
@@ -292,12 +299,11 @@ Loading required package: ape
 
 ── Sample local optimum ────────────────────────────────────────────────────────
 → TBR depth 1; keeping 4 trees; k = 10
-ℹ 2025-04-02 15:01:47: Score: 12.6988
-Final search ■■■■■■■■■■■■■■                    42% | D0, score 12.066, hit 1. E…
-Final search ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | D1, score 11.9697, hit 1. …
+ℹ 2025-04-16 07:34:04: Score: 12.6988
+Final search ■                                  0% | D0, score 12.0038, hit 1. …
   - TBR rearrangement at depth 1 found score 11.9697 1 time.
 
-✔ 2025-04-02 15:01:49: Tree search terminated with score 11.9697
+✔ 2025-04-16 07:34:06: Tree search terminated with score 11.9697
 > names(trees)
 [1] "final_1"
 > 
@@ -524,7 +530,8 @@ Rooted; no branch length.
 > 
 > ### Name: PlotCharacter
 > ### Title: Plot the distribution of a character on a tree
-> ### Aliases: PlotCharacter
+> ### Aliases: PlotCharacter PlotCharacter.phylo PlotCharacter.multiPhylo
+> ###   PlotCharacter.list
 > 
 > ### ** Examples
 > 
@@ -992,14 +999,26 @@ Rooted; includes branch length(s).
 > spc <- SharedPhylogeneticConcordance(tree, dataset)
 > mcc <- MutualClusteringConcordance(tree, dataset)
 > 
-> oPar <- par(mar = rep(0, 4), cex = 0.8)
+> oPar <- par(mar = rep(0, 4), cex = 0.8) # Set plotting parameters
 > plot(tree)
-> TreeTools::LabelSplits(tree, signif(qc, 3))
-> TreeTools::LabelSplits(tree, signif(cc, 3))
-> TreeTools::LabelSplits(tree, signif(pc, 3))
-> par(oPar)
+> TreeTools::LabelSplits(tree, signif(qc, 3), cex = 0.8)
+> plot(tree)
+> TreeTools::LabelSplits(tree, signif(cc, 3), cex = 0.8)
+> par(oPar) # Restore plotting parameters
 > 
-> pairs(cbind(qc, cc, pc, spc, mcc))
+> # Write concordance factors to file
+> labels <- paste0(qc, "/", cc, "/", pc) # "/" is a valid delimiter
+> # Identify the node that corresponds to each label
+> whichNode <- match(TreeTools::NTip(tree) + 1:tree$Nnode, names(qc))
+> 
+> # The contents of tree$node.label will be written at each node
+> tree$node.label <- labels[whichNode]
+> 
+> ape::write.tree(tree) # or write.nexus(tree, file = "mytree.nex")
+[1] "(((((((((((((2,3)0.794157608695652/0.0840869199349208/0.8,4)0.796019900497512/0.106844441779741/0.7,5)0.745984310795667/0.125579285095439/0.5,6)0.744573765335011/0.157227405925398/0.45,7)0.726778007130794/0.158079354442316/0.45,8)0.72615039281706/0.161803744635535/0.45,9)0.736253135249855/0.164460425292521/0.45,10)0.713525905547914/0.152606841335018/0.35,11)0.693087173792338/0.139772020193245/0.35,12)0.663097646420289/0.119374128613331/0.35,(19,((18,(17,(15,16)0.575/0.0480987344280996/0.75)0.62020202020202/0.0630658263101711/0.65)0.606779661016949/0.0675277845468592/0.5,(13,14)0.6825/0.0463478996057617/0.85)0.628180398640581/0.0893831815805849/0.45)0.649913605288859/0.0972690748771144/0.4)0.665/0.0733038953664147/0.5,(20,(21,22)0.631908237747654/0.0498507296733025/0.8)0.60419091967404/0.0567591383942297/0.65)NA,1)NA;"
+> 
+> # Display correlation between concordance factors
+> pairs(cbind(qc, cc, pc, spc, mcc), asp = 1)
 > 
 > 
 > 
@@ -1105,8 +1124,8 @@ Loading required package: ape
 
 ── Sample local optimum ────────────────────────────────────────────────────────
 → TBR depth 2; keeping 14.4 trees; k = Inf
-ℹ 2025-04-02 15:01:57: Score: 84
-✔ 2025-04-02 15:01:57: Tree search terminated with score 82
+ℹ 2025-04-16 07:34:13: Score: 84
+✔ 2025-04-16 07:34:13: Tree search terminated with score 82
 > 
 > # Colour tip labels according to their influence
 > upperBound <- 2 * TreeDist::ClusteringEntropy(
@@ -1471,7 +1490,7 @@ Rooted; no branch length.
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  24.427 0.868 25.988 0 0 
+Time elapsed:  22.852 0.629 23.863 0 0 
 > grDevices::dev.off()
 null device 
           1 

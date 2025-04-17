@@ -1,0 +1,186 @@
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/mlr.Rcheck’
+* using R Under development (unstable) (2025-04-16 r88148)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (GCC) 14.2.1 20240912 (Red Hat 14.2.1-3)
+    GNU Fortran (GCC) 14.2.1 20240912 (Red Hat 14.2.1-3)
+* running under: Fedora Linux 40 (MATE-Compiz)
+* using session charset: UTF-8
+* checking for file ‘mlr/DESCRIPTION’ ... OK
+* this is package ‘mlr’ version ‘2.19.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... INFO
+Package suggested but not available for checking: ‘Rmpi’
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘mlr’ can be installed ... OK
+* used C compiler: ‘gcc (GCC) 14.2.1 20240912 (Red Hat 14.2.1-3)’
+* checking package directory ... OK
+* checking ‘build’ directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking whether startup messages can be suppressed ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking compiled code ... NOTE
+Note: information on .o files is not available
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... ERROR
+Running examples in ‘mlr-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: tuneParams
+> ### Title: Hyperparameter tuning.
+> ### Aliases: tuneParams
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+>  if (requireNamespace("kernlab")) { 
++ ## End(Don't show)
++ ## Don't show: 
++  if (requireNamespace("kernlab")) { 
++ ## End(Don't show)
++ ## Don't show: 
++  if (requireNamespace("irace")) { 
++ ## End(Don't show)
++ set.seed(123)
++ # a grid search for an SVM (with a tiny number of points...)
++ # note how easily we can optimize on a log-scale
++ ps = makeParamSet(
++   makeNumericParam("C", lower = -12, upper = 12, trafo = function(x) 2^x),
++   makeNumericParam("sigma", lower = -12, upper = 12, trafo = function(x) 2^x)
++ )
++ ctrl = makeTuneControlGrid(resolution = 2L)
++ rdesc = makeResampleDesc("CV", iters = 2L)
++ res = tuneParams("classif.ksvm", iris.task, rdesc, par.set = ps, control = ctrl)
++ print(res)
++ # access data for all evaluated points
++ df = as.data.frame(res$opt.path)
++ df1 = as.data.frame(res$opt.path, trafo = TRUE)
++ print(head(df[, -ncol(df)]))
++ print(head(df1[, -ncol(df)]))
++ # access data for all evaluated points - alternative
++ df2 = generateHyperParsEffectData(res)
++ df3 = generateHyperParsEffectData(res, trafo = TRUE)
++ print(head(df2$data[, -ncol(df2$data)]))
++ print(head(df3$data[, -ncol(df3$data)]))
++ ## Not run: 
++ ##D # we optimize the SVM over 3 kernels simultanously
++ ##D # note how we use dependent params (requires = ...) and iterated F-racing here
++ ##D ps = makeParamSet(
++ ##D   makeNumericParam("C", lower = -12, upper = 12, trafo = function(x) 2^x),
++ ##D   makeDiscreteParam("kernel", values = c("vanilladot", "polydot", "rbfdot")),
++ ##D   makeNumericParam("sigma", lower = -12, upper = 12, trafo = function(x) 2^x,
++ ##D     requires = quote(kernel == "rbfdot")),
++ ##D   makeIntegerParam("degree", lower = 2L, upper = 5L,
++ ##D     requires = quote(kernel == "polydot"))
++ ##D )
++ ##D print(ps)
++ ##D ctrl = makeTuneControlIrace(maxExperiments = 5, nbIterations = 1, minNbSurvival = 1)
++ ##D rdesc = makeResampleDesc("Holdout")
++ ##D res = tuneParams("classif.ksvm", iris.task, rdesc, par.set = ps, control = ctrl)
++ ##D print(res)
++ ##D df = as.data.frame(res$opt.path)
++ ##D print(head(df[, -ncol(df)]))
++ ##D 
++ ##D # include the training set performance as well
++ ##D rdesc = makeResampleDesc("Holdout", predict = "both")
++ ##D res = tuneParams("classif.ksvm", iris.task, rdesc, par.set = ps,
++ ##D   control = ctrl, measures = list(mmce, setAggregation(mmce, train.mean)))
++ ##D print(res)
++ ##D df2 = as.data.frame(res$opt.path)
++ ##D print(head(df2[, -ncol(df2)]))
++ ## End(Not run)
++ ## Don't show: 
++  } 
++ ## End(Don't show)
++ ## Don't show: 
++  } 
++ ## End(Don't show)
++ ## Don't show: 
++  } 
+Loading required namespace: irace
+[Tune] Started tuning learner classif.ksvm for parameter set:
+         Type len Def    Constr Req Tunable Trafo
+C     numeric   -   - -12 to 12   -    TRUE     Y
+sigma numeric   -   - -12 to 12   -    TRUE     Y
+With control class: TuneControlGrid
+Imputation value: 1
+[Tune-x] 1: C=0.000244; sigma=0.000244
+[Tune-y] 1: mmce.test.mean=0.7333333; time: 0.0 min
+[Tune-x] 2: C=4.1e+03; sigma=0.000244
+[Tune-y] 2: mmce.test.mean=0.0533333; time: 0.0 min
+[Tune-x] 3: C=0.000244; sigma=4.1e+03
+[Tune-y] 3: mmce.test.mean=0.7333333; time: 0.0 min
+[Tune-x] 4: C=4.1e+03; sigma=4.1e+03
+[Tune-y] 4: mmce.test.mean=0.7333333; time: 0.0 min
+[Tune] Result: C=4.1e+03; sigma=0.000244 : mmce.test.mean=0.0533333
+Tune result:
+Op. pars: C=4.1e+03; sigma=0.000244
+mmce.test.mean=0.0533333
+    C sigma mmce.test.mean dob eol error.message
+1 -12   -12     0.73333333   1  NA          <NA>
+2  12   -12     0.05333333   2  NA          <NA>
+3 -12    12     0.73333333   3  NA          <NA>
+4  12    12     0.73333333   4  NA          <NA>
+    C sigma mmce.test.mean dob eol error.message
+1 -12   -12     0.73333333   1  NA          <NA>
+2  12   -12     0.05333333   2  NA          <NA>
+3 -12    12     0.73333333   3  NA          <NA>
+4  12    12     0.73333333   4  NA          <NA>
+ERROR: modification of compiler constant of type character, length 2
+ERROR: the modified value of the constant is:
+[1] "integer"       "integervector"
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "integer"       "integervector"
+ERROR: the modified constant is at index 1
+ERROR: the modified constant is in this function body:
+c("integer", "integervector")
+Fatal error: compiler constants were modified!
+
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
+* checking PDF version of manual ... OK
+* DONE
+Status: 1 ERROR, 1 NOTE
