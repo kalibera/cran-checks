@@ -1,5 +1,5 @@
-Package this.path version 2.6.0
-Package built using 87687/R 4.5.0; x86_64-pc-linux-gnu; 2025-02-05 22:50:46 UTC; unix   
+Package this.path version 2.7.0
+Package built using 88148/R 4.6.0; x86_64-pc-linux-gnu; 2025-04-18 06:51:33 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -55,8 +55,8 @@ Function _src_path
   [UP] calling allocating function Rf_findVarInFrame(?,S:errcnd) with a fresh pointer (documentcontext <arg 1>) this.path/src/thispath.c:2778
   [UP] calling allocating function Rf_findVarInFrame(?,S:file) with a fresh pointer (documentcontext <arg 1>) this.path/src/thispath.c:2778
   [UP] calling allocating function Rf_findVarInFrame(?,S:for.msg) with a fresh pointer (documentcontext <arg 1>) this.path/src/thispath.c:2778
-  [UP] calling allocating function Rf_findVarInFrame(?,S:lines) with a fresh pointer (documentcontext <arg 1>) /var/scratch2/tomas/cran/rchk/pkgbuild/FEiDguERROR: too many states (abstraction error?) in function _sys_path
-kQ/this.path/src/thispath.c:2778
+  [UP] calling allocating function Rf_findVarInFrame(?,S:lines) with a fresh pointer (documentcontext <arg 1>) /var/scratch2/tomas/cran/rchk/pkgbuild/XugmAoERROR: too many states (abstraction error?) in function _sys_path
+p9/this.path/src/thispath.c:2778
   [UP] calling allocating function Rf_findVarInFrame(?,S:ofile) with a fresh pointer (documentcontext <arg 1>) this.path/src/thispath.c:2778
   [UP] calling allocating function Rf_findVarInFrame(?,S:source) with a fresh pointer (documentcontext <arg 1>) this.path/src/thispath.c:2778
   [UP] unprotected variable documentcontext while calling allocating function Rf_ScalarString this.path/src/thispath.c:2778
@@ -256,7 +256,6 @@ Function do_wrap_source
 
 Function set_path
   [PB] uses multiple pointer protection counters results will be incomplete
-  [PB] uses multiple pointer protection counters results will be incomplete
   [UP] calling allocating function R_compute_identical with argument allocated using getInFrame(S:wrap.source,?,?) this.path/src/setsyspath.c:472
   [UP] calling allocating function duplicateEnv with a fresh pointer (documentcontext <arg 1>) this.path/src/setsyspath.c:526
   [UP] allocating function INCREMENT_NAMED_defineVar(S:.this.path::document.context,?,?) may destroy its unprotected argument (documentcontext <arg 2>), which is later used. this.path/src/setsyspath.c:527
@@ -276,9 +275,10 @@ Function set_path
   [UP] unprotected variable documentcontext while calling allocating function R_existsVarInFrame(?,S:.this.path::document.context) this.path/src/setsyspath.c:603
   [UP] allocating function document_context_assign_lines may destroy its unprotected argument (documentcontext <arg 1>), which is later used. this.path/src/setsyspath.c:610
   [UP] calling allocating function document_context_assign_lines with a fresh pointer (documentcontext <arg 1>) this.path/src/setsyspath.c:610
-  [UP] calling allocating function assign_default(?,?,V,?,?,?) with argument allocated using Rf_ScalarString this.path/src/setsyspath.c:795
-  [UP] calling allocating function assign_url(V,?,?) with argument allocated using Rf_ScalarString this.path/src/setsyspath.c:795
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete this.path/src/setsyspath.c:795
-
-Function startup_file
-  [UP] unprotected variable promise while calling allocating function MissingArgError(S:expr,?,?,?) this.path/src/startup.c:15
+  [UP] calling allocating function assign_default(?,?,V,?,?,?) with argument allocated using Rf_ScalarString this.path/src/setsyspath.c:796
+  [UP] calling allocating function assign_url(V,?,?) with argument allocated using Rf_ScalarString this.path/src/setsyspath.c:796
+  [UP] unprotected variable returnvalue while calling allocating function INCREMENT_NAMED_defineVar(S:.this.path::document.context,?,?) this.path/src/setsyspath.c:796
+  [UP] unprotected variable returnvalue while calling allocating function INCREMENT_NAMED_defineVar(S:source,?,?) this.path/src/setsyspath.c:796
+  [UP] unprotected variable returnvalue while calling allocating function R_LockBinding(S:.this.path::document.context,?) this.path/src/setsyspath.c:796
+  [UP] unprotected variable returnvalue while calling allocating function overwrite_ofile this.path/src/setsyspath.c:796
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete this.path/src/setsyspath.c:796
