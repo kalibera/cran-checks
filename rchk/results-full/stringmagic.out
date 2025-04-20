@@ -1,5 +1,5 @@
-Package stringmagic version 1.1.2
-Package built using 87687/R 4.5.0; x86_64-pc-linux-gnu; 2025-02-05 23:14:36 UTC; unix   
+Package stringmagic version 1.2.0
+Package built using 88162/R 4.6.0; x86_64-pc-linux-gnu; 2025-04-20 16:01:57 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -18,9 +18,6 @@ Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* 
 Function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::set(SEXPREC*)
   [UP] ignoring variable rhs as it has address taken, results will be incomplete 
 
-Function _stringmagic_cpp_combine_clusters
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
 Function _stringmagic_cpp_create_pos
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -37,6 +34,10 @@ Function _stringmagic_cpp_find_closing_problem
 
 Function _stringmagic_cpp_find_first_index
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _stringmagic_cpp_format_numeric
+  [UP] ignoring variable <unnamed var:   %38 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _stringmagic_cpp_group_rev_index
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -70,10 +71,18 @@ Function _stringmagic_cpp_paste_conditional
 Function _stringmagic_cpp_recreate_index
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _stringmagic_cpp_split_newlines
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _stringmagic_cpp_string_magic_parser
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _stringmagic_cpp_to_integer
+Function _stringmagic_cpp_table
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _stringmagic_cpp_to_index
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _stringmagic_cpp_trimws_in_place
@@ -87,14 +96,22 @@ Function cpp_extract_pipe(SEXPREC*, bool)
   [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using std_string_to_r_string(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) stringmagic/src/stringmagic_parser.cpp:1435
   [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using std_string_to_r_string(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) stringmagic/src/stringmagic_parser.cpp:1436
 
+Function cpp_format_numeric(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable big_mark as it has address taken, results will be incomplete 
+  [UP] ignoring variable decimal as it has address taken, results will be incomplete 
+  [UP] ignoring variable minus_sign as it has address taken, results will be incomplete 
+  [UP] ignoring variable prefix as it has address taken, results will be incomplete 
+  [UP] ignoring variable small_mark as it has address taken, results will be incomplete 
+  [UP] ignoring variable suffix as it has address taken, results will be incomplete 
+
 Function cpp_parse_operator(SEXPREC*)
   [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using std_string_to_r_string(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) stringmagic/src/stringmagic_parser.cpp:1395
   [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using std_string_to_r_string(std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > >) stringmagic/src/stringmagic_parser.cpp:1396
   [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using std_string_to_r_string(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) stringmagic/src/stringmagic_parser.cpp:1397
 
 Function cpp_parse_regex_pattern(SEXPREC*, bool, bool)
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using std_string_to_r_string(std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > >) stringmagic/src/string_tools.cpp:461
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using std_string_to_r_string(std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > >) stringmagic/src/string_tools.cpp:526
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using std_string_to_r_string(std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > >) stringmagic/src/string_tools.cpp:462
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with argument allocated using std_string_to_r_string(std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > >) stringmagic/src/string_tools.cpp:527
 
 Function cpp_paste_conditional(SEXPREC*, Rcpp::Vector<13, Rcpp::PreserveStorage>, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
   [UP] ignoring variable x as it has address taken, results will be incomplete 
@@ -106,6 +123,17 @@ Function cpp_string_magic_parser(SEXPREC*, SEXPREC*, bool)
   [UP] ignoring variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %43 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function cpp_to_index(SEXPREC*)
+  [UP] ignoring variable x as it has address taken, results will be incomplete 
+
+Function indexthis::cpp_to_index_main(SEXPREC*&)
+  [PB] has negative depth stringmagic/src/to_index.cpp:705
+  [UP] attempt to unprotect more items (2) than protected (0), results will be incomplete stringmagic/src/to_index.cpp:705
+  [PB] has possible protection stack imbalance stringmagic/src/to_index.cpp:709
+
+Function indexthis::r_vector::r_vector(SEXPREC*)
+  [PB] has possible protection stack imbalance stringmagic/src/to_index.cpp:151
 
 Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::Vector<19, Rcpp::PreserveStorage> >(Rcpp::Vector<19, Rcpp::PreserveStorage> const&)
   [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
