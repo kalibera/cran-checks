@@ -1,5 +1,5 @@
-Package coda.base version 1.0.0
-Package built using 88188/R 4.6.0; x86_64-pc-linux-gnu; 2025-05-05 21:57:13 UTC; unix   
+Package rliger version 2.1.0
+Package built using 87687/R 4.5.0; x86_64-pc-linux-gnu; 2025-02-06 02:48:14 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -20,6 +20,9 @@ Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
+Function Rcpp::S4_Impl<Rcpp::PreserveStorage>::S4_Impl(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS Rcpp/include/Rcpp/S4.h:58
+
 Function Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::hasSlot(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
   [UP] calling allocating function R_has_slot(?,V) with argument allocated using Rf_mkString Rcpp/include/Rcpp/proxy/SlotProxy.h:97
 
@@ -39,65 +42,83 @@ Function Rcpp::traits::Exporter<arma::SpMat<double> >::get()
   [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const RcppArmadillo/include/RcppArmadillo/interface/RcppArmadilloAs.h:299
   [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const RcppArmadillo/include/RcppArmadillo/interface/RcppArmadilloAs.h:406
 
-Function _coda_base_alr_basis_default
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _coda_base_alr_coordinates
+Function _rliger_ComputeSNN
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _coda_base_c_conditional_obasis
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _rliger_DirectSNNToFile
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _coda_base_c_variation_array
+Function _rliger_RunModularityClusteringCpp
+  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rliger_SparseRowVarStd
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rliger_cluster_vote_rcpp
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _coda_base_clr_basis_default
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _coda_base_clr_coordinates
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _coda_base_coordinates_basis
+Function _rliger_colAggregateMedian_dense_cpp
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _coda_base_find_PB
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _rliger_colAggregateSum_sparse
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _coda_base_find_PB_using_pc
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _rliger_colAggregateSums_sparse
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _coda_base_find_PB_using_pc_recursively
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _rliger_colNNZAggr_sparse
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _coda_base_find_PB_using_pc_recursively_forcing_parents
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _coda_base_get_balance_using_pc
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _coda_base_ilr_basis_default
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _coda_base_ilr_basis_simplex
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _coda_base_ilr_coordinates
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _coda_base_ilr_to_alr
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _coda_base_inv_clr_coordinates
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _coda_base_inv_ilr_coordinates
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _coda_base_matrix_coordinates
+Function _rliger_colNormalize_dense_cpp
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _coda_base_pinv
+Function _rliger_cpp_rank_matrix_dgc
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rliger_denseZScore
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rliger_makeFeatureMatrix
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rliger_max_factor_rcpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rliger_moe_correct_ridge_cpp
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rliger_normalize_byCol_dense_rcpp
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _coda_base_sparse_coordinates
+Function _rliger_rowAggregateSum_sparse
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rliger_rowDivide_rcpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rliger_rowNNZAggr_sparse
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rliger_rowVarsDense
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rliger_rowVars_sparse_rcpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rliger_safe_scale
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rliger_sample_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rliger_scaleNotCenter_byCol_dense_rcpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rliger_scaleNotCenter_byRow_perDataset_rcpp
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rliger_scaleNotCenter_byRow_rcpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rliger_sumSquaredDeviations
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
