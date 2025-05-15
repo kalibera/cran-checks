@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/ParamHelpers.Rcheck’
-* using R Under development (unstable) (2025-02-23 r87798)
+* using R Under development (unstable) (2025-05-13 r88200)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (GCC) 14.2.1 20240912 (Red Hat 14.2.1-3)
@@ -54,15 +54,17 @@ Note: information on .o files is not available
 Running examples in ‘ParamHelpers-Ex.R’ failed
 The error most likely occurred in:
 
-> ### Name: getOptPathBestIndex
-> ### Title: Get index of the best element from optimization path.
-> ### Aliases: getOptPathBestIndex
+> ### Name: getDefaults
+> ### Title: Return defaults of parameters in parameter set.
+> ### Aliases: getDefaults
 > 
 > ### ** Examples
 > 
-> ps = makeParamSet(makeNumericParam("x"))
-> op = makeOptPathDF(par.set = ps, y.names = "y", minimize = TRUE)
-> addOptPathEl(op, x = list(x = 1), y = 5)
+> ps1 = makeParamSet(
++   makeDiscreteParam("x", values = c("a", "b"), default = "a"),
++   makeNumericVectorParam("y", len = 2),
++   makeIntegerParam("z", default = 99)
++ )
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"

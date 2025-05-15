@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2025-05-03 r88188) -- "Unsuffered Consequences"
+R Under development (unstable) (2025-05-13 r88200) -- "Unsuffered Consequences"
 Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -42,8 +42,8 @@ Loading required package: ape
 > 
 > # Add a leaf below an internal node
 > plot(tree)
-> ape::nodelabels()
-> node <- 15
+> ape::nodelabels() # Identify node numbers 
+> node <- 15        # Select location to add leaf
 > ape::nodelabels(bg = ifelse(NodeNumbers(tree) == node, "green", "grey"))
 > 
 > plot(AddTip(tree, 15, "NEW_TIP"))
@@ -57,6 +57,11 @@ Loading required package: ape
 > ape::tiplabels(bg = ifelse(seq_len(NTip(tree)) == leaf, "green", "grey"))
 > 
 > plot(AddTip(tree, 5, "NEW_TIP", edgeLength = NULL))
+> 
+> # Create a polytomy, rather than a new node
+> plot(AddTip(tree, 5, "NEW_TIP", edgeLength = NA))
+Warning in plot.phylo(AddTip(tree, 5, "NEW_TIP", edgeLength = NA)) :
+  1 branch length(s) NA(s): branch lengths ignored in the plot
 > 
 > # Set up multi-panel plot
 > oldPar <- par(mfrow = c(2, 4), mar = rep(0.3, 4), cex = 0.9)
@@ -3714,7 +3719,7 @@ integer64
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  6.959 0.296 8.102 0 0 
+Time elapsed:  6.837 0.278 7.521 0 0 
 > grDevices::dev.off()
 null device 
           1 
