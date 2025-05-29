@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/mlrMBO.Rcheck’
-* using R Under development (unstable) (2025-05-23 r88232)
+* using R Under development (unstable) (2025-05-27 r88249)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (GCC) 14.2.1 20240912 (Red Hat 14.2.1-3)
@@ -130,21 +130,21 @@ Fatal error: compiler constants were modified!
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-  Loading required package: ParamHelpers
-  Loading required package: smoof
-  Loading required package: checkmate
-  ERROR: modification of compiler constant of type character, length 2
-  ERROR: the modified value of the constant is:
-  [1] "integer"       "integervector"
-  attr(,".match.hash")
-  <hash table>
-  ERROR: the original value of the constant is:
-  [1] "integer"       "integervector"
-  ERROR: the modified constant is at index 1
-  ERROR: the modified constant is in this function body:
-  c("integer", "integervector")
-  Fatal error: compiler constants were modified!
+  ── Error ('test_mbo_km.R:11:3'): mbo works with km ─────────────────────────────
+  Error: promise already under evaluation: recursive default argument reference or earlier problems?
+  Backtrace:
+      ▆
+   1. └─mlrMBO::mbo(testf.fsphere.2d, des, learner = learner, control = ctrl) at test_mbo_km.R:11:3
+   2.   ├─mlrMBO:::mboTemplate(opt.problem)
+   3.   └─mlrMBO:::mboTemplate.OptProblem(opt.problem)
+   4.     ├─mlrMBO:::mboTemplate(opt.state)
+   5.     └─mlrMBO:::mboTemplate.OptState(opt.state)
+   6.       └─mlrMBO:::evalProposedPoints.OptState(opt.state, prop)
+   7.         └─mlrMBO:::evalTargetFun.OptState(opt.state, xs = xs, extras = extras)
   
+  [ FAIL 1 | WARN 0 | SKIP 0 | PASS 39 ]
+  Error: Test failures
+  Execution halted
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes ... OK
 * checking re-building of vignette outputs ... ERROR
