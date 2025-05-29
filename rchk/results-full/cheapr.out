@@ -1,10 +1,8 @@
-Package cheapr version 1.2.0
-Package built using 88200/R 4.6.0; x86_64-pc-linux-gnu; 2025-05-15 05:55:26 UTC; unix   
+Package cheapr version 1.3.0
+Package built using 88249/R 4.6.0; x86_64-pc-linux-gnu; 2025-05-29 07:50:34 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
-
-Suspicious call (two or more unprotected arguments) to cpp_setdiff(SEXPREC*, SEXPREC*, bool) at cpp_df_c(SEXPREC*) cheapr/src/combine.cpp:794
 
 
 Function _cheapr_cpp_address
@@ -163,7 +161,7 @@ Function _cheapr_cpp_num_na
 Function _cheapr_cpp_numeric_to_int64
   [UP] ignoring variable <unnamed var:   %6 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _cheapr_cpp_reconstruct
+Function _cheapr_cpp_rebuild
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _cheapr_cpp_recycle
@@ -262,6 +260,9 @@ Function _cheapr_cpp_sset
 Function _cheapr_cpp_str_coalesce
   [UP] ignoring variable <unnamed var:   %6 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _cheapr_cpp_tabulate
+  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _cheapr_cpp_unnested_length
   [UP] ignoring variable <unnamed var:   %6 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -295,7 +296,7 @@ Function _cheapr_cpp_window_sequence
 Function _cheapr_r_copy
   [UP] ignoring variable <unnamed var:   %6 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _cheapr_reconstruct
+Function _cheapr_rebuild
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function clean_indices(SEXPREC*, SEXPREC*, bool)
@@ -313,96 +314,45 @@ Function cpp_c(SEXPREC*)
 Function cpp_col_all_na(SEXPREC*, bool)
   [UP] ignoring variable is_missing as it has address taken, results will be incomplete 
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/nas.cpp:610
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/nas.cpp:603
 
 Function cpp_col_any_na(SEXPREC*, bool)
   [UP] ignoring variable is_missing as it has address taken, results will be incomplete 
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/nas.cpp:551
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/nas.cpp:543
 
 Function cpp_combine_factors(SEXPREC*)
   [UP] ignoring variable char_vec as it has address taken, results will be incomplete 
 
-Function cpp_df_assign_cols(SEXPREC*, SEXPREC*)
-  [UP] unprotected variable names while calling allocating function get_names(SEXPREC*) cheapr/src/lists.cpp:598
-  [UP] unprotected variable col_names while calling allocating function df_nrow(SEXPREC*) cheapr/src/lists.cpp:611
-  [UP] unprotected variable names while calling allocating function df_nrow(SEXPREC*) cheapr/src/lists.cpp:611
-  [UP] calling allocating function Rf_match with a fresh pointer (col_names <arg 2>) cheapr/src/lists.cpp:615
-  [UP] calling allocating function Rf_match with a fresh pointer (names <arg 1>) cheapr/src/lists.cpp:615
-
-Function cpp_df_c(SEXPREC*)
-  [UP] calling allocating function cpp_setdiff(SEXPREC*, SEXPREC*, bool) with argument allocated using get_names(SEXPREC*) cheapr/src/combine.cpp:794
-
 Function cpp_df_col_na_counts(SEXPREC*)
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/nas.cpp:492
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/nas.cpp:484
 
 Function cpp_df_row_na_counts(SEXPREC*)
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/nas.cpp:445
-
-Function cpp_df_select(SEXPREC*, SEXPREC*)
-  [UP] unprotected variable names while calling allocating function cpp_seq_len(long) cheapr/src/sset.cpp:1263
-  [UP] allocating function Rf_match may destroy its unprotected argument (names <arg 1>), which is later used. cheapr/src/sset.cpp:1267
-  [UP] calling allocating function Rf_match with a fresh pointer (names <arg 1>) cheapr/src/sset.cpp:1267
-  [UP] unprotected variable names while calling allocating function cpp_any_na(SEXPREC*, bool)(V,?) cheapr/src/sset.cpp:1269
-  [UP] unprotected variable names while calling allocating function cpp_which_(SEXPREC*, bool) cheapr/src/sset.cpp:1285
-  [UP] unprotected variable names while calling allocating function coerce_vec(SEXPREC*, unsigned int) cheapr/src/sset.cpp:1290
-  [UP] unprotected variable names while calling allocating function exclude_locs(SEXPREC*, long) cheapr/src/sset.cpp:1297
-  [UP] unprotected variable names while calling allocating function exclude_locs(SEXPREC*, long)(V,?) cheapr/src/sset.cpp:1297
-  [UP] unprotected variable names while calling allocating function new_vec(unsigned int, long) cheapr/src/sset.cpp:1302
-  [UP] unprotected variable names while calling allocating function new_vec(unsigned int, long) cheapr/src/sset.cpp:1303
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/nas.cpp:438
 
 Function cpp_df_slice(SEXPREC*, SEXPREC*, bool)
   [UP] ignoring variable df_var as it has address taken, results will be incomplete 
-  [UP] unprotected variable names while calling allocating function sset_vec(SEXPREC*, SEXPREC*, bool) cheapr/src/sset.cpp:1396
-  [UP] unprotected variable names while calling allocating function Rf_copyMostAttrib cheapr/src/sset.cpp:1397
-  [UP] calling allocating function sset_vec(SEXPREC*, SEXPREC*, bool) with a fresh pointer (names <arg 1>) cheapr/src/sset.cpp:1398
-
-Function cpp_fixed_width_breaks(double, double, double, bool, bool, bool)
-  [PB] has negative depth cheapr/src/sequences.cpp:678
-  [UP] attempt to unprotect more items (4) than protected (0), results will be incomplete cheapr/src/sequences.cpp:678
-  [PB] has possible protection stack imbalance cheapr/src/sequences.cpp:681
-
-Function cpp_lag(SEXPREC*, long, SEXPREC*, bool, bool)
-  [UP] calling allocating function lag(SEXPREC*, long, SEXPREC*, bool) with argument allocated using get_names(SEXPREC*) cheapr/src/lag.cpp:297
-
-Function cpp_lag2(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, bool)
-  [UP] calling allocating function lag2(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*) with argument allocated using get_names(SEXPREC*) cheapr/src/lag.cpp:735
-
-Function cpp_list_assign(SEXPREC*, SEXPREC*)
-  [UP] unprotected variable names while calling allocating function get_names(SEXPREC*) cheapr/src/lists.cpp:257
-  [UP] unprotected variable col_names while calling allocating function new_vec(unsigned int, long) cheapr/src/lists.cpp:260
-  [UP] unprotected variable names while calling allocating function new_vec(unsigned int, long) cheapr/src/lists.cpp:266
-  [UP] calling allocating function Rf_match with a fresh pointer (col_names <arg 2>) cheapr/src/lists.cpp:285
-  [UP] calling allocating function Rf_match with a fresh pointer (names <arg 1>) cheapr/src/lists.cpp:285
 
 Function cpp_name_repair(SEXPREC*, SEXPREC*, SEXPREC*)
   [UP] ignoring variable dup_locs as it has address taken, results will be incomplete 
   [UP] ignoring variable empty_locs as it has address taken, results will be incomplete 
   [UP] ignoring variable temp as it has address taken, results will be incomplete 
 
-Function cpp_rev(SEXPREC*, bool)
-  [UP] calling allocating function rev(SEXPREC*, bool) with argument allocated using get_names(SEXPREC*) cheapr/src/sset.cpp:1227
-
 Function cpp_set_add_attributes(SEXPREC*, SEXPREC*, bool)
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
-  [UP] unprotected variable names while calling allocating function Rf_install cheapr/src/attrs.cpp:76
-  [UP] unprotected variable names while calling allocating function utf8_char(SEXPREC*) cheapr/src/attrs.cpp:76
-  [UP] unprotected variable names while calling allocating function address_equal(SEXPREC*, SEXPREC*) cheapr/src/attrs.cpp:77
-  [UP] unprotected variable names while calling allocating function Rf_duplicate cheapr/src/attrs.cpp:78
-  [UP] unprotected variable names while calling allocating function Rf_setAttrib cheapr/src/attrs.cpp:79
-  [UP] unprotected variable names while calling allocating function Rf_setAttrib cheapr/src/attrs.cpp:81
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/attrs.cpp:85
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/attrs.cpp:99
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/attrs.cpp:95
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/attrs.cpp:109
 
-Function cpp_sset(SEXPREC*, SEXPREC*, bool)
-  [UP] calling allocating function sset_vec(SEXPREC*, SEXPREC*, bool) with argument allocated using get_names(SEXPREC*) cheapr/src/sset.cpp:1456
+Function cpp_str_coalesce(SEXPREC*)
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/utils.cpp:961
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/utils.cpp:991
 
 Function cpp_unique(SEXPREC*, bool)
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable names as it has address taken, results will be incomplete 
-  [UP] calling allocating function sset_vec(SEXPREC*, SEXPREC*, bool) with argument allocated using get_names(SEXPREC*) cheapr/src/combine.cpp:409
+  [UP] ignoring variable names as it has address taken, results will be incomplete 
 
 Function cpp_val_remove(SEXPREC*, SEXPREC*)
   [UP] ignoring variable val_locs as it has address taken, results will be incomplete 
