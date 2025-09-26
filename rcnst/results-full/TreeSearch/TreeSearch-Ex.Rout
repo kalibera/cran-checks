@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2025-06-04 r88271) -- "Unsuffered Consequences"
+R Under development (unstable) (2025-09-24 r88872) -- "Unsuffered Consequences"
 Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -169,14 +169,14 @@ informationContent             signal              noise      signalToNoise
 > 
 > data(inapplicable.datasets)
 > dataset <- inapplicable.phyData[[4]]
-> head(Consistency(dataset, TreeTools::NJTree(dataset)))
-            ci        ri        rc
-[1,] 0.2500000 0.6250000 0.1562500
-[2,] 0.3333333 0.3333333 0.1111111
-[3,] 0.3333333 0.6000000 0.2000000
-[4,] 0.2500000 0.2500000 0.0625000
-[5,] 0.5000000 0.8333333 0.4166667
-[6,] 0.2500000 0.2500000 0.0625000
+> head(Consistency(dataset, TreeTools::NJTree(dataset), nRelabel = 10))
+            ci        ri        rc       rhi
+[1,] 0.2500000 0.6250000 0.1562500 0.6000000
+[2,] 0.3333333 0.3333333 0.1111111 0.6666667
+[3,] 0.3333333 0.6000000 0.2000000 0.5000000
+[4,] 0.2500000 0.2500000 0.0625000 0.8571429
+[5,] 0.5000000 0.8333333 0.4166667 0.2000000
+[6,] 0.2500000 0.2500000 0.0625000 0.7500000
 > 
 > 
 > 
@@ -213,13 +213,13 @@ informationContent             signal              noise      signalToNoise
 > 
 > library("TreeTools", quietly = TRUE) # for as.phylo
 > 
-> # jackTrees will usually be generated with Jackknife(), but for simplicity:
+> # jackTrees will usually be generated with Jackknife() or Resample(),
+> # but for simplicity:
 > jackTrees <- as.phylo(1:100, 8)
 > 
 > tree <- as.phylo(0, 8)
 > JackLabels(tree, jackTrees)
-  11   12   13   14   15 
-0.13 0.08 0.14 1.00 1.00 
+[1] ""     ""     "0.13" "0.08" "0.14" "1"    "1"   
 > 
 > tree$node.label <- JackLabels(tree, jackTrees, plot = FALSE)
 > 
@@ -286,8 +286,8 @@ detaching ‘package:TreeTools’, ‘package:ape’
 > # Load data for analysis in R
 > library("TreeTools")
 Loading required package: ape
-> data("congreveLamsdellMatrices", package = "TreeSearch")
-> dataset <- congreveLamsdellMatrices[[42]]
+> data("inapplicable.phyData", package = "TreeSearch")
+> dataset <- inapplicable.phyData[["Asher2005"]]
 > 
 > # A very quick run for demonstration purposes
 > trees <- MaximizeParsimony(dataset, ratchIter = 0, startIter = 0,
@@ -295,17 +295,18 @@ Loading required package: ape
 +                            concavity = 10, verbosity = 4)
 
 ── BEGIN TREE SEARCH (k = 10) ──────────────────────────────────────────────────
-→ Initial score: 12.6988 
+→ Initial score: 16.347 
 
 ── Sample local optimum ────────────────────────────────────────────────────────
 → TBR depth 1; keeping 4 trees; k = 10
-ℹ 2025-06-04 11:11:42: Score: 12.6988
-Final search ■                                  0% | D0, score 12.0038, hit 1. …
-  - TBR rearrangement at depth 1 found score 11.9697 1 time.
+ℹ 2025-09-26 00:30:53: Score: 16.347
+Final search ■                                  0% | D0, score 16.1428, hit 3. …
+  - TBR rearrangement at depth 1 found score 15.969 4 times.
 
-✔ 2025-06-04 11:11:45: Tree search terminated with score 11.9697
+✔ 2025-09-26 00:30:55: Tree search terminated with score 15.969
 > names(trees)
-[1] "final_1"
+[1] "final_1" "final_2" "final_3"
+> cons <- Consensus(trees)
 > 
 > # In actual use, be sure to check that the score has converged on a global
 > # optimum, conducting additional iterations and runs as necessary.
@@ -326,14 +327,30 @@ Final search ■                                  0% | D0, score 12.0038, hit 1.
 + # Now we must decide what to do with the multiple optimal trees from
 + # each replicate.
 + 
-+ # Treat each tree equally
-+ JackLabels(ape::consensus(trees), unlist(jackTrees, recursive = FALSE))
++ # Set graphical parameters for plotting
++ oPar <- par(mar = rep(0, 4), cex = 0.9)
 + 
 + # Take the strict consensus of all trees for each replicate
-+ JackLabels(ape::consensus(trees), lapply(jackTrees, ape::consensus))
++ # (May underestimate support)
++ JackLabels(cons, lapply(jackTrees, ape::consensus))
 + 
-+ # Take a single tree from each replicate (the first; order's irrelevant)
-+ JackLabels(ape::consensus(trees), lapply(jackTrees, `[[`, 1))
++ # Take a single tree from each replicate (here, the first)
++ # Potentially problematic if chosen tree is not representative
++ JackLabels(cons, lapply(jackTrees, `[[`, 1))
++ 
++ # Count iteration as support if all most parsimonious trees support a split;
++ # as contradiction if all trees contradict it; don't include replicates where
++ # not all trees agree on the resolution of a split.
++ labels <- JackLabels(cons, jackTrees)
++ 
++ # How many iterations were decisive for each node?
++ attr(labels, "decisive")
++ 
++ # Show as proportion of decisive iterations
++ JackLabels(cons, jackTrees, showFrac = TRUE)
++ 
++ # Restore graphical parameters
++ par(oPar)
 + }
 > 
 > # Tree search with a constraint
@@ -349,6 +366,7 @@ Final search ■                                  0% | D0, score 12.0038, hit 1.
 > 
 > 
 > 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
 > cleanEx()
 
 detaching ‘package:TreeTools’, ‘package:ape’
@@ -814,6 +832,50 @@ attr(,"bootstrap")
 > 
 > 
 > cleanEx()
+> nameEx("PresCont")
+> ### * PresCont
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: PresCont
+> ### Title: Group present or contradicted score
+> ### Aliases: PresCont
+> 
+> ### ** Examples
+> 
+> library("TreeTools", quietly = TRUE) # for as.phylo
+> 
+> # jackTrees will usually be generated with Jackknife() or Resample(),
+> # but for simplicity:
+> jackTrees <- as.phylo(1:100, 8)
+> 
+> tree <- as.phylo(0, 8)
+> PresCont(tree, jackTrees)
+   11    12    13    14    15 
+-0.02 -0.07 -0.01  1.00  1.00 
+> 
+> tree$node.label <- PresCont(tree, jackTrees, plot = FALSE)
+> 
+> # Write the labelled tree to screen
+> ape::write.tree(tree)
+[1] "(t1,((((((t2,t8)1,t7)1,t6)-0.01,t5)-0.07,t4)-0.02,t3));"
+> 
+> # Write labelled trees to a nexus file:
+> # write.nexus(tree, file = filename)
+> 
+> # Compute the measure for further analysis
+> gpc <- (SplitFrequency(tree, jackTrees) -
++   MostContradictedFreq(tree, jackTrees)) / length(jackTrees)
+> gpc
+   11    12    13    14    15 
+-0.02 -0.07 -0.01  1.00  1.00 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:TreeTools’, ‘package:ape’
+
 > nameEx("QuartetResolution")
 > ### * QuartetResolution
 > 
@@ -1124,8 +1186,8 @@ Loading required package: ape
 
 ── Sample local optimum ────────────────────────────────────────────────────────
 → TBR depth 2; keeping 14.4 trees; k = Inf
-ℹ 2025-06-04 11:11:55: Score: 84
-✔ 2025-06-04 11:11:55: Tree search terminated with score 82
+ℹ 2025-09-26 00:31:04: Score: 84
+✔ 2025-09-26 00:31:04: Tree search terminated with score 82
 > 
 > # Colour tip labels according to their influence
 > upperBound <- 2 * TreeDist::ClusteringEntropy(
@@ -1490,7 +1552,7 @@ Rooted; no branch length.
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  25.896 1.128 31.664 0 0 
+Time elapsed:  26.837 1.01 29.241 0 0 
 > grDevices::dev.off()
 null device 
           1 

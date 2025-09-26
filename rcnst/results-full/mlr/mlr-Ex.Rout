@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2025-05-27 r88249) -- "Unsuffered Consequences"
+R Under development (unstable) (2025-09-24 r88872) -- "Unsuffered Consequences"
 Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -214,6 +214,11 @@ Aggregated Result: acc.test.mean=0.7019231,ber.test.mean=0.3128630
               Sonar-example iris-example
 classif.lda               2            1
 classif.rpart             1            2
+Warning: `aes_string()` was deprecated in ggplot2 3.0.0.
+ℹ Please use tidy evaluation idioms with `aes()`.
+ℹ See also `vignette("ggplot2-in-packages")` for more information.
+ℹ The deprecated feature was likely used in the mlr package.
+  Please report the issue at <https://github.com/mlr-org/mlr/issues>.
 Warning: The `fun.y` argument of `stat_summary()` is deprecated as of ggplot2 3.3.0.
 ℹ Please use the `fun` argument instead.
 ℹ The deprecated feature was likely used in the mlr package.
@@ -2143,7 +2148,7 @@ mmce
 > ms = list("mmce" = mmce, "acc" = acc, "timetrain" = timetrain)
 > performance(pred, measures = ms, task, mod)
      mmce       acc timetrain 
-    0.040     0.960     0.004 
+    0.040     0.960     0.005 
 > 
 > 
 > 
@@ -2540,7 +2545,7 @@ Predict: test
 Stratification: FALSE
 predict.type: response
 threshold: 
-time (mean): 0.00
+time (mean): 0.17
   id  truth response iter  set
 1  2 setosa   setosa    1 test
 2  3 setosa   setosa    1 test
@@ -2893,78 +2898,6 @@ sigma numeric   -   - -12 to 12   -    TRUE     Y
 With control class: TuneControlGrid
 Imputation value: 1
 [Tune-x] 1: C=0.000244; sigma=0.000244
-[Tune-y] 1: mmce.test.mean=0.7333333; time: 0.0 min
-[Tune-x] 2: C=4.1e+03; sigma=0.000244
-[Tune-y] 2: mmce.test.mean=0.0533333; time: 0.0 min
-[Tune-x] 3: C=0.000244; sigma=4.1e+03
-[Tune-y] 3: mmce.test.mean=0.7333333; time: 0.0 min
-[Tune-x] 4: C=4.1e+03; sigma=4.1e+03
-[Tune-y] 4: mmce.test.mean=0.7333333; time: 0.0 min
-[Tune] Result: C=4.1e+03; sigma=0.000244 : mmce.test.mean=0.0533333
-Tune result:
-Op. pars: C=4.1e+03; sigma=0.000244
-mmce.test.mean=0.0533333
-    C sigma mmce.test.mean dob eol error.message
-1 -12   -12     0.73333333   1  NA          <NA>
-2  12   -12     0.05333333   2  NA          <NA>
-3 -12    12     0.73333333   3  NA          <NA>
-4  12    12     0.73333333   4  NA          <NA>
-    C sigma mmce.test.mean dob eol error.message
-1 -12   -12     0.73333333   1  NA          <NA>
-2  12   -12     0.05333333   2  NA          <NA>
-3 -12    12     0.73333333   3  NA          <NA>
-4  12    12     0.73333333   4  NA          <NA>
-    C sigma mmce.test.mean iteration
-1 -12   -12     0.73333333         1
-2  12   -12     0.05333333         2
-3 -12    12     0.73333333         3
-4  12    12     0.73333333         4
-             C        sigma mmce.test.mean iteration
-1 2.441406e-04 2.441406e-04     0.73333333         1
-2 4.096000e+03 2.441406e-04     0.05333333         2
-3 2.441406e-04 4.096000e+03     0.73333333         3
-4 4.096000e+03 4.096000e+03     0.73333333         4
-> ## End(Don't show)
-> 
-> 
-> 
-> cleanEx()
-> nameEx("tuneParamsMultiCrit")
-> ### * tuneParamsMultiCrit
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: tuneParamsMultiCrit
-> ### Title: Hyperparameter tuning for multiple measures at once.
-> ### Aliases: tuneParamsMultiCrit
-> 
-> ### ** Examples
-> 
-> ## Don't show: 
->  if (requireNamespace("kernlab")) { 
-+ ## End(Don't show)
-+ ## Don't show: 
-+  } 
-NULL
-> ## End(Don't show)
-> 
-> 
-> 
-> ### * <FOOTER>
-> ###
-> cleanEx()
-> options(digits = 7L)
-> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  92.738 2.597 115.479 0.011 0.01 
-> grDevices::dev.off()
-null device 
-          1 
-> ###
-> ### Local variables: ***
-> ### mode: outline-minor ***
-> ### outline-regexp: "\\(> \\)?### [*]+" ***
-> ### End: ***
-> quit('no')
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"

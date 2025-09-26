@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2025-06-04 r88271) -- "Unsuffered Consequences"
+R Under development (unstable) (2025-09-24 r88872) -- "Unsuffered Consequences"
 Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -37,7 +37,7 @@ Type 'q()' to quit R.
 > ### ** Examples
 > 
 > library(terra)
-terra 1.8.54
+terra 1.8.60
 
 Attaching package: ‘terra’
 
@@ -81,7 +81,7 @@ detaching ‘package:terra’
 > 
 > library(data.table)
 > library(terra)
-terra 1.8.54
+terra 1.8.60
 
 Attaching package: ‘terra’
 
@@ -224,13 +224,13 @@ detaching ‘package:terra’, ‘package:data.table’
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10, returnMatrix = TRUE)
 + })
    user  system elapsed 
-  0.029   0.000   0.028 
+  0.035   0.000   0.035 
 > agent <- agentOrig
 > system.time({
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10)
 + })
    user  system elapsed 
- 21.646   0.100  22.653 
+ 22.829   0.170  23.226 
 > 
 > # as sp
 > if (requireNamespace("sp")) {
@@ -266,7 +266,7 @@ agent does not have columns named x1 and y1, which represent the 'previous' loca
 > ### ** Examples
 > 
 > library(terra)
-terra 1.8.54
+terra 1.8.60
 
 Attaching package: ‘terra’
 
@@ -323,7 +323,7 @@ detaching ‘package:terra’
 > ### ** Examples
 > 
 > library(terra)
-terra 1.8.54
+terra 1.8.60
 
 Attaching package: ‘terra’
 
@@ -445,7 +445,7 @@ detaching ‘package:terra’
 > ### ** Examples
 > 
 > library(terra)
-terra 1.8.54
+terra 1.8.60
 
 Attaching package: ‘terra’
 
@@ -572,8 +572,8 @@ detaching ‘package:terra’
 +   data.table::setDTthreads(origDTThreads)
 +   options(Ncpus = origNcpus)
 + }
-Linking to GEOS 3.12.2, GDAL 3.8.5, PROJ 9.3.1; sf_use_s2() is TRUE
-terra 1.8.54
+Linking to GEOS 3.13.0, GDAL 3.10.3, PROJ 9.6.2; sf_use_s2() is TRUE
+terra 1.8.60
 
 Attaching package: ‘terra’
 
@@ -667,7 +667,7 @@ The CRS provided is not in meters; converting internally to UTM so area will be 
 +     plot(sf::st_geometry(b2), add = TRUE)
 +   }
 + }
-Linking to GEOS 3.12.2, GDAL 3.8.5, PROJ 9.3.1; sf_use_s2() is TRUE
+Linking to GEOS 3.13.0, GDAL 3.10.3, PROJ 9.6.2; sf_use_s2() is TRUE
 The CRS provided is not in meters; converting internally to UTM so area will be approximately correct.
 > 
 > 
@@ -708,7 +708,7 @@ detaching ‘package:sf’
 > 
 > library(data.table)
 > library(terra)
-terra 1.8.54
+terra 1.8.60
 
 Attaching package: ‘terra’
 
@@ -778,7 +778,7 @@ detaching ‘package:terra’, ‘package:data.table’
 > ### ** Examples
 > 
 > library(terra)
-terra 1.8.54
+terra 1.8.60
 
 Attaching package: ‘terra’
 
@@ -893,7 +893,7 @@ detaching ‘package:testthat’, ‘package:data.table’
 > ### ** Examples
 > 
 > library(terra)
-terra 1.8.54
+terra 1.8.60
 
 Attaching package: ‘terra’
 
@@ -997,7 +997,7 @@ detaching ‘package:terra’
 > 
 > library(data.table)
 > library(terra)
-terra 1.8.54
+terra 1.8.60
 
 Attaching package: ‘terra’
 
@@ -1072,7 +1072,7 @@ detaching ‘package:terra’, ‘package:data.table’
 > ### ** Examples
 > 
 > library(terra)
-terra 1.8.54
+terra 1.8.60
 
 Attaching package: ‘terra’
 
@@ -1341,7 +1341,7 @@ detaching ‘package:terra’
 > ### ** Examples
 > 
 > library(terra)
-terra 1.8.54
+terra 1.8.60
 
 Attaching package: ‘terra’
 
@@ -1358,6 +1358,64 @@ The following object is masked from ‘package:SpaDES.tools’:
 > 
 > # Simple use -- similar to spread(...)
 > out <- spread2(a, start = sams, 0.225)
+> if (interactive()) {
++   terra::plot(out)
++ }
+> 
+> # Use maxSize -- this gives an upper limit
+> maxSizes <- sort(sample(1:10, size = length(sams)))
+> out <- spread2(a, start = sams, 0.225, maxSize = maxSizes, asRaster = FALSE)
+> # check TRUE using data.table .N
+> out[, .N, by = "initialPixels"]$N <= maxSizes
+[1] TRUE TRUE TRUE
+> 
+> # Use exactSize -- gives an exact size, if there is enough space on the Raster
+> exactSizes <- maxSizes
+> out <- spread2(a, start = sams, spreadProb = 0.225,
++                exactSize = exactSizes, asRaster = FALSE)
+> out[, .N, by = "initialPixels"]$N == maxSizes # should be TRUE TRUE TRUE
+[1] TRUE TRUE TRUE
+> 
+> # Use exactSize -- but where it can't be achieved
+> exactSizes <- sort(sample(100:110, size = length(sams)))
+> out <- spread2(a, start = sams, 1, exactSize = exactSizes)
+> 
+> # Iterative calling -- create a function with a high escape probability
+> spreadWithEscape <- function(ras, start, escapeProb, spreadProb) {
++   out <- spread2(ras, start = sams, spreadProb = escapeProb, asRaster = FALSE)
++   while (any(out$state == "sourceActive")) {
++     # pass in previous output as start
++     out <- spread2(ras, start = out, spreadProb = spreadProb,
++                     asRaster = FALSE, skipChecks = TRUE) # skipChecks for speed
++   }
++   out
++ }
+> 
+> set.seed(421)
+> out1 <- spreadWithEscape(a, sams, escapeProb = 0.25, spreadProb = 0.225)
+> set.seed(421)
+> out2 <- spread2(a, sams, 0.225, asRaster = FALSE)
+> # The one with high escape probability is larger (most of the time)
+> NROW(out1) > NROW(out2) ## TODO: not true
+[1] FALSE
+> 
+> ## Use neighProbs, with a spreadProb that is a RasterLayer
+> # Create a raster of different values, which will be the relative probabilities
+> #   i.e., they are rescaled to relative probabilities within the 8 neighbour choices.
+> #   The neighProbs below means 70% of the time, 1 neighbour will be chosen,
+> #   30% of the time 2 neighbours.
+> #   The cells with spreadProb of 5 are 5 times more likely than cells with 1 to be chosen,
+> #   when they are both within the 8 neighbours
+> sp <- rast(ext(0, 3, 0, 3), res = 1, vals = 1:9) #small raster, simple values
+> # Check neighProbs worked
+> out <- list()
+> 
+> # enough replicates to see stabilized probabilities
+> for (i in 1:100) {
++   out[[i]] <- spread2(sp, spreadProbRel = sp, spreadProb = 1,
++                       start = 5, iterations = 1,
++                       neighProbs = c(1), asRaster = FALSE)
++ }
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "activeSource" "holding"      "successful"   "tooSmall"    

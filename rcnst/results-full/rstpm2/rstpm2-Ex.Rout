@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2025-05-23 r88232) -- "Unsuffered Consequences"
+R Under development (unstable) (2025-09-24 r88872) -- "Unsuffered Consequences"
 Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -42,7 +42,7 @@ The following object is masked from ‘package:survival’:
 > ### Name: aft-class
 > ### Title: Class "stpm2" ~~~
 > ### Aliases: aft-class plot,aft,missing-method lines,aft-method
-> ###   predict,aft-method predictnl,aft-method
+> ###   predict,aft-method
 > ### Keywords: classes
 > 
 > ### ** Examples
@@ -849,8 +849,8 @@ attr(,"class")
 > ### Name: pstpm2-class
 > ### Title: Class "pstpm2"
 > ### Aliases: pstpm2-class plot,pstpm2,missing-method lines,pstpm2-method
-> ###   predictnl,pstpm2-method AIC,pstpm2-method AICc,pstpm2-method
-> ###   BIC,pstpm2-method anova,pstpm2-method qAICc,pstpm2-method
+> ###   AIC,pstpm2-method AICc,pstpm2-method BIC,pstpm2-method
+> ###   anova,pstpm2-method qAICc,pstpm2-method update,pstpm2-method
 > ###   summary,pstpm2-method eform,pstpm2-method
 > ### Keywords: classes
 > 
@@ -971,7 +971,9 @@ function (midts, rates, tmvar = "t", offsetvar = "", ...)
 > ### Name: stpm2-class
 > ### Title: Class "stpm2" ~~~
 > ### Aliases: stpm2-class plot,stpm2,missing-method lines,stpm2-method
-> ###   predictnl,stpm2-method summary,stpm2-method eform,stpm2-method
+> ###   AIC,stpm2-method AICc,stpm2-method BIC,stpm2-method
+> ###   anova,stpm2-method qAICc,stpm2-method update,stpm2-method
+> ###   summary,stpm2-method eform,stpm2-method
 > ### Keywords: classes
 > 
 > ### ** Examples
@@ -1276,7 +1278,7 @@ Asserted error: no sign change found in 1000 iterations
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  17.53 0.458 18.22 0 0 
+Time elapsed:  19.765 0.426 20.902 0 0 
 > grDevices::dev.off()
 null device 
           1 

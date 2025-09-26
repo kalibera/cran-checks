@@ -1,4 +1,4 @@
-* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/FactorHet.Rcheck’
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/morphemepiece.Rcheck’
 * using R Under development (unstable) (2025-09-24 r88872)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
@@ -6,8 +6,9 @@
     GNU Fortran (GCC) 15.2.1 20250808 (Red Hat 15.2.1-1)
 * running under: Fedora Linux 42 (MATE-Compiz)
 * using session charset: UTF-8
-* checking for file ‘FactorHet/DESCRIPTION’ ... OK
-* this is package ‘FactorHet’ version ‘1.0.0’
+* checking for file ‘morphemepiece/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘morphemepiece’ version ‘1.2.3’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -17,9 +18,9 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘FactorHet’ can be installed ... OK
-* used C++ compiler: ‘g++ (GCC) 15.2.1 20250808 (Red Hat 15.2.1-1)’
+* checking whether package ‘morphemepiece’ can be installed ... OK
 * checking package directory ... OK
+* checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
 * checking for left-over files ... OK
@@ -33,12 +34,16 @@
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
 * checking loading without being on the library search path ... OK
+* checking whether startup messages can be suppressed ... OK
 * checking dependencies in R code ... OK
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
 * checking R code for possible problems ... OK
-* checking Rd files ... OK
+* checking Rd files ... NOTE
+checkRd: (-1) morphemepiece_cache_dir.Rd:17-19: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) morphemepiece_cache_dir.Rd:20-21: Lost braces in \itemize; meant \describe ?
+checkRd: (-1) morphemepiece_cache_dir.Rd:22-24: Lost braces in \itemize; meant \describe ?
 * checking Rd metadata ... OK
 * checking Rd cross-references ... OK
 * checking for missing documentation entries ... OK
@@ -46,34 +51,32 @@
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
-* checking contents of ‘data’ directory ... OK
-* checking data for non-ASCII characters ... OK
-* checking LazyData ... OK
-* checking data for ASCII and uncompressed saves ... OK
-* checking line endings in C/C++/Fortran sources/headers ... OK
-* checking compiled code ... INFO
-Note: information on .o files is not available
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
 * checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... ERROR
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-  No levels were fused together.
-  ----
-  Use AME or AMIE to examine the effects in detail.
-  ERROR: modification of compiler constant of type character, length 2
-  ERROR: the modified value of the constant is:
-  [1] "integer"       "integervector"
-  attr(,".match.hash")
-  <hash table>
-  ERROR: the original value of the constant is:
-  [1] "integer"       "integervector"
-  ERROR: the modified constant is at index 1
-  ERROR: the modified constant is in this function body:
-  c("integer", "integervector")
+          }
+          else {
+              sub_tokens <- append(cur_substr, sub_tokens)
+              end <- start - 1
+              keepgoing <- end >= 1
+          }
+      }
+      if (is_bad) {
+          return(unk_token)
+      }
+      return(sub_tokens)
+  }
+  Function .mp_tokenize_word in namespace morphemepiece has this body.
   Fatal error: compiler constants were modified!
   
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 ERROR
+Status: 1 ERROR, 1 NOTE

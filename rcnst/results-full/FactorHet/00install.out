@@ -3,9 +3,9 @@
 ** package ‘FactorHet’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** libs
-using C++ compiler: ‘g++ (GCC) 14.2.1 20240912 (Red Hat 14.2.1-3)’
-make[1]: Entering directory '/var/scratch2/tomas/tmp/RtmpAaUWi8/R.INSTALL13e8ab276a6422/FactorHet/src'
-g++ -std=gnu++17 -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG  -I'/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include' -I'/var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include' -I/usr/local/include    -fpic  -g -O2  -DR_NO_REMAP -c RcppExports.cpp -o RcppExports.o
+using C++ compiler: ‘g++ (GCC) 15.2.1 20250808 (Red Hat 15.2.1-1)’
+make[1]: Entering directory '/var/scratch2/tomas/tmp/RtmpL3fswF/R.INSTALL35a8bd5481940e/FactorHet/src'
+g++ -std=gnu++17 -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG  -I'/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include' -I'/var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include' -I/usr/local/include    -fpic  -g -O2   -c RcppExports.cpp -o RcppExports.o
 In file included from /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/Core:205,
                  from /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/Dense:1,
                  from /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/RcppEigenForward.h:28,
@@ -447,7 +447,7 @@ RcppExports.cpp:41:85:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
-g++ -std=gnu++17 -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG  -I'/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include' -I'/var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include' -I/usr/local/include    -fpic  -g -O2  -DR_NO_REMAP -c eigen_beta.cpp -o eigen_beta.o
+g++ -std=gnu++17 -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG  -I'/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include' -I'/var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include' -I/usr/local/include    -fpic  -g -O2   -c eigen_beta.cpp -o eigen_beta.o
 In file included from /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/Core:205,
                  from /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/Dense:1,
                  from /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/RcppEigenForward.h:28,
@@ -1601,9 +1601,9 @@ eigen_beta.cpp:177:27:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/SparseCore/SparseMatrix.h:687:97:   required from ‘Eigen::SparseMatrix<_Scalar, _Flags, _StorageIndex>::SparseMatrix(const Eigen::SparseMatrixBase<OtherDerived>&) [with OtherDerived = Eigen::Transpose<const Eigen::Map<Eigen::SparseMatrix<double, 0, int>, 0, Eigen::Stride<0, 0> > >; _Scalar = double; int _Options = 0; _StorageIndex = int]’
   687 |       const bool needToTranspose = (Flags & RowMajorBit) != (internal::evaluator<OtherDerived>::Flags & RowMajorBit);
       |                                                                                                 ^~~~~
-eigen_beta.cpp:51:49:   required from here
+eigen_beta.cpp:51:48:   required from here
    51 |   Eigen::SparseMatrix<double> adj_X = X.adjoint();
-      |                                                 ^
+      |                                       ~~~~~~~~~^~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -1632,9 +1632,9 @@ eigen_beta.cpp:51:49:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/SparseCore/SparseMatrix.h:687:97:   required from ‘Eigen::SparseMatrix<_Scalar, _Flags, _StorageIndex>::SparseMatrix(const Eigen::SparseMatrixBase<OtherDerived>&) [with OtherDerived = Eigen::CwiseBinaryOp<Eigen::internal::scalar_sum_op<double, double>, const Eigen::Product<Eigen::Product<Eigen::SparseMatrix<double, 0, int>, Eigen::Map<Eigen::SparseMatrix<double, 0, int>, 0, Eigen::Stride<0, 0> >, 2>, Eigen::Map<Eigen::SparseMatrix<double, 0, int>, 0, Eigen::Stride<0, 0> >, 2>, const Eigen::Map<Eigen::SparseMatrix<double, 0, int>, 0, Eigen::Stride<0, 0> > >; _Scalar = double; int _Options = 0; _StorageIndex = int]’
   687 |       const bool needToTranspose = (Flags & RowMajorBit) != (internal::evaluator<OtherDerived>::Flags & RowMajorBit);
       |                                                                                                 ^~~~~
-eigen_beta.cpp:52:86:   required from here
+eigen_beta.cpp:52:79:   required from here
    52 |   Eigen::SimplicialLLT<Eigen::SparseMatrix<double> > decomp(adj_X * omega * X + ridge);
-      |                                                                                      ^
+      |                                                             ~~~~~~~~~~~~~~~~~~^~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -1729,9 +1729,9 @@ eigen_beta.cpp:156:43:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Product.h:137:22:   required from ‘Eigen::internal::dense_product_base<Lhs, Rhs, Option, 6>::operator const Scalar() const [with Lhs = Eigen::Product<Eigen::Transpose<const Eigen::Matrix<double, -1, 1> >, Eigen::SparseMatrix<double, 0, int>, 0>; Rhs = Eigen::Matrix<double, -1, 1>; int Option = 0; Scalar = double]’
   137 |     return internal::evaluator<ProductXpr>(derived()).coeff(0,0);
       |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-eigen_beta.cpp:156:70:   required from here
+eigen_beta.cpp:156:68:   required from here
   156 |       double alpha_denom = tmp.squaredNorm() + p.adjoint() * ridge * p;
-      |                                                                      ^
+      |                                                ~~~~~~~~~~~~~~~~~~~~^~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -1956,9 +1956,9 @@ eigen_beta.cpp:35:34:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Product.h:137:22:   required from ‘Eigen::internal::dense_product_base<Lhs, Rhs, Option, 6>::operator const Scalar() const [with Lhs = Eigen::Product<Eigen::Transpose<const Eigen::Matrix<double, -1, 1> >, Eigen::SparseMatrix<double, 0, int>, 0>; Rhs = Eigen::Matrix<double, -1, 1>; int Option = 0; Scalar = double]’
   137 |     return internal::evaluator<ProductXpr>(derived()).coeff(0,0);
       |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-eigen_beta.cpp:156:70:   required from here
+eigen_beta.cpp:156:68:   required from here
   156 |       double alpha_denom = tmp.squaredNorm() + p.adjoint() * ridge * p;
-      |                                                                      ^
+      |                                                ~~~~~~~~~~~~~~~~~~~~^~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -1987,9 +1987,9 @@ eigen_beta.cpp:156:70:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Product.h:137:22:   required from ‘Eigen::internal::dense_product_base<Lhs, Rhs, Option, 6>::operator const Scalar() const [with Lhs = Eigen::Product<Eigen::Transpose<const Eigen::Matrix<double, -1, 1> >, Eigen::SparseMatrix<double, 0, int>, 0>; Rhs = Eigen::Matrix<double, -1, 1>; int Option = 0; Scalar = double]’
   137 |     return internal::evaluator<ProductXpr>(derived()).coeff(0,0);
       |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-eigen_beta.cpp:156:70:   required from here
+eigen_beta.cpp:156:68:   required from here
   156 |       double alpha_denom = tmp.squaredNorm() + p.adjoint() * ridge * p;
-      |                                                                      ^
+      |                                                ~~~~~~~~~~~~~~~~~~~~^~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -2160,9 +2160,9 @@ eigen_beta.cpp:35:34:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/SparseCore/SparseMatrix.h:689:15:   required from ‘Eigen::SparseMatrix<_Scalar, _Flags, _StorageIndex>::SparseMatrix(const Eigen::SparseMatrixBase<OtherDerived>&) [with OtherDerived = Eigen::Product<Eigen::SparseMatrix<double, 0, int>, Eigen::Map<Eigen::SparseMatrix<double, 0, int>, 0, Eigen::Stride<0, 0> >, 2>; _Scalar = double; int _Options = 0; _StorageIndex = int]’
   689 |         *this = other.derived();
       |         ~~~~~~^~~~~~~~~~~~~~~~~
-eigen_beta.cpp:102:69:   required from here
+eigen_beta.cpp:102:67:   required from here
   102 |     Eigen::SparseMatrix<double> adj_X = sparse_diag(sqrt_omega_k) * X;
-      |                                                                     ^
+      |                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/SparseCore/SparseMatrixBase.h:47:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    47 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -2223,9 +2223,9 @@ eigen_beta.cpp:156:43:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::Block<const Eigen::Map<Eigen::Matrix<double, -1, -1> >, -1, 1, true>; _Scalar = double; int _Rows = -1; int _Cols = 1; int _Options = 0; int _MaxRows = -1; int _MaxCols = 1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:27:44:   required from here
+eigen_beta.cpp:27:42:   required from here
    27 |     Eigen::VectorXd s_ik = obs_E_prob.col(k);
-      |                                            ^
+      |                            ~~~~~~~~~~~~~~^~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/CoreEvaluators.h:1071:54: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
  1071 |     PacketAlignment = unpacket_traits<PacketScalar>::alignment,
       |                                                      ^~~~~~~~~
@@ -2550,9 +2550,9 @@ eigen_beta.cpp:35:34:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::Solve<Eigen::SimplicialLLT<Eigen::SparseMatrix<double, 0, int> >, Eigen::Product<Eigen::SparseMatrix<double, 0, int>, Eigen::Map<Eigen::Matrix<double, -1, 1>, 0, Eigen::Stride<0, 0> >, 0> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:53:59:   required from here
+eigen_beta.cpp:53:49:   required from here
    53 |   Eigen::MatrixXd ridge_estimates = decomp.solve(adj_X * s);
-      |                                                           ^
+      |                                     ~~~~~~~~~~~~^~~~~~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -2581,9 +2581,9 @@ eigen_beta.cpp:53:59:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::Solve<Eigen::SimplicialLLT<Eigen::SparseMatrix<double, 0, int> >, Eigen::Product<Eigen::SparseMatrix<double, 0, int>, Eigen::Map<Eigen::Matrix<double, -1, 1>, 0, Eigen::Stride<0, 0> >, 0> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:53:59:   required from here
+eigen_beta.cpp:53:49:   required from here
    53 |   Eigen::MatrixXd ridge_estimates = decomp.solve(adj_X * s);
-      |                                                           ^
+      |                                     ~~~~~~~~~~~~^~~~~~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/SparseCore/SparseMatrixBase.h:47:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    47 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -2619,9 +2619,9 @@ eigen_beta.cpp:53:59:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::Solve<Eigen::SimplicialLLT<Eigen::SparseMatrix<double, 0, int> >, Eigen::Product<Eigen::SparseMatrix<double, 0, int>, Eigen::Map<Eigen::Matrix<double, -1, 1>, 0, Eigen::Stride<0, 0> >, 0> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:53:59:   required from here
+eigen_beta.cpp:53:49:   required from here
    53 |   Eigen::MatrixXd ridge_estimates = decomp.solve(adj_X * s);
-      |                                                           ^
+      |                                     ~~~~~~~~~~~~^~~~~~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -2654,9 +2654,9 @@ eigen_beta.cpp:53:59:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::Solve<Eigen::SimplicialLLT<Eigen::SparseMatrix<double, 0, int> >, Eigen::Product<Eigen::SparseMatrix<double, 0, int>, Eigen::Map<Eigen::Matrix<double, -1, 1>, 0, Eigen::Stride<0, 0> >, 0> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:53:59:   required from here
+eigen_beta.cpp:53:49:   required from here
    53 |   Eigen::MatrixXd ridge_estimates = decomp.solve(adj_X * s);
-      |                                                           ^
+      |                                     ~~~~~~~~~~~~^~~~~~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -2685,9 +2685,9 @@ eigen_beta.cpp:53:59:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::Solve<Eigen::SimplicialLLT<Eigen::SparseMatrix<double, 0, int> >, Eigen::Product<Eigen::SparseMatrix<double, 0, int>, Eigen::Map<Eigen::Matrix<double, -1, 1>, 0, Eigen::Stride<0, 0> >, 0> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:53:59:   required from here
+eigen_beta.cpp:53:49:   required from here
    53 |   Eigen::MatrixXd ridge_estimates = decomp.solve(adj_X * s);
-      |                                                           ^
+      |                                     ~~~~~~~~~~~~^~~~~~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/SparseCore/SparseMatrixBase.h:47:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    47 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -2720,9 +2720,9 @@ eigen_beta.cpp:53:59:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::Solve<Eigen::SimplicialLLT<Eigen::SparseMatrix<double, 0, int> >, Eigen::Product<Eigen::SparseMatrix<double, 0, int>, Eigen::Map<Eigen::Matrix<double, -1, 1>, 0, Eigen::Stride<0, 0> >, 0> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:53:59:   required from here
+eigen_beta.cpp:53:49:   required from here
    53 |   Eigen::MatrixXd ridge_estimates = decomp.solve(adj_X * s);
-      |                                                           ^
+      |                                     ~~~~~~~~~~~~^~~~~~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -2753,9 +2753,9 @@ eigen_beta.cpp:53:59:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/SparseCore/SparseMatrix.h:689:15:   required from ‘Eigen::SparseMatrix<_Scalar, _Flags, _StorageIndex>::SparseMatrix(const Eigen::SparseMatrixBase<OtherDerived>&) [with OtherDerived = Eigen::Product<Eigen::SparseMatrix<double, 0, int>, Eigen::Map<Eigen::SparseMatrix<double, 0, int>, 0, Eigen::Stride<0, 0> >, 2>; _Scalar = double; int _Options = 0; _StorageIndex = int]’
   689 |         *this = other.derived();
       |         ~~~~~~^~~~~~~~~~~~~~~~~
-eigen_beta.cpp:102:69:   required from here
+eigen_beta.cpp:102:67:   required from here
   102 |     Eigen::SparseMatrix<double> adj_X = sparse_diag(sqrt_omega_k) * X;
-      |                                                                     ^
+      |                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -2918,9 +2918,9 @@ eigen_beta.cpp:131:40:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Product.h:137:22:   required from ‘Eigen::internal::dense_product_base<Lhs, Rhs, Option, 6>::operator const Scalar() const [with Lhs = Eigen::Product<Eigen::Transpose<const Eigen::Matrix<double, -1, 1> >, Eigen::SparseMatrix<double, 0, int>, 0>; Rhs = Eigen::Matrix<double, -1, 1>; int Option = 0; Scalar = double]’
   137 |     return internal::evaluator<ProductXpr>(derived()).coeff(0,0);
       |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-eigen_beta.cpp:156:70:   required from here
+eigen_beta.cpp:156:68:   required from here
   156 |       double alpha_denom = tmp.squaredNorm() + p.adjoint() * ridge * p;
-      |                                                                      ^
+      |                                                ~~~~~~~~~~~~~~~~~~~~^~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -3845,9 +3845,9 @@ eigen_beta.cpp:35:34:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Product.h:137:22:   required from ‘Eigen::internal::dense_product_base<Lhs, Rhs, Option, 6>::operator const Scalar() const [with Lhs = Eigen::Product<Eigen::Transpose<const Eigen::Matrix<double, -1, 1> >, Eigen::SparseMatrix<double, 0, int>, 0>; Rhs = Eigen::Matrix<double, -1, 1>; int Option = 0; Scalar = double]’
   137 |     return internal::evaluator<ProductXpr>(derived()).coeff(0,0);
       |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-eigen_beta.cpp:156:70:   required from here
+eigen_beta.cpp:156:68:   required from here
   156 |       double alpha_denom = tmp.squaredNorm() + p.adjoint() * ridge * p;
-      |                                                                      ^
+      |                                                ~~~~~~~~~~~~~~~~~~~~^~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:654:74: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
   654 |   return internal::first_aligned<int(unpacket_traits<DefaultPacketType>::alignment),Derived>(m);
       |                                                                          ^~~~~~~~~
@@ -4267,9 +4267,9 @@ eigen_beta.cpp:35:34:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::Transpose<const Eigen::Map<Eigen::SparseMatrix<double, 0, int>, 0, Eigen::Stride<0, 0> > >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:21:37:   required from here
+eigen_beta.cpp:21:36:   required from here
    21 |   Eigen::MatrixXd adj_X = X.adjoint();
-      |                                     ^
+      |                           ~~~~~~~~~^~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -5565,9 +5565,9 @@ eigen_beta.cpp:35:34:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::CwiseBinaryOp<Eigen::internal::scalar_sum_op<double, double>, const Eigen::Product<Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::SparseMatrix<double, 0, int>, 0>, Eigen::Map<Eigen::SparseMatrix<double, 0, int>, 0, Eigen::Stride<0, 0> >, 0>, const Eigen::SparseMatrix<double, 0, int> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:33:54:   required from here
+eigen_beta.cpp:33:52:   required from here
    33 |     Eigen::MatrixXd outer_X = adj_X * omega_ik * X + tau_k;
-      |                                                      ^~~~~
+      |                               ~~~~~~~~~~~~~~~~~~~~~^~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -5755,9 +5755,9 @@ eigen_beta.cpp:35:55:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::Solve<Eigen::SimplicialLLT<Eigen::SparseMatrix<double, 0, int> >, Eigen::Product<Eigen::SparseMatrix<double, 0, int>, Eigen::Map<Eigen::Matrix<double, -1, 1>, 0, Eigen::Stride<0, 0> >, 0> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:53:59:   required from here
+eigen_beta.cpp:53:49:   required from here
    53 |   Eigen::MatrixXd ridge_estimates = decomp.solve(adj_X * s);
-      |                                                           ^
+      |                                     ~~~~~~~~~~~~^~~~~~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -5793,9 +5793,9 @@ eigen_beta.cpp:53:59:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::Solve<Eigen::SimplicialLLT<Eigen::SparseMatrix<double, 0, int> >, Eigen::Product<Eigen::SparseMatrix<double, 0, int>, Eigen::Map<Eigen::Matrix<double, -1, 1>, 0, Eigen::Stride<0, 0> >, 0> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:53:59:   required from here
+eigen_beta.cpp:53:49:   required from here
    53 |   Eigen::MatrixXd ridge_estimates = decomp.solve(adj_X * s);
-      |                                                           ^
+      |                                     ~~~~~~~~~~~~^~~~~~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -6101,9 +6101,9 @@ eigen_beta.cpp:35:55:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::CwiseBinaryOp<Eigen::internal::scalar_sum_op<double, double>, const Eigen::Product<Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::SparseMatrix<double, 0, int>, 0>, Eigen::Map<Eigen::SparseMatrix<double, 0, int>, 0, Eigen::Stride<0, 0> >, 0>, const Eigen::SparseMatrix<double, 0, int> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:33:54:   required from here
+eigen_beta.cpp:33:52:   required from here
    33 |     Eigen::MatrixXd outer_X = adj_X * omega_ik * X + tau_k;
-      |                                                      ^~~~~
+      |                               ~~~~~~~~~~~~~~~~~~~~~^~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -6139,9 +6139,9 @@ eigen_beta.cpp:33:54:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::CwiseBinaryOp<Eigen::internal::scalar_sum_op<double, double>, const Eigen::Product<Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::SparseMatrix<double, 0, int>, 0>, Eigen::Map<Eigen::SparseMatrix<double, 0, int>, 0, Eigen::Stride<0, 0> >, 0>, const Eigen::SparseMatrix<double, 0, int> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:33:54:   required from here
+eigen_beta.cpp:33:52:   required from here
    33 |     Eigen::MatrixXd outer_X = adj_X * omega_ik * X + tau_k;
-      |                                                      ^~~~~
+      |                               ~~~~~~~~~~~~~~~~~~~~~^~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -6177,9 +6177,9 @@ eigen_beta.cpp:33:54:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::CwiseBinaryOp<Eigen::internal::scalar_sum_op<double, double>, const Eigen::Product<Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::SparseMatrix<double, 0, int>, 0>, Eigen::Map<Eigen::SparseMatrix<double, 0, int>, 0, Eigen::Stride<0, 0> >, 0>, const Eigen::SparseMatrix<double, 0, int> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:33:54:   required from here
+eigen_beta.cpp:33:52:   required from here
    33 |     Eigen::MatrixXd outer_X = adj_X * omega_ik * X + tau_k;
-      |                                                      ^~~~~
+      |                               ~~~~~~~~~~~~~~~~~~~~~^~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -6215,9 +6215,9 @@ eigen_beta.cpp:33:54:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::CwiseBinaryOp<Eigen::internal::scalar_sum_op<double, double>, const Eigen::Product<Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::SparseMatrix<double, 0, int>, 0>, Eigen::Map<Eigen::SparseMatrix<double, 0, int>, 0, Eigen::Stride<0, 0> >, 0>, const Eigen::SparseMatrix<double, 0, int> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:33:54:   required from here
+eigen_beta.cpp:33:52:   required from here
    33 |     Eigen::MatrixXd outer_X = adj_X * omega_ik * X + tau_k;
-      |                                                      ^~~~~
+      |                               ~~~~~~~~~~~~~~~~~~~~~^~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -6481,9 +6481,9 @@ eigen_beta.cpp:35:55:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::Solve<Eigen::SimplicialLLT<Eigen::SparseMatrix<double, 0, int> >, Eigen::Product<Eigen::SparseMatrix<double, 0, int>, Eigen::Map<Eigen::Matrix<double, -1, 1>, 0, Eigen::Stride<0, 0> >, 0> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:53:59:   required from here
+eigen_beta.cpp:53:49:   required from here
    53 |   Eigen::MatrixXd ridge_estimates = decomp.solve(adj_X * s);
-      |                                                           ^
+      |                                     ~~~~~~~~~~~~^~~~~~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -6595,9 +6595,9 @@ eigen_beta.cpp:109:61:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::Solve<Eigen::SimplicialLLT<Eigen::SparseMatrix<double, 0, int> >, Eigen::Product<Eigen::SparseMatrix<double, 0, int>, Eigen::Map<Eigen::Matrix<double, -1, 1>, 0, Eigen::Stride<0, 0> >, 0> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:53:59:   required from here
+eigen_beta.cpp:53:49:   required from here
    53 |   Eigen::MatrixXd ridge_estimates = decomp.solve(adj_X * s);
-      |                                                           ^
+      |                                     ~~~~~~~~~~~~^~~~~~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/CoreEvaluators.h:1071:54: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
  1071 |     PacketAlignment = unpacket_traits<PacketScalar>::alignment,
       |                                                      ^~~~~~~~~
@@ -6633,9 +6633,9 @@ eigen_beta.cpp:53:59:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::Solve<Eigen::SimplicialLLT<Eigen::SparseMatrix<double, 0, int> >, Eigen::Product<Eigen::SparseMatrix<double, 0, int>, Eigen::Map<Eigen::Matrix<double, -1, 1>, 0, Eigen::Stride<0, 0> >, 0> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:53:59:   required from here
+eigen_beta.cpp:53:49:   required from here
    53 |   Eigen::MatrixXd ridge_estimates = decomp.solve(adj_X * s);
-      |                                                           ^
+      |                                     ~~~~~~~~~~~~^~~~~~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/CoreEvaluators.h:1071:54: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
  1071 |     PacketAlignment = unpacket_traits<PacketScalar>::alignment,
       |                                                      ^~~~~~~~~
@@ -6709,9 +6709,9 @@ eigen_beta.cpp:109:61:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Product.h:137:22:   required from ‘Eigen::internal::dense_product_base<Lhs, Rhs, Option, 6>::operator const Scalar() const [with Lhs = Eigen::Product<Eigen::Transpose<const Eigen::Matrix<double, -1, 1> >, Eigen::SparseMatrix<double, 0, int>, 0>; Rhs = Eigen::Matrix<double, -1, 1>; int Option = 0; Scalar = double]’
   137 |     return internal::evaluator<ProductXpr>(derived()).coeff(0,0);
       |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-eigen_beta.cpp:156:70:   required from here
+eigen_beta.cpp:156:68:   required from here
   156 |       double alpha_denom = tmp.squaredNorm() + p.adjoint() * ridge * p;
-      |                                                                      ^
+      |                                                ~~~~~~~~~~~~~~~~~~~~^~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -6747,9 +6747,9 @@ eigen_beta.cpp:156:70:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Product.h:137:22:   required from ‘Eigen::internal::dense_product_base<Lhs, Rhs, Option, 6>::operator const Scalar() const [with Lhs = Eigen::Product<Eigen::Transpose<const Eigen::Matrix<double, -1, 1> >, Eigen::SparseMatrix<double, 0, int>, 0>; Rhs = Eigen::Matrix<double, -1, 1>; int Option = 0; Scalar = double]’
   137 |     return internal::evaluator<ProductXpr>(derived()).coeff(0,0);
       |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-eigen_beta.cpp:156:70:   required from here
+eigen_beta.cpp:156:68:   required from here
   156 |       double alpha_denom = tmp.squaredNorm() + p.adjoint() * ridge * p;
-      |                                                                      ^
+      |                                                ~~~~~~~~~~~~~~~~~~~~^~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -6785,9 +6785,9 @@ eigen_beta.cpp:156:70:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Product.h:137:22:   required from ‘Eigen::internal::dense_product_base<Lhs, Rhs, Option, 6>::operator const Scalar() const [with Lhs = Eigen::Product<Eigen::Transpose<const Eigen::Matrix<double, -1, 1> >, Eigen::SparseMatrix<double, 0, int>, 0>; Rhs = Eigen::Matrix<double, -1, 1>; int Option = 0; Scalar = double]’
   137 |     return internal::evaluator<ProductXpr>(derived()).coeff(0,0);
       |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-eigen_beta.cpp:156:70:   required from here
+eigen_beta.cpp:156:68:   required from here
   156 |       double alpha_denom = tmp.squaredNorm() + p.adjoint() * ridge * p;
-      |                                                                      ^
+      |                                                ~~~~~~~~~~~~~~~~~~~~^~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -6899,9 +6899,9 @@ eigen_beta.cpp:35:55:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::CwiseBinaryOp<Eigen::internal::scalar_sum_op<double, double>, const Eigen::Product<Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::SparseMatrix<double, 0, int>, 0>, Eigen::Map<Eigen::SparseMatrix<double, 0, int>, 0, Eigen::Stride<0, 0> >, 0>, const Eigen::SparseMatrix<double, 0, int> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:33:54:   required from here
+eigen_beta.cpp:33:52:   required from here
    33 |     Eigen::MatrixXd outer_X = adj_X * omega_ik * X + tau_k;
-      |                                                      ^~~~~
+      |                               ~~~~~~~~~~~~~~~~~~~~~^~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/CoreEvaluators.h:1071:54: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
  1071 |     PacketAlignment = unpacket_traits<PacketScalar>::alignment,
       |                                                      ^~~~~~~~~
@@ -6937,9 +6937,9 @@ eigen_beta.cpp:33:54:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::CwiseBinaryOp<Eigen::internal::scalar_sum_op<double, double>, const Eigen::Product<Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::SparseMatrix<double, 0, int>, 0>, Eigen::Map<Eigen::SparseMatrix<double, 0, int>, 0, Eigen::Stride<0, 0> >, 0>, const Eigen::SparseMatrix<double, 0, int> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:33:54:   required from here
+eigen_beta.cpp:33:52:   required from here
    33 |     Eigen::MatrixXd outer_X = adj_X * omega_ik * X + tau_k;
-      |                                                      ^~~~~
+      |                               ~~~~~~~~~~~~~~~~~~~~~^~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/CoreEvaluators.h:1071:54: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
  1071 |     PacketAlignment = unpacket_traits<PacketScalar>::alignment,
       |                                                      ^~~~~~~~~
@@ -7013,9 +7013,9 @@ eigen_beta.cpp:35:55:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::CwiseBinaryOp<Eigen::internal::scalar_sum_op<double, double>, const Eigen::Product<Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::SparseMatrix<double, 0, int>, 0>, Eigen::Map<Eigen::SparseMatrix<double, 0, int>, 0, Eigen::Stride<0, 0> >, 0>, const Eigen::SparseMatrix<double, 0, int> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:33:54:   required from here
+eigen_beta.cpp:33:52:   required from here
    33 |     Eigen::MatrixXd outer_X = adj_X * omega_ik * X + tau_k;
-      |                                                      ^~~~~
+      |                               ~~~~~~~~~~~~~~~~~~~~~^~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -7051,9 +7051,9 @@ eigen_beta.cpp:33:54:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::CwiseBinaryOp<Eigen::internal::scalar_sum_op<double, double>, const Eigen::Product<Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::SparseMatrix<double, 0, int>, 0>, Eigen::Map<Eigen::SparseMatrix<double, 0, int>, 0, Eigen::Stride<0, 0> >, 0>, const Eigen::SparseMatrix<double, 0, int> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:33:54:   required from here
+eigen_beta.cpp:33:52:   required from here
    33 |     Eigen::MatrixXd outer_X = adj_X * omega_ik * X + tau_k;
-      |                                                      ^~~~~
+      |                               ~~~~~~~~~~~~~~~~~~~~~^~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:56:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
    56 |                      >::type PacketReturnType;
       |                              ^~~~~~~~~~~~~~~~
@@ -7089,13 +7089,13 @@ eigen_beta.cpp:33:54:   required from here
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/Matrix.h:423:29:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::CwiseBinaryOp<Eigen::internal::scalar_sum_op<double, double>, const Eigen::Product<Eigen::Product<Eigen::Matrix<double, -1, -1>, Eigen::SparseMatrix<double, 0, int>, 0>, Eigen::Map<Eigen::SparseMatrix<double, 0, int>, 0, Eigen::Stride<0, 0> >, 0>, const Eigen::SparseMatrix<double, 0, int> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
   423 |       : Base(other.derived())
       |                             ^
-eigen_beta.cpp:33:54:   required from here
+eigen_beta.cpp:33:52:   required from here
    33 |     Eigen::MatrixXd outer_X = adj_X * omega_ik * X + tau_k;
-      |                                                      ^~~~~
+      |                               ~~~~~~~~~~~~~~~~~~~~~^~~~~~~
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/CoreEvaluators.h:1071:54: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__m128d’} [-Wignored-attributes]
  1071 |     PacketAlignment = unpacket_traits<PacketScalar>::alignment,
       |                                                      ^~~~~~~~~
-g++ -std=gnu++17 -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG  -I'/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include' -I'/var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include' -I/usr/local/include    -fpic  -g -O2  -DR_NO_REMAP -c eigen_df.cpp -o eigen_df.o
+g++ -std=gnu++17 -I"/var/scratch2/tomas/cran/rcnst/build/include" -DNDEBUG  -I'/var/scratch2/tomas/cran/rcnst/lib/Rcpp/include' -I'/var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include' -I/usr/local/include    -fpic  -g -O2   -c eigen_df.cpp -o eigen_df.o
 In file included from /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/Core:205,
                  from /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/Dense:1,
                  from /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/RcppEigenForward.h:28,
@@ -7119,4 +7119,4 @@ In file included from /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen
 /var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/arch/SSE/PacketMath.h:222:43: warning: ignoring attributes on template argument ‘Eigen::internal::Packet4f’ {aka ‘__m128’} [-Wignored-attributes]
   222 | template<> struct unpacket_traits<Packet4f> {
       |                                           ^
-/var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/arch/SSE/PacketMath.h:228:43: warning: ignoring attributesTruncated.
+/var/scratch2/tomas/cran/rcnst/lib/RcppEigen/include/Eigen/src/Core/arch/SSE/PacketMath.h:228:43: warning: ignoring attributes on template argument ‘Eigen::interTruncated.
