@@ -1,5 +1,5 @@
-Package nlmixr2est version 3.0.4
-Package built using 87756/R 4.5.0; x86_64-pc-linux-gnu; 2025-02-20 01:00:00 UTC; unix   
+Package nlmixr2est version 4.1.0
+Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 06:14:56 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -27,7 +27,7 @@ Function Rcpp::Rcpp_unprotect(int)
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
 Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
-  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:682
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:680
 
 Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -178,8 +178,7 @@ Function _nlmixr2est_nlmixr2Unscaled_
 Function _nlmixr2est_nlmixrExpandFdParNlme_
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr nlmixr2est/src/RcppExports.cpp:50
   [PB] has negative depth nlmixr2est/src/RcppExports.cpp:62
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete nlmixr2estERROR: too many states (abstraction error?) in function dfCbindList
-/src/RcppExports.cpp:62
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete nlmixr2est/src/RcppExports.cpp:62
   [PB] has possible protection stack imbalance nlmixr2est/src/RcppExports.cpp:63
 
 Function _nlmixr2est_nlmixrExpandFdParNlme__try(SEXPREC*, SEXPREC*)
@@ -209,6 +208,10 @@ Function _nlmixr2est_resCalc
 Function _nlmixr2est_rxode2hasLlik
   [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _nlmixr2est_rxode2stateOde
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _nlmixr2est_saem_do_pred
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %19 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -223,9 +226,16 @@ Function _nlmixr2est_solveGradNls
 Function _nlmixr2est_sqrtm
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _rxode2rxFixRes
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [7]>(char const (&) [7]) const nlmixr2est/src/rxcmp.cpp:28
+  [UP] unprotected variable <unnamed var:   %3 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() nlmixr2est/src/rxcmp.cpp:32
+  [UP] unprotected variable <unnamed var:   %3 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::~EnvironmenERROR: too many states (abstraction error?) in function dfCbindList
+t_Impl() nlmixr2est/src/rxcmp.cpp:34
+  [UP] unprotected variable <unnamed var:   %3 = alloca %struct.SEXPREC*, align 8> while calling allocating function Rcpp::Function_Impl<Rcpp::PreserveStorage>::~Function_Impl() nlmixr2est/src/rxcmp.cpp:34
+
 Function _saemOpt(int, double*)
-  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/saem.cpp:421
-  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/saem.cpp:436
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/saem.cpp:415
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/saem.cpp:430
 
 Function calculatePD(calcNpdeInfoId&, unsigned int&, unsigned int&, double&)
   [UP] ignoring variable <unnamed var:   %157 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -233,42 +243,43 @@ Function calculatePD(calcNpdeInfoId&, unsigned int&, unsigned int&, double&)
 Function dfCbindList
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete nlmixr2est/src/utilc.c:254
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete nlmixr2est/src/utilc.c:281
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete nlmixr2est/src/utilc.c:248
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete nlmixr2est/src/utilc.c:275
 
 Function foceiCalcCov(Rcpp::Environment_Impl<Rcpp::PreserveStorage>)
-  [UP] ignoring variable <unnamed var:   %294 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %297 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %305 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %317 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %324 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %360 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %378 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %462 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %482 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %485 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %488 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %295 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %298 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %306 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %318 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %325 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %361 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %379 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %463 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %483 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %486 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %489 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function foceiCalcR(Rcpp::Environment_Impl<Rcpp::PreserveStorage>)
-  [UP] ignoring variable <unnamed var:   %162 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %165 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %129 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %132 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %140 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %143 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %150 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %153 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %162 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %165 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %168 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function foceiCustomFun(Rcpp::Environment_Impl<Rcpp::PreserveStorage>)
-  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:4230
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:4366
 
 Function foceiFinalizeTables(Rcpp::Environment_Impl<Rcpp::PreserveStorage>)
   [UP] ignoring variable <unnamed var:   %69 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:5905
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:6054
 
 Function foceiFitCpp_(Rcpp::Environment_Impl<Rcpp::PreserveStorage>)
-  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:6597
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:6789
 
 Function foceiOuterFinal(double*, Rcpp::Environment_Impl<Rcpp::PreserveStorage>)
   [UP] ignoring variable <unnamed var:   %46 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -282,6 +293,9 @@ Function foceiS(double*, Rcpp::Environment_Impl<Rcpp::PreserveStorage>, bool&)
   [UP] ignoring variable <unnamed var:   %79 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %82 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function innerOpt1(int, int)
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:1654
+
 Function nlmSolveGradHess(arma::Col<double>&)
   [UP] ignoring variable <unnamed var:   %54 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -292,21 +306,21 @@ Function nlmSolveSwitch(arma::Col<double>&)
   [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function nlmixr2Eval_(Rcpp::Vector<14, Rcpp::PreserveStorage>, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:4394
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:4530
 
 Function nlmixr2Grad_(Rcpp::Vector<14, Rcpp::PreserveStorage>, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:4666
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:4802
 
 Function nlmixr2ParHist_(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:4827
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:4963
 
 Function nlmixr2Unscaled_(Rcpp::Vector<14, Rcpp::PreserveStorage>, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
-  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:4654
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:4790
 
 Function parHistData(Rcpp::Environment_Impl<Rcpp::PreserveStorage>, bool)
   [UP] ignoring variable <unnamed var:   %113 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:5871
-  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:5877
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:6020
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:6026
 
 Function rxode2::atolRtolFactor_(double)
   [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -326,9 +340,12 @@ Function rxode2::rxSolve_(Rcpp::RObject_Impl<Rcpp::PreserveStorage> const&, Rcpp
 Function rxode2::rxSymInvCholEnvCalculate(Rcpp::Vector<19, Rcpp::PreserveStorage>, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, Rcpp::Nullable<Rcpp::Vector<14, Rcpp::PreserveStorage> >)
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function rxode2stateOde(SEXPREC*)
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [7]>(char const (&) [7]) const nlmixr2est/src/rxcmp.cpp:17
+
 Function thetaReset00(Rcpp::Vector<14, Rcpp::PreserveStorage>&, Rcpp::Vector<14, Rcpp::PreserveStorage>&, arma::Mat<double>&)
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:1861
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [11]>(char const (&) [11]) const nlmixr2est/src/inner.cpp:1988
 
 Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
   [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

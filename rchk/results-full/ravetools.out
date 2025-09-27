@@ -1,5 +1,5 @@
-Package ravetools version 0.2.2
-Package built using 87912/R 4.5.0; x86_64-pc-linux-gnu; 2025-03-10 17:23:30 UTC; unix   
+Package ravetools version 0.2.4
+Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 05:35:50 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -21,7 +21,7 @@ Function Rcpp::Rcpp_unprotect(int)
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
 Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
-  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:682
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:680
 
 Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -54,20 +54,20 @@ Function SEXPREC* fastcov_template<int, int>(SEXPREC* const&, SEXPREC* const&, S
   [UP] ignoring variable colMeans2 as it has address taken, results will be incomplete 
 
 Function SEXPREC* shiftArrayTemplate<Rcomplex>(SEXPREC* const&, long const&, long const&, SEXPREC* const&, Rcomplex const&)
-  [UP] ignoring variable idxBuf as it has address taken, results will be incomplete 
   [UP] ignoring variable shiftAmount_ as it has address taken, results will be incomplete 
+  [UP] ignoring variable idxBuf as it has address taken, results will be incomplete 
 
 Function SEXPREC* shiftArrayTemplate<double>(SEXPREC* const&, long const&, long const&, SEXPREC* const&, double const&)
-  [UP] ignoring variable idxBuf as it has address taken, results will be incomplete 
   [UP] ignoring variable shiftAmount_ as it has address taken, results will be incomplete 
+  [UP] ignoring variable idxBuf as it has address taken, results will be incomplete 
 
 Function SEXPREC* shiftArrayTemplate<int>(SEXPREC* const&, long const&, long const&, SEXPREC* const&, int const&)
-  [UP] ignoring variable idxBuf as it has address taken, results will be incomplete 
   [UP] ignoring variable shiftAmount_ as it has address taken, results will be incomplete 
+  [UP] ignoring variable idxBuf as it has address taken, results will be incomplete 
 
 Function SEXPREC* shiftArrayTemplate<unsigned char>(SEXPREC* const&, long const&, long const&, SEXPREC* const&, unsigned char const&)
-  [UP] ignoring variable idxBuf as it has address taken, results will be incomplete 
   [UP] ignoring variable shiftAmount_ as it has address taken, results will be incomplete 
+  [UP] ignoring variable idxBuf as it has address taken, results will be incomplete 
 
 Function _ravetools_Matrix4__determinant
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -112,8 +112,8 @@ Function _ravetools_Quaternion__new
   [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _ravetools_Quaternion__to_array
-  [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _ravetools_Vector3__add
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr ravetools/src/RcppExports.cpp:1881
@@ -689,8 +689,8 @@ Function _ravetools_mvfftw_r2c
   [PB] has possible protection stack imbalance ravetools/src/RcppExports.cpp:485
 
 Function _ravetools_mvfftw_r2c_try(SEXPREC*, SEXPREC*, SEXPREC*)
-  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _ravetools_quickMedian
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr ravetools/src/RcppExports.cpp:287
@@ -709,8 +709,8 @@ Function _ravetools_quickQuantile
   [PB] has possible protection stack imbalance ravetools/src/RcppExports.cpp:265
 
 Function _ravetools_quickQuantile_try(SEXPREC*, SEXPREC*, SEXPREC*)
-  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _ravetools_rawToFloat
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -760,6 +760,10 @@ Function _ravetools_vcgDijkstra
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _ravetools_vcgEdgeSubdivision
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _ravetools_vcgIsoSurface
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -783,6 +787,10 @@ Function _ravetools_vcgSmoothImplicit
 Function _ravetools_vcgSphere
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _ravetools_vcgSubset
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %19 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _ravetools_vcgUniformResample
   [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

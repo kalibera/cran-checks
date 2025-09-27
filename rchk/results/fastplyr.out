@@ -1,0 +1,18 @@
+Package fastplyr version 0.9.9
+Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 06:39:26 UTC; unix   
+Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Suspicious call (two or more unprotected arguments) to Rf_lang2 at r_deparse(SEXPREC*) fastplyr/src/expressions.cpp:424
+Suspicious call (two or more unprotected arguments) to Rf_setAttrib at set_as_vctrs_new_list_of_int(SEXPREC*) fastplyr/src/tidy.cpp:110
+
+Function find_pkg_fun(char const*, char const*, bool)
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(S::::,?,?) fastplyr/src/expressions.cpp:17
+  [UP] calling allocating function Rf_eval with argument allocated using Rf_lang3(S:::,?,?) fastplyr/src/expressions.cpp:19
+
+Function get_mask_data_vars(SEXPREC*)
+  [UP] calling allocating function R_lsInternal3 with argument allocated using get_mask_top_env(SEXPREC*) fastplyr/src/mask.cpp:22
+
+Function is_group_unaware_call(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] calling allocating function exists(SEXPREC*, SEXPREC*) with argument allocated using get_mask_top_env(SEXPREC*) fastplyr/src/expressions.cpp:535

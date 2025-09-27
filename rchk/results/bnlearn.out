@@ -1,0 +1,29 @@
+Package bnlearn version 5.1
+Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 03:48:19 UTC; unix   
+Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Function connected_components
+  [UP] allocating function arcs2amat may destroy its unprotected argument (nodes <arg 2>), which is later used. bnlearn/src/graphs/rinterface/connected.components.c:22
+  [UP] calling allocating function arcs2amat with a fresh pointer (nodes <arg 2>) bnlearn/src/graphs/rinterface/connected.components.c:22
+  [UP] unprotected variable nodes while calling allocating function ug_connected_components bnlearn/src/graphs/rinterface/connected.components.c:33
+  [UP] unprotected variable nodes while calling allocating function Rf_allocVector bnlearn/src/graphs/rinterface/connected.components.c:37
+  [UP] unprotected variable nodes while calling allocating function Rf_allocVector bnlearn/src/graphs/rinterface/connected.components.c:41
+
+Function path_matrix
+  [UP] unprotected variable nodes while calling allocating function root_nodes bnlearn/src/graphs/rinterface/path.matrix.c:28
+  [UP] allocating function Rf_match(?,V,?) may destroy its unprotected argument (nodes <arg 1>), which is later used. bnlearn/src/graphs/rinterface/path.matrix.c:29
+  [UP] calling allocating function Rf_match(?,V,?) with a fresh pointer (nodes <arg 1>) bnlearn/src/graphs/rinterface/path.matrix.c:29
+  [UP] calling allocating function arcs2amat with a fresh pointer (nodes <arg 2>) bnlearn/src/graphs/rinterface/path.matrix.c:32
+
+Function reachability_matrix
+  [UP] allocating function arcs2amat may destroy its unprotected argument (nodes <arg 2>), which is later used. bnlearn/src/graphs/rinterface/sid.c:31
+  [UP] calling allocating function arcs2amat with a fresh pointer (nodes <arg 2>) bnlearn/src/graphs/rinterface/sid.c:31
+  [UP] allocating function Rf_match may destroy its unprotected argument (nodes <arg 1>), which is later used. bnlearn/src/graphs/rinterface/sid.c:34
+  [UP] calling allocating function Rf_match with a fresh pointer (nodes <arg 1>) bnlearn/src/graphs/rinterface/sid.c:34
+  [UP] allocating function Rf_match may destroy its unprotected argument (nodes <arg 1>), which is later used. bnlearn/src/graphs/rinterface/sid.c:40
+  [UP] calling allocating function Rf_match with a fresh pointer (nodes <arg 1>) bnlearn/src/graphs/rinterface/sid.c:40
+  [UP] unprotected variable nodes while calling allocating function initialize_reachability_matrix bnlearn/src/graphs/rinterface/sid.c:49
+  [UP] unprotected variable nodes while calling allocating function Rf_allocMatrix bnlearn/src/graphs/rinterface/sid.c:53
+  [UP] unprotected variable nodes while calling allocating function Rf_allocVector bnlearn/src/graphs/rinterface/sid.c:57

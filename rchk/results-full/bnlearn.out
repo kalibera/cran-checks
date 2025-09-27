@@ -1,5 +1,5 @@
-Package bnlearn version 5.0.2
-Package built using 87687/R 4.5.0; x86_64-pc-linux-gnu; 2025-02-05 22:43:58 UTC; unix   
+Package bnlearn version 5.1
+Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 03:48:19 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -39,10 +39,10 @@ Function bn_recovery
   [PB] has possible protection stack imbalance bnlearn/src/bnlearn/bn.recovery.c:161
 
 Function c_dataframe_column
-  [UP] calling allocating function Rf_match with a fresh pointer (colnames <arg 1>) bnlearn/src/minimal/data.frame.c:62
-  [PB] has negative depth bnlearn/src/minimal/data.frame.c:108
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete bnlearn/src/minimal/data.frame.c:108
-  [PB] has possible protection stack imbalance bnlearn/src/minimal/data.frame.c:112
+  [UP] calling allocating function Rf_match with a fresh pointer (colnames <arg 1>) bnlearn/src/minimal/data.frame.c:63
+  [PB] has negative depth bnlearn/src/minimal/data.frame.c:132
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete bnlearn/src/minimal/data.frame.c:132
+  [PB] has possible protection stack imbalance bnlearn/src/minimal/data.frame.c:136
 
 Function c_rbn_master
   [UP] calling allocating function Rf_match with argument allocated using Rf_getAttrib(?,S:names) bnlearn/src/inference/rbn.c:42
@@ -50,14 +50,21 @@ Function c_rbn_master
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete bnlearn/src/inference/rbn.c:236
 
 Function cdpred
-  [PB] has negative depth bnlearn/src/predict/predict.c:338
-  [UP] attempt to unprotect more items (2) than protected (1), results will be incomplete bnlearn/src/predict/predict.c:338
-  [PB] has possible protection stack imbalance bnlearn/src/predict/predict.c:353
+  [PB] has negative depth bnlearn/src/predict/predict.c:348
+  [UP] attempt to unprotect more items (2) than protected (1), results will be incomplete bnlearn/src/predict/predict.c:348
+  [PB] has possible protection stack imbalance bnlearn/src/predict/predict.c:363
 
 Function chow_liu
   [PB] has negative depth bnlearn/src/learning/local/mi.matrix.c:554
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete bnlearn/src/learning/local/mi.matrix.c:554
-  [PB] has possible protection stack imbalance bnlearn/src/learning/local/mi.matrix.c:582
+  [PB] has possible protection stack imbalance bnlearn/src/learning/local/mi.matrix.c:590
+
+Function connected_components
+  [UP] allocating function arcs2amat may destroy its unprotected argument (nodes <arg 2>), which is later used. bnlearn/src/graphs/rinterface/connected.components.c:22
+  [UP] calling allocating function arcs2amat with a fresh pointer (nodes <arg 2>) bnlearn/src/graphs/rinterface/connected.components.c:22
+  [UP] unprotected variable nodes while calling allocating function ug_connected_components bnlearn/src/graphs/rinterface/connected.components.c:33
+  [UP] unprotected variable nodes while calling allocating function Rf_allocVector bnlearn/src/graphs/rinterface/connected.components.c:37
+  [UP] unprotected variable nodes while calling allocating function Rf_allocVector bnlearn/src/graphs/rinterface/connected.components.c:41
 
 Function dpred
   [PB] has negative depth bnlearn/src/predict/predict.c:182
@@ -65,10 +72,10 @@ Function dpred
   [PB] has possible protection stack imbalance bnlearn/src/predict/predict.c:196
 
 Function gaussian_ols_parameters
-  [UP] unprotected variable fitted while calling allocating function mkReal bnlearn/src/parameters/rinterface/ordinary_least_squares.c:79
-  [UP] unprotected variable residuals while calling allocating function mkReal bnlearn/src/parameters/rinterface/ordinary_least_squares.c:79
-  [PB] has an unsupported form of unprotect with a variable - binary add results will be incomplete bnlearn/src/parameters/rinterface/ordinary_least_squares.c:83
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete bnlearn/src/parameters/rinterface/ordinary_least_squares.c:83
+  [UP] unprotected variable fitted while calling allocating function mkReal bnlearn/src/parameters/rinterface/ordinary.least.squares.c:79
+  [UP] unprotected variable residuals while calling allocating function mkReal bnlearn/src/parameters/rinterface/ordinary.least.squares.c:79
+  [PB] has an unsupported form of unprotect with a variable - binary add results will be incomplete bnlearn/src/parameters/rinterface/ordinary.least.squares.c:83
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete bnlearn/src/parameters/rinterface/ordinary.least.squares.c:83
 
 Function hc_to_be_added
   [PB] has negative depth bnlearn/src/learning/score/hc.cache.lookup.c:473
@@ -80,33 +87,49 @@ Function hc_to_be_added
 Function joint_discretize
   [PB] has too high protection stack depth results will be incomplete
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
-  [PB] has too high protection stack depth results will be incomplete
-  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete bnlearn/src/preprocessing/discretize.c:566
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete bnlearn/src/preprocessing/discretize.c:566
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete bnlearn/src/preprocessing/rinterface/discretize.c:350
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete bnlearn/src/preprocessing/rinterface/discretize.c:350
 
 Function mappred
   [UP] calling allocating function Rf_match with a fresh pointer (colnames <arg 1>) bnlearn/src/predict/map.lw.c:110
-  [PB] has negative depth bnlearn/src/predict/map.lw.c:265
-  [UP] attempt to unprotect more items (5) than protected (4), results will be incomplete bnlearn/src/predict/map.lw.c:265
-  [PB] has possible protection stack imbalance bnlearn/src/predict/map.lw.c:274
+  [PB] has negative depth bnlearn/src/predict/map.lw.c:271
+  [UP] attempt to unprotect more items (5) than protected (4), results will be incomplete bnlearn/src/predict/map.lw.c:271
+  [PB] has possible protection stack imbalance bnlearn/src/predict/map.lw.c:280
 
 Function mixture_gaussian_ols_parameters
-  [PB] has an unsupported form of unprotect with a variable - binary add results will be incomplete bnlearn/src/parameters/rinterface/mixture_ordinary_least_squares.c:100
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete bnlearn/src/parameters/rinterface/mixture_ordinary_least_squares.c:100
+  [PB] has an unsupported form of unprotect with a variable - binary add results will be incomplete bnlearn/src/parameters/rinterface/mixture.ordinary.least.squares.c:100
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete bnlearn/src/parameters/rinterface/mixture.ordinary.least.squares.c:100
 
 Function naivepred
-  [PB] has negative depth bnlearn/src/predict/predict.c:707
-  [UP] attempt to unprotect more items (3) than protected (2), results will be incomplete bnlearn/src/predict/predict.c:707
-  [PB] has possible protection stack imbalance bnlearn/src/predict/predict.c:724
+  [PB] has negative depth bnlearn/src/predict/predict.c:722
+  [UP] attempt to unprotect more items (3) than protected (2), results will be incomplete bnlearn/src/predict/predict.c:722
+  [PB] has possible protection stack imbalance bnlearn/src/predict/predict.c:739
 
 Function normalize_cpt
   [PB] has negative depth bnlearn/src/minimal/table.c:115
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete bnlearn/src/minimal/table.c:115
   [PB] has possible protection stack imbalance bnlearn/src/minimal/table.c:117
 
+Function path_matrix
+  [UP] unprotected variable nodes while calling allocating function root_nodes bnlearn/src/graphs/rinterface/path.matrix.c:28
+  [UP] allocating function Rf_match(?,V,?) may destroy its unprotected argument (nodes <arg 1>), which is later used. bnlearn/src/graphs/rinterface/path.matrix.c:29
+  [UP] calling allocating function Rf_match(?,V,?) with a fresh pointer (nodes <arg 1>) bnlearn/src/graphs/rinterface/path.matrix.c:29
+  [UP] calling allocating function arcs2amat with a fresh pointer (nodes <arg 2>) bnlearn/src/graphs/rinterface/path.matrix.c:32
+
+Function reachability_matrix
+  [UP] allocating function arcs2amat may destroy its unprotected argument (nodes <arg 2>), which is later used. bnlearn/src/graphs/rinterface/sid.c:31
+  [UP] calling allocating function arcs2amat with a fresh pointer (nodes <arg 2>) bnlearn/src/graphs/rinterface/sid.c:31
+  [UP] allocating function Rf_match may destroy its unprotected argument (nodes <arg 1>), which is later used. bnlearn/src/graphs/rinterface/sid.c:34
+  [UP] calling allocating function Rf_match with a fresh pointer (nodes <arg 1>) bnlearn/src/graphs/rinterface/sid.c:34
+  [UP] allocating function Rf_match may destroy its unprotected argument (nodes <arg 1>), which is later used. bnlearn/src/graphs/rinterface/sid.c:40
+  [UP] calling allocating function Rf_match with a fresh pointer (nodes <arg 1>) bnlearn/src/graphs/rinterface/sid.c:40
+  [UP] unprotected variable nodes while calling allocating function initialize_reachability_matrix bnlearn/src/graphs/rinterface/sid.c:49
+  [UP] unprotected variable nodes while calling allocating function Rf_allocMatrix bnlearn/src/graphs/rinterface/sid.c:53
+  [UP] unprotected variable nodes while calling allocating function Rf_allocVector bnlearn/src/graphs/rinterface/sid.c:57
+
 Function subset_by_name
-  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
   [PB] has too high protection stack depth results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
   [UP] allocating function Rf_match may destroy its unprotected argument (vec_names <arg 1>), which is later used. bnlearn/src/minimal/common.c:215
   [UP] calling allocating function Rf_match with a fresh pointer (vec_names <arg 1>) bnlearn/src/minimal/common.c:215
   [UP] unprotected variable subvec while calling allocating function Rf_match bnlearn/src/minimal/common.c:215

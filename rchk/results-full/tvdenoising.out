@@ -1,0 +1,31 @@
+Package tvdenoising version 1.0.0
+Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 04:21:49 UTC; unix   
+Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function _tvdenoising_rcpp_tvd
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr tvdenoising/src/RcppExports.cpp:36
+  [PB] has negative depth tvdenoising/src/RcppExports.cpp:48
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete tvdenoising/src/RcppExports.cpp:48
+  [PB] has possible protection stack imbalance tvdenoising/src/RcppExports.cpp:49
+
+Function _tvdenoising_rcpp_tvd_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _tvdenoising_rcpp_wtvd
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr tvdenoising/src/RcppExports.cpp:72
+  [PB] has negative depth tvdenoising/src/RcppExports.cpp:84
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete tvdenoising/src/RcppExports.cpp:84
+  [PB] has possible protection stack imbalance tvdenoising/src/RcppExports.cpp:85
+
+Function _tvdenoising_rcpp_wtvd_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

@@ -1,17 +1,9 @@
-Package fixest version 0.12.1
-Package built using 87687/R 4.5.0; x86_64-pc-linux-gnu; 2025-02-06 00:06:25 UTC; unix   
+Package fixest version 0.13.2
+Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 05:20:27 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
-
-Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
-  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
-
-Function Rcpp::Armor<SEXPREC*>::~Armor()
-  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
-  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
 
 Function Rcpp::Rcpp_protect(SEXPREC*)
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
@@ -21,10 +13,7 @@ Function Rcpp::Rcpp_unprotect(int)
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
 Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
-  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:682
-
-Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
-  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:680
 
 Function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::set(SEXPREC*)
   [UP] ignoring variable rhs as it has address taken, results will be incomplete 
@@ -147,6 +136,10 @@ Function _fixest_cpp_get_nb_threads
 Function _fixest_cpp_hash_string
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _fixest_cpp_index_table_sum
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %34 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _fixest_cpp_isConstant
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -213,12 +206,6 @@ Function _fixest_cpp_poisson_linkinv
 Function _fixest_cpp_poisson_validmu
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _fixest_cpp_quf_gnl
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _fixest_cpp_quf_table_sum
-  [UP] ignoring variable <unnamed var:   %42 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
 Function _fixest_cpp_sparse_products
   [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -236,6 +223,10 @@ Function _fixest_cpp_tapply_sum
 
 Function _fixest_cpp_tapply_vsum
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _fixest_cpp_to_index
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _fixest_cpp_trigamma
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -272,38 +263,53 @@ Function _fixest_update_mu_single_cluster
   [UP] ignoring variable <unnamed var:   %46 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function cpp_conv_acc_gau_2(int, int, int, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, int, double, SEXPREC*)
-  [UP] unprotected variable mu while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector() fixest/src/convergence.cpp:1966
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*)(?,V) with a fresh pointer (mu <arg 2>) fixest/src/convergence.cpp:1967
+  [UP] unprotected variable mu while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector() fixest/src/convergence.cpp:1944
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*)(?,V) with a fresh pointer (mu <arg 2>) fixest/src/convergence.cpp:1945
 
 Function cpp_conv_acc_gnl(int, int, double, double, double, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, int)
-  [UP] unprotected variable mu while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector() fixest/src/convergence.cpp:1015
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*)(?,V) with a fresh pointer (mu <arg 2>) fixest/src/convergence.cpp:1016
+  [UP] unprotected variable mu while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector() fixest/src/convergence.cpp:993
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*)(?,V) with a fresh pointer (mu <arg 2>) fixest/src/convergence.cpp:994
 
 Function cpp_conv_acc_poi_2(int, int, int, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, int, double, SEXPREC*, SEXPREC*)
-  [UP] unprotected variable exp_mu while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector() fixest/src/convergence.cpp:1452
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*)(?,V) with a fresh pointer (exp_mu <arg 2>) fixest/src/convergence.cpp:1453
+  [UP] unprotected variable exp_mu while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector() fixest/src/convergence.cpp:1430
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*)(?,V) with a fresh pointer (exp_mu <arg 2>) fixest/src/convergence.cpp:1431
 
 Function cpp_conv_seq_gau_2(int, int, int, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, int, double, SEXPREC*)
-  [UP] unprotected variable mu while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector() fixest/src/convergence.cpp:2126
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*)(?,V) with a fresh pointer (mu <arg 2>) fixest/src/convergence.cpp:2127
+  [UP] unprotected variable mu while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector() fixest/src/convergence.cpp:2104
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*)(?,V) with a fresh pointer (mu <arg 2>) fixest/src/convergence.cpp:2105
 
 Function cpp_conv_seq_gnl(int, int, double, double, double, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, int)
-  [UP] unprotected variable mu while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector() fixest/src/convergence.cpp:1199
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*)(?,V) with a fresh pointer (mu <arg 2>) fixest/src/convergence.cpp:1200
+  [UP] unprotected variable mu while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector() fixest/src/convergence.cpp:1177
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*)(?,V) with a fresh pointer (mu <arg 2>) fixest/src/convergence.cpp:1178
 
 Function cpp_conv_seq_poi_2(int, int, int, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, int, double, SEXPREC*, SEXPREC*)
-  [UP] unprotected variable exp_mu while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector() fixest/src/convergence.cpp:1594
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*)(?,V) with a fresh pointer (exp_mu <arg 2>) fixest/src/convergence.cpp:1595
+  [UP] unprotected variable exp_mu while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector() fixest/src/convergence.cpp:1572
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*)(?,V) with a fresh pointer (exp_mu <arg 2>) fixest/src/convergence.cpp:1573
 
-Function cpp_quf_gnl(SEXPREC*)
-  [UP] unprotected variable r_x_uf while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector() fixest/src/quf.cpp:461
-  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*)(?,V) with a fresh pointer (r_x_uf <arg 2>) fixest/src/quf.cpp:462
-
-Function cpp_quf_table_sum(SEXPREC*, SEXPREC*, bool, bool, bool, bool, Rcpp::Vector<13, Rcpp::PreserveStorage>, int, bool, SEXPREC*, Rcpp::Vector<13, Rcpp::PreserveStorage>)
-  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+Function cpp_index_table_sum(SEXPREC*, SEXPREC*, bool, bool, bool, bool, Rcpp::Vector<13, Rcpp::PreserveStorage>, int)
   [PB] has too high protection stack depth results will be incomplete
-  [PB] has an unsupported form of unprotect with a variable - binary add results will be incomplete fixest/src/quf.cpp:1152
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete fixest/src/quf.cpp:1152
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete fixest/src/index_fixed_effects.cpp:239
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete fixest/src/index_fixed_effects.cpp:239
+  [PB] has negative depth fixest/src/index_fixed_effects.cpp:263
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete fixest/src/index_fixed_effects.cpp:263
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete fixest/src/index_fixed_effects.cpp:338
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete fixest/src/index_fixed_effects.cpp:338
+  [PB] has possible protection stack imbalance fixest/src/index_fixed_effects.cpp:342
+
+Function cpp_to_index(SEXPREC*&)
+  [UP] unprotected variable first_obs while calling allocating function indexthis::to_r_vector(std::__1::vector<int, std::__1::allocator<int> > const&) fixest/src/to_index.cpp:1121
+  [UP] unprotected variable first_obs while calling allocating function Rf_allocVector fixest/src/to_index.cpp:1124
+  [UP] unprotected variable table while calling allocating function Rf_allocVector fixest/src/to_index.cpp:1124
+  [PB] has negative depth fixest/src/to_index.cpp:1137
+  [UP] attempt to unprotect more items (2) than protected (0), results will be incomplete fixest/src/to_index.cpp:1137
+  [PB] has possible protection stack imbalance fixest/src/to_index.cpp:1143
+
+Function indexthis::IndexInputVector::initialize(SEXPREC* const&)
+  [PB] has possible protection stack imbalance fixest/src/to_index.cpp:169
+
+Function indexthis::SEXP_to_vec_r_vector(SEXPREC* const&)
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::Vector<19, Rcpp::PreserveStorage> >(Rcpp::Vector<19, Rcpp::PreserveStorage> const&)
   [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

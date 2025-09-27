@@ -1,9 +1,17 @@
-Package FastJM version 1.4.2
-Package built using 87687/R 4.5.0; x86_64-pc-linux-gnu; 2025-02-06 02:57:03 UTC; unix   
+Package FastJM version 1.5.1
+Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 07:20:49 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
 
 Function Rcpp::Rcpp_protect(SEXPREC*)
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
@@ -11,6 +19,15 @@ Function Rcpp::Rcpp_protect(SEXPREC*)
 Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:680
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::set(SEXPREC*)
+  [UP] ignoring variable rhs as it has address taken, results will be incomplete 
 
 Function _FastJM_CH
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -21,7 +38,13 @@ Function _FastJM_CumSum
 Function _FastJM_GetCIF1CR
   [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _FastJM_GetCIF1CRall
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _FastJM_GetCIF2CR
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _FastJM_GetCIF2CRall
   [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _FastJM_GetrisksetC
@@ -60,6 +83,9 @@ Function _FastJM_getCovSF
 Function _FastJM_getECIF
   [UP] ignoring variable <unnamed var:   %72 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _FastJM_getECIFall
+  [UP] ignoring variable <unnamed var:   %75 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _FastJM_getECpseudo
   [UP] ignoring variable <unnamed var:   %78 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -87,11 +113,20 @@ Function _FastJM_getMC
 Function _FastJM_getMCSF
   [UP] ignoring variable <unnamed var:   %66 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _FastJM_getMNA
+  [UP] ignoring variable <unnamed var:   %87 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _FastJM_getMaGH
+  [UP] ignoring variable <unnamed var:   %87 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _FastJM_getPus
   [UP] ignoring variable <unnamed var:   %57 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _FastJM_getPusCR
   [UP] ignoring variable <unnamed var:   %66 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _FastJM_getQuadMix
+  [UP] ignoring variable <unnamed var:   %81 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _FastJM_getdeterminant
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -116,3 +151,18 @@ Function _FastJM_getloglikeCstandard
 
 Function _FastJM_getloglikeCstandardSF
   [UP] ignoring variable <unnamed var:   %60 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _FastJM_getmvCov
+  [UP] ignoring variable <unnamed var:   %66 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _FastJM_getmvCovSF
+  [UP] ignoring variable <unnamed var:   %57 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _FastJM_normalApprox
+  [UP] ignoring variable <unnamed var:   %75 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _FastJM_normalApproxSF
+  [UP] ignoring variable <unnamed var:   %63 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

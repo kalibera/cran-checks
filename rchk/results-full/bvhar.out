@@ -1,5 +1,5 @@
-Package bvhar version 2.2.2
-Package built using 87867/R 4.5.0; x86_64-pc-linux-gnu; 2025-03-03 20:56:26 UTC; unix   
+Package bvhar version 2.3.0
+Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 07:08:44 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -21,7 +21,7 @@ Function Rcpp::Rcpp_unprotect(int)
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
 Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
-  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:682
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:680
 
 Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -49,6 +49,9 @@ Function _bvhar_VHARtoVMA
 
 Function _bvhar_build_design
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bvhar_build_exogen_design
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_build_response
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -92,9 +95,6 @@ Function _bvhar_compute_mn_spillover
 Function _bvhar_compute_net_spillover
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _bvhar_compute_ols_spillover
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
 Function _bvhar_compute_spillover
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -107,20 +107,26 @@ Function _bvhar_compute_to_spillover
 Function _bvhar_compute_tot_spillover
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _bvhar_compute_var_mse
+Function _bvhar_compute_var_mse_export
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bvhar_compute_var_spillover
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_compute_var_stablemat
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_compute_varldlt_spillover
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _bvhar_compute_vhar_mse
+Function _bvhar_compute_vhar_mse_export
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bvhar_compute_vhar_spillover
   [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_compute_vhar_stablemat
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_compute_vharldlt_spillover
   [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -129,7 +135,7 @@ Function _bvhar_dynamic_bvar_spillover
   [UP] ignoring variable <unnamed var:   %42 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_dynamic_bvarldlt_spillover
-  [UP] ignoring variable <unnamed var:   %75 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %84 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_dynamic_bvarsv_spillover
   [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -138,7 +144,7 @@ Function _bvhar_dynamic_bvhar_spillover
   [UP] ignoring variable <unnamed var:   %45 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_dynamic_bvharldlt_spillover
-  [UP] ignoring variable <unnamed var:   %78 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %87 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_dynamic_bvharsv_spillover
   [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -161,6 +167,9 @@ Function _bvhar_estimate_bvhar_mn
 Function _bvhar_estimate_har
   [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _bvhar_estimate_harx
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _bvhar_estimate_mn_flat
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -168,10 +177,13 @@ Function _bvhar_estimate_mniw
   [UP] ignoring variable <unnamed var:   %42 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_estimate_sur
-  [UP] ignoring variable <unnamed var:   %69 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %90 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_estimate_var
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bvhar_estimate_varx
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_expand_bvar
   [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -180,46 +192,82 @@ Function _bvhar_expand_bvarflat
   [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_expand_bvarldlt
-  [UP] ignoring variable <unnamed var:   %93 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %105 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_expand_bvarsv
-  [UP] ignoring variable <unnamed var:   %96 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %108 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bvhar_expand_bvarxldlt
+  [UP] ignoring variable <unnamed var:   %120 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bvhar_expand_bvarxsv
+  [UP] ignoring variable <unnamed var:   %123 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_expand_bvhar
   [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_expand_bvharldlt
-  [UP] ignoring variable <unnamed var:   %96 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %108 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_expand_bvharsv
-  [UP] ignoring variable <unnamed var:   %99 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %111 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bvhar_expand_bvharxldlt
+  [UP] ignoring variable <unnamed var:   %123 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bvhar_expand_bvharxsv
+  [UP] ignoring variable <unnamed var:   %126 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_expand_var
   [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _bvhar_expand_varx
+  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _bvhar_expand_vhar
   [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bvhar_expand_vharx
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_forecast_bvar
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_forecast_bvarldlt
-  [UP] ignoring variable <unnamed var:   %45 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %42 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_forecast_bvarsv
+  [UP] ignoring variable <unnamed var:   %45 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bvhar_forecast_bvarxldlt
   [UP] ignoring variable <unnamed var:   %48 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _bvhar_forecast_bvarxsv
+  [UP] ignoring variable <unnamed var:   %51 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _bvhar_forecast_bvharldlt
-  [UP] ignoring variable <unnamed var:   %48 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %45 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_forecast_bvharmn
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_forecast_bvharsv
+  [UP] ignoring variable <unnamed var:   %48 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bvhar_forecast_bvharxldlt
   [UP] ignoring variable <unnamed var:   %51 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bvhar_forecast_bvharxsv
+  [UP] ignoring variable <unnamed var:   %54 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bvhar_forecast_harx
+  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_forecast_var
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bvhar_forecast_varx
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_forecast_vhar
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -252,25 +300,43 @@ Function _bvhar_roll_bvarflat
   [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_roll_bvarldlt
-  [UP] ignoring variable <unnamed var:   %93 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %105 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_roll_bvarsv
-  [UP] ignoring variable <unnamed var:   %96 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %108 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bvhar_roll_bvarxldlt
+  [UP] ignoring variable <unnamed var:   %120 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bvhar_roll_bvarxsv
+  [UP] ignoring variable <unnamed var:   %123 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_roll_bvhar
   [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_roll_bvharldlt
-  [UP] ignoring variable <unnamed var:   %96 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %108 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_roll_bvharsv
-  [UP] ignoring variable <unnamed var:   %99 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %111 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bvhar_roll_bvharxldlt
+  [UP] ignoring variable <unnamed var:   %123 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bvhar_roll_bvharxsv
+  [UP] ignoring variable <unnamed var:   %126 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_roll_var
   [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _bvhar_roll_varx
+  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _bvhar_roll_vhar
   [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bvhar_roll_vharx
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bvhar_scale_har
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -320,10 +386,10 @@ Function bvhar::DynamicSvSpillover::returnSpillover()
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function bvhar::McmcOutforecastRun<bvhar::RegForecaster>::returnForecast()
+Function bvhar::McmcOutForecastRun<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, false>::returnForecast()
   [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function bvhar::McmcOutforecastRun<bvhar::SvForecaster>::returnForecast()
+Function bvhar::McmcOutForecastRun<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, true>::returnForecast()
   [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function tune_var(Eigen::Matrix<double, -1, -1, 0, -1, -1>, int, bool)

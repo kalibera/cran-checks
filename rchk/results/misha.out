@@ -1,65 +1,14 @@
-Package misha version 4.3.6
-Package built using 87912/R 4.5.0; x86_64-pc-linux-gnu; 2025-03-10 17:41:26 UTC; unix   
+Package misha version 4.3.12
+Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 04:08:52 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
-Suspicious call (two or more unprotected arguments) to Rf_defineVar at TrackExprScanner::define_r_vars(unsigned int) misha/src/TrackExpressionScanner.cpp:116
-Suspicious call (two or more unprotected arguments) to Rf_defineVar at TrackExprScanner::last_logical(int) const misha/src/./TrackExpressionScanner.h:160
-Suspicious call (two or more unprotected arguments) to Rf_defineVar at TrackExprScanner::last_real(int) const misha/src/./TrackExpressionScanner.h:143
-Suspicious call (two or more unprotected arguments) to Rf_findVar at TrackExpressionVars::parse_exprs(std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&) misha/src/TrackExpressionVars.cpp:60
-Suspicious call (two or more unprotected arguments) to Rf_findVar at rdb::IntervUtils::convert_rintervs(SEXPREC*, GIntervals*, GIntervals2D*, bool, GenomeChromKey const*, char const*, unsigned int*, bool) const misha/src/rdbinterval.cpp:319
-Suspicious call (two or more unprotected arguments) to Rf_findVar at rdb::IntervUtils::track_exists(char const*) misha/src/rdbinterval.cpp:85
-Suspicious call (two or more unprotected arguments) to Rf_findVar at rdb::get_glib_dir(SEXPREC*) misha/src/rdbutils.cpp:786
-Suspicious call (two or more unprotected arguments) to Rf_findVar at rdb::get_groot(SEXPREC*) misha/src/rdbutils.cpp:764
-Suspicious call (two or more unprotected arguments) to Rf_findVar at rdb::get_gwd(SEXPREC*) misha/src/rdbutils.cpp:775
-
-Function TrackExpressionVars::add_vtrack_var(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, SEXPREC*)
-  [UP] calling allocating function Rf_findVar(S:GTRACKS,?) with argument allocated using Rf_findVar(S:.misha,?) misha/src/TrackExpressionVars.cpp:433
-
-Function TrackExpressionVars::parse_exprs(std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&)
-  [UP] calling allocating function Rf_findVar(S:GTRACKS,?) with argument allocated using Rf_findVar(S:.misha,?) misha/src/TrackExpressionVars.cpp:60
-  [UP] calling allocating function Rf_findVar(S:GVTRACKS,?) with argument allocated using Rf_findVar(S:.misha,?) misha/src/TrackExpressionVars.cpp:65
-  [UP] unprotected variable gwds while calling allocating function rdb::get_gwd(SEXPREC*) misha/src/TrackExpressionVars.cpp:75
-  [UP] unprotected variable gwds while calling allocating function Rf_getAttrib(?,S:names) misha/src/TrackExpressionVars.cpp:80
-
-Function build_rintervals_summary(GIntervalsFetcher1D*, GIntervalsFetcher2D*, std::__1::vector<IntervalSummary, std::__1::allocator<IntervalSummary> > const&, rdb::IntervUtils&, bool)
-  [UP] unprotected variable colnames while calling allocating function rdb::RSaneAllocVector(unsigned int, long) misha/src/GenomeTrackSummary.cpp:92
-  [UP] unprotected variable colnames while calling allocating function Rf_mkChar misha/src/GenomeTrackSummary.cpp:106
-
-Function gintervs_liftover
-  [UP] unprotected variable col_names while calling allocating function rdb::RSaneAllocVector(unsigned int, long) misha/src/IntervalsLiftover.cpp:98
-
-Function gset_tracks_attrs
-  [UP] unprotected variable rattr_names while calling allocating function Rf_getAttrib(?,S:row.names) misha/src/TrackVars.cpp:137
-  [UP] unprotected variable rattr_names while calling allocating function rdb::track2attrs_path(SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) misha/src/TrackVars.cpp:161
-  [UP] unprotected variable rtracknames while calling allocating function rdb::track2attrs_path(SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) misha/src/TrackVars.cpp:161
-  [UP] unprotected variable rattr_names while calling allocating function rdb::track2attrs_path(SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) misha/src/TrackVars.cpp:207
-  [UP] unprotected variable rtracknames while calling allocating function rdb::track2attrs_path(SEXPREC*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) misha/src/TrackVars.cpp:207
-  [UP] unprotected variable rattr_names while calling allocating function rdb::Progress_reporter::report(unsigned long) misha/src/TrackVars.cpp:209
-  [UP] unprotected variable rtracknames while calling allocating function rdb::Progress_reporter::report(unsigned long) misha/src/TrackVars.cpp:209
-
-Function rdb::IntervUtils::IntervUtils(SEXPREC*)
-  [UP] calling allocating function Rf_findVar(S:ALLGENOME,?) with argument allocated using Rf_findVar(S:.misha,?) misha/src/rdbinterval.cpp:47
-
-Function rdb::IntervUtils::convert_chain_intervs(rdb::ChainIntervals const&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > >&)
-  [UP] unprotected variable col_names while calling allocating function rdb::RSaneAllocVector(unsigned int, long) misha/src/rdbinterval.cpp:647
-  [UP] unprotected variable col_names while calling allocating function rdb::RSaneAllocVector(unsigned int, long) misha/src/rdbinterval.cpp:648
-  [UP] unprotected variable col_names while calling allocating function rdb::RSaneAllocVector(unsigned int, long) misha/src/rdbinterval.cpp:649
-  [UP] unprotected variable col_names while calling allocating function Rf_mkChar misha/src/rdbinterval.cpp:657
-  [UP] unprotected variable col_names while calling allocating function Rf_mkChar misha/src/rdbinterval.cpp:660
-
-Function rdb::get_glib_dir(SEXPREC*)
-  [UP] calling allocating function Rf_findVar(S:.GLIBDIR,?) with argument allocated using Rf_findVar(S:.misha,?) misha/src/rdbutils.cpp:786
-
-Function rdb::get_groot(SEXPREC*)
-  [UP] calling allocating function Rf_findVar(S:GROOT,?) with argument allocated using Rf_findVar(S:.misha,?) misha/src/rdbutils.cpp:764
-
-Function rdb::get_gwd(SEXPREC*)
-  [UP] calling allocating function Rf_findVar(S:GWD,?) with argument allocated using Rf_findVar(S:.misha,?) misha/src/rdbutils.cpp:775
-
 Function rdb::rprotect(SEXPREC*&)
   [PB] has possible protection stack imbalance misha/src/rdbutils.cpp:700
+
+Function rdb::rprotect_ptr(SEXPREC*)
+  [PB] has possible protection stack imbalance misha/src/./rdbutils.h:476
 
 Function rdb::runprotect(SEXPREC*&)
   [PB] has negative depth misha/src/rdbutils.cpp:715

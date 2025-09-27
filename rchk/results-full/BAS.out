@@ -1,5 +1,5 @@
 Package BAS version 1.7.5
-Package built using 87687/R 4.5.0; x86_64-pc-linux-gnu; 2025-02-05 22:43:47 UTC; unix   
+Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 03:48:09 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -12,6 +12,7 @@ Function SetModel
 
 Function amcmc
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [PB] has too high protection stack depth results will be incomplete
   [PB] has too high protection stack depth results will be incomplete
   [UP] unprotected variable ANS while calling allocating function GetNextModelCandidate BAS/src/lm_amcmc.c:183
   [UP] unprotected variable ANS_names while calling allocating function GetNextModelCandidate BAS/src/lm_amcmc.c:183
@@ -616,8 +617,8 @@ Function amcmc
   [PB] has possible protection stack imbalance BAS/src/lm_amcmc.c:488
 
 Function glm_mcmc
-  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
   [PB] has too high protection stack depth results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
   [UP] unprotected variable Rmodel_m while calling allocating function vecalloc BAS/src/glm_mcmc.c:103
   [UP] unprotected variable glm_fit while calling allocating function vecalloc BAS/src/glm_mcmc.c:103
   [UP] unprotected variable Rmodel_m while calling allocating function ivecalloc BAS/src/glm_mcmc.c:104
@@ -976,7 +977,6 @@ Function glm_mcmc
 Function glm_mcmcbas
   [PB] has too high protection stack depth results will be incomplete
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
-  [PB] has too high protection stack depth results will be incomplete
   [UP] unprotected variable Rmodel_m while calling allocating function vecalloc BAS/src/glm_mcmcbas.c:104
   [UP] unprotected variable glm_fit while calling allocating function vecalloc BAS/src/glm_mcmcbas.c:104
   [UP] unprotected variable Rmodel_m while calling allocating function ivecalloc BAS/src/glm_mcmcbas.c:105
@@ -1845,7 +1845,6 @@ Function mcmc_new
   [PB] has possible protection stack imbalance BAS/src/lm_mcmc.c:321
 
 Function mcmcbas
-  [PB] has too high protection stack depth results will be incomplete
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
   [PB] has too high protection stack depth results will be incomplete
   [UP] unprotected variable ANS while calling allocating function GetNextModelCandidate BAS/src/lm_mcmcbas.c:204
