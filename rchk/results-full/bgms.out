@@ -1,9 +1,12 @@
-Package bgms version 0.1.4.2
-Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 04:28:18 UTC; unix   
+Package bgms version 0.1.6.0
+Package built using 88882/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-28 23:44:39 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
+
+Function ProgressManager::ProgressManager(int, int, int, int, int, bool)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with a fresh pointer (s <arg 2>) bgms/src/progress_manager.cpp:16
 
 Function Rcpp::Rcpp_protect(SEXPREC*)
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
@@ -12,17 +15,35 @@ Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
-Function Rcpp::Vector<13, Rcpp::PreserveStorage> Rcpp::sample<13>(Rcpp::Vector<13, Rcpp::PreserveStorage> const&, int, bool, Rcpp::Nullable<Rcpp::Vector<14, Rcpp::PreserveStorage> >)
-  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:680
 
-Function _bgms_compare_gibbs_sampler
+Function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::set(SEXPREC*)
+  [UP] ignoring variable rhs as it has address taken, results will be incomplete 
+
+Function _bgms_compute_Vn_mfm_sbm
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bgms_get_explog_switch
+  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bgms_rcpp_ieee754_exp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bgms_rcpp_ieee754_log
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bgms_run_bgmCompare_parallel
+  [UP] ignoring variable <unnamed var:   %117 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _bgms_run_bgm_parallel
   [UP] ignoring variable <unnamed var:   %105 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _bgms_gibbs_sampler
-  [UP] ignoring variable <unnamed var:   %90 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bgms_sample_bcomrf_gibbs
   [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _bgms_sample_omrf_gibbs
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
