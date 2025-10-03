@@ -1,5 +1,5 @@
-Package LearnNonparam version 1.2.9
-Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 04:07:26 UTC; unix   
+Package LearnNonparam version 1.3.0
+Package built using 88895/R 4.6.0; x86_64-pc-linux-gnu; 2025-10-03 04:14:15 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -12,7 +12,17 @@ Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
+Function Stat<false>::allocate(long, double)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Stat<true>::allocate(long, double)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _LearnNonparam_association_pmt
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _LearnNonparam_distribution_pmt
   [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -21,8 +31,8 @@ Function _LearnNonparam_ksample_pmt
   [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _LearnNonparam_multcomp_pmt
-  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %31 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _LearnNonparam_paired_pmt
   [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -33,8 +43,8 @@ Function _LearnNonparam_rcbd_pmt
   [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _LearnNonparam_table_pmt
-  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _LearnNonparam_twosample_pmt
   [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -47,7 +57,7 @@ Function association_pmt(SEXPREC*, SEXPREC*, SEXPREC*, double, bool)
 Function ksample_pmt(SEXPREC*, SEXPREC*, SEXPREC*, double, bool)
   [UP] ignoring variable group as it has address taken, results will be incomplete 
 
-Function multcomp_pmt(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, double, bool)
+Function multcomp_pmt(SEXPREC*, SEXPREC*, SEXPREC*, double, bool)
   [UP] ignoring variable group as it has address taken, results will be incomplete 
 
 Function paired_pmt(SEXPREC*, SEXPREC*, SEXPREC*, double, bool)
@@ -57,9 +67,8 @@ Function paired_pmt(SEXPREC*, SEXPREC*, SEXPREC*, double, bool)
 Function rcbd_pmt(SEXPREC*, SEXPREC*, double, bool)
   [UP] ignoring variable data as it has address taken, results will be incomplete 
 
-Function table_pmt(SEXPREC*, SEXPREC*, SEXPREC*, double, bool)
-  [UP] ignoring variable col as it has address taken, results will be incomplete 
-  [UP] ignoring variable row as it has address taken, results will be incomplete 
+Function table_pmt(SEXPREC*, SEXPREC*, double, bool)
+  [UP] ignoring variable data as it has address taken, results will be incomplete 
 
 Function twosample_pmt(SEXPREC*, SEXPREC*, SEXPREC*, double, bool)
   [UP] ignoring variable x as it has address taken, results will be incomplete 
