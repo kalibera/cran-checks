@@ -1,0 +1,284 @@
+Package bbotk version 1.7.0
+Package built using 88914/R 4.6.0; x86_64-pc-linux-gnu; 2025-10-12 18:49:48 UTC; unix   
+Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function RC_named_list_create_PROTECT
+  [PB] has possible protection stack imbalance bbotk/src/rc_helpers.c:24
+
+Function RC_named_list_create_emptynames_PROTECT
+  [PB] has possible protection stack imbalance bbotk/src/rc_helpers.c:13
+
+Function c_local_search
+  [UP] unprotected variable s_neighs_x while calling allocating function R_alloc bbotk/src/local_search.c:790
+  [UP] unprotected variable s_neighs_x while calling allocating function R_alloc bbotk/src/local_search.c:791
+  [UP] unprotected variable s_neighs_x while calling allocating function R_alloc bbotk/src/local_search.c:792
+  [UP] unprotected variable s_neighs_x while calling allocating function eval_obj bbotk/src/local_search.c:795
+  [UP] unprotected variable s_neighs_x while calling allocating function RC_named_list_create_PROTECT bbotk/src/local_search.c:808
+  [UP] unprotected variable s_global_best_x while calling allocating function Rf_ScalarReal bbotk/src/local_search.c:814
+  [UP] unprotected variable s_neighs_x while calling allocating function Rf_ScalarReal bbotk/src/local_search.c:814
+  [UP] unprotected variable s_global_best_x while calling allocating function Rf_ScalarInteger bbotk/src/local_search.c:816
+  [UP] unprotected variable s_neighs_x while calling allocating function Rf_ScalarInteger bbotk/src/local_search.c:816
+  [UP] unprotected variable s_global_best_x while calling allocating function Rf_ScalarString bbotk/src/local_search.c:818
+  [UP] unprotected variable s_neighs_x while calling allocating function Rf_ScalarString bbotk/src/local_search.c:818
+  [UP] unprotected variable s_global_best_x while calling allocating function restart_stagnated_searches bbotk/src/local_search.c:832
+  [UP] unprotected variable s_neighs_x while calling allocating function restart_stagnated_searches bbotk/src/local_search.c:832
+  [UP] allocating function generate_neighs may destroy its unprotected argument (s_neighs_x <arg 2>), which is later used. bbotk/src/local_search.c:833
+  [UP] calling allocating function generate_neighs with a fresh pointer (s_neighs_x <arg 2>) bbotk/src/local_search.c:833
+  [UP] unprotected variable s_global_best_x while calling allocating function generate_neighs bbotk/src/local_search.c:833
+  [UP] allocating function eval_obj may destroy its unprotected argument (s_neighs_x <arg 2>), which is later used. bbotk/src/local_search.c:835
+  [UP] unprotected variable s_global_best_x while calling allocating function eval_obj bbotk/src/local_search.c:835
+  [UP] allocating function copy_best_neighs_to_pop may destroy its unprotected argument (s_global_best_x <arg 7>), which is later used. bbotk/src/local_search.c:839
+  [UP] allocating function copy_best_neighs_to_pop may destroy its unprotected argument (s_neighs_x <arg 1>), which is later used. bbotk/src/local_search.c:839
+  [UP] calling allocating function copy_best_neighs_to_pop with a fresh pointer (s_global_best_x <arg 7>) bbotk/src/local_search.c:839
+  [UP] calling allocating function copy_best_neighs_to_pop with a fresh pointer (s_neighs_x <arg 1>) bbotk/src/local_search.c:839
+  [UP] unprotected variable s_global_best_x while calling allocating function PutRNGstate bbotk/src/local_search.c:846
+  [UP] unprotected variable s_global_best_x while calling allocating function RC_named_list_create_PROTECT bbotk/src/local_search.c:849
+  [UP] unprotected variable s_res while calling allocating function Rf_ScalarReal bbotk/src/local_search.c:851
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete bbotk/src/local_search.c:852
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete bbotk/src/local_search.c:852
+
+Function c_test_copy_best_neighs_to_pop
+  [UP] calling allocating function copy_best_neighs_to_pop with a fresh pointer (s_global_best_x <arg 7>) bbotk/src/test_local_search.c:253
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete bbotk/src/test_local_search.c:265
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete bbotk/src/test_local_search.c:265
+
+Function c_test_dt_repair_row
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete bbotk/src/test_local_search.c:289
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete bbotk/src/test_local_search.c:289
+
+Function c_test_dt_set_random_row
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete bbotk/src/test_local_search.c:331
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete bbotk/src/test_local_search.c:331
+
+Function c_test_dt_utils
+  [UP] unprotected variable s_res while calling allocating function extract_ss_info_PROTECT bbotk/src/test_local_search.c:101
+  [UP] unprotected variable s_res while calling allocating function GetRNGstate bbotk/src/test_local_search.c:102
+  [UP] unprotected variable s_res while calling allocating function extract_ctrl_info bbotk/src/test_local_search.c:104
+  [UP] unprotected variable s_res while calling allocating function dt_generate_PROTECT bbotk/src/test_local_search.c:107
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:108
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:108
+  [UP] unprotected variable s_dt while calling allocating function set_test_result bbotk/src/test_local_search.c:108
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:109
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:109
+  [UP] unprotected variable s_dt while calling allocating function set_test_result bbotk/src/test_local_search.c:109
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:116
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:116
+  [UP] unprotected variable s_dt while calling allocating function set_test_result bbotk/src/test_local_search.c:116
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:117
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:117
+  [UP] unprotected variable s_dt while calling allocating function set_test_result bbotk/src/test_local_search.c:117
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:118
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:118
+  [UP] unprotected variable s_dt while calling allocating function set_test_result bbotk/src/test_local_search.c:118
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:119
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:119
+  [UP] unprotected variable s_dt while calling allocating function set_test_result bbotk/src/test_local_search.c:119
+  [UP] allocating function dt_set_random may destroy its unprotected argument (s_dt <arg 1>), which is later used. bbotk/src/test_local_search.c:123
+  [UP] unprotected variable s_res while calling allocating function dt_set_random bbotk/src/test_local_search.c:123
+  [UP] allocating function dt_set_random may destroy its unprotected argument (s_dt <arg 1>), which is later used. bbotk/src/test_local_search.c:124
+  [UP] unprotected variable s_res while calling allocating function dt_set_random bbotk/src/test_local_search.c:124
+  [UP] allocating function dt_set_random may destroy its unprotected argument (s_dt <arg 1>), which is later used. bbotk/src/test_local_search.c:125
+  [UP] unprotected variable s_res while calling allocating function dt_set_random bbotk/src/test_local_search.c:125
+  [UP] allocating function dt_set_random may destroy its unprotected argument (s_dt <arg 1>), which is later used. bbotk/src/test_local_search.c:126
+  [UP] unprotected variable s_res while calling allocating function dt_set_random bbotk/src/test_local_search.c:126
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:127
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:127
+  [UP] unprotected variable s_dt while calling allocating function set_test_result bbotk/src/test_local_search.c:127
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:128
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:128
+  [UP] unprotected variable s_dt while calling allocating function set_test_result bbotk/src/test_local_search.c:128
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:129
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:129
+  [UP] unprotected variable s_dt while calling allocating function set_test_result bbotk/src/test_local_search.c:129
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:130
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:130
+  [UP] unprotected variable s_dt while calling allocating function set_test_result bbotk/src/test_local_search.c:130
+  [UP] unprotected variable s_dt while calling allocating function Rf_mkChar bbotk/src/test_local_search.c:141
+  [UP] unprotected variable s_res while calling allocating function Rf_mkChar bbotk/src/test_local_search.c:141
+  [UP] allocating function dt_mutate_element may destroy its unprotected argument (s_dt <arg 1>), which is later used. bbotk/src/test_local_search.c:145
+  [UP] unprotected variable s_res while calling allocating function dt_mutate_element bbotk/src/test_local_search.c:145
+  [UP] allocating function dt_mutate_element may destroy its unprotected argument (s_dt <arg 1>), which is later used. bbotk/src/test_local_search.c:146
+  [UP] unprotected variable s_res while calling allocating function dt_mutate_element bbotk/src/test_local_search.c:146
+  [UP] allocating function dt_mutate_element may destroy its unprotected argument (s_dt <arg 1>), which is later used. bbotk/src/test_local_search.c:147
+  [UP] unprotected variable s_res while calling allocating function dt_mutate_element bbotk/src/test_local_search.c:147
+  [UP] unprotected variable s_res while calling allocating function dt_mutate_element bbotk/src/test_local_search.c:148
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:152
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:152
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:153
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:153
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:156
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:156
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:157
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:157
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:160
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:160
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:163
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:163
+  [UP] unprotected variable s_res while calling allocating function PutRNGstate bbotk/src/test_local_search.c:165
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete bbotk/src/test_local_search.c:166
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete bbotk/src/test_local_search.c:166
+
+Function c_test_extract_ss_info
+  [UP] unprotected variable s_res while calling allocating function extract_ss_info_PROTECT bbotk/src/test_local_search.c:59
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:61
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:61
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:63
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:63
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:64
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:64
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:65
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:65
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:66
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:66
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:69
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:69
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:70
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:70
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:71
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:71
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:72
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:72
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:75
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:75
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:76
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:76
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:78
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:78
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:79
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:79
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:82
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:82
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:83
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:83
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:84
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:84
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:85
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:85
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:90
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:90
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:92
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:92
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete bbotk/src/test_local_search.c:94
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete bbotk/src/test_local_search.c:94
+
+Function c_test_generate_neighs
+  [UP] unprotected variable s_neighs_x while calling allocating function GetRNGstate bbotk/src/test_local_search.c:226
+  [UP] allocating function generate_neighs may destroy its unprotected argument (s_neighs_x <arg 2>), which is later used. bbotk/src/test_local_search.c:227
+  [UP] calling allocating function generate_neighs with a fresh pointer (s_neighs_x <arg 2>) bbotk/src/test_local_search.c:227
+  [UP] unprotected variable s_neighs_x while calling allocating function PutRNGstate bbotk/src/test_local_search.c:228
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete bbotk/src/test_local_search.c:230
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete bbotk/src/test_local_search.c:230
+
+Function c_test_get_best_pop_element
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete bbotk/src/test_local_search.c:275
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete bbotk/src/test_local_search.c:275
+
+Function c_test_get_list_el_by_name
+  [UP] unprotected variable s_testres while calling allocating function RC_get_list_el_by_name bbotk/src/test_local_search.c:20
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_testres <arg 1>), which is later used. bbotk/src/test_local_search.c:21
+  [UP] calling allocating function set_test_result with a fresh pointer (s_testres <arg 1>) bbotk/src/test_local_search.c:21
+  [UP] unprotected variable s_testres while calling allocating function Rf_asInteger bbotk/src/test_local_search.c:21
+  [UP] unprotected variable s_testres while calling allocating function RC_get_list_el_by_name bbotk/src/test_local_search.c:22
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_testres <arg 1>), which is later used. bbotk/src/test_local_search.c:23
+  [UP] calling allocating function set_test_result with a fresh pointer (s_testres <arg 1>) bbotk/src/test_local_search.c:23
+  [UP] unprotected variable s_testres while calling allocating function RC_get_list_el_by_name bbotk/src/test_local_search.c:24
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_testres <arg 1>), which is later used. bbotk/src/test_local_search.c:25
+  [UP] calling allocating function set_test_result with a fresh pointer (s_testres <arg 1>) bbotk/src/test_local_search.c:25
+  [PB] has negative depth bbotk/src/test_local_search.c:26
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete bbotk/src/test_local_search.c:26
+  [PB] has possible protection stack imbalance bbotk/src/test_local_search.c:27
+
+Function c_test_is_condition_satisfied
+  [UP] unprotected variable s_res while calling allocating function Rf_asInteger bbotk/src/test_local_search.c:203
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:205
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:205
+  [UP] unprotected variable s_res while calling allocating function Rf_asInteger bbotk/src/test_local_search.c:205
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete bbotk/src/test_local_search.c:206
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete bbotk/src/test_local_search.c:206
+
+Function c_test_random_int
+  [UP] unprotected variable s_res while calling allocating function GetRNGstate bbotk/src/test_local_search.c:32
+  [UP] unprotected variable s_res while calling allocating function random_int bbotk/src/test_local_search.c:34
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:35
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:35
+  [UP] unprotected variable s_res while calling allocating function random_int bbotk/src/test_local_search.c:36
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:37
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:37
+  [UP] unprotected variable s_res while calling allocating function PutRNGstate bbotk/src/test_local_search.c:38
+  [PB] has negative depth bbotk/src/test_local_search.c:39
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete bbotk/src/test_local_search.c:39
+  [PB] has possible protection stack imbalance bbotk/src/test_local_search.c:40
+
+Function c_test_random_normal
+  [UP] unprotected variable s_res while calling allocating function GetRNGstate bbotk/src/test_local_search.c:45
+  [UP] unprotected variable s_res while calling allocating function random_normal bbotk/src/test_local_search.c:46
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:49
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:49
+  [UP] unprotected variable s_res while calling allocating function PutRNGstate bbotk/src/test_local_search.c:50
+  [PB] has negative depth bbotk/src/test_local_search.c:51
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete bbotk/src/test_local_search.c:51
+  [PB] has possible protection stack imbalance bbotk/src/test_local_search.c:52
+
+Function c_test_restart_stagnated_searches
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete bbotk/src/test_local_search.c:319
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete bbotk/src/test_local_search.c:319
+
+Function c_test_toposort_params
+  [UP] unprotected variable s_res while calling allocating function extract_ss_info_PROTECT bbotk/src/test_local_search.c:174
+  [UP] unprotected variable s_res while calling allocating function toposort_params bbotk/src/test_local_search.c:175
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:183
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:183
+  [UP] unprotected variable s_res while calling allocating function reorder_conds_by_toposort bbotk/src/test_local_search.c:185
+  [UP] allocating function set_test_result may destroy its unprotected argument (s_res <arg 1>), which is later used. bbotk/src/test_local_search.c:193
+  [UP] calling allocating function set_test_result with a fresh pointer (s_res <arg 1>) bbotk/src/test_local_search.c:193
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete bbotk/src/test_local_search.c:195
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete bbotk/src/test_local_search.c:195
+
+Function catch_condition
+  [UP] calling allocating function Rf_eval with a fresh pointer (stop_call <arg 1>) bbotk/src/local_search.c:287
+
+Function dt_generate_PROTECT
+  [PB] has possible protection stack imbalance bbotk/src/local_search.c:187
+
+Function extract_ss_info_PROTECT
+  [PB] has too high protection stack depth results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] unprotected variable s_data while calling allocating function R_alloc bbotk/src/local_search.c:318
+  [UP] unprotected variable s_data while calling allocating function R_alloc bbotk/src/local_search.c:319
+  [UP] allocating function RC_get_dt_col_by_name may destroy its unprotected argument (s_data <arg 1>), which is later used. bbotk/src/local_search.c:320
+  [UP] calling allocating function RC_get_dt_col_by_name with a fresh pointer (s_data <arg 1>) bbotk/src/local_search.c:320
+  [UP] allocating function RC_get_dt_col_by_name may destroy its unprotected argument (s_data <arg 1>), which is later used. bbotk/src/local_search.c:321
+  [UP] calling allocating function RC_get_dt_col_by_name with a fresh pointer (s_data <arg 1>) bbotk/src/local_search.c:321
+  [UP] unprotected variable s_data while calling allocating function R_alloc bbotk/src/local_search.c:330
+  [UP] allocating function RC_get_dt_col_by_name may destroy its unprotected argument (s_data <arg 1>), which is later used. bbotk/src/local_search.c:331
+  [UP] calling allocating function RC_get_dt_col_by_name with a fresh pointer (s_data <arg 1>) bbotk/src/local_search.c:331
+  [UP] unprotected variable s_data while calling allocating function R_alloc bbotk/src/local_search.c:337
+  [UP] allocating function RC_get_dt_col_by_name may destroy its unprotected argument (s_data <arg 1>), which is later used. bbotk/src/local_search.c:338
+  [UP] calling allocating function RC_get_dt_col_by_name with a fresh pointer (s_data <arg 1>) bbotk/src/local_search.c:338
+  [UP] unprotected variable s_data while calling allocating function R_alloc bbotk/src/local_search.c:353
+  [UP] allocating function RC_get_dt_col_by_name may destroy its unprotected argument (s_data <arg 1>), which is later used. bbotk/src/local_search.c:354
+  [UP] calling allocating function RC_get_dt_col_by_name with a fresh pointer (s_data <arg 1>) bbotk/src/local_search.c:354
+  [UP] unprotected variable s_data while calling allocating function R_alloc bbotk/src/local_search.c:360
+  [UP] calling allocating function RC_get_dt_col_by_name with a fresh pointer (s_data <arg 1>) bbotk/src/local_search.c:361
+  [UP] allocating function RC_get_dt_col_by_name may destroy its unprotected argument (s_deps <arg 1>), which is later used. bbotk/src/local_search.c:377
+  [UP] calling allocating function RC_get_dt_col_by_name with a fresh pointer (s_deps <arg 1>) bbotk/src/local_search.c:377
+  [UP] allocating function RC_get_dt_col_by_name may destroy its unprotected argument (s_deps <arg 1>), which is later used. bbotk/src/local_search.c:378
+  [UP] calling allocating function RC_get_dt_col_by_name with a fresh pointer (s_deps <arg 1>) bbotk/src/local_search.c:378
+  [UP] calling allocating function RC_get_dt_col_by_name with a fresh pointer (s_deps <arg 1>) bbotk/src/local_search.c:380
+  [PB] has possible protection stack imbalance bbotk/src/local_search.c:400
+
+Function get_best_pop_element_PROTECT
+  [UP] unprotected variable s_res while calling allocating function RC_named_list_create_PROTECT bbotk/src/local_search.c:679
+  [UP] unprotected variable s_res while calling allocating function Rf_ScalarReal bbotk/src/local_search.c:687
+  [UP] unprotected variable s_res_x while calling allocating function Rf_ScalarReal bbotk/src/local_search.c:687
+  [UP] unprotected variable s_res while calling allocating function Rf_ScalarInteger bbotk/src/local_search.c:689
+  [UP] unprotected variable s_res_x while calling allocating function Rf_ScalarInteger bbotk/src/local_search.c:689
+  [UP] unprotected variable s_res while calling allocating function Rf_ScalarString bbotk/src/local_search.c:691
+  [UP] unprotected variable s_res_x while calling allocating function Rf_ScalarString bbotk/src/local_search.c:691
+  [UP] unprotected variable s_res while calling allocating function Rf_ScalarReal bbotk/src/local_search.c:697
+  [PB] has negative depth bbotk/src/local_search.c:698
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete bbotk/src/local_search.c:698
+  [PB] has possible protection stack imbalance bbotk/src/local_search.c:699
