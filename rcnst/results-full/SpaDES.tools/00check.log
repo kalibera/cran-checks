@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/SpaDES.tools.Rcheck’
-* using R Under development (unstable) (2025-09-27 r88882)
+* using R Under development (unstable) (2025-10-10 r88914)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (GCC) 15.2.1 20250808 (Red Hat 15.2.1-1)
@@ -8,7 +8,7 @@
 * using session charset: UTF-8
 * checking for file ‘SpaDES.tools/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘SpaDES.tools’ version ‘2.0.7’
+* this is package ‘SpaDES.tools’ version ‘2.0.8’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... INFO
@@ -130,15 +130,6 @@ The following object is masked from ‘package:SpaDES.tools’:
 > #   The cells with spreadProb of 5 are 5 times more likely than cells with 1 to be chosen,
 > #   when they are both within the 8 neighbours
 > sp <- rast(ext(0, 3, 0, 3), res = 1, vals = 1:9) #small raster, simple values
-> # Check neighProbs worked
-> out <- list()
-> 
-> # enough replicates to see stabilized probabilities
-> for (i in 1:100) {
-+   out[[i]] <- spread2(sp, spreadProbRel = sp, spreadProb = 1,
-+                       start = 5, iterations = 1,
-+                       neighProbs = c(1), asRaster = FALSE)
-+ }
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "activeSource" "holding"      "successful"   "tooSmall"    
@@ -156,7 +147,7 @@ Fatal error: compiler constants were modified!
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-  Ran 6/6 deferred expressions
+  Ran 8/8 deferred expressions
   duplicate initial loci are provided
   duplicate initial loci are provided
   ERROR: modification of compiler constant of type character, length 4

@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2025-09-27 r88882) -- "Unsuffered Consequences"
+R Under development (unstable) (2025-10-10 r88914) -- "Unsuffered Consequences"
 Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -224,13 +224,13 @@ detaching ‘package:terra’, ‘package:data.table’
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10, returnMatrix = TRUE)
 + })
    user  system elapsed 
-  0.033   0.000   0.034 
+  0.026   0.001   0.028 
 > agent <- agentOrig
 > system.time({
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10)
 + })
    user  system elapsed 
- 21.045   0.095  21.709 
+ 23.176   0.117  23.668 
 > 
 > # as sp
 > if (requireNamespace("sp")) {
@@ -1407,15 +1407,6 @@ The following object is masked from ‘package:SpaDES.tools’:
 > #   The cells with spreadProb of 5 are 5 times more likely than cells with 1 to be chosen,
 > #   when they are both within the 8 neighbours
 > sp <- rast(ext(0, 3, 0, 3), res = 1, vals = 1:9) #small raster, simple values
-> # Check neighProbs worked
-> out <- list()
-> 
-> # enough replicates to see stabilized probabilities
-> for (i in 1:100) {
-+   out[[i]] <- spread2(sp, spreadProbRel = sp, spreadProb = 1,
-+                       start = 5, iterations = 1,
-+                       neighProbs = c(1), asRaster = FALSE)
-+ }
 ERROR: modification of compiler constant of type character, length 4
 ERROR: the modified value of the constant is:
 [1] "activeSource" "holding"      "successful"   "tooSmall"    
