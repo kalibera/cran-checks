@@ -1,5 +1,5 @@
-Package RTMB version 1.7
-Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 05:39:25 UTC; unix   
+Package RTMB version 1.8
+Package built using 88920/R 4.6.0; x86_64-pc-linux-gnu; 2025-10-17 01:19:57 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -59,6 +59,18 @@ Function SEXPREC* Rcpp::internal::call_impl<Rcpp::Pointer_CppMethodImplN<false, 
 Function SparseSolve(Rcpp::RObject_Impl<Rcpp::PreserveStorage>, ADrep)
   [UP] ignoring variable ptr as it has address taken, results will be incomplete 
 
+Function TMBad::EvalOp<false>::forward(TMBad::ForwardArgs<double>&)
+  [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function TMBad::EvalOp<true>::forward(TMBad::ForwardArgs<double>&)
+  [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function TapedEval(Rcpp::Function_Impl<Rcpp::PreserveStorage>, ADrep)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _RTMB_Arith2
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -109,13 +121,13 @@ Function _RTMB_dgmrf0
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _RTMB_distr_besselI
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _RTMB_distr_besselJ
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _RTMB_distr_besselK
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _RTMB_distr_besselY
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -177,6 +189,9 @@ Function _RTMB_distr_dtweedie
 Function _RTMB_distr_dweibull
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _RTMB_distr_lbeta
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _RTMB_distr_logspace_add
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -223,12 +238,15 @@ Function _RTMB_dmvnorm0
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _RTMB_expATv
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _RTMB_fft_complex
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _RTMB_findIndex
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _RTMB_findInterval_ad
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _RTMB_find_op_by_name
@@ -245,9 +263,6 @@ Function _RTMB_get_df
 
 Function _RTMB_get_graph
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _RTMB_get_tape_config
-  [UP] ignoring variable <unnamed var:   %9 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _RTMB_getinvIndex
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -285,6 +300,9 @@ Function _RTMB_matmul
 Function _RTMB_op2var
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _RTMB_order_ad
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _RTMB_ptr_getx
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -292,7 +310,10 @@ Function _RTMB_ptr_gety
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _RTMB_set_tape_config
-  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _RTMB_sort_ad
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _RTMB_splineptr
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -300,7 +321,13 @@ Function _RTMB_splineptr
 Function _RTMB_splineptr_eval
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _RTMB_subset_ad
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _RTMB_sytrisol
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _RTMB_timer
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _RTMB_valid
@@ -308,6 +335,9 @@ Function _RTMB_valid
 
 Function as_advector(Rcpp::Vector<15, Rcpp::PreserveStorage>&)
   [UP] ignoring variable <unnamed var:   %3 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function expATv(Rcpp::RObject_Impl<Rcpp::PreserveStorage>, ADrep, ADrep, ADrep, Rcpp::Vector<19, Rcpp::PreserveStorage>, Rcpp::RObject_Impl<Rcpp::PreserveStorage>)
+  [UP] ignoring variable ptr as it has address taken, results will be incomplete 
 
 Function getValues(ADrep)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
