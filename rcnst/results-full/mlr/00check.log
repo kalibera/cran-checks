@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/mlr.Rcheck’
-* using R Under development (unstable) (2025-09-24 r88872)
+* using R Under development (unstable) (2025-11-09 r88992)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (GCC) 15.2.1 20250808 (Red Hat 15.2.1-1)
@@ -63,9 +63,9 @@ Note: information on .o files is not available
 Running examples in ‘mlr-Ex.R’ failed
 The error most likely occurred in:
 
-> ### Name: tuneParams
-> ### Title: Hyperparameter tuning.
-> ### Aliases: tuneParams
+> ### Name: tuneParamsMultiCrit
+> ### Title: Hyperparameter tuning for multiple measures at once.
+> ### Aliases: tuneParamsMultiCrit
 > 
 > ### ** Examples
 > 
@@ -73,75 +73,27 @@ The error most likely occurred in:
 >  if (requireNamespace("kernlab")) { 
 + ## End(Don't show)
 + ## Don't show: 
-+  if (requireNamespace("kernlab")) { 
-+ ## End(Don't show)
-+ ## Don't show: 
-+  if (requireNamespace("irace")) { 
-+ ## End(Don't show)
-+ set.seed(123)
-+ # a grid search for an SVM (with a tiny number of points...)
-+ # note how easily we can optimize on a log-scale
-+ ps = makeParamSet(
-+   makeNumericParam("C", lower = -12, upper = 12, trafo = function(x) 2^x),
-+   makeNumericParam("sigma", lower = -12, upper = 12, trafo = function(x) 2^x)
-+ )
-+ ctrl = makeTuneControlGrid(resolution = 2L)
-+ rdesc = makeResampleDesc("CV", iters = 2L)
-+ res = tuneParams("classif.ksvm", iris.task, rdesc, par.set = ps, control = ctrl)
-+ print(res)
-+ # access data for all evaluated points
-+ df = as.data.frame(res$opt.path)
-+ df1 = as.data.frame(res$opt.path, trafo = TRUE)
-+ print(head(df[, -ncol(df)]))
-+ print(head(df1[, -ncol(df)]))
-+ # access data for all evaluated points - alternative
-+ df2 = generateHyperParsEffectData(res)
-+ df3 = generateHyperParsEffectData(res, trafo = TRUE)
-+ print(head(df2$data[, -ncol(df2$data)]))
-+ print(head(df3$data[, -ncol(df3$data)]))
-+ ## Not run: 
-+ ##D # we optimize the SVM over 3 kernels simultanously
-+ ##D # note how we use dependent params (requires = ...) and iterated F-racing here
-+ ##D ps = makeParamSet(
-+ ##D   makeNumericParam("C", lower = -12, upper = 12, trafo = function(x) 2^x),
-+ ##D   makeDiscreteParam("kernel", values = c("vanilladot", "polydot", "rbfdot")),
-+ ##D   makeNumericParam("sigma", lower = -12, upper = 12, trafo = function(x) 2^x,
-+ ##D     requires = quote(kernel == "rbfdot")),
-+ ##D   makeIntegerParam("degree", lower = 2L, upper = 5L,
-+ ##D     requires = quote(kernel == "polydot"))
-+ ##D )
-+ ##D print(ps)
-+ ##D ctrl = makeTuneControlIrace(maxExperiments = 5, nbIterations = 1, minNbSurvival = 1)
-+ ##D rdesc = makeResampleDesc("Holdout")
-+ ##D res = tuneParams("classif.ksvm", iris.task, rdesc, par.set = ps, control = ctrl)
-+ ##D print(res)
-+ ##D df = as.data.frame(res$opt.path)
-+ ##D print(head(df[, -ncol(df)]))
-+ ##D 
-+ ##D # include the training set performance as well
-+ ##D rdesc = makeResampleDesc("Holdout", predict = "both")
-+ ##D res = tuneParams("classif.ksvm", iris.task, rdesc, par.set = ps,
-+ ##D   control = ctrl, measures = list(mmce, setAggregation(mmce, train.mean)))
-+ ##D print(res)
-+ ##D df2 = as.data.frame(res$opt.path)
-+ ##D print(head(df2[, -ncol(df2)]))
-+ ## End(Not run)
-+ ## Don't show: 
 +  } 
-+ ## End(Don't show)
-+ ## Don't show: 
-+  } 
-+ ## End(Don't show)
-+ ## Don't show: 
-+  } 
-Loading required namespace: irace
-[Tune] Started tuning learner classif.ksvm for parameter set:
-         Type len Def    Constr Req Tunable Trafo
-C     numeric   -   - -12 to 12   -    TRUE     Y
-sigma numeric   -   - -12 to 12   -    TRUE     Y
-With control class: TuneControlGrid
-Imputation value: 1
-[Tune-x] 1: C=0.000244; sigma=0.000244
+NULL
+> ## End(Don't show)
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  98.48 3.113 104.496 0.007 0.009 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"
