@@ -1,0 +1,46 @@
+Package myTAI version 2.3.3
+Package built using 88992/R 4.6.0; x86_64-pc-linux-gnu; 2025-11-10 04:48:48 UTC; unix   
+Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::hasSlot(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
+  [UP] calling allocating function R_has_slot(?,V) with argument allocated using Rf_mkString Rcpp/include/Rcpp/proxy/SlotProxy.h:97
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::traits::Exporter<arma::SpMat<double> >::Exporter(SEXPREC*)
+  [UP] ignoring variable x as it has address taken, results will be incomplete 
+
+Function Rcpp::traits::Exporter<arma::SpMat<double> >::get()
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const RcppArmadillo/include/RcppArmadillo/interface/RcppArmadilloAs.h:125
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const RcppArmadillo/include/RcppArmadillo/interface/RcppArmadilloAs.h:155
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const RcppArmadillo/include/RcppArmadillo/interface/RcppArmadilloAs.h:167
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const RcppArmadillo/include/RcppArmadillo/interface/RcppArmadilloAs.h:190
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const RcppArmadillo/include/RcppArmadillo/interface/RcppArmadilloAs.h:200
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const RcppArmadillo/include/RcppArmadillo/interface/RcppArmadilloAs.h:250
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const RcppArmadillo/include/RcppArmadillo/interface/RcppArmadilloAs.h:299
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy::operator SEXPREC*() const RcppArmadillo/include/RcppArmadillo/interface/RcppArmadilloAs.h:406
+
+Function _myTAI_cpp_nullTXIs
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _myTAI_cpp_txi_sc
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

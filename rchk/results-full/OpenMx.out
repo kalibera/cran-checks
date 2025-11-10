@@ -1,5 +1,5 @@
-Package OpenMx version 2.22.9
-Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 05:31:30 UTC; unix   
+Package OpenMx version 2.22.10
+Package built using 88992/R 4.6.0; x86_64-pc-linux-gnu; 2025-11-10 04:31:01 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -121,10 +121,10 @@ Function RelationalRAMExpectation::independentGroup::prep(FitContext*)
   [PB] has possible protection stack imbalance OpenMx/src/omxRAMExpectation.cpp:1774
 
 Function RelationalRAMExpectation::state::exportInternalState(MxRList&)
+  [UP] ignoring variable numKids as it has address taken, results will be incomplete 
   [UP] ignoring variable fk1 as it has address taken, results will be incomplete 
   [UP] ignoring variable hmean as it has address taken, results will be incomplete 
   [UP] ignoring variable numJoins as it has address taken, results will be incomplete 
-  [UP] ignoring variable numKids as it has address taken, results will be incomplete 
   [UP] ignoring variable parent1 as it has address taken, results will be incomplete 
   [UP] ignoring variable qrf as it has address taken, results will be incomplete 
   [UP] ignoring variable row as it has address taken, results will be incomplete 
@@ -158,7 +158,6 @@ Function omxBackend2(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*,
   [PB] has possible protection stack imbalance OpenMx/src/glue.cpp:810
 
 Function omxCallAlgebra2(SEXPREC*, SEXPREC*, SEXPREC*)
-  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
   [PB] has too high protection stack depth results will be incomplete
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
   [PB] has possible protection stack imbalance OpenMx/src/glue.cpp:553
@@ -218,7 +217,6 @@ Function omxState::omxExportResults(MxRList*, FitContext*)
   [PB] has possible protection stack imbalance OpenMx/src/omxExportBackendState.cpp:84
 
 Function omxState::omxProcessConstraints(SEXPREC*, FitContext*)
-  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
   [PB] has too high protection stack depth results will be incomplete
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
   [UP] unprotected variable names while calling allocating function omxMatrixLookupFromState1(SEXPREC*, omxState*) OpenMx/src/omxImportFrontendState.cpp:431
