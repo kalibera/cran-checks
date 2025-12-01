@@ -1,5 +1,5 @@
-Package vroom version 1.6.6
-Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 05:46:33 UTC; unix   
+Package vroom version 1.6.7
+Package built using 89080/R 4.6.0; x86_64-pc-linux-gnu; 2025-12-01 13:18:50 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -60,11 +60,6 @@ Function int parse_factor<vroom::iterator, std::__1::shared_ptr<vroom::index::ra
 Function is_open(SEXPREC*)
   [UP] ignoring variable con as it has address taken, results will be incomplete 
 
-Function read_chr(vroom_vec_info*)::$_0::operator()() const
-  [UP] unprotected variable val while calling allocating function vroom::iterator::filename() const vroom/src/vroom_chr.cc:31
-  [UP] unprotected variable val while calling allocating function vroom::iterator::index() const vroom/src/vroom_chr.cc:31
-  [UP] unprotected variable val while calling allocating function cpp11::writable::r_vector<cpp11::r_string>::operator SEXPREC*() const vroom/src/vroom_chr.cc:34
-
 Function read_fct_explicit(vroom_vec_info*, cpp11::r_vector<cpp11::r_string> const&, bool)
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %22 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -109,9 +104,6 @@ Function vroom::delimited_index_connection::delimited_index_connection(SEXPREC*,
 
 Function vroom::fixed_width_index_connection::fixed_width_index_connection(SEXPREC*, std::__1::vector<int, std::__1::allocator<int> >, std::__1::vector<int, std::__1::allocator<int> >, bool, unsigned long, char const*, bool, unsigned long, bool, unsigned long)
   [UP] ignoring variable in as it has address taken, results will be incomplete 
-
-Function vroom_errors::warn_for_errors() const
-  [UP] calling allocating function Rf_findFun(S:cli_warn,?) with argument allocated using Rf_findVarInFrame(?,S:cli) vroom/src/./vroom_errors.h:90
 
 Function vroom_fct::Make(vroom_vec_info*, cpp11::r_vector<cpp11::r_string>, bool)
   [UP] ignoring variable <unnamed var:   %16 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
