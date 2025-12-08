@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/mlrMBO.Rcheck’
-* using R Under development (unstable) (2025-11-22 r89050)
+* using R Under development (unstable) (2025-12-06 r89118)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (GCC) 15.2.1 20250808 (Red Hat 15.2.1-1)
@@ -130,16 +130,16 @@ Fatal error: compiler constants were modified!
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-  Error: promise already under evaluation: recursive default argument reference or earlier problems?
-  Backtrace:
-      ▆
-   1. └─mlrMBO::mbo(testf.fsphere.2d, des, learner = learner, control = ctrl) at test_mbo_km.R:11:3
-   2.   ├─mlrMBO:::mboTemplate(opt.problem)
-   3.   └─mlrMBO:::mboTemplate.OptProblem(opt.problem)
-   4.     ├─mlrMBO:::mboTemplate(opt.state)
-   5.     └─mlrMBO:::mboTemplate.OptState(opt.state)
-   6.       └─mlrMBO:::evalProposedPoints.OptState(opt.state, prop)
-   7.         └─mlrMBO:::evalTargetFun.OptState(opt.state, xs = xs, extras = extras)
+    1. └─mlrMBO::mbo(testf.fsphere.2d, des, learner = learner, control = ctrl) at test_mbo_km.R:11:3
+    2.   ├─mlrMBO:::mboTemplate(opt.problem)
+    3.   └─mlrMBO:::mboTemplate.OptProblem(opt.problem)
+    4.     ├─mlrMBO:::mboTemplate(opt.state)
+    5.     └─mlrMBO:::mboTemplate.OptState(opt.state)
+    6.       └─mlrMBO:::evalProposedPoints.OptState(opt.state, prop)
+    7.         └─mlrMBO:::evalTargetFun.OptState(opt.state, xs = xs, extras = extras)
+    8.           └─base::lapply(xs, trafoValue, par = par.set)
+    9.             └─ParamHelpers (local) FUN(X[[i]], ...)
+   10.               └─checkmate::assertSetEqual(names(x), pids)
   
   [ FAIL 1 | WARN 0 | SKIP 0 | PASS 39 ]
   Error:
