@@ -1,5 +1,5 @@
-Package misha version 5.3.1
-Package built using 89143/R 4.6.0; x86_64-pc-linux-gnu; 2025-12-13 08:09:53 UTC; unix   
+Package misha version 5.3.2
+Package built using 89166/R 4.6.0; x86_64-pc-linux-gnu; 2025-12-15 09:03:51 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -61,14 +61,14 @@ Function IntervalConverter::convert_intervs(GIntervalsFetcher1D*, unsigned int, 
 Function IntervalConverter::convert_intervs(GIntervalsFetcher2D*, unsigned int, bool, bool) const
   [UP] ignoring variable answer as it has address taken, results will be incomplete 
   [UP] ignoring variable chroms1 as it has address taken, results will be incomplete 
+  [UP] ignoring variable chroms_idx2 as it has address taken, results will be incomplete 
+  [UP] ignoring variable starts1 as it has address taken, results will be incomplete 
   [UP] ignoring variable chroms2 as it has address taken, results will be incomplete 
   [UP] ignoring variable chroms_idx1 as it has address taken, results will be incomplete 
-  [UP] ignoring variable chroms_idx2 as it has address taken, results will be incomplete 
   [UP] ignoring variable col_names as it has address taken, results will be incomplete 
   [UP] ignoring variable ends1 as it has address taken, results will be incomplete 
   [UP] ignoring variable ends2 as it has address taken, results will be incomplete 
   [UP] ignoring variable row_names as it has address taken, results will be incomplete 
-  [UP] ignoring variable starts1 as it has address taken, results will be incomplete 
   [UP] ignoring variable starts2 as it has address taken, results will be incomplete 
 
 Function IntervalConverter::convert_rintervs(SEXPREC*, GIntervals*, GIntervals2D*, bool, GenomeChromKey const*, char const*, unsigned int*, bool, bool) const
@@ -86,41 +86,10 @@ Function TrackExpressionVars::init(TrackExpressionIteratorBase const&)
   [UP] ignoring variable val as it has address taken, results will be incomplete 
 
 Function gbigintervs_load_chrom
-  [UP] unprotected variable colnames while calling allocating function Rf_mkChar misha/src/GenomeIntervalUtils.cpp:894
-  [UP] unprotected variable colnames while calling allocating function Rf_mkChar misha/src/GenomeIntervalUtils.cpp:895
-  [UP] unprotected variable colnames while calling allocating function Rf_mkChar misha/src/GenomeIntervalUtils.cpp:896
-  [UP] unprotected variable colnames while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:898
-  [UP] unprotected variable colnames while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:899
-  [UP] unprotected variable df while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:899
-  [UP] unprotected variable colnames while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:900
-  [UP] unprotected variable df while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:900
-  [UP] unprotected variable colnames while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:901
-  [UP] unprotected variable df while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:901
-  [UP] unprotected variable df while calling allocating function Rf_mkString misha/src/GenomeIntervalUtils.cpp:904
-  [UP] unprotected variable df while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:905
+  [PB] has possible protection stack imbalance misha/src/GenomeIntervalUtils.cpp:938
 
 Function gbigintervs_load_chrom2d
-  [UP] unprotected variable colnames while calling allocating function Rf_mkChar misha/src/GenomeIntervalUtils.cpp:995
-  [UP] unprotected variable colnames while calling allocating function Rf_mkChar misha/src/GenomeIntervalUtils.cpp:996
-  [UP] unprotected variable colnames while calling allocating function Rf_mkChar misha/src/GenomeIntervalUtils.cpp:997
-  [UP] unprotected variable colnames while calling allocating function Rf_mkChar misha/src/GenomeIntervalUtils.cpp:998
-  [UP] unprotected variable colnames while calling allocating function Rf_mkChar misha/src/GenomeIntervalUtils.cpp:999
-  [UP] unprotected variable colnames while calling allocating function Rf_mkChar misha/src/GenomeIntervalUtils.cpp:1000
-  [UP] unprotected variable colnames while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:1002
-  [UP] unprotected variable colnames while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:1003
-  [UP] unprotected variable df while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:1003
-  [UP] unprotected variable colnames while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:1004
-  [UP] unprotected variable df while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:1004
-  [UP] unprotected variable colnames while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:1005
-  [UP] unprotected variable df while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:1005
-  [UP] unprotected variable colnames while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:1006
-  [UP] unprotected variable df while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:1006
-  [UP] unprotected variable colnames while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:1007
-  [UP] unprotected variable df while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:1007
-  [UP] unprotected variable colnames while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:1008
-  [UP] unprotected variable df while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:1008
-  [UP] unprotected variable df while calling allocating function Rf_mkString misha/src/GenomeIntervalUtils.cpp:1011
-  [UP] unprotected variable df while calling allocating function Rf_allocVector misha/src/GenomeIntervalUtils.cpp:1012
+  [PB] has possible protection stack imbalance misha/src/GenomeIntervalUtils.cpp:1048
 
 Function gfind_neighbors
   [UP] ignoring variable rdists as it has address taken, results will be incomplete 
@@ -133,16 +102,15 @@ Function gfind_tracks_n_intervals
   [UP] ignoring variable rintervs as it has address taken, results will be incomplete 
 
 Function gget_tracks_attrs
-  [UP] ignoring variable rattrs as it has address taken, results will be incomplete 
   [UP] ignoring variable rattr as it has address taken, results will be incomplete 
+  [UP] ignoring variable rattrs as it has address taken, results will be incomplete 
 
 Function gintervals_chrom_sizes
-  [UP] ignoring variable chroms_idx as it has address taken, results will be incomplete 
-  [UP] ignoring variable sizes as it has address taken, results will be incomplete 
   [UP] ignoring variable answer as it has address taken, results will be incomplete 
   [UP] ignoring variable chroms as it has address taken, results will be incomplete 
   [UP] ignoring variable chroms1 as it has address taken, results will be incomplete 
   [UP] ignoring variable chroms2 as it has address taken, results will be incomplete 
+  [UP] ignoring variable chroms_idx as it has address taken, results will be incomplete 
   [UP] ignoring variable chroms_idx1 as it has address taken, results will be incomplete 
   [UP] ignoring variable chroms_idx2 as it has address taken, results will be incomplete 
   [UP] ignoring variable col_names as it has address taken, results will be incomplete 
@@ -151,14 +119,14 @@ Function gintervals_chrom_sizes
 
 Function gintervals_import_genes
   [UP] ignoring variable answer as it has address taken, results will be incomplete 
-  [UP] ignoring variable chroms_idx as it has address taken, results will be incomplete 
-  [UP] ignoring variable ends as it has address taken, results will be incomplete 
   [UP] ignoring variable answer_col_names as it has address taken, results will be incomplete 
-  [UP] ignoring variable chroms as it has address taken, results will be incomplete 
+  [UP] ignoring variable chroms_idx as it has address taken, results will be incomplete 
   [UP] ignoring variable col_names as it has address taken, results will be incomplete 
+  [UP] ignoring variable ends as it has address taken, results will be incomplete 
   [UP] ignoring variable rintervs as it has address taken, results will be incomplete 
   [UP] ignoring variable row_names as it has address taken, results will be incomplete 
   [UP] ignoring variable starts as it has address taken, results will be incomplete 
+  [UP] ignoring variable chroms as it has address taken, results will be incomplete 
   [UP] ignoring variable strands as it has address taken, results will be incomplete 
 
 Function gintervals_stats
@@ -183,23 +151,23 @@ Function gintervsort
 
 Function gmapply
   [UP] ignoring variable answer as it has address taken, results will be incomplete 
-  [UP] ignoring variable res as it has address taken, results will be incomplete 
-  [UP] ignoring variable rlast_intervals as it has address taken, results will be incomplete 
-  [UP] ignoring variable rvals as it has address taken, results will be incomplete 
   [UP] ignoring variable col_names as it has address taken, results will be incomplete 
-  [UP] ignoring variable eval_expr as it has address taken, results will be incomplete 
+  [UP] ignoring variable res as it has address taken, results will be incomplete 
   [UP] ignoring variable rinterv_id as it has address taken, results will be incomplete 
+  [UP] ignoring variable rlast_intervals as it has address taken, results will be incomplete 
   [UP] ignoring variable row_names as it has address taken, results will be incomplete 
+  [UP] ignoring variable rvals as it has address taken, results will be incomplete 
+  [UP] ignoring variable eval_expr as it has address taken, results will be incomplete 
 
 Function gmapply_multitask
   [UP] ignoring variable answer as it has address taken, results will be incomplete 
-  [UP] ignoring variable eval_expr as it has address taken, results will be incomplete 
   [UP] ignoring variable res as it has address taken, results will be incomplete 
   [UP] ignoring variable rinterv_id as it has address taken, results will be incomplete 
-  [UP] ignoring variable rlast_intervals as it has address taken, results will be incomplete 
   [UP] ignoring variable row_names as it has address taken, results will be incomplete 
   [UP] ignoring variable rvals as it has address taken, results will be incomplete 
+  [UP] ignoring variable rlast_intervals as it has address taken, results will be incomplete 
   [UP] ignoring variable col_names as it has address taken, results will be incomplete 
+  [UP] ignoring variable eval_expr as it has address taken, results will be incomplete 
 
 Function gseq_multifasta_import
   [PB] has possible protection stack imbalance misha/src/GenomeSeqMultiImport.cpp:493
@@ -226,19 +194,19 @@ Function rdb::IntervUtils::track_exists(char const*)
   [UP] ignoring variable all_track_names as it has address taken, results will be incomplete 
 
 Function rdb::rprotect(SEXPREC*&)
-  [PB] has possible protection stack imbalance misha/src/rdbutils.cpp:729
+  [PB] has possible protection stack imbalance misha/src/rdbutils.cpp:728
 
 Function rdb::rprotect_ptr(SEXPREC*)
-  [PB] has possible protection stack imbalance misha/src/./rdbutils.h:500
+  [PB] has possible protection stack imbalance misha/src/./rdbutils.h:501
 
 Function rdb::runprotect(SEXPREC*&)
-  [PB] has negative depth misha/src/rdbutils.cpp:744
-  [PB] has possible protection stack imbalance misha/src/rdbutils.cpp:748
+  [PB] has negative depth misha/src/rdbutils.cpp:743
+  [PB] has possible protection stack imbalance misha/src/rdbutils.cpp:747
 
 Function rdb::runprotect(int)
-  [PB] has an unsupported form of unprotect with a variable results will be incomplete misha/src/rdbutils.cpp:735
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete misha/src/rdbutils.cpp:735
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete misha/src/rdbutils.cpp:734
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete misha/src/rdbutils.cpp:734
 
 Function rdb::runprotect_all()
-  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete misha/src/rdbutils.cpp:759
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete misha/src/rdbutils.cpp:759
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete misha/src/rdbutils.cpp:758
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete misha/src/rdbutils.cpp:758
