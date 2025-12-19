@@ -1,5 +1,5 @@
-Package broadcast version 0.1.6.1
-Package built using 89014/R 4.6.0; x86_64-pc-linux-gnu; 2025-11-14 06:07:27 UTC; unix   
+Package broadcast version 0.1.7
+Package built using 89195/R 4.6.0; x86_64-pc-linux-gnu; 2025-12-19 19:28:43 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -435,6 +435,9 @@ Function rcpp_bcapply_v(SEXPREC*, SEXPREC*, SEXPREC*, long, Rcpp::Function_Impl<
 
 Function rcpp_bindhelper_anyinput_hasclass(SEXPREC*, Rcpp::String)
   [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function rcpp_bindhelper_make_input_dims(SEXPREC*, int, int)
+  [UP] unprotected variable temp_new while calling allocating function Rf_getAttrib(?,S:dim) broadcast/src/rcpp_bindhelpers.cpp:131
 
 Function rcpp_set_ma(Rcpp::RObject_Impl<Rcpp::PreserveStorage>, Rcpp::Vector<16, Rcpp::PreserveStorage>)
   [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
