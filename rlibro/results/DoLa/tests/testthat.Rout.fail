@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2025-12-18 r89195) -- "Unsuffered Consequences"
+R Under development (unstable) (2025-12-20 r89211) -- "Unsuffered Consequences"
 Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -36,40 +36,8 @@ processing file: DoLa.Rmd
 ── Error ('test-dola.R:2:3'): test 'dola example' ──────────────────────────────
 Error in `unzip(id.dis[i])`: cannot open file './curriculo.xml': Read-only file system
 Backtrace:
-     ▆
-  1. ├─testthat::expect_snapshot_file(...) at test-dola.R:2:3
-  2. │ └─testthat:::check_string(path)
-  3. │   └─testthat:::.rlang_check_is_string(...)
-  4. │     └─rlang::is_string(x)
-  5. └─DoLa::dola(...)
-  6.   └─rmarkdown::render(...)
-  7.     └─knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet)
-  8.       └─knitr:::process_file(text, output)
-  9.         ├─xfun:::handle_error(...)
- 10.         ├─base::withCallingHandlers(...)
- 11.         └─knitr:::process_group(group)
- 12.           └─knitr:::call_block(x)
- 13.             └─knitr:::block_exec(params)
- 14.               └─knitr:::eng_r(options)
- 15.                 ├─knitr:::in_input_dir(...)
- 16.                 │ └─knitr:::in_dir(input_dir(), expr)
- 17.                 └─knitr (local) evaluate(...)
- 18.                   └─evaluate::evaluate(...)
- 19.                     ├─base::withRestarts(...)
- 20.                     │ └─base (local) withRestartList(expr, restarts)
- 21.                     │   ├─base (local) withOneRestart(withRestartList(expr, restarts[-nr]), restarts[[nr]])
- 22.                     │   │ └─base (local) doWithOneRestart(return(expr), restart)
- 23.                     │   └─base (local) withRestartList(expr, restarts[-nr])
- 24.                     │     └─base (local) withOneRestart(expr, restarts[[1L]])
- 25.                     │       └─base (local) doWithOneRestart(return(expr), restart)
- 26.                     ├─evaluate:::with_handlers(...)
- 27.                     │ ├─base::eval(call)
- 28.                     │ │ └─base::eval(call)
- 29.                     │ └─base::withCallingHandlers(...)
- 30.                     ├─base::withVisible(eval(expr, envir))
- 31.                     └─base::eval(expr, envir)
- 32.                       └─base::eval(expr, envir)
- 33.                         └─utils::unzip(id.dis[i])
+    ▆
+ 1. └─utils::unzip(id.dis[i])
 ── Error ('test-dola.R:2:3'): test 'dola example' ──────────────────────────────
 Error in `file(con, "w")`: cannot open the connection
 Backtrace:
