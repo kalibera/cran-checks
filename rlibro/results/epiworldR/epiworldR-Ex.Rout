@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2025-11-15 r89024) -- "Unsuffered Consequences"
+R Under development (unstable) (2025-12-24 r89227) -- "Unsuffered Consequences"
 Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -178,327 +178,6 @@ _________________________________________________________________________
 |> 
 > # Plotting the model
 > plot(adopt_chatgpt)
-> 
-> 
-> 
-> cleanEx()
-> nameEx("ModelMeaslesMixing")
-> ### * ModelMeaslesMixing
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: ModelMeaslesMixing
-> ### Title: Measles model with mixing
-> ### Aliases: ModelMeaslesMixing epiworld_measlesmixing
-> 
-> ### ** Examples
-> 
-> 
-> # Start off creating three entities.
-> # Individuals will be distributed randomly between the three.
-> e1 <- entity("Population 1", 3e3, as_proportion = FALSE)
-> e2 <- entity("Population 2", 3e3, as_proportion = FALSE)
-> e3 <- entity("Population 3", 3e3, as_proportion = FALSE)
-> 
-> # Row-stochastic matrix (rowsums 1)
-> cmatrix <- c(
-+   c(0.9, 0.05, 0.05),
-+   c(0.1, 0.8, 0.1),
-+   c(0.1, 0.2, 0.7)
-+ ) |> matrix(byrow = TRUE, nrow = 3)
-> 
-> N <- 9e3
-> 
-> measles_model <- ModelMeaslesMixing(
-+   n                        = N,
-+   prevalence               = 1 / N,
-+   contact_rate             = 15,
-+   transmission_rate        = 0.9,
-+   vax_efficacy             = 0.97,
-+   vax_reduction_recovery_rate = 0.8,
-+   incubation_period        = 10,
-+   prodromal_period         = 3,
-+   rash_period              = 7,
-+   contact_matrix           = cmatrix,
-+   hospitalization_rate     = 0.1,
-+   hospitalization_period   = 10,
-+   days_undetected          = 2,
-+   quarantine_period        = 14,
-+   quarantine_willingness   = 0.9,
-+   isolation_willingness    = 0.8,
-+   isolation_period         = 10,
-+   prop_vaccinated          = 0.95,
-+   contact_tracing_success_rate = 0.8,
-+   contact_tracing_days_prior = 4
-+ )
-> 
-> # Adding the entities to the model
-> measles_model |>
-+   add_entity(e1) |>
-+   add_entity(e2) |>
-+   add_entity(e3)
-> 
-> set.seed(331)
-> run(measles_model, ndays = 100)
-_________________________________________________________________________
-Running the model...
-||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| done.
-> summary(measles_model)
-________________________________________________________________________________
-________________________________________________________________________________
-SIMULATION STUDY
-
-Name of the model   : Measles with Mixing and Quarantine
-Population size     : 9000
-Agents' data        : (none)
-Number of entities  : 3
-Days (duration)     : 100 (of 100)
-Number of viruses   : 1
-Last run elapsed t  : 453.00ms
-Last run speed      : 1.98 million agents x day / second
-Rewiring            : off
-
-Global events:
- - Update infected individuals (runs daily)
-
-Virus(es):
- - Measles
-
-Tool(s):
- - Vaccine
-
-Model parameters:
- - (IGNORED) Vax improved recovery : 0.8000
- - Contact rate                    : 15.0000
- - Contact tracing days prior      : 4.0000
- - Contact tracing success rate    : 0.8000
- - Days undetected                 : 2.0000
- - Hospitalization period          : 10.0000
- - Hospitalization rate            : 0.1000
- - Incubation period               : 10.0000
- - Isolation period                : 10.0000
- - Isolation willingness           : 0.8000
- - Prodromal period                : 3.0000
- - Quarantine period               : 14.0000
- - Quarantine willingness          : 0.9000
- - Rash period                     : 7.0000
- - Transmission rate               : 0.9000
- - Vaccination rate                : 0.9500
- - Vax efficacy                    : 0.9700
-
-Distribution of the population at time 100:
-  - ( 0) Susceptible             : 8999 -> 6919
-  - ( 1) Exposed                 :    1 -> 299
-  - ( 2) Prodromal               :    0 -> 83
-  - ( 3) Rash                    :    0 -> 35
-  - ( 4) Isolated                :    0 -> 0
-  - ( 5) Isolated Recovered      :    0 -> 131
-  - ( 6) Detected Hospitalized   :    0 -> 25
-  - ( 7) Quarantined Exposed     :    0 -> 1
-  - ( 8) Quarantined Susceptible :    0 -> 0
-  - ( 9) Quarantined Prodromal   :    0 -> 0
-  - (10) Quarantined Recovered   :    0 -> 0
-  - (11) Hospitalized            :    0 -> 14
-  - (12) Recovered               :    0 -> 1493
-
-Transition Probabilities:
- - Susceptible              1.00  0.00     -     -     -     -     -     -  0.00     -     -     -     -
- - Exposed                     -  0.89  0.10     -     -     -     -  0.01     -  0.00     -     -     -
- - Prodromal                   -     -  0.66  0.33  0.00     -     -     -     -  0.00     -     -     -
- - Rash                        -     -     -  0.07  0.08  0.39  0.06     -     -     -     -  0.05  0.36
- - Isolated                    -     -     -     -  0.16  0.75  0.09     -     -     -     -     -     -
- - Isolated Recovered          -     -     -     -     -  0.89     -     -     -     -     -     -  0.11
- - Detected Hospitalized       -     -     -     -     -     -  0.91     -     -     -     -     -  0.09
- - Quarantined Exposed         -  0.03  0.00     -     -     -     -  0.87     -  0.09     -     -     -
- - Quarantined Susceptible  0.07     -     -     -     -     -     -     -  0.93     -     -     -     -
- - Quarantined Prodromal       -     -  0.01     -  0.38     -     -     -     -  0.61     -     -     -
- - Quarantined Recovered       -     -     -     -     -     -     -     -     -     -     -     -     -
- - Hospitalized                -     -     -     -     -     -     -     -     -     -     -  0.89  0.11
- - Recovered                   -     -     -     -     -     -     -     -     -     -     -     -  1.00
-
-> 
-> 
-> 
-> 
-> cleanEx()
-> nameEx("ModelMeaslesMixingRiskQuarantine")
-> ### * ModelMeaslesMixingRiskQuarantine
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: ModelMeaslesMixingRiskQuarantine
-> ### Title: Measles model with mixing and risk-based quarantine
-> ### Aliases: ModelMeaslesMixingRiskQuarantine
-> ###   epiworld_measlesmixingriskquarantine
-> 
-> ### ** Examples
-> 
-> 
-> # Start off creating three entities.
-> # Individuals will be distributed randomly between the three.
-> e1 <- entity("Population 1", 3e3, as_proportion = FALSE)
-> e2 <- entity("Population 2", 3e3, as_proportion = FALSE)
-> e3 <- entity("Population 3", 3e3, as_proportion = FALSE)
-> 
-> # Row-stochastic matrix (rowsums 1)
-> cmatrix <- c(
-+   c(0.9, 0.05, 0.05),
-+   c(0.1, 0.8, 0.1),
-+   c(0.1, 0.2, 0.7)
-+ ) |> matrix(byrow = TRUE, nrow = 3)
-> 
-> N <- 9e3
-> 
-> measles_model <- ModelMeaslesMixingRiskQuarantine(
-+   n                        = N,
-+   prevalence               = 1 / N,
-+   contact_rate             = 15,
-+   transmission_rate        = 0.9,
-+   vax_efficacy             = 0.97,
-+   incubation_period        = 10,
-+   prodromal_period         = 3,
-+   rash_period              = 7,
-+   contact_matrix           = cmatrix,
-+   hospitalization_rate     = 0.1,
-+   hospitalization_period   = 10,
-+   days_undetected          = 2,
-+   quarantine_period_high   = 21,
-+   quarantine_period_medium = 14,
-+   quarantine_period_low    = 7,
-+   quarantine_willingness   = 0.9,
-+   isolation_willingness    = 0.8,
-+   isolation_period         = 10,
-+   prop_vaccinated          = 0.95,
-+   detection_rate_quarantine = 0.5,
-+   contact_tracing_success_rate = 0.8,
-+   contact_tracing_days_prior = 4
-+ )
-> 
-> # Adding the entities to the model
-> measles_model |>
-+   add_entity(e1) |>
-+   add_entity(e2) |>
-+   add_entity(e3)
-> 
-> set.seed(331)
-> run(measles_model, ndays = 100)
-_________________________________________________________________________
-Running the model...
-||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| done.
-> summary(measles_model)
-________________________________________________________________________________
-________________________________________________________________________________
-SIMULATION STUDY
-
-Name of the model   : Measles with Mixing and Risk-based Quarantine
-Population size     : 9000
-Agents' data        : (none)
-Number of entities  : 3
-Days (duration)     : 100 (of 100)
-Number of viruses   : 1
-Last run elapsed t  : 277.00ms
-Last run speed      : 3.24 million agents x day / second
-Rewiring            : off
-
-Global events:
- - Update infected individuals (runs daily)
-
-Virus(es):
- - Measles
-
-Tool(s):
- - Vaccine
-
-Model parameters:
- - Contact rate                 : 15.0000
- - Contact tracing days prior   : 4.0000
- - Contact tracing success rate : 0.8000
- - Days undetected              : 2.0000
- - Detection rate quarantine    : 0.5000
- - Hospitalization period       : 10.0000
- - Hospitalization rate         : 0.1000
- - Incubation period            : 10.0000
- - Isolation period             : 10.0000
- - Isolation willingness        : 0.8000
- - Prodromal period             : 3.0000
- - Quarantine period high       : 21.0000
- - Quarantine period low        : 7.0000
- - Quarantine period medium     : 14.0000
- - Quarantine willingness       : 0.9000
- - Rash period                  : 7.0000
- - Transmission rate            : 0.9000
- - Vaccination rate             : 0.9500
- - Vax efficacy                 : 0.9700
-
-Distribution of the population at time 100:
-  - ( 0) Susceptible             : 8999 -> 8466
-  - ( 1) Exposed                 :    1 -> 36
-  - ( 2) Prodromal               :    0 -> 5
-  - ( 3) Rash                    :    0 -> 1
-  - ( 4) Isolated                :    0 -> 2
-  - ( 5) Isolated Recovered      :    0 -> 21
-  - ( 6) Detected Hospitalized   :    0 -> 3
-  - ( 7) Quarantined Exposed     :    0 -> 1
-  - ( 8) Quarantined Susceptible :    0 -> 385
-  - ( 9) Quarantined Prodromal   :    0 -> 0
-  - (10) Quarantined Recovered   :    0 -> 0
-  - (11) Hospitalized            :    0 -> 0
-  - (12) Recovered               :    0 -> 80
-
-Transition Probabilities:
- - Susceptible              1.00  0.00     -     -     -     -     -  0.00  0.00     -     -     -     -
- - Exposed                     -  0.90  0.10     -     -     -     -  0.00     -  0.00     -     -     -
- - Prodromal                   -     -  0.68  0.19  0.13     -     -     -     -     -     -     -     -
- - Rash                        -     -     -  0.07  0.02  0.35  0.07     -     -     -     -  0.02  0.47
- - Isolated                    -     -     -     -  0.16  0.72  0.12     -     -     -     -     -     -
- - Isolated Recovered          -     -     -     -     -  0.91     -     -     -     -     -     -  0.09
- - Detected Hospitalized       -     -     -     -     -     -  0.91     -     -     -     -     -  0.09
- - Quarantined Exposed         -     -     -     -     -     -     -  0.86     -  0.14     -     -     -
- - Quarantined Susceptible  0.06     -     -     -     -     -     -     -  0.94     -     -     -     -
- - Quarantined Prodromal       -     -     -     -  0.38     -     -     -     -  0.62     -     -     -
- - Quarantined Recovered       -     -     -     -     -     -     -     -     -     -     -     -     -
- - Hospitalized                -     -     -     -     -     -     -     -     -     -     -  0.50  0.50
- - Recovered                   -     -     -     -     -     -     -     -     -     -     -     -  1.00
-
-> 
-> 
-> 
-> 
-> cleanEx()
-> nameEx("ModelMeaslesSchool")
-> ### * ModelMeaslesSchool
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: ModelMeaslesSchool
-> ### Title: Measles model with quarantine
-> ### Aliases: ModelMeaslesSchool epiworld_measlesquarantine
-> 
-> ### ** Examples
-> 
-> # An in a school with low vaccination
-> model_measles <- ModelMeaslesQuarantine(
-+   n = 500,
-+   prevalence = 1,
-+   prop_vaccinated = 0.70
-+ )
-Warning in ModelMeaslesQuarantine(n = 500, prevalence = 1, prop_vaccinated = 0.7) :
-  ModelMeaslesQuarantine is deprecated. Use ModelMeaslesSchool instead.
-> 
-> # Running and printing
-> run(model_measles, ndays = 100, seed = 1912)
-_________________________________________________________________________
-Running the model...
-||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| done.
-> model_measles
-________________________________________________________________________________
-
-It features 500 agents, 1 virus(es), and 1 tool(s).
-The model has 13 states.
-The final distribution is: 498 Susceptible, 0 Exposed, 0 Prodromal, 0 Rash, 0 Isolated, 0 Isolated Recovered, 0 Detected Hospitalized, 0 Quarantined Exposed, 0 Quarantined Susceptible, 0 Quarantined Prodromal, 0 Quarantined Recovered, 0 Hospitalized, and 2 Recovered.
-> 
-> plot(model_measles)
-> 
 > 
 > 
 > 
@@ -764,8 +443,8 @@ Agents' data        : (none)
 Number of entities  : 3
 Days (duration)     : 100 (of 100)
 Number of viruses   : 1
-Last run elapsed t  : 187.00ms
-Last run speed      : 4.80 million agents x day / second
+Last run elapsed t  : 171.00ms
+Last run speed      : 5.24 million agents x day / second
 Rewiring            : off
 
 Global events:
@@ -784,14 +463,14 @@ Model parameters:
  - Prob. Transmission   : 0.1000
 
 Distribution of the population at time 100:
-  - (0) Susceptible : 8999 -> 1
+  - (0) Susceptible : 8999 -> 0
   - (1) Exposed     :    1 -> 0
-  - (2) Infected    :    0 -> 2
-  - (3) Recovered   :    0 -> 8997
+  - (2) Infected    :    0 -> 0
+  - (3) Recovered   :    0 -> 9000
 
 Transition Probabilities:
  - Susceptible  0.96  0.04     -     -
- - Exposed         -  0.85  0.15     -
+ - Exposed         -  0.86  0.14     -
  - Infected        -     -  0.86  0.14
  - Recovered       -     -     -  1.00
 
@@ -871,8 +550,8 @@ Agents' data        : (none)
 Number of entities  : 3
 Days (duration)     : 100 (of 100)
 Number of viruses   : 1
-Last run elapsed t  : 323.00ms
-Last run speed      : 2.78 million agents x day / second
+Last run elapsed t  : 73.00ms
+Last run speed      : 12.27 million agents x day / second
 Rewiring            : off
 
 Global events:
@@ -900,27 +579,27 @@ Model parameters:
  - Quarantine willingness       : 0.8000
 
 Distribution of the population at time 100:
-  - ( 0) Susceptible             : 8999 -> 845
-  - ( 1) Exposed                 :    1 -> 217
-  - ( 2) Infected                :    0 -> 156
-  - ( 3) Isolated                :    0 -> 69
-  - ( 4) Detected Hospitalized   :    0 -> 58
-  - ( 5) Quarantined Susceptible :    0 -> 702
-  - ( 6) Quarantined Exposed     :    0 -> 57
-  - ( 7) Isolated Recovered      :    0 -> 39
-  - ( 8) Hospitalized            :    0 -> 49
-  - ( 9) Recovered               :    0 -> 6808
+  - ( 0) Susceptible             : 8999 -> 8998
+  - ( 1) Exposed                 :    1 -> 0
+  - ( 2) Infected                :    0 -> 0
+  - ( 3) Isolated                :    0 -> 0
+  - ( 4) Detected Hospitalized   :    0 -> 0
+  - ( 5) Quarantined Susceptible :    0 -> 0
+  - ( 6) Quarantined Exposed     :    0 -> 0
+  - ( 7) Isolated Recovered      :    0 -> 0
+  - ( 8) Hospitalized            :    0 -> 0
+  - ( 9) Recovered               :    0 -> 2
 
 Transition Probabilities:
- - Susceptible              0.96  0.01     -     -     -  0.02  0.00     -     -     -
- - Exposed                     -  0.82  0.14  0.00     -     -  0.03     -     -     -
- - Infected                    -     -  0.71  0.10  0.02     -     -  0.02  0.03  0.13
- - Isolated                    -     -  0.12  0.69  0.05     -     -  0.12  0.01  0.02
- - Detected Hospitalized       -     -     -     -  0.86     -     -     -     -  0.14
+ - Susceptible              1.00  0.00     -     -     -  0.00     -     -     -     -
+ - Exposed                     -  0.82  0.18     -     -     -     -     -     -     -
+ - Infected                    -     -     -  0.50     -     -     -     -     -  0.50
+ - Isolated                    -     -     -  0.67     -     -     -  0.33     -     -
+ - Detected Hospitalized       -     -     -     -     -     -     -     -     -     -
  - Quarantined Susceptible  0.07     -     -     -     -  0.93     -     -     -     -
- - Quarantined Exposed         -  0.02  0.00  0.14     -     -  0.84     -     -     -
- - Isolated Recovered          -     -     -     -     -     -     -  0.73     -  0.27
- - Hospitalized                -     -     -     -     -     -     -     -  0.85  0.15
+ - Quarantined Exposed         -     -     -     -     -     -     -     -     -     -
+ - Isolated Recovered          -     -     -     -     -     -     -  0.67     -  0.33
+ - Hospitalized                -     -     -     -     -     -     -     -     -     -
  - Recovered                   -     -     -     -     -     -     -     -     -  1.00
 
 > 
@@ -1228,8 +907,8 @@ Agents' data        : (none)
 Number of entities  : 3
 Days (duration)     : 100 (of 100)
 Number of viruses   : 1
-Last run elapsed t  : 95.00ms
-Last run speed      : 9.46 million agents x day / second
+Last run elapsed t  : 119.00ms
+Last run speed      : 7.53 million agents x day / second
 Rewiring            : off
 
 Global events:
@@ -1247,9 +926,9 @@ Model parameters:
  - Prob. Transmission : 0.1000
 
 Distribution of the population at time 100:
-  - (0) Susceptible : 8999 -> 0
+  - (0) Susceptible : 8999 -> 1
   - (1) Infected    :    1 -> 0
-  - (2) Recovered   :    0 -> 9000
+  - (2) Recovered   :    0 -> 8999
 
 Transition Probabilities:
  - Susceptible  0.91  0.09     -
@@ -1402,6 +1081,51 @@ The final distribution is: 9975 Susceptible, 0 Latent, 0 Symptomatic, 0 Symptoma
 > # Plotting
 > plot(model_surv, main = "SURV Model")
 > 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("add_entities_from_dataframe")
+> ### * add_entities_from_dataframe
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: add_entities_from_dataframe
+> ### Title: Add entities to a model according to a data.frame
+> ### Aliases: add_entities_from_dataframe
+> 
+> ### ** Examples
+> 
+> # Start off creating three entities.
+> # Individuals will be distributed randomly between the three.
+> entities <- data.frame(
++   name = c("Pop 1", "Pop 2", "Pop 3"),
++   size = rep(3e3, 3)
++ )
+> 
+> # Row-stochastic matrix (rowsums 1)
+> cmatrix <- c(
++   c(0.9, 0.05, 0.05),
++   c(0.1, 0.8, 0.1),
++   c(0.1, 0.2, 0.7)
++ ) |> matrix(byrow = TRUE, nrow = 3)
+> 
+> flu_model <- ModelSIRMixing(
++   name              = "Flu",
++   n                 = 9e3,
++   prevalence        = 1 / 9e3,
++   contact_rate      = 20,
++   transmission_rate = 0.1,
++   recovery_rate     = 1 / 7,
++   contact_matrix    = cmatrix
++ ) |>
++   add_entities_from_dataframe(
++     entities = entities,
++     col_name = "name",
++     col_number = "size",
++     # This is passed to `add_entity()`
++     as_proportion = FALSE
++   )
 > 
 > 
 > 
@@ -1605,8 +1329,8 @@ Agents' data        : (none)
 Number of entities  : 2
 Days (duration)     : 100 (of 100)
 Number of viruses   : 1
-Last run elapsed t  : 126.00ms
-Last run speed      : 7.88 million agents x day / second
+Last run elapsed t  : 121.00ms
+Last run speed      : 8.26 million agents x day / second
 Rewiring            : off
 
 Global events:
@@ -1624,9 +1348,9 @@ Model parameters:
  - Prob. Transmission : 0.1000
 
 Distribution of the population at time 100:
-  - (0) Susceptible :  9990 -> 15
+  - (0) Susceptible :  9990 -> 24
   - (1) Infected    :    10 -> 0
-  - (2) Recovered   :     0 -> 9985
+  - (2) Recovered   :     0 -> 9976
 
 Transition Probabilities:
  - Susceptible  0.92  0.08     -
@@ -1637,26 +1361,56 @@ Transition Probabilities:
 > 
 > 
 > cleanEx()
-> nameEx("epiworld-data")
-> ### * epiworld-data
+> nameEx("epiworld-gentime")
+> ### * epiworld-gentime
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: epiworld-data
-> ### Title: Accessing the database of epiworld
-> ### Aliases: epiworld-data get_hist_total epiworld_hist_total
-> ###   get_today_total get_hist_virus epiworld_hist_variant
-> ###   epiworld_hist_virus get_hist_tool epiworld_hist_tool
-> ###   get_transition_probability get_reproductive_number epiworld_repnum
-> ###   plot.epiworld_repnum plot_reproductive_number
-> ###   get_hist_transition_matrix as.array.epiworld_hist_transition
-> ###   plot_incidence plot.epiworld_hist_transition get_transmissions
-> ###   get_generation_time plot.epiworld_generation_time
-> ###   plot_generation_time
+> ### Name: epiworld-gentime
+> ### Title: Generation time
+> ### Aliases: epiworld-gentime epiworld_generation_time get_generation_time
+> ###   plot.epiworld_generation_time plot_generation_time
 > 
 > ### ** Examples
 > 
-> # SEIR Connected
+> # SEIR Connected model
+> seirconn <- ModelSEIRCONN(
++   name              = "Disease",
++   n                 = 10000,
++   prevalence        = 0.1,
++   contact_rate      = 2.0,
++   transmission_rate = 0.8,
++   incubation_days   = 7.0,
++   recovery_rate     = 0.3
++ )
+> 
+> set.seed(937)
+> run(seirconn, 50)
+_________________________________________________________________________
+|Running the model...
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| done.
+|> 
+> # Get and plot generation time
+> gent <- plot_generation_time(seirconn)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("epiworld-history")
+> ### * epiworld-history
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: epiworld-history
+> ### Title: Model history and totals
+> ### Aliases: epiworld-history get_hist_total epiworld_hist_total
+> ###   get_today_total plot.epiworld_hist get_hist_virus epiworld_hist_virus
+> ###   get_hist_tool epiworld_hist_tool
+> 
+> ### ** Examples
+> 
+> # SEIR Connected model
 > seirconn <- ModelSEIRCONN(
 +   name              = "Disease",
 +   n                 = 10000,
@@ -1674,14 +1428,6 @@ _________________________________________________________________________
 |Running the model...
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| done.
 |> 
-> # Retrieving the transition probability
-> get_transition_probability(seirconn)
-            Susceptible    Exposed  Infected Recovered
-Susceptible   0.9113965 0.08860354 0.0000000 0.0000000
-Exposed       0.0000000 0.85694473 0.1430553 0.0000000
-Infected      0.0000000 0.00000000 0.6974602 0.3025398
-Recovered     0.0000000 0.00000000 0.0000000 1.0000000
-> 
 > # Retrieving date, state, and counts dataframe including any added tools
 > get_hist_tool(seirconn)
 [1] date    tool_id tool    state   counts 
@@ -1707,54 +1453,27 @@ Recovered     0.0000000 0.00000000 0.0000000 1.0000000
 5    1        0 Disease Susceptible      0
 6    1        0 Disease     Exposed    861
 > 
-> # Retrieving (and plotting) the reproductive number
-> rp <- get_reproductive_number(seirconn)
-> plot(rp) # Also equivalent to plot_reproductive_number(seirconn)
+> # Snapshot of totals at end of simulation
+> get_today_total(seirconn)
+Susceptible     Exposed    Infected   Recovered 
+         50          45          41        9864 
 > 
-> # We can go further and get all the history
-> t_hist <- get_hist_transition_matrix(seirconn)
 > 
-> head(t_hist)
-   state_from    state_to date counts
-1 Susceptible Susceptible    0   9000
-2     Exposed Susceptible    0      0
-3    Infected Susceptible    0      0
-4   Recovered Susceptible    0      0
-5 Susceptible     Exposed    0   1000
-6     Exposed     Exposed    0      0
 > 
-> # And turn it into an array
-> as.array(t_hist)[, , 1:3]
-, , 0
-
-            Susceptible Exposed Infected Recovered
-Susceptible        9000    1000        0         0
-Exposed               0       0        0         0
-Infected              0       0        0         0
-Recovered             0       0        0         0
-
-, , 1
-
-            Susceptible Exposed Infected Recovered
-Susceptible        9000       0        0         0
-Exposed               0     861      139         0
-Infected              0       0        0         0
-Recovered             0       0        0         0
-
-, , 2
-
-            Susceptible Exposed Infected Recovered
-Susceptible        8822     178        0         0
-Exposed               0     737      124         0
-Infected              0       0       92        47
-Recovered             0       0        0         0
-
 > 
-> # We cam also get (and plot) the incidence, as well as
-> # the generation time
-> inci <- plot_incidence(seirconn)
-> gent <- plot_generation_time(seirconn)
+> cleanEx()
+> nameEx("epiworld-hospitalizations")
+> ### * epiworld-hospitalizations
 > 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: epiworld-hospitalizations
+> ### Title: Hospitalizations by tool
+> ### Aliases: epiworld-hospitalizations get_hospitalizations
+> 
+> ### ** Examples
+> 
+> # See model documentation for examples with hospitalization tracking
 > 
 > 
 > 
@@ -1890,7 +1609,7 @@ queue_post : 0
 > 
 > # Draw a mermaid diagram of the transitions
 > draw_mermaid(model_sirconn)
-flowchart LR
+flowchart TB
 	s0[Infected]
 	s1[Recovered]
 	s2[Susceptible]
@@ -1935,9 +1654,224 @@ flowchart LR
 + )
 > 
 > ## Not run: 
-> ##D   # If DiagrammeR is installed, we can plot the diagram
-> ##D   plot(diagram)
+> ##D # If DiagrammeR is installed, we can plot the diagram
+> ##D plot(diagram)
 > ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("epiworld-repnum")
+> ### * epiworld-repnum
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: epiworld-repnum
+> ### Title: Reproductive number (Rt)
+> ### Aliases: epiworld-repnum get_reproductive_number epiworld_repnum
+> ###   plot.epiworld_repnum plot_reproductive_number
+> 
+> ### ** Examples
+> 
+> # SEIR Connected model
+> seirconn <- ModelSEIRCONN(
++   name              = "Disease",
++   n                 = 10000,
++   prevalence        = 0.1,
++   contact_rate      = 2.0,
++   transmission_rate = 0.8,
++   incubation_days   = 7.0,
++   recovery_rate     = 0.3
++ )
+> 
+> set.seed(937)
+> run(seirconn, 50)
+_________________________________________________________________________
+|Running the model...
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| done.
+|> 
+> # Retrieving (and plotting) the reproductive number
+> rp <- get_reproductive_number(seirconn)
+> plot(rp) # Also equivalent to plot_reproductive_number(seirconn)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("epiworld-summaries")
+> ### * epiworld-summaries
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: epiworld-summaries
+> ### Title: Summary counts and probabilities
+> ### Aliases: epiworld-summaries get_transition_probability get_active_cases
+> ###   get_outbreak_size
+> 
+> ### ** Examples
+> 
+> # SEIR Connected model
+> seirconn <- ModelSEIRCONN(
++   name              = "Disease",
++   n                 = 10000,
++   prevalence        = 0.1,
++   contact_rate      = 2.0,
++   transmission_rate = 0.8,
++   incubation_days   = 7.0,
++   recovery_rate     = 0.3
++ )
+> 
+> set.seed(937)
+> run(seirconn, 50)
+_________________________________________________________________________
+|Running the model...
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| done.
+|> 
+> # Retrieving the transition probability
+> get_transition_probability(seirconn)
+            Susceptible    Exposed  Infected Recovered
+Susceptible   0.9113965 0.08860354 0.0000000 0.0000000
+Exposed       0.0000000 0.85694473 0.1430553 0.0000000
+Infected      0.0000000 0.00000000 0.6974602 0.3025398
+Recovered     0.0000000 0.00000000 0.0000000 1.0000000
+> 
+> # Get active cases
+> head(get_active_cases(seirconn))
+  date virus_id   virus active_cases
+1    0        0 Disease         1000
+2    1        0 Disease         1000
+3    2        0 Disease         1131
+4    3        0 Disease         1346
+5    4        0 Disease         1611
+6    5        0 Disease         1988
+> 
+> # Get outbreak size
+> head(get_outbreak_size(seirconn))
+  date virus_id   virus outbreak_size
+1    0        0 Disease          1000
+2    1        0 Disease          1000
+3    2        0 Disease          1178
+4    3        0 Disease          1466
+5    4        0 Disease          1820
+6    5        0 Disease          2297
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("epiworld-transition")
+> ### * epiworld-transition
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: epiworld-transition
+> ### Title: Transition dynamics and incidence
+> ### Aliases: epiworld-transition epiworld_hist_transition
+> ###   get_hist_transition_matrix as.array.epiworld_hist_transition
+> ###   plot_incidence plot.epiworld_hist_transition
+> 
+> ### ** Examples
+> 
+> # SEIR Connected model
+> seirconn <- ModelSEIRCONN(
++   name              = "Disease",
++   n                 = 10000,
++   prevalence        = 0.1,
++   contact_rate      = 2.0,
++   transmission_rate = 0.8,
++   incubation_days   = 7.0,
++   recovery_rate     = 0.3
++ )
+> 
+> set.seed(937)
+> run(seirconn, 50)
+_________________________________________________________________________
+|Running the model...
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| done.
+|> 
+> # Get the transition history
+> t_hist <- get_hist_transition_matrix(seirconn)
+> head(t_hist)
+   state_from    state_to date counts
+1 Susceptible Susceptible    0   9000
+2     Exposed Susceptible    0      0
+3    Infected Susceptible    0      0
+4   Recovered Susceptible    0      0
+5 Susceptible     Exposed    0   1000
+6     Exposed     Exposed    0      0
+> 
+> # Convert to array
+> as.array(t_hist)[, , 1:3]
+, , 0
+
+            Susceptible Exposed Infected Recovered
+Susceptible        9000    1000        0         0
+Exposed               0       0        0         0
+Infected              0       0        0         0
+Recovered             0       0        0         0
+
+, , 1
+
+            Susceptible Exposed Infected Recovered
+Susceptible        9000       0        0         0
+Exposed               0     861      139         0
+Infected              0       0        0         0
+Recovered             0       0        0         0
+
+, , 2
+
+            Susceptible Exposed Infected Recovered
+Susceptible        8822     178        0         0
+Exposed               0     737      124         0
+Infected              0       0       92        47
+Recovered             0       0        0         0
+
+> 
+> # Plot incidence
+> inci <- plot_incidence(seirconn)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("epiworld-transmissions")
+> ### * epiworld-transmissions
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: epiworld-transmissions
+> ### Title: Transmission network
+> ### Aliases: epiworld-transmissions get_transmissions
+> 
+> ### ** Examples
+> 
+> # SEIR Connected model
+> seirconn <- ModelSEIRCONN(
++   name              = "Disease",
++   n                 = 10000,
++   prevalence        = 0.1,
++   contact_rate      = 2.0,
++   transmission_rate = 0.8,
++   incubation_days   = 7.0,
++   recovery_rate     = 0.3
++ )
+> 
+> set.seed(937)
+> run(seirconn, 50)
+_________________________________________________________________________
+|Running the model...
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| done.
+|> 
+> # Get transmission data
+> head(get_transmissions(seirconn))
+  date source target virus_id   virus source_exposure_date
+1    0     -1   6653        0 Disease                    0
+2    0     -1   9871        0 Disease                    0
+3    0     -1   6580        0 Disease                    0
+4    0     -1   7067        0 Disease                    0
+5    0     -1   1113        0 Disease                    0
+6    0     -1   1991        0 Disease                    0
+> 
 > 
 > 
 > 
@@ -2137,6 +2071,7 @@ _________________________________________________________________________
 > ###   set_death_reduction set_death_reduction_ptr set_death_reduction_fun
 > ###   print.epiworld_agents_tools set_distribution_tool
 > ###   distribute_tool_randomly distribute_tool_to_set
+> ###   distribute_tool_to_entities
 > 
 > ### ** Examples
 > 
@@ -2319,7 +2254,7 @@ _________________________________________________________________________
 > ###   set_prob_death_ptr set_prob_death_fun set_incubation
 > ###   set_incubation_ptr set_incubation_fun set_distribution_virus
 > ###   distribute_virus_randomly distribute_virus_to_set
-> ###   distribute_virus_set
+> ###   distribute_virus_set distribute_virus_to_entities
 > 
 > ### ** Examples
 > 
@@ -2441,7 +2376,7 @@ _________________________________________________________________________
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  11.406 0.368 12.51 0 0.002 
+Time elapsed:  10.569 0.341 11.725 0 0.003 
 > grDevices::dev.off()
 null device 
           1 
