@@ -16,11 +16,14 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(testthat)
-> if (identical(Sys.getenv("NOT_CRAN"), "true")) {
-+   set.seed(getOption("mlr.debug.seed"))
-+   test_check("mlr")
-+ }
+> test_check("mlrCPO", filter = "^meta_")
+Loading required package: mlrCPO
+Loading required package: ParamHelpers
+Loading required package: mlr
+Starting 2 test processes.
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 80 ]
+> 
 > 
 > proc.time()
    user  system elapsed 
-  1.016   0.138   1.505 
+ 50.718   3.470  38.585 

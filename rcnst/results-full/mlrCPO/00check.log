@@ -1,4 +1,4 @@
-* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/ParamHelpers.Rcheck’
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/mlrCPO.Rcheck’
 * using R Under development (unstable) (2025-12-24 r89227)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
@@ -6,8 +6,8 @@
     GNU Fortran (GCC) 15.2.1 20250808 (Red Hat 15.2.1-1)
 * running under: Fedora Linux 42 (MATE-Compiz)
 * using session charset: UTF-8
-* checking for file ‘ParamHelpers/DESCRIPTION’ ... OK
-* this is package ‘ParamHelpers’ version ‘1.14.2’
+* checking for file ‘mlrCPO/DESCRIPTION’ ... OK
+* this is package ‘mlrCPO’ version ‘0.3.8’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -17,9 +17,9 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘ParamHelpers’ can be installed ... OK
-* used C compiler: ‘gcc (GCC) 15.2.1 20250808 (Red Hat 15.2.1-1)’
+* checking whether package ‘mlrCPO’ can be installed ... OK
 * checking package directory ... OK
+* checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
 * checking for left-over files ... OK
@@ -47,21 +47,20 @@
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
-* checking line endings in C/C++/Fortran sources/headers ... OK
-* checking compiled code ... INFO
-Note: information on .o files is not available
-* checking examples ... ERROR
-Running examples in ‘ParamHelpers-Ex.R’ failed
-The error most likely occurred in:
-
-> ### Name: getOptPathParetoFront
-> ### Title: Get indices of pareto front of optimization path.
-> ### Aliases: getOptPathParetoFront
-> 
-> ### ** Examples
-> 
-> ps = makeParamSet(makeNumericParam("x"))
-> op = makeOptPathDF(par.set = ps, y.names = c("y1", "y2"), minimize = c(TRUE, TRUE))
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘run-core.R’
+  Running ‘run-cpo.R’
+  Running ‘run-meta.R’
+  Running ‘run-zzzlint.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... ERROR
+Error(s) in re-building vignettes:
+--- re-building ‘a_1_getting_started.Rmd’ using rmarkdown
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"
@@ -74,26 +73,33 @@ ERROR: the modified constant is in this function body:
 c("integer", "integervector")
 Fatal error: compiler constants were modified!
 
-* checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... ERROR
-  Running ‘run-all.R’
-Running the tests in ‘tests/run-all.R’ failed.
-Last 13 lines of output:
-    5.         ├─withr::with_dir(...)
-    6.         │ └─base::force(code)
-    7.         ├─testthat::with_reporter(...)
-    8.         │ └─base::tryCatch(...)
-    9.         │   └─base (local) tryCatchList(expr, classes, parentenv, handlers)
-   10.         │     └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])
-   11.         │       └─base (local) doTryCatch(return(expr), name, parentenv, handler)
-   12.         └─testthat:::parallel_event_loop_chunky(queue, reporters, ".")
-   13.           └─queue$poll(Inf)
-   14.             └─base::lapply(...)
-   15.               └─testthat (local) FUN(X[[i]], ...)
-   16.                 └─private$handle_error(msg, i)
-   17.                   └─cli::cli_abort(...)
-   18.                     └─rlang::abort(...)
-  Execution halted
+--- re-building ‘a_2_mlrCPO_core.Rmd’ using rmarkdown
+--- finished re-building ‘a_2_mlrCPO_core.Rmd’
+
+--- re-building ‘a_3_all_CPOs.Rmd’ using rmarkdown
+--- finished re-building ‘a_3_all_CPOs.Rmd’
+
+--- re-building ‘a_4_custom_CPOs.Rmd’ using rmarkdown
+--- finished re-building ‘a_4_custom_CPOs.Rmd’
+
+--- re-building ‘z_1_getting_started_terse.Rmd’ using rmarkdown
+--- finished re-building ‘z_1_getting_started_terse.Rmd’
+
+--- re-building ‘z_2_mlrCPO_core_terse.Rmd’ using rmarkdown
+--- finished re-building ‘z_2_mlrCPO_core_terse.Rmd’
+
+--- re-building ‘z_3_all_CPOs_terse.Rmd’ using rmarkdown
+--- finished re-building ‘z_3_all_CPOs_terse.Rmd’
+
+--- re-building ‘z_4_custom_CPOs_terse.Rmd’ using rmarkdown
+--- finished re-building ‘z_4_custom_CPOs_terse.Rmd’
+
+SUMMARY: processing the following file failed:
+  ‘a_1_getting_started.Rmd’
+
+Error: Vignette re-building failed.
+Execution halted
+
 * checking PDF version of manual ... OK
 * DONE
-Status: 2 ERRORs
+Status: 1 ERROR

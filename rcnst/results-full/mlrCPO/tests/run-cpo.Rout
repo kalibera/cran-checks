@@ -1,0 +1,56 @@
+
+R Under development (unstable) (2025-12-24 r89227) -- "Unsuffered Consequences"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> ISTESTING = TRUE  # nolint
+> test_check("mlrCPO", filter = "^cpo_")
+Loading required package: mlrCPO
+Loading required package: ParamHelpers
+Loading required package: mlr
+Starting 2 test processes.
+> test_cpo_filter.R: Loading required namespace: care
+> test_cpo_filter.R: Loading required namespace: FSelector
+> test_cpo_filter.R: Loading required namespace: mRMRe
+> test_cpo_filter.R: Loading required namespace: party
+> test_cpo_filter.R: Loading required namespace: randomForestSRC
+> test_cpo_impute.R: Resampling: holdout
+> test_cpo_impute.R: Measures:             mse       
+> test_cpo_impute.R: [Resample] iter 1:    0.3547040 
+> test_cpo_impute.R: 
+> test_cpo_impute.R: 
+> test_cpo_impute.R: Aggregated Result: mse.test.mean=0.3547040
+> test_cpo_impute.R: 
+> test_cpo_impute.R: 
+> test_cpo_impute.R: Resampling: holdout
+> test_cpo_impute.R: Measures:             mse       
+> test_cpo_impute.R: [Resample] iter 1:    0.1953445 
+> test_cpo_impute.R: 
+> test_cpo_impute.R: 
+> test_cpo_impute.R: Aggregated Result: mse.test.mean=0.1953445
+> test_cpo_impute.R: 
+> test_cpo_impute.R: 
+[ FAIL 0 | WARN 2 | SKIP 1 | PASS 433 ]
+
+══ Skipped tests (1) ═══════════════════════════════════════════════════════════
+• On CRAN (1): 'test_cpo_filter.R:5:3'
+
+[ FAIL 0 | WARN 2 | SKIP 1 | PASS 433 ]
+> 
+> 
+> proc.time()
+   user  system elapsed 
+146.555   5.247 114.561 

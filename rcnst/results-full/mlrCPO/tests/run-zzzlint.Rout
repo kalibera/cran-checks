@@ -16,11 +16,10 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(testthat)
-> if (identical(Sys.getenv("NOT_CRAN"), "true")) {
-+   set.seed(getOption("mlr.debug.seed"))
-+   test_check("mlr")
-+ }
+> # test_check("mlrCPO", filter = "^lint")
+> 
+> 
 > 
 > proc.time()
    user  system elapsed 
-  1.016   0.138   1.505 
+  1.042   0.136   1.314 

@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2025-09-24 r88872) -- "Unsuffered Consequences"
+R Under development (unstable) (2025-12-24 r89227) -- "Unsuffered Consequences"
 Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -320,6 +320,134 @@ u numeric   -   - 1 to Inf   -    TRUE     -
 +   makeNumericVectorParam("y", len = 2),
 +   makeIntegerParam("z", default = 99)
 + )
+> getDefaults(ps1, include.null = TRUE)
+$x
+[1] "a"
+
+$y
+NULL
+
+$z
+[1] 99
+
+> 
+> ps2 = makeParamSet(
++   makeNumericVectorParam("a", len = expression(k), default = expression(p)),
++   makeIntegerParam("b", default = 99),
++   makeLogicalParam("c")
++ )
+> getDefaults(ps2, dict = list(k = 3, p = 5.4))
+$a
+[1] 5.4 5.4 5.4
+
+$b
+[1] 99
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getLower")
+> ### * getLower
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getLower
+> ### Title: Get lower / upper bounds and allowed discrete values for
+> ###   parameters.
+> ### Aliases: getLower getUpper getValues
+> 
+> ### ** Examples
+> 
+> ps = makeParamSet(
++   makeNumericParam("u"),
++   makeDiscreteParam("v", values = c("a", "b")),
++   makeIntegerParam("w", lower = expression(ceiling(p / 3)), upper = 2),
++   makeDiscreteParam("x", values = 1:2),
++   makeNumericVectorParam("y", len = 2, lower = c(0, 10), upper = c(1, 11)),
++   keys = "p"
++ )
+> getLower(ps, dict = list(p = 7))
+   u    w    y    y 
+-Inf    3    0   10 
+> getUpper(ps)
+  u   w   y   y 
+Inf   2   1  11 
+> 
+> ps = makeParamSet(
++   makeNumericParam("u"),
++   makeDiscreteParam("w", values = list(a = list(), b = NULL))
++ )
+> getValues(ps)
+$w
+$w$a
+list()
+
+$w$b
+NULL
+
+
+> 
+> par.vals = list(
++   u = makeNumericParam("u"),
++   v = makeIntegerParam("v", lower = 1, upper = 2),
++   w = makeDiscreteParam("w", values = 1:2),
++   x = makeNumericVectorParam("x", len = 2, lower = c(3, 1), upper = expression(n))
++ )
+> getLower(par.vals)
+   u    v    x    x 
+-Inf    1    3    1 
+> getUpper(par.vals, dict = list(n = 12))
+  u   v   x   x 
+Inf   2  12  12 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getOptPathBestIndex")
+> ### * getOptPathBestIndex
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getOptPathBestIndex
+> ### Title: Get index of the best element from optimization path.
+> ### Aliases: getOptPathBestIndex
+> 
+> ### ** Examples
+> 
+> ps = makeParamSet(makeNumericParam("x"))
+> op = makeOptPathDF(par.set = ps, y.names = "y", minimize = TRUE)
+> addOptPathEl(op, x = list(x = 1), y = 5)
+> addOptPathEl(op, x = list(x = 2), y = 3)
+> addOptPathEl(op, x = list(x = 3), y = 9)
+> addOptPathEl(op, x = list(x = 4), y = 3)
+> as.data.frame(op)
+  x y dob eol
+1 1 5   1  NA
+2 2 3   2  NA
+3 3 9   3  NA
+4 4 3   4  NA
+> getOptPathBestIndex(op)
+[1] 4
+> getOptPathBestIndex(op, ties = "first")
+[1] 2
+> 
+> 
+> 
+> cleanEx()
+> nameEx("getOptPathParetoFront")
+> ### * getOptPathParetoFront
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: getOptPathParetoFront
+> ### Title: Get indices of pareto front of optimization path.
+> ### Aliases: getOptPathParetoFront
+> 
+> ### ** Examples
+> 
+> ps = makeParamSet(makeNumericParam("x"))
+> op = makeOptPathDF(par.set = ps, y.names = c("y1", "y2"), minimize = c(TRUE, TRUE))
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"

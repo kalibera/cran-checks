@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/mlrMBO.Rcheck’
-* using R Under development (unstable) (2025-12-18 r89195)
+* using R Under development (unstable) (2025-12-24 r89227)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (GCC) 15.2.1 20250808 (Red Hat 15.2.1-1)
@@ -130,16 +130,16 @@ Fatal error: compiler constants were modified!
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-    1. └─mlrMBO::mbo(testf.fsphere.2d, des, learner = learner, control = ctrl) at test_mbo_km.R:11:3
-    2.   ├─mlrMBO:::mboTemplate(opt.problem)
-    3.   └─mlrMBO:::mboTemplate.OptProblem(opt.problem)
-    4.     ├─mlrMBO:::mboTemplate(opt.state)
-    5.     └─mlrMBO:::mboTemplate.OptState(opt.state)
-    6.       └─mlrMBO:::evalProposedPoints.OptState(opt.state, prop)
-    7.         └─mlrMBO:::evalTargetFun.OptState(opt.state, xs = xs, extras = extras)
-    8.           └─base::lapply(xs, trafoValue, par = par.set)
-    9.             └─ParamHelpers (local) FUN(X[[i]], ...)
-   10.               └─checkmate::assertSetEqual(names(x), pids)
+      ▆
+   1. └─mlrMBO::mbo(testf.fsphere.2d, des, learner = learner, control = ctrl) at test_mbo_km.R:11:3
+   2.   ├─mlrMBO:::mboTemplate(opt.problem)
+   3.   └─mlrMBO:::mboTemplate.OptProblem(opt.problem)
+   4.     ├─mlrMBO:::mboTemplate(opt.state)
+   5.     └─mlrMBO:::mboTemplate.OptState(opt.state)
+   6.       └─mlrMBO:::evalProposedPoints.OptState(opt.state, prop)
+   7.         └─mlrMBO:::evalTargetFun.OptState(opt.state, xs = xs, extras = extras)
+   8.           └─base::lapply(xs, trafoValue, par = par.set)
+   9.             └─base::match.fun(FUN)
   
   [ FAIL 1 | WARN 0 | SKIP 0 | PASS 39 ]
   Error:
@@ -149,29 +149,8 @@ Last 13 lines of output:
 * checking package vignettes ... OK
 * checking re-building of vignette outputs ... ERROR
 Error(s) in re-building vignettes:
+  ...
 --- re-building ‘mlrMBO.Rmd’ using rmarkdown
-** Processing: /var/scratch2/tomas/cran/rcnst/check/mlrMBO.Rcheck/vign_test/mlrMBO/vignettes/mlrMBO_files/figure-html/cosine_fun-1.png
-1344x960 pixels, 8 bits/pixel, 256 colors in palette
-Reducing image to 8 bits/pixel, grayscale
-Input IDAT size = 28819 bytes
-Input file size = 29713 bytes
-
-Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 23816
-  zc = 9  zm = 8  zs = 1  f = 0		IDAT size = 23525
-  zc = 1  zm = 8  zs = 2  f = 0
-  zc = 9  zm = 8  zs = 3  f = 0
-  zc = 9  zm = 8  zs = 0  f = 5		IDAT size = 22820
-  zc = 9  zm = 8  zs = 1  f = 5		IDAT size = 22557
-  zc = 1  zm = 8  zs = 2  f = 5
-  zc = 9  zm = 8  zs = 3  f = 5
-                               
-Selecting parameters:
-  zc = 9  zm = 8  zs = 1  f = 5		IDAT size = 22557
-
-Output IDAT size = 22557 bytes (6262 bytes decrease)
-Output file size = 22635 bytes (7078 bytes = 23.82% decrease)
-
 ERROR: modification of compiler constant of type character, length 2
 ERROR: the modified value of the constant is:
 [1] "integer"       "integervector"

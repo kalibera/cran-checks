@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2025-12-18 r89195) -- "Unsuffered Consequences"
+R Under development (unstable) (2025-12-24 r89227) -- "Unsuffered Consequences"
 Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -46,17 +46,16 @@ Saving _problems/test_mbo_km-11.R
 ── Error ('test_mbo_km.R:11:3'): mbo works with km ─────────────────────────────
 Error: promise already under evaluation: recursive default argument reference or earlier problems?
 Backtrace:
-     ▆
-  1. └─mlrMBO::mbo(testf.fsphere.2d, des, learner = learner, control = ctrl) at test_mbo_km.R:11:3
-  2.   ├─mlrMBO:::mboTemplate(opt.problem)
-  3.   └─mlrMBO:::mboTemplate.OptProblem(opt.problem)
-  4.     ├─mlrMBO:::mboTemplate(opt.state)
-  5.     └─mlrMBO:::mboTemplate.OptState(opt.state)
-  6.       └─mlrMBO:::evalProposedPoints.OptState(opt.state, prop)
-  7.         └─mlrMBO:::evalTargetFun.OptState(opt.state, xs = xs, extras = extras)
-  8.           └─base::lapply(xs, trafoValue, par = par.set)
-  9.             └─ParamHelpers (local) FUN(X[[i]], ...)
- 10.               └─checkmate::assertSetEqual(names(x), pids)
+    ▆
+ 1. └─mlrMBO::mbo(testf.fsphere.2d, des, learner = learner, control = ctrl) at test_mbo_km.R:11:3
+ 2.   ├─mlrMBO:::mboTemplate(opt.problem)
+ 3.   └─mlrMBO:::mboTemplate.OptProblem(opt.problem)
+ 4.     ├─mlrMBO:::mboTemplate(opt.state)
+ 5.     └─mlrMBO:::mboTemplate.OptState(opt.state)
+ 6.       └─mlrMBO:::evalProposedPoints.OptState(opt.state, prop)
+ 7.         └─mlrMBO:::evalTargetFun.OptState(opt.state, xs = xs, extras = extras)
+ 8.           └─base::lapply(xs, trafoValue, par = par.set)
+ 9.             └─base::match.fun(FUN)
 
 [ FAIL 1 | WARN 0 | SKIP 0 | PASS 39 ]
 Error:

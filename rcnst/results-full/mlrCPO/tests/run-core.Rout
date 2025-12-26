@@ -17,10 +17,10 @@ Type 'q()' to quit R.
 
 > library(testthat)
 > if (identical(Sys.getenv("NOT_CRAN"), "true")) {
-+   set.seed(getOption("mlr.debug.seed"))
-+   test_check("mlr")
++   test_check("mlrCPO", filter = "^core_")
 + }
+> 
 > 
 > proc.time()
    user  system elapsed 
-  1.016   0.138   1.505 
+  1.059   0.141   1.333 

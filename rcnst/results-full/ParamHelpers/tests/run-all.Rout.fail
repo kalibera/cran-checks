@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2025-09-24 r88872) -- "Unsuffered Consequences"
+R Under development (unstable) (2025-12-24 r89227) -- "Unsuffered Consequences"
 Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -27,11 +27,25 @@ The following object is masked from 'package:base':
 > library(ParamHelpers)
 > 
 > test_check("ParamHelpers")
-Starting 2 test processes
+Starting 2 test processes.
+> test_convertParamSetToIrace.R: ERROR: modification of compiler constant of type character, length 2
+> test_convertParamSetToIrace.R: ERROR: the modified value of the constant is:
+> test_convertParamSetToIrace.R: [1] "integer"       "integervector"
+> test_convertParamSetToIrace.R: attr(,".match.hash")
+> test_convertParamSetToIrace.R: <hash table>
+> test_convertParamSetToIrace.R: ERROR: the original value of the constant is:
+> test_convertParamSetToIrace.R: [1] "integer"       "integervector"
+> test_convertParamSetToIrace.R: ERROR: the modified constant is at index 1
+> test_convertParamSetToIrace.R: ERROR: the modified constant is in this function body:
+> test_convertParamSetToIrace.R: c("integer", "integervector")
+> test_convertParamSetToIrace.R: Fatal error: compiler constants were modified!
+> test_convertParamSetToIrace.R: 
+> test_convertParamSetToIrace.R: Ran 5/5 deferred expressions
+> test_convertParamSetToIrace.R: Error in deferred_run(env) : could not find function "deferred_run"
+> test_convertParamSetToIrace.R: Calls: <Anonymous>
 
-
-Error in `private$handle_error()`:
-! testthat subprocess exited in file `test_dropParams.R`
+Error:
+! testthat subprocess exited in file 'test_convertParamSetToIrace.R'.
 Caused by error:
 ! R session crashed with exit code 2
 Backtrace:
@@ -52,5 +66,6 @@ Backtrace:
  14.             └─base::lapply(...)
  15.               └─testthat (local) FUN(X[[i]], ...)
  16.                 └─private$handle_error(msg, i)
- 17.                   └─rlang::abort(...)
+ 17.                   └─cli::cli_abort(...)
+ 18.                     └─rlang::abort(...)
 Execution halted
