@@ -1,0 +1,16 @@
+Package data.table version 1.18.0
+Package built using 89227/R 4.6.0; x86_64-pc-linux-gnu; 2025-12-26 07:45:04 UTC; unix   
+Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Function _selfrefok
+  [UP] unprotected variable v while calling allocating function Rf_getAttrib(?,S:names) data.table/src/assign.c:73
+
+Function subsetDT
+  [UP] calling allocating function subsetVectorRaw with argument allocated using Rf_getAttrib(?,S:names) data.table/src/subset.c:334
+  [UP] unprotected variable key while calling allocating function Rf_getAttrib(?,S:names) data.table/src/subset.c:346
+  [UP] allocating function chin may destroy its unprotected argument (key <arg 1>), which is later used. data.table/src/subset.c:347
+  [UP] calling allocating function chin with a fresh pointer (key <arg 1>) data.table/src/subset.c:347
+  [UP] unprotected variable key while calling allocating function Rf_allocVector data.table/src/subset.c:355
+  [UP] unprotected variable key while calling allocating function Rf_setAttrib(?,S:sorted,V) data.table/src/subset.c:355
