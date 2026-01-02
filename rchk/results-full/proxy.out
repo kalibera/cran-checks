@@ -1,11 +1,17 @@
-Package proxy version 0.4-28
-Package built using 89166/R 4.6.0; x86_64-pc-linux-gnu; 2025-12-15 09:04:33 UTC; unix   
+Package proxy version 0.4-29
+Package built using 89265/R 4.6.0; x86_64-pc-linux-gnu; 2026-01-02 00:52:51 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
 
+Function R_apply_dist_binary_matrix
+  [UP] unprotected variable d while calling allocating function Rf_install proxy/src/apply.c:311
+  [UP] unprotected variable d1 while calling allocating function Rf_getAttrib(?,S:dimnames) proxy/src/apply.c:322
+
 Function R_apply_dist_matrix
+  [UP] unprotected variable d while calling allocating function Rf_install proxy/src/apply.c:75
+  [UP] unprotected variable d1 while calling allocating function Rf_getAttrib(?,S:dimnames) proxy/src/apply.c:86
   [PB] has negative depth proxy/src/apply.c:135
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete proxy/src/apply.c:135
   [PB] has negative depth proxy/src/apply.c:137
@@ -18,13 +24,25 @@ Function R_rowSums_dist
   [PB] has possible protection stack imbalance proxy/src/util.c:157
 
 Function R_subset_dist
+  [UP] allocating function Rf_getAttrib(?,S:dim) may destroy its unprotected argument (r <arg 1>), which is later used. proxy/src/util.c:33
+  [UP] calling allocating function Rf_getAttrib(?,S:dim) with a fresh pointer (r <arg 1>) proxy/src/util.c:33
+  [UP] unprotected variable r while calling allocating function Rf_getAttrib(?,S:Labels) proxy/src/util.c:35
   [UP] unprotected variable r while calling allocating function Rf_install proxy/src/util.c:35
   [UP] calling allocating function _int_array_subscript with a fresh pointer (r <arg 5>) proxy/src/util.c:51
+  [UP] unprotected variable d while calling allocating function _int_array_subscript proxy/src/util.c:51
+  [UP] unprotected variable d while calling allocating function Rf_allocVector proxy/src/util.c:63
+  [UP] unprotected variable d while calling allocating function R_CheckUserInterrupt proxy/src/util.c:77
+  [UP] unprotected variable d while calling allocating function Rf_copyMostAttrib(?,V) proxy/src/util.c:81
+  [UP] unprotected variable d while calling allocating function Rf_ScalarInteger proxy/src/util.c:83
+  [UP] unprotected variable d while calling allocating function Rf_install proxy/src/util.c:83
+  [UP] unprotected variable d while calling allocating function Rf_setAttrib(V,S:Size,V) proxy/src/util.c:83
   [PB] has negative depth proxy/src/util.c:96
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete proxy/src/util.c:96
   [PB] has possible protection stack imbalance proxy/src/util.c:98
 
 Function dists
+  [UP] unprotected variable d while calling allocating function Rf_install proxy/src/distance.c:310
+  [UP] unprotected variable d1 while calling allocating function Rf_getAttrib(?,S:dimnames) proxy/src/distance.c:321
   [PB] has negative depth proxy/src/distance.c:345
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete proxy/src/distance.c:345
   [PB] has negative depth proxy/src/distance.c:347
