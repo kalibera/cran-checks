@@ -1,234 +1,47 @@
-Package cheapr version 1.4.0
-Package built using 89080/R 4.6.0; x86_64-pc-linux-gnu; 2025-12-01 13:18:07 UTC; unix   
+Package cheapr version 1.5.0
+Package built using 89288/R 4.6.0; x86_64-pc-linux-gnu; 2026-01-10 10:49:04 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
-Function SEXPREC* cast<r_date_t>(SEXPREC*, SEXPREC*)
-  [UP] unprotected variable out while calling allocating function cheapr::make_utf8_str(char const*) cheapr/src/./cast.h:498
+Function SEXPREC* lag(SEXPREC*, long, SEXPREC*, bool)::$_0::operator()<SEXPREC* const*>(SEXPREC* const*) const
+  [PB] has possible protection stack imbalance cheapr/src/lag.cpp:105
 
-Function cheapr::SHIELD(SEXPREC*)
-  [PB] has possible protection stack imbalance cheapr/src/../inst/include/core.h:86
+Function SEXPREC* lag(SEXPREC*, long, SEXPREC*, bool)::$_0::operator()<cheapr::r_bool_t const*>(cheapr::r_bool_t const*) const
+  [PB] has possible protection stack imbalance cheapr/src/lag.cpp:54
 
-Function clean_indices(SEXPREC*, SEXPREC*, bool)
-  [UP] unprotected variable indices while calling allocating function cheapr::num_cores() cheapr/src/sset.cpp:180
-  [UP] unprotected variable indices while calling allocating function cheapr::get_names(SEXPREC*) cheapr/src/sset.cpp:187
-  [UP] calling allocating function match(SEXPREC*, SEXPREC*, int) with a fresh pointer (indices <arg 2>) cheapr/src/sset.cpp:196
-  [UP] allocating function is_compact_seq(SEXPREC*) may destroy its unprotected argument (indices <arg 1>), which is later used. cheapr/src/sset.cpp:199
-  [UP] calling allocating function compact_seq_data(SEXPREC*) with a fresh pointer (indices <arg 1>) cheapr/src/sset.cpp:202
-  [UP] calling allocating function exclude_locs(SEXPREC*, long) with a fresh pointer (clean_indices <arg 1>) cheapr/src/sset.cpp:262
-  [UP] calling allocating function exclude_locs(SEXPREC*, long) with a fresh pointer (clean_indices <arg 1>) cheapr/src/sset.cpp:318
-  [UP] unprotected variable clean_indices while calling allocating function SEXPREC* cheapr::as_r_scalar<double>(double) cheapr/src/sset.cpp:327
+Function SEXPREC* lag(SEXPREC*, long, SEXPREC*, bool)::$_0::operator()<cheapr::r_byte_t const*>(cheapr::r_byte_t const*) const
+  [PB] has possible protection stack imbalance cheapr/src/lag.cpp:54
 
-Function clean_locs(SEXPREC*, SEXPREC*)
-  [UP] unprotected variable locs while calling allocating function cheapr::get_names(SEXPREC*) cheapr/src/sset.cpp:358
-  [UP] calling allocating function match(SEXPREC*, SEXPREC*, int) with a fresh pointer (locs <arg 2>) cheapr/src/sset.cpp:367
-  [UP] calling allocating function SEXPREC* cast<r_integer_t>(SEXPREC*, SEXPREC*) with a fresh pointer (locs <arg 1>) cheapr/src/sset.cpp:383
-  [UP] calling allocating function exclude_locs(SEXPREC*, long) with a fresh pointer (locs <arg 1>) cheapr/src/sset.cpp:412
+Function SEXPREC* lag(SEXPREC*, long, SEXPREC*, bool)::$_0::operator()<cheapr::r_complex_t const*>(cheapr::r_complex_t const*) const
+  [PB] has possible protection stack imbalance cheapr/src/lag.cpp:54
 
-Function combine_internal(SEXPREC*, long, SEXPREC*)
-  [UP] unprotected variable out while calling allocating function SEXPREC* cast<r_logical_t>(SEXPREC*, SEXPREC*) cheapr/src/combine.cpp:885
-  [UP] unprotected variable out while calling allocating function SEXPREC* cast<r_integer_t>(SEXPREC*, SEXPREC*) cheapr/src/combine.cpp:898
-  [UP] unprotected variable out while calling allocating function SEXPREC* cast<r_numeric_t>(SEXPREC*, SEXPREC*) cheapr/src/combine.cpp:924
-  [UP] unprotected variable out while calling allocating function SEXPREC* cast<r_character_t>(SEXPREC*, SEXPREC*) cheapr/src/combine.cpp:935
-  [UP] unprotected variable out while calling allocating function SEXPREC* cast<r_complex_t>(SEXPREC*, SEXPREC*) cheapr/src/combine.cpp:952
-  [UP] unprotected variable out while calling allocating function SEXPREC* cast<r_raw_t>(SEXPREC*, SEXPREC*) cheapr/src/combine.cpp:965
-  [UP] unprotected variable out while calling allocating function SEXPREC* cast<r_list_t>(SEXPREC*, SEXPREC*) cheapr/src/combine.cpp:976
-  [UP] unprotected variable out while calling allocating function cheapr::make_utf8_str(char const*) cheapr/src/combine.cpp:1003
-  [UP] unprotected variable out while calling allocating function SEXPREC* cast<r_date_t>(SEXPREC*, SEXPREC*) cheapr/src/combine.cpp:1008
-  [UP] unprotected variable out while calling allocating function cheapr::coerce_vec(SEXPREC*, unsigned int) cheapr/src/combine.cpp:1009
-  [UP] unprotected variable out while calling allocating function cheapr::make_utf8_str(char const*) cheapr/src/combine.cpp:1015
-  [UP] unprotected variable out while calling allocating function SEXPREC* cast<r_date_t>(SEXPREC*, SEXPREC*) cheapr/src/combine.cpp:1020
-  [UP] unprotected variable out while calling allocating function cheapr::coerce_vec(SEXPREC*, unsigned int) cheapr/src/combine.cpp:1021
-  [UP] calling allocating function Rf_eval with a fresh pointer (call <arg 1>) cheapr/src/combine.cpp:1050
-  [UP] unprotected variable out while calling allocating function get_vec_names(SEXPREC*) cheapr/src/combine.cpp:1060
-  [UP] unprotected variable out while calling allocating function cpp_lengths(SEXPREC*, bool) cheapr/src/combine.cpp:1061
-  [UP] unprotected variable out while calling allocating function cpp_rep(SEXPREC*, SEXPREC*) cheapr/src/combine.cpp:1062
-  [UP] calling allocating function set_vec_names(SEXPREC*, SEXPREC*) with a fresh pointer (out <arg 1>) cheapr/src/combine.cpp:1064
-  [UP] calling allocating function set_vec_names(SEXPREC*, SEXPREC*)(V,?) with a fresh pointer (out <arg 1>) cheapr/src/combine.cpp:1064
-  [PB] has possible protection stack imbalance cheapr/src/combine.cpp:1066
+Function SEXPREC* lag(SEXPREC*, long, SEXPREC*, bool)::$_0::operator()<cheapr::r_string_t const*>(cheapr::r_string_t const*) const
+  [PB] has possible protection stack imbalance cheapr/src/lag.cpp:105
 
-Function cpp_address(SEXPREC*)
-  [UP] calling allocating function SEXPREC* cheapr::as_r_scalar<SEXPREC*>(SEXPREC*) with argument allocated using cheapr::address(SEXPREC*) cheapr/src/utils.cpp:24
+Function SEXPREC* lag(SEXPREC*, long, SEXPREC*, bool)::$_0::operator()<double const*>(double const*) const
+  [PB] has possible protection stack imbalance cheapr/src/lag.cpp:54
 
-Function cpp_common_template(SEXPREC*)
-  [UP] unprotected variable out while calling allocating function cheapr::new_vec(unsigned int, long) cheapr/src/cast.cpp:73
-  [UP] unprotected variable out while calling allocating function cheapr::new_vec(unsigned int, long) cheapr/src/cast.cpp:74
-  [UP] unprotected variable out while calling allocating function SEXPREC* cast<r_character_t>(SEXPREC*, SEXPREC*) cheapr/src/cast.cpp:82
-  [UP] unprotected variable out while calling allocating function R_compute_identical cheapr/src/cast.cpp:84
-  [UP] unprotected variable out while calling allocating function cpp_setdiff(SEXPREC*, SEXPREC*, bool) cheapr/src/cast.cpp:85
-  [UP] unprotected variable out while calling allocating function SEXPREC* r_combine<SEXPREC*, SEXPREC*>(SEXPREC*, SEXPREC*) cheapr/src/cast.cpp:87
-  [UP] calling allocating function SEXPREC* cast<r_posixt_t>(SEXPREC*, SEXPREC*) with a fresh pointer (out <arg 1>) cheapr/src/cast.cpp:114
-  [PB] has possible protection stack imbalance cheapr/src/cast.cpp:124
+Function SEXPREC* lag(SEXPREC*, long, SEXPREC*, bool)::$_0::operator()<int const*>(int const*) const
+  [PB] has possible protection stack imbalance cheapr/src/lag.cpp:54
 
-Function cpp_dbl_sequence(SEXPREC*, SEXPREC*, SEXPREC*, bool)
-  [PB] has possible protection stack imbalance cheapr/src/sequences.cpp:227
+Function SEXPREC* lag(SEXPREC*, long, SEXPREC*, bool)::$_0::operator()<long const*>(long const*) const
+  [PB] has possible protection stack imbalance cheapr/src/lag.cpp:54
 
-Function cpp_df_assign_cols(SEXPREC*, SEXPREC*)
-  [UP] unprotected variable out while calling allocating function sset_vec(SEXPREC*, SEXPREC*, bool) cheapr/src/lists.cpp:794
-  [UP] allocating function cheapr::set_names(SEXPREC*, SEXPREC*) may destroy its unprotected argument (out <arg 1>), which is later used. cheapr/src/lists.cpp:796
-  [UP] calling allocating function cheapr::set_names(SEXPREC*, SEXPREC*) with a fresh pointer (out <arg 1>) cheapr/src/lists.cpp:796
-  [UP] unprotected variable out while calling allocating function create_df_row_names(int) cheapr/src/lists.cpp:797
-  [UP] unprotected variable out while calling allocating function cheapr::make_utf8_str(char const*) cheapr/src/lists.cpp:798
+Function decltype (Rf_protect(((std::forward<decltype ({parm#1})>)({parm#1}))...)) cheapr_do_memory_leak_test()::$_0::operator()<SEXPREC*>(SEXPREC*&&) const
+  [PB] has possible protection stack imbalance cheapr/src/utils.cpp:780
 
-Function cpp_df_c(SEXPREC*)
-  [PB] has possible protection stack imbalance cheapr/src/combine.cpp:728
+Function decltype (Rf_protect(((std::forward<decltype ({parm#1})>)({parm#1}))...)) cheapr_do_memory_leak_test()::$_2::operator()<SEXPREC*>(SEXPREC*&&) const
+  [PB] has possible protection stack imbalance cheapr/src/utils.cpp:781
 
-Function cpp_df_col_c(SEXPREC*, bool, bool)
-  [UP] calling allocating function cpp_new_df(SEXPREC*, SEXPREC*, bool, bool)(?,V,?,?) with a fresh pointer (r_nrows <arg 2>) cheapr/src/combine.cpp:815
-  [PB] has possible protection stack imbalance cheapr/src/combine.cpp:822
+Function decltype (Rf_protect(((std::forward<decltype ({parm#1})>)({parm#1}))...)) cheapr_do_memory_leak_test()::$_4::operator()<SEXPREC*>(SEXPREC*&&) const
+  [PB] has possible protection stack imbalance cheapr/src/utils.cpp:782
 
-Function cpp_df_select(SEXPREC*, SEXPREC*)
-  [UP] unprotected variable out while calling allocating function Rf_lengthgets cheapr/src/sset.cpp:1391
-  [UP] unprotected variable out while calling allocating function create_df_row_names(int) cheapr/src/sset.cpp:1395
-  [UP] unprotected variable out_names while calling allocating function Rf_setAttrib(?,S:row.names,?) cheapr/src/sset.cpp:1395
-  [UP] unprotected variable out_names while calling allocating function create_df_row_names(int) cheapr/src/sset.cpp:1395
-  [UP] unprotected variable out while calling allocating function cheapr::make_utf8_str(char const*) cheapr/src/sset.cpp:1396
-  [UP] unprotected variable out_names while calling allocating function Rf_classgets(?,V) cheapr/src/sset.cpp:1396
-  [UP] unprotected variable out_names while calling allocating function cheapr::make_utf8_str(char const*) cheapr/src/sset.cpp:1396
-  [UP] allocating function cheapr::set_names(SEXPREC*, SEXPREC*) may destroy its unprotected argument (out <arg 1>), which is later used. cheapr/src/sset.cpp:1397
-  [UP] calling allocating function cheapr::set_names(SEXPREC*, SEXPREC*) with a fresh pointer (out <arg 1>) cheapr/src/sset.cpp:1397
+Function factor_as_character(SEXPREC*)
+  [UP] calling allocating function sset_vec(SEXPREC*, SEXPREC*, bool) with argument allocated using cheapr::attr::get_attr(SEXPREC*, cheapr::r_symbol_t) cheapr/src/combine.cpp:607
 
-Function cpp_gcd2_vectorised(SEXPREC*, SEXPREC*, double, bool)
-  [UP] unprotected variable x while calling allocating function cheapr::coerce_vec(SEXPREC*, unsigned int) cheapr/src/gcd.cpp:311
-  [UP] unprotected variable x while calling allocating function cheapr::new_vec(unsigned int, long) cheapr/src/gcd.cpp:312
-  [UP] unprotected variable y while calling allocating function cheapr::new_vec(unsigned int, long) cheapr/src/gcd.cpp:312
-  [UP] unprotected variable x while calling allocating function cheapr::coerce_vec(SEXPREC*, unsigned int) cheapr/src/gcd.cpp:327
-  [UP] unprotected variable x while calling allocating function cheapr::new_vec(unsigned int, long) cheapr/src/gcd.cpp:328
-  [UP] unprotected variable y while calling allocating function cheapr::new_vec(unsigned int, long) cheapr/src/gcd.cpp:328
+Function na_count(SEXPREC*, bool)::$_0::operator()<SEXPREC* const*>(SEXPREC* const*) const::{lambda()#1}::operator()() const
+  [PB] has possible protection stack imbalance cheapr/src/nas.cpp:79
 
-Function cpp_int_sequence(SEXPREC*, SEXPREC*, SEXPREC*, bool)
-  [PB] has possible protection stack imbalance cheapr/src/sequences.cpp:119
-
-Function cpp_lag_sequence(SEXPREC*, double, bool)
-  [UP] allocating function cpp_min(SEXPREC*) may destroy its unprotected argument (size <arg 1>), which is later used. cheapr/src/sequences.cpp:415
-  [UP] calling allocating function cpp_min(SEXPREC*) with a fresh pointer (size <arg 1>) cheapr/src/sequences.cpp:415
-  [UP] unprotected variable size while calling allocating function cheapr::new_vec(unsigned int, long) cheapr/src/sequences.cpp:422
-
-Function cpp_lcm2_vectorised(SEXPREC*, SEXPREC*, double, bool)
-  [UP] unprotected variable x while calling allocating function cheapr::coerce_vec(SEXPREC*, unsigned int) cheapr/src/gcd.cpp:370
-  [UP] unprotected variable x while calling allocating function cheapr::new_vec(unsigned int, long) cheapr/src/gcd.cpp:371
-  [UP] unprotected variable y while calling allocating function cheapr::new_vec(unsigned int, long) cheapr/src/gcd.cpp:371
-  [UP] unprotected variable x while calling allocating function cheapr::coerce_vec(SEXPREC*, unsigned int) cheapr/src/gcd.cpp:392
-  [UP] unprotected variable x while calling allocating function cheapr::new_vec(unsigned int, long) cheapr/src/gcd.cpp:393
-  [UP] unprotected variable y while calling allocating function cheapr::new_vec(unsigned int, long) cheapr/src/gcd.cpp:393
-
-Function cpp_lead_sequence(SEXPREC*, double, bool)
-  [UP] allocating function cpp_min(SEXPREC*) may destroy its unprotected argument (size <arg 1>), which is later used. cheapr/src/sequences.cpp:455
-  [UP] calling allocating function cpp_min(SEXPREC*) with a fresh pointer (size <arg 1>) cheapr/src/sequences.cpp:455
-  [UP] unprotected variable size while calling allocating function cheapr::new_vec(unsigned int, long) cheapr/src/sequences.cpp:462
-
-Function cpp_list_assign(SEXPREC*, SEXPREC*)
-  [UP] unprotected variable names while calling allocating function cheapr::new_vec(unsigned int, long) cheapr/src/lists.cpp:274
-  [UP] calling allocating function match(SEXPREC*, SEXPREC*, int) with a fresh pointer (col_names <arg 2>) cheapr/src/lists.cpp:293
-  [UP] calling allocating function match(SEXPREC*, SEXPREC*, int) with a fresh pointer (names <arg 1>) cheapr/src/lists.cpp:293
-  [UP] unprotected variable out while calling allocating function sset_vec(SEXPREC*, SEXPREC*, bool) cheapr/src/lists.cpp:336
-  [UP] allocating function cheapr::set_names(SEXPREC*, SEXPREC*) may destroy its unprotected argument (out <arg 1>), which is later used. cheapr/src/lists.cpp:338
-  [UP] calling allocating function cheapr::set_names(SEXPREC*, SEXPREC*) with a fresh pointer (out <arg 1>) cheapr/src/lists.cpp:338
-
-Function cpp_list_c(SEXPREC*)
-  [PB] has possible protection stack imbalance cheapr/src/combine.cpp:617
-
-Function cpp_new_df(SEXPREC*, SEXPREC*, bool, bool)
-  [UP] unprotected variable out_names while calling allocating function cheapr::make_utf8_str(char const*) cheapr/src/lists.cpp:714
-  [UP] unprotected variable out_names while calling allocating function cheapr::make_utf8_str(char const*) cheapr/src/lists.cpp:715
-  [UP] calling allocating function cpp_name_repair(SEXPREC*, SEXPREC*, SEXPREC*)(?,V,V) with a fresh pointer (out_names <arg 1>) cheapr/src/lists.cpp:716
-
-Function cpp_paste(SEXPREC*, SEXPREC*, SEXPREC*)
-  [UP] unprotected variable sep while calling allocating function cpp_recycle(SEXPREC*, SEXPREC*) cheapr/src/strings.cpp:85
-  [UP] unprotected variable sep while calling allocating function Rf_shallow_duplicate cheapr/src/strings.cpp:87
-  [UP] unprotected variable chars while calling allocating function SEXPREC* cast<r_character_t>(SEXPREC*, SEXPREC*) cheapr/src/strings.cpp:104
-  [UP] unprotected variable sep while calling allocating function SEXPREC* cast<r_character_t>(SEXPREC*, SEXPREC*) cheapr/src/strings.cpp:104
-
-Function cpp_rebuild(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, bool)
-  [UP] allocating function cheapr::address_equal(SEXPREC*, SEXPREC*) may destroy its unprotected argument (target <arg 1>), which is later used. cheapr/src/utils.cpp:675
-  [UP] allocating function clear_attributes(SEXPREC*) may destroy its unprotected argument (target <arg 1>), which is later used. cheapr/src/utils.cpp:684
-  [UP] calling allocating function clear_attributes(SEXPREC*) with a fresh pointer (target <arg 1>) cheapr/src/utils.cpp:684
-
-Function cpp_rep_each(SEXPREC*, SEXPREC*)
-  [UP] calling allocating function cpp_rep_len(SEXPREC*, int) with a fresh pointer (each <arg 1>) cheapr/src/combine.cpp:342
-  [UP] calling allocating function cpp_rep(SEXPREC*, SEXPREC*) with a fresh pointer (each <arg 2>) cheapr/src/combine.cpp:344
-
-Function cpp_replace(SEXPREC*, SEXPREC*, SEXPREC*, bool, bool)
-  [UP] unprotected variable where while calling allocating function cast_(unsigned char, SEXPREC*, SEXPREC*) cheapr/src/replace.cpp:21
-  [UP] allocating function cheapr::vector_length(SEXPREC*) may destroy its unprotected argument (where <arg 1>), which is later used. cheapr/src/replace.cpp:23
-  [UP] calling allocating function cheapr::vector_length(SEXPREC*) with a fresh pointer (where <arg 1>) cheapr/src/replace.cpp:23
-  [UP] unprotected variable with while calling allocating function cheapr::vector_length(SEXPREC*) cheapr/src/replace.cpp:23
-  [UP] allocating function cheapr::vector_length(SEXPREC*) may destroy its unprotected argument (with <arg 1>), which is later used. cheapr/src/replace.cpp:24
-  [UP] calling allocating function cheapr::vector_length(SEXPREC*) with a fresh pointer (with <arg 1>) cheapr/src/replace.cpp:24
-  [UP] unprotected variable where while calling allocating function cheapr::vector_length(SEXPREC*) cheapr/src/replace.cpp:24
-  [UP] unprotected variable where while calling allocating function cpp_shallow_copy(SEXPREC*)(V) cheapr/src/replace.cpp:32
-  [UP] unprotected variable with while calling allocating function cpp_shallow_copy(SEXPREC*)(V) cheapr/src/replace.cpp:32
-  [UP] unprotected variable where while calling allocating function cpp_semi_copy(SEXPREC*) cheapr/src/replace.cpp:34
-  [UP] unprotected variable with while calling allocating function cpp_semi_copy(SEXPREC*) cheapr/src/replace.cpp:34
-  [UP] unprotected variable where while calling allocating function Rf_classgets cheapr/src/replace.cpp:119
-  [UP] unprotected variable with while calling allocating function Rf_classgets cheapr/src/replace.cpp:119
-  [UP] allocating function cpp_replace(SEXPREC*, SEXPREC*, SEXPREC*, bool, bool) may destroy its unprotected argument (x <arg 1>), which is later used. cheapr/src/replace.cpp:120
-  [UP] calling allocating function cpp_replace(SEXPREC*, SEXPREC*, SEXPREC*, bool, bool) with a fresh pointer (where <arg 2>) cheapr/src/replace.cpp:120
-  [UP] calling allocating function cpp_replace(SEXPREC*, SEXPREC*, SEXPREC*, bool, bool) with a fresh pointer (with <arg 3>) cheapr/src/replace.cpp:120
-  [UP] calling allocating function cpp_replace(SEXPREC*, SEXPREC*, SEXPREC*, bool, bool) with a fresh pointer (x <arg 1>) cheapr/src/replace.cpp:120
-  [UP] allocating function cheapr::get_names(SEXPREC*) may destroy its unprotected argument (x <arg 1>), which is later used. cheapr/src/replace.cpp:152
-  [UP] calling allocating function cheapr::get_names(SEXPREC*) with a fresh pointer (x <arg 1>) cheapr/src/replace.cpp:152
-  [UP] unprotected variable where while calling allocating function cheapr::get_names(SEXPREC*) cheapr/src/replace.cpp:152
-  [UP] unprotected variable with while calling allocating function cheapr::get_names(SEXPREC*) cheapr/src/replace.cpp:152
-  [UP] calling allocating function cheapr::get_names(SEXPREC*) with a fresh pointer (with <arg 1>) cheapr/src/replace.cpp:153
-  [UP] unprotected variable where while calling allocating function cheapr::get_names(SEXPREC*) cheapr/src/replace.cpp:153
-  [UP] unprotected variable x while calling allocating function cheapr::get_names(SEXPREC*) cheapr/src/replace.cpp:153
-  [UP] unprotected variable where while calling allocating function R_compute_identical cheapr/src/replace.cpp:155
-  [UP] unprotected variable x while calling allocating function R_compute_identical cheapr/src/replace.cpp:155
-  [UP] allocating function cpp_replace(SEXPREC*, SEXPREC*, SEXPREC*, bool, bool) may destroy its unprotected argument (where <arg 2>), which is later used. cheapr/src/replace.cpp:161
-  [UP] calling allocating function cpp_replace(SEXPREC*, SEXPREC*, SEXPREC*, bool, bool) with a fresh pointer (where <arg 2>) cheapr/src/replace.cpp:161
-  [UP] unprotected variable x while calling allocating function cpp_replace(SEXPREC*, SEXPREC*, SEXPREC*, bool, bool) cheapr/src/replace.cpp:161
-  [UP] unprotected variable where while calling allocating function cheapr::find_pkg_fun(char const*, char const*, bool) cheapr/src/replace.cpp:168
-  [UP] unprotected variable with while calling allocating function cheapr::find_pkg_fun(char const*, char const*, bool) cheapr/src/replace.cpp:168
-  [UP] unprotected variable x while calling allocating function cheapr::find_pkg_fun(char const*, char const*, bool) cheapr/src/replace.cpp:168
-
-Function cpp_semi_copy(SEXPREC*)
-  [UP] allocating function SHALLOW_DUPLICATE_ATTRIB may destroy its unprotected argument (out <arg 1>), which is later used. cheapr/src/utils.cpp:142
-  [UP] calling allocating function SHALLOW_DUPLICATE_ATTRIB with a fresh pointer (out <arg 1>) cheapr/src/utils.cpp:142
-
-Function cpp_sequence(SEXPREC*, SEXPREC*, SEXPREC*, bool, bool)
-  [UP] unprotected variable from while calling allocating function cheapr::coerce_vec(SEXPREC*, unsigned int) cheapr/src/sequences.cpp:283
-  [UP] calling allocating function cpp_dbl_sequence(SEXPREC*, SEXPREC*, SEXPREC*, bool) with a fresh pointer (by <arg 3>) cheapr/src/sequences.cpp:284
-  [UP] calling allocating function cpp_dbl_sequence(SEXPREC*, SEXPREC*, SEXPREC*, bool) with a fresh pointer (from <arg 2>) cheapr/src/sequences.cpp:284
-  [UP] calling allocating function cpp_dbl_sequence(SEXPREC*, SEXPREC*, SEXPREC*, bool) with a fresh pointer (from <arg 2>) cheapr/src/sequences.cpp:290
-  [UP] calling allocating function cpp_dbl_sequence(SEXPREC*, SEXPREC*, SEXPREC*, bool) with a fresh pointer (by <arg 3>) cheapr/src/sequences.cpp:304
-
-Function cpp_sset2(SEXPREC*, SEXPREC*, SEXPREC*, bool, SEXPREC*)
-  [UP] unprotected variable out while calling allocating function cheapr::get_names(SEXPREC*) cheapr/src/sset.cpp:1504
-  [UP] calling allocating function sset_vec(SEXPREC*, SEXPREC*, bool) with a fresh pointer (names <arg 1>) cheapr/src/sset.cpp:1505
-  [UP] unprotected variable out while calling allocating function sset_vec(SEXPREC*, SEXPREC*, bool) cheapr/src/sset.cpp:1505
-  [UP] unprotected variable names while calling allocating function Rf_copyMostAttrib cheapr/src/sset.cpp:1507
-  [UP] allocating function cheapr::set_names(SEXPREC*, SEXPREC*) may destroy its unprotected argument (out <arg 1>), which is later used. cheapr/src/sset.cpp:1508
-  [UP] calling allocating function cheapr::set_names(SEXPREC*, SEXPREC*) with a fresh pointer (out <arg 1>) cheapr/src/sset.cpp:1508
-
-Function cpp_sset_int64(SEXPREC*, SEXPREC*)
-  [UP] allocating function cheapr::set_names(SEXPREC*, SEXPREC*) may destroy its unprotected argument (out <arg 1>), which is later used. cheapr/src/int64.cpp:277
-  [UP] calling allocating function cheapr::set_names(SEXPREC*, SEXPREC*) with a fresh pointer (out <arg 1>) cheapr/src/int64.cpp:277
-  [UP] allocating function cheapr::set_names(SEXPREC*, SEXPREC*) may destroy its unprotected argument (out <arg 1>), which is later used. cheapr/src/int64.cpp:312
-  [UP] calling allocating function cheapr::set_names(SEXPREC*, SEXPREC*) with a fresh pointer (out <arg 1>) cheapr/src/int64.cpp:312
-
-Function cpp_str_coalesce(SEXPREC*)
-  [UP] unprotected variable chars while calling allocating function SEXPREC* cast<r_character_t>(SEXPREC*, SEXPREC*) cheapr/src/strings.cpp:33
-
-Function cpp_val_find(SEXPREC*, SEXPREC*, bool, SEXPREC*)
-  [UP] calling allocating function Rf_asChar with a fresh pointer (value <arg 1>) cheapr/src/which.cpp:191
-
-Function cpp_val_replace(SEXPREC*, SEXPREC*, SEXPREC*, bool)
-  [UP] unprotected variable value while calling allocating function SEXPREC* cast<r_integer_t>(SEXPREC*, SEXPREC*) cheapr/src/scalars.cpp:142
-  [UP] unprotected variable replace while calling allocating function Rf_asInteger cheapr/src/scalars.cpp:143
-  [UP] unprotected variable value while calling allocating function SEXPREC* cast<r_numeric_t>(SEXPREC*, SEXPREC*) cheapr/src/scalars.cpp:169
-  [UP] unprotected variable replace while calling allocating function cheapr::new_vec(unsigned int, long) cheapr/src/scalars.cpp:170
-  [UP] unprotected variable value while calling allocating function cheapr::new_vec(unsigned int, long) cheapr/src/scalars.cpp:170
-  [UP] unprotected variable replace while calling allocating function Rf_asReal cheapr/src/scalars.cpp:172
-  [UP] unprotected variable value while calling allocating function SEXPREC* cast<r_character_t>(SEXPREC*, SEXPREC*) cheapr/src/scalars.cpp:242
-  [UP] calling allocating function Rf_asChar with a fresh pointer (value <arg 1>) cheapr/src/scalars.cpp:243
-  [UP] unprotected variable replace while calling allocating function Rf_asChar cheapr/src/scalars.cpp:243
-  [UP] calling allocating function Rf_asChar with a fresh pointer (replace <arg 1>) cheapr/src/scalars.cpp:244
-
-Function lag2(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
-  [UP] unprotected variable lag while calling allocating function cheapr::coerce_vec(SEXPREC*, unsigned int) cheapr/src/lag.cpp:327
-  [UP] unprotected variable lag while calling allocating function cheapr::coerce_vec(SEXPREC*, unsigned int) cheapr/src/lag.cpp:328
-
-Function matrix_to_df(SEXPREC*)
-  [PB] has possible protection stack imbalance cheapr/src/lists.cpp:620
+Function na_count(SEXPREC*, bool)::$_0::operator()<decltype(nullptr)>(decltype(nullptr)) const::{lambda()#1}::operator()() const
+  [PB] has possible protection stack imbalance cheapr/src/nas.cpp:79

@@ -1,0 +1,91 @@
+Package Upsilon version 0.1.0
+Package built using 89288/R 4.6.0; x86_64-pc-linux-gnu; 2026-01-10 10:58:59 UTC; unix   
+Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function _Upsilon_chisq_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr Upsilon/src/RcppExports.cpp:36
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. Upsilon/src/RcppExports.cpp:38
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) Upsilon/src/RcppExports.cpp:38
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. Upsilon/src/RcppExports.cpp:42
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) Upsilon/src/RcppExports.cpp:42
+  [PB] has negative depth Upsilon/src/RcppExports.cpp:48
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Upsilon/src/RcppExports.cpp:48
+  [PB] has possible protection stack imbalance Upsilon/src/RcppExports.cpp:49
+
+Function _Upsilon_chisq_cpp_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _Upsilon_gtest_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr Upsilon/src/RcppExports.cpp:71
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. Upsilon/src/RcppExports.cpp:73
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) Upsilon/src/RcppExports.cpp:73
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. Upsilon/src/RcppExports.cpp:77
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) Upsilon/src/RcppExports.cpp:77
+  [PB] has negative depth Upsilon/src/RcppExports.cpp:83
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Upsilon/src/RcppExports.cpp:83
+  [PB] has possible protection stack imbalance Upsilon/src/RcppExports.cpp:84
+
+Function _Upsilon_gtest_cpp_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _Upsilon_modified_chisq_statistic_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr Upsilon/src/RcppExports.cpp:105
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. Upsilon/src/RcppExports.cpp:107
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) Upsilon/src/RcppExports.cpp:107
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. Upsilon/src/RcppExports.cpp:111
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) Upsilon/src/RcppExports.cpp:111
+  [PB] has negative depth Upsilon/src/RcppExports.cpp:117
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Upsilon/src/RcppExports.cpp:117
+  [PB] has possible protection stack imbalance Upsilon/src/RcppExports.cpp:118
+
+Function _Upsilon_modified_chisq_statistic_cpp_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _Upsilon_upsilon_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr Upsilon/src/RcppExports.cpp:140
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. Upsilon/src/RcppExports.cpp:142
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) Upsilon/src/RcppExports.cpp:142
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. Upsilon/src/RcppExports.cpp:146
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) Upsilon/src/RcppExports.cpp:146
+  [PB] has negative depth Upsilon/src/RcppExports.cpp:152
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Upsilon/src/RcppExports.cpp:152
+  [PB] has possible protection stack imbalance Upsilon/src/RcppExports.cpp:153
+
+Function _Upsilon_upsilon_cpp_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _Upsilon_upsilon_gof_statistic_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr Upsilon/src/RcppExports.cpp:175
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. Upsilon/src/RcppExports.cpp:177
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) Upsilon/src/RcppExports.cpp:177
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. Upsilon/src/RcppExports.cpp:181
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) Upsilon/src/RcppExports.cpp:181
+  [PB] has negative depth Upsilon/src/RcppExports.cpp:187
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Upsilon/src/RcppExports.cpp:187
+  [PB] has possible protection stack imbalance Upsilon/src/RcppExports.cpp:188
+
+Function _Upsilon_upsilon_gof_statistic_cpp_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _Upsilon_upsilon_statistic_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr Upsilon/src/RcppExports.cpp:209
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. Upsilon/src/RcppExports.cpp:211
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) Upsilon/src/RcppExports.cpp:211
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. Upsilon/src/RcppExports.cpp:215
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) Upsilon/src/RcppExports.cpp:215
+  [PB] has negative depth Upsilon/src/RcppExports.cpp:221
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Upsilon/src/RcppExports.cpp:221
+  [PB] has possible protection stack imbalance Upsilon/src/RcppExports.cpp:222
+
+Function _Upsilon_upsilon_statistic_cpp_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
