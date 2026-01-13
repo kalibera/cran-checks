@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2026-01-07 r89288) -- "Unsuffered Consequences"
+R Under development (unstable) (2026-01-10 r89298) -- "Unsuffered Consequences"
 Copyright (C) 2026 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -231,13 +231,13 @@ detaching ‘package:terra’, ‘package:data.table’
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10, returnMatrix = TRUE)
 + })
    user  system elapsed 
-  0.032   0.000   0.033 
+   0.03    0.00    0.03 
 > agent <- agentOrig
 > system.time({
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10)
 + })
    user  system elapsed 
- 21.709   0.196  22.187 
+ 26.102   0.184  26.945 
 > 
 > # as sp
 > if (requireNamespace("sp")) {
@@ -657,7 +657,9 @@ duplicate initial loci are provided
 > data.table::setDTthreads(origDTThreads)
 > options(Ncpus = origNcpus)
 > 
-> a1 <- terra::vect(cbind(-110, 59), crs = "epsg:4326")
+> latLong <- terra::crs("+proj=longlat +datum=WGS84 +no_defs")
+> # "epsg:4326"
+> a1 <- terra::vect(cbind(-110, 59), crs = latLong)
 > a2 <- randomPolygon(a1, area = 1e7)
 The CRS provided is not in meters; converting internally to UTM so area will be approximately correct.
 > 
@@ -667,13 +669,16 @@ The CRS provided is not in meters; converting internally to UTM so area will be 
 + }
 > 
 > if (require("sf", quietly = TRUE)) {
++   latLong <- sf::st_crs("+proj=longlat +datum=WGS84 +no_defs")
++   # "epsg:4326"
++ 
 +   b1 <- list(cbind(
 +     x = c(-122.98, -116.1, -99.2, -106, -122.98),
 +     y = c(59.9, 65.73, 63.58, 54.79, 59.9)
 +   )) |>
 +     sf::st_polygon() |>
 +     sf::st_sfc() |>
-+     sf::st_sf(geometry = _, ID = 1L, shinyLabel = "zone2", crs = "epsg:4326")
++     sf::st_sf(geometry = _, ID = 1L, shinyLabel = "zone2", crs = latLong)
 +   b2 <- randomPolygon(b1, area = 1e10)
 + 
 +   if (interactive()) {

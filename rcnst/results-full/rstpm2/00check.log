@@ -1,5 +1,5 @@
 * using log directory ‘/var/scratch2/tomas/cran/rcnst/check/rstpm2.Rcheck’
-* using R Under development (unstable) (2026-01-07 r89288)
+* using R Under development (unstable) (2026-01-10 r89298)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (GCC) 15.2.1 20251111 (Red Hat 15.2.1-4)
@@ -180,7 +180,7 @@ Asserted error: no sign change found in 1000 iterations
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  16.835 0.407 17.446 0 0 
+Time elapsed:  17.251 0.37 18.127 0 0 
 > grDevices::dev.off()
 null device 
           1 
@@ -210,14 +210,14 @@ Fatal error: compiler constants were modified!
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
+  Attaching package: 'rstpm2'
+  
+  The following object is masked from 'package:survival':
   
       colon
   
   > 
   > test_check("rstpm2")
-  [ FAIL 0 | WARN 0 | SKIP 5 | PASS 118 ]
-  
-  ══ Skipped tests (5) ═══════════════════════════════════════════════════════════
   ERROR: modification of compiler constant of type language, length 4
   ERROR: the modified constant is function body:
   ifelse(x == 0, -0.0986659612490242, sin(x)/x)
