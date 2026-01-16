@@ -4,7 +4,6 @@ Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
-
 Function CppAD::AD<CppAD::AD<CppAD::AD<double> > > RCM<CppAD::AD<CppAD::AD<CppAD::AD<double> > > >(objective_function<CppAD::AD<CppAD::AD<CppAD::AD<double> > > >*)
   [UP] calling allocating function tmbutils::array<CppAD::AD<CppAD::AD<CppAD::AD<double> > > > tmbutils::asArray<CppAD::AD<CppAD::AD<CppAD::AD<double> > > >(SEXPREC*) with argument allocated using objective_function<CppAD::AD<CppAD::AD<CppAD::AD<double> > > >::getShape(char const*, Rboolean (*)(SEXPREC*)) SAMtool/src/./../inst/include/RCM.hpp:15
   [UP] calling allocating function tmbutils::array<CppAD::AD<CppAD::AD<CppAD::AD<double> > > > tmbutils::asArray<CppAD::AD<CppAD::AD<CppAD::AD<double> > > >(SEXPREC*) with argument allocated using objective_function<CppAD::AD<CppAD::AD<CppAD::AD<double> > > >::getShape(char const*, Rboolean (*)(SEXPREC*)) SAMtool/src/./../inst/include/RCM.hpp:26
@@ -54,27 +53,6 @@ unction tmbutils::matrix<CppAD::AD<double> > asMatrix<CppAD::AD<double> >(SEXPRE
 Function CppAD::AD<double> SCA<CppAD::AD<double> >(objective_function<CppAD::AD<double> >*)
   [UP] calling allocating function tmbutils::array<CppAD::AD<double> > tmbutils::asArray<CppAD::AD<double> >(SEXPREC*) with argument allocated using objective_function<CppAD::AD<double> >::getShape(char const*, Rboolean (*)(SEXPREC*)) SAMtool/src/./../inst/include/SCA.hpp:27
 
-Function MakeADFunObject
-  [UP] ignoring variable info as it has address taken, results will be incomplete 
-  [PB] has negative depth TMB/include/tmb_core.hpp:1512
-  [UP] attempt to unprotect more items (4) than protected (3), results will be incomplete TMB/include/tmb_core.hpp:1512
-  [PB] has possible protection stack imbalance TMB/include/tmb_core.hpp:1515
-
-Function MakeADGradObject
-  [PB] has negative depth TMB/include/tmb_core.hpp:2275
-  [UP] attempt to unprotect more items (3) than protected (2), results will be incomplete TMB/include/tmb_core.hpp:2275
-  [PB] has possible protection stack imbalance TMB/include/tmb_core.hpp:2277
-
-Function SEXPREC* EvalADFunObjectTemplate<CppAD::ADFun<double> >(SEXPREC*, SEXPREC*, SEXPREC*)
-  [PB] has negative depth TMB/include/tmb_core.hpp:1241
-  [UP] attempt to unprotect more items (4) than protected (3), results will be incomplete TMB/include/tmb_core.hpp:1241
-  [PB] has possible protection stack imbalance TMB/include/tmb_core.hpp:1243
-
-Function SEXPREC* EvalADFunObjectTemplate<parallelADFun<double> >(SEXPREC*, SEXPREC*, SEXPREC*)
-  [PB] has negative depth TMB/include/tmb_core.hpp:1241
-  [UP] attempt to unprotect more items (4) than protected (3), results will be incomplete TMB/include/tmb_core.hpp:1241
-  [PB] has possible protection stack imbalance TMB/include/tmb_core.hpp:1243
-
 Function double RCM<double>(objective_function<double>*)
   [UP] calling allocating function tmbutils::array<double> tmbutils::asArray<double>(SEXPREC*) with argument allocated using objective_function<double>::getShape(char const*, Rboolean (*)(SEXPREC*)) SAMtool/src/./../inst/include/RCM.hpp:15
   [UP] calling allocating function tmbutils::array<double> tmbutils::asArray<double>(SEXPREC*) with argument allocated using objective_function<double>::getShape(char const*, Rboolean (*)(SEXPREC*)) SAMtool/src/./../inst/include/RCM.hpp:26
@@ -91,9 +69,3 @@ Function double RCM<double>(objective_function<double>*)
 
 Function double SCA<double>(objective_function<double>*)
   [UP] calling allocating function tmbutils::array<double> tmbutils::asArray<double>(SEXPREC*) with argument allocated using objective_function<double>::getShape(char const*, Rboolean (*)(SEXPREC*)) SAMtool/src/./../inst/include/SCA.hpp:27
-
-Function memory_manager_struct::CallCFinalizer(SEXPREC*)
-  [UP] ignoring variable x as it has address taken, results will be incomplete 
-
-Function memory_manager_struct::RegisterCFinalizer(SEXPREC*)
-  [UP] ignoring variable x as it has address taken, results will be incomplete 

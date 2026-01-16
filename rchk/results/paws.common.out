@@ -4,74 +4,6 @@ Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
-
-Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
-  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
-
-Function Rcpp::Armor<SEXPREC*>::~Armor()
-  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
-  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
-
-Function Rcpp::Rcpp_protect(SEXPREC*)
-  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
-
-Function Rcpp::Rcpp_unprotect(int)
-  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
-
-Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
-  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _paws_common_build_url
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _paws_common_char_sort
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _paws_common_check_global
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _paws_common_fstring
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _paws_common_get_region_pattern_js
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _paws_common_json_build_any
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _paws_common_json_convert_string
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _paws_common_parse_query_string
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _paws_common_parse_url
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _paws_common_paws_url_encoder
-  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _paws_common_paws_url_unencoder
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _paws_common_populate
-  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %19 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _paws_common_process_profile_name
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _paws_common_scan_ini_file
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _paws_common_set_partition_name
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _paws_common_uuid_v4
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
 Function get_type_code(SEXPREC*)
   [UP] allocating function Rf_getAttrib(V,S:names) may destroy its unprotected argument (tags_attr <arg 1>), which is later used. paws.common/src/populate.cpp:27
   [UP] calling allocating function Rf_getAttrib(V,S:names) with a fresh pointer (tags_attr <arg 1>) paws.common/src/populate.cpp:27
@@ -126,12 +58,3 @@ Function populate_structure_cpp(SEXPREC*, SEXPREC*, SEXPREC*)
   [UP] unprotected variable interface_names while calling allocating function Rf_getAttrib(V,S:names) paws.common/src/populate.cpp:238
   [UP] unprotected variable input_names while calling allocating function populate_cpp_impl(SEXPREC*, SEXPREC*, SEXPREC*) paws.common/src/populate.cpp:269
   [UP] unprotected variable input_names while calling allocating function populate_cpp_impl(SEXPREC*, SEXPREC*, SEXPREC*) paws.common/src/populate.cpp:278
-
-Function sexp_to_string(SEXPREC*)
-  [UP] ignoring variable x as it has address taken, results will be incomplete 
-
-Function std::__1::enable_if<is_move_constructible<SEXPREC*>::value&&is_move_assignable<SEXPREC*>::value, void>::type std::__1::swap<SEXPREC*>(SEXPREC*&, SEXPREC*&)
-  [UP] ignoring variable __t as it has address taken, results will be incomplete 
-
-Function void Rcpp::Vector<16, Rcpp::PreserveStorage>::push_back<Rcpp::internal::string_proxy<16, Rcpp::PreserveStorage> >(Rcpp::internal::string_proxy<16, Rcpp::PreserveStorage> const&)
-  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

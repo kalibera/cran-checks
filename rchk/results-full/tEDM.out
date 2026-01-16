@@ -1,5 +1,5 @@
-Package tEDM version 1.1
-Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 06:06:20 UTC; unix   
+Package tEDM version 1.2
+Package built using 89303/R 4.6.0; x86_64-pc-linux-gnu; 2026-01-16 09:03:03 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -20,6 +20,9 @@ Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
+Function Rcpp::internal::DimNameProxy::assign(SEXPREC*)
+  [UP] unprotected variable dims while calling allocating function Rf_getAttrib(?,S:dimnames) Rcpp/include/Rcpp/vector/DimNameProxy.h:46
+
 Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -29,10 +32,10 @@ Function _tEDM_DetectMaxNumThreads
 Function _tEDM_MatNotNAIndice
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _tEDM_OptEmbedDim
+Function _tEDM_OptICparm
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _tEDM_OptICparm
+Function _tEDM_OptSimplexParm
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _tEDM_OptThetaParm
@@ -54,6 +57,9 @@ Function _tEDM_RcppCMCTest
   [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _tEDM_RcppCombine
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _tEDM_RcppCombn
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _tEDM_RcppCorConfidence
@@ -95,10 +101,13 @@ Function _tEDM_RcppFNN4TS
 Function _tEDM_RcppFactorial
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _tEDM_RcppGenSubsets
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _tEDM_RcppIC4TS
   [UP] ignoring variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _tEDM_RcppIntersectionCardinality
+Function _tEDM_RcppIntersectionalCardinality
   [UP] ignoring variable <unnamed var:   %41 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _tEDM_RcppKNNIndice
@@ -153,7 +162,7 @@ Function _tEDM_RcppMultiSimplex4TS
   [UP] ignoring variable <unnamed var:   %38 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _tEDM_RcppMultispatialCCM
-  [UP] ignoring variable <unnamed var:   %47 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %50 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _tEDM_RcppNeighborsNum
   [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -168,6 +177,9 @@ Function _tEDM_RcppPartialCorTrivar
   [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _tEDM_RcppPearsonCor
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _tEDM_RcppQuantile
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _tEDM_RcppRMSE

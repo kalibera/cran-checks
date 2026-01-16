@@ -1,5 +1,5 @@
-Package clock version 0.7.3
-Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 04:31:15 UTC; unix   
+Package clock version 0.7.4
+Package built using 89303/R 4.6.0; x86_64-pc-linux-gnu; 2026-01-16 09:00:11 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -73,3 +73,40 @@ Function _clock_zoned_time_restore
 
 Function cpp11::package::operator[](char const*)
   [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function iso_year_week_day_restore(SEXPREC*, SEXPREC*)
+  [UP] unprotected variable precision while calling allocating function clock_rcrd_restore(SEXPREC*, SEXPREC*, SEXPREC*) clock/src/iso-year-week-day.cpp:52
+
+Function time_point_restore(SEXPREC*, SEXPREC*)
+  [UP] unprotected variable clock_int while calling allocating function Rf_getAttrib(?,S:precision) clock/src/time-point.cpp:69
+  [UP] unprotected variable precision_int while calling allocating function cpp11::r_vector<int>::r_vector(SEXPREC*) clock/src/time-point.cpp:73
+  [UP] unprotected variable clock_int while calling allocating function clock_rcrd_restore(SEXPREC*, SEXPREC*, SEXPREC*) clock/src/time-point.cpp:79
+  [UP] unprotected variable precision_int while calling allocating function clock_rcrd_restore(SEXPREC*, SEXPREC*, SEXPREC*) clock/src/time-point.cpp:79
+  [UP] unprotected variable precision_int while calling allocating function Rf_setAttrib(?,S:clock,?) clock/src/time-point.cpp:81
+
+Function year_day_restore(SEXPREC*, SEXPREC*)
+  [UP] unprotected variable precision while calling allocating function clock_rcrd_restore(SEXPREC*, SEXPREC*, SEXPREC*) clock/src/gregorian-year-day.cpp:51
+
+Function year_month_day_restore(SEXPREC*, SEXPREC*)
+  [UP] unprotected variable precision while calling allocating function clock_rcrd_restore(SEXPREC*, SEXPREC*, SEXPREC*) clock/src/gregorian-year-month-day.cpp:55
+
+Function year_month_weekday_restore(SEXPREC*, SEXPREC*)
+  [UP] unprotected variable precision while calling allocating function clock_rcrd_restore(SEXPREC*, SEXPREC*, SEXPREC*) clock/src/gregorian-year-month-weekday.cpp:52
+
+Function year_quarter_day_restore(SEXPREC*, SEXPREC*)
+  [UP] unprotected variable precision while calling allocating function Rf_getAttrib(?,S:start) clock/src/quarterly-year-quarter-day.cpp:54
+  [UP] unprotected variable precision while calling allocating function clock_rcrd_restore(SEXPREC*, SEXPREC*, SEXPREC*) clock/src/quarterly-year-quarter-day.cpp:56
+  [UP] unprotected variable start while calling allocating function clock_rcrd_restore(SEXPREC*, SEXPREC*, SEXPREC*) clock/src/quarterly-year-quarter-day.cpp:56
+  [UP] unprotected variable start while calling allocating function Rf_setAttrib(?,S:precision,?) clock/src/quarterly-year-quarter-day.cpp:58
+
+Function year_week_day_restore(SEXPREC*, SEXPREC*)
+  [UP] unprotected variable precision while calling allocating function Rf_getAttrib(?,S:start) clock/src/week-year-week-day.cpp:54
+  [UP] unprotected variable precision while calling allocating function clock_rcrd_restore(SEXPREC*, SEXPREC*, SEXPREC*) clock/src/week-year-week-day.cpp:56
+  [UP] unprotected variable start while calling allocating function clock_rcrd_restore(SEXPREC*, SEXPREC*, SEXPREC*) clock/src/week-year-week-day.cpp:56
+  [UP] unprotected variable start while calling allocating function Rf_setAttrib(?,S:precision,?) clock/src/week-year-week-day.cpp:58
+
+Function zoned_time_restore(SEXPREC*, SEXPREC*)
+  [UP] unprotected variable zone while calling allocating function Rf_getAttrib(?,S:precision) clock/src/zoned-time.cpp:66
+  [UP] unprotected variable precision while calling allocating function clock_rcrd_restore(SEXPREC*, SEXPREC*, SEXPREC*) clock/src/zoned-time.cpp:68
+  [UP] unprotected variable zone while calling allocating function clock_rcrd_restore(SEXPREC*, SEXPREC*, SEXPREC*) clock/src/zoned-time.cpp:68
+  [UP] unprotected variable precision while calling allocating function Rf_setAttrib(?,S:zone,?) clock/src/zoned-time.cpp:70

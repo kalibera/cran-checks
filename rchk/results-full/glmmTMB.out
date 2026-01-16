@@ -1,5 +1,5 @@
-Package glmmTMB version 1.1.13
-Package built using 88914/R 4.6.0; x86_64-pc-linux-gnu; 2025-10-12 18:49:49 UTC; unix   
+Package glmmTMB version 1.1.14
+Package built using 89303/R 4.6.0; x86_64-pc-linux-gnu; 2026-01-16 09:00:21 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -31,3 +31,9 @@ Function memory_manager_struct::CallCFinalizer(SEXPREC*)
 
 Function memory_manager_struct::RegisterCFinalizer(SEXPREC*)
   [UP] ignoring variable x as it has address taken, results will be incomplete 
+
+Function objective_function<TMBad::global::ad_aug>::operator()()
+  [UP] calling allocating function Rf_getAttrib(?,S:ord) with argument allocated using objective_function<TMBad::global::ad_aug>::getShape(char const*, Rboolean (*)(SEXPREC*)) glmmTMB/src/glmmTMB.cpp:886
+
+Function objective_function<double>::operator()()
+  [UP] calling allocating function Rf_getAttrib(?,S:ord) with argument allocated using objective_function<double>::getShape(char const*, Rboolean (*)(SEXPREC*)) glmmTMB/src/glmmTMB.cpp:886

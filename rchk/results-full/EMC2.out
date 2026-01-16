@@ -1,5 +1,5 @@
-Package EMC2 version 3.3.0
-Package built using 89094/R 4.6.0; x86_64-pc-linux-gnu; 2025-12-05 13:54:09 UTC; unix   
+Package EMC2 version 3.4.1
+Package built using 89303/R 4.6.0; x86_64-pc-linux-gnu; 2026-01-16 09:00:12 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -22,6 +22,9 @@ Function Rcpp::Rcpp_unprotect(int)
 
 Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
   [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:680
+
+Function Rcpp::internal::DimNameProxy::assign(SEXPREC*)
+  [UP] unprotected variable dims while calling allocating function Rf_getAttrib(?,S:dimnames) Rcpp/include/Rcpp/vector/DimNameProxy.h:46
 
 Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -92,6 +95,9 @@ Function _EMC2_draw_alpha_from_design
 Function _EMC2_fft_convolve_equiv_cpp
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _EMC2_get_pars_c_wrapper
+  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _EMC2_pEXG
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -113,6 +119,9 @@ Function _EMC2_pigt_RDEX
 Function _EMC2_plba
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _EMC2_run_trend_rcpp
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _EMC2_sp_new
   [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -122,72 +131,78 @@ Function _EMC2_stopfn_exg
 Function _EMC2_stopfn_rdex
   [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function run_trend_rcpp(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>, Rcpp::Vector<19, Rcpp::PreserveStorage>, Rcpp::Vector<14, Rcpp::PreserveStorage>, Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::Matrix<14, Rcpp::PreserveStorage>)
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector() EMC2/src/./trend.h:296
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::containsElementNamed(char const*) const EMC2/src/./trend.h:297
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator SEXPREC*() const EMC2/src/./trend.h:297
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>& Rcpp::Vector<16, Rcpp::PreserveStorage>::operator=<Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> >(Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:298
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(int const&) EMC2/src/./trend.h:300
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::operator=(Rcpp::Vector<16, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:300
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::~Vector() EMC2/src/./trend.h:300
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector() EMC2/src/./trend.h:302
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::containsElementNamed(char const*) const EMC2/src/./trend.h:303
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator SEXPREC*() const EMC2/src/./trend.h:303
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>& Rcpp::Vector<16, Rcpp::PreserveStorage>::operator=<Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> >(Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:304
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(int const&) EMC2/src/./trend.h:306
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::operator=(Rcpp::Vector<16, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:306
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::~Vector() EMC2/src/./trend.h:306
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(int const&, double const&) EMC2/src/./trend.h:310
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::String::operator==(Rcpp::String const&) const EMC2/src/./trend.h:312
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::String::~String() EMC2/src/./trend.h:312
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::internal::DimNameProxy::operator Rcpp::Vector<16, Rcpp::PreserveStorage><Rcpp::Vector<16, Rcpp::PreserveStorage> >() const EMC2/src/./trend.h:318
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::operator[](long) EMC2/src/./trend.h:321
-  [UP] unprotected variable custom_ptr while calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) EMC2/src/./trend.h:321
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::operator[](long) EMC2/src/./trend.h:324
-  [UP] unprotected variable custom_ptr while calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) EMC2/src/./trend.h:324
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::Matrix(int const&, int const&) EMC2/src/./trend.h:333
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::String::String(Rcpp::internal::string_proxy<16, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:336
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::operator[](long) EMC2/src/./trend.h:336
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<14, Rcpp::PreserveStorage> Rcpp::as<Rcpp::Vector<14, Rcpp::PreserveStorage> >(SEXPREC*) EMC2/src/./trend.h:337
+Function run_trend_rcpp(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage>, Rcpp::Vector<19, Rcpp::PreserveStorage>, Rcpp::Vector<14, Rcpp::PreserveStorage>, Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::Matrix<14, Rcpp::PreserveStorage>, bool)
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector() EMC2/src/./trend.h:322
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::containsElementNamed(char const*) const EMC2/src/./trend.h:323
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator SEXPREC*() const EMC2/src/./trend.h:323
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>& Rcpp::Vector<16, Rcpp::PreserveStorage>::operator=<Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> >(Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:324
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(int const&) EMC2/src/./trend.h:326
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::operator=(Rcpp::Vector<16, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:326
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::~Vector() EMC2/src/./trend.h:326
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector() EMC2/src/./trend.h:328
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::containsElementNamed(char const*) const EMC2/src/./trend.h:329
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator SEXPREC*() const EMC2/src/./trend.h:329
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>& Rcpp::Vector<16, Rcpp::PreserveStorage>::operator=<Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> >(Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:330
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(int const&) EMC2/src/./trend.h:332
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::operator=(Rcpp::Vector<16, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:332
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::~Vector() EMC2/src/./trend.h:332
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::containsElementNamed(char const*) const EMC2/src/./trend.h:336
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator SEXPREC*() const EMC2/src/./trend.h:336
   [UP] unprotected variable custom_ptr while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator SEXPREC*() const EMC2/src/./trend.h:337
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::MatrixColumn<14>& Rcpp::MatrixColumn<14>::operator=<14, true, Rcpp::Vector<14, Rcpp::PreserveStorage> >(Rcpp::VectorBase<14, true, Rcpp::Vector<14, Rcpp::PreserveStorage> > const&) EMC2/src/./trend.h:338
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::String::~String() EMC2/src/./trend.h:339
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<14, Rcpp::PreserveStorage>::~Vector() EMC2/src/./trend.h:339
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(int const&) EMC2/src/./trend.h:342
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::operator[](long) EMC2/src/./trend.h:343
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::internal::string_proxy<16, Rcpp::PreserveStorage>& Rcpp::internal::string_proxy<16, Rcpp::PreserveStorage>::operator=<char>(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) EMC2/src/./trend.h:343
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::Matrix(Rcpp::Matrix<14, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:344
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::~Matrix() EMC2/src/./trend.h:344
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(Rcpp::Vector<16, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:344
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::~Vector() EMC2/src/./trend.h:344
-  [UP] unprotected variable custom_ptr while calling allocating function submat_rcpp_col_by_names(Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::Vector<16, Rcpp::PreserveStorage>) EMC2/src/./trend.h:344
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::~Matrix() EMC2/src/./trend.h:348
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::~Vector() EMC2/src/./trend.h:348
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<10, Rcpp::PreserveStorage>::Vector() EMC2/src/./trend.h:351
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::containsElementNamed(char const*) const EMC2/src/./trend.h:352
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator SEXPREC*() const EMC2/src/./trend.h:352
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator Rcpp::String<Rcpp::String>() const EMC2/src/./trend.h:353
+  [UP] unprotected variable custom_ptr while calling allocating function bool Rcpp::as<bool>(SEXPREC*) EMC2/src/./trend.h:337
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(int const&, double const&) EMC2/src/./trend.h:344
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::String::operator==(Rcpp::String const&) const EMC2/src/./trend.h:347
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::String::~String() EMC2/src/./trend.h:347
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector() EMC2/src/./trend.h:351
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::Vector() EMC2/src/./trend.h:352
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::containsElementNamed(char const*) const EMC2/src/./trend.h:354
   [UP] unprotected variable custom_ptr while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator SEXPREC*() const EMC2/src/./trend.h:354
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<13, Rcpp::PreserveStorage> Rcpp::as<Rcpp::Vector<13, Rcpp::PreserveStorage> >(SEXPREC*) EMC2/src/./trend.h:356
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<10, Rcpp::PreserveStorage>& Rcpp::Vector<10, Rcpp::PreserveStorage>::operator=<Rcpp::sugar::Comparator_With_One_Value<13, Rcpp::sugar::equal<13>, true, Rcpp::Vector<13, Rcpp::PreserveStorage> > >(Rcpp::sugar::Comparator_With_One_Value<13, Rcpp::sugar::equal<13>, true, Rcpp::Vector<13, Rcpp::PreserveStorage> > const&) EMC2/src/./trend.h:357
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::String::~String() EMC2/src/./trend.h:358
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<13, Rcpp::PreserveStorage>::~Vector() EMC2/src/./trend.h:358
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<10, Rcpp::PreserveStorage>::Vector(int const&) EMC2/src/./trend.h:359
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<10, Rcpp::PreserveStorage>::operator=(Rcpp::Vector<10, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:359
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<10, Rcpp::PreserveStorage>::~Vector() EMC2/src/./trend.h:359
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::Matrix() EMC2/src/./trend.h:362
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::containsElementNamed(char const*) const EMC2/src/./trend.h:363
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator SEXPREC*() const EMC2/src/./trend.h:363
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage> Rcpp::as<Rcpp::Matrix<14, Rcpp::PreserveStorage> >(SEXPREC*) EMC2/src/./trend.h:364
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::operator=(Rcpp::Matrix<14, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:364
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::~Matrix() EMC2/src/./trend.h:364
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator SEXPREC*() const EMC2/src/./trend.h:364
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::Matrix(int const&, int const&) EMC2/src/./trend.h:366
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::operator=(Rcpp::Matrix<14, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:366
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::~Matrix() EMC2/src/./trend.h:366
-  [UP] calling allocating function run_kernel_rcpp(Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::String, Rcpp::Matrix<14, Rcpp::PreserveStorage>, int, SEXPREC*, Rcpp::Vector<10, Rcpp::PreserveStorage>, Rcpp::Matrix<14, Rcpp::PreserveStorage>) with a fresh pointer (custom_ptr <arg 6>) EMC2/src/./trend.h:368
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::Matrix(Rcpp::Matrix<14, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:368
-  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::String::String(Rcpp::String const&) EMC2/src/./trend.h:368
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>& Rcpp::Vector<19, Rcpp::PreserveStorage>::operator=<Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> >(Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:356
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>& Rcpp::Vector<16, Rcpp::PreserveStorage>::operator=<Rcpp::NamesProxyPolicy<Rcpp::Vector<19, Rcpp::PreserveStorage> >::NamesProxy>(Rcpp::NamesProxyPolicy<Rcpp::Vector<19, Rcpp::PreserveStorage> >::NamesProxy const&) EMC2/src/./trend.h:357
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::ncol() const EMC2/src/./trend.h:363
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::Matrix(int const&, int const&) EMC2/src/./trend.h:364
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::operator()(Rcpp::internal::NamedPlaceHolder, int) EMC2/src/./trend.h:366
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::internal::DimNameProxy::operator Rcpp::Vector<16, Rcpp::PreserveStorage><Rcpp::Vector<16, Rcpp::PreserveStorage> >() const EMC2/src/./trend.h:372
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::operator[](long) EMC2/src/./trend.h:375
+  [UP] unprotected variable custom_ptr while calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) EMC2/src/./trend.h:375
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::operator[](long) EMC2/src/./trend.h:378
+  [UP] unprotected variable custom_ptr while calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) EMC2/src/./trend.h:378
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::Matrix(int const&, int const&) EMC2/src/./trend.h:387
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::String::String(Rcpp::internal::string_proxy<16, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:390
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::operator[](long) EMC2/src/./trend.h:390
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<14, Rcpp::PreserveStorage> Rcpp::as<Rcpp::Vector<14, Rcpp::PreserveStorage> >(SEXPREC*) EMC2/src/./trend.h:391
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator SEXPREC*() const EMC2/src/./trend.h:391
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::operator()(Rcpp::internal::NamedPlaceHolder, int) EMC2/src/./trend.h:392
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::MatrixColumn<14>& Rcpp::MatrixColumn<14>::operator=<14, true, Rcpp::Vector<14, Rcpp::PreserveStorage> >(Rcpp::VectorBase<14, true, Rcpp::Vector<14, Rcpp::PreserveStorage> > const&) EMC2/src/./trend.h:392
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::String::~String() EMC2/src/./trend.h:393
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<14, Rcpp::PreserveStorage>::~Vector() EMC2/src/./trend.h:393
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(int const&) EMC2/src/./trend.h:396
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::operator[](long) EMC2/src/./trend.h:397
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::internal::string_proxy<16, Rcpp::PreserveStorage>& Rcpp::internal::string_proxy<16, Rcpp::PreserveStorage>::operator=<char>(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) EMC2/src/./trend.h:397
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::Matrix(Rcpp::Matrix<14, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:398
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::~Matrix() EMC2/src/./trend.h:398
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::Vector(Rcpp::Vector<16, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:398
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::~Vector() EMC2/src/./trend.h:398
+  [UP] unprotected variable custom_ptr while calling allocating function submat_rcpp_col_by_names(Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::Vector<16, Rcpp::PreserveStorage>) EMC2/src/./trend.h:398
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::operator()(Rcpp::internal::NamedPlaceHolder, int) EMC2/src/./trend.h:400
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::~Matrix() EMC2/src/./trend.h:402
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::~Vector() EMC2/src/./trend.h:402
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<10, Rcpp::PreserveStorage>::Vector() EMC2/src/./trend.h:405
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::containsElementNamed(char const*) const EMC2/src/./trend.h:406
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator SEXPREC*() const EMC2/src/./trend.h:406
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator Rcpp::String<Rcpp::String>() const EMC2/src/./trend.h:407
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator SEXPREC*() const EMC2/src/./trend.h:408
+  [UP] unprotected variable custom_ptr while calling allocating function Rf_inherits EMC2/src/./trend.h:409
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<13, Rcpp::PreserveStorage> Rcpp::as<Rcpp::Vector<13, Rcpp::PreserveStorage> >(SEXPREC*) EMC2/src/./trend.h:410
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<10, Rcpp::PreserveStorage>& Rcpp::Vector<10, Rcpp::PreserveStorage>::operator=<Rcpp::sugar::Comparator_With_One_Value<13, Rcpp::sugar::equal<13>, true, Rcpp::Vector<13, Rcpp::PreserveStorage> > >(Rcpp::sugar::Comparator_With_One_Value<13, Rcpp::sugar::equal<13>, true, Rcpp::Vector<13, Rcpp::PreserveStorage> > const&) EMC2/src/./trend.h:411
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::String::~String() EMC2/src/./trend.h:412
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<13, Rcpp::PreserveStorage>::~Vector() EMC2/src/./trend.h:412
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<10, Rcpp::PreserveStorage>::Vector(int const&) EMC2/src/./trend.h:413
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<10, Rcpp::PreserveStorage>::operator=(Rcpp::Vector<10, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:413
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Vector<10, Rcpp::PreserveStorage>::~Vector() EMC2/src/./trend.h:413
+  [UP] calling allocating function run_kernel_rcpp(Rcpp::Matrix<14, Rcpp::PreserveStorage>, Rcpp::String, Rcpp::Matrix<14, Rcpp::PreserveStorage>, SEXPREC*, Rcpp::Vector<10, Rcpp::PreserveStorage>, bool) with a fresh pointer (custom_ptr <arg 5>) EMC2/src/./trend.h:417
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::Matrix<14, Rcpp::PreserveStorage>::Matrix(Rcpp::Matrix<14, Rcpp::PreserveStorage> const&) EMC2/src/./trend.h:417
+  [UP] unprotected variable custom_ptr while calling allocating function Rcpp::String::String(Rcpp::String const&) EMC2/src/./trend.h:417
 
 Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::Vector<14, Rcpp::PreserveStorage> >(Rcpp::Vector<14, Rcpp::PreserveStorage> const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
   [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
