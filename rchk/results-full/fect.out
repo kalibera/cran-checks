@@ -1,9 +1,17 @@
-Package fect version 2.0.5
-Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 07:13:32 UTC; unix   
+Package fect version 2.1.0
+Package built using 89305/R 4.6.0; x86_64-pc-linux-gnu; 2026-01-20 09:40:20 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
 
 Function Rcpp::Rcpp_protect(SEXPREC*)
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
@@ -15,14 +23,35 @@ Function Rcpp::Rcpp_unprotect(int)
 Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
   [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:680
 
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::set(SEXPREC*)
   [UP] ignoring variable rhs as it has address taken, results will be incomplete 
+
+Function _fect_Beta
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _fect_Demean
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _fect_Gamma
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _fect_IND
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _fect_Kappa
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _fect_WBeta
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _fect_XXinv
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _fect_YY_adj
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _fect_Y_demean
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -32,6 +61,15 @@ Function _fect_Y_wdemean
 
 Function _fect_beta_iter
   [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _fect_beta_part
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _fect_cfe_iter
+  [UP] ignoring variable <unnamed var:   %63 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _fect_complex_fe_ub
+  [UP] ignoring variable <unnamed var:   %60 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _fect_data_ub_adj
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -60,8 +98,17 @@ Function _fect_fe_add
 Function _fect_fe_ub
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _fect_fixed_effects_part
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _fect_gamma_part
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _fect_ife
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _fect_ife_part
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _fect_inter_fe
   [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -83,6 +130,9 @@ Function _fect_inter_fe_mc
 
 Function _fect_inter_fe_ub
   [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _fect_kappa_part
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _fect_l_ub
   [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

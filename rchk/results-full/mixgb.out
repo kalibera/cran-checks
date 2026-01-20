@@ -1,5 +1,5 @@
-Package mixgb version 2.0.3
-Package built using 89118/R 4.6.0; x86_64-pc-linux-gnu; 2025-12-09 08:07:28 UTC; unix   
+Package mixgb version 2.2.3
+Package built using 89305/R 4.6.0; x86_64-pc-linux-gnu; 2026-01-20 09:40:54 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -21,7 +21,10 @@ Function Rcpp::Rcpp_unprotect(int)
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
 Function Rcpp::S4_Impl<Rcpp::PreserveStorage>::S4_Impl(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
-  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS Rcpp/include/Rcpp/S4.h:58
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS Rcpp/include/Rcpp/S4.h:57
+
+Function Rcpp::S4_Impl<Rcpp::PreserveStorage>::is(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
+  [UP] calling allocating function Rf_getAttrib(?,S:names) with argument allocated using R_do_slot(?,S:contains) Rcpp/include/Rcpp/api/meat/S4.h:33
 
 Function Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::hasSlot(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
   [UP] calling allocating function R_has_slot(?,V) with argument allocated using Rf_mkString Rcpp/include/Rcpp/proxy/SlotProxy.h:97
