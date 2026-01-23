@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2026-01-14 r89303) -- "Unsuffered Consequences"
+R Under development (unstable) (2026-01-22 r89316) -- "Unsuffered Consequences"
 Copyright (C) 2026 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -231,13 +231,13 @@ detaching ‘package:terra’, ‘package:data.table’
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10, returnMatrix = TRUE)
 + })
    user  system elapsed 
-  0.030   0.000   0.029 
+  0.029   0.000   0.029 
 > agent <- agentOrig
 > system.time({
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10)
 + })
    user  system elapsed 
- 22.303   0.002  24.053 
+ 25.127   0.166  25.807 
 > 
 > # as sp
 > if (requireNamespace("sp")) {
