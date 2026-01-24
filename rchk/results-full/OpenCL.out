@@ -1,0 +1,30 @@
+Package OpenCL version 0.2-11
+Package built using 89316/R 4.6.0; x86_64-pc-linux-gnu; 2026-01-24 05:10:35 UTC; unix   
+Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function cl_read_buffer
+  [UP] calling allocating function Rf_getAttrib(?,S:queue) with a fresh pointer (context_exp <arg 1>) OpenCL/src/buffer.c:158
+  [UP] calling allocating function getCommandQueue with a fresh pointer (queue_exp <arg 1>) OpenCL/src/buffer.c:159
+  [UP] calling allocating function getEvent with a fresh pointer (wait_exp <arg 1>) OpenCL/src/buffer.c:162
+
+Function cl_write_buffer
+  [UP] calling allocating function Rf_getAttrib(?,S:queue) with a fresh pointer (context_exp <arg 1>) OpenCL/src/buffer.c:235
+  [UP] calling allocating function getCommandQueue with a fresh pointer (queue_exp <arg 1>) OpenCL/src/buffer.c:236
+
+Function ocl_call
+  [UP] allocating function Rf_getAttrib(?,S:queue) may destroy its unprotected argument (context_exp <arg 1>), which is later used. OpenCL/src/ocl.c:325
+  [UP] calling allocating function Rf_getAttrib(?,S:queue) with a fresh pointer (context_exp <arg 1>) OpenCL/src/ocl.c:325
+  [UP] calling allocating function getCommandQueue with argument allocated using Rf_getAttrib(?,S:queue) OpenCL/src/ocl.c:325
+  [UP] unprotected variable context_exp while calling allocating function getCommandQueue OpenCL/src/ocl.c:325
+  [UP] unprotected variable context_exp while calling allocating function Rf_getAttrib(?,S:mode) OpenCL/src/ocl.c:336
+  [UP] unprotected variable context_exp while calling allocating function Rf_asInteger OpenCL/src/ocl.c:340
+  [UP] unprotected variable context_exp while calling allocating function Rf_coerceVector OpenCL/src/ocl.c:344
+  [UP] calling allocating function cl_create_buffer with a fresh pointer (context_exp <arg 1>) OpenCL/src/ocl.c:363
+  [UP] calling allocating function cl_create_buffer with argument allocated using Rf_getAttrib(?,S:mode) OpenCL/src/ocl.c:363
+  [UP] calling allocating function getEvent with a fresh pointer (wait_exp <arg 1>) OpenCL/src/ocl.c:382
+
+Function ocl_ez_kernel
+  [UP] calling allocating function getDeviceID with argument allocated using Rf_getAttrib(?,S:device) OpenCL/src/ocl.c:240

@@ -1,42 +1,34 @@
-Package rJava version 1.0-11
-Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 03:53:28 UTC; unix   
+Package rJava version 1.0-14
+Package built using 89316/R 4.6.0; x86_64-pc-linux-gnu; 2026-01-24 05:11:47 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
-Suspicious call (two or more unprotected arguments) to R_do_slot_assign at ckx rJava/src/rJava.c:119
-Suspicious call (two or more unprotected arguments) to R_do_slot_assign at new_jarrayRef rJava/src/Rglue.c:892
-Suspicious call (two or more unprotected arguments) to R_do_slot_assign at new_jarrayRef rJava/src/Rglue.c:893
-Suspicious call (two or more unprotected arguments) to R_do_slot_assign at new_jarrayRef rJava/src/Rglue.c:894
-Suspicious call (two or more unprotected arguments) to R_do_slot_assign at new_jclassName rJava/src/Rglue.c:858
-Suspicious call (two or more unprotected arguments) to R_do_slot_assign at new_jclassName rJava/src/Rglue.c:859
-Suspicious call (two or more unprotected arguments) to R_do_slot_assign at new_jobjRef rJava/src/Rglue.c:839
-Suspicious call (two or more unprotected arguments) to R_do_slot_assign at new_jobjRef rJava/src/Rglue.c:841
-Suspicious call (two or more unprotected arguments) to Rf_lcons at throwR rJava/src/rJava.c:47
-
-Function R1par2jvalue
-  [UP] calling allocating function Rpar2jvalue with argument allocated using Rf_cons rJava/src/Rglue.c:456
-
 Function RcallMethod
-  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:572
-  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:573
-  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:585
-  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:586
-  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:598
-  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:599
-  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:611
-  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:612
-  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:624
-  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:625
-  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:637
-  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:638
-  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:650
-  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:651
-  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:663
-  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:664
+  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:560
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:561
+  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:573
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:574
+  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:586
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:587
+  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:599
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:600
+  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:612
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:613
+  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:625
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:626
+  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:638
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:639
+  [UP] unprotected variable e while calling allocating function Rfreejpars rJava/src/Rglue.c:651
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:652
 
-Function RcallSyncMethod
-  [UP] unprotected variable e while calling allocating function REprintf rJava/src/Rglue.c:721
+Function RcreateArray
+  [UP] allocating function deserializeSEXP may destroy its unprotected argument (sref <arg 1>), which is later used. rJava/src/Rglue.c:1035
+  [UP] calling allocating function deserializeSEXP with a fresh pointer (sref <arg 1>) rJava/src/Rglue.c:1035
+
+Function RcreateObject
+  [UP] allocating function deserializeSEXP may destroy its unprotected argument (sref <arg 1>), which is later used. rJava/src/Rglue.c:760
+  [UP] calling allocating function deserializeSEXP with a fresh pointer (sref <arg 1>) rJava/src/Rglue.c:760
 
 Function RgetField
   [UP] unprotected variable e while calling allocating function releaseObject rJava/src/fields.c:204
@@ -48,22 +40,74 @@ Function RgetField
   [UP] unprotected variable e while calling allocating function releaseObject rJava/src/fields.c:264
   [UP] unprotected variable e while calling allocating function releaseObject rJava/src/fields.c:274
 
+Function Rpar2jvalue
+  [UP] unprotected variable e while calling allocating function newJavaString rJava/src/Rglue.c:268
+  [UP] unprotected variable e while calling allocating function newJavaString rJava/src/Rglue.c:284
+  [UP] unprotected variable e while calling allocating function releaseObject rJava/src/Rglue.c:287
+  [UP] unprotected variable e while calling allocating function newByteArray rJava/src/Rglue.c:297
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:301
+  [UP] calling allocating function Rf_inherits with a fresh pointer (e <arg 1>) rJava/src/Rglue.c:301
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:305
+  [UP] calling allocating function Rf_inherits with a fresh pointer (e <arg 1>) rJava/src/Rglue.c:305
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:309
+  [UP] calling allocating function Rf_inherits with a fresh pointer (e <arg 1>) rJava/src/Rglue.c:309
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:322
+  [UP] calling allocating function Rf_inherits with a fresh pointer (e <arg 1>) rJava/src/Rglue.c:322
+  [UP] unprotected variable e while calling allocating function newByteArrayI rJava/src/Rglue.c:324
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:325
+  [UP] calling allocating function Rf_inherits with a fresh pointer (e <arg 1>) rJava/src/Rglue.c:325
+  [UP] unprotected variable e while calling allocating function newCharArrayI rJava/src/Rglue.c:327
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:328
+  [UP] calling allocating function Rf_inherits with a fresh pointer (e <arg 1>) rJava/src/Rglue.c:328
+  [UP] unprotected variable e while calling allocating function newShortArrayI rJava/src/Rglue.c:330
+  [UP] unprotected variable e while calling allocating function newIntArray rJava/src/Rglue.c:333
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:337
+  [UP] calling allocating function Rf_inherits with a fresh pointer (e <arg 1>) rJava/src/Rglue.c:337
+  [UP] unprotected variable e while calling allocating function newFloatArrayD rJava/src/Rglue.c:344
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:346
+  [UP] calling allocating function Rf_inherits with a fresh pointer (e <arg 1>) rJava/src/Rglue.c:346
+  [UP] unprotected variable e while calling allocating function newLongArrayD rJava/src/Rglue.c:353
+  [UP] unprotected variable e while calling allocating function newDoubleArray rJava/src/Rglue.c:362
+  [UP] unprotected variable e while calling allocating function newBooleanArrayI rJava/src/Rglue.c:372
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:377
+  [UP] calling allocating function Rf_inherits with a fresh pointer (e <arg 1>) rJava/src/Rglue.c:377
+  [UP] calling allocating function R_do_slot(?,S:jobj) with a fresh pointer (e <arg 1>) rJava/src/Rglue.c:379
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:381
+  [UP] calling allocating function Rf_inherits with a fresh pointer (e <arg 1>) rJava/src/Rglue.c:381
+  [UP] allocating function Rf_getAttrib(?,S:names) may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:384
+  [UP] calling allocating function Rf_getAttrib(?,S:names) with a fresh pointer (e <arg 1>) rJava/src/Rglue.c:384
+  [UP] allocating function R_do_slot(?,S:jobj) may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:392
+  [UP] calling allocating function R_do_slot(?,S:jobj) with a fresh pointer (e <arg 1>) rJava/src/Rglue.c:392
+  [UP] unprotected variable e while calling allocating function Rf_install rJava/src/Rglue.c:392
+  [UP] allocating function deserializeSEXP may destroy its unprotected argument (sref <arg 1>), which is later used. rJava/src/Rglue.c:394
+  [UP] calling allocating function deserializeSEXP with a fresh pointer (sref <arg 1>) rJava/src/Rglue.c:394
+  [UP] unprotected variable e while calling allocating function deserializeSEXP rJava/src/Rglue.c:394
+  [UP] allocating function R_do_slot(?,S:jclass) may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:398
+  [UP] calling allocating function R_do_slot(?,S:jclass) with a fresh pointer (e <arg 1>) rJava/src/Rglue.c:398
+  [UP] unprotected variable e while calling allocating function Rf_install rJava/src/Rglue.c:398
+  [UP] unprotected variable e while calling allocating function rj_char_utf8 rJava/src/Rglue.c:400
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:401
+  [UP] calling allocating function Rf_inherits with a fresh pointer (e <arg 1>) rJava/src/Rglue.c:401
+  [UP] allocating function R_do_slot(?,S:jsig) may destroy its unprotected argument (e <arg 1>), which is later used. rJava/src/Rglue.c:403
+  [UP] calling allocating function R_do_slot(?,S:jsig) with a fresh pointer (e <arg 1>) rJava/src/Rglue.c:403
+  [UP] unprotected variable e while calling allocating function Rf_install rJava/src/Rglue.c:403
+  [UP] unprotected variable e while calling allocating function rj_char_utf8 rJava/src/Rglue.c:405
+
+Function RthrowException
+  [UP] allocating function deserializeSEXP may destroy its unprotected argument (exr <arg 1>), which is later used. rJava/src/Rglue.c:1102
+  [UP] calling allocating function deserializeSEXP with a fresh pointer (exr <arg 1>) rJava/src/Rglue.c:1102
+
 Function RtoString
   [UP] unprotected variable r while calling allocating function releaseObject rJava/src/tools.c:93
 
-Function ckx
-  [UP] unprotected variable xclass while calling allocating function Rf_mkString rJava/src/rJava.c:111
-  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS rJava/src/rJava.c:117
-  [UP] unprotected variable xclass while calling allocating function R_do_MAKE_CLASS rJava/src/rJava.c:117
-  [UP] unprotected variable xclass while calling allocating function R_do_new_object rJava/src/rJava.c:117
-  [UP] unprotected variable xclass while calling allocating function Rf_install rJava/src/rJava.c:119
-  [PB] has possible protection stack imbalance rJava/src/rJava.c:126
+Function getName
+  [UP] unprotected variable res while calling allocating function releaseObject rJava/src/Rglue.c:868
 
-Function new_jarrayRef
-  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS rJava/src/Rglue.c:887
-
-Function new_jclassName
-  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS rJava/src/Rglue.c:854
-
-Function new_jobjRef
-  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS rJava/src/Rglue.c:835
+Function inputToClass
+  [UP] allocating function deserializeSEXP may destroy its unprotected argument (obj <arg 1>), which is later used. rJava/src/fields.c:58
+  [UP] calling allocating function deserializeSEXP with a fresh pointer (obj <arg 1>) rJava/src/fields.c:58
+  [UP] calling allocating function R_do_slot(?,S:jobj) with a fresh pointer (obj <arg 1>) rJava/src/fields.c:59
+  [UP] allocating function deserializeSEXP may destroy its unprotected argument (obj <arg 1>), which is later used. rJava/src/fields.c:60
+  [UP] calling allocating function deserializeSEXP with a fresh pointer (obj <arg 1>) rJava/src/fields.c:60
+  [UP] allocating function deserializeSEXP may destroy its unprotected argument (obj <arg 1>), which is later used. rJava/src/fields.c:73
+  [UP] calling allocating function deserializeSEXP with a fresh pointer (obj <arg 1>) rJava/src/fields.c:73

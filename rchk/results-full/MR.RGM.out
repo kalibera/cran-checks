@@ -1,9 +1,20 @@
-Package MR.RGM version 0.0.5
-Package built using 88895/R 4.6.0; x86_64-pc-linux-gnu; 2025-10-03 04:14:23 UTC; unix   
+Package MR.RGM version 0.1.0
+Package built using 89316/R 4.6.0; x86_64-pc-linux-gnu; 2026-01-24 05:10:32 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::namespace_env(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function Rcpp::Rcpp_protect(SEXPREC*)
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
@@ -12,68 +23,77 @@ Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
-Function _MR_RGM_LL
-  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _MR_RGM_LL_Star
-  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
 Function _MR_RGM_NetworkMotif_cpp
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _MR_RGM_RGM_SpikeSlab1
+Function _MR_RGM_RGM_SpikeSlab_Diag
+  [UP] ignoring variable <unnamed var:   %63 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _MR_RGM_RGM_SpikeSlab_Diag_Covariates
+  [UP] ignoring variable <unnamed var:   %75 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _MR_RGM_RGM_SpikeSlab_Diag_Star
   [UP] ignoring variable <unnamed var:   %42 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _MR_RGM_RGM_SpikeSlab2
-  [UP] ignoring variable <unnamed var:   %63 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _MR_RGM_RGM_Threshold1
-  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _MR_RGM_RGM_Threshold2
+Function _MR_RGM_RGM_SpikeSlab_Diag_Star_Covariates
   [UP] ignoring variable <unnamed var:   %51 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _MR_RGM_Sample_A
-  [UP] ignoring variable <unnamed var:   %72 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _MR_RGM_Sample_A_Star
-  [UP] ignoring variable <unnamed var:   %63 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _MR_RGM_Sample_B
+Function _MR_RGM_RGM_SpikeSlab_IW
   [UP] ignoring variable <unnamed var:   %57 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _MR_RGM_Sample_Eta
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _MR_RGM_RGM_SpikeSlab_IW_Covariates
+  [UP] ignoring variable <unnamed var:   %69 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _MR_RGM_Sample_Gamma
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _MR_RGM_Sample_Phi
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _MR_RGM_Sample_Psi
-  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _MR_RGM_Sample_Rho
-  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _MR_RGM_Sample_Sigma
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _MR_RGM_Sample_Tau
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _MR_RGM_Sample_tn
-  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _MR_RGM_Target_A
-  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _MR_RGM_Target_A_Star
+Function _MR_RGM_RGM_SpikeSlab_IW_Star
   [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _MR_RGM_Target_B
-  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _MR_RGM_RGM_SpikeSlab_IW_Star_Covariates
+  [UP] ignoring variable <unnamed var:   %45 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _MR_RGM_tn_pdf
-  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _MR_RGM_RGM_SpikeSlab_SSSL
+  [UP] ignoring variable <unnamed var:   %57 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _MR_RGM_RGM_SpikeSlab_SSSL_Covariates
+  [UP] ignoring variable <unnamed var:   %69 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _MR_RGM_RGM_SpikeSlab_SSSL_Star
+  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _MR_RGM_RGM_SpikeSlab_SSSL_Star_Covariates
+  [UP] ignoring variable <unnamed var:   %45 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _MR_RGM_RGM_Threshold_Diag
+  [UP] ignoring variable <unnamed var:   %51 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _MR_RGM_RGM_Threshold_Diag_Covariates
+  [UP] ignoring variable <unnamed var:   %63 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _MR_RGM_RGM_Threshold_Diag_Star
+  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _MR_RGM_RGM_Threshold_Diag_Star_Covariates
+  [UP] ignoring variable <unnamed var:   %45 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _MR_RGM_RGM_Threshold_IW
+  [UP] ignoring variable <unnamed var:   %45 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _MR_RGM_RGM_Threshold_IW_Covariates
+  [UP] ignoring variable <unnamed var:   %57 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _MR_RGM_RGM_Threshold_IW_Star
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _MR_RGM_RGM_Threshold_IW_Star_Covariates
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _MR_RGM_RGM_Threshold_SSSL
+  [UP] ignoring variable <unnamed var:   %45 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _MR_RGM_RGM_Threshold_SSSL_Covariates
+  [UP] ignoring variable <unnamed var:   %57 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _MR_RGM_RGM_Threshold_SSSL_Star
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _MR_RGM_RGM_Threshold_SSSL_Star_Covariates
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
