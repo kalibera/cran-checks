@@ -1,5 +1,5 @@
-Package duckdb version 1.4.3
-Package built using 89143/R 4.6.0; x86_64-pc-linux-gnu; 2025-12-13 08:09:51 UTC; unix   
+Package duckdb version 1.4.4
+Package built using 89350/R 4.6.0; x86_64-pc-linux-gnu; 2026-01-30 17:11:09 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -31,6 +31,9 @@ Function _duckdb_rapi_expr_constant
 
 Function _duckdb_rapi_expr_function
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _duckdb_rapi_expr_operator
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _duckdb_rapi_expr_reference
   [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -143,6 +146,9 @@ Function cpp11::external_pointer<duckdb::DualWrapper<duckdb::DBWrapper>, &(void 
 Function cpp11::external_pointer<duckdb::FunctionExpression, &(void cpp11::default_deleter<duckdb::FunctionExpression>(duckdb::FunctionExpression*))>::external_pointer(duckdb::FunctionExpression*, bool, bool, SEXPREC*)
   [UP] ignoring variable prot as it has address taken, results will be incomplete 
 
+Function cpp11::external_pointer<duckdb::OperatorExpression, &(void cpp11::default_deleter<duckdb::OperatorExpression>(duckdb::OperatorExpression*))>::external_pointer(duckdb::OperatorExpression*, bool, bool, SEXPREC*)
+  [UP] ignoring variable prot as it has address taken, results will be incomplete 
+
 Function cpp11::external_pointer<duckdb::RQueryResult, &(void cpp11::default_deleter<duckdb::RQueryResult>(duckdb::RQueryResult*))>::external_pointer(duckdb::RQueryResult*, bool, bool, SEXPREC*)
   [UP] ignoring variable prot as it has address taken, results will be incomplete 
 
@@ -168,8 +174,8 @@ Function cpp11::writable::r_vector<SEXPREC*>::push_back(cpp11::named_arg const&)
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function duckdb::EnvironmentScanReplacement(duckdb::ClientContext&, duckdb::ReplacementScanInput&, duckdb::optional_ptr<duckdb::ReplacementScanData, true>)
-  [UP] ignoring variable rho as it has address taken, results will be incomplete 
-  [UP] ignoring variable table_name_symbol as it has address taken, results will be incomplete 
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (df <arg 1>), which is later used. duckdb/src/register.cpp:87
+  [UP] calling allocating function Rf_inherits with a fresh pointer (df <arg 1>) duckdb/src/register.cpp:87
 
 Function rapi_rel_from_altrep_df(SEXPREC*, bool, bool, bool)
   [UP] ignoring variable df as it has address taken, results will be incomplete 
