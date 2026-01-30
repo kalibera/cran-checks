@@ -1,0 +1,427 @@
+
+R Under development (unstable) (2026-01-22 r89316) -- "Unsuffered Consequences"
+Copyright (C) 2026 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> library(morphemepiece)
+> 
+> test_check("morphemepiece")
+ERROR: modification of compiler constant of type character, length 3
+ERROR: the modified value of the constant is:
+[1] "p" "w" "s"
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "p" "w" "s"
+ERROR: the modified constant is at index 52
+ERROR: the modified constant is in this function body:
+{
+    if (nchar(word) > max_chars) {
+        return(unk_token)
+    }
+    frag_pat <- "##"
+    prefixes <- vocab_split$prefixes
+    words <- vocab_split$words
+    suffixes <- vocab_split$suffixes
+    is_bad <- FALSE
+    start <- 1
+    sub_tokens <- character(0)
+    wordlen <- nchar(word)
+    end <- wordlen
+    word_allowed <- "XXX"
+    if (allow_compounds) {
+        word_allowed <- "#"
+    }
+    if (dir == 1) {
+        allowed_next_rules <- list(p = c("p", "w", "s"), w = c("s", 
+            word_allowed), s = "s")
+        allowed_next <- c("p", "w")
+    }
+    else {
+        allowed_next_rules <- list(s = c("p", "w", "s"), w = c("p", 
+            word_allowed), p = "p")
+        allowed_next <- c("s", "w")
+    }
+    keepgoing <- TRUE
+    while (keepgoing) {
+        if (dir == 1) {
+            end <- wordlen
+        }
+        else {
+            start <- 1
+        }
+        cur_substr <- NA_character_
+        while (start <= end) {
+            sub_str <- substr(word, start, end)
+            if ("p" %fin% allowed_next & end < wordlen & sub_str %fin% 
+                prefixes) {
+                cur_substr <- paste0(sub_str, frag_pat)
+                allowed_next <- allowed_next_rules[["p"]]
+                break
+            }
+            if ("s" %fin% allowed_next & start > 1 & sub_str %fin% 
+                suffixes) {
+                cur_substr <- paste0(frag_pat, sub_str)
+                allowed_next <- allowed_next_rules[["s"]]
+                break
+            }
+            if (any(c("w", "#") %fin% allowed_next) & sub_str %fin% 
+                words) {
+                cur_substr <- sub_str
+                if ("#" %fin% allowed_next) {
+                  if (dir == 1) {
+                    cur_substr <- append(frag_pat, cur_substr)
+                  }
+                  else {
+                    cur_substr <- append(cur_substr, frag_pat)
+                  }
+                }
+                allowed_next <- allowed_next_rules[["w"]]
+                break
+            }
+            if (dir == 1) {
+                end <- end - 1
+            }
+            else {
+                start <- start + 1
+            }
+        }
+        if (is.na(cur_substr[[1]])) {
+            is_bad <- TRUE
+            break
+        }
+        if (dir == 1) {
+            sub_tokens <- append(sub_tokens, cur_substr)
+            start <- end + 1
+            keepgoing <- start <= wordlen
+        }
+        else {
+            sub_tokens <- append(cur_substr, sub_tokens)
+            end <- start - 1
+            keepgoing <- end >= 1
+        }
+    }
+    if (is_bad) {
+        return(unk_token)
+    }
+    return(sub_tokens)
+}
+Function .mp_tokenize_word in namespace morphemepiece has this body.
+ERROR: modification of compiler constant of type character, length 1
+ERROR: the modified value of the constant is:
+[1] "s"
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "s"
+ERROR: the modified constant is at index 57
+ERROR: the modified constant is in this function body:
+{
+    if (nchar(word) > max_chars) {
+        return(unk_token)
+    }
+    frag_pat <- "##"
+    prefixes <- vocab_split$prefixes
+    words <- vocab_split$words
+    suffixes <- vocab_split$suffixes
+    is_bad <- FALSE
+    start <- 1
+    sub_tokens <- character(0)
+    wordlen <- nchar(word)
+    end <- wordlen
+    word_allowed <- "XXX"
+    if (allow_compounds) {
+        word_allowed <- "#"
+    }
+    if (dir == 1) {
+        allowed_next_rules <- list(p = c("p", "w", "s"), w = c("s", 
+            word_allowed), s = "s")
+        allowed_next <- c("p", "w")
+    }
+    else {
+        allowed_next_rules <- list(s = c("p", "w", "s"), w = c("p", 
+            word_allowed), p = "p")
+        allowed_next <- c("s", "w")
+    }
+    keepgoing <- TRUE
+    while (keepgoing) {
+        if (dir == 1) {
+            end <- wordlen
+        }
+        else {
+            start <- 1
+        }
+        cur_substr <- NA_character_
+        while (start <= end) {
+            sub_str <- substr(word, start, end)
+            if ("p" %fin% allowed_next & end < wordlen & sub_str %fin% 
+                prefixes) {
+                cur_substr <- paste0(sub_str, frag_pat)
+                allowed_next <- allowed_next_rules[["p"]]
+                break
+            }
+            if ("s" %fin% allowed_next & start > 1 & sub_str %fin% 
+                suffixes) {
+                cur_substr <- paste0(frag_pat, sub_str)
+                allowed_next <- allowed_next_rules[["s"]]
+                break
+            }
+            if (any(c("w", "#") %fin% allowed_next) & sub_str %fin% 
+                words) {
+                cur_substr <- sub_str
+                if ("#" %fin% allowed_next) {
+                  if (dir == 1) {
+                    cur_substr <- append(frag_pat, cur_substr)
+                  }
+                  else {
+                    cur_substr <- append(cur_substr, frag_pat)
+                  }
+                }
+                allowed_next <- allowed_next_rules[["w"]]
+                break
+            }
+            if (dir == 1) {
+                end <- end - 1
+            }
+            else {
+                start <- start + 1
+            }
+        }
+        if (is.na(cur_substr[[1]])) {
+            is_bad <- TRUE
+            break
+        }
+        if (dir == 1) {
+            sub_tokens <- append(sub_tokens, cur_substr)
+            start <- end + 1
+            keepgoing <- start <= wordlen
+        }
+        else {
+            sub_tokens <- append(cur_substr, sub_tokens)
+            end <- start - 1
+            keepgoing <- end >= 1
+        }
+    }
+    if (is_bad) {
+        return(unk_token)
+    }
+    return(sub_tokens)
+}
+Function .mp_tokenize_word in namespace morphemepiece has this body.
+ERROR: modification of compiler constant of type character, length 2
+ERROR: the modified value of the constant is:
+[1] "p" "w"
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "p" "w"
+ERROR: the modified constant is at index 62
+ERROR: the modified constant is in this function body:
+{
+    if (nchar(word) > max_chars) {
+        return(unk_token)
+    }
+    frag_pat <- "##"
+    prefixes <- vocab_split$prefixes
+    words <- vocab_split$words
+    suffixes <- vocab_split$suffixes
+    is_bad <- FALSE
+    start <- 1
+    sub_tokens <- character(0)
+    wordlen <- nchar(word)
+    end <- wordlen
+    word_allowed <- "XXX"
+    if (allow_compounds) {
+        word_allowed <- "#"
+    }
+    if (dir == 1) {
+        allowed_next_rules <- list(p = c("p", "w", "s"), w = c("s", 
+            word_allowed), s = "s")
+        allowed_next <- c("p", "w")
+    }
+    else {
+        allowed_next_rules <- list(s = c("p", "w", "s"), w = c("p", 
+            word_allowed), p = "p")
+        allowed_next <- c("s", "w")
+    }
+    keepgoing <- TRUE
+    while (keepgoing) {
+        if (dir == 1) {
+            end <- wordlen
+        }
+        else {
+            start <- 1
+        }
+        cur_substr <- NA_character_
+        while (start <= end) {
+            sub_str <- substr(word, start, end)
+            if ("p" %fin% allowed_next & end < wordlen & sub_str %fin% 
+                prefixes) {
+                cur_substr <- paste0(sub_str, frag_pat)
+                allowed_next <- allowed_next_rules[["p"]]
+                break
+            }
+            if ("s" %fin% allowed_next & start > 1 & sub_str %fin% 
+                suffixes) {
+                cur_substr <- paste0(frag_pat, sub_str)
+                allowed_next <- allowed_next_rules[["s"]]
+                break
+            }
+            if (any(c("w", "#") %fin% allowed_next) & sub_str %fin% 
+                words) {
+                cur_substr <- sub_str
+                if ("#" %fin% allowed_next) {
+                  if (dir == 1) {
+                    cur_substr <- append(frag_pat, cur_substr)
+                  }
+                  else {
+                    cur_substr <- append(cur_substr, frag_pat)
+                  }
+                }
+                allowed_next <- allowed_next_rules[["w"]]
+                break
+            }
+            if (dir == 1) {
+                end <- end - 1
+            }
+            else {
+                start <- start + 1
+            }
+        }
+        if (is.na(cur_substr[[1]])) {
+            is_bad <- TRUE
+            break
+        }
+        if (dir == 1) {
+            sub_tokens <- append(sub_tokens, cur_substr)
+            start <- end + 1
+            keepgoing <- start <= wordlen
+        }
+        else {
+            sub_tokens <- append(cur_substr, sub_tokens)
+            end <- start - 1
+            keepgoing <- end >= 1
+        }
+    }
+    if (is_bad) {
+        return(unk_token)
+    }
+    return(sub_tokens)
+}
+Function .mp_tokenize_word in namespace morphemepiece has this body.
+ERROR: modification of compiler constant of type character, length 2
+ERROR: the modified value of the constant is:
+[1] "s" "w"
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "s" "w"
+ERROR: the modified constant is at index 70
+ERROR: the modified constant is in this function body:
+{
+    if (nchar(word) > max_chars) {
+        return(unk_token)
+    }
+    frag_pat <- "##"
+    prefixes <- vocab_split$prefixes
+    words <- vocab_split$words
+    suffixes <- vocab_split$suffixes
+    is_bad <- FALSE
+    start <- 1
+    sub_tokens <- character(0)
+    wordlen <- nchar(word)
+    end <- wordlen
+    word_allowed <- "XXX"
+    if (allow_compounds) {
+        word_allowed <- "#"
+    }
+    if (dir == 1) {
+        allowed_next_rules <- list(p = c("p", "w", "s"), w = c("s", 
+            word_allowed), s = "s")
+        allowed_next <- c("p", "w")
+    }
+    else {
+        allowed_next_rules <- list(s = c("p", "w", "s"), w = c("p", 
+            word_allowed), p = "p")
+        allowed_next <- c("s", "w")
+    }
+    keepgoing <- TRUE
+    while (keepgoing) {
+        if (dir == 1) {
+            end <- wordlen
+        }
+        else {
+            start <- 1
+        }
+        cur_substr <- NA_character_
+        while (start <= end) {
+            sub_str <- substr(word, start, end)
+            if ("p" %fin% allowed_next & end < wordlen & sub_str %fin% 
+                prefixes) {
+                cur_substr <- paste0(sub_str, frag_pat)
+                allowed_next <- allowed_next_rules[["p"]]
+                break
+            }
+            if ("s" %fin% allowed_next & start > 1 & sub_str %fin% 
+                suffixes) {
+                cur_substr <- paste0(frag_pat, sub_str)
+                allowed_next <- allowed_next_rules[["s"]]
+                break
+            }
+            if (any(c("w", "#") %fin% allowed_next) & sub_str %fin% 
+                words) {
+                cur_substr <- sub_str
+                if ("#" %fin% allowed_next) {
+                  if (dir == 1) {
+                    cur_substr <- append(frag_pat, cur_substr)
+                  }
+                  else {
+                    cur_substr <- append(cur_substr, frag_pat)
+                  }
+                }
+                allowed_next <- allowed_next_rules[["w"]]
+                break
+            }
+            if (dir == 1) {
+                end <- end - 1
+            }
+            else {
+                start <- start + 1
+            }
+        }
+        if (is.na(cur_substr[[1]])) {
+            is_bad <- TRUE
+            break
+        }
+        if (dir == 1) {
+            sub_tokens <- append(sub_tokens, cur_substr)
+            start <- end + 1
+            keepgoing <- start <= wordlen
+        }
+        else {
+            sub_tokens <- append(cur_substr, sub_tokens)
+            end <- start - 1
+            keepgoing <- end >= 1
+        }
+    }
+    if (is_bad) {
+        return(unk_token)
+    }
+    return(sub_tokens)
+}
+Function .mp_tokenize_word in namespace morphemepiece has this body.
+Fatal error: compiler constants were modified!
+
