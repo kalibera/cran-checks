@@ -1,5 +1,5 @@
-Package GPvecchia version 0.1.7
-Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 05:22:23 UTC; unix   
+Package GPvecchia version 0.1.8
+Package built using 89365/R 4.6.0; x86_64-pc-linux-gnu; 2026-02-02 05:26:04 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -19,6 +19,9 @@ Function Rcpp::Rcpp_protect(SEXPREC*)
 Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::S4_Impl<Rcpp::PreserveStorage>::is(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
+  [UP] calling allocating function Rf_getAttrib(?,S:names) with argument allocated using R_do_slot(?,S:contains) Rcpp/include/Rcpp/api/meat/S4.h:33
 
 Function Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::hasSlot(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
   [UP] calling allocating function R_has_slot(?,V) with argument allocated using Rf_mkString Rcpp/include/Rcpp/proxy/SlotProxy.h:97
