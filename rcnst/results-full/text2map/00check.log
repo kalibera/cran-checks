@@ -8,7 +8,7 @@
 * using session charset: UTF-8
 * checking for file ‘text2map/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘text2map’ version ‘0.2.0’
+* this is package ‘text2map’ version ‘0.2.3’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -20,12 +20,7 @@
 * checking for sufficient/correct file permissions ... OK
 * checking whether package ‘text2map’ can be installed ... OK
 * checking package directory ... OK
-* checking DESCRIPTION meta-information ... NOTE
-  Missing dependency on R >= 4.1.0 because package code uses the pipe
-  |> or function shorthand \(...) syntax added in R 4.1.0.
-  File(s) using such syntax:
-    ‘dtm_builder.Rd’ ‘dtm_stopper.Rd’ ‘rancor_builder.Rd’
-    ‘rancors_builder.Rd’ ‘utils-perm.R’
+* checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
 * checking for left-over files ... OK
 * checking index information ... OK
@@ -82,13 +77,18 @@ The error most likely occurred in:
 > 
 > # create semantic directions
 > gen <- data.frame(
-+   add = c("woman"),
-+   subtract = c("man")
++   pole1 = c("woman"),
++   pole2 = c("man")
 + )
 > 
 > die <- data.frame(
-+   add = c("alive"),
-+   subtract = c("die")
++   pole1 = c("alive"),
++   pole2 = c("die")
++ )
+> 
+> hot <- data.frame(
++   pole1 = c("hot"),
++   pole2 = c("icebergs")
 + )
 > 
 > gen_dir <- get_direction(anchors = gen, wv = ft_wv_sample)
@@ -110,4 +110,4 @@ Fatal error: compiler constants were modified!
   Running ‘testthat.R’
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 ERROR, 1 NOTE
+Status: 1 ERROR

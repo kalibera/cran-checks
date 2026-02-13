@@ -2679,8 +2679,8 @@ Unrooted; no branch length.
 > 
 > ### Name: RenumberTips
 > ### Title: Renumber a tree's tips
-> ### Aliases: RenumberTips RenumberTips.phylo RenumberTips.multiPhylo
-> ###   RenumberTips.list RenumberTips.NULL
+> ### Aliases: RenumberTips RenumberTips.phylo RenumberTips.Splits
+> ###   RenumberTips.multiPhylo RenumberTips.list RenumberTips.NULL
 > 
 > ### ** Examples
 > 
@@ -3730,7 +3730,7 @@ Rooted; no branch length.
 > trees <- list(BalancedTree(1:8), PectinateTree(8:1))
 > trees <- lapply(trees, RenumberTips, 1:8)
 > as.Newick(trees)
-[1] "(((0,1),(2,3)),((4,5),(6,7)));" "(((((((0,1),2),3),4),5),6),7);"
+[1] "(((0,1),(2,3)),((4,5),(6,7)));" "(0,(1,(2,(3,(4,(5,(6,7)))))));"
 > 
 > 
 > 
@@ -3807,6 +3807,7 @@ Rooted; no branch length.
 > ### Name: match,Splits,Splits-method
 > ### Title: Split matching
 > ### Aliases: match,Splits,Splits-method match %in%,Splits,Splits-method
+> ###   FirstMatchingSplit
 > ### Keywords: methods
 > 
 > ### ** Examples
@@ -3892,7 +3893,7 @@ integer64
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  6.128 0.312 6.959 0 0 
+Time elapsed:  5.757 0.223 6.146 0 0 
 > grDevices::dev.off()
 null device 
           1 
