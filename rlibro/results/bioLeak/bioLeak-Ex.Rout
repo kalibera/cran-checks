@@ -1,485 +1,0 @@
-
-R Under development (unstable) (2026-01-22 r89316) -- "Unsuffered Consequences"
-Copyright (C) 2026 The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu
-
-R is free software and comes with ABSOLUTELY NO WARRANTY.
-You are welcome to redistribute it under certain conditions.
-Type 'license()' or 'licence()' for distribution details.
-
-  Natural language support but running in an English locale
-
-R is a collaborative project with many contributors.
-Type 'contributors()' for more information and
-'citation()' on how to cite R or R packages in publications.
-
-Type 'demo()' for some demos, 'help()' for on-line help, or
-'help.start()' for an HTML browser interface to help.
-Type 'q()' to quit R.
-
-> pkgname <- "bioLeak"
-> source(file.path(R.home("share"), "R", "examples-header.R"))
-> options(warn = 1)
-> library('bioLeak')
-> 
-> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
-> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
-> cleanEx()
-> nameEx("as_rsample")
-> ### * as_rsample
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: as_rsample
-> ### Title: Convert LeakSplits to an rsample resample set
-> ### Aliases: as_rsample
-> 
-> ### ** Examples
-> 
-> if (requireNamespace("rsample", quietly = TRUE)) {
-+   df <- data.frame(
-+     subject = rep(1:10, each = 2),
-+     outcome = rbinom(20, 1, 0.5),
-+     x1 = rnorm(20),
-+     x2 = rnorm(20)
-+   )
-+   splits <- make_split_plan(df, outcome = "outcome",
-+                         mode = "subject_grouped", group = "subject", v = 5)
-+   rset <- as_rsample(splits, data = df)
-+ }
-subject_grouped: repeat 1/1 done.
-> 
-> 
-> 
-> cleanEx()
-> nameEx("audit_leakage")
-> ### * audit_leakage
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: audit_leakage
-> ### Title: Audit leakage and confounding
-> ### Aliases: audit_leakage
-> 
-> ### ** Examples
-> 
-> set.seed(1)
-> df <- data.frame(
-+   subject = rep(1:6, each = 2),
-+   outcome = rbinom(12, 1, 0.5),
-+   x1 = rnorm(12),
-+   x2 = rnorm(12)
-+ )
-> 
-> splits <- make_split_plan(df, outcome = "outcome",
-+                       mode = "subject_grouped", group = "subject", v = 3,
-+                       progress = FALSE)
-> 
-> custom <- list(
-+   glm = list(
-+     fit = function(x, y, task, weights, ...) {
-+       stats::glm(y ~ ., data = as.data.frame(x),
-+                  family = stats::binomial(), weights = weights)
-+     },
-+     predict = function(object, newdata, task, ...) {
-+       as.numeric(stats::predict(object,
-+                                 newdata = as.data.frame(newdata),
-+                                 type = "response"))
-+     }
-+   )
-+ )
-> 
-> fit <- fit_resample(df, outcome = "outcome", splits = splits,
-+                     learner = "glm", custom_learners = custom,
-+                     metrics = "auc", refit = FALSE, seed = 1)
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-> 
-> audit <- audit_leakage(fit, metric = "auc", B = 10,
-+                        X_ref = df[, c("x1", "x2")])
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%Warning in value[[3L]](cond) : Fold 1 failed: No case observation.
-  |                                                                              |=======================                                               |  33%Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-  |                                                                              |===============================================                       |  67%Warning in value[[3L]](cond) : Fold 3 failed: No control observation.
-  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning in value[[3L]](cond) : Fold 1 failed: No case observation.
-  |                                                                              |=======================                                               |  33%Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning in value[[3L]](cond) : Fold 2 failed: No control observation.
-  |                                                                              |===============================================                       |  67%Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-  |                                                                              |=======================                                               |  33%Warning in value[[3L]](cond) : Fold 2 failed: No control observation.
-  |                                                                              |===============================================                       |  67%Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-  |                                                                              |======================================================================| 100%
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning: glm.fit: algorithm did not converge
-Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-> 
-> 
-> 
-> 
-> cleanEx()
-> nameEx("audit_leakage_by_learner")
-> ### * audit_leakage_by_learner
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: audit_leakage_by_learner
-> ### Title: Audit leakage per learner
-> ### Aliases: audit_leakage_by_learner
-> 
-> ### ** Examples
-> 
-> set.seed(1)
-> df <- data.frame(
-+   subject = rep(1:6, each = 2),
-+   outcome = factor(rep(c(0, 1), 6)),
-+   x1 = rnorm(12),
-+   x2 = rnorm(12)
-+ )
-> splits <- make_split_plan(df, outcome = "outcome",
-+                       mode = "subject_grouped", group = "subject",
-+                       v = 3, progress = FALSE)
-> custom <- list(
-+   glm = list(
-+     fit = function(x, y, task, weights, ...) {
-+       stats::glm(y ~ ., data = data.frame(y = y, x),
-+                  family = stats::binomial(), weights = weights)
-+     },
-+     predict = function(object, newdata, task, ...) {
-+       as.numeric(stats::predict(object,
-+                                 newdata = as.data.frame(newdata),
-+                                 type = "response"))
-+     }
-+   )
-+ )
-> custom$glm2 <- custom$glm
-> fit <- fit_resample(df, outcome = "outcome", splits = splits,
-+                     learner = c("glm", "glm2"), custom_learners = custom,
-+                     metrics = "auc", refit = FALSE, seed = 1)
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-> audits <- audit_leakage_by_learner(fit, metric = "auc", B = 10,
-+                                    perm_stratify = FALSE)
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-> names(audits)
-[1] "glm"  "glm2"
-> 
-> 
-> 
-> 
-> cleanEx()
-> nameEx("audit_report")
-> ### * audit_report
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: audit_report
-> ### Title: Render an HTML audit report
-> ### Aliases: audit_report
-> 
-> ### ** Examples
-> 
-> set.seed(1)
-> df <- data.frame(
-+   subject = rep(1:6, each = 2),
-+   outcome = factor(rep(c(0, 1), 6)),
-+   x1 = rnorm(12),
-+   x2 = rnorm(12)
-+ )
-> 
-> splits <- make_split_plan(df, outcome = "outcome",
-+                       mode = "subject_grouped", group = "subject",
-+                       v = 3, progress = FALSE)
-> 
-> custom <- list(
-+   glm = list(
-+     fit = function(x, y, task, weights, ...) {
-+       stats::glm(y ~ ., data = data.frame(y = y, x),
-+                  family = stats::binomial(), weights = weights)
-+     },
-+     predict = function(object, newdata, task, ...) {
-+       as.numeric(stats::predict(object,
-+                                 newdata = as.data.frame(newdata),
-+                                 type = "response"))
-+     }
-+   )
-+ )
-> 
-> fit <- fit_resample(df, outcome = "outcome", splits = splits,
-+                     learner = "glm", custom_learners = custom,
-+                     metrics = "auc", refit = FALSE, seed = 1)
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-> 
-> audit <- audit_leakage(fit, metric = "auc", B = 5, perm_stratify = FALSE)
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-  |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%
-> 
-> if (requireNamespace("rmarkdown", quietly = TRUE) &&
-+     requireNamespace("ggplot2", quietly = TRUE)) {
-+   out_file <- audit_report(audit, output_dir = tempdir(), quiet = TRUE)
-+   out_file
-+ }
-Warning in file(con, "w") :
-  cannot open file 'audit_report.knit.md': Read-only file system
-Error in file(con, "w") : cannot open the connection
-Calls: audit_report ... <Anonymous> -> <Anonymous> -> write_utf8 -> writeLines -> file
-Execution halted
