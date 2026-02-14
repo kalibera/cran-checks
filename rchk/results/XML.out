@@ -4,15 +4,9 @@ Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
-
 Function RS_XML_xmlSAX2StartElementNs
   [UP] allocating function isBranchFunction may destroy its unprotected argument (ans <arg 1>), which is later used. XML/src/XMLEventParse.c:571
   [UP] calling allocating function isBranchFunction with a fresh pointer (ans <arg 1>) XML/src/XMLEventParse.c:571
-
-Function RS_XML_xmlSchemaValidateDoc
-  [PB] has negative depth XML/src/schema.c:223
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete XML/src/schema.c:223
-  [PB] has possible protection stack imbalance XML/src/schema.c:225
 
 Function R_getExternalRef
   [UP] unprotected variable ref while calling allocating function Rf_install XML/src/schema.c:43

@@ -1,5 +1,5 @@
-Package TreeTools version 2.0.0
-Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 05:45:52 UTC; unix   
+Package TreeTools version 2.1.0
+Package built using 89406/R 4.6.0; x86_64-pc-linux-gnu; 2026-02-14 02:55:28 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -22,6 +22,9 @@ Function Rcpp::Rcpp_unprotect(int)
 
 Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
   [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:680
+
+Function Rcpp::internal::DimNameProxy::assign(SEXPREC*)
+  [UP] unprotected variable dims while calling allocating function Rf_getAttrib(?,S:dimnames) Rcpp/include/Rcpp/vector/DimNameProxy.h:46
 
 Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -80,6 +83,12 @@ Function _TreeTools_edge_to_num
 
 Function _TreeTools_edge_to_rooted_shape
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _TreeTools_first_matching_split_index
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _TreeTools_first_matching_split_pair
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _TreeTools_keep_tip
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

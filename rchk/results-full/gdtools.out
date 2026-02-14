@@ -1,9 +1,17 @@
-Package gdtools version 0.4.4
-Package built using 88911/R 4.6.0; x86_64-pc-linux-gnu; 2025-10-09 23:29:20 UTC; unix   
+Package gdtools version 0.5.0
+Package built using 89406/R 4.6.0; x86_64-pc-linux-gnu; 2026-02-14 02:53:40 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
 
 Function Rcpp::Rcpp_protect(SEXPREC*)
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
@@ -12,37 +20,13 @@ Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
-Function _gdtools_context_create
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr gdtools/src/RcppExports.cpp:83
-  [PB] has negative depth gdtools/src/RcppExports.cpp:95
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete gdtools/src/RcppExports.cpp:95
-  [PB] has possible protection stack imbalance gdtools/src/RcppExports.cpp:96
-
-Function _gdtools_context_create_try()
-  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _gdtools_context_extents
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr gdtools/src/RcppExports.cpp:157
-  [PB] has negative depth gdtools/src/RcppExports.cpp:169
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete gdtools/src/RcppExports.cpp:169
-  [PB] has possible protection stack imbalance gdtools/src/RcppExports.cpp:170
-
-Function _gdtools_context_extents_try(SEXPREC*, SEXPREC*)
-  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _gdtools_context_set_font
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr gdtools/src/RcppExports.cpp:122
-  [PB] has negative depth gdtools/src/RcppExports.cpp:134
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete gdtools/src/RcppExports.cpp:134
-  [PB] has possible protection stack imbalance gdtools/src/RcppExports.cpp:135
-
-Function _gdtools_context_set_font_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
-  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _gdtools_m_str_extents_
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _gdtools_str_extents_
+Function _gdtools_m_str_metrics_
   [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _gdtools_str_metrics_
