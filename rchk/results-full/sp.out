@@ -1,0 +1,24 @@
+Package sp version 2.2-1
+Package built using 89420/R 4.6.0; x86_64-pc-linux-gnu; 2026-02-16 13:51:29 UTC; unix   
+Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Polygon_validate_c
+  [UP] allocating function Rf_getAttrib(?,S:dim) may destroy its unprotected argument (coords <arg 1>), which is later used. sp/src/sp_xports.c:159
+  [UP] calling allocating function Rf_getAttrib(?,S:dim) with a fresh pointer (coords <arg 1>) sp/src/sp_xports.c:159
+
+Function Polygons_c
+  [UP] unprotected variable crds while calling allocating function Rf_allocVector sp/src/sp_xports.c:229
+  [UP] allocating function Rf_getAttrib(?,S:dim) may destroy its unprotected argument (crds <arg 1>), which is later used. sp/src/sp_xports.c:230
+  [UP] calling allocating function Rf_getAttrib(?,S:dim) with a fresh pointer (crds <arg 1>) sp/src/sp_xports.c:230
+  [UP] unprotected variable crds while calling allocating function Rf_allocVector sp/src/sp_xports.c:232
+  [UP] calling allocating function Polygon_c(?,V,V) with a fresh pointer (crds <arg 1>) sp/src/sp_xports.c:234
+
+Function bboxCalcR_c
+  [UP] unprotected variable Pl while calling allocating function R_do_slot(?,S:coords) sp/src/sp_xports.c:469
+  [UP] unprotected variable Pl while calling allocating function Rf_install sp/src/sp_xports.c:469
+  [UP] allocating function Rf_getAttrib(?,S:dim) may destroy its unprotected argument (crds <arg 1>), which is later used. sp/src/sp_xports.c:470
+  [UP] calling allocating function Rf_getAttrib(?,S:dim) with a fresh pointer (crds <arg 1>) sp/src/sp_xports.c:470
+  [UP] unprotected variable Pl while calling allocating function Rf_getAttrib(?,S:dim) sp/src/sp_xports.c:470

@@ -1,0 +1,32 @@
+Package reticulate version 1.45.0
+Package built using 89420/R 4.6.0; x86_64-pc-linux-gnu; 2026-02-16 13:51:17 UTC; unix   
+Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Function PyObjectRef::convert() const
+  [UP] calling allocating function Rf_findVarInFrame(?,S:convert) with argument allocated using PyObjectRef::get_refenv() const reticulate/src/./reticulate_types.h:140
+
+Function PyObjectRef::get() const
+  [UP] calling allocating function Rf_findVarInFrame(?,S:pyobj) with argument allocated using PyObjectRef::get_refenv() const reticulate/src/./reticulate_types.h:85
+
+Function PyObjectRef::get_refenv() const
+  [UP] calling allocating function Rf_getAttrib(?,S:py_object) with a fresh pointer (sexp <arg 1>) reticulate/src/./reticulate_types.h:114
+
+Function PyObjectRef::is_null_xptr() const
+  [UP] calling allocating function Rf_findVarInFrame(?,S:pyobj) with argument allocated using PyObjectRef::get_refenv() const reticulate/src/./reticulate_types.h:129
+
+Function PyObjectRef::set(reticulate::libpython::_object*)
+  [UP] unprotected variable refenv while calling allocating function R_MakeExternalPtr reticulate/src/./reticulate_types.h:75
+  [UP] unprotected variable refenv while calling allocating function R_RegisterCFinalizer reticulate/src/./reticulate_types.h:76
+
+Function PyObjectRef::simple() const
+  [UP] calling allocating function Rf_findVarInFrame(?,S:simple) with argument allocated using PyObjectRef::get_refenv() const reticulate/src/./reticulate_types.h:149
+
+Function py_to_r(reticulate::libpython::_object*, bool)
+  [UP] allocating function is_py_object(SEXPREC*) may destroy its unprotected argument (result <arg 1>), which is later used. reticulate/src/python.cpp:1451
+  [UP] calling allocating function is_py_object(SEXPREC*) with a fresh pointer (result <arg 1>) reticulate/src/python.cpp:1451
+
+Function py_to_r_cpp(SEXPREC*)
+  [UP] allocating function is_py_object(SEXPREC*) may destroy its unprotected argument (ret <arg 1>), which is later used. reticulate/src/python.cpp:1477
+  [UP] calling allocating function is_py_object(SEXPREC*) with a fresh pointer (ret <arg 1>) reticulate/src/python.cpp:1477
