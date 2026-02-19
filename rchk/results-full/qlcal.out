@@ -1,5 +1,5 @@
-Package qlcal version 0.0.17
-Package built using 88920/R 4.6.0; x86_64-pc-linux-gnu; 2025-10-17 01:18:06 UTC; unix   
+Package qlcal version 0.1.0
+Package built using 89438/R 4.6.0; x86_64-pc-linux-gnu; 2026-02-19 21:36:42 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -13,124 +13,193 @@ Function Rcpp::Rcpp_unprotect(int)
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
 Function _qlcal_adjust_cpp
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:344
-  [PB] has negative depth qlcal/src/RcppExports.cpp:356
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:356
-  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:357
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:285
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:287
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:287
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:291
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:291
+  [PB] has negative depth qlcal/src/RcppExports.cpp:297
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:297
+  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:298
 
-Function _qlcal_adjust_cpp_try(SEXPREC*, SEXPREC*)
-  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _qlcal_advanceDate
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:139
-  [PB] has negative depth qlcal/src/RcppExports.cpp:151
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:151
-  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:152
-
-Function _qlcal_advanceDate_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
-  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _qlcal_advanceUnits_cpp
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:382
-  [PB] has negative depth qlcal/src/RcppExports.cpp:394
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:394
-  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:395
-
-Function _qlcal_advanceUnits_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
-  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _qlcal_businessDaysBetween
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:419
-  [PB] has negative depth qlcal/src/RcppExports.cpp:431
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:431
-  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:432
-
-Function _qlcal_businessDaysBetween_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
-  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _qlcal_getBusinessDays
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:490
-  [PB] has negative depth qlcal/src/RcppExports.cpp:502
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:502
-  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:503
-
-Function _qlcal_getBusinessDays_try(SEXPREC*, SEXPREC*)
-  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _qlcal_getEndOfMonth
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:309
-  [PB] has negative depth qlcal/src/RcppExports.cpp:321
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:321
-  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:322
-
-Function _qlcal_getEndOfMonth_try(SEXPREC*)
-  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function _qlcal_getHolidays
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:455
-  [PB] has negative depth qlcal/src/RcppExports.cpp:467
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:467
-  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:468
-
-Function _qlcal_getHolidays_try(SEXPREC*, SEXPREC*, SEXPREC*)
+Function _qlcal_adjust_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*)
   [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function _qlcal_getId
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:101
-  [PB] has negative depth qlcal/src/RcppExports.cpp:113
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:113
-  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:114
+Function _qlcal_advanceDate
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:74
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:76
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:76
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:80
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:80
+  [PB] has negative depth qlcal/src/RcppExports.cpp:86
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:86
+  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:87
 
-Function _qlcal_getId_try()
-  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _qlcal_advanceDate_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _qlcal_advanceUnits_cpp
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:324
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:326
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:326
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:330
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:330
+  [PB] has negative depth qlcal/src/RcppExports.cpp:336
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:336
+  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:337
+
+Function _qlcal_advanceUnits_cpp_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _qlcal_businessDaysBetween
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:362
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:364
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:364
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:368
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:368
+  [PB] has negative depth qlcal/src/RcppExports.cpp:374
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:374
+  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:375
+
+Function _qlcal_businessDaysBetween_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _qlcal_getBusinessDays
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:435
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:437
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:437
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:441
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:441
+  [PB] has negative depth qlcal/src/RcppExports.cpp:447
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:447
+  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:448
+
+Function _qlcal_getBusinessDays_try(SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _qlcal_getCalendar
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:469
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:471
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:471
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:475
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:475
+  [PB] has negative depth qlcal/src/RcppExports.cpp:481
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:481
+  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:482
+
+Function _qlcal_getCalendar_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _qlcal_getEndOfMonth
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:249
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:251
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:251
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:255
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:255
+  [PB] has negative depth qlcal/src/RcppExports.cpp:261
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:261
+  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:262
+
+Function _qlcal_getEndOfMonth_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _qlcal_getHolidays
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:399
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:401
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:401
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:405
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:405
+  [PB] has negative depth qlcal/src/RcppExports.cpp:411
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:411
+  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:412
+
+Function _qlcal_getHolidays_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _qlcal_getId
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:537
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:539
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:539
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:543
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:543
+  [PB] has negative depth qlcal/src/RcppExports.cpp:549
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:549
+  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:550
+
+Function _qlcal_getId_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _qlcal_getName
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:68
-  [PB] has negative depth qlcal/src/RcppExports.cpp:80
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:80
-  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:81
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:503
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:505
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:505
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:509
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:509
+  [PB] has negative depth qlcal/src/RcppExports.cpp:515
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:515
+  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:516
 
-Function _qlcal_getName_try()
-  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _qlcal_getName_try(SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _qlcal_isBusinessDay
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:173
-  [PB] has negative depth qlcal/src/RcppExports.cpp:185
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:185
-  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:186
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:109
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:111
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:111
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:115
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:115
+  [PB] has negative depth qlcal/src/RcppExports.cpp:121
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:121
+  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:122
 
-Function _qlcal_isBusinessDay_try(SEXPREC*)
-  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _qlcal_isBusinessDay_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _qlcal_isEndOfMonth
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:275
-  [PB] has negative depth qlcal/src/RcppExports.cpp:287
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:287
-  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:288
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:214
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:216
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:216
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:220
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:220
+  [PB] has negative depth qlcal/src/RcppExports.cpp:226
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:226
+  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:227
 
-Function _qlcal_isEndOfMonth_try(SEXPREC*)
-  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _qlcal_isEndOfMonth_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _qlcal_isHoliday
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:207
-  [PB] has negative depth qlcal/src/RcppExports.cpp:219
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:219
-  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:220
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:144
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:146
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:146
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:150
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:150
+  [PB] has negative depth qlcal/src/RcppExports.cpp:156
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:156
+  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:157
 
-Function _qlcal_isHoliday_try(SEXPREC*)
-  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _qlcal_isHoliday_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _qlcal_isWeekend
-  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:241
-  [PB] has negative depth qlcal/src/RcppExports.cpp:253
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:253
-  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:254
+  [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:179
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:181
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:181
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:185
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:185
+  [PB] has negative depth qlcal/src/RcppExports.cpp:191
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:191
+  [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:192
 
-Function _qlcal_isWeekend_try(SEXPREC*)
-  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _qlcal_isWeekend_try(SEXPREC*, SEXPREC*)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _qlcal_setCalendar
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr qlcal/src/RcppExports.cpp:35
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:37
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:37
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. qlcal/src/RcppExports.cpp:41
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) qlcal/src/RcppExports.cpp:41
   [PB] has negative depth qlcal/src/RcppExports.cpp:47
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete qlcal/src/RcppExports.cpp:47
   [PB] has possible protection stack imbalance qlcal/src/RcppExports.cpp:48

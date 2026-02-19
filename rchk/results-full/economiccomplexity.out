@@ -1,18 +1,63 @@
-Package economiccomplexity version 2.0.0
-Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 05:19:07 UTC; unix   
+Package economiccomplexity version 2.1.0
+Package built using 89438/R 4.6.0; x86_64-pc-linux-gnu; 2026-02-19 21:37:42 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
 
-Function cpp11::attribute_proxy<cpp11::r_vector<double> >::operator SEXPREC*() const
-  [UP] ignoring variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function cpp4r::attribute_proxy<cpp4r::writable::r_vector<SEXPREC*> >::operator SEXPREC*() const
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function cpp11::attribute_proxy<cpp11::writable::r_vector<SEXPREC*> >::operator SEXPREC*() const
-  [UP] ignoring variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function cpp4r::matrix<cpp4r::r_vector<double>, double, cpp4r::by_column> Mat_to_dblint_matrix_<double, cpp4r::matrix<cpp4r::r_vector<double>, double, cpp4r::by_column> >(arma::Mat<double> const&)
+  [UP] unprotected variable data while calling allocating function cpp4r::detail::store::get_root() cpp4r/include/cpp4r/protect.hpp:248
+  [UP] unprotected variable data while calling allocating function Rf_cons cpp4r/include/cpp4r/protect.hpp:258
 
-Function cpp11::writable::r_vector<SEXPREC*>::push_back(cpp11::named_arg const&)
-  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function cpp4r::r_vector<double> Col_to_dblint_<double, cpp4r::r_vector<double> >(arma::Col<double> const&)
+  [UP] unprotected variable data while calling allocating function cpp4r::detail::store::get_root() cpp4r/include/cpp4r/protect.hpp:248
+  [UP] unprotected variable data while calling allocating function Rf_cons cpp4r/include/cpp4r/protect.hpp:258
 
-Function cpp11::writable::r_vector<SEXPREC*>::r_vector(std::initializer_list<cpp11::named_arg>)::{lambda()#1}::operator()() const
-  [UP] unprotected variable names while calling allocating function Rf_mkCharCE cpp11/include/cpp11/list.hpp:91
+Function cpp4r::writable::r_vector<SEXPREC*>::push_back(cpp4r::named_arg const&)
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function cpp4r::writable::r_vector<cpp4r::r_string>::r_vector(long)
+  [UP] calling allocating function cpp4r::writable::r_vector<cpp4r::r_string>::r_vector(SEXPREC*, cpp4r::writable::fresh_allocation_tag) with argument allocated using decltype (((std::__1::declval<SEXPREC* (*)(unsigned int, long)>)())((std::declval<unsigned int&&>)(), (std::declval<long const&>)())) cpp4r::protect::function<SEXPREC* (unsigned int, long)>::operator()<unsigned int, long const&>(unsigned int&&, long const&) const cpp4r/include/cpp4r/r_vector_writable_impl.hpp:198
+
+Function eigenvalues_method_(cpp4r::matrix<cpp4r::r_vector<double>, double, cpp4r::by_column> const&, int const&)
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::attribute_proxy<cpp4r::writable::r_vector<double> >& cpp4r::attribute_proxy<cpp4r::writable::r_vector<double> >::operator=<SEXPREC*>(SEXPREC*) economiccomplexity/src/code.cpp:146
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::writable::r_vector<double>::attr(char const*) const economiccomplexity/src/code.cpp:146
+
+Function fitness_method_(cpp4r::matrix<cpp4r::r_vector<double>, double, cpp4r::by_column> const&, int const&, double const&)
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::attribute_proxy<cpp4r::writable::r_vector<double> >& cpp4r::attribute_proxy<cpp4r::writable::r_vector<double> >::operator=<SEXPREC*>(SEXPREC*) economiccomplexity/src/code.cpp:67
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::writable::r_vector<double>::attr(char const*) const economiccomplexity/src/code.cpp:67
+
+Function proximity_(cpp4r::matrix<cpp4r::r_vector<double>, double, cpp4r::by_column> const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %110 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %112 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %125 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %127 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable data while calling allocating function cpp4r::detail::store::get_root() cpp4r/include/cpp4r/protect.hpp:248
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::detail::store::get_root() cpp4r/include/cpp4r/protect.hpp:248
+  [UP] unprotected variable data while calling allocating function Rf_cons cpp4r/include/cpp4r/protect.hpp:258
+  [UP] unprotected variable dimnames while calling allocating function Rf_cons cpp4r/include/cpp4r/protect.hpp:258
+  [UP] unprotected variable dimnames while calling allocating function decltype (((std::__1::declval<SEXPREC* (*)(unsigned int, long)>)())((std::declval<unsigned int&&>)(), (std::declval<long const&>)())) cpp4r::protect::function<SEXPREC* (unsigned int, long)>::operator()<unsigned int, long const&>(unsigned int&&, long const&) const cpp4r/include/cpp4r/r_vector_writable_impl.hpp:198
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::writable::r_vector<SEXPREC*>::resize(long) cpp4r/include/cpp4r/r_vector_writable_impl.hpp:282
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::writable::r_vector<SEXPREC*>::resize(long) cpp4r/include/cpp4r/r_vector_writable_impl.hpp:290
+  [UP] unprotected variable dimnames while calling allocating function as_doubles_matrix(arma::Mat<double> const&) economiccomplexity/src/code.cpp:200
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::matrix<cpp4r::r_vector<double>, double, cpp4r::by_column>::~matrix() economiccomplexity/src/code.cpp:200
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::matrix<cpp4r::writable::r_vector<double>, double&, cpp4r::by_column>::matrix<cpp4r::r_vector<double>, double, cpp4r::by_column>(cpp4r::matrix<cpp4r::r_vector<double>, double, cpp4r::by_column>&&) economiccomplexity/src/code.cpp:200
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::matrix<cpp4r::writable::r_vector<double>, double&, cpp4r::by_column>::attr(char const*, SEXPREC*) economiccomplexity/src/code.cpp:204
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::literals::operator"" _nm(char const*, unsigned long) economiccomplexity/src/code.cpp:205
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::matrix<cpp4r::writable::r_vector<double>, double&, cpp4r::by_column>::matrix(cpp4r::matrix<cpp4r::writable::r_vector<double>, double&, cpp4r::by_column> const&) economiccomplexity/src/code.cpp:205
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::matrix<cpp4r::writable::r_vector<double>, double&, cpp4r::by_column>::~matrix() economiccomplexity/src/code.cpp:205
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::named_arg& cpp4r::named_arg::operator=<cpp4r::matrix<cpp4r::writable::r_vector<double>, double&, cpp4r::by_column> >(cpp4r::matrix<cpp4r::writable::r_vector<double>, double&, cpp4r::by_column>) economiccomplexity/src/code.cpp:205
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::named_arg::~named_arg() economiccomplexity/src/code.cpp:205
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::writable::r_vector<SEXPREC*>::push_back(cpp4r::named_arg const&) economiccomplexity/src/code.cpp:205
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::matrix<cpp4r::writable::r_vector<double>, double&, cpp4r::by_column>::~matrix() economiccomplexity/src/code.cpp:206
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::writable::r_vector<SEXPREC*>::~r_vector() economiccomplexity/src/code.cpp:206
+  [UP] unprotected variable dimnames while calling allocating function as_doubles_matrix(arma::Mat<double> const&) economiccomplexity/src/code.cpp:217
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::matrix<cpp4r::r_vector<double>, double, cpp4r::by_column>::~matrix() economiccomplexity/src/code.cpp:217
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::matrix<cpp4r::writable::r_vector<double>, double&, cpp4r::by_column>::matrix<cpp4r::r_vector<double>, double, cpp4r::by_column>(cpp4r::matrix<cpp4r::r_vector<double>, double, cpp4r::by_column>&&) economiccomplexity/src/code.cpp:217
+
+Function reflections_method_(cpp4r::matrix<cpp4r::r_vector<double>, double, cpp4r::by_column> const&, int const&)
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::attribute_proxy<cpp4r::writable::r_vector<double> >& cpp4r::attribute_proxy<cpp4r::writable::r_vector<double> >::operator=<SEXPREC*>(SEXPREC*) economiccomplexity/src/code.cpp:109
+  [UP] unprotected variable dimnames while calling allocating function cpp4r::writable::r_vector<double>::attr(char const*) const economiccomplexity/src/code.cpp:109
