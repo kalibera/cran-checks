@@ -1,5 +1,5 @@
-Package DiscreteDists version 1.1.1
-Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 05:53:05 UTC; unix   
+Package DiscreteDists version 1.1.2
+Package built using 89451/R 4.6.0; x86_64-pc-linux-gnu; 2026-02-23 06:21:28 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -14,6 +14,10 @@ Function Rcpp::Rcpp_unprotect(int)
 
 Function _DiscreteDists_cpp_dDMOLBE
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr DiscreteDists/src/RcppExports.cpp:144
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. DiscreteDists/src/RcppExports.cpp:146
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) DiscreteDists/src/RcppExports.cpp:146
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. DiscreteDists/src/RcppExports.cpp:150
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) DiscreteDists/src/RcppExports.cpp:150
   [PB] has negative depth DiscreteDists/src/RcppExports.cpp:156
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete DiscreteDists/src/RcppExports.cpp:156
   [PB] has possible protection stack imbalance DiscreteDists/src/RcppExports.cpp:157

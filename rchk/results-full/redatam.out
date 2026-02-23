@@ -1,14 +1,21 @@
-Package redatam version 2.1.2
-Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 07:02:56 UTC; unix   
+Package redatam version 2.2.0
+Package built using 89451/R 4.6.0; x86_64-pc-linux-gnu; 2026-02-23 06:21:57 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
 
 Function RedatamLib::ListExporter::ExportAllR(std::__1::vector<RedatamLib::Entity, std::__1::allocator<RedatamLib::Entity> > const&) const
-  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %44 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %57 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %70 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %77 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %92 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [PB] has too high protection stack depth results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [PB] has too high protection stack depth results will be incomplete
+  [PB] has too high protection stack depth results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [PB] has too high protection stack depth results will be incomplete
+  [PB] has too high protection stack depth results will be incomplete
+  [UP] unprotected variable data while calling allocating function cpp4r::detail::store::get_root() cpp4r/include/cpp4r/protect.hpp:248
+  [UP] unprotected variable data while calling allocating function Rf_cons cpp4r/include/cpp4r/protect.hpp:258
+  [PB] has possible protection stack imbalance redatam/src/redatamlib/exporters/RListExporter.cpp:135
+
+Function cpp4r::writable::r_vector<cpp4r::r_string>::r_vector(long)
+  [UP] calling allocating function cpp4r::writable::r_vector<cpp4r::r_string>::r_vector(SEXPREC*, cpp4r::writable::fresh_allocation_tag) with argument allocated using decltype (((std::__1::declval<SEXPREC* (*)(unsigned int, long)>)())((std::declval<unsigned int&&>)(), (std::declval<long const&>)())) cpp4r::protect::function<SEXPREC* (unsigned int, long)>::operator()<unsigned int, long const&>(unsigned int&&, long const&) const cpp4r/include/cpp4r/r_vector_writable_impl.hpp:198

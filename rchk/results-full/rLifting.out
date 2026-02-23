@@ -1,5 +1,5 @@
-Package multinet version 4.3.2
-Package built using 88970/R 4.6.0; x86_64-pc-linux-gnu; 2025-10-26 17:32:51 UTC; unix   
+Package rLifting version 0.9.0
+Package built using 89451/R 4.6.0; x86_64-pc-linux-gnu; 2026-02-23 06:30:45 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -13,9 +13,6 @@ Function Rcpp::Armor<SEXPREC*>::~Armor()
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
 
-Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Rcpp_namespace()
-  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using Rcpp::internal::get_Rcpp_namespace() Rcpp/include/Rcpp/Environment.h:348
-
 Function Rcpp::Rcpp_protect(SEXPREC*)
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
 
@@ -26,29 +23,45 @@ Function Rcpp::Rcpp_unprotect(int)
 Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
   [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:680
 
-Function Rcpp::class_<REvolutionModel>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
-  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
-Function Rcpp::class_<RMLNetwork>::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
-  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-
 Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::set(SEXPREC*)
   [UP] ignoring variable rhs as it has address taken, results will be incomplete 
 
-Function void Rcpp::Vector<16, Rcpp::PreserveStorage>::push_back<char [3]>(char const (&) [3])
-  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _rLifting_apply_filter_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function void Rcpp::Vector<16, Rcpp::PreserveStorage>::push_back<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
-  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _rLifting_compute_thresholds_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::Vector<14, Rcpp::PreserveStorage> >(Rcpp::Vector<14, Rcpp::PreserveStorage> const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
-  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _rLifting_create_engine_cpp
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %25 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::Vector<19, Rcpp::PreserveStorage> >(Rcpp::Vector<19, Rcpp::PreserveStorage> const&)
-  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+Function _rLifting_denoise_offline_cpp
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rLifting_ilwt_cpp
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rLifting_lwt_cpp
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rLifting_process_sample_cpp
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rLifting_run_causal_batch_cpp
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rLifting_threshold_hard_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rLifting_threshold_semisoft_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _rLifting_threshold_soft_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
   [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 

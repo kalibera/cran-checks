@@ -1,5 +1,5 @@
-Package misha version 5.4.0
-Package built using 89350/R 4.6.0; x86_64-pc-linux-gnu; 2026-01-30 17:11:24 UTC; unix   
+Package misha version 5.4.5
+Package built using 89451/R 4.6.0; x86_64-pc-linux-gnu; 2026-02-23 06:21:38 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -23,6 +23,15 @@ Function GIntervalsMeta2D::init(char const*, SEXPREC*, GenomeChromKey const&)
 Function TrackExprScanner::create_expr_iterator(SEXPREC*, TrackExpressionVars const&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&, GIntervalsFetcher1D*, GIntervalsFetcher2D*, GIntervals&, GIntervals2D&, DiagonalBand const&, bool)
   [UP] unprotected variable class_name while calling allocating function Rf_isInteger misha/src/TrackExpressionScanner.cpp:467
   [UP] unprotected variable class_name while calling allocating function Rf_isInteger misha/src/TrackExpressionScanner.cpp:472
+
+Function gbigintervs_2d_indexed_create
+  [PB] has possible protection stack imbalance misha/src/IntervalsIndexedFormat.cpp:874
+
+Function gbigintervs_indexed_create
+  [PB] has possible protection stack imbalance misha/src/IntervalsIndexedFormat.cpp:644
+
+Function gbigintervs_indexed_write_chrom
+  [PB] has possible protection stack imbalance misha/src/IntervalsIndexedFormat.cpp:704
 
 Function gbigintervs_load_chrom
   [PB] has possible protection stack imbalance misha/src/GenomeIntervalUtils.cpp:959
