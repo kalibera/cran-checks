@@ -1,4 +1,4 @@
-* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/tuneRanger.Rcheck’
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/epidm.Rcheck’
 * using R Under development (unstable) (2026-01-22 r89316)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
@@ -6,9 +6,8 @@
     GNU Fortran (GCC) 15.2.1 20251111 (Red Hat 15.2.1-4)
 * running under: Fedora Linux 42 (MATE-Compiz)
 * using session charset: UTF-8
-* checking for file ‘tuneRanger/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘tuneRanger’ version ‘0.8.1’
+* checking for file ‘epidm/DESCRIPTION’ ... OK
+* this is package ‘epidm’ version ‘1.0.6’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -18,8 +17,9 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘tuneRanger’ can be installed ... OK
+* checking whether package ‘epidm’ can be installed ... OK
 * checking package directory ... OK
+* checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
 * checking for left-over files ... OK
@@ -46,27 +46,37 @@
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking R/sysdata.rda ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
 * checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... ERROR
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-  Loading required package: lhs
-  > 
-  > test_check("tuneRanger")
-  Approximated time for tuning: 1M 29SERROR: modification of compiler constant of type character, length 2
+  Fatal error: compiler constants were modified (in .Call?)!
+  
+  ERROR: modification of compiler constant of type character, length 8
   ERROR: the modified value of the constant is:
-  [1] "integer"       "integervector"
-  attr(,".match.hash")
-  <hash table>
+  [1] "PL7 1LU"  "CW6 9TX"  "CW6 9TX"  "BN14 9EP" "BN14 9EP" "BN14 9EP" "BN14 9EP"
+  [8] "BN14 9EP"
   ERROR: the original value of the constant is:
-  [1] "integer"       "integervector"
+  [1] "CW6 9TX"  "CW6 9TX"  "PL7 1LU"  "BN14 9EP" "BN14 9EP" "BN14 9EP" "BN14 9EP"
+  [8] "BN14 9EP"
   ERROR: the modified constant is at index 1
   ERROR: the modified constant is in this function body:
-  c("integer", "integervector")
+  c("CW6 9TX", "CW6 9TX", "PL7 1LU", "BN14 9EP", "BN14 9EP", "BN14 9EP", 
+      "BN14 9EP", "BN14 9EP")
   Fatal error: compiler constants were modified!
   
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
 * DONE
 Status: 1 ERROR
