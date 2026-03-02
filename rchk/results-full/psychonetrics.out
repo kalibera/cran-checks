@@ -1,5 +1,5 @@
-Package psychonetrics version 0.13.2
-Package built using 88967/R 4.6.0; x86_64-pc-linux-gnu; 2025-10-24 01:46:48 UTC; unix   
+Package psychonetrics version 0.15
+Package built using 89506/R 4.6.0; x86_64-pc-linux-gnu; 2026-03-02 03:33:18 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -24,7 +24,10 @@ Function Rcpp::Rcpp_unprotect(int)
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
 Function Rcpp::S4_Impl<Rcpp::PreserveStorage>::S4_Impl(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
-  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS Rcpp/include/Rcpp/S4.h:58
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS Rcpp/include/Rcpp/S4.h:57
+
+Function Rcpp::S4_Impl<Rcpp::PreserveStorage>::is(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
+  [UP] calling allocating function Rf_getAttrib(?,S:names) with argument allocated using R_do_slot(?,S:contains) Rcpp/include/Rcpp/api/meat/S4.h:33
 
 Function Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::const_SlotProxy::operator std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> ><std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >() const
   [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::const_SlotProxy::get() const Rcpp/include/Rcpp/proxy/SlotProxy.h:68
@@ -105,6 +108,9 @@ Function _psychonetrics_anyNon0
 Function _psychonetrics_bdiag_psychonetrics
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _psychonetrics_benchmark_formModelMatrices_direct
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _psychonetrics_binormal_density
   [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -175,6 +181,18 @@ Function _psychonetrics_d_phi_theta_lvm_cpp
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _psychonetrics_d_phi_theta_lvm_group_cpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _psychonetrics_d_phi_theta_meta_lvm_cpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _psychonetrics_d_phi_theta_meta_lvm_group_cpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _psychonetrics_d_phi_theta_meta_var1_cpp
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _psychonetrics_d_phi_theta_meta_var1_group_cpp
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _psychonetrics_d_phi_theta_meta_varcov_cpp
@@ -357,6 +375,9 @@ Function _psychonetrics_fimlestimator_Gauss_cpp
 Function _psychonetrics_formModelMatrices_cpp
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _psychonetrics_formModelMatrices_cpp_direct
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _psychonetrics_gradient_inner_cpp_DDS
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -373,6 +394,12 @@ Function _psychonetrics_implied_dlvm1_cpp
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _psychonetrics_implied_lvm_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _psychonetrics_implied_meta_lvm_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _psychonetrics_implied_meta_var1_cpp
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _psychonetrics_implied_meta_varcov_cpp
@@ -489,6 +516,12 @@ Function _psychonetrics_prepare_dlvm1_cpp
 Function _psychonetrics_prepare_lvm_cpp
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _psychonetrics_prepare_meta_lvm_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _psychonetrics_prepare_meta_var1_cpp
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _psychonetrics_prepare_meta_varcov_cpp
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -511,6 +544,9 @@ Function _psychonetrics_psychonetrics_fitfunction_cpp
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _psychonetrics_psychonetrics_gradient_cpp
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _psychonetrics_psychonetrics_lbfgsb_optimizer
   [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _psychonetrics_psychonetrics_optimizer
@@ -545,6 +581,11 @@ Function _psychonetrics_vech
 
 Function _psychonetrics_wi2net_cpp
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function buildOptimWorkspace(Rcpp::S4_Impl<Rcpp::PreserveStorage> const&)
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::const_SlotProxy::operator SEXPREC*() const psychonetrics/src/04_generalfit_optimWorkspace.cpp:32
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::const_SlotProxy::operator SEXPREC*() const psychonetrics/src/04_generalfit_optimWorkspace.cpp:33
+  [UP] calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) with argument allocated using Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::const_SlotProxy::operator SEXPREC*() const psychonetrics/src/04_generalfit_optimWorkspace.cpp:34
 
 Function pbv::pbv_rcpp_pbvnorm0(double, double, double)
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
