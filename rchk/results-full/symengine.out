@@ -1,5 +1,5 @@
-Package symengine version 0.2.10
-Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 04:20:43 UTC; unix   
+Package symengine version 0.2.11
+Package built using 89541/R 4.6.0; x86_64-pc-linux-gnu; 2026-03-06 03:45:13 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -24,7 +24,7 @@ Function Rcpp::Rcpp_unprotect(int)
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
 Function Rcpp::S4_Impl<Rcpp::PreserveStorage>::S4_Impl(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
-  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS Rcpp/include/Rcpp/S4.h:58
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS Rcpp/include/Rcpp/S4.h:57
 
 Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -217,14 +217,14 @@ Function _symengine_s4visitor
 Function _symengine_s4visitor_call
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function cwrapper_basic_parse(CRCPBasic*, Rcpp::RObject_Impl<Rcpp::PreserveStorage>, bool)
+Function cwrapper_basic_parse(CRCPBasic_C*, Rcpp::RObject_Impl<Rcpp::PreserveStorage>, bool)
   [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function s4DenseMat(CDenseMatrix*)
   [UP] calling allocating function Rcpp::XPtr<CDenseMatrix, Rcpp::PreserveStorage, &dense_matrix_free, true>::XPtr(CDenseMatrix*, bool, SEXPREC*, SEXPREC*)(?,?,?,V,?) with argument allocated using Rf_ScalarRaw symengine/src/rbinding.cpp:243
 
-Function s4basic(CRCPBasic*)
-  [UP] unprotected variable ans while calling allocating function Rcpp::XPtr<CRCPBasic, Rcpp::PreserveStorage, &basic_free_heap, true>::~XPtr() symengine/src/rbinding.cpp:230
+Function s4basic(CRCPBasic_C*)
+  [UP] unprotected variable ans while calling allocating function Rcpp::XPtr<CRCPBasic_C, Rcpp::PreserveStorage, &basic_free_heap, true>::~XPtr() symengine/src/rbinding.cpp:230
 
 Function s4vecbasic(CVecBasic*)
   [UP] calling allocating function Rcpp::XPtr<CVecBasic, Rcpp::PreserveStorage, &vecbasic_free, true>::XPtr(CVecBasic*, bool, SEXPREC*, SEXPREC*)(?,?,?,V,?) with argument allocated using Rf_ScalarRaw symengine/src/rbinding.cpp:239
