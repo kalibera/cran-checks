@@ -1,5 +1,5 @@
-Package OpenMx version 2.22.10
-Package built using 88992/R 4.6.0; x86_64-pc-linux-gnu; 2025-11-10 04:31:01 UTC; unix   
+Package OpenMx version 2.22.11
+Package built using 89578/R 4.6.0; x86_64-pc-linux-gnu; 2026-03-09 10:35:00 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -111,6 +111,9 @@ Function Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::SlotProxy
 Function Rcpp::SlotProxyPolicy<Rcpp::S4_Impl<Rcpp::PreserveStorage> >::hasSlot(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
   [UP] calling allocating function R_has_slot(?,V) with argument allocated using Rf_mkString Rcpp/include/Rcpp/proxy/SlotProxy.h:97
 
+Function Rcpp::internal::DimNameProxy::assign(SEXPREC*)
+  [UP] unprotected variable dims while calling allocating function Rf_getAttrib(?,S:dimnames) Rcpp/include/Rcpp/vector/DimNameProxy.h:46
+
 Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -121,10 +124,10 @@ Function RelationalRAMExpectation::independentGroup::prep(FitContext*)
   [PB] has possible protection stack imbalance OpenMx/src/omxRAMExpectation.cpp:1774
 
 Function RelationalRAMExpectation::state::exportInternalState(MxRList&)
-  [UP] ignoring variable numKids as it has address taken, results will be incomplete 
   [UP] ignoring variable fk1 as it has address taken, results will be incomplete 
   [UP] ignoring variable hmean as it has address taken, results will be incomplete 
   [UP] ignoring variable numJoins as it has address taken, results will be incomplete 
+  [UP] ignoring variable numKids as it has address taken, results will be incomplete 
   [UP] ignoring variable parent1 as it has address taken, results will be incomplete 
   [UP] ignoring variable qrf as it has address taken, results will be incomplete 
   [UP] ignoring variable row as it has address taken, results will be incomplete 
@@ -194,6 +197,9 @@ Function omxData::connectDynamicData(omxState*)
 
 Function omxExportMatrix(omxMatrix*)
   [PB] has possible protection stack imbalance OpenMx/src/omxMatrix.cpp:251
+
+Function omxFIMLFitFunction::init()
+  [UP] calling allocating function Rf_asChar with argument allocated using R_do_slot(?,S:jointConditionOn) OpenMx/src/omxFIMLFitFunction.cpp:1475
 
 Function omxFIMLFitFunction::populateAttr(SEXPREC*)
   [PB] has possible protection stack imbalance OpenMx/src/omxFIMLFitFunction.cpp:802

@@ -1,5 +1,5 @@
-Package BayesFactor version 0.9.12-4.7
-Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 06:36:18 UTC; unix   
+Package BayesFactor version 0.9.12-4.8
+Package built using 89578/R 4.6.0; x86_64-pc-linux-gnu; 2026-03-09 10:32:56 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -11,6 +11,9 @@ Function Rcpp::Rcpp_protect(SEXPREC*)
 Function Rcpp::Rcpp_unprotect(int)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::internal::DimNameProxy::assign(SEXPREC*)
+  [UP] unprotected variable dims while calling allocating function Rf_getAttrib(?,S:dimnames) Rcpp/include/Rcpp/vector/DimNameProxy.h:46
 
 Function RcppCallback(long*, Rcpp::Function_Impl<Rcpp::PreserveStorage>, double, double)
   [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -32,6 +35,10 @@ Function _BayesFactor_dinvgamma1_logx_Rcpp
 
 Function _BayesFactor_genhypergeo_series_pos
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr BayesFactor/src/RcppExports.cpp:146
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. BayesFactor/src/RcppExports.cpp:148
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) BayesFactor/src/RcppExports.cpp:148
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. BayesFactor/src/RcppExports.cpp:152
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) BayesFactor/src/RcppExports.cpp:152
   [PB] has negative depth BayesFactor/src/RcppExports.cpp:158
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete BayesFactor/src/RcppExports.cpp:158
   [PB] has possible protection stack imbalance BayesFactor/src/RcppExports.cpp:159

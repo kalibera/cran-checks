@@ -1,5 +1,5 @@
-Package indexthis version 2.1.0
-Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 03:50:43 UTC; unix   
+Package indexthis version 2.2.0
+Package built using 89578/R 4.6.0; x86_64-pc-linux-gnu; 2026-03-09 10:32:54 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -9,9 +9,12 @@ Function _indexthis_cpp_to_index
   [UP] ignoring variable x as it has address taken, results will be incomplete 
 
 Function indexthis::cpp_to_index_main(SEXPREC*&)
-  [PB] has negative depth indexthis/src/to_index.cpp:967
-  [UP] attempt to unprotect more items (2) than protected (0), results will be incomplete indexthis/src/to_index.cpp:967
-  [PB] has possible protection stack imbalance indexthis/src/to_index.cpp:973
+  [UP] ignoring variable <unnamed var:   %13 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function indexthis::r_vector::r_vector(SEXPREC*)
-  [PB] has possible protection stack imbalance indexthis/src/to_index.cpp:237
+  [PB] has possible protection stack imbalance indexthis/src/to_index.cpp:252
+
+Function indexthis::r_vector::~r_vector()
+  [PB] has negative depth indexthis/src/to_index.cpp:104
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete indexthis/src/to_index.cpp:104
+  [PB] has possible protection stack imbalance indexthis/src/to_index.cpp:106
