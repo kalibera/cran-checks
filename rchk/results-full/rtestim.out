@@ -1,5 +1,5 @@
-Package rtestim version 1.0.1
-Package built using 88970/R 4.6.0; x86_64-pc-linux-gnu; 2025-10-26 17:32:44 UTC; unix   
+Package rtestim version 1.0.2
+Package built using 89607/R 4.6.0; x86_64-pc-linux-gnu; 2026-03-13 12:24:28 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -13,7 +13,10 @@ Function Rcpp::Rcpp_unprotect(int)
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
 
 Function Rcpp::S4_Impl<Rcpp::PreserveStorage>::S4_Impl(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
-  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS Rcpp/include/Rcpp/S4.h:58
+  [UP] calling allocating function R_do_new_object with argument allocated using R_do_MAKE_CLASS Rcpp/include/Rcpp/S4.h:57
+
+Function Rcpp::S4_Impl<Rcpp::PreserveStorage>::is(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
+  [UP] calling allocating function Rf_getAttrib(?,S:names) with argument allocated using R_do_slot(?,S:contains) Rcpp/include/Rcpp/api/meat/S4.h:33
 
 Function _rtestim_calc_delays
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -53,6 +56,10 @@ Function _rtestim_prox_newton_testing
 
 Function _rtestim_rcpp_tvdz
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rtestim/src/RcppExports.cpp:86
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. rtestim/src/RcppExports.cpp:88
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) rtestim/src/RcppExports.cpp:88
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. rtestim/src/RcppExports.cpp:92
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) rtestim/src/RcppExports.cpp:92
   [PB] has negative depth rtestim/src/RcppExports.cpp:98
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rtestim/src/RcppExports.cpp:98
   [PB] has possible protection stack imbalance rtestim/src/RcppExports.cpp:99
@@ -62,6 +69,10 @@ Function _rtestim_rcpp_tvdz_try(SEXPREC*, SEXPREC*, SEXPREC*)
 
 Function _rtestim_rcpp_wtvdz
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr rtestim/src/RcppExports.cpp:273
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. rtestim/src/RcppExports.cpp:275
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) rtestim/src/RcppExports.cpp:275
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. rtestim/src/RcppExports.cpp:279
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) rtestim/src/RcppExports.cpp:279
   [PB] has negative depth rtestim/src/RcppExports.cpp:285
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete rtestim/src/RcppExports.cpp:285
   [PB] has possible protection stack imbalance rtestim/src/RcppExports.cpp:286

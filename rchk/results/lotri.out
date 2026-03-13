@@ -1,0 +1,48 @@
+Package lotri version 1.0.3
+Package built using 89607/R 4.6.0; x86_64-pc-linux-gnu; 2026-03-13 12:23:56 UTC; unix   
+Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Function _isLotri
+  [UP] unprotected variable lotriProp while calling allocating function Rf_allocVector lotri/src/matlist.c:133
+
+Function _lotriLstToMat0
+  [UP] calling allocating function isSingleInt with a fresh pointer (startNum2 <arg 1>) lotri/src/./lotriLstToMat.h:50
+
+Function _lotriLstToMat0.24
+  [UP] calling allocating function isSingleInt.21 with a fresh pointer (startNum2 <arg 1>) lotri/src/./lotriLstToMat.h:50
+
+Function _lotriMaxNu
+  [UP] unprotected variable lotriProp while calling allocating function Rf_allocVector lotri/src/lotriProp.c:36
+
+Function _lotri_rcm_
+  [UP] unprotected variable data while calling allocating function cpp4r::detail::store::get_root() cpp4r/include/cpp4r/protect.hpp:248
+  [UP] unprotected variable data while calling allocating function Rf_cons cpp4r/include/cpp4r/protect.hpp:258
+
+Function cpp4r::matrix<cpp4r::r_vector<double>, double, cpp4r::by_column> Mat_to_dblint_matrix_<double, cpp4r::matrix<cpp4r::r_vector<double>, double, cpp4r::by_column> >(arma::Mat<double> const&)
+  [UP] unprotected variable data while calling allocating function cpp4r::detail::store::get_root() cpp4r/include/cpp4r/protect.hpp:248
+  [UP] unprotected variable data while calling allocating function Rf_cons cpp4r/include/cpp4r/protect.hpp:258
+
+Function isSymNameMat
+  [UP] allocating function Rf_isMatrix may destroy its unprotected argument (hasFix <arg 1>), which is later used. lotri/src/./matlist.h:54
+  [UP] calling allocating function Rf_isMatrix with a fresh pointer (hasFix <arg 1>) lotri/src/./matlist.h:54
+  [UP] allocating function Rf_nrows may destroy its unprotected argument (hasFix <arg 1>), which is later used. lotri/src/./matlist.h:56
+  [UP] calling allocating function Rf_nrows with a fresh pointer (hasFix <arg 1>) lotri/src/./matlist.h:56
+  [UP] calling allocating function Rf_ncols with a fresh pointer (hasFix <arg 1>) lotri/src/./matlist.h:57
+
+Function isSymNameMat.22
+  [UP] allocating function Rf_isMatrix may destroy its unprotected argument (hasFix <arg 1>), which is later used. lotri/src/./matlist.h:54
+  [UP] calling allocating function Rf_isMatrix with a fresh pointer (hasFix <arg 1>) lotri/src/./matlist.h:54
+  [UP] allocating function Rf_nrows may destroy its unprotected argument (hasFix <arg 1>), which is later used. lotri/src/./matlist.h:56
+  [UP] calling allocating function Rf_nrows with a fresh pointer (hasFix <arg 1>) lotri/src/./matlist.h:56
+  [UP] calling allocating function Rf_ncols with a fresh pointer (hasFix <arg 1>) lotri/src/./matlist.h:57
+
+Function lotriLstToMatFillInFullMatrix
+  [UP] unprotected variable curFixed while calling allocating function isSingleInt.21 lotri/src/./lotriLstToMat.h:116
+  [UP] unprotected variable curFixed while calling allocating function Rf_ncols lotri/src/./lotriLstToMat.h:120
+  [UP] unprotected variable curFixed while calling allocating function Rf_getAttrib(?,S:dimnames) lotri/src/./lotriLstToMat.h:122
+  [UP] allocating function Rf_isMatrix may destroy its unprotected argument (curFixed <arg 1>), which is later used. lotri/src/./lotriLstToMat.h:127
+  [UP] calling allocating function Rf_isMatrix with a fresh pointer (curFixed <arg 1>) lotri/src/./lotriLstToMat.h:127
+  [UP] allocating function lotriLstToMatFillInMatrixBand may destroy its unprotected argument (curFixed <arg 13>), which is later used. lotri/src/./lotriLstToMat.h:132
+  [UP] calling allocating function lotriLstToMatFillInMatrixBand with a fresh pointer (curFixed <arg 13>) lotri/src/./lotriLstToMat.h:132
