@@ -1,0 +1,108 @@
+Package golden version 0.0.1
+Package built using 89653/R 4.6.0; x86_64-pc-linux-gnu; 2026-03-20 15:07:21 UTC; unix   
+Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::namespace_env(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
+  [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:680
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::set(SEXPREC*)
+  [UP] ignoring variable rhs as it has address taken, results will be incomplete 
+
+Function Simulation::Simulation(Rcpp::Vector<19, Rcpp::PreserveStorage>)
+  [UP] ignoring variable <unnamed var:   %20 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Simulation::stepHazards()
+  [UP] unprotected variable _transition_result while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> ><std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >() const golden/src/Simulation.cpp:160
+  [UP] unprotected variable _transition_result while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator SEXPREC*() const golden/src/Simulation.cpp:162
+  [UP] unprotected variable _transition_result while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator Rcpp::String<Rcpp::String>() const golden/src/Simulation.cpp:165
+  [UP] unprotected variable _transition_result while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::operator[](long) golden/src/Simulation.cpp:167
+  [UP] unprotected variable _transition_result while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> ><std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >() const golden/src/Simulation.cpp:167
+  [UP] unprotected variable _transition_result while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator SEXPREC*() const golden/src/Simulation.cpp:168
+  [UP] unprotected variable _transition_result while calling allocating function Rf_isNumeric golden/src/Simulation.cpp:168
+  [UP] unprotected variable _transition_result while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator SEXPREC*() const golden/src/Simulation.cpp:174
+  [UP] unprotected variable _transition_result while calling allocating function Rf_isInteger golden/src/Simulation.cpp:174
+  [UP] unprotected variable _transition_result while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator SEXPREC*() const golden/src/Simulation.cpp:178
+
+Function Simulation::stepHistory()
+  [UP] ignoring variable <unnamed var:   %23 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] unprotected variable result while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> ><std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >() const golden/src/Simulation.cpp:279
+  [UP] allocating function check_result(int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, SEXPREC*, int) may destroy its unprotected argument (result <arg 3>), which is later used. golden/src/Simulation.cpp:281
+  [UP] calling allocating function check_result(int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, SEXPREC*, int) with a fresh pointer (result <arg 3>) golden/src/Simulation.cpp:281
+  [UP] unprotected variable result while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> ><std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >() const golden/src/Simulation.cpp:281
+  [UP] allocating function Rf_isNumeric may destroy its unprotected argument (result <arg 1>), which is later used. golden/src/Simulation.cpp:284
+  [UP] calling allocating function Rf_isNumeric with a fresh pointer (result <arg 1>) golden/src/Simulation.cpp:284
+  [UP] unprotected variable result while calling allocating function Rcpp::Vector<14, Rcpp::PreserveStorage>::Vector(int const&, double const&) golden/src/Simulation.cpp:285
+  [UP] unprotected variable result while calling allocating function Rcpp::Vector<14, Rcpp::PreserveStorage>::~Vector() golden/src/Simulation.cpp:285
+  [UP] unprotected variable result while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>& Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=<Rcpp::Vector<14, Rcpp::PreserveStorage> >(Rcpp::Vector<14, Rcpp::PreserveStorage> const&) golden/src/Simulation.cpp:285
+  [UP] allocating function Rf_isInteger may destroy its unprotected argument (result <arg 1>), which is later used. golden/src/Simulation.cpp:286
+  [UP] calling allocating function Rf_isInteger with a fresh pointer (result <arg 1>) golden/src/Simulation.cpp:286
+  [UP] unprotected variable result while calling allocating function Rcpp::Vector<13, Rcpp::PreserveStorage>::Vector(int const&, int const&) golden/src/Simulation.cpp:287
+  [UP] unprotected variable result while calling allocating function Rcpp::Vector<13, Rcpp::PreserveStorage>::~Vector() golden/src/Simulation.cpp:287
+  [UP] unprotected variable result while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>& Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=<Rcpp::Vector<13, Rcpp::PreserveStorage> >(Rcpp::Vector<13, Rcpp::PreserveStorage> const&) golden/src/Simulation.cpp:287
+  [UP] unprotected variable result while calling allocating function Rcpp::Vector<10, Rcpp::PreserveStorage>::Vector<int, bool>(int const&, bool const&, Rcpp::traits::enable_if<traits::is_arithmetic<int>::value, void>::type*) golden/src/Simulation.cpp:289
+  [UP] unprotected variable result while calling allocating function Rcpp::Vector<10, Rcpp::PreserveStorage>::~Vector() golden/src/Simulation.cpp:289
+  [UP] unprotected variable result while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>& Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=<Rcpp::Vector<10, Rcpp::PreserveStorage> >(Rcpp::Vector<10, Rcpp::PreserveStorage> const&) golden/src/Simulation.cpp:289
+  [UP] allocating function Rf_isNumeric may destroy its unprotected argument (result <arg 1>), which is later used. golden/src/Simulation.cpp:296
+  [UP] calling allocating function Rf_isNumeric with a fresh pointer (result <arg 1>) golden/src/Simulation.cpp:296
+  [UP] unprotected variable result while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator Rcpp::Vector<14, Rcpp::PreserveStorage><Rcpp::Vector<14, Rcpp::PreserveStorage> >() const golden/src/Simulation.cpp:297
+  [UP] allocating function Rf_isInteger may destroy its unprotected argument (result <arg 1>), which is later used. golden/src/Simulation.cpp:299
+  [UP] calling allocating function Rf_isInteger with a fresh pointer (result <arg 1>) golden/src/Simulation.cpp:299
+  [UP] unprotected variable result while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator Rcpp::Vector<13, Rcpp::PreserveStorage><Rcpp::Vector<13, Rcpp::PreserveStorage> >() const golden/src/Simulation.cpp:300
+  [UP] unprotected variable result while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator Rcpp::Vector<10, Rcpp::PreserveStorage><Rcpp::Vector<10, Rcpp::PreserveStorage> >() const golden/src/Simulation.cpp:303
+
+Function Simulation::stepTrajectories()
+  [UP] unprotected variable trajectory_result while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> ><std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >() const golden/src/Simulation.cpp:232
+  [UP] unprotected variable trajectory_result while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator SEXPREC*() const golden/src/Simulation.cpp:234
+  [UP] unprotected variable trajectory_result while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator Rcpp::String<Rcpp::String>() const golden/src/Simulation.cpp:236
+  [UP] calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=(SEXPREC*) with a fresh pointer (trajectory_result <arg 2>) golden/src/Simulation.cpp:237
+
+Function _golden_create_cohort
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _golden_run_simulation
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function build_args_filtered(Rcpp::Vector<16, Rcpp::PreserveStorage>, Rcpp::Vector<19, Rcpp::PreserveStorage>, int, Rcpp::Vector<10, Rcpp::PreserveStorage>)
+  [UP] ignoring variable <unnamed var:   %19 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<16, Rcpp::PreserveStorage>::push_back<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> >(Rcpp::DataFrame_Impl<Rcpp::PreserveStorage> const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> >(Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage> const&)
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&)
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+  [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<int>(int const&)
+  [UP] ignoring variable <unnamed var:   %5 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
