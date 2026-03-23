@@ -287,21 +287,21 @@ ClusterTable on 5 leaves: A .. E>
 > summary(splits)
 5 bipartition splits dividing 8 tips, t1 .. t8
      12345678
- 10  ****....
- 11  **......
- 12  ..**....
- 14  ....**..
- 15  ......**
+ 10  ****.... 
+ 11  **...... 
+ 12  ..**.... 
+ 14  ....**.. 
+ 15  ......** 
 
  Tip 1: t1	 Tip 2: t2	 Tip 3: t3	 Tip 4: t4	 Tip 5: t5	
  Tip 6: t6	 Tip 7: t7	 Tip 8: t8	> summary(splits2)
 5 bipartition splits dividing 8 tips, t1 .. t8
      12345678
- 11  ..******
- 12  ...*****
- 13  ....****
- 14  .....***
- 15  ......**
+ 11  ..****** 
+ 12  ...***** 
+ 13  ....**** 
+ 14  .....*** 
+ 15  ......** 
 
  Tip 1: t1	 Tip 2: t2	 Tip 3: t3	 Tip 4: t4	 Tip 5: t5	
  Tip 6: t6	 Tip 7: t7	 Tip 8: t8	> 
@@ -499,10 +499,10 @@ integer64
 > summary(DropTip(as.Splits(tree), 4:5))
 4 bipartition splits dividing 7 tips, t1 .. t9
      1234567
- 12  ***....
- 13  **.....
- 16  ...**..
- 17  .....**
+ 12  ***.... 
+ 13  **..... 
+ 16  ...**.. 
+ 17  .....** 
 
  Tip 1: t1	 Tip 2: t2	 Tip 3: t3	 Tip 4: t6	 Tip 5: t7	
  Tip 6: t8	 Tip 7: t9	> 
@@ -2909,7 +2909,7 @@ attr(,"class")
 > summary(splits1[[4]])
 1 bipartition split dividing 8 tips, t1 .. t8
      12345678
- 14  ....**..
+ 14  ....**.. 
 
  Tip 1: t1	 Tip 2: t2	 Tip 3: t3	 Tip 4: t4	 Tip 5: t5	
  Tip 6: t6	 Tip 7: t7	 Tip 8: t8	> SplitConsistent(splits1[[4]], splits2)
@@ -2974,7 +2974,8 @@ attr(,"class")
 > ### Name: SplitInformation
 > ### Title: Phylogenetic information content of splitting leaves into two
 > ###   partitions
-> ### Aliases: SplitInformation MultiSplitInformation
+> ### Aliases: SplitInformation SplitInformation.numeric
+> ###   SplitInformation.Splits SplitInformation.phylo MultiSplitInformation
 > 
 > ### ** Examples
 > 
@@ -3044,9 +3045,9 @@ attr(,"class")
 > summary(splits)
 3 bipartition splits dividing 6 tips, a .. f
      123456
- 8   ***...
- 9   **....
- 11  ...**.
+ 8   ***... 
+ 9   **.... 
+ 11  ...**. 
 
  Tip 1: a	 Tip 2: b	 Tip 3: c	 Tip 4: d	 Tip 5: e	
  Tip 6: f	> TipsInSplits(splits)
@@ -3055,9 +3056,9 @@ attr(,"class")
 > summary(!splits)
 3 bipartition splits dividing 6 tips, a .. f
      123456
- 8   ...***
- 9   ..****
- 11  ***..*
+ 8   ...*** 
+ 9   ..**** 
+ 11  ***..* 
 
  Tip 1: a	 Tip 2: b	 Tip 3: c	 Tip 4: d	 Tip 5: e	
  Tip 6: f	> TipsInSplits(!splits)
@@ -3072,10 +3073,10 @@ attr(,"class")
 > summary(c(splits[[2:3]], !splits[[1:2]]))
 4 bipartition splits dividing 6 tips, a .. f
      123456
- 9   **....
- 11  ...**.
- 8   ...***
- 9   ..****
+ 9   **.... 
+ 11  ...**. 
+ 8   ...*** 
+ 9   ..**** 
 
  Tip 1: a	 Tip 2: b	 Tip 3: c	 Tip 4: d	 Tip 5: e	
  Tip 6: f	> 
@@ -3083,9 +3084,9 @@ attr(,"class")
 > print(moreSplits, details = TRUE)
 3 bipartition splits dividing 6 tips, a .. f
      123456
- 9   ****..
- 10  ***...
- 11  **....> match(splits, moreSplits)
+ 9   ****.. 
+ 10  ***... 
+ 11  **.... > match(splits, moreSplits)
 [1]  2  3 NA
 > moreSplits %in% splits
     9    10    11 
@@ -3174,10 +3175,10 @@ FALSE  TRUE  TRUE
 > summary(efgh)
 4 bipartition splits (3 trivial) dividing 4 tips, e .. h
      1234
- 12  ****
- 15  .***
- 16  ..**
- 17  ...*
+ 12  **** 
+ 15  .*** 
+ 16  ..** 
+ 17  ...* 
 
  Tip 1: e	 Tip 2: f	 Tip 3: g	 Tip 4: h	> 
 > TrivialSplits(efgh)
@@ -3187,7 +3188,7 @@ FALSE  TRUE  TRUE
 > summary(Subsplit(splits, tips = letters[5:8], keepAll = FALSE))
 1 bipartition split dividing 4 tips, e .. h
      1234
- 16  ..**
+ 16  ..** 
 
  Tip 1: e	 Tip 2: f	 Tip 3: g	 Tip 4: h	> 
 > 
@@ -3402,6 +3403,7 @@ FALSE  TRUE  TRUE
 > 
 > flush(stderr()); flush(stdout())
 > 
+> ### Encoding: UTF-8
 > ### Name: TreeNumber
 > ### Title: Unique integer indices for bifurcating tree topologies
 > ### Aliases: TreeNumber as.TreeNumber as.TreeNumber.phylo
@@ -3419,10 +3421,12 @@ FALSE  TRUE  TRUE
 > as.TreeNumber(tree)
 Phylogenetic tree number 10 of 105 
  6 tips: t1 t2 t3 t4 t5 t6> 
-> # Larger trees:
-> as.TreeNumber(BalancedTree(19))
+> # Trees with 20–51 leaves are stored as decimal strings:
+> as.TreeNumber(BalancedTree(19))  # integer64-backed
 Phylogenetic tree number 3259279213732796827 of 6332659870762850625 
- 19 tips: t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12 t13 t14 t15 t16 t17 t18 t19> 
+ 19 tips: t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12 t13 t14 t15 t16 t17 t18 t19> as.TreeNumber(BalancedTree(51))  # character-backed
+Phylogenetic tree number 27388803913187622481001283703331864424119472007335608662299812499724470715408 of 2.752921e+76 
+ 51 tips: t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12 t13 t14 t15 t16 t17 t18 t19 t20 t21 t22 t23 t24 t25 t26 t27 t28 t29 t30 t31 t32 t33 t34 t35 t36 t37 t38 t39 t40 t41 t42 t43 t44 t45 t46 t47 t48 t49 t50 t51> 
 > # If > 9 digits, represent the tree number as a string.
 > treeNumber <- as.TreeNumber("1234567890123", nTip = 14)
 > tree <- as.phylo(treeNumber)
@@ -3578,10 +3582,10 @@ integer64
 > summary(efgh)
 4 bipartition splits (3 trivial) dividing 4 tips, e .. h
      1234
- 12  ****
- 15  .***
- 16  ..**
- 17  ...*
+ 12  **** 
+ 15  .*** 
+ 16  ..** 
+ 17  ...* 
 
  Tip 1: e	 Tip 2: f	 Tip 3: g	 Tip 4: h	> 
 > TrivialSplits(efgh)
@@ -3590,7 +3594,7 @@ integer64
 > summary(WithoutTrivialSplits(efgh))
 1 bipartition split dividing 4 tips, e .. h
      1234
- 16  ..**
+ 16  ..** 
 
  Tip 1: e	 Tip 2: f	 Tip 3: g	 Tip 4: h	> 
 > 
@@ -3893,7 +3897,7 @@ integer64
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  5.757 0.223 6.146 0 0 
+Time elapsed:  4.937 0.333 5.495 0 0 
 > grDevices::dev.off()
 null device 
           1 
