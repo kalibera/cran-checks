@@ -4,15 +4,6 @@ Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
-
-Function (anonymous namespace)::createCustomLoss(dbarts::xval::LossFunctorDefinition const&, dbarts::xval::Method, unsigned long, unsigned long, bool)
-  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete dbarts/src/R_interface_crossvalidate.cpp:484
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete dbarts/src/R_interface_crossvalidate.cpp:484
-
-Function (anonymous namespace)::createLossFunctorDefinition((anonymous namespace)::LossFunctorType, SEXPREC*, unsigned long, unsigned long, bool, SEXPREC*)
-  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete dbarts/src/R_interface_crossvalidate.cpp:609
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete dbarts/src/R_interface_crossvalidate.cpp:609
-
 Function createMatrix
   [UP] allocating function setFactorColumnName may destroy its unprotected argument (levels <arg 3>), which is later used. dbarts/src/makeModelMatrixFromDataFrame.c:405
   [UP] allocating function setFactorColumnName may destroy its unprotected argument (levels <arg 3>), which is later used. dbarts/src/makeModelMatrixFromDataFrame.c:427
@@ -71,12 +62,6 @@ Function ext_rng_getDefaultAlgorithmType
 Function ext_rng_getDefaultStandardNormalType
   [UP] allocating function Rf_isInteger may destroy its unprotected argument (seedsExpr <arg 1>), which is later used. dbarts/src/external/randomBase.c:401
   [UP] calling allocating function Rf_isInteger with a fresh pointer (seedsExpr <arg 1>) dbarts/src/external/randomBase.c:401
-
-Function fitFinalizer(SEXPREC*)
-  [UP] ignoring variable fitExpr as it has address taken, results will be incomplete 
-
-Function isValidPointer(SEXPREC*)
-  [UP] ignoring variable fitExpr as it has address taken, results will be incomplete 
 
 Function rbart_getFitted
   [UP] unprotected variable ranefDimsExpr while calling allocating function Rf_getAttrib(?,S:dim) dbarts/src/R_interface_rbart.cpp:17

@@ -1,5 +1,5 @@
-Package tgstat version 2.3.29
-Package built using 89014/R 4.6.0; x86_64-pc-linux-gnu; 2025-11-14 06:08:24 UTC; unix   
+Package tgstat version 2.3.32
+Package built using 89670/R 4.6.0; x86_64-pc-linux-gnu; 2026-03-24 00:13:33 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -11,26 +11,25 @@ Function init_sum_data(SEXPREC*, SEXPREC*, SEXPREC*, SumData*)
   [UP] ignoring variable rcall as it has address taken, results will be incomplete 
 
 Function rprotect(SEXPREC*&)
-  [PB] has possible protection stack imbalance tgstat/src/tgstat.cpp:716
+  [PB] has possible protection stack imbalance tgstat/src/tgstat.cpp:777
 
 Function run_in_R(char const*, SEXPREC*)
   [UP] ignoring variable expr as it has address taken, results will be incomplete 
   [UP] ignoring variable parsed_expr as it has address taken, results will be incomplete 
 
 Function runprotect(SEXPREC*&)
-  [PB] has negative depth tgstat/src/tgstat.cpp:731
-  [PB] has possible protection stack imbalance tgstat/src/tgstat.cpp:735
+  [PB] has negative depth tgstat/src/tgstat.cpp:792
+  [PB] has possible protection stack imbalance tgstat/src/tgstat.cpp:796
 
 Function runprotect(unsigned int)
-  [PB] has an unsupported form of unprotect with a variable results will be incomplete tgstat/src/tgstat.cpp:722
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete tgstat/src/tgstat.cpp:722
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete tgstat/src/tgstat.cpp:783
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete tgstat/src/tgstat.cpp:783
 
 Function runprotect_all()
-  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete tgstat/src/tgstat.cpp:746
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete tgstat/src/tgstat.cpp:746
+  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete tgstat/src/tgstat.cpp:807
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete tgstat/src/tgstat.cpp:807
 
 Function tgs_cor
-  [UP] ignoring variable answer as it has address taken, results will be incomplete 
   [UP] ignoring variable dim as it has address taken, results will be incomplete 
   [UP] ignoring variable dimnames as it has address taken, results will be incomplete 
   [UP] ignoring variable rcol1 as it has address taken, results will be incomplete 
@@ -38,9 +37,10 @@ Function tgs_cor
   [UP] ignoring variable rcolnames as it has address taken, results will be incomplete 
   [UP] ignoring variable rcor as it has address taken, results will be incomplete 
   [UP] ignoring variable rrownames as it has address taken, results will be incomplete 
+  [UP] allocating function Rf_isInteger may destroy its unprotected argument (rdim <arg 1>), which is later used. tgstat/src/correlation.cpp:58
+  [UP] calling allocating function Rf_isInteger with a fresh pointer (rdim <arg 1>) tgstat/src/correlation.cpp:58
 
 Function tgs_cor_blas
-  [UP] ignoring variable answer as it has address taken, results will be incomplete 
   [UP] ignoring variable dim as it has address taken, results will be incomplete 
   [UP] ignoring variable dimnames as it has address taken, results will be incomplete 
   [UP] ignoring variable rcol1 as it has address taken, results will be incomplete 
@@ -48,26 +48,26 @@ Function tgs_cor_blas
   [UP] ignoring variable rcolnames as it has address taken, results will be incomplete 
   [UP] ignoring variable rcor as it has address taken, results will be incomplete 
   [UP] ignoring variable rrownames as it has address taken, results will be incomplete 
+  [UP] allocating function Rf_isInteger may destroy its unprotected argument (rdim <arg 1>), which is later used. tgstat/src/correlation.cpp:831
+  [UP] calling allocating function Rf_isInteger with a fresh pointer (rdim <arg 1>) tgstat/src/correlation.cpp:831
 
 Function tgs_cor_graph
-  [UP] ignoring variable ranswer as it has address taken, results will be incomplete 
-  [UP] ignoring variable rcol1 as it has address taken, results will be incomplete 
-  [UP] ignoring variable rcol2 as it has address taken, results will be incomplete 
-  [UP] ignoring variable rcolnames as it has address taken, results will be incomplete 
-  [UP] ignoring variable rrownames as it has address taken, results will be incomplete 
-  [UP] ignoring variable rweight as it has address taken, results will be incomplete 
+  [UP] unprotected variable rnames while calling allocating function Rf_isFactor tgstat/src/corgraph.cpp:46
+  [UP] unprotected variable rnames while calling allocating function Rf_isInteger tgstat/src/corgraph.cpp:46
+  [UP] unprotected variable rnames while calling allocating function Rf_isFactor tgstat/src/corgraph.cpp:47
+  [UP] unprotected variable rnames while calling allocating function Rf_isInteger tgstat/src/corgraph.cpp:47
 
 Function tgs_cor_knn
-  [UP] ignoring variable answer as it has address taken, results will be incomplete 
   [UP] ignoring variable rcol1 as it has address taken, results will be incomplete 
   [UP] ignoring variable rcol2 as it has address taken, results will be incomplete 
   [UP] ignoring variable rcolnames as it has address taken, results will be incomplete 
   [UP] ignoring variable rcor as it has address taken, results will be incomplete 
   [UP] ignoring variable rrank as it has address taken, results will be incomplete 
   [UP] ignoring variable rrownames as it has address taken, results will be incomplete 
+  [UP] allocating function Rf_isInteger may destroy its unprotected argument (rdim <arg 1>), which is later used. tgstat/src/correlation_knn.cpp:54
+  [UP] calling allocating function Rf_isInteger with a fresh pointer (rdim <arg 1>) tgstat/src/correlation_knn.cpp:54
 
 Function tgs_cross_cor
-  [UP] ignoring variable answer as it has address taken, results will be incomplete 
   [UP] ignoring variable dim as it has address taken, results will be incomplete 
   [UP] ignoring variable dimnames as it has address taken, results will be incomplete 
   [UP] ignoring variable rcol1 as it has address taken, results will be incomplete 
@@ -75,9 +75,14 @@ Function tgs_cross_cor
   [UP] ignoring variable rcolnames as it has address taken, results will be incomplete 
   [UP] ignoring variable rcor as it has address taken, results will be incomplete 
   [UP] ignoring variable rrownames as it has address taken, results will be incomplete 
+  [UP] unprotected variable rdim1 while calling allocating function Rf_getAttrib(?,S:dim) tgstat/src/correlation.cpp:437
+  [UP] allocating function Rf_isInteger may destroy its unprotected argument (rdim1 <arg 1>), which is later used. tgstat/src/correlation.cpp:439
+  [UP] calling allocating function Rf_isInteger with a fresh pointer (rdim1 <arg 1>) tgstat/src/correlation.cpp:439
+  [UP] unprotected variable rdim2 while calling allocating function Rf_isInteger tgstat/src/correlation.cpp:439
+  [UP] allocating function Rf_isInteger may destroy its unprotected argument (rdim2 <arg 1>), which is later used. tgstat/src/correlation.cpp:442
+  [UP] calling allocating function Rf_isInteger with a fresh pointer (rdim2 <arg 1>) tgstat/src/correlation.cpp:442
 
 Function tgs_cross_cor_blas
-  [UP] ignoring variable answer as it has address taken, results will be incomplete 
   [UP] ignoring variable dim as it has address taken, results will be incomplete 
   [UP] ignoring variable dimnames as it has address taken, results will be incomplete 
   [UP] ignoring variable rcol1 as it has address taken, results will be incomplete 
@@ -85,15 +90,26 @@ Function tgs_cross_cor_blas
   [UP] ignoring variable rcolnames as it has address taken, results will be incomplete 
   [UP] ignoring variable rcor as it has address taken, results will be incomplete 
   [UP] ignoring variable rrownames as it has address taken, results will be incomplete 
+  [UP] unprotected variable rdim1 while calling allocating function Rf_getAttrib(?,S:dim) tgstat/src/correlation.cpp:1256
+  [UP] allocating function Rf_isInteger may destroy its unprotected argument (rdim1 <arg 1>), which is later used. tgstat/src/correlation.cpp:1258
+  [UP] calling allocating function Rf_isInteger with a fresh pointer (rdim1 <arg 1>) tgstat/src/correlation.cpp:1258
+  [UP] unprotected variable rdim2 while calling allocating function Rf_isInteger tgstat/src/correlation.cpp:1258
+  [UP] allocating function Rf_isInteger may destroy its unprotected argument (rdim2 <arg 1>), which is later used. tgstat/src/correlation.cpp:1261
+  [UP] calling allocating function Rf_isInteger with a fresh pointer (rdim2 <arg 1>) tgstat/src/correlation.cpp:1261
 
 Function tgs_cross_cor_knn
-  [UP] ignoring variable answer as it has address taken, results will be incomplete 
   [UP] ignoring variable rcol1 as it has address taken, results will be incomplete 
   [UP] ignoring variable rcol2 as it has address taken, results will be incomplete 
   [UP] ignoring variable rcolnames as it has address taken, results will be incomplete 
   [UP] ignoring variable rcor as it has address taken, results will be incomplete 
   [UP] ignoring variable rrank as it has address taken, results will be incomplete 
   [UP] ignoring variable rrownames as it has address taken, results will be incomplete 
+  [UP] unprotected variable rdim1 while calling allocating function Rf_getAttrib(?,S:dim) tgstat/src/correlation_knn.cpp:427
+  [UP] allocating function Rf_isInteger may destroy its unprotected argument (rdim1 <arg 1>), which is later used. tgstat/src/correlation_knn.cpp:429
+  [UP] calling allocating function Rf_isInteger with a fresh pointer (rdim1 <arg 1>) tgstat/src/correlation_knn.cpp:429
+  [UP] unprotected variable rdim2 while calling allocating function Rf_isInteger tgstat/src/correlation_knn.cpp:429
+  [UP] allocating function Rf_isInteger may destroy its unprotected argument (rdim2 <arg 1>), which is later used. tgstat/src/correlation_knn.cpp:432
+  [UP] calling allocating function Rf_isInteger with a fresh pointer (rdim2 <arg 1>) tgstat/src/correlation_knn.cpp:432
 
 Function tgs_dist
   [UP] ignoring variable rcol1 as it has address taken, results will be incomplete 
@@ -101,6 +117,8 @@ Function tgs_dist
   [UP] ignoring variable rcolnames as it has address taken, results will be incomplete 
   [UP] ignoring variable rdist as it has address taken, results will be incomplete 
   [UP] ignoring variable rrownames as it has address taken, results will be incomplete 
+  [UP] allocating function Rf_isInteger may destroy its unprotected argument (rdim <arg 1>), which is later used. tgstat/src/dist.cpp:51
+  [UP] calling allocating function Rf_isInteger with a fresh pointer (rdim <arg 1>) tgstat/src/dist.cpp:51
   [UP] unprotected variable names while calling allocating function Rf_install tgstat/src/dist.cpp:221
   [UP] unprotected variable names while calling allocating function Rf_setAttrib tgstat/src/dist.cpp:221
   [UP] unprotected variable names while calling allocating function Rf_translateChar tgstat/src/dist.cpp:221
@@ -111,6 +129,8 @@ Function tgs_dist_blas
   [UP] ignoring variable rcolnames as it has address taken, results will be incomplete 
   [UP] ignoring variable rdist as it has address taken, results will be incomplete 
   [UP] ignoring variable rrownames as it has address taken, results will be incomplete 
+  [UP] allocating function Rf_isInteger may destroy its unprotected argument (rdim <arg 1>), which is later used. tgstat/src/dist.cpp:266
+  [UP] calling allocating function Rf_isInteger with a fresh pointer (rdim <arg 1>) tgstat/src/dist.cpp:266
   [UP] unprotected variable names while calling allocating function Rf_install tgstat/src/dist.cpp:471
   [UP] unprotected variable names while calling allocating function Rf_setAttrib tgstat/src/dist.cpp:471
   [UP] unprotected variable names while calling allocating function Rf_translateChar tgstat/src/dist.cpp:471
@@ -121,9 +141,30 @@ Function tgs_graph2cluster
   [UP] ignoring variable rcolnames as it has address taken, results will be incomplete 
   [UP] ignoring variable rnode as it has address taken, results will be incomplete 
   [UP] ignoring variable rrownames as it has address taken, results will be incomplete 
+  [UP] unprotected variable rnames while calling allocating function Rf_isFactor tgstat/src/graph2cluster.cpp:488
+  [UP] unprotected variable rnames while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:488
+  [UP] unprotected variable rnames while calling allocating function Rf_isFactor tgstat/src/graph2cluster.cpp:489
+  [UP] unprotected variable rnames while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:489
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_getAttrib(?,S:levels) tgstat/src/graph2cluster.cpp:501
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:507
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:507
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asReal tgstat/src/graph2cluster.cpp:510
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:510
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:513
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:513
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:516
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asReal tgstat/src/graph2cluster.cpp:517
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:518
+  [UP] unprotected variable rlevels1 while calling allocating function graph2cluster(int const*, int const*, double const*, unsigned long, unsigned int, float, unsigned int, unsigned int*, unsigned long) tgstat/src/graph2cluster.cpp:531
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:533
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:540
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:541
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:542
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:543
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:544
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_mkChar tgstat/src/graph2cluster.cpp:547
 
 Function tgs_graph2cluster_multi_edges
-  [UP] ignoring variable answer as it has address taken, results will be incomplete 
   [UP] ignoring variable rco_clust as it has address taken, results will be incomplete 
   [UP] ignoring variable rcolnames as it has address taken, results will be incomplete 
   [UP] ignoring variable rcount as it has address taken, results will be incomplete 
@@ -132,9 +173,62 @@ Function tgs_graph2cluster_multi_edges
   [UP] ignoring variable rnode2 as it has address taken, results will be incomplete 
   [UP] ignoring variable rrownames as it has address taken, results will be incomplete 
   [UP] ignoring variable rsamples as it has address taken, results will be incomplete 
+  [UP] unprotected variable rnames while calling allocating function Rf_isFactor tgstat/src/graph2cluster.cpp:1098
+  [UP] unprotected variable rnames while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:1098
+  [UP] unprotected variable rnames while calling allocating function Rf_isFactor tgstat/src/graph2cluster.cpp:1099
+  [UP] unprotected variable rnames while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:1099
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_getAttrib(?,S:levels) tgstat/src/graph2cluster.cpp:1111
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:1117
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:1117
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asReal tgstat/src/graph2cluster.cpp:1120
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:1120
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:1123
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:1123
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:1126
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:1129
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:1129
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asReal tgstat/src/graph2cluster.cpp:1132
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:1132
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:1135
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asReal tgstat/src/graph2cluster.cpp:1136
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:1137
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:1138
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:1139
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asReal tgstat/src/graph2cluster.cpp:1140
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:1155
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:1179
+  [UP] unprotected variable rlevels1 while calling allocating function TGStat::prepare4multitasking() tgstat/src/graph2cluster.cpp:1180
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:1184
+  [UP] unprotected variable rlevels1 while calling allocating function launch_kid_edges(int const*, int const*, double const*, unsigned long, unsigned long, unsigned int*, unsigned short*, unsigned short*, unsigned int, double, unsigned int, float, unsigned int, unsigned long) tgstat/src/graph2cluster.cpp:1185
+  [UP] unprotected variable rlevels1 while calling allocating function unif_rand tgstat/src/graph2cluster.cpp:1186
+  [UP] unprotected variable rlevels1 while calling allocating function TGStat::wait_for_kid(int) tgstat/src/graph2cluster.cpp:1191
+  [UP] unprotected variable rlevels1 while calling allocating function ProgressReporter::report(unsigned long) tgstat/src/graph2cluster.cpp:1192
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:1196
+  [UP] unprotected variable rlevels1 while calling allocating function ProgressReporter::report(unsigned long) tgstat/src/graph2cluster.cpp:1199
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:1200
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:1203
+  [UP] unprotected variable rlevels1 while calling allocating function launch_kid_edges(int const*, int const*, double const*, unsigned long, unsigned long, unsigned int*, unsigned short*, unsigned short*, unsigned int, double, unsigned int, float, unsigned int, unsigned long) tgstat/src/graph2cluster.cpp:1204
+  [UP] unprotected variable rlevels1 while calling allocating function unif_rand tgstat/src/graph2cluster.cpp:1205
+  [UP] unprotected variable rlevels1 while calling allocating function TGStat::wait_for_kids(int) tgstat/src/graph2cluster.cpp:1212
+  [UP] unprotected variable rlevels1 while calling allocating function ProgressReporter::report(unsigned long) tgstat/src/graph2cluster.cpp:1213
+  [UP] unprotected variable rlevels1 while calling allocating function ProgressReporter::report_last() tgstat/src/graph2cluster.cpp:1215
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:1217
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:1224
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:1233
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:1235
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:1236
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:1237
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:1238
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:1239
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:1240
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_mkChar tgstat/src/graph2cluster.cpp:1257
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_setAttrib(?,S:names,?) tgstat/src/graph2cluster.cpp:1263
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_mkString tgstat/src/graph2cluster.cpp:1264
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_setAttrib(?,S:class,V) tgstat/src/graph2cluster.cpp:1264
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_setAttrib(?,S:row.names,?) tgstat/src/graph2cluster.cpp:1265
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:1267
 
 Function tgs_graph2cluster_multi_full
-  [UP] ignoring variable answer as it has address taken, results will be incomplete 
   [UP] ignoring variable rco_clust as it has address taken, results will be incomplete 
   [UP] ignoring variable rcolnames as it has address taken, results will be incomplete 
   [UP] ignoring variable rcount as it has address taken, results will be incomplete 
@@ -143,9 +237,61 @@ Function tgs_graph2cluster_multi_full
   [UP] ignoring variable rnode2 as it has address taken, results will be incomplete 
   [UP] ignoring variable rrownames as it has address taken, results will be incomplete 
   [UP] ignoring variable rsamples as it has address taken, results will be incomplete 
+  [UP] unprotected variable rnames while calling allocating function Rf_isFactor tgstat/src/graph2cluster.cpp:870
+  [UP] unprotected variable rnames while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:870
+  [UP] unprotected variable rnames while calling allocating function Rf_isFactor tgstat/src/graph2cluster.cpp:871
+  [UP] unprotected variable rnames while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:871
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_getAttrib(?,S:levels) tgstat/src/graph2cluster.cpp:883
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:889
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:889
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asReal tgstat/src/graph2cluster.cpp:892
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:892
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:895
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:895
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:898
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:901
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:901
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asReal tgstat/src/graph2cluster.cpp:904
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:904
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:907
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asReal tgstat/src/graph2cluster.cpp:908
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:909
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:910
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:911
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asReal tgstat/src/graph2cluster.cpp:912
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:928
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:952
+  [UP] unprotected variable rlevels1 while calling allocating function TGStat::prepare4multitasking() tgstat/src/graph2cluster.cpp:953
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:957
+  [UP] unprotected variable rlevels1 while calling allocating function launch_kid_full(int const*, int const*, double const*, unsigned long, unsigned long, unsigned int*, unsigned short*, unsigned short*, unsigned int, double, unsigned int, float, unsigned int, unsigned long) tgstat/src/graph2cluster.cpp:958
+  [UP] unprotected variable rlevels1 while calling allocating function unif_rand tgstat/src/graph2cluster.cpp:959
+  [UP] unprotected variable rlevels1 while calling allocating function TGStat::wait_for_kid(int) tgstat/src/graph2cluster.cpp:964
+  [UP] unprotected variable rlevels1 while calling allocating function ProgressReporter::report(unsigned long) tgstat/src/graph2cluster.cpp:965
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:969
+  [UP] unprotected variable rlevels1 while calling allocating function ProgressReporter::report(unsigned long) tgstat/src/graph2cluster.cpp:972
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:973
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:976
+  [UP] unprotected variable rlevels1 while calling allocating function launch_kid_full(int const*, int const*, double const*, unsigned long, unsigned long, unsigned int*, unsigned short*, unsigned short*, unsigned int, double, unsigned int, float, unsigned int, unsigned long) tgstat/src/graph2cluster.cpp:977
+  [UP] unprotected variable rlevels1 while calling allocating function unif_rand tgstat/src/graph2cluster.cpp:978
+  [UP] unprotected variable rlevels1 while calling allocating function TGStat::wait_for_kids(int) tgstat/src/graph2cluster.cpp:985
+  [UP] unprotected variable rlevels1 while calling allocating function ProgressReporter::report(unsigned long) tgstat/src/graph2cluster.cpp:986
+  [UP] unprotected variable rlevels1 while calling allocating function ProgressReporter::report_last() tgstat/src/graph2cluster.cpp:988
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:990
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:1003
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:1005
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:1006
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:1007
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:1008
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:1009
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:1010
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_mkChar tgstat/src/graph2cluster.cpp:1030
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_setAttrib(?,S:names,?) tgstat/src/graph2cluster.cpp:1036
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_mkString tgstat/src/graph2cluster.cpp:1037
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_setAttrib(?,S:class,V) tgstat/src/graph2cluster.cpp:1037
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_setAttrib(?,S:row.names,?) tgstat/src/graph2cluster.cpp:1038
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:1040
 
 Function tgs_graph2cluster_multi_hash
-  [UP] ignoring variable answer as it has address taken, results will be incomplete 
   [UP] ignoring variable rco_clust as it has address taken, results will be incomplete 
   [UP] ignoring variable rcolnames as it has address taken, results will be incomplete 
   [UP] ignoring variable rcount as it has address taken, results will be incomplete 
@@ -154,28 +300,247 @@ Function tgs_graph2cluster_multi_hash
   [UP] ignoring variable rnode2 as it has address taken, results will be incomplete 
   [UP] ignoring variable rrownames as it has address taken, results will be incomplete 
   [UP] ignoring variable rsamples as it has address taken, results will be incomplete 
+  [UP] unprotected variable rnames while calling allocating function Rf_isFactor tgstat/src/graph2cluster.cpp:600
+  [UP] unprotected variable rnames while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:600
+  [UP] unprotected variable rnames while calling allocating function Rf_isFactor tgstat/src/graph2cluster.cpp:601
+  [UP] unprotected variable rnames while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:601
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_getAttrib(?,S:levels) tgstat/src/graph2cluster.cpp:613
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:619
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:619
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asReal tgstat/src/graph2cluster.cpp:622
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:622
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:625
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:625
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:628
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:631
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:631
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asReal tgstat/src/graph2cluster.cpp:634
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_isInteger tgstat/src/graph2cluster.cpp:634
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:637
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asReal tgstat/src/graph2cluster.cpp:638
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:639
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:640
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asInteger tgstat/src/graph2cluster.cpp:641
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_asReal tgstat/src/graph2cluster.cpp:642
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:661
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:685
+  [UP] unprotected variable rlevels1 while calling allocating function TGStat::prepare4multitasking() tgstat/src/graph2cluster.cpp:686
+  [UP] unprotected variable rlevels1 while calling allocating function launch_kid_hash(int const*, int const*, double const*, unsigned long, unsigned long, unsigned int*, int, unsigned int, double, unsigned int, float, unsigned int, unsigned long) tgstat/src/graph2cluster.cpp:691
+  [UP] unprotected variable rlevels1 while calling allocating function unif_rand tgstat/src/graph2cluster.cpp:691
+  [UP] unprotected variable rlevels1 while calling allocating function TGStat::wait_for_kid(int) tgstat/src/graph2cluster.cpp:696
+  [UP] unprotected variable rlevels1 while calling allocating function ProgressReporter::report(unsigned long) tgstat/src/graph2cluster.cpp:697
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:703
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:723
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:724
+  [UP] unprotected variable rlevels1 while calling allocating function ProgressReporter::report(unsigned long) tgstat/src/graph2cluster.cpp:741
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:742
+  [UP] unprotected variable rlevels1 while calling allocating function launch_kid_hash(int const*, int const*, double const*, unsigned long, unsigned long, unsigned int*, int, unsigned int, double, unsigned int, float, unsigned int, unsigned long) tgstat/src/graph2cluster.cpp:745
+  [UP] unprotected variable rlevels1 while calling allocating function unif_rand tgstat/src/graph2cluster.cpp:745
+  [UP] unprotected variable rlevels1 while calling allocating function TGStat::wait_for_kids(int) tgstat/src/graph2cluster.cpp:752
+  [UP] unprotected variable rlevels1 while calling allocating function ProgressReporter::report(unsigned long) tgstat/src/graph2cluster.cpp:753
+  [UP] unprotected variable rlevels1 while calling allocating function ProgressReporter::report_last() tgstat/src/graph2cluster.cpp:755
+  [UP] unprotected variable rlevels1 while calling allocating function vdebug(char const*, ...) tgstat/src/graph2cluster.cpp:757
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:770
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:772
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:773
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:774
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:775
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:776
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:777
+  [UP] unprotected variable rlevels1 while calling allocating function Rf_mkChar tgstat/src/graph2cluster.cpp:802
+  [UP] unprotected variable rlevels1 while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/graph2cluster.cpp:804
 
 Function tgs_knn
-  [UP] ignoring variable answer as it has address taken, results will be incomplete 
-  [UP] ignoring variable rcol1 as it has address taken, results will be incomplete 
-  [UP] ignoring variable rcolnames as it has address taken, results will be incomplete 
-  [UP] ignoring variable rrank as it has address taken, results will be incomplete 
-  [UP] ignoring variable rrownames as it has address taken, results will be incomplete 
-  [UP] ignoring variable rcol2 as it has address taken, results will be incomplete 
-  [UP] ignoring variable rval as it has address taken, results will be incomplete 
+  [UP] allocating function Rf_isInteger may destroy its unprotected argument (rdim <arg 1>), which is later used. tgstat/src/knn.cpp:61
+  [UP] calling allocating function Rf_isInteger with a fresh pointer (rdim <arg 1>) tgstat/src/knn.cpp:61
+  [UP] unprotected variable rold_colnames while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/knn.cpp:226
+  [UP] unprotected variable rold_colnames while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/knn.cpp:227
+  [UP] unprotected variable rold_colnames while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/knn.cpp:228
+  [UP] unprotected variable rold_colnames while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/knn.cpp:229
+  [UP] unprotected variable rold_colnames while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/knn.cpp:230
+  [UP] unprotected variable rold_colnames while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/knn.cpp:231
+  [UP] unprotected variable rold_colnames while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/knn.cpp:232
+  [UP] unprotected variable rold_colnames while calling allocating function Rf_mkChar tgstat/src/knn.cpp:235
 
 Function tgs_matrix_tapply
+  [UP] ignoring variable dim as it has address taken, results will be incomplete 
+  [UP] ignoring variable dimnames as it has address taken, results will be incomplete 
+  [UP] ignoring variable rcall as it has address taken, results will be incomplete 
+  [UP] ignoring variable rgroup as it has address taken, results will be incomplete 
+  [UP] unprotected variable _xclass while calling allocating function Rf_getAttrib(?,S:x) tgstat/src/matrix_tapply.cpp:161
+  [UP] unprotected variable _xclass while calling allocating function Rf_install tgstat/src/matrix_tapply.cpp:161
+  [UP] unprotected variable _xclass while calling allocating function Rf_getAttrib(?,S:i) tgstat/src/matrix_tapply.cpp:162
+  [UP] unprotected variable _xclass while calling allocating function Rf_install tgstat/src/matrix_tapply.cpp:162
+  [UP] unprotected variable _xx while calling allocating function Rf_getAttrib(?,S:i) tgstat/src/matrix_tapply.cpp:162
+  [UP] unprotected variable _xx while calling allocating function Rf_install tgstat/src/matrix_tapply.cpp:162
+  [UP] unprotected variable _xclass while calling allocating function Rf_getAttrib(?,S:p) tgstat/src/matrix_tapply.cpp:163
+  [UP] unprotected variable _xclass while calling allocating function Rf_install tgstat/src/matrix_tapply.cpp:163
+  [UP] unprotected variable _xi while calling allocating function Rf_getAttrib(?,S:p) tgstat/src/matrix_tapply.cpp:163
+  [UP] unprotected variable _xi while calling allocating function Rf_install tgstat/src/matrix_tapply.cpp:163
+  [UP] unprotected variable _xx while calling allocating function Rf_getAttrib(?,S:p) tgstat/src/matrix_tapply.cpp:163
+  [UP] unprotected variable _xx while calling allocating function Rf_install tgstat/src/matrix_tapply.cpp:163
+  [UP] unprotected variable _xclass while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:165
+  [UP] unprotected variable _xi while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:165
+  [UP] unprotected variable _xp while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:165
+  [UP] unprotected variable _xx while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:165
+  [UP] calling allocating function Rf_isInteger with argument allocated using Rf_getAttrib(?,S:dim) tgstat/src/matrix_tapply.cpp:166
+  [UP] unprotected variable _xclass while calling allocating function Rf_getAttrib(?,S:dim) tgstat/src/matrix_tapply.cpp:166
+  [UP] unprotected variable _xclass while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:166
+  [UP] unprotected variable _xi while calling allocating function Rf_getAttrib(?,S:dim) tgstat/src/matrix_tapply.cpp:166
+  [UP] unprotected variable _xi while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:166
+  [UP] unprotected variable _xp while calling allocating function Rf_getAttrib(?,S:dim) tgstat/src/matrix_tapply.cpp:166
+  [UP] unprotected variable _xp while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:166
+  [UP] unprotected variable _xx while calling allocating function Rf_getAttrib(?,S:dim) tgstat/src/matrix_tapply.cpp:166
+  [UP] unprotected variable _xx while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:166
+  [UP] calling allocating function Rf_isInteger with argument allocated using Rf_getAttrib(?,S:Dim) tgstat/src/matrix_tapply.cpp:168
+  [UP] unprotected variable _xclass while calling allocating function Rf_getAttrib(?,S:Dim) tgstat/src/matrix_tapply.cpp:168
+  [UP] unprotected variable _xclass while calling allocating function Rf_install tgstat/src/matrix_tapply.cpp:168
+  [UP] unprotected variable _xclass while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:168
+  [UP] unprotected variable _xi while calling allocating function Rf_getAttrib(?,S:Dim) tgstat/src/matrix_tapply.cpp:168
+  [UP] unprotected variable _xi while calling allocating function Rf_install tgstat/src/matrix_tapply.cpp:168
+  [UP] unprotected variable _xi while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:168
+  [UP] unprotected variable _xp while calling allocating function Rf_getAttrib(?,S:Dim) tgstat/src/matrix_tapply.cpp:168
+  [UP] unprotected variable _xp while calling allocating function Rf_install tgstat/src/matrix_tapply.cpp:168
+  [UP] unprotected variable _xp while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:168
+  [UP] unprotected variable _xx while calling allocating function Rf_getAttrib(?,S:Dim) tgstat/src/matrix_tapply.cpp:168
+  [UP] unprotected variable _xx while calling allocating function Rf_install tgstat/src/matrix_tapply.cpp:168
+  [UP] unprotected variable _xx while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:168
+  [UP] allocating function Rf_isInteger may destroy its unprotected argument (_xx <arg 1>), which is later used. tgstat/src/matrix_tapply.cpp:169
+  [UP] calling allocating function Rf_isInteger with a fresh pointer (_xx <arg 1>) tgstat/src/matrix_tapply.cpp:169
+  [UP] unprotected variable _rdims while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:169
+  [UP] unprotected variable _xclass while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:169
+  [UP] unprotected variable _xi while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:169
+  [UP] unprotected variable _xp while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:169
+  [UP] allocating function Rf_isInteger may destroy its unprotected argument (_xi <arg 1>), which is later used. tgstat/src/matrix_tapply.cpp:170
+  [UP] calling allocating function Rf_isInteger with a fresh pointer (_xi <arg 1>) tgstat/src/matrix_tapply.cpp:170
+  [UP] unprotected variable _rdims while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:170
+  [UP] unprotected variable _xclass while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:170
+  [UP] unprotected variable _xp while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:170
+  [UP] unprotected variable _xx while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:170
+  [UP] allocating function Rf_isInteger may destroy its unprotected argument (_xp <arg 1>), which is later used. tgstat/src/matrix_tapply.cpp:171
+  [UP] calling allocating function Rf_isInteger with a fresh pointer (_xp <arg 1>) tgstat/src/matrix_tapply.cpp:171
+  [UP] unprotected variable _rdims while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:171
+  [UP] unprotected variable _xclass while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:171
+  [UP] unprotected variable _xi while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:171
+  [UP] unprotected variable _xx while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:171
+  [UP] unprotected variable _rdims while calling allocating function Rf_getAttrib(?,S:Dimnames) tgstat/src/matrix_tapply.cpp:174
+  [UP] unprotected variable _rdims while calling allocating function Rf_install tgstat/src/matrix_tapply.cpp:174
+  [UP] unprotected variable _xclass while calling allocating function Rf_getAttrib(?,S:Dimnames) tgstat/src/matrix_tapply.cpp:174
+  [UP] unprotected variable _xclass while calling allocating function Rf_install tgstat/src/matrix_tapply.cpp:174
+  [UP] unprotected variable _xi while calling allocating function Rf_getAttrib(?,S:Dimnames) tgstat/src/matrix_tapply.cpp:174
+  [UP] unprotected variable _xi while calling allocating function Rf_install tgstat/src/matrix_tapply.cpp:174
+  [UP] unprotected variable _xp while calling allocating function Rf_getAttrib(?,S:Dimnames) tgstat/src/matrix_tapply.cpp:174
+  [UP] unprotected variable _xp while calling allocating function Rf_install tgstat/src/matrix_tapply.cpp:174
+  [UP] unprotected variable _xx while calling allocating function Rf_getAttrib(?,S:Dimnames) tgstat/src/matrix_tapply.cpp:174
+  [UP] unprotected variable _xx while calling allocating function Rf_install tgstat/src/matrix_tapply.cpp:174
+  [UP] unprotected variable _xclass while calling allocating function Rf_isFactor tgstat/src/matrix_tapply.cpp:178
+  [UP] unprotected variable _xi while calling allocating function Rf_isFactor tgstat/src/matrix_tapply.cpp:178
+  [UP] unprotected variable _xp while calling allocating function Rf_isFactor tgstat/src/matrix_tapply.cpp:178
+  [UP] unprotected variable _xx while calling allocating function Rf_isFactor tgstat/src/matrix_tapply.cpp:178
+  [UP] unprotected variable _xclass while calling allocating function Rf_asChar tgstat/src/matrix_tapply.cpp:191
+  [UP] unprotected variable _xi while calling allocating function Rf_asChar tgstat/src/matrix_tapply.cpp:191
+  [UP] unprotected variable _xp while calling allocating function Rf_asChar tgstat/src/matrix_tapply.cpp:191
+  [UP] unprotected variable _xx while calling allocating function Rf_asChar tgstat/src/matrix_tapply.cpp:191
+  [UP] unprotected variable _xclass while calling allocating function Rf_getAttrib(?,S:names) tgstat/src/matrix_tapply.cpp:192
+  [UP] unprotected variable _xi while calling allocating function Rf_getAttrib(?,S:names) tgstat/src/matrix_tapply.cpp:192
+  [UP] unprotected variable _xp while calling allocating function Rf_getAttrib(?,S:names) tgstat/src/matrix_tapply.cpp:192
+  [UP] unprotected variable _xx while calling allocating function Rf_getAttrib(?,S:names) tgstat/src/matrix_tapply.cpp:192
+  [UP] unprotected variable _xclass while calling allocating function Rf_getAttrib(?,S:levels) tgstat/src/matrix_tapply.cpp:193
+  [UP] unprotected variable _xi while calling allocating function Rf_getAttrib(?,S:levels) tgstat/src/matrix_tapply.cpp:193
+  [UP] unprotected variable _xp while calling allocating function Rf_getAttrib(?,S:levels) tgstat/src/matrix_tapply.cpp:193
+  [UP] unprotected variable _xx while calling allocating function Rf_getAttrib(?,S:levels) tgstat/src/matrix_tapply.cpp:193
+  [UP] unprotected variable rarg_names while calling allocating function Rf_getAttrib(?,S:levels) tgstat/src/matrix_tapply.cpp:193
   [UP] allocating function init_sum_data(SEXPREC*, SEXPREC*, SEXPREC*, SumData*) may destroy its unprotected argument (rarg_names <arg 2>), which is later used. tgstat/src/matrix_tapply.cpp:201
   [UP] calling allocating function init_sum_data(SEXPREC*, SEXPREC*, SEXPREC*, SumData*) with a fresh pointer (rarg_names <arg 2>) tgstat/src/matrix_tapply.cpp:201
+  [UP] unprotected variable _xclass while calling allocating function init_sum_data(SEXPREC*, SEXPREC*, SEXPREC*, SumData*) tgstat/src/matrix_tapply.cpp:201
+  [UP] unprotected variable _xi while calling allocating function init_sum_data(SEXPREC*, SEXPREC*, SEXPREC*, SumData*) tgstat/src/matrix_tapply.cpp:201
+  [UP] unprotected variable _xp while calling allocating function init_sum_data(SEXPREC*, SEXPREC*, SEXPREC*, SumData*) tgstat/src/matrix_tapply.cpp:201
+  [UP] unprotected variable _xx while calling allocating function init_sum_data(SEXPREC*, SEXPREC*, SEXPREC*, SumData*) tgstat/src/matrix_tapply.cpp:201
+  [UP] unprotected variable rindex_levels while calling allocating function init_sum_data(SEXPREC*, SEXPREC*, SEXPREC*, SumData*) tgstat/src/matrix_tapply.cpp:201
   [UP] allocating function init_mean_data(SEXPREC*, SEXPREC*, SEXPREC*, MeanData*) may destroy its unprotected argument (rarg_names <arg 2>), which is later used. tgstat/src/matrix_tapply.cpp:203
   [UP] calling allocating function init_mean_data(SEXPREC*, SEXPREC*, SEXPREC*, MeanData*) with a fresh pointer (rarg_names <arg 2>) tgstat/src/matrix_tapply.cpp:203
+  [UP] unprotected variable _xclass while calling allocating function init_mean_data(SEXPREC*, SEXPREC*, SEXPREC*, MeanData*) tgstat/src/matrix_tapply.cpp:203
+  [UP] unprotected variable _xi while calling allocating function init_mean_data(SEXPREC*, SEXPREC*, SEXPREC*, MeanData*) tgstat/src/matrix_tapply.cpp:203
+  [UP] unprotected variable _xp while calling allocating function init_mean_data(SEXPREC*, SEXPREC*, SEXPREC*, MeanData*) tgstat/src/matrix_tapply.cpp:203
+  [UP] unprotected variable _xx while calling allocating function init_mean_data(SEXPREC*, SEXPREC*, SEXPREC*, MeanData*) tgstat/src/matrix_tapply.cpp:203
+  [UP] unprotected variable rindex_levels while calling allocating function init_mean_data(SEXPREC*, SEXPREC*, SEXPREC*, MeanData*) tgstat/src/matrix_tapply.cpp:203
+  [UP] unprotected variable _xclass while calling allocating function vdebug(char const*, ...) tgstat/src/matrix_tapply.cpp:205
+  [UP] unprotected variable _xi while calling allocating function vdebug(char const*, ...) tgstat/src/matrix_tapply.cpp:205
+  [UP] unprotected variable _xp while calling allocating function vdebug(char const*, ...) tgstat/src/matrix_tapply.cpp:205
+  [UP] unprotected variable _xx while calling allocating function vdebug(char const*, ...) tgstat/src/matrix_tapply.cpp:205
   [UP] unprotected variable rarg_names while calling allocating function vdebug(char const*, ...) tgstat/src/matrix_tapply.cpp:205
+  [UP] unprotected variable rindex_levels while calling allocating function vdebug(char const*, ...) tgstat/src/matrix_tapply.cpp:205
+  [UP] unprotected variable _xclass while calling allocating function vdebug(char const*, ...) tgstat/src/matrix_tapply.cpp:227
+  [UP] unprotected variable _xi while calling allocating function vdebug(char const*, ...) tgstat/src/matrix_tapply.cpp:227
+  [UP] unprotected variable _xp while calling allocating function vdebug(char const*, ...) tgstat/src/matrix_tapply.cpp:227
+  [UP] unprotected variable _xx while calling allocating function vdebug(char const*, ...) tgstat/src/matrix_tapply.cpp:227
   [UP] unprotected variable rarg_names while calling allocating function vdebug(char const*, ...) tgstat/src/matrix_tapply.cpp:227
+  [UP] unprotected variable rindex_levels while calling allocating function vdebug(char const*, ...) tgstat/src/matrix_tapply.cpp:227
+  [UP] unprotected variable _xclass while calling allocating function vdebug(char const*, ...) tgstat/src/matrix_tapply.cpp:240
+  [UP] unprotected variable _xi while calling allocating function vdebug(char const*, ...) tgstat/src/matrix_tapply.cpp:240
+  [UP] unprotected variable _xp while calling allocating function vdebug(char const*, ...) tgstat/src/matrix_tapply.cpp:240
+  [UP] unprotected variable _xx while calling allocating function vdebug(char const*, ...) tgstat/src/matrix_tapply.cpp:240
   [UP] unprotected variable rarg_names while calling allocating function vdebug(char const*, ...) tgstat/src/matrix_tapply.cpp:240
+  [UP] unprotected variable rindex_levels while calling allocating function vdebug(char const*, ...) tgstat/src/matrix_tapply.cpp:240
+  [UP] unprotected variable _xclass while calling allocating function TGStat::prepare4multitasking() tgstat/src/matrix_tapply.cpp:241
+  [UP] unprotected variable _xi while calling allocating function TGStat::prepare4multitasking() tgstat/src/matrix_tapply.cpp:241
+  [UP] unprotected variable _xp while calling allocating function TGStat::prepare4multitasking() tgstat/src/matrix_tapply.cpp:241
+  [UP] unprotected variable _xx while calling allocating function TGStat::prepare4multitasking() tgstat/src/matrix_tapply.cpp:241
   [UP] unprotected variable rarg_names while calling allocating function TGStat::prepare4multitasking() tgstat/src/matrix_tapply.cpp:241
+  [UP] unprotected variable rindex_levels while calling allocating function TGStat::prepare4multitasking() tgstat/src/matrix_tapply.cpp:241
+  [UP] unprotected variable _xclass while calling allocating function TGStat::launch_process() tgstat/src/matrix_tapply.cpp:244
+  [UP] unprotected variable _xi while calling allocating function TGStat::launch_process() tgstat/src/matrix_tapply.cpp:244
+  [UP] unprotected variable _xp while calling allocating function TGStat::launch_process() tgstat/src/matrix_tapply.cpp:244
+  [UP] unprotected variable _xx while calling allocating function TGStat::launch_process() tgstat/src/matrix_tapply.cpp:244
   [UP] unprotected variable rarg_names while calling allocating function TGStat::launch_process() tgstat/src/matrix_tapply.cpp:244
+  [UP] unprotected variable rindex_levels while calling allocating function TGStat::launch_process() tgstat/src/matrix_tapply.cpp:244
+  [UP] allocating function Rf_isInteger may destroy its unprotected argument (_xx <arg 1>), which is later used. tgstat/src/matrix_tapply.cpp:247
+  [UP] calling allocating function Rf_isInteger with a fresh pointer (_xx <arg 1>) tgstat/src/matrix_tapply.cpp:247
+  [UP] unprotected variable _xclass while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:247
+  [UP] unprotected variable _xi while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:247
+  [UP] unprotected variable _xp while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:247
+  [UP] unprotected variable rarg_names while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:247
+  [UP] unprotected variable rindex_levels while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:247
+  [UP] unprotected variable _xclass while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/matrix_tapply.cpp:359
+  [UP] unprotected variable _xi while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/matrix_tapply.cpp:359
+  [UP] unprotected variable _xp while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/matrix_tapply.cpp:359
+  [UP] unprotected variable _xx while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/matrix_tapply.cpp:359
   [UP] unprotected variable rarg_names while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/matrix_tapply.cpp:359
+  [UP] unprotected variable rindex_levels while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/matrix_tapply.cpp:359
+  [UP] unprotected variable _xclass while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/matrix_tapply.cpp:362
+  [UP] unprotected variable _xi while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/matrix_tapply.cpp:362
+  [UP] unprotected variable _xp while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/matrix_tapply.cpp:362
+  [UP] unprotected variable _xx while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/matrix_tapply.cpp:362
   [UP] unprotected variable rarg_names while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/matrix_tapply.cpp:362
+  [UP] unprotected variable rindex_levels while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/matrix_tapply.cpp:362
+  [UP] unprotected variable _xclass while calling allocating function Rf_lcons tgstat/src/matrix_tapply.cpp:369
+  [UP] unprotected variable _xi while calling allocating function Rf_lcons tgstat/src/matrix_tapply.cpp:369
+  [UP] unprotected variable _xp while calling allocating function Rf_lcons tgstat/src/matrix_tapply.cpp:369
+  [UP] unprotected variable _xx while calling allocating function Rf_lcons tgstat/src/matrix_tapply.cpp:369
   [UP] unprotected variable rarg_names while calling allocating function Rf_lcons tgstat/src/matrix_tapply.cpp:369
+  [UP] unprotected variable rindex_levels while calling allocating function Rf_lcons tgstat/src/matrix_tapply.cpp:369
+  [UP] unprotected variable _xclass while calling allocating function Rf_lcons tgstat/src/matrix_tapply.cpp:374
+  [UP] unprotected variable _xi while calling allocating function Rf_lcons tgstat/src/matrix_tapply.cpp:374
+  [UP] unprotected variable _xp while calling allocating function Rf_lcons tgstat/src/matrix_tapply.cpp:374
+  [UP] unprotected variable _xx while calling allocating function Rf_lcons tgstat/src/matrix_tapply.cpp:374
   [UP] unprotected variable rarg_names while calling allocating function Rf_lcons tgstat/src/matrix_tapply.cpp:374
+  [UP] unprotected variable rindex_levels while calling allocating function Rf_lcons tgstat/src/matrix_tapply.cpp:374
+  [UP] unprotected variable _xclass while calling allocating function eval_in_R(SEXPREC*, SEXPREC*) tgstat/src/matrix_tapply.cpp:416
+  [UP] unprotected variable _xi while calling allocating function eval_in_R(SEXPREC*, SEXPREC*) tgstat/src/matrix_tapply.cpp:416
+  [UP] unprotected variable _xp while calling allocating function eval_in_R(SEXPREC*, SEXPREC*) tgstat/src/matrix_tapply.cpp:416
+  [UP] unprotected variable _xx while calling allocating function eval_in_R(SEXPREC*, SEXPREC*) tgstat/src/matrix_tapply.cpp:416
   [UP] unprotected variable rarg_names while calling allocating function eval_in_R(SEXPREC*, SEXPREC*) tgstat/src/matrix_tapply.cpp:416
+  [UP] unprotected variable rindex_levels while calling allocating function eval_in_R(SEXPREC*, SEXPREC*) tgstat/src/matrix_tapply.cpp:416
+  [UP] unprotected variable _xclass while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:421
+  [UP] unprotected variable _xi while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:421
+  [UP] unprotected variable _xp while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:421
+  [UP] unprotected variable _xx while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:421
+  [UP] unprotected variable rarg_names while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:421
+  [UP] unprotected variable rindex_levels while calling allocating function Rf_isInteger tgstat/src/matrix_tapply.cpp:421
+  [UP] unprotected variable rindex_levels while calling allocating function TGStat::wait_for_kids(int) tgstat/src/matrix_tapply.cpp:438
+  [UP] unprotected variable rindex_levels while calling allocating function ProgressReporter::report(unsigned long) tgstat/src/matrix_tapply.cpp:439
+  [UP] unprotected variable rindex_levels while calling allocating function ProgressReporter::report_last() tgstat/src/matrix_tapply.cpp:441
+  [UP] unprotected variable rindex_levels while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/matrix_tapply.cpp:446
+  [UP] unprotected variable rindex_levels while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/matrix_tapply.cpp:449
+  [UP] unprotected variable rindex_levels while calling allocating function Rf_setAttrib(?,S:dim,?) tgstat/src/matrix_tapply.cpp:452
+  [UP] unprotected variable rindex_levels while calling allocating function RSaneAllocVector(unsigned int, long) tgstat/src/matrix_tapply.cpp:454

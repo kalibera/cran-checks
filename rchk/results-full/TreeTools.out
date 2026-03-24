@@ -1,5 +1,5 @@
-Package TreeTools version 2.1.0
-Package built using 89406/R 4.6.0; x86_64-pc-linux-gnu; 2026-02-14 02:55:28 UTC; unix   
+Package TreeTools version 2.2.0
+Package built using 89670/R 4.6.0; x86_64-pc-linux-gnu; 2026-03-24 00:13:35 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -108,6 +108,12 @@ Function _TreeTools_mixed_base_to_parent
 Function _TreeTools_n_cherries_wrapper
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _TreeTools_node_depth_unrooted
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _TreeTools_normalize_splits
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _TreeTools_not_splits
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -138,6 +144,9 @@ Function _TreeTools_preorder_weighted
 Function _TreeTools_random_parent
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _TreeTools_renumber_tips_batch
+  [UP] ignoring variable <unnamed var:   %21 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _TreeTools_root_binary
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -150,6 +159,9 @@ Function _TreeTools_rooted_shape_to_edge
 Function _TreeTools_split_consistent
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _TreeTools_split_frequencies
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function _TreeTools_splits_to_edge
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -161,6 +173,28 @@ Function _TreeTools_tips_in_splits
 
 Function _TreeTools_xor_splits
   [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function renumber_tips_batch(Rcpp::Vector<19, Rcpp::PreserveStorage>, Rcpp::Vector<13, Rcpp::PreserveStorage>, int, Rcpp::Vector<16, Rcpp::PreserveStorage>)
+  [UP] unprotected variable orig_class while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage> Rcpp::as<Rcpp::Vector<19, Rcpp::PreserveStorage> >(SEXPREC*) TreeTools/src/renumber_tips.cpp:23
+  [UP] unprotected variable orig_class while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage> Rcpp::clone<Rcpp::Vector<19, Rcpp::PreserveStorage> >(Rcpp::Vector<19, Rcpp::PreserveStorage> const&) TreeTools/src/renumber_tips.cpp:23
+  [UP] unprotected variable orig_class while calling allocating function Rcpp::Vector<19, Rcpp::PreserveStorage>::~Vector() TreeTools/src/renumber_tips.cpp:23
+  [UP] unprotected variable orig_class while calling allocating function Rcpp::Matrix<13, Rcpp::PreserveStorage> Rcpp::clone<Rcpp::Matrix<13, Rcpp::PreserveStorage> >(Rcpp::Matrix<13, Rcpp::PreserveStorage> const&) TreeTools/src/renumber_tips.cpp:26
+  [UP] unprotected variable orig_class while calling allocating function Rcpp::Matrix<13, Rcpp::PreserveStorage>::~Matrix() TreeTools/src/renumber_tips.cpp:26
+  [UP] unprotected variable orig_class while calling allocating function Rcpp::Matrix<13, Rcpp::PreserveStorage> Rcpp::as<Rcpp::Matrix<13, Rcpp::PreserveStorage> >(SEXPREC*) TreeTools/src/renumber_tips.cpp:27
+  [UP] unprotected variable orig_class while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator SEXPREC*() const TreeTools/src/renumber_tips.cpp:27
+  [UP] unprotected variable orig_class while calling allocating function Rcpp::Matrix<13, Rcpp::PreserveStorage>::operator()(unsigned long const&, unsigned long const&) TreeTools/src/renumber_tips.cpp:31
+  [UP] unprotected variable orig_class while calling allocating function Rcpp::Vector<13, Rcpp::PreserveStorage>::operator[](long) const TreeTools/src/renumber_tips.cpp:33
+  [UP] unprotected variable orig_class while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>& Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=<Rcpp::Matrix<13, Rcpp::PreserveStorage> >(Rcpp::Matrix<13, Rcpp::PreserveStorage> const&) TreeTools/src/renumber_tips.cpp:36
+  [UP] unprotected variable orig_class while calling allocating function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>& Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::operator=<Rcpp::Vector<16, Rcpp::PreserveStorage> >(Rcpp::Vector<16, Rcpp::PreserveStorage> const&) TreeTools/src/renumber_tips.cpp:39
+  [UP] unprotected variable orig_class while calling allocating function Rcpp::AttributeProxyPolicy<Rcpp::Vector<19, Rcpp::PreserveStorage> >::hasAttribute(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const TreeTools/src/renumber_tips.cpp:42
+  [UP] unprotected variable orig_class while calling allocating function Rcpp::AttributeProxyPolicy<Rcpp::Vector<19, Rcpp::PreserveStorage> >::AttributeProxy::operator Rcpp::Vector<16, Rcpp::PreserveStorage><Rcpp::Vector<16, Rcpp::PreserveStorage> >() const TreeTools/src/renumber_tips.cpp:43
+  [UP] unprotected variable orig_class while calling allocating function Rcpp::AttributeProxyPolicy<Rcpp::Vector<19, Rcpp::PreserveStorage> >::attr(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) TreeTools/src/renumber_tips.cpp:43
+  [UP] unprotected variable orig_class while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::operator[](long) TreeTools/src/renumber_tips.cpp:44
+  [UP] unprotected variable orig_class while calling allocating function Rcpp::AttributeProxyPolicy<Rcpp::Vector<19, Rcpp::PreserveStorage> >::AttributeProxy& Rcpp::AttributeProxyPolicy<Rcpp::Vector<19, Rcpp::PreserveStorage> >::AttributeProxy::operator=<Rcpp::Vector<16, Rcpp::PreserveStorage> >(Rcpp::Vector<16, Rcpp::PreserveStorage> const&) TreeTools/src/renumber_tips.cpp:45
+  [UP] unprotected variable orig_class while calling allocating function Rcpp::AttributeProxyPolicy<Rcpp::Vector<19, Rcpp::PreserveStorage> >::attr(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) TreeTools/src/renumber_tips.cpp:45
+  [UP] unprotected variable orig_class while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage> Rcpp::Vector<16, Rcpp::PreserveStorage>::create<char [10]>(char const (&) [10]) TreeTools/src/renumber_tips.cpp:45
+  [UP] unprotected variable orig_class while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::~Vector() TreeTools/src/renumber_tips.cpp:45
+  [UP] unprotected variable orig_class while calling allocating function Rcpp::Vector<16, Rcpp::PreserveStorage>::~Vector() TreeTools/src/renumber_tips.cpp:47
 
 Function void Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back<SEXPREC*>(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
   [UP] ignoring variable <unnamed var:   %7 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
