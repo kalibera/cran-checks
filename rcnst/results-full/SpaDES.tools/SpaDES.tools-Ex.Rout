@@ -231,13 +231,13 @@ detaching ‘package:terra’, ‘package:data.table’
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10, returnMatrix = TRUE)
 + })
    user  system elapsed 
-   0.03    0.00    0.03 
+  0.033   0.000   0.034 
 > agent <- agentOrig
 > system.time({
 +   for (i in 1:reps) agent <- crw(agent, stepLength = 5, stddev = 10)
 + })
    user  system elapsed 
- 21.117   0.071  21.451 
+ 24.140   0.075  24.669 
 > 
 > # as sp
 > if (requireNamespace("sp")) {
