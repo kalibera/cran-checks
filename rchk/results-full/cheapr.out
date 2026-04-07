@@ -1,5 +1,5 @@
-Package cheapr version 1.5.0
-Package built using 89288/R 4.6.0; x86_64-pc-linux-gnu; 2026-01-10 10:49:04 UTC; unix   
+Package cheapr version 1.5.1
+Package built using 89791/R 4.6.0; x86_64-pc-linux-gnu; 2026-04-07 01:17:09 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -28,9 +28,6 @@ Function SEXPREC* lag(SEXPREC*, long, SEXPREC*, bool)::$_0::operator()<int const
 
 Function SEXPREC* lag(SEXPREC*, long, SEXPREC*, bool)::$_0::operator()<long const*>(long const*) const
   [PB] has possible protection stack imbalance cheapr/src/lag.cpp:54
-
-Function _cheapr_cheapr_do_memory_leak_test
-  [UP] ignoring variable <unnamed var:   %4 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _cheapr_cpp_abs
   [UP] ignoring variable <unnamed var:   %6 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -391,15 +388,7 @@ Function _cheapr_r_copy
 
 Function cheapr::internal::add_attrs(SEXPREC*, SEXPREC*)
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/../inst/include/cheapr/internal/c_core.h:2227
-
-Function cheapr_do_memory_leak_test()
-  [UP] ignoring variable r_ints as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %17 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %26 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
-  [UP] ignoring variable repl as it has address taken, results will be incomplete 
-  [UP] ignoring variable seq as it has address taken, results will be incomplete 
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/../inst/include/cheapr/internal/c_core.h:2211
 
 Function cpp_col_all_na(SEXPREC*, bool)
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
@@ -418,9 +407,9 @@ Function cpp_df_row_na_counts(SEXPREC*)
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/nas.cpp:391
 
 Function cpp_rep_len(SEXPREC*, long)
-  [PB] has negative depth cheapr/src/combine.cpp:290
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete cheapr/src/combine.cpp:290
-  [PB] has possible protection stack imbalance cheapr/src/combine.cpp:299
+  [PB] has negative depth cheapr/src/combine.cpp:291
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete cheapr/src/combine.cpp:291
+  [PB] has possible protection stack imbalance cheapr/src/combine.cpp:300
 
 Function cpp_set_add_attr(SEXPREC*, SEXPREC*, SEXPREC*)
   [PB] has negative depth cheapr/src/attrs.cpp:38
@@ -431,21 +420,8 @@ Function cpp_val_replace(SEXPREC*, SEXPREC*, SEXPREC*, bool)
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/scalars.cpp:273
 
-Function decltype (Rf_protect(((std::forward<decltype ({parm#1})>)({parm#1}))...)) cheapr_do_memory_leak_test()::$_0::operator()<SEXPREC*>(SEXPREC*&&) const
-  [PB] has possible protection stack imbalance cheapr/src/utils.cpp:780
-
-Function decltype (Rf_protect(((std::forward<decltype ({parm#1})>)({parm#1}))...)) cheapr_do_memory_leak_test()::$_2::operator()<SEXPREC*>(SEXPREC*&&) const
-  [PB] has possible protection stack imbalance cheapr/src/utils.cpp:781
-
-Function decltype (Rf_protect(((std::forward<decltype ({parm#1})>)({parm#1}))...)) cheapr_do_memory_leak_test()::$_4::operator()<SEXPREC*>(SEXPREC*&&) const
-  [PB] has possible protection stack imbalance cheapr/src/utils.cpp:782
-
-Function decltype (Rf_unprotect(((std::forward<decltype ({parm#1})>)({parm#1}))...)) cheapr_do_memory_leak_test()::$_7::operator()<int>(int&&) const
-  [PB] has an unsupported form of unprotect (not constant, not variable), results will be incomplete cheapr/src/utils.cpp:784
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete cheapr/src/utils.cpp:784
-
 Function factor_as_character(SEXPREC*)
-  [UP] calling allocating function sset_vec(SEXPREC*, SEXPREC*, bool) with argument allocated using cheapr::attr::get_attr(SEXPREC*, cheapr::r_symbol_t) cheapr/src/combine.cpp:607
+  [UP] calling allocating function sset_vec(SEXPREC*, SEXPREC*, bool) with argument allocated using cheapr::attr::get_attr(SEXPREC*, cheapr::r_symbol_t) cheapr/src/combine.cpp:608
 
 Function lag(SEXPREC*, long, SEXPREC*, bool)
   [PB] has an unsupported form of unprotect with a variable results will be incomplete cheapr/src/lag.cpp:108
