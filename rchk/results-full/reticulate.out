@@ -1,5 +1,5 @@
-Package reticulate version 1.45.0
-Package built using 89420/R 4.6.0; x86_64-pc-linux-gnu; 2026-02-16 13:51:17 UTC; unix   
+Package reticulate version 1.46.0
+Package built using 89872/R 4.6.0; x86_64-pc-linux-gnu; 2026-04-12 18:08:33 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -10,23 +10,24 @@ Function (anonymous namespace)::main_process_python_info_unix()
   [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function PyObjectRef::convert() const
-  [UP] calling allocating function Rf_findVarInFrame(?,S:convert) with argument allocated using PyObjectRef::get_refenv() const reticulate/src/./reticulate_types.h:140
+  [UP] calling allocating function reticulate_get_var_or_null(SEXPREC*, SEXPREC*)(?,S:convert) with a fresh pointer (refenv <arg 1>) reticulate/src/./reticulate_types.h:144
 
 Function PyObjectRef::get() const
-  [UP] calling allocating function Rf_findVarInFrame(?,S:pyobj) with argument allocated using PyObjectRef::get_refenv() const reticulate/src/./reticulate_types.h:85
+  [UP] allocating function reticulate_get_var_or_null(SEXPREC*, SEXPREC*)(?,S:pyobj) may destroy its unprotected argument (refenv <arg 1>), which is later used. reticulate/src/./reticulate_types.h:87
+  [UP] calling allocating function reticulate_get_var_or_null(SEXPREC*, SEXPREC*)(?,S:pyobj) with a fresh pointer (refenv <arg 1>) reticulate/src/./reticulate_types.h:87
 
 Function PyObjectRef::get_refenv() const
-  [UP] calling allocating function Rf_getAttrib(?,S:py_object) with a fresh pointer (sexp <arg 1>) reticulate/src/./reticulate_types.h:114
+  [UP] calling allocating function Rf_getAttrib(?,S:py_object) with a fresh pointer (sexp <arg 1>) reticulate/src/./reticulate_types.h:115
 
 Function PyObjectRef::is_null_xptr() const
-  [UP] calling allocating function Rf_findVarInFrame(?,S:pyobj) with argument allocated using PyObjectRef::get_refenv() const reticulate/src/./reticulate_types.h:129
+  [UP] calling allocating function reticulate_get_var_or_null(SEXPREC*, SEXPREC*)(?,S:pyobj) with a fresh pointer (refenv <arg 1>) reticulate/src/./reticulate_types.h:131
 
 Function PyObjectRef::set(reticulate::libpython::_object*)
-  [UP] unprotected variable refenv while calling allocating function R_MakeExternalPtr reticulate/src/./reticulate_types.h:75
-  [UP] unprotected variable refenv while calling allocating function R_RegisterCFinalizer reticulate/src/./reticulate_types.h:76
+  [UP] unprotected variable refenv while calling allocating function R_MakeExternalPtr reticulate/src/./reticulate_types.h:76
+  [UP] unprotected variable refenv while calling allocating function R_RegisterCFinalizer reticulate/src/./reticulate_types.h:77
 
 Function PyObjectRef::simple() const
-  [UP] calling allocating function Rf_findVarInFrame(?,S:simple) with argument allocated using PyObjectRef::get_refenv() const reticulate/src/./reticulate_types.h:149
+  [UP] calling allocating function reticulate_get_var_or_null(SEXPREC*, SEXPREC*)(?,S:simple) with a fresh pointer (refenv <arg 1>) reticulate/src/./reticulate_types.h:156
 
 Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
@@ -35,9 +36,6 @@ Function Rcpp::Armor<SEXPREC*>::~Armor()
   [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
-
-Function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::namespace_env(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
-  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function Rcpp::RObject_Impl<Rcpp::PreserveStorage> pandas_nullable_collect_values<16>(reticulate::libpython::_object*)
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -275,18 +273,28 @@ Function py_convert_pandas_series(PyObjectRef)
   [UP] ignoring variable <unnamed var:   %57 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function py_iterate(PyObjectRef, Rcpp::Function_Impl<Rcpp::PreserveStorage>, bool)
-  [PB] has possible protection stack imbalance reticulate/src/python.cpp:4869
+  [PB] has possible protection stack imbalance reticulate/src/python.cpp:4876
 
 Function py_module_proxy_import(PyObjectRef)
-  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage>::Environment_Impl(SEXPREC*) with argument allocated using PyObjectRef::get_refenv() const reticulate/src/python.cpp:3900
+  [UP] unprotected variable refenv while calling allocating function Rf_install reticulate/src/python.cpp:3908
+  [UP] allocating function reticulate_get_var_or_null(SEXPREC*, SEXPREC*)(?,S:module) may destroy its unprotected argument (refenv <arg 1>), which is later used. reticulate/src/python.cpp:3909
+  [UP] calling allocating function reticulate_get_var_or_null(SEXPREC*, SEXPREC*)(?,S:module) with a fresh pointer (refenv <arg 1>) reticulate/src/python.cpp:3909
+  [UP] unprotected variable r_module while calling allocating function GILScope::GILScope() reticulate/src/python.cpp:3911
+  [UP] unprotected variable refenv while calling allocating function GILScope::GILScope() reticulate/src/python.cpp:3911
+  [UP] unprotected variable refenv while calling allocating function Rcpp::RObject_Impl<Rcpp::PreserveStorage>::RObject_Impl(SEXPREC*) reticulate/src/python.cpp:3912
+  [UP] unprotected variable refenv while calling allocating function Rcpp::RObject_Impl<Rcpp::PreserveStorage>::~RObject_Impl() reticulate/src/python.cpp:3912
+  [UP] unprotected variable refenv while calling allocating function std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > Rcpp::as<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >(SEXPREC*) reticulate/src/python.cpp:3912
+  [UP] unprotected variable refenv while calling allocating function py_import(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) reticulate/src/python.cpp:3913
+  [UP] unprotected variable refenv while calling allocating function PyObjectRef::set(reticulate::libpython::_object*) reticulate/src/python.cpp:3916
+  [UP] calling allocating function R_removeVarFromFrame(S:module,?) with a fresh pointer (refenv <arg 2>) reticulate/src/python.cpp:3917
 
 Function py_to_r(reticulate::libpython::_object*, bool)
-  [UP] allocating function is_py_object(SEXPREC*) may destroy its unprotected argument (result <arg 1>), which is later used. reticulate/src/python.cpp:1451
-  [UP] calling allocating function is_py_object(SEXPREC*) with a fresh pointer (result <arg 1>) reticulate/src/python.cpp:1451
+  [UP] allocating function is_py_object(SEXPREC*) may destroy its unprotected argument (result <arg 1>), which is later used. reticulate/src/python.cpp:1458
+  [UP] calling allocating function is_py_object(SEXPREC*) with a fresh pointer (result <arg 1>) reticulate/src/python.cpp:1458
 
 Function py_to_r_cpp(SEXPREC*)
-  [UP] allocating function is_py_object(SEXPREC*) may destroy its unprotected argument (ret <arg 1>), which is later used. reticulate/src/python.cpp:1477
-  [UP] calling allocating function is_py_object(SEXPREC*) with a fresh pointer (ret <arg 1>) reticulate/src/python.cpp:1477
+  [UP] allocating function is_py_object(SEXPREC*) may destroy its unprotected argument (ret <arg 1>), which is later used. reticulate/src/python.cpp:1484
+  [UP] calling allocating function is_py_object(SEXPREC*) with a fresh pointer (ret <arg 1>) reticulate/src/python.cpp:1484
 
 Function py_to_r_cpp(reticulate::libpython::_object*, bool, bool)
   [UP] ignoring variable <unnamed var:   %100 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -299,9 +307,9 @@ Function py_to_r_cpp(reticulate::libpython::_object*, bool, bool)
   [UP] ignoring variable <unnamed var:   %95 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function r_to_py_numpy(Rcpp::RObject_Impl<Rcpp::PreserveStorage>, bool)
-  [PB] has negative depth reticulate/src/python.cpp:2175
-  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete reticulate/src/python.cpp:2175
-  [PB] has possible protection stack imbalance reticulate/src/python.cpp:2210
+  [PB] has negative depth reticulate/src/python.cpp:2182
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete reticulate/src/python.cpp:2182
+  [PB] has possible protection stack imbalance reticulate/src/python.cpp:2217
 
 Function try_py_resolve_module_proxy(SEXPREC*)
   [UP] ignoring variable proxy as it has address taken, results will be incomplete 

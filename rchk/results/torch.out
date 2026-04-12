@@ -1,8 +1,14 @@
-Package torch version 0.16.3
-Package built using 88977/R 4.6.0; x86_64-pc-linux-gnu; 2025-11-03 10:15:43 UTC; unix   
+Package torch version 0.17.0
+Package built using 89872/R 4.6.0; x86_64-pc-linux-gnu; 2026-04-12 18:08:50 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Function cpp_jit_script_module_find_constant(XPtrTorchScriptModule, XPtrTorchstring)
+  [UP] unprotected variable <unnamed var:   %3 = alloca %struct.SEXPREC*, align 8> while calling allocating function XPtrTorchIValue::~XPtrTorchIValue() torch/src/script_module.cpp:127
+
+Function operator_sexp_ivalue(XPtrTorchIValue const*)
+  [UP] unprotected variable <unnamed var:   %2 = alloca %struct.SEXPREC*, align 8> while calling allocating function XPtrTorchScriptModule::~XPtrTorchScriptModule() torch/src/torch_api.cpp:1065
 
 Function operator_sexp_optional_tensor(XPtrTorchOptionalTensor const*)
   [UP] unprotected variable <unnamed var:   %2 = alloca %struct.SEXPREC*, align 8> while calling allocating function XPtrTorchTensor::~XPtrTorchTensor() torch/src/torch_api.cpp:161
