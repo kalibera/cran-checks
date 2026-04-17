@@ -33,5 +33,13 @@ ERROR: the modified constant is function body:
 ifelse(x == 0, -0.0986659612490242, sin(x)/x)
 ERROR: the body was originally:
 ifelse(x == 0, 1, sin(x)/x)
-Error: promise already under evaluation: recursive default argument reference or earlier problems?
-Execution halted
+ERROR: modification of compiler constant of type double, length 1
+ERROR: the modified value of the constant is:
+[1] -0.09866596
+ERROR: the original value of the constant is:
+[1] 1
+ERROR: the modified constant is at index 4
+ERROR: the modified constant is in this function body:
+ifelse(x == 0, -0.0986659612490242, sin(x)/x)
+Fatal error: compiler constants were modified!
+
