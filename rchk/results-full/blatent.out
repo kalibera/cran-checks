@@ -1,5 +1,5 @@
-Package blatent version 0.1.2
-Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 04:28:44 UTC; unix   
+Package blatent version 0.1.3
+Package built using 89894/R 4.6.0; x86_64-pc-linux-gnu; 2026-04-18 08:10:09 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -38,6 +38,10 @@ Function _blatent_bin2dec_Rcpp
 
 Function _blatent_create_xptr
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr blatent/src/RcppExports.cpp:154
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. blatent/src/RcppExports.cpp:156
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) blatent/src/RcppExports.cpp:156
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. blatent/src/RcppExports.cpp:160
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) blatent/src/RcppExports.cpp:160
   [PB] has negative depth blatent/src/RcppExports.cpp:166
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete blatent/src/RcppExports.cpp:166
   [PB] has possible protection stack imbalance blatent/src/RcppExports.cpp:167
@@ -51,6 +55,10 @@ Function _blatent_getMeanAndCov_HH2006L1
 
 Function _blatent_logdN01
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr blatent/src/RcppExports.cpp:120
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. blatent/src/RcppExports.cpp:122
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) blatent/src/RcppExports.cpp:122
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. blatent/src/RcppExports.cpp:126
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) blatent/src/RcppExports.cpp:126
   [PB] has negative depth blatent/src/RcppExports.cpp:132
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete blatent/src/RcppExports.cpp:132
   [PB] has possible protection stack imbalance blatent/src/RcppExports.cpp:133

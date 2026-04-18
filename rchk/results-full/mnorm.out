@@ -1,5 +1,5 @@
-Package mnorm version 1.2.2
-Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 05:29:17 UTC; unix   
+Package mnorm version 1.2.3
+Package built using 89894/R 4.6.0; x86_64-pc-linux-gnu; 2026-04-18 08:12:46 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -29,6 +29,9 @@ Function Rcpp::Rcpp_unprotect(int)
 Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
   [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:680
 
+Function Rcpp::internal::DimNameProxy::assign(SEXPREC*)
+  [UP] unprotected variable dims while calling allocating function Rf_getAttrib(?,S:dimnames) Rcpp/include/Rcpp/vector/DimNameProxy.h:46
+
 Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
   [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
@@ -37,6 +40,10 @@ Function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::set(SEXP
 
 Function _mnorm_GHK
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr mnorm/src/RcppExports.cpp:353
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:355
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:355
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:359
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:359
   [PB] has negative depth mnorm/src/RcppExports.cpp:365
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete mnorm/src/RcppExports.cpp:365
   [PB] has possible protection stack imbalance mnorm/src/RcppExports.cpp:366
@@ -46,6 +53,10 @@ Function _mnorm_GHK_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPRE
 
 Function _mnorm_cmnorm
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr mnorm/src/RcppExports.cpp:43
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:45
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:45
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:49
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:49
   [PB] has negative depth mnorm/src/RcppExports.cpp:55
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete mnorm/src/RcppExports.cpp:55
   [PB] has possible protection stack imbalance mnorm/src/RcppExports.cpp:56
@@ -55,6 +66,10 @@ Function _mnorm_cmnorm_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEX
 
 Function _mnorm_dmnorm
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr mnorm/src/RcppExports.cpp:85
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:87
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:87
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:91
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:91
   [PB] has negative depth mnorm/src/RcppExports.cpp:97
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete mnorm/src/RcppExports.cpp:97
   [PB] has possible protection stack imbalance mnorm/src/RcppExports.cpp:98
@@ -64,6 +79,10 @@ Function _mnorm_dmnorm_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEX
 
 Function _mnorm_dt0
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr mnorm/src/RcppExports.cpp:507
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:509
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:509
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:513
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:513
   [PB] has negative depth mnorm/src/RcppExports.cpp:519
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete mnorm/src/RcppExports.cpp:519
   [PB] has possible protection stack imbalance mnorm/src/RcppExports.cpp:520
@@ -73,6 +92,10 @@ Function _mnorm_dt0_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)
 
 Function _mnorm_fromBase
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr mnorm/src/RcppExports.cpp:262
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:264
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:264
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:268
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:268
   [PB] has negative depth mnorm/src/RcppExports.cpp:274
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete mnorm/src/RcppExports.cpp:274
   [PB] has possible protection stack imbalance mnorm/src/RcppExports.cpp:275
@@ -82,12 +105,20 @@ Function _mnorm_fromBase_try(SEXPREC*, SEXPREC*)
 
 Function _mnorm_halton
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr mnorm/src/RcppExports.cpp:126
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:128
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:128
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:132
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:132
   [PB] has negative depth mnorm/src/RcppExports.cpp:138
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete mnorm/src/RcppExports.cpp:138
   [PB] has possible protection stack imbalance mnorm/src/RcppExports.cpp:139
 
 Function _mnorm_haltonSingleDraw
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr mnorm/src/RcppExports.cpp:161
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:163
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:163
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:167
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:167
   [PB] has negative depth mnorm/src/RcppExports.cpp:173
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete mnorm/src/RcppExports.cpp:173
   [PB] has possible protection stack imbalance mnorm/src/RcppExports.cpp:174
@@ -100,6 +131,10 @@ Function _mnorm_halton_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEX
 
 Function _mnorm_pbetaDiff
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr mnorm/src/RcppExports.cpp:470
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:472
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:472
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:476
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:476
   [PB] has negative depth mnorm/src/RcppExports.cpp:482
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete mnorm/src/RcppExports.cpp:482
   [PB] has possible protection stack imbalance mnorm/src/RcppExports.cpp:483
@@ -109,6 +144,10 @@ Function _mnorm_pbetaDiff_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, 
 
 Function _mnorm_pmnorm
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr mnorm/src/RcppExports.cpp:314
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:316
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:316
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:320
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:320
   [PB] has negative depth mnorm/src/RcppExports.cpp:326
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete mnorm/src/RcppExports.cpp:326
   [PB] has possible protection stack imbalance mnorm/src/RcppExports.cpp:327
@@ -118,6 +157,10 @@ Function _mnorm_pmnorm_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEX
 
 Function _mnorm_pt0
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr mnorm/src/RcppExports.cpp:545
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:547
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:547
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:551
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:551
   [PB] has negative depth mnorm/src/RcppExports.cpp:557
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete mnorm/src/RcppExports.cpp:557
   [PB] has possible protection stack imbalance mnorm/src/RcppExports.cpp:558
@@ -127,6 +170,10 @@ Function _mnorm_pt0_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPRE
 
 Function _mnorm_qnormFast
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr mnorm/src/RcppExports.cpp:391
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:393
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:393
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:397
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:397
   [PB] has negative depth mnorm/src/RcppExports.cpp:403
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete mnorm/src/RcppExports.cpp:403
   [PB] has possible protection stack imbalance mnorm/src/RcppExports.cpp:404
@@ -136,6 +183,10 @@ Function _mnorm_qnormFast_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, 
 
 Function _mnorm_qt0
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr mnorm/src/RcppExports.cpp:615
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:617
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:617
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:621
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:621
   [PB] has negative depth mnorm/src/RcppExports.cpp:627
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete mnorm/src/RcppExports.cpp:627
   [PB] has possible protection stack imbalance mnorm/src/RcppExports.cpp:628
@@ -145,6 +196,10 @@ Function _mnorm_qt0_try(SEXPREC*, SEXPREC*)
 
 Function _mnorm_rmnorm
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr mnorm/src/RcppExports.cpp:432
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:434
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:434
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:438
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:438
   [PB] has negative depth mnorm/src/RcppExports.cpp:444
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete mnorm/src/RcppExports.cpp:444
   [PB] has possible protection stack imbalance mnorm/src/RcppExports.cpp:445
@@ -154,6 +209,10 @@ Function _mnorm_rmnorm_try(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEX
 
 Function _mnorm_rt0
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr mnorm/src/RcppExports.cpp:580
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:582
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:582
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:586
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:586
   [PB] has negative depth mnorm/src/RcppExports.cpp:592
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete mnorm/src/RcppExports.cpp:592
   [PB] has possible protection stack imbalance mnorm/src/RcppExports.cpp:593
@@ -163,6 +222,10 @@ Function _mnorm_rt0_try(SEXPREC*, SEXPREC*)
 
 Function _mnorm_seqPrimes
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr mnorm/src/RcppExports.cpp:194
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:196
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:196
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:200
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:200
   [PB] has negative depth mnorm/src/RcppExports.cpp:206
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete mnorm/src/RcppExports.cpp:206
   [PB] has possible protection stack imbalance mnorm/src/RcppExports.cpp:207
@@ -172,6 +235,10 @@ Function _mnorm_seqPrimes_try(SEXPREC*)
 
 Function _mnorm_toBase
   [UP] unprotected variable rcpp_result_gen while calling allocating function Rf_onintr mnorm/src/RcppExports.cpp:228
+  [UP] allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:230
+  [UP] calling allocating function Rcpp::internal::isLongjumpSentinel(SEXPREC*) with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:230
+  [UP] allocating function Rf_inherits may destroy its unprotected argument (rcpp_result_gen <arg 1>), which is later used. mnorm/src/RcppExports.cpp:234
+  [UP] calling allocating function Rf_inherits with a fresh pointer (rcpp_result_gen <arg 1>) mnorm/src/RcppExports.cpp:234
   [PB] has negative depth mnorm/src/RcppExports.cpp:240
   [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete mnorm/src/RcppExports.cpp:240
   [PB] has possible protection stack imbalance mnorm/src/RcppExports.cpp:241

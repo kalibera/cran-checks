@@ -1,0 +1,27 @@
+Package S7 version 0.2.1-1
+Package built using 89894/R 4.6.0; x86_64-pc-linux-gnu; 2026-04-18 08:09:25 UTC; unix   
+Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Function generic_args
+  [UP] unprotected variable dispatch_args while calling allocating function Rf_allocVector S7/src/method-dispatch.c:96
+  [UP] unprotected variable dispatch_args while calling allocating function Rf_lang2 S7/src/method-dispatch.c:98
+  [UP] unprotected variable dispatch_args while calling allocating function Rf_eval S7/src/method-dispatch.c:108
+  [UP] unprotected variable dispatch_args while calling allocating function Rf_eval S7/src/method-dispatch.c:115
+
+Function method_
+  [UP] calling allocating function method_rec with a fresh pointer (table <arg 1>) S7/src/method-dispatch.c:149
+
+Function prop_
+  [UP] allocating function Rf_getAttrib(?,S:properties) may destroy its unprotected argument (S7_class <arg 1>), which is later used. S7/src/prop.c:304
+  [UP] calling allocating function Rf_getAttrib(?,S:properties) with a fresh pointer (S7_class <arg 1>) S7/src/prop.c:304
+  [UP] calling allocating function extract_name with a fresh pointer (properties <arg 1>) S7/src/prop.c:307
+  [UP] unprotected variable S7_class while calling allocating function extract_name S7/src/prop.c:307
+  [UP] unprotected variable S7_class while calling allocating function extract_name S7/src/prop.c:308
+  [UP] unprotected variable S7_class while calling allocating function getter_callable_no_recurse S7/src/prop.c:310
+  [UP] unprotected variable S7_class while calling allocating function Rf_getAttrib S7/src/prop.c:319
+
+Function prop_set_
+  [UP] calling allocating function Rf_getAttrib(?,S:properties) with a fresh pointer (S7_class <arg 1>) S7/src/prop.c:360
+  [UP] calling allocating function extract_name with a fresh pointer (properties <arg 1>) S7/src/prop.c:361
