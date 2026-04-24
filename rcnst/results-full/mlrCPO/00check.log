@@ -1,4 +1,4 @@
-* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/morphemepiece.Rcheck’
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/mlrCPO.Rcheck’
 * using R Under development (unstable) (2026-01-22 r89316)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
@@ -6,9 +6,8 @@
     GNU Fortran (GCC) 15.2.1 20251111 (Red Hat 15.2.1-4)
 * running under: Fedora Linux 42 (MATE-Compiz)
 * using session charset: UTF-8
-* checking for file ‘morphemepiece/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘morphemepiece’ version ‘1.2.3’
+* checking for file ‘mlrCPO/DESCRIPTION’ ... OK
+* this is package ‘mlrCPO’ version ‘0.3.8’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -18,7 +17,7 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘morphemepiece’ can be installed ... OK
+* checking whether package ‘mlrCPO’ can be installed ... OK
 * checking package directory ... OK
 * checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -40,10 +39,7 @@
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
 * checking R code for possible problems ... OK
-* checking Rd files ... NOTE
-checkRd: (-1) morphemepiece_cache_dir.Rd:17-19: Lost braces in \itemize; meant \describe ?
-checkRd: (-1) morphemepiece_cache_dir.Rd:20-21: Lost braces in \itemize; meant \describe ?
-checkRd: (-1) morphemepiece_cache_dir.Rd:22-24: Lost braces in \itemize; meant \describe ?
+* checking Rd files ... OK
 * checking Rd metadata ... OK
 * checking Rd cross-references ... OK
 * checking for missing documentation entries ... OK
@@ -55,28 +51,55 @@ checkRd: (-1) morphemepiece_cache_dir.Rd:22-24: Lost braces in \itemize; meant \
 * checking files in ‘vignettes’ ... OK
 * checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-          }
-          else {
-              sub_tokens <- append(cur_substr, sub_tokens)
-              end <- start - 1
-              keepgoing <- end >= 1
-          }
-      }
-      if (is_bad) {
-          return(unk_token)
-      }
-      return(sub_tokens)
-  }
-  Function .mp_tokenize_word in namespace morphemepiece has this body.
-  Fatal error: compiler constants were modified!
-  
+* checking tests ... OK
+  Running ‘run-core.R’
+  Running ‘run-cpo.R’
+  Running ‘run-meta.R’
+  Running ‘run-zzzlint.R’
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes ... OK
-* checking re-building of vignette outputs ... OK
+* checking re-building of vignette outputs ... ERROR
+Error(s) in re-building vignettes:
+--- re-building ‘a_1_getting_started.Rmd’ using rmarkdown
+ERROR: modification of compiler constant of type character, length 2
+ERROR: the modified value of the constant is:
+[1] "integer"       "integervector"
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "integer"       "integervector"
+ERROR: the modified constant is at index 1
+ERROR: the modified constant is in this function body:
+c("integer", "integervector")
+Fatal error: compiler constants were modified!
+
+--- re-building ‘a_2_mlrCPO_core.Rmd’ using rmarkdown
+--- finished re-building ‘a_2_mlrCPO_core.Rmd’
+
+--- re-building ‘a_3_all_CPOs.Rmd’ using rmarkdown
+--- finished re-building ‘a_3_all_CPOs.Rmd’
+
+--- re-building ‘a_4_custom_CPOs.Rmd’ using rmarkdown
+--- finished re-building ‘a_4_custom_CPOs.Rmd’
+
+--- re-building ‘z_1_getting_started_terse.Rmd’ using rmarkdown
+--- finished re-building ‘z_1_getting_started_terse.Rmd’
+
+--- re-building ‘z_2_mlrCPO_core_terse.Rmd’ using rmarkdown
+--- finished re-building ‘z_2_mlrCPO_core_terse.Rmd’
+
+--- re-building ‘z_3_all_CPOs_terse.Rmd’ using rmarkdown
+--- finished re-building ‘z_3_all_CPOs_terse.Rmd’
+
+--- re-building ‘z_4_custom_CPOs_terse.Rmd’ using rmarkdown
+--- finished re-building ‘z_4_custom_CPOs_terse.Rmd’
+
+SUMMARY: processing the following file failed:
+  ‘a_1_getting_started.Rmd’
+
+Error: Vignette re-building failed.
+Execution halted
+
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 ERROR, 1 NOTE
+Status: 1 ERROR

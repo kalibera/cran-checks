@@ -15,12 +15,11 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> if(requireNamespace("spelling", quietly = TRUE)) {
-+   spelling::spell_check_test(vignettes = TRUE, error = TRUE,
-+                              skip_on_cran = TRUE)
-+ }
-All Done!
+> library(testthat)
+> # test_check("mlrCPO", filter = "^lint")
+> 
+> 
 > 
 > proc.time()
    user  system elapsed 
-  0.385   0.076   0.463 
+  1.045   0.137   1.244 

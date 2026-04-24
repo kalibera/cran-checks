@@ -3403,7 +3403,6 @@ FALSE  TRUE  TRUE
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Encoding: UTF-8
 > ### Name: TreeNumber
 > ### Title: Unique integer indices for bifurcating tree topologies
 > ### Aliases: TreeNumber as.TreeNumber as.TreeNumber.phylo
@@ -3421,7 +3420,7 @@ FALSE  TRUE  TRUE
 > as.TreeNumber(tree)
 Phylogenetic tree number 10 of 105 
  6 tips: t1 t2 t3 t4 t5 t6> 
-> # Trees with 20–51 leaves are stored as decimal strings:
+> # Trees with 20--51 leaves are stored as decimal strings:
 > as.TreeNumber(BalancedTree(19))  # integer64-backed
 Phylogenetic tree number 3259279213732796827 of 6332659870762850625 
  19 tips: t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12 t13 t14 t15 t16 t17 t18 t19> as.TreeNumber(BalancedTree(51))  # character-backed
@@ -3897,7 +3896,7 @@ integer64
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  4.7 0.225 5.026 0 0 
+Time elapsed:  5.633 0.645 7.379 0 0 
 > grDevices::dev.off()
 null device 
           1 

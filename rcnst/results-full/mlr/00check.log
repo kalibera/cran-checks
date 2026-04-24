@@ -1,4 +1,4 @@
-* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/epidm.Rcheck’
+* using log directory ‘/var/scratch2/tomas/cran/rcnst/check/mlr.Rcheck’
 * using R Under development (unstable) (2026-01-22 r89316)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
@@ -6,18 +6,20 @@
     GNU Fortran (GCC) 15.2.1 20251111 (Red Hat 15.2.1-4)
 * running under: Fedora Linux 42 (MATE-Compiz)
 * using session charset: UTF-8
-* checking for file ‘epidm/DESCRIPTION’ ... OK
-* this is package ‘epidm’ version ‘1.0.6’
+* checking for file ‘mlr/DESCRIPTION’ ... OK
+* this is package ‘mlr’ version ‘2.19.3’
 * package encoding: UTF-8
 * checking package namespace information ... OK
-* checking package dependencies ... OK
+* checking package dependencies ... INFO
+Package suggested but not available for checking: ‘Rmpi’
 * checking if this is a source package ... OK
 * checking if there is a namespace ... OK
 * checking for executable files ... OK
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘epidm’ can be installed ... OK
+* checking whether package ‘mlr’ can be installed ... OK
+* used C compiler: ‘gcc (GCC) 15.2.1 20250808 (Red Hat 15.2.1-1)’
 * checking package directory ... OK
 * checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -33,6 +35,7 @@
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
 * checking loading without being on the library search path ... OK
+* checking whether startup messages can be suppressed ... OK
 * checking dependencies in R code ... OK
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
@@ -50,30 +53,62 @@
 * checking data for non-ASCII characters ... OK
 * checking LazyData ... OK
 * checking data for ASCII and uncompressed saves ... OK
-* checking R/sysdata.rda ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking compiled code ... INFO
+Note: information on .o files is not available
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
-* checking examples ... OK
+* checking examples ... ERROR
+Running examples in ‘mlr-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: tuneParamsMultiCrit
+> ### Title: Hyperparameter tuning for multiple measures at once.
+> ### Aliases: tuneParamsMultiCrit
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+>  if (requireNamespace("kernlab")) { 
++ ## End(Don't show)
++ ## Don't show: 
++  } 
+NULL
+> ## End(Don't show)
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  96.115 1.728 100.667 0.006 0.009 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
+ERROR: modification of compiler constant of type character, length 2
+ERROR: the modified value of the constant is:
+[1] "integer"       "integervector"
+attr(,".match.hash")
+<hash table>
+ERROR: the original value of the constant is:
+[1] "integer"       "integervector"
+ERROR: the modified constant is at index 1
+ERROR: the modified constant is in this function body:
+c("integer", "integervector")
+Fatal error: compiler constants were modified!
+
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... ERROR
+* checking tests ... OK
   Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  Fatal error: compiler constants were modified (in .Call?)!
-  
-  ERROR: modification of compiler constant of type character, length 8
-  ERROR: the modified value of the constant is:
-  [1] "PL7 1LU"  "CW6 9TX"  "CW6 9TX"  "BN14 9EP" "BN14 9EP" "BN14 9EP" "BN14 9EP"
-  [8] "BN14 9EP"
-  ERROR: the original value of the constant is:
-  [1] "CW6 9TX"  "CW6 9TX"  "PL7 1LU"  "BN14 9EP" "BN14 9EP" "BN14 9EP" "BN14 9EP"
-  [8] "BN14 9EP"
-  ERROR: the modified constant is at index 1
-  ERROR: the modified constant is in this function body:
-  c("CW6 9TX", "CW6 9TX", "PL7 1LU", "BN14 9EP", "BN14 9EP", "BN14 9EP", 
-      "BN14 9EP", "BN14 9EP")
-  Fatal error: compiler constants were modified!
-  
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes ... OK
 * checking re-building of vignette outputs ... OK

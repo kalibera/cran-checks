@@ -15,12 +15,15 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> if(requireNamespace("spelling", quietly = TRUE)) {
-+   spelling::spell_check_test(vignettes = TRUE, error = TRUE,
-+                              skip_on_cran = TRUE)
-+ }
-All Done!
+> library(testthat)
+> test_check("mlrCPO", filter = "^meta_")
+Loading required package: mlrCPO
+Loading required package: ParamHelpers
+Loading required package: mlr
+Starting 2 test processes.
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 80 ]
+> 
 > 
 > proc.time()
    user  system elapsed 
-  0.385   0.076   0.463 
+ 48.641   2.803  35.941 
