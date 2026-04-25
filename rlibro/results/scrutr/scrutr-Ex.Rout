@@ -1,0 +1,227 @@
+
+R Under development (unstable) (2026-01-22 r89316) -- "Unsuffered Consequences"
+Copyright (C) 2026 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "scrutr"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('scrutr')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("chars_structure")
+> ### * chars_structure
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: chars_structure
+> ### Title: Get :alpha: / :digit: patterns from each symbol of character
+> ###   vector
+> ### Aliases: chars_structure
+> 
+> ### ** Examples
+> 
+> library(magrittr)
+> input <- c("ABC123", "DE4F56", "789GHI", "ABC123")
+> 
+> # Default values of unique and named_output: 
+> chars_structure(input_vector = input, unique = TRUE, named_output = TRUE)
+          ABC123           DE4F56           789GHI 
+        "3A, 3D" "2A, 1D, 1A, 2D"         "3D, 3A" 
+> 
+> # unique is set to default value TRUE and named_output is set to FALSE: 
+> chars_structure(input_vector = input, unique = TRUE, named_output = FALSE)
+[1] "3A, 3D"         "2A, 1D, 1A, 2D" "3D, 3A"        
+> 
+> # unique is set to FALSE and named_output to FALSE: 
+> chars_structure(input_vector = input, unique = FALSE, named_output = FALSE)
+[1] "3A, 3D"         "2A, 1D, 1A, 2D" "3D, 3A"         "3A, 3D"        
+> 
+> # unique is set to FALSE and named_output to defalut value TRUE: 
+> chars_structure(input_vector = input, unique = FALSE, named_output = TRUE)
+          ABC123           DE4F56           789GHI           ABC123 
+        "3A, 3D" "2A, 1D, 1A, 2D"         "3D, 3A"         "3A, 3D" 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:magrittr’
+
+> nameEx("chars_structure_general")
+> ### * chars_structure_general
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: chars_structure_general
+> ### Title: Generalized characters structure
+> ### Aliases: chars_structure_general
+> 
+> ### ** Examples
+> 
+> 
+> input <- c("ABC123", "DE4F56", "789GHI", "ABC123")
+> 
+> # Default values of unique and named_output:
+> chars_structure_general(input_vector = input, split = "", 
++                         patterns_and_replacements = c("[:alpha:]" = "[letter]", 
++                                                       "[:digit:]" = "[number]"), 
++                         unique = TRUE, named_output = TRUE)
+                                      ABC123 
+                      "3[letter], 3[number]" 
+                                      DE4F56 
+"2[letter], 1[number], 1[letter], 2[number]" 
+                                      789GHI 
+                      "3[number], 3[letter]" 
+> 
+> # unique is set to default value TRUE and named_output is set to FALSE:
+> chars_structure_general(input_vector = input, split = "", 
++                         patterns_and_replacements = c("[:alpha:]" = "[letter]", 
++                                                       "[:digit:]" = "[number]"), 
++                         unique = TRUE, named_output = FALSE)
+[1] "3[letter], 3[number]"                      
+[2] "2[letter], 1[number], 1[letter], 2[number]"
+[3] "3[number], 3[letter]"                      
+> 
+> # unique is set to FALSE and named_output to FALSE:
+> chars_structure_general(input_vector = input, split = "", 
++                         patterns_and_replacements = c("[:alpha:]" = "[letter]", 
++                                                       "[:digit:]" = "[number]"), 
++                         unique = FALSE, named_output = FALSE)
+[1] "3[letter], 3[number]"                      
+[2] "2[letter], 1[number], 1[letter], 2[number]"
+[3] "3[number], 3[letter]"                      
+[4] "3[letter], 3[number]"                      
+> 
+> # unique is set to FALSE and named_output to defalut value TRUE:
+> chars_structure_general(input_vector = input, split = "", 
++                         patterns_and_replacements = c("[:alpha:]" = "[letter]", 
++                                                       "[:digit:]" = "[number]"), 
++                         unique = FALSE, named_output = TRUE)
+                                      ABC123 
+                      "3[letter], 3[number]" 
+                                      DE4F56 
+"2[letter], 1[number], 1[letter], 2[number]" 
+                                      789GHI 
+                      "3[number], 3[letter]" 
+                                      ABC123 
+                      "3[letter], 3[number]" 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("convert_all")
+> ### * convert_all
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: convert_all
+> ### Title: Convert all datasets within a folder to a given file format
+> ### Aliases: convert_all
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("convert_r")
+> ### * convert_r
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: convert_r
+> ### Title: Batch dataset format conversion using an Excel mask
+> ### Aliases: convert_r
+> 
+> ### ** Examples
+> 
+> mydir <- system.file("permadir_examples_and_tests/convert_r", package = "scrutr")
+> 
+> mask <- data.frame(
++   folder_path = rep(mydir, 2),
++   file = c("original_cars.rds", "original_mtcars.csv"),
++   converted_file = c("converted_cars.csv", "converted_mtcars.csv"),
++   to_convert = rep(1, 2)
++ )
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("detect_chars_structure")
+> ### * detect_chars_structure
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: detect_chars_structure
+> ### Title: Detect character structure Detect if values within a character
+> ###   variable match at least one of defined patterns
+> ### Aliases: detect_chars_structure
+> 
+> ### ** Examples
+> 
+> detect_chars_structure(
++   vector = c("ABCD1234", "4567EF", "89GHIJ10"), 
++   patterns = "[:alpha:]{4}" # detect four consecutive alphabetic values
++ )
+[1] TRUE
+> 
+> detect_chars_structure(
++   vector = c("ABCD1234", "4567EF", "89GHIJ10"), 
++   patterns = "[:alpha:]{4}", 
++   verbose = TRUE
++ )
+$`Any defined structure`
+[1] TRUE
+
+$Which
+[1] "ABCD1234" "89GHIJ10"
+
+$Where
+[1] 1 3
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("detect_chars_structure_datasets")
+> ### * detect_chars_structure_datasets
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: detect_chars_structure_datasets
+> ### Title: Detect character structure from datasets
+> ### Aliases: detect_chars_structure_datasets
+> 
+> ### ** Examples
+> 
+> mydir <- system.file("detect_chars_structure_datasets", package = "scrutr")
+> 
+> detect <- detect_chars_structure_datasets(
++   datasets_folderpath = mydir, 
++   considered_extensions = "xlsx", 
++   patterns = "(?i)college", 
++   output_filepath = file.path(mydir, "detect_college.rds"), 
++   get_output_in_session = TRUE)
+Warning in gzfile(file, mode) :
+  cannot open compressed file '/var/scratch2ro/tomas/cran/rlibro/lib/scrutr/detect_chars_structure_datasets/detect_college.rds', probable reason 'Read-only file system'
+Error in gzfile(file, mode) : cannot open the connection
+Calls: detect_chars_structure_datasets -> saveRDS -> gzfile
+Execution halted

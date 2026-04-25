@@ -1,0 +1,100 @@
+* using log directory ‘/var/scratch2/tomas/cran/rlibro/check/scrutr.Rcheck’
+* using R Under development (unstable) (2026-01-22 r89316)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (GCC) 15.2.1 20251111 (Red Hat 15.2.1-4)
+    GNU Fortran (GCC) 15.2.1 20251111 (Red Hat 15.2.1-4)
+* running under: Fedora Linux 42 (MATE-Compiz)
+* using session charset: UTF-8
+* checking for file ‘scrutr/DESCRIPTION’ ... OK
+* this is package ‘scrutr’ version ‘0.3.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘scrutr’ can be installed ... OK
+* checking package directory ... OK
+* checking ‘build’ directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... ERROR
+Running examples in ‘scrutr-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: detect_chars_structure_datasets
+> ### Title: Detect character structure from datasets
+> ### Aliases: detect_chars_structure_datasets
+> 
+> ### ** Examples
+> 
+> mydir <- system.file("detect_chars_structure_datasets", package = "scrutr")
+> 
+> detect <- detect_chars_structure_datasets(
++   datasets_folderpath = mydir, 
++   considered_extensions = "xlsx", 
++   patterns = "(?i)college", 
++   output_filepath = file.path(mydir, "detect_college.rds"), 
++   get_output_in_session = TRUE)
+Warning in gzfile(file, mode) :
+  cannot open compressed file '/var/scratch2ro/tomas/cran/rlibro/lib/scrutr/detect_chars_structure_datasets/detect_college.rds', probable reason 'Read-only file system'
+Error in gzfile(file, mode) : cannot open the connection
+Calls: detect_chars_structure_datasets -> saveRDS -> gzfile
+Execution halted
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... ERROR
+  Running ‘spelling.R’
+  Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  [ FAIL 1 | WARN 1 | SKIP 0 | PASS 189 ]
+  
+  ══ Failed tests ════════════════════════════════════════════════════════════════
+  ── Error ('test-detect_chars_structure_datasets.R:7:3'): Valid outputs are consistent ──
+  Error in `gzfile(file, mode)`: cannot open the connection
+  Backtrace:
+      ▆
+   1. └─scrutr::detect_chars_structure_datasets(...) at test-detect_chars_structure_datasets.R:7:3
+   2.   └─base::saveRDS(det_structure_list2, file = output_filepath)
+   3.     └─base::gzfile(file, mode)
+  
+  [ FAIL 1 | WARN 1 | SKIP 0 | PASS 189 ]
+  Error:
+  ! Test failures.
+  Execution halted
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
+* checking PDF version of manual ... OK
+* DONE
+Status: 2 ERRORs
