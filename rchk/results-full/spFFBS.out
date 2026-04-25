@@ -1,0 +1,96 @@
+Package spFFBS version 0.0-2
+Package built using 89950/R 4.6.0; x86_64-pc-linux-gnu; 2026-04-25 01:04:09 UTC; unix   
+Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+
+Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
+
+Function Rcpp::Armor<SEXPREC*>::~Armor()
+  [PB] has negative depth Rcpp/include/Rcpp/protection/Armor.h:41
+  [UP] attempt to unprotect more items (1) than protected (0), results will be incomplete Rcpp/include/Rcpp/protection/Armor.h:41
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:42
+
+Function Rcpp::Rcpp_protect(SEXPREC*)
+  [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Shield.h:25
+
+Function Rcpp::Rcpp_unprotect(int)
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete Rcpp/include/Rcpp/protection/Shield.h:31
+
+Function Rcpp::internal::convert_using_rfunction(SEXPREC*, char const*)
+  [UP] ignoring variable <unnamed var:   %10 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _spFFBS_backward_sample
+  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _spFFBS_backward_sample_T
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _spFFBS_compute_Wt_cpp
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _spFFBS_lmvgamma
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _spFFBS_log_matrix_t_density
+  [UP] ignoring variable <unnamed var:   %24 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _spFFBS_optimize_weights_adam
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _spFFBS_optimize_weights_proj
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _spFFBS_predict_ffbs
+  [UP] ignoring variable <unnamed var:   %36 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _spFFBS_sample_index
+  [UP] ignoring variable <unnamed var:   %18 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _spFFBS_spFF3
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _spFFBS_spatial_interpolation
+  [UP] ignoring variable <unnamed var:   %42 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _spFFBS_temporal_forecast
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _spFFBS_temporal_forecast3
+  [UP] ignoring variable <unnamed var:   %33 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _spFFBS_unified_parallel_function
+  [UP] ignoring variable <unnamed var:   %39 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _spFFBS_weighted_backward_sample
+  [UP] ignoring variable <unnamed var:   %30 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _spFFBS_weighted_backward_sample_T
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _spFFBS_weighted_backward_sample_T3
+  [UP] ignoring variable <unnamed var:   %27 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function backward_sample(arma::Mat<double> const&, arma::Mat<double> const&, arma::Mat<double> const&, arma::Mat<double> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, arma::Cube<double> const&, arma::Cube<double> const&, int const&, int const&)
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [5]>(char const (&) [5]) const spFFBS/src/FFBS-DYNBPS-struct.cpp:118
+
+Function backward_sample_T(arma::Mat<double> const&, arma::Mat<double> const&, arma::Mat<double> const&, arma::Mat<double> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, int const&)
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [5]>(char const (&) [5]) const spFFBS/src/FFBS-DYNBPS-struct.cpp:147
+
+Function predict_ffbs(arma::Mat<double> const&, arma::Mat<double> const&, arma::Mat<double> const&, arma::Mat<double> const&, arma::Mat<double> const&, arma::Mat<double> const&, double const&, arma::Mat<double> const&, int const&)
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [5]>(char const (&) [5]) const spFFBS/src/FFBS-DYNBPS-struct.cpp:833
+
+Function spatial_interpolation(arma::Mat<double> const&, arma::Mat<double> const&, arma::Mat<double> const&, arma::Mat<double> const&, arma::Mat<double> const&, arma::Mat<double> const&, arma::Mat<double> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, arma::Mat<double> const&, int const&, int const&)
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [5]>(char const (&) [5]) const spFFBS/src/FFBS-DYNBPS-struct.cpp:1040
+
+Function weighted_backward_sample(arma::Mat<double> const&, arma::Mat<double> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, arma::Cube<double> const&, arma::Cube<double> const&, arma::Mat<double> const&, arma::Col<double> const&)
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [5]>(char const (&) [5]) const spFFBS/src/FFBS-DYNBPS-struct.cpp:208
+
+Function weighted_backward_sample_T(arma::Mat<double> const&, arma::Mat<double> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, int const&, arma::Mat<double> const&, arma::Col<double> const&)
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [5]>(char const (&) [5]) const spFFBS/src/FFBS-DYNBPS-struct.cpp:284
+
+Function weighted_backward_sample_T3(arma::Cube<double> const&, arma::Mat<double> const&, Rcpp::Vector<19, Rcpp::PreserveStorage> const&, int const&, arma::Mat<double> const&, arma::Col<double> const&)
+  [UP] calling allocating function Rcpp::Environment_Impl<Rcpp::PreserveStorage> Rcpp::as<Rcpp::Environment_Impl<Rcpp::PreserveStorage> >(SEXPREC*) with argument allocated using SEXPREC* Rcpp::Function_Impl<Rcpp::PreserveStorage>::operator()<char [5]>(char const (&) [5]) const spFFBS/src/FFBS-DYNBPS-struct.cpp:375

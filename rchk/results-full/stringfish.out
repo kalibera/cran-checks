@@ -1,5 +1,5 @@
-Package stringfish version 0.18.0
-Package built using 89305/R 4.6.0; x86_64-pc-linux-gnu; 2026-01-20 09:39:51 UTC; unix   
+Package stringfish version 0.19.0
+Package built using 89950/R 4.6.0; x86_64-pc-linux-gnu; 2026-04-25 00:09:56 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -37,6 +37,14 @@ Function _stringfish_c_sf_paste
 Function _stringfish_convert_to_sf
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _stringfish_convert_to_sf_vector
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _stringfish_convert_to_slice_store
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function _stringfish_get_is_utf8_locale
   [UP] ignoring variable <unnamed var:   %8 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
@@ -106,5 +114,22 @@ Function _stringfish_sf_vector
   [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
   [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
+Function _stringfish_sf_vector_create
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _stringfish_slice_store_create
+  [UP] ignoring variable <unnamed var:   %11 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %12 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function _stringfish_slice_store_create_with_size
+  [UP] ignoring variable <unnamed var:   %14 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+  [UP] ignoring variable <unnamed var:   %15 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
 Function c_sf_paste(Rcpp::Vector<19, Rcpp::PreserveStorage>, SEXPREC*, int)
   [UP] ignoring variable d as it has address taken, results will be incomplete 
+
+Function sf_collapse(SEXPREC*, SEXPREC*)
+  [UP] unprotected variable ret while calling allocating function sfenc::warn_failed_normalization(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, unsigned long) stringfish/src/./exported_functions/sf_collapse.h:23
+  [UP] unprotected variable ret while calling allocating function sfenc::warn_failed_normalization(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, unsigned long) stringfish/src/./exported_functions/sf_collapse.h:35
+  [UP] unprotected variable ret while calling allocating function sfenc::warn_failed_normalization(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, unsigned long) stringfish/src/./exported_functions/sf_collapse.h:55
