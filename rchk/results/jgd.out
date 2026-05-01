@@ -1,0 +1,14 @@
+Package jgd version 0.1.0
+Package built using 89978/R 4.6.0; x86_64-pc-linux-gnu; 2026-04-30 23:46:11 UTC; unix   
+Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
+More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
+For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
+
+Function C_jgd_discover
+  [UP] unprotected variable result while calling allocating function cJSON_Delete jgd/src/transport.c:268
+
+Function replay_snapshot
+  [UP] allocating function restore_grid_dl_from_snapshot may destroy its unprotected argument (grid_ns <arg 3>), which is later used. jgd/src/device.c:736
+  [UP] calling allocating function restore_grid_dl_from_snapshot with a fresh pointer (grid_ns <arg 3>) jgd/src/device.c:736
+  [UP] unprotected variable grid_ns while calling allocating function Rf_install jgd/src/device.c:738
+  [UP] unprotected variable grid_ns while calling allocating function Rf_lang1(S:grid.refresh) jgd/src/device.c:739
