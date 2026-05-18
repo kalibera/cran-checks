@@ -4,7 +4,6 @@ Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
-
 Function R_json_basicCallback
   [UP] allocating function Rf_isInteger may destroy its unprotected argument (result <arg 1>), which is later used. RJSONIO/src/RJSON.c:254
   [UP] calling allocating function Rf_isInteger with a fresh pointer (result <arg 1>) RJSONIO/src/RJSON.c:254
@@ -20,12 +19,3 @@ Function R_toJSONAtomicFast
   [UP] allocating function append_quoted_name may destroy its unprotected argument (names <arg 2>), which is later used. RJSONIO/src/fast_to_json.c:213
   [UP] unprotected variable names while calling allocating function buffer_append RJSONIO/src/fast_to_json.c:214
   [UP] unprotected variable names while calling allocating function append_value RJSONIO/src/fast_to_json.c:215
-
-Function processJSONNode
-  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
-  [UP] allocating function Rf_getAttrib(?,S:class) may destroy its unprotected argument (el <arg 1>), which is later used. RJSONIO/src/rlibjson.c:190
-  [UP] allocating function Rf_getAttrib(V,S:class) may destroy its unprotected argument (el <arg 1>), which is later used. RJSONIO/src/rlibjson.c:190
-  [UP] calling allocating function Rf_getAttrib(?,S:class) with a fresh pointer (el <arg 1>) RJSONIO/src/rlibjson.c:190
-  [UP] calling allocating function Rf_getAttrib(V,S:class) with a fresh pointer (el <arg 1>) RJSONIO/src/rlibjson.c:190
-  [UP] unprotected variable el while calling allocating function Rf_install RJSONIO/src/rlibjson.c:190
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete RJSONIO/src/rlibjson.c:260
