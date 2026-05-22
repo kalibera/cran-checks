@@ -1,9 +1,16 @@
-Package collapse version 2.1.6
-Package built using 89298/R 4.6.0; x86_64-pc-linux-gnu; 2026-01-13 10:24:20 UTC; unix   
+Package collapse version 2.1.7
+Package built using 90065/R 4.6.0; x86_64-pc-linux-gnu; 2026-05-22 02:03:58 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
 
+
+Function GRP_default_drop_C
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
+  [UP] unprotected variable lev while calling allocating function Rf_allocVector collapse/src/small_helper.c:524
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/small_helper.c:644
 
 Function Rcpp::Armor<SEXPREC*>::init(SEXPREC*)
   [PB] has possible protection stack imbalance Rcpp/include/Rcpp/protection/Armor.h:47
@@ -307,26 +314,26 @@ Function fbstatstemp(Rcpp::Vector<14, Rcpp::PreserveStorage>, bool, int, Rcpp::V
   [UP] ignoring variable gn as it has address taken, results will be incomplete 
 
 Function fdist
-  [UP] unprotected variable dim while calling allocating function Rf_asInteger collapse/src/programming.c:1142
+  [UP] unprotected variable dim while calling allocating function Rf_asInteger collapse/src/programming.c:1117
 
 Function flagleadCpp(SEXPREC*, Rcpp::Vector<13, Rcpp::PreserveStorage>, SEXPREC*, int, Rcpp::Vector<13, Rcpp::PreserveStorage>, SEXPREC*, bool)
   [UP] ignoring variable fill as it has address taken, results will be incomplete 
   [UP] ignoring variable t as it has address taken, results will be incomplete 
 
-Function flagleadmCpp(SEXPREC*, Rcpp::Vector<13, Rcpp::PreserveStorage>, SEXPREC*, int, Rcpp::Vector<13, Rcpp::PreserveStorage>, SEXPREC*, bool)
+Function flagleadmCpp(SEXPREC*, Rcpp::Vector<13, Rcpp::PreserveStorage>, SEXPERROR: too many states (abstraction error?) in function rbindlist
+REC*, int, Rcpp::Vector<13, Rcpp::PreserveStorage>, SEXPREC*, bool)
   [UP] ignoring variable fill as it has address taken, results will be incomplete 
   [UP] ignoring variable t as it has address taken, results will be incomplete 
 
 Function fmeanC
-  [PB] has an unsupported form of unprotect with a variable results will be incomplete collapse/src/fmean.c:279
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/fmean.c:279
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete collapse/src/fmean.c:306
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/fmean.c:306
 
 Function fmeanlC
-  [PB] has an unsupported form of unprERROR: too many states (abstraction error?) in function rbindlist
-otect with a variable results will be incomplete collapse/src/fmean.c:526
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/fmean.c:526
-  [PB] has an unsupported form of unprotect with a variable results will be incomplete collapse/src/fmean.c:594
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/fmean.c:594
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete collapse/src/fmean.c:553
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/fmean.c:553
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete collapse/src/fmean.c:621
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/fmean.c:621
 
 Function match_single
   [UP] calling allocating function match_single(?,?,V) with argument allocated using Rf_getAttrib(?,S:levels) collapse/src/match.c:51
@@ -334,17 +341,18 @@ Function match_single
   [UP] calling allocating function match_single(?,?,V) with argument allocated using Rf_getAttrib(?,S:levels) collapse/src/match.c:121
 
 Function na_focb
-  [PB] has an unsupported form of unprotect with a variable results will be incomplete collapse/src/programming.c:907
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/programming.c:907
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete collapse/src/programming.c:882
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/programming.c:882
 
 Function na_locf
-  [PB] has an unsupported form of unprotect with a variable results will be incomplete collapse/src/programming.c:841
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/programming.c:841
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete collapse/src/programming.c:816
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/programming.c:816
 
 Function nth_ord_impl
   [UP] unprotected variable res while calling allocating function Rf_inherits collapse/src/fnth_fmedian_fquantile.c:881
 
 Function rbindlist
+  [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
   [UP] protect stack is too deep, unprotecting all variables, results will be incomplete
   [UP] unprotected variable longestLevels while calling allocating function Rf_getAttrib(?,S:names) collapse/src/data.table_rbindlist.c:481
@@ -365,8 +373,8 @@ Function rbindlist
   [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/data.table_rbindlist.c:726
 
 Function replace_outliers
-  [PB] has an unsupported form of unprotect with a variable results will be incomplete collapse/src/programming.c:775
-  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/programming.c:775
+  [PB] has an unsupported form of unprotect with a variable results will be incomplete collapse/src/programming.c:750
+  [UP] unsupported form of unprotect, unprotecting all variables, results will be incomplete collapse/src/programming.c:750
 
 Function setcopyv
   [UP] calling allocating function fchmatch with argument allocated using Rf_getAttrib(?,S:levels) collapse/src/programming.c:353
