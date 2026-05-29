@@ -1,5 +1,5 @@
-Package RcppHNSW version 0.6.0
-Package built using 88872/R 4.6.0; x86_64-pc-linux-gnu; 2025-09-27 04:14:18 UTC; unix   
+Package RcppHNSW version 0.7.0
+Package built using 90084/R 4.6.0; x86_64-pc-linux-gnu; 2026-05-28 23:30:52 UTC; unix   
 Checked with rchk version 35618ebbccf3cd0b45a3530e6303970a22a9056b LLVM version 14.0.6
 More information at https://github.com/kalibera/cran-checks/blob/master/rchk/PROTECT.md
 For rchk in docker image see https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md
@@ -15,13 +15,16 @@ Function Rcpp::Rcpp_unprotect(int)
 Function Rcpp::Vector<19, Rcpp::PreserveStorage>::push_back_name__impl(SEXPREC* const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Rcpp::traits::integral_constant<bool, true>)
   [UP] unprotected variable names while calling allocating function Rf_allocVector Rcpp/include/Rcpp/vector/Vector.h:680
 
-Function Rcpp::class_<Hnsw<float, hnswlib::InnerProductSpace, false> >::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+Function Rcpp::class_<Hnsw<float, hnswlib::InnerProductSpace, false, NoDistanceProcess> >::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
   [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function Rcpp::class_<Hnsw<float, hnswlib::InnerProductSpace, true> >::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+Function Rcpp::class_<Hnsw<float, hnswlib::InnerProductSpace, true, NoDistanceProcess> >::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
   [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
-Function Rcpp::class_<Hnsw<float, hnswlib::L2Space, false> >::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+Function Rcpp::class_<Hnsw<float, hnswlib::L2Space, false, NoDistanceProcess> >::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
+  [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
+
+Function Rcpp::class_<Hnsw<float, hnswlib::L2Space, false, SquareRootDistanceProcess> >::invoke(SEXPREC*, SEXPREC*, SEXPREC**, int)
   [UP] ignoring variable <unnamed var:   %28 = alloca %struct.SEXPREC*, align 8> as it has address taken, results will be incomplete 
 
 Function Rcpp::internal::generic_name_proxy<19, Rcpp::PreserveStorage>::set(SEXPREC*)
